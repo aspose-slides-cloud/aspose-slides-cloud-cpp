@@ -1,4 +1,5 @@
-# Aspose.Slides Cloud SDK for C++ [![NuGet](https://img.shields.io/nuget/v/Aspose.Slides-Cloud.svg)](https://www.nuget.org/packages/Aspose.Slides-Cloud.Cpp/)
+![](https://img.shields.io/badge/api-v3.0-lightgrey) ![Nuget](https://img.shields.io/nuget/v/Aspose.slides-Cloud) ![Nuget](https://img.shields.io/nuget/dt/Aspose.slides-Cloud) [![GitHub license](https://img.shields.io/github/license/aspose-slides-cloud/aspose-slides-cloud-cpp)](https://github.com/aspose-slides-cloud/aspose-slides-cloud-cpp/blob/master/LICENSE)
+# Aspose.Slides Cloud SDK for C++
 This repository contains Aspose.Slides Cloud SDK for C++ source code. This SDK allows you to work with Aspose.Slides Cloud REST APIs in your .NET applications.
 
 ## Key Features
@@ -45,20 +46,11 @@ api->postSlidesConvert().get().writeTo(versionStream);
 ```
 You can check more [Examples](Examples) of using the SDK.
 
-## Contact Us
+## Aspose.Slides Cloud SDKs in Popular Languages
 
-Your feedback is very important to us. Please feel free to contact us using our [Support Forums](https://forum.aspose.cloud/c/slides).
+| .NET | Java | PHP | Python | Ruby | Node.js | Android | Swift|Perl|Go|
+|---|---|---|---|---|---|---|--|--|--|
+| [GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-dotnet) | [GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-java) | [GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-php) | [GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-python) | [GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-ruby)  | [GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-nodejs) | [GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-android) | [GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-swift)|[GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-perl) |[GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-go) |
+| [NuGet](https://www.nuget.org/packages/Aspose.slides-Cloud/) | [Maven](https://repository.aspose.cloud/webapp/#/artifacts/browse/tree/General/repo/com/aspose/aspose-slides-cloud) | [Composer](https://packagist.org/packages/aspose/slides-sdk-php) | [PIP](https://pypi.org/project/asposeslidescloud/) | [GEM](https://rubygems.org/gems/aspose_slides_cloud)  | [NPM](https://www.npmjs.com/package/asposeslidescloud) | [Maven](https://repository.aspose.cloud/webapp/#/artifacts/browse/tree/General/repo/com/aspose/aspose-slides-cloud) | [Cocoapods](https://cocoapods.org/pods/AsposeslidesCloud)|[Meta Cpan](https://metacpan.org/release/AsposeSlidesCloud-SlidesApi) | [Go.Dev](https://pkg.go.dev/github.com/aspose-slides-cloud/aspose-slides-cloud-go/) | 
 
-## Resources
- 
-[Website](https://www.aspose.cloud/)  
-[Product Home](https://products.aspose.cloud/slides/family)  
-[API Reference](https://apireference.aspose.cloud/slides/)  
-[Documentation](https://docs.aspose.cloud/slides/)  
-[Blog](https://blog.aspose.cloud/category/slides/)  
- 
-## Other languages
-
-We generate our SDKs in different languages so you may check if yours is available in our [list](https://github.com/aspose-slides-cloud).
- 
-If you don't find your language in the list, feel free to request it from us, or use raw REST API requests as you can find it [here](https://products.aspose.cloud/slides/curl).
+[Product Page](https://products.aspose.cloud/slides/cpp) | [Documentation](https://docs.aspose.cloud/display/slidescloud/Home) | [API Reference](https://apireference.aspose.cloud/slides/) | [Code Samples](https://github.com/aspose-slides-cloud/aspose-slides-cloud-cpp) | [Blog](https://blog.aspose.cloud/category/slides/) | [Free Support](https://forum.aspose.cloud/c/slides) | [Free Trial](https://dashboard.aspose.cloud/#/apps)
