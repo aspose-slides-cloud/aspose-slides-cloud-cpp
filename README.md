@@ -11,6 +11,21 @@ This repository contains Aspose.Slides Cloud SDK for C++ source code. This SDK a
 * Full read & write access to Document Object Model, including slides, shapes, paragraphs, portions and many others
 * Support of Aspose.Storage API
 
+### New Features & Recent API Changes
+
+#### 20.12
+* New property "HttpRequestTimeout" is added to SDK configuration. It allows to specify a custom timeout (in seconds) for HTTP requests made by the SDK.
+
+#### 20.10
+* Removed shapeType property from BaseShape class; replaced geometryShapeType with shapeType property for GeometryShape.
+* Removed redundant ResourceUriElement class. All properties of ResourceUriElement type are changed to ResourceUri type.
+
+#### 20.9
+* New getSections, putSections, putSection, postSection, postSectionMove, deleteSection, deleteSections methods to add, update and delete presentation sections.
+* New postSlidesHeaderFooter, postSlideHeaderFooter, getSlideHeaderFooter, postNotesSlideHeaderFooter, getNotesSlideHeaderFooter methods to manage header/footer settings for slides.
+* Replaces categories for parentCategories & level properties in ChartCategory class to properly support Sunburst & Treeview charts.
+
+
 ## Licensing
 All Aspose.Slides Cloud SDKs are licensed under MIT License.
 
