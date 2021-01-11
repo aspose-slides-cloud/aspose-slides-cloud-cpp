@@ -1,14 +1,42 @@
-# Aspose.Slides Cloud SDK for C++ [![NuGet](https://img.shields.io/nuget/v/Aspose.Slides-Cloud.svg)](https://www.nuget.org/packages/Aspose.Slides-Cloud.Cpp/)
-This repository contains Aspose.Slides Cloud SDK for C++ source code. This SDK allows you to work with Aspose.Slides Cloud REST APIs in your .NET applications.
+![](https://img.shields.io/badge/api-v3.0-lightgrey) ![Nuget](https://img.shields.io/nuget/v/Aspose.slides-Cloud) ![Nuget](https://img.shields.io/nuget/dt/Aspose.slides-Cloud) [![GitHub license](https://img.shields.io/github/license/aspose-slides-cloud/aspose-slides-cloud-cpp)](https://github.com/aspose-slides-cloud/aspose-slides-cloud-cpp/blob/master/LICENSE)
 
-## Key Features
-* Conversion between various document-related formats (20+ formats supported), including PDF<->PowerPoint conversion
-* Download slides and shapes in various formats, including PDF and SVG
-* Merge and split PowerPoint presentations
-* Access PowerPoint presentation metadata and statistics
-* Find and replace
-* Full read & write access to Document Object Model, including slides, shapes, paragraphs, portions and many others
-* Support of Aspose.Storage API
+# C++ REST API to Process Presentation in Cloud
+This repository contains Aspose.Slides Cloud SDK for C++ source code. This SDK allows you to [process & manipulate PPT, PPTX, ODP, OTP](https://products.aspose.cloud/slides/cpp) using Aspose.slides Cloud REST APIs in your C++ applications.
+
+## Presentation Processing Features
+
+- Fetch presentation images in any of the supported file formats.
+- Copy the layout side or clone the master slide from the source presentation.
+- Process slides shapes, slides notes, placeholders, colors & font theme info.
+- Programmatically create a presentation from HTML & export it to various formats.
+- Merge multiple presentations or split the single presentation into multiple ones.
+- Extract and replace text from a specific slide or an entire presentation.
+
+## Read & Write Presentation Formats
+
+**Microsoft PowerPoint:** PPT, PPTX, PPS, PPSX, PPTM, PPSM, POTX, POTM
+**OpenOffice:** ODP, OTP, FODP
+
+## Save Presentation As
+
+**Fixed Layout:** PDF, PDF/A, XPS
+**Images:** JPEG, PNG, BMP, TIFF, SVG
+**Web:** HTML
+**Other:** SWF (export whole presentations)
+
+## Enhancements in Version 20.12
+- Updated the SDK to run with cloud image.
+- **HttpRequestTimeout** property is added to SDK configuration. It allows specifying a custom timeout (in seconds) for **HTTP** requests made by the SDK.
+
+## Enhancements in Version 20.10
+* Removed ****ShapeType** property from BaseShape class; replaced **GeometryShapeType** with **ShapeType** property for **GeometryShape**.
+* Removed redundant **ResourceUriElement** class. All properties of **ResourceUriElement** type are changed to ResourceUri type.
+
+## Enhancements in Version 20.9
+* New **GetSections, PutSections, PutSection, PostSection, PostSectionMove, DeleteSection, DeleteSections** methods to add, update and delete presentation sections.
+* New **PostslidesHeaderFooter, PostSlideHeaderFooter, GetSlideHeaderFooter, PostNotesSlideHeaderFooter, GetNotesSlideHeaderFooter** methods to manage header/footer settings for slides.
+* Replaced Categories for **ParentCategories** & Level properties in **ChartCategory** class to properly support Sunburst & Treeview charts.
+
 
 ## Licensing
 All Aspose.Slides Cloud SDKs are licensed under MIT License.
@@ -45,20 +73,11 @@ api->postSlidesConvert().get().writeTo(versionStream);
 ```
 You can check more [Examples](Examples) of using the SDK.
 
-## Contact Us
+## Aspose.Slides Cloud SDKs in Popular Languages
 
-Your feedback is very important to us. Please feel free to contact us using our [Support Forums](https://forum.aspose.cloud/c/slides).
+| .NET | Java | PHP | Python | Ruby | Node.js | Android | Swift|Perl|Go|
+|---|---|---|---|---|---|---|--|--|--|
+| [GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-dotnet) | [GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-java) | [GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-php) | [GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-python) | [GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-ruby)  | [GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-nodejs) | [GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-android) | [GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-swift)|[GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-perl) |[GitHub](https://github.com/aspose-slides-cloud/aspose-slides-cloud-go) |
+| [NuGet](https://www.nuget.org/packages/Aspose.slides-Cloud/) | [Maven](https://repository.aspose.cloud/webapp/#/artifacts/browse/tree/General/repo/com/aspose/aspose-slides-cloud) | [Composer](https://packagist.org/packages/aspose/slides-sdk-php) | [PIP](https://pypi.org/project/asposeslidescloud/) | [GEM](https://rubygems.org/gems/aspose_slides_cloud)  | [NPM](https://www.npmjs.com/package/asposeslidescloud) | [Maven](https://repository.aspose.cloud/webapp/#/artifacts/browse/tree/General/repo/com/aspose/aspose-slides-cloud) | [Cocoapods](https://cocoapods.org/pods/AsposeslidesCloud)|[Meta Cpan](https://metacpan.org/release/AsposeSlidesCloud-SlidesApi) | [Go.Dev](https://pkg.go.dev/github.com/aspose-slides-cloud/aspose-slides-cloud-go/) |
 
-## Resources
- 
-[Website](https://www.aspose.cloud/)  
-[Product Home](https://products.aspose.cloud/slides/family)  
-[API Reference](https://apireference.aspose.cloud/slides/)  
-[Documentation](https://docs.aspose.cloud/slides/)  
-[Blog](https://blog.aspose.cloud/category/slides/)  
- 
-## Other languages
-
-We generate our SDKs in different languages so you may check if yours is available in our [list](https://github.com/aspose-slides-cloud).
- 
-If you don't find your language in the list, feel free to request it from us, or use raw REST API requests as you can find it [here](https://products.aspose.cloud/slides/curl).
+[Product Page](https://products.aspose.cloud/slides/cpp) | [Documentation](https://docs.aspose.cloud/display/slidescloud/Home) | [API Reference](https://apireference.aspose.cloud/slides/) | [Code Samples](https://github.com/aspose-slides-cloud/aspose-slides-cloud-cpp) | [Blog](https://blog.aspose.cloud/category/slides/) | [Free Support](https://forum.aspose.cloud/c/slides) | [Free Trial](https://dashboard.aspose.cloud/#/apps)
