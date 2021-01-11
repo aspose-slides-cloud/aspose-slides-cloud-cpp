@@ -35,7 +35,7 @@ From Package Manager:
 
 The example code below converts a PowerPoint document to PDF format using Aspose.Slides-Cloud library:
 ```c++
-std::shared_ptr<asposeslidescloud::api::SlidesApi> api = std::make_shared<asposeslidescloud::api::SlidesApi>(utility::conversions::to_string_t("MyAppSid"), utility::conversions::to_string_t("MyAppKey"));
+std::shared_ptr<asposeslidescloud::api::SlidesApi> api = std::make_shared<asposeslidescloud::api::SlidesApi>(utility::conversions::to_string_t("MyClientId"), utility::conversions::to_string_t("MyClientSecret"));
 api->getSlidesApiInfo().get()->getName();
 std::shared_ptr<PostSlidesConvertRequest> request = std::make_shared<PostSlidesConvertRequest>();
 request->setFormat(utility::conversions::to_string_t("pdf"));

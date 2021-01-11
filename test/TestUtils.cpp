@@ -173,7 +173,7 @@ double* TestUtils::getOptionalDoubleTestValue(std::string functionName, std::str
 std::shared_ptr<HttpContent> TestUtils::getBinaryTestValue(std::string functionName, std::string parameterName)
 {
 	std::shared_ptr<HttpContent> uploadContent = std::make_shared<HttpContent>();
-	uploadContent->setData(std::make_shared<std::ifstream>("TestData/test.ppt", std::ios::binary));
+	uploadContent->setData(std::make_shared<std::ifstream>("TestData/test.pptx", std::ios::binary));
 	return uploadContent;
 }
 

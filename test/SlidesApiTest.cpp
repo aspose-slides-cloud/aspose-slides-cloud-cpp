@@ -2447,13 +2447,13 @@ protected:
 			rulesString = rulesStream.str();
 			web::json::value config = web::json::value::parse(utility::conversions::to_string_t(rulesString));
 			std::shared_ptr<ApiConfiguration> configuration = std::make_shared<ApiConfiguration>();
-			if (config.has_field(utility::conversions::to_string_t("AppSid")))
+			if (config.has_field(utility::conversions::to_string_t("ClientId")))
 			{
-				configuration->setAppSid(config[utility::conversions::to_string_t("AppSid")].as_string());
+				configuration->setAppSid(config[utility::conversions::to_string_t("ClientId")].as_string());
 			}
-			if (config.has_field(utility::conversions::to_string_t("AppKey")))
+			if (config.has_field(utility::conversions::to_string_t("ClientSecret")))
 			{
-				configuration->setAppKey(config[utility::conversions::to_string_t("AppKey")].as_string());
+				configuration->setAppKey(config[utility::conversions::to_string_t("ClientSecret")].as_string());
 			}
 			if (config.has_field(utility::conversions::to_string_t("BaseUrl")))
 			{

@@ -73,12 +73,12 @@ public:
 	ASPOSE_DLL_EXPORT void setTimeout(const int32_t value);
 
 protected:
-    utility::string_t m_BaseUrl;
+	utility::string_t m_BaseUrl;
 	utility::string_t m_BaseAuthUrl;
 	utility::string_t m_Version;
 	utility::string_t m_ApiVersion;
 	std::map<utility::string_t, utility::string_t> m_Headers;
-    utility::string_t m_AppSid;
+	utility::string_t m_AppSid;
 	utility::string_t m_AppKey;
 	utility::string_t m_AccessToken;
 	bool m_Debug;

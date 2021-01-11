@@ -93,30 +93,33 @@ void ApiClient::setRequestHeaders(web::http::http_request& request) const
 	{
 		request.headers().add(kvp.first, kvp.second);
 	}
-	if (m_Configuration->getAccessToken().empty())
+	if (!m_Configuration->getAppSid().empty() || !m_Configuration->getAccessToken().empty())
 	{
-		web::http::client::http_client authClient(m_Configuration->getBaseAuthUrl());
-		web::http::http_request authRequest;
-		web::http::uri_builder authBuilder(U("connect/token"));
-		authRequest.set_request_uri(authBuilder.to_uri());
-		authRequest.set_body(
-			utility::conversions::to_string_t("grant_type=client_credentials&client_id=")
-			+ m_Configuration->getAppSid()
-			+ utility::conversions::to_string_t("&client_secret=")
-			+ m_Configuration->getAppKey(),
-			utility::conversions::to_string_t("application/x-www-form-urlencoded"));
-		authRequest.set_method(web::http::methods::POST);
-		authClient
-			.request(authRequest)
-			.then([](const web::http::http_response& response) {
-			return response.extract_json();
-		}).then([&](const web::json::value& json) {
-			m_Configuration->setAccessToken(web::json::value(json)[utility::conversions::to_string_t("access_token")].as_string());
-		}).wait();
+		if (m_Configuration->getAccessToken().empty())
+		{
+			web::http::client::http_client authClient(m_Configuration->getBaseAuthUrl());
+			web::http::http_request authRequest;
+			web::http::uri_builder authBuilder(U("connect/token"));
+			authRequest.set_request_uri(authBuilder.to_uri());
+			authRequest.set_body(
+				utility::conversions::to_string_t("grant_type=client_credentials&client_id=")
+				+ m_Configuration->getAppSid()
+				+ utility::conversions::to_string_t("&client_secret=")
+				+ m_Configuration->getAppKey(),
+				utility::conversions::to_string_t("application/x-www-form-urlencoded"));
+			authRequest.set_method(web::http::methods::POST);
+			authClient
+				.request(authRequest)
+				.then([](const web::http::http_response& response) {
+				return response.extract_json();
+			}).then([&](const web::json::value& json) {
+				m_Configuration->setAccessToken(web::json::value(json)[utility::conversions::to_string_t("access_token")].as_string());
+			}).wait();
+		}
+		request.headers().add(
+			utility::conversions::to_string_t("Authorization"),
+			utility::conversions::to_string_t("Bearer ") + m_Configuration->getAccessToken());
 	}
-	request.headers().add(
-		utility::conversions::to_string_t("Authorization"),
-		utility::conversions::to_string_t("Bearer ") + m_Configuration->getAccessToken());
 }
 
 void ApiClient::logRequest(web::http::http_request& request) const
