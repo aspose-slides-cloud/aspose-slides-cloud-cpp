@@ -1005,6 +1005,16 @@ public:
 		return request;
 	}
 
+	std::shared_ptr<GetSlidesProtectionPropertiesRequest> getGetSlidesProtectionPropertiesRequest()
+	{
+		std::shared_ptr<GetSlidesProtectionPropertiesRequest> request = std::make_shared<GetSlidesProtectionPropertiesRequest>();
+		request->setName(utils->getTestValue("getSlidesProtectionProperties", "name"));
+		request->setPassword(utils->getTestValue("getSlidesProtectionProperties", "password"));
+		request->setFolder(utils->getTestValue("getSlidesProtectionProperties", "folder"));
+		request->setStorage(utils->getTestValue("getSlidesProtectionProperties", "storage"));
+		return request;
+	}
+
 	std::shared_ptr<GetSlidesSlideRequest> getGetSlidesSlideRequest()
 	{
 		std::shared_ptr<GetSlidesSlideRequest> request = std::make_shared<GetSlidesSlideRequest>();
@@ -1046,6 +1056,16 @@ public:
 		request->setPassword(utils->getTestValue("getSlidesSlideImages", "password"));
 		request->setFolder(utils->getTestValue("getSlidesSlideImages", "folder"));
 		request->setStorage(utils->getTestValue("getSlidesSlideImages", "storage"));
+		return request;
+	}
+
+	std::shared_ptr<GetSlidesSlidePropertiesRequest> getGetSlidesSlidePropertiesRequest()
+	{
+		std::shared_ptr<GetSlidesSlidePropertiesRequest> request = std::make_shared<GetSlidesSlidePropertiesRequest>();
+		request->setName(utils->getTestValue("getSlidesSlideProperties", "name"));
+		request->setPassword(utils->getTestValue("getSlidesSlideProperties", "password"));
+		request->setFolder(utils->getTestValue("getSlidesSlideProperties", "folder"));
+		request->setStorage(utils->getTestValue("getSlidesSlideProperties", "storage"));
 		return request;
 	}
 
@@ -1708,6 +1728,17 @@ public:
 		return request;
 	}
 
+	std::shared_ptr<PostSlidesDocumentFromPdfRequest> getPostSlidesDocumentFromPdfRequest()
+	{
+		std::shared_ptr<PostSlidesDocumentFromPdfRequest> request = std::make_shared<PostSlidesDocumentFromPdfRequest>();
+		request->setName(utils->getTestValue("postSlidesDocumentFromPdf", "name"));
+		request->setPdf(utils->getBinaryTestValue("postSlidesDocumentFromPdf", "pdf"));
+		request->setPassword(utils->getTestValue("postSlidesDocumentFromPdf", "password"));
+		request->setStorage(utils->getTestValue("postSlidesDocumentFromPdf", "storage"));
+		request->setFolder(utils->getTestValue("postSlidesDocumentFromPdf", "folder"));
+		return request;
+	}
+
 	std::shared_ptr<PostSlidesDocumentFromSourceRequest> getPostSlidesDocumentFromSourceRequest()
 	{
 		std::shared_ptr<PostSlidesDocumentFromSourceRequest> request = std::make_shared<PostSlidesDocumentFromSourceRequest>();
@@ -2242,6 +2273,17 @@ public:
 		return request;
 	}
 
+	std::shared_ptr<PutSlidesProtectionPropertiesRequest> getPutSlidesProtectionPropertiesRequest()
+	{
+		std::shared_ptr<PutSlidesProtectionPropertiesRequest> request = std::make_shared<PutSlidesProtectionPropertiesRequest>();
+		request->setName(utils->getTestValue("putSlidesProtectionProperties", "name"));
+		request->setDto(utils->getTestValueForClass<ProtectionProperties>("putSlidesProtectionProperties", "dto"));
+		request->setPassword(utils->getTestValue("putSlidesProtectionProperties", "password"));
+		request->setFolder(utils->getTestValue("putSlidesProtectionProperties", "folder"));
+		request->setStorage(utils->getTestValue("putSlidesProtectionProperties", "storage"));
+		return request;
+	}
+
 	std::shared_ptr<PutSlidesSaveAsRequest> getPutSlidesSaveAsRequest()
 	{
 		std::shared_ptr<PutSlidesSaveAsRequest> request = std::make_shared<PutSlidesSaveAsRequest>();
@@ -2301,6 +2343,17 @@ public:
 		request->setFolder(utils->getTestValue("putSlidesSlideBackgroundColor", "folder"));
 		request->setPassword(utils->getTestValue("putSlidesSlideBackgroundColor", "password"));
 		request->setStorage(utils->getTestValue("putSlidesSlideBackgroundColor", "storage"));
+		return request;
+	}
+
+	std::shared_ptr<PutSlidesSlidePropertiesRequest> getPutSlidesSlidePropertiesRequest()
+	{
+		std::shared_ptr<PutSlidesSlidePropertiesRequest> request = std::make_shared<PutSlidesSlidePropertiesRequest>();
+		request->setName(utils->getTestValue("putSlidesSlideProperties", "name"));
+		request->setDto(utils->getTestValueForClass<SlideProperties>("putSlidesSlideProperties", "dto"));
+		request->setPassword(utils->getTestValue("putSlidesSlideProperties", "password"));
+		request->setFolder(utils->getTestValue("putSlidesSlideProperties", "folder"));
+		request->setStorage(utils->getTestValue("putSlidesSlideProperties", "storage"));
 		return request;
 	}
 
@@ -19633,6 +19686,157 @@ TEST_F(SlidesApiTest, getSlidesPresentationTextItemsStorage) {
 	}
 }
 
+TEST_F(SlidesApiTest, getSlidesProtectionProperties) {
+	std::shared_ptr<GetSlidesProtectionPropertiesRequest> request = getGetSlidesProtectionPropertiesRequest();
+	utils->initialize("getSlidesProtectionProperties", "");
+	std::shared_ptr<ProtectionProperties> result = api->getSlidesProtectionProperties(request).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, getSlidesProtectionPropertiesName) {
+	std::shared_ptr<GetSlidesProtectionPropertiesRequest> request = getGetSlidesProtectionPropertiesRequest();
+	request->setName(utils->getInvalidTestValue("getSlidesProtectionProperties", "name", request->getName()));
+	utils->initialize("getSlidesProtectionProperties", "name", request->getName());
+
+	bool failed = true;
+	try
+	{
+		api->getSlidesProtectionProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getSlidesProtectionProperties", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getSlidesProtectionProperties", "name", request->getName());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getSlidesProtectionProperties", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getSlidesProtectionProperties", "name", request->getName());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getSlidesProtectionProperties", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getSlidesProtectionPropertiesPassword) {
+	std::shared_ptr<GetSlidesProtectionPropertiesRequest> request = getGetSlidesProtectionPropertiesRequest();
+	request->setPassword(utils->getInvalidTestValue("getSlidesProtectionProperties", "password", request->getPassword()));
+	utils->initialize("getSlidesProtectionProperties", "password", request->getPassword());
+
+	bool failed = true;
+	try
+	{
+		api->getSlidesProtectionProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getSlidesProtectionProperties", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getSlidesProtectionProperties", "password", request->getPassword());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getSlidesProtectionProperties", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getSlidesProtectionProperties", "password", request->getPassword());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getSlidesProtectionProperties", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getSlidesProtectionPropertiesFolder) {
+	std::shared_ptr<GetSlidesProtectionPropertiesRequest> request = getGetSlidesProtectionPropertiesRequest();
+	request->setFolder(utils->getInvalidTestValue("getSlidesProtectionProperties", "folder", request->getFolder()));
+	utils->initialize("getSlidesProtectionProperties", "folder", request->getFolder());
+
+	bool failed = true;
+	try
+	{
+		api->getSlidesProtectionProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getSlidesProtectionProperties", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getSlidesProtectionProperties", "folder", request->getFolder());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getSlidesProtectionProperties", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getSlidesProtectionProperties", "folder", request->getFolder());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getSlidesProtectionProperties", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getSlidesProtectionPropertiesStorage) {
+	std::shared_ptr<GetSlidesProtectionPropertiesRequest> request = getGetSlidesProtectionPropertiesRequest();
+	request->setStorage(utils->getInvalidTestValue("getSlidesProtectionProperties", "storage", request->getStorage()));
+	utils->initialize("getSlidesProtectionProperties", "storage", request->getStorage());
+
+	bool failed = true;
+	try
+	{
+		api->getSlidesProtectionProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getSlidesProtectionProperties", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getSlidesProtectionProperties", "storage", request->getStorage());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getSlidesProtectionProperties", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getSlidesProtectionProperties", "storage", request->getStorage());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getSlidesProtectionProperties", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, getSlidesSlide) {
 	std::shared_ptr<GetSlidesSlideRequest> request = getGetSlidesSlideRequest();
 	utils->initialize("getSlidesSlide", "");
@@ -20376,6 +20580,157 @@ TEST_F(SlidesApiTest, getSlidesSlideImagesStorage) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("getSlidesSlideImages", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getSlidesSlideProperties) {
+	std::shared_ptr<GetSlidesSlidePropertiesRequest> request = getGetSlidesSlidePropertiesRequest();
+	utils->initialize("getSlidesSlideProperties", "");
+	std::shared_ptr<SlideProperties> result = api->getSlidesSlideProperties(request).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, getSlidesSlidePropertiesName) {
+	std::shared_ptr<GetSlidesSlidePropertiesRequest> request = getGetSlidesSlidePropertiesRequest();
+	request->setName(utils->getInvalidTestValue("getSlidesSlideProperties", "name", request->getName()));
+	utils->initialize("getSlidesSlideProperties", "name", request->getName());
+
+	bool failed = true;
+	try
+	{
+		api->getSlidesSlideProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getSlidesSlideProperties", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getSlidesSlideProperties", "name", request->getName());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getSlidesSlideProperties", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getSlidesSlideProperties", "name", request->getName());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getSlidesSlideProperties", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getSlidesSlidePropertiesPassword) {
+	std::shared_ptr<GetSlidesSlidePropertiesRequest> request = getGetSlidesSlidePropertiesRequest();
+	request->setPassword(utils->getInvalidTestValue("getSlidesSlideProperties", "password", request->getPassword()));
+	utils->initialize("getSlidesSlideProperties", "password", request->getPassword());
+
+	bool failed = true;
+	try
+	{
+		api->getSlidesSlideProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getSlidesSlideProperties", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getSlidesSlideProperties", "password", request->getPassword());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getSlidesSlideProperties", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getSlidesSlideProperties", "password", request->getPassword());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getSlidesSlideProperties", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getSlidesSlidePropertiesFolder) {
+	std::shared_ptr<GetSlidesSlidePropertiesRequest> request = getGetSlidesSlidePropertiesRequest();
+	request->setFolder(utils->getInvalidTestValue("getSlidesSlideProperties", "folder", request->getFolder()));
+	utils->initialize("getSlidesSlideProperties", "folder", request->getFolder());
+
+	bool failed = true;
+	try
+	{
+		api->getSlidesSlideProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getSlidesSlideProperties", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getSlidesSlideProperties", "folder", request->getFolder());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getSlidesSlideProperties", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getSlidesSlideProperties", "folder", request->getFolder());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getSlidesSlideProperties", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getSlidesSlidePropertiesStorage) {
+	std::shared_ptr<GetSlidesSlidePropertiesRequest> request = getGetSlidesSlidePropertiesRequest();
+	request->setStorage(utils->getInvalidTestValue("getSlidesSlideProperties", "storage", request->getStorage()));
+	utils->initialize("getSlidesSlideProperties", "storage", request->getStorage());
+
+	bool failed = true;
+	try
+	{
+		api->getSlidesSlideProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getSlidesSlideProperties", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getSlidesSlideProperties", "storage", request->getStorage());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getSlidesSlideProperties", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getSlidesSlideProperties", "storage", request->getStorage());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getSlidesSlideProperties", "storage"))
 	{
 		FAIL() << "Must have failed";
 	}
@@ -31451,6 +31806,193 @@ TEST_F(SlidesApiTest, postSlidesDocumentFromHtmlFolder) {
 	}
 }
 
+TEST_F(SlidesApiTest, postSlidesDocumentFromPdf) {
+	std::shared_ptr<PostSlidesDocumentFromPdfRequest> request = getPostSlidesDocumentFromPdfRequest();
+	utils->initialize("postSlidesDocumentFromPdf", "");
+	std::shared_ptr<Document> result = api->postSlidesDocumentFromPdf(request).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, postSlidesDocumentFromPdfName) {
+	std::shared_ptr<PostSlidesDocumentFromPdfRequest> request = getPostSlidesDocumentFromPdfRequest();
+	request->setName(utils->getInvalidTestValue("postSlidesDocumentFromPdf", "name", request->getName()));
+	utils->initialize("postSlidesDocumentFromPdf", "name", request->getName());
+
+	bool failed = true;
+	try
+	{
+		api->postSlidesDocumentFromPdf(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postSlidesDocumentFromPdf", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postSlidesDocumentFromPdf", "name", request->getName());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postSlidesDocumentFromPdf", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postSlidesDocumentFromPdf", "name", request->getName());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postSlidesDocumentFromPdf", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postSlidesDocumentFromPdfPdf) {
+	std::shared_ptr<PostSlidesDocumentFromPdfRequest> request = getPostSlidesDocumentFromPdfRequest();
+	request->setPdf(utils->getInvalidBinaryTestValue("postSlidesDocumentFromPdf", "pdf", request->getPdf()));
+	utils->initialize("postSlidesDocumentFromPdf", "pdf", request->getPdf());
+
+	bool failed = true;
+	try
+	{
+		api->postSlidesDocumentFromPdf(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postSlidesDocumentFromPdf", "pdf");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postSlidesDocumentFromPdf", "pdf", request->getPdf());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postSlidesDocumentFromPdf", "pdf");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postSlidesDocumentFromPdf", "pdf", request->getPdf());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postSlidesDocumentFromPdf", "pdf"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postSlidesDocumentFromPdfPassword) {
+	std::shared_ptr<PostSlidesDocumentFromPdfRequest> request = getPostSlidesDocumentFromPdfRequest();
+	request->setPassword(utils->getInvalidTestValue("postSlidesDocumentFromPdf", "password", request->getPassword()));
+	utils->initialize("postSlidesDocumentFromPdf", "password", request->getPassword());
+
+	bool failed = true;
+	try
+	{
+		api->postSlidesDocumentFromPdf(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postSlidesDocumentFromPdf", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postSlidesDocumentFromPdf", "password", request->getPassword());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postSlidesDocumentFromPdf", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postSlidesDocumentFromPdf", "password", request->getPassword());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postSlidesDocumentFromPdf", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postSlidesDocumentFromPdfStorage) {
+	std::shared_ptr<PostSlidesDocumentFromPdfRequest> request = getPostSlidesDocumentFromPdfRequest();
+	request->setStorage(utils->getInvalidTestValue("postSlidesDocumentFromPdf", "storage", request->getStorage()));
+	utils->initialize("postSlidesDocumentFromPdf", "storage", request->getStorage());
+
+	bool failed = true;
+	try
+	{
+		api->postSlidesDocumentFromPdf(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postSlidesDocumentFromPdf", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postSlidesDocumentFromPdf", "storage", request->getStorage());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postSlidesDocumentFromPdf", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postSlidesDocumentFromPdf", "storage", request->getStorage());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postSlidesDocumentFromPdf", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postSlidesDocumentFromPdfFolder) {
+	std::shared_ptr<PostSlidesDocumentFromPdfRequest> request = getPostSlidesDocumentFromPdfRequest();
+	request->setFolder(utils->getInvalidTestValue("postSlidesDocumentFromPdf", "folder", request->getFolder()));
+	utils->initialize("postSlidesDocumentFromPdf", "folder", request->getFolder());
+
+	bool failed = true;
+	try
+	{
+		api->postSlidesDocumentFromPdf(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postSlidesDocumentFromPdf", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postSlidesDocumentFromPdf", "folder", request->getFolder());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postSlidesDocumentFromPdf", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postSlidesDocumentFromPdf", "folder", request->getFolder());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postSlidesDocumentFromPdf", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, postSlidesDocumentFromSource) {
 	std::shared_ptr<PostSlidesDocumentFromSourceRequest> request = getPostSlidesDocumentFromSourceRequest();
 	utils->initialize("postSlidesDocumentFromSource", "");
@@ -41196,6 +41738,193 @@ TEST_F(SlidesApiTest, putSlidesHeaderFooterFolder) {
 	}
 }
 
+TEST_F(SlidesApiTest, putSlidesProtectionProperties) {
+	std::shared_ptr<PutSlidesProtectionPropertiesRequest> request = getPutSlidesProtectionPropertiesRequest();
+	utils->initialize("putSlidesProtectionProperties", "");
+	std::shared_ptr<ProtectionProperties> result = api->putSlidesProtectionProperties(request).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, putSlidesProtectionPropertiesName) {
+	std::shared_ptr<PutSlidesProtectionPropertiesRequest> request = getPutSlidesProtectionPropertiesRequest();
+	request->setName(utils->getInvalidTestValue("putSlidesProtectionProperties", "name", request->getName()));
+	utils->initialize("putSlidesProtectionProperties", "name", request->getName());
+
+	bool failed = true;
+	try
+	{
+		api->putSlidesProtectionProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("putSlidesProtectionProperties", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesProtectionProperties", "name", request->getName());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("putSlidesProtectionProperties", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesProtectionProperties", "name", request->getName());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("putSlidesProtectionProperties", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, putSlidesProtectionPropertiesDto) {
+	std::shared_ptr<PutSlidesProtectionPropertiesRequest> request = getPutSlidesProtectionPropertiesRequest();
+	request->setDto(utils->getInvalidTestValueForClass<>("putSlidesProtectionProperties", "dto", request->getDto()));
+	utils->initialize("putSlidesProtectionProperties", "dto", request->getDto());
+
+	bool failed = true;
+	try
+	{
+		api->putSlidesProtectionProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("putSlidesProtectionProperties", "dto");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesProtectionProperties", "dto", request->getDto());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("putSlidesProtectionProperties", "dto");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesProtectionProperties", "dto", request->getDto());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("putSlidesProtectionProperties", "dto"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, putSlidesProtectionPropertiesPassword) {
+	std::shared_ptr<PutSlidesProtectionPropertiesRequest> request = getPutSlidesProtectionPropertiesRequest();
+	request->setPassword(utils->getInvalidTestValue("putSlidesProtectionProperties", "password", request->getPassword()));
+	utils->initialize("putSlidesProtectionProperties", "password", request->getPassword());
+
+	bool failed = true;
+	try
+	{
+		api->putSlidesProtectionProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("putSlidesProtectionProperties", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesProtectionProperties", "password", request->getPassword());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("putSlidesProtectionProperties", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesProtectionProperties", "password", request->getPassword());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("putSlidesProtectionProperties", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, putSlidesProtectionPropertiesFolder) {
+	std::shared_ptr<PutSlidesProtectionPropertiesRequest> request = getPutSlidesProtectionPropertiesRequest();
+	request->setFolder(utils->getInvalidTestValue("putSlidesProtectionProperties", "folder", request->getFolder()));
+	utils->initialize("putSlidesProtectionProperties", "folder", request->getFolder());
+
+	bool failed = true;
+	try
+	{
+		api->putSlidesProtectionProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("putSlidesProtectionProperties", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesProtectionProperties", "folder", request->getFolder());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("putSlidesProtectionProperties", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesProtectionProperties", "folder", request->getFolder());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("putSlidesProtectionProperties", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, putSlidesProtectionPropertiesStorage) {
+	std::shared_ptr<PutSlidesProtectionPropertiesRequest> request = getPutSlidesProtectionPropertiesRequest();
+	request->setStorage(utils->getInvalidTestValue("putSlidesProtectionProperties", "storage", request->getStorage()));
+	utils->initialize("putSlidesProtectionProperties", "storage", request->getStorage());
+
+	bool failed = true;
+	try
+	{
+		api->putSlidesProtectionProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("putSlidesProtectionProperties", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesProtectionProperties", "storage", request->getStorage());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("putSlidesProtectionProperties", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesProtectionProperties", "storage", request->getStorage());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("putSlidesProtectionProperties", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, putSlidesSaveAs) {
 	std::shared_ptr<PutSlidesSaveAsRequest> request = getPutSlidesSaveAsRequest();
 	utils->initialize("putSlidesSaveAs", "");
@@ -42377,6 +43106,193 @@ TEST_F(SlidesApiTest, putSlidesSlideBackgroundColorStorage) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("putSlidesSlideBackgroundColor", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, putSlidesSlideProperties) {
+	std::shared_ptr<PutSlidesSlidePropertiesRequest> request = getPutSlidesSlidePropertiesRequest();
+	utils->initialize("putSlidesSlideProperties", "");
+	std::shared_ptr<SlideProperties> result = api->putSlidesSlideProperties(request).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, putSlidesSlidePropertiesName) {
+	std::shared_ptr<PutSlidesSlidePropertiesRequest> request = getPutSlidesSlidePropertiesRequest();
+	request->setName(utils->getInvalidTestValue("putSlidesSlideProperties", "name", request->getName()));
+	utils->initialize("putSlidesSlideProperties", "name", request->getName());
+
+	bool failed = true;
+	try
+	{
+		api->putSlidesSlideProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("putSlidesSlideProperties", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesSlideProperties", "name", request->getName());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("putSlidesSlideProperties", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesSlideProperties", "name", request->getName());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("putSlidesSlideProperties", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, putSlidesSlidePropertiesDto) {
+	std::shared_ptr<PutSlidesSlidePropertiesRequest> request = getPutSlidesSlidePropertiesRequest();
+	request->setDto(utils->getInvalidTestValueForClass<>("putSlidesSlideProperties", "dto", request->getDto()));
+	utils->initialize("putSlidesSlideProperties", "dto", request->getDto());
+
+	bool failed = true;
+	try
+	{
+		api->putSlidesSlideProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("putSlidesSlideProperties", "dto");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesSlideProperties", "dto", request->getDto());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("putSlidesSlideProperties", "dto");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesSlideProperties", "dto", request->getDto());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("putSlidesSlideProperties", "dto"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, putSlidesSlidePropertiesPassword) {
+	std::shared_ptr<PutSlidesSlidePropertiesRequest> request = getPutSlidesSlidePropertiesRequest();
+	request->setPassword(utils->getInvalidTestValue("putSlidesSlideProperties", "password", request->getPassword()));
+	utils->initialize("putSlidesSlideProperties", "password", request->getPassword());
+
+	bool failed = true;
+	try
+	{
+		api->putSlidesSlideProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("putSlidesSlideProperties", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesSlideProperties", "password", request->getPassword());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("putSlidesSlideProperties", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesSlideProperties", "password", request->getPassword());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("putSlidesSlideProperties", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, putSlidesSlidePropertiesFolder) {
+	std::shared_ptr<PutSlidesSlidePropertiesRequest> request = getPutSlidesSlidePropertiesRequest();
+	request->setFolder(utils->getInvalidTestValue("putSlidesSlideProperties", "folder", request->getFolder()));
+	utils->initialize("putSlidesSlideProperties", "folder", request->getFolder());
+
+	bool failed = true;
+	try
+	{
+		api->putSlidesSlideProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("putSlidesSlideProperties", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesSlideProperties", "folder", request->getFolder());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("putSlidesSlideProperties", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesSlideProperties", "folder", request->getFolder());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("putSlidesSlideProperties", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, putSlidesSlidePropertiesStorage) {
+	std::shared_ptr<PutSlidesSlidePropertiesRequest> request = getPutSlidesSlidePropertiesRequest();
+	request->setStorage(utils->getInvalidTestValue("putSlidesSlideProperties", "storage", request->getStorage()));
+	utils->initialize("putSlidesSlideProperties", "storage", request->getStorage());
+
+	bool failed = true;
+	try
+	{
+		api->putSlidesSlideProperties(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("putSlidesSlideProperties", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesSlideProperties", "storage", request->getStorage());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("putSlidesSlideProperties", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesSlideProperties", "storage", request->getStorage());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("putSlidesSlideProperties", "storage"))
 	{
 		FAIL() << "Must have failed";
 	}

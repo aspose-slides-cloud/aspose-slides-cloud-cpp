@@ -5363,6 +5363,54 @@ void GetSlidesPresentationTextItemsRequest::setStorage(utility::string_t value)
 	m_storage = value;
 }
 
+GetSlidesProtectionPropertiesRequest::GetSlidesProtectionPropertiesRequest()
+{
+}
+
+GetSlidesProtectionPropertiesRequest::~GetSlidesProtectionPropertiesRequest()
+{
+}
+
+utility::string_t GetSlidesProtectionPropertiesRequest::getName() const
+{
+	return m_name;
+}
+
+void GetSlidesProtectionPropertiesRequest::setName(utility::string_t value)
+{
+	m_name = value;
+}
+
+utility::string_t GetSlidesProtectionPropertiesRequest::getPassword() const
+{
+	return m_password;
+}
+
+void GetSlidesProtectionPropertiesRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t GetSlidesProtectionPropertiesRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void GetSlidesProtectionPropertiesRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t GetSlidesProtectionPropertiesRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void GetSlidesProtectionPropertiesRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
 GetSlidesSlideRequest::GetSlidesSlideRequest()
 {
 }
@@ -5591,6 +5639,54 @@ utility::string_t GetSlidesSlideImagesRequest::getStorage() const
 }
 
 void GetSlidesSlideImagesRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
+GetSlidesSlidePropertiesRequest::GetSlidesSlidePropertiesRequest()
+{
+}
+
+GetSlidesSlidePropertiesRequest::~GetSlidesSlidePropertiesRequest()
+{
+}
+
+utility::string_t GetSlidesSlidePropertiesRequest::getName() const
+{
+	return m_name;
+}
+
+void GetSlidesSlidePropertiesRequest::setName(utility::string_t value)
+{
+	m_name = value;
+}
+
+utility::string_t GetSlidesSlidePropertiesRequest::getPassword() const
+{
+	return m_password;
+}
+
+void GetSlidesSlidePropertiesRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t GetSlidesSlidePropertiesRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void GetSlidesSlidePropertiesRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t GetSlidesSlidePropertiesRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void GetSlidesSlidePropertiesRequest::setStorage(utility::string_t value)
 {
 	m_storage = value;
 }
@@ -9225,6 +9321,64 @@ void PostSlidesDocumentFromHtmlRequest::setFolder(utility::string_t value)
 	m_folder = value;
 }
 
+PostSlidesDocumentFromPdfRequest::PostSlidesDocumentFromPdfRequest()
+{
+}
+
+PostSlidesDocumentFromPdfRequest::~PostSlidesDocumentFromPdfRequest()
+{
+}
+
+utility::string_t PostSlidesDocumentFromPdfRequest::getName() const
+{
+	return m_name;
+}
+
+void PostSlidesDocumentFromPdfRequest::setName(utility::string_t value)
+{
+	m_name = value;
+}
+
+std::shared_ptr<HttpContent> PostSlidesDocumentFromPdfRequest::getPdf() const
+{
+	return m_pdf;
+}
+
+void PostSlidesDocumentFromPdfRequest::setPdf(std::shared_ptr<HttpContent> value)
+{
+	m_pdf = value;
+}
+
+utility::string_t PostSlidesDocumentFromPdfRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostSlidesDocumentFromPdfRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PostSlidesDocumentFromPdfRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostSlidesDocumentFromPdfRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
+utility::string_t PostSlidesDocumentFromPdfRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PostSlidesDocumentFromPdfRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
 PostSlidesDocumentFromSourceRequest::PostSlidesDocumentFromSourceRequest()
 {
 }
@@ -12325,6 +12479,64 @@ void PutSlidesHeaderFooterRequest::setFolder(utility::string_t value)
 	m_folder = value;
 }
 
+PutSlidesProtectionPropertiesRequest::PutSlidesProtectionPropertiesRequest()
+{
+}
+
+PutSlidesProtectionPropertiesRequest::~PutSlidesProtectionPropertiesRequest()
+{
+}
+
+utility::string_t PutSlidesProtectionPropertiesRequest::getName() const
+{
+	return m_name;
+}
+
+void PutSlidesProtectionPropertiesRequest::setName(utility::string_t value)
+{
+	m_name = value;
+}
+
+std::shared_ptr<ProtectionProperties> PutSlidesProtectionPropertiesRequest::getDto() const
+{
+	return m_dto;
+}
+
+void PutSlidesProtectionPropertiesRequest::setDto(std::shared_ptr<ProtectionProperties> value)
+{
+	m_dto = value;
+}
+
+utility::string_t PutSlidesProtectionPropertiesRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PutSlidesProtectionPropertiesRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PutSlidesProtectionPropertiesRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PutSlidesProtectionPropertiesRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t PutSlidesProtectionPropertiesRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PutSlidesProtectionPropertiesRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
 PutSlidesSaveAsRequest::PutSlidesSaveAsRequest()
 {
 }
@@ -12681,6 +12893,64 @@ utility::string_t PutSlidesSlideBackgroundColorRequest::getStorage() const
 }
 
 void PutSlidesSlideBackgroundColorRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
+PutSlidesSlidePropertiesRequest::PutSlidesSlidePropertiesRequest()
+{
+}
+
+PutSlidesSlidePropertiesRequest::~PutSlidesSlidePropertiesRequest()
+{
+}
+
+utility::string_t PutSlidesSlidePropertiesRequest::getName() const
+{
+	return m_name;
+}
+
+void PutSlidesSlidePropertiesRequest::setName(utility::string_t value)
+{
+	m_name = value;
+}
+
+std::shared_ptr<SlideProperties> PutSlidesSlidePropertiesRequest::getDto() const
+{
+	return m_dto;
+}
+
+void PutSlidesSlidePropertiesRequest::setDto(std::shared_ptr<SlideProperties> value)
+{
+	m_dto = value;
+}
+
+utility::string_t PutSlidesSlidePropertiesRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PutSlidesSlidePropertiesRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PutSlidesSlidePropertiesRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PutSlidesSlidePropertiesRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t PutSlidesSlidePropertiesRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PutSlidesSlidePropertiesRequest::setStorage(utility::string_t value)
 {
 	m_storage = value;
 }

@@ -77,6 +77,7 @@
 #include "../model/Portion.h"
 #include "../model/Portions.h"
 #include "../model/PresentationsMergeRequest.h"
+#include "../model/ProtectionProperties.h"
 #include "../model/Sections.h"
 #include "../model/Series.h"
 #include "../model/ShapeBase.h"
@@ -85,6 +86,7 @@
 #include "../model/SlideAnimation.h"
 #include "../model/SlideBackground.h"
 #include "../model/SlideComments.h"
+#include "../model/SlideProperties.h"
 #include "../model/SlideReplaceResult.h"
 #include "../model/Slides.h"
 #include "../model/SplitDocumentResult.h"
@@ -512,6 +514,11 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<TextItems>> getSlidesPresentationTextItems(std::shared_ptr<GetSlidesPresentationTextItemsRequest> request);
 
 	/// <summary>
+	/// Read presentation protection properties.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ProtectionProperties>> getSlidesProtectionProperties(std::shared_ptr<GetSlidesProtectionPropertiesRequest> request);
+
+	/// <summary>
 	/// Read presentation slide info.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Slide>> getSlidesSlide(std::shared_ptr<GetSlidesSlideRequest> request);
@@ -530,6 +537,11 @@ public:
 	/// Read slide images info.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Images>> getSlidesSlideImages(std::shared_ptr<GetSlidesSlideImagesRequest> request);
+
+	/// <summary>
+	/// Read presentation slide properties.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideProperties>> getSlidesSlideProperties(std::shared_ptr<GetSlidesSlidePropertiesRequest> request);
 
 	/// <summary>
 	/// Extract slide text items.
@@ -752,6 +764,11 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Document>> postSlidesDocumentFromHtml(std::shared_ptr<PostSlidesDocumentFromHtmlRequest> request);
 
 	/// <summary>
+	/// Create presentation document from pdf or append pdf to an existing presentation.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Document>> postSlidesDocumentFromPdf(std::shared_ptr<PostSlidesDocumentFromPdfRequest> request);
+
+	/// <summary>
 	/// Create a presentation from an existing source.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Document>> postSlidesDocumentFromSource(std::shared_ptr<PostSlidesDocumentFromSourceRequest> request);
@@ -927,6 +944,11 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Document>> putSlidesHeaderFooter(std::shared_ptr<PutSlidesHeaderFooterRequest> request);
 
 	/// <summary>
+	/// Update presentation protection properties.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ProtectionProperties>> putSlidesProtectionProperties(std::shared_ptr<PutSlidesProtectionPropertiesRequest> request);
+
+	/// <summary>
 	/// Save a presentation to a specified format.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<void> putSlidesSaveAs(std::shared_ptr<PutSlidesSaveAsRequest> request);
@@ -950,6 +972,11 @@ public:
 	/// Set background color for a slide.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideBackground>> putSlidesSlideBackgroundColor(std::shared_ptr<PutSlidesSlideBackgroundColorRequest> request);
+
+	/// <summary>
+	/// Update presentation slide properties.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideProperties>> putSlidesSlideProperties(std::shared_ptr<PutSlidesSlidePropertiesRequest> request);
 
 	/// <summary>
 	/// Set slide size for a presentation.

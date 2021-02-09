@@ -173,7 +173,11 @@ double* TestUtils::getOptionalDoubleTestValue(std::string functionName, std::str
 std::shared_ptr<HttpContent> TestUtils::getBinaryTestValue(std::string functionName, std::string parameterName)
 {
 	std::shared_ptr<HttpContent> uploadContent = std::make_shared<HttpContent>();
-	uploadContent->setData(std::make_shared<std::ifstream>("TestData/test.pptx", std::ios::binary));
+	utility::string_t path = utility::conversions::to_string_t("TestData/test.pptx");
+	if (boost::iequals(utility::conversions::to_string_t("PostSlidesDocumentFromPdf"), functionName)) {
+		path = utility::conversions::to_string_t("TestData/test.pdf");
+	}
+	uploadContent->setData(std::make_shared<std::ifstream>(path, std::ios::binary));
 	return uploadContent;
 }
 

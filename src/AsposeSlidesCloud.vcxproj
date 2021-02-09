@@ -235,6 +235,7 @@
     <ClCompile Include="model\Portion.cpp" />
     <ClCompile Include="model\Portions.cpp" />
     <ClCompile Include="model\PptxExportOptions.cpp" />
+    <ClCompile Include="model\ProtectionProperties.cpp" />
     <ClCompile Include="model\RemoveShape.cpp" />
     <ClCompile Include="model\RemoveSlide.cpp" />
     <ClCompile Include="model\ReorderSlide.cpp" />
@@ -255,6 +256,7 @@
     <ClCompile Include="model\SlideAnimation.cpp" />
     <ClCompile Include="model\SlideBackground.cpp" />
     <ClCompile Include="model\SlideComments.cpp" />
+    <ClCompile Include="model\SlideProperties.cpp" />
     <ClCompile Include="model\Slides.cpp" />
     <ClCompile Include="model\SolidFill.cpp" />
     <ClCompile Include="model\SplitDocumentResult.cpp" />
@@ -409,6 +411,7 @@
     <ClInclude Include="model\Portion.h" />
     <ClInclude Include="model\Portions.h" />
     <ClInclude Include="model\PptxExportOptions.h" />
+    <ClInclude Include="model\ProtectionProperties.h" />
     <ClInclude Include="model\RemoveShape.h" />
     <ClInclude Include="model\RemoveSlide.h" />
     <ClInclude Include="model\ReorderSlide.h" />
@@ -429,6 +432,7 @@
     <ClInclude Include="model\SlideAnimation.h" />
     <ClInclude Include="model\SlideBackground.h" />
     <ClInclude Include="model\SlideComments.h" />
+    <ClInclude Include="model\SlideProperties.h" />
     <ClInclude Include="model\Slides.h" />
     <ClInclude Include="model\SolidFill.h" />
     <ClInclude Include="model\SplitDocumentResult.h" />

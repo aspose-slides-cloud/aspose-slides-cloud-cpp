@@ -68,9 +68,11 @@ pplx::task<void> SlidesApi::copyFile(std::shared_ptr<CopyFileRequest> request)
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("destStorageName"), request->getDestStorageName());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("versionId"), request->getVersionId());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -109,9 +111,11 @@ pplx::task<void> SlidesApi::copyFolder(std::shared_ptr<CopyFolderRequest> reques
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("srcStorageName"), request->getSrcStorageName());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("destStorageName"), request->getDestStorageName());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -138,9 +142,11 @@ pplx::task<void> SlidesApi::createFolder(std::shared_ptr<CreateFolderRequest> re
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storageName"), request->getStorageName());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -173,13 +179,15 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::deleteChartCategory(std::shared_pt
 	ApiClient::setPathParameter(path, "categoryIndex", request->getCategoryIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -216,13 +224,15 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::deleteChartDataPoint(std::shared_p
 	ApiClient::setPathParameter(path, "pointIndex", request->getPointIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -258,13 +268,15 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::deleteChartSeries(std::shared_ptr<
 	ApiClient::setPathParameter(path, "seriesIndex", request->getSeriesIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -295,9 +307,11 @@ pplx::task<void> SlidesApi::deleteFile(std::shared_ptr<DeleteFileRequest> reques
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storageName"), request->getStorageName());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("versionId"), request->getVersionId());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -328,9 +342,11 @@ pplx::task<void> SlidesApi::deleteFolder(std::shared_ptr<DeleteFolderRequest> re
 		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("recursive"), request->getRecursive());
 	}
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -361,13 +377,15 @@ pplx::task<std::shared_ptr<Slide>> SlidesApi::deleteNotesSlide(std::shared_ptr<D
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -403,13 +421,15 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteNotesSlideParagraph(std
 	ApiClient::setPathParameter(path, "paragraphIndex", request->getParagraphIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -445,13 +465,15 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteNotesSlideParagraphs(st
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("paragraphs"), request->getParagraphs());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -488,13 +510,15 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteNotesSlidePortion(std::sh
 	ApiClient::setPathParameter(path, "portionIndex", request->getPortionIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -531,13 +555,15 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteNotesSlidePortions(std::s
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("portions"), request->getPortions());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -572,13 +598,15 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteNotesSlideShape(std::shared
 	ApiClient::setPathParameter(path, "shapeIndex", request->getShapeIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -613,13 +641,15 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteNotesSlideShapes(std::share
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapes"), request->getShapes());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -655,13 +685,15 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteParagraph(std::shared_p
 	ApiClient::setPathParameter(path, "paragraphIndex", request->getParagraphIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -697,13 +729,15 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteParagraphs(std::shared_
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("paragraphs"), request->getParagraphs());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -740,13 +774,15 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deletePortion(std::shared_ptr<D
 	ApiClient::setPathParameter(path, "portionIndex", request->getPortionIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -783,13 +819,15 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deletePortions(std::shared_ptr<
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("portions"), request->getPortions());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -827,13 +865,15 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::deleteSection(std::shared_ptr<D
 	{
 		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("withSlides"), request->getWithSlides());
 	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -871,13 +911,15 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::deleteSections(std::shared_ptr<
 	{
 		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("withSlides"), request->getWithSlides());
 	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -911,13 +953,15 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSlideAnimation(std:
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -952,13 +996,15 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSlideAnimationEffec
 	ApiClient::setPathParameter(path, "effectIndex", request->getEffectIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -993,13 +1039,15 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSlideAnimationInter
 	ApiClient::setPathParameter(path, "sequenceIndex", request->getSequenceIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1035,13 +1083,15 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSlideAnimationInter
 	ApiClient::setPathParameter(path, "effectIndex", request->getEffectIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1075,13 +1125,15 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSlideAnimationInter
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1115,13 +1167,15 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSlideAnimationMainS
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1155,13 +1209,15 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::deleteSlideByIndex(std::shared_pt
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1196,13 +1252,15 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSlideShape(std::shared_ptr<
 	ApiClient::setPathParameter(path, "shapeIndex", request->getShapeIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1237,13 +1295,15 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSlideShapes(std::shared_ptr
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapes"), request->getShapes());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1279,13 +1339,15 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSlideSubshape(std::shared_p
 	ApiClient::setPathParameter(path, "shapeIndex", request->getShapeIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1321,13 +1383,15 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSlideSubshapes(std::shared_
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapes"), request->getShapes());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1361,13 +1425,15 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::deleteSlidesCleanSlidesList(std::
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("slides"), request->getSlides());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1400,13 +1466,15 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::deleteSlidesDocumentP
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1445,13 +1513,15 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::deleteSlidesDocumentP
 	ApiClient::setPathParameter(path, "propertyName", request->getPropertyName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1485,13 +1555,15 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::deleteSlidesSlideBackgro
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1528,13 +1600,15 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSubshapeParagraph(std::
 	ApiClient::setPathParameter(path, "paragraphIndex", request->getParagraphIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1571,13 +1645,15 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSubshapeParagraphs(std:
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("paragraphs"), request->getParagraphs());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1615,13 +1691,15 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSubshapePortion(std::shar
 	ApiClient::setPathParameter(path, "portionIndex", request->getPortionIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1659,13 +1737,15 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSubshapePortions(std::sha
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("portions"), request->getPortions());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1696,9 +1776,11 @@ pplx::task<HttpContent> SlidesApi::downloadFile(std::shared_ptr<DownloadFileRequ
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storageName"), request->getStorageName());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("versionId"), request->getVersionId());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1726,9 +1808,11 @@ pplx::task<std::shared_ptr<DiscUsage>> SlidesApi::getDiscUsage(std::shared_ptr<G
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storageName"), request->getStorageName());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1758,9 +1842,11 @@ pplx::task<std::shared_ptr<FileVersions>> SlidesApi::getFileVersions(std::shared
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storageName"), request->getStorageName());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1790,9 +1876,11 @@ pplx::task<std::shared_ptr<FilesList>> SlidesApi::getFilesList(std::shared_ptr<G
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storageName"), request->getStorageName());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1826,13 +1914,15 @@ pplx::task<std::shared_ptr<LayoutSlide>> SlidesApi::getLayoutSlide(std::shared_p
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1865,13 +1955,15 @@ pplx::task<std::shared_ptr<LayoutSlides>> SlidesApi::getLayoutSlidesList(std::sh
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1905,13 +1997,15 @@ pplx::task<std::shared_ptr<MasterSlide>> SlidesApi::getMasterSlide(std::shared_p
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1944,13 +2038,15 @@ pplx::task<std::shared_ptr<MasterSlides>> SlidesApi::getMasterSlidesList(std::sh
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -1984,13 +2080,15 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::getNotesSlide(std::shared_ptr
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2024,13 +2122,15 @@ pplx::task<std::shared_ptr<EntityExists>> SlidesApi::getNotesSlideExists(std::sh
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2064,13 +2164,15 @@ pplx::task<std::shared_ptr<NotesSlideHeaderFooter>> SlidesApi::getNotesSlideHead
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2105,13 +2207,15 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getNotesSlideShape(std::shared
 	ApiClient::setPathParameter(path, "shapeIndex", request->getShapeIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2147,13 +2251,15 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getNotesSlideShapeParagraph(st
 	ApiClient::setPathParameter(path, "paragraphIndex", request->getParagraphIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2188,13 +2294,15 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getNotesSlideShapeParagraphs(
 	ApiClient::setPathParameter(path, "shapeIndex", request->getShapeIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2231,13 +2339,15 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getNotesSlideShapePortion(std::s
 	ApiClient::setPathParameter(path, "portionIndex", request->getPortionIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2273,13 +2383,15 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::getNotesSlideShapePortions(std:
 	ApiClient::setPathParameter(path, "paragraphIndex", request->getParagraphIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2313,13 +2425,15 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getNotesSlideShapes(std::shared_p
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2372,14 +2486,16 @@ pplx::task<HttpContent> SlidesApi::getNotesSlideWithFormat(std::shared_ptr<GetNo
 	{
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("height"), request->getHeight());
 	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), request->getFontsFolder());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2415,13 +2531,15 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getParagraphPortion(std::shared_
 	ApiClient::setPathParameter(path, "portionIndex", request->getPortionIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2457,13 +2575,15 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::getParagraphPortions(std::share
 	ApiClient::setPathParameter(path, "paragraphIndex", request->getParagraphIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2496,13 +2616,15 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::getSections(std::shared_ptr<Get
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2540,13 +2662,15 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::getSlideAnimation(std::sh
 	{
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapeIndex"), request->getShapeIndex());
 	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2580,13 +2704,15 @@ pplx::task<std::shared_ptr<HeaderFooter>> SlidesApi::getSlideHeaderFooter(std::s
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2621,13 +2747,15 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getSlideShape(std::shared_ptr<
 	ApiClient::setPathParameter(path, "shapeIndex", request->getShapeIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2663,13 +2791,15 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getSlideShapeParagraph(std::sh
 	ApiClient::setPathParameter(path, "paragraphIndex", request->getParagraphIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2704,13 +2834,15 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getSlideShapeParagraphs(std::
 	ApiClient::setPathParameter(path, "shapeIndex", request->getShapeIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2744,13 +2876,15 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getSlideShapes(std::shared_ptr<Ge
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2786,13 +2920,15 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getSlideSubshape(std::shared_p
 	ApiClient::setPathParameter(path, "shapeIndex", request->getShapeIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2829,13 +2965,15 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getSlideSubshapeParagraph(std:
 	ApiClient::setPathParameter(path, "paragraphIndex", request->getParagraphIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2871,13 +3009,15 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getSlideSubshapeParagraphs(st
 	ApiClient::setPathParameter(path, "shapeIndex", request->getShapeIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2912,13 +3052,15 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getSlideSubshapes(std::shared_ptr
 	ApiClient::setPathParameter(path, "path", request->getPath());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2946,9 +3088,11 @@ pplx::task<std::shared_ptr<ApiInfo>> SlidesApi::getSlidesApiInfo()
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -2981,13 +3125,15 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::getSlidesDocument(std::shared_p
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3020,13 +3166,15 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::getSlidesDocumentProp
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3065,13 +3213,15 @@ pplx::task<std::shared_ptr<DocumentProperty>> SlidesApi::getSlidesDocumentProper
 	ApiClient::setPathParameter(path, "propertyName", request->getPropertyName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3105,13 +3255,15 @@ pplx::task<HttpContent> SlidesApi::getSlidesImageWithDefaultFormat(std::shared_p
 	ApiClient::setPathParameter(path, "index", request->getIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3155,13 +3307,15 @@ pplx::task<HttpContent> SlidesApi::getSlidesImageWithFormat(std::shared_ptr<GetS
 	ApiClient::setPathParameter(path, "format", request->getFormat());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3193,13 +3347,15 @@ pplx::task<std::shared_ptr<Images>> SlidesApi::getSlidesImages(std::shared_ptr<G
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3234,13 +3390,15 @@ pplx::task<std::shared_ptr<Placeholder>> SlidesApi::getSlidesPlaceholder(std::sh
 	ApiClient::setPathParameter(path, "placeholderIndex", request->getPlaceholderIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3274,13 +3432,15 @@ pplx::task<std::shared_ptr<Placeholders>> SlidesApi::getSlidesPlaceholders(std::
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3317,13 +3477,15 @@ pplx::task<std::shared_ptr<TextItems>> SlidesApi::getSlidesPresentationTextItems
 	{
 		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("withEmpty"), request->getWithEmpty());
 	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3345,6 +3507,47 @@ pplx::task<std::shared_ptr<TextItems>> SlidesApi::getSlidesPresentationTextItems
 		});
 }
 
+pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::getSlidesProtectionProperties(std::shared_ptr<GetSlidesProtectionPropertiesRequest> request)
+{
+	// verify the required parameter 'name' is set
+	if (request->getName().empty())
+	{
+		throw std::invalid_argument("Missing required parameter: request.name");
+	}
+	utility::string_t path = utility::conversions::to_string_t("/slides/{name}/protectionProperties");
+	ApiClient::setPathParameter(path, "name", request->getName());
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
+		.then([=](web::http::http_response response)
+		{
+			if (response.status_code() >= 400)
+			{
+				throw ApiException(
+					response.status_code(),
+					utility::conversions::to_string_t("error calling getSlidesProtectionProperties: ") + response.reason_phrase(),
+					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			}
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<ProtectionProperties> result(new ProtectionProperties());
+			result->fromJson(json);
+			return result;
+		});
+}
+
 pplx::task<std::shared_ptr<Slide>> SlidesApi::getSlidesSlide(std::shared_ptr<GetSlidesSlideRequest> request)
 {
 	// verify the required parameter 'name' is set
@@ -3357,13 +3560,15 @@ pplx::task<std::shared_ptr<Slide>> SlidesApi::getSlidesSlide(std::shared_ptr<Get
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3397,13 +3602,15 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::getSlidesSlideBackground
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3437,13 +3644,15 @@ pplx::task<std::shared_ptr<SlideComments>> SlidesApi::getSlidesSlideComments(std
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3477,13 +3686,15 @@ pplx::task<std::shared_ptr<Images>> SlidesApi::getSlidesSlideImages(std::shared_
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3505,6 +3716,47 @@ pplx::task<std::shared_ptr<Images>> SlidesApi::getSlidesSlideImages(std::shared_
 		});
 }
 
+pplx::task<std::shared_ptr<SlideProperties>> SlidesApi::getSlidesSlideProperties(std::shared_ptr<GetSlidesSlidePropertiesRequest> request)
+{
+	// verify the required parameter 'name' is set
+	if (request->getName().empty())
+	{
+		throw std::invalid_argument("Missing required parameter: request.name");
+	}
+	utility::string_t path = utility::conversions::to_string_t("/slides/{name}/slideProperties");
+	ApiClient::setPathParameter(path, "name", request->getName());
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
+		.then([=](web::http::http_response response)
+		{
+			if (response.status_code() >= 400)
+			{
+				throw ApiException(
+					response.status_code(),
+					utility::conversions::to_string_t("error calling getSlidesSlideProperties: ") + response.reason_phrase(),
+					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			}
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<SlideProperties> result(new SlideProperties());
+			result->fromJson(json);
+			return result;
+		});
+}
+
 pplx::task<std::shared_ptr<TextItems>> SlidesApi::getSlidesSlideTextItems(std::shared_ptr<GetSlidesSlideTextItemsRequest> request)
 {
 	// verify the required parameter 'name' is set
@@ -3521,13 +3773,15 @@ pplx::task<std::shared_ptr<TextItems>> SlidesApi::getSlidesSlideTextItems(std::s
 	{
 		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("withEmpty"), request->getWithEmpty());
 	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3560,13 +3814,15 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::getSlidesSlidesList(std::shared_p
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3600,13 +3856,15 @@ pplx::task<std::shared_ptr<Theme>> SlidesApi::getSlidesTheme(std::shared_ptr<Get
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3640,13 +3898,15 @@ pplx::task<std::shared_ptr<ColorScheme>> SlidesApi::getSlidesThemeColorScheme(st
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3680,13 +3940,15 @@ pplx::task<std::shared_ptr<FontScheme>> SlidesApi::getSlidesThemeFontScheme(std:
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3720,13 +3982,15 @@ pplx::task<std::shared_ptr<FormatScheme>> SlidesApi::getSlidesThemeFormatScheme(
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3759,13 +4023,15 @@ pplx::task<std::shared_ptr<ViewProperties>> SlidesApi::getSlidesViewProperties(s
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3803,13 +4069,15 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getSubshapeParagraphPortion(std:
 	ApiClient::setPathParameter(path, "portionIndex", request->getPortionIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3846,13 +4114,15 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::getSubshapeParagraphPortions(st
 	ApiClient::setPathParameter(path, "paragraphIndex", request->getParagraphIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3895,9 +4165,11 @@ pplx::task<void> SlidesApi::moveFile(std::shared_ptr<MoveFileRequest> request)
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("destStorageName"), request->getDestStorageName());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("versionId"), request->getVersionId());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3936,9 +4208,11 @@ pplx::task<void> SlidesApi::moveFolder(std::shared_ptr<MoveFolderRequest> reques
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("srcStorageName"), request->getSrcStorageName());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("destStorageName"), request->getDestStorageName());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -3966,9 +4240,11 @@ pplx::task<std::shared_ptr<ObjectExist>> SlidesApi::objectExists(std::shared_ptr
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storageName"), request->getStorageName());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("versionId"), request->getVersionId());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4007,7 +4283,6 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::postAddNewParagraph(std::share
 	ApiClient::setPathParameter(path, "shapeIndex", request->getShapeIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	if (request->positionIsSet())
@@ -4015,13 +4290,16 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::postAddNewParagraph(std::share
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), request->getPosition());
 	}
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4061,7 +4339,6 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::postAddNewPortion(std::shared_pt
 	ApiClient::setPathParameter(path, "paragraphIndex", request->getParagraphIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	if (request->positionIsSet())
@@ -4069,13 +4346,16 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::postAddNewPortion(std::shared_pt
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), request->getPosition());
 	}
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4109,7 +4389,6 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::postAddNewShape(std::shared_pt
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	if (request->shapeToCloneIsSet())
@@ -4121,13 +4400,16 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::postAddNewShape(std::shared_pt
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), request->getPosition());
 	}
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4162,7 +4444,6 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::postAddNewSubshape(std::shared
 	ApiClient::setPathParameter(path, "path", request->getPath());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	if (request->shapeToCloneIsSet())
@@ -4174,13 +4455,16 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::postAddNewSubshape(std::shared
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), request->getPosition());
 	}
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4220,7 +4504,6 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::postAddNewSubshapeParagraph(st
 	ApiClient::setPathParameter(path, "shapeIndex", request->getShapeIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	if (request->positionIsSet())
@@ -4228,13 +4511,16 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::postAddNewSubshapeParagraph(st
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), request->getPosition());
 	}
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4275,7 +4561,6 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::postAddNewSubshapePortion(std::s
 	ApiClient::setPathParameter(path, "paragraphIndex", request->getParagraphIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	if (request->positionIsSet())
@@ -4283,13 +4568,16 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::postAddNewSubshapePortion(std::s
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), request->getPosition());
 	}
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4327,9 +4615,11 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::postAddNotesSlide(std::shared
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
@@ -4337,7 +4627,7 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::postAddNotesSlide(std::shared
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4376,9 +4666,11 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::postChartCategory(std::shared_ptr<
 	ApiClient::setPathParameter(path, "shapeIndex", request->getShapeIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getCategory() != nullptr)
@@ -4386,7 +4678,7 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::postChartCategory(std::shared_ptr<
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getCategory()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4426,9 +4718,11 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::postChartDataPoint(std::shared_ptr
 	ApiClient::setPathParameter(path, "seriesIndex", request->getSeriesIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDataPoint() != nullptr)
@@ -4436,7 +4730,7 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::postChartDataPoint(std::shared_ptr
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDataPoint()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4475,9 +4769,11 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::postChartSeries(std::shared_ptr<Po
 	ApiClient::setPathParameter(path, "shapeIndex", request->getShapeIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getSeries() != nullptr)
@@ -4485,7 +4781,7 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::postChartSeries(std::shared_ptr<Po
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getSeries()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4525,15 +4821,17 @@ pplx::task<std::shared_ptr<LayoutSlide>> SlidesApi::postCopyLayoutSlideFromSourc
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("cloneFrom"), request->getCloneFrom());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("cloneFromPosition"), request->getCloneFromPosition());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("cloneFromPassword"), request->getCloneFromPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("cloneFromStorage"), request->getCloneFromStorage());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("cloneFromPassword"), request->getCloneFromPassword());
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4573,19 +4871,21 @@ pplx::task<std::shared_ptr<MasterSlide>> SlidesApi::postCopyMasterSlideFromSourc
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("cloneFrom"), request->getCloneFrom());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("cloneFromPosition"), request->getCloneFromPosition());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("cloneFromPassword"), request->getCloneFromPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("cloneFromStorage"), request->getCloneFromStorage());
 	if (request->applyToAllIsSet())
 	{
 		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("applyToAll"), request->getApplyToAll());
 	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("cloneFromPassword"), request->getCloneFromPassword());
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4617,12 +4917,14 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::postGetNotesSlide(std::shared
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	httpBody = request->getDocument();
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4654,12 +4956,14 @@ pplx::task<std::shared_ptr<EntityExists>> SlidesApi::postGetNotesSlideExists(std
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	httpBody = request->getDocument();
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4710,13 +5014,15 @@ pplx::task<HttpContent> SlidesApi::postGetNotesSlideWithFormat(std::shared_ptr<P
 	{
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("height"), request->getHeight());
 	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), request->getFontsFolder());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	httpBody = request->getDocument();
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4754,7 +5060,6 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::postNotesSlideAddNewParagraph(
 	ApiClient::setPathParameter(path, "shapeIndex", request->getShapeIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	if (request->positionIsSet())
@@ -4762,13 +5067,16 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::postNotesSlideAddNewParagraph(
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), request->getPosition());
 	}
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4808,7 +5116,6 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::postNotesSlideAddNewPortion(std:
 	ApiClient::setPathParameter(path, "paragraphIndex", request->getParagraphIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	if (request->positionIsSet())
@@ -4816,13 +5123,16 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::postNotesSlideAddNewPortion(std:
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), request->getPosition());
 	}
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4860,7 +5170,6 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::postNotesSlideAddNewShape(std:
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	if (request->shapeToCloneIsSet())
@@ -4872,13 +5181,16 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::postNotesSlideAddNewShape(std:
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), request->getPosition());
 	}
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4924,7 +5236,6 @@ pplx::task<HttpContent> SlidesApi::postNotesSlideShapeSaveAs(std::shared_ptr<Pos
 	ApiClient::setPathParameter(path, "format", request->getFormat());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	if (request->scaleXIsSet())
@@ -4938,13 +5249,16 @@ pplx::task<HttpContent> SlidesApi::postNotesSlideShapeSaveAs(std::shared_ptr<Pos
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("bounds"), request->getBounds());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), request->getFontsFolder());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getOptions() != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getOptions()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -4980,9 +5294,11 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::postPresentationMerge(std::shar
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getRequest() != nullptr)
@@ -4990,7 +5306,7 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::postPresentationMerge(std::shar
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getRequest()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5030,13 +5346,15 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::postSection(std::shared_ptr<Pos
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("sectionName"), request->getSectionName());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("slideIndex"), request->getSlideIndex());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5071,13 +5389,15 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::postSectionMove(std::shared_ptr
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("newPosition"), request->getNewPosition());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5123,7 +5443,6 @@ pplx::task<HttpContent> SlidesApi::postShapeSaveAs(std::shared_ptr<PostShapeSave
 	ApiClient::setPathParameter(path, "format", request->getFormat());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	if (request->scaleXIsSet())
@@ -5137,13 +5456,16 @@ pplx::task<HttpContent> SlidesApi::postShapeSaveAs(std::shared_ptr<PostShapeSave
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("bounds"), request->getBounds());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), request->getFontsFolder());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getOptions() != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getOptions()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5180,9 +5502,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::postSlideAnimationEffect(
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getEffect() != nullptr)
@@ -5190,7 +5514,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::postSlideAnimationEffect(
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getEffect()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5228,9 +5552,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::postSlideAnimationInterac
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getSequence() != nullptr)
@@ -5238,7 +5564,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::postSlideAnimationInterac
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getSequence()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5277,9 +5603,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::postSlideAnimationInterac
 	ApiClient::setPathParameter(path, "sequenceIndex", request->getSequenceIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getEffect() != nullptr)
@@ -5287,7 +5615,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::postSlideAnimationInterac
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getEffect()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5340,10 +5668,12 @@ pplx::task<HttpContent> SlidesApi::postSlideSaveAs(std::shared_ptr<PostSlideSave
 	{
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("height"), request->getHeight());
 	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), request->getFontsFolder());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getOptions() != nullptr)
@@ -5351,7 +5681,7 @@ pplx::task<HttpContent> SlidesApi::postSlideSaveAs(std::shared_ptr<PostSlideSave
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getOptions()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5387,14 +5717,16 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::postSlidesAdd(std::shared_ptr<Pos
 	{
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), request->getPosition());
 	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("layoutAlias"), request->getLayoutAlias());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5436,13 +5768,15 @@ pplx::task<HttpContent> SlidesApi::postSlidesConvert(std::shared_ptr<PostSlidesC
 	ApiClient::setPathParameter(path, "format", request->getFormat());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), request->getFontsFolder());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	httpBody = request->getDocument();
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5480,15 +5814,17 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::postSlidesCopy(std::shared_ptr<Po
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), request->getPosition());
 	}
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("source"), request->getSource());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("sourcePassword"), request->getSourcePassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("sourceStorage"), request->getSourceStorage());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("sourcePassword"), request->getSourcePassword());
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5521,15 +5857,17 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::postSlidesDocument(std::shared_
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("inputPassword"), request->getInputPassword());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("inputPassword"), request->getInputPassword());
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	httpBody = request->getData();
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5562,9 +5900,11 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::postSlidesDocumentFromHtml(std:
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (!request->getHtml().empty())
@@ -5572,7 +5912,7 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::postSlidesDocumentFromHtml(std:
 		httpBody = std::shared_ptr<IHttpBody>(new StringBody(request->getHtml()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5580,6 +5920,48 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::postSlidesDocumentFromHtml(std:
 				throw ApiException(
 					response.status_code(),
 					utility::conversions::to_string_t("error calling postSlidesDocumentFromHtml: ") + response.reason_phrase(),
+					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			}
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<Document> result(new Document());
+			result->fromJson(json);
+			return result;
+		});
+}
+
+pplx::task<std::shared_ptr<Document>> SlidesApi::postSlidesDocumentFromPdf(std::shared_ptr<PostSlidesDocumentFromPdfRequest> request)
+{
+	// verify the required parameter 'name' is set
+	if (request->getName().empty())
+	{
+		throw std::invalid_argument("Missing required parameter: request.name");
+	}
+	utility::string_t path = utility::conversions::to_string_t("/slides/{name}/fromPdf");
+	ApiClient::setPathParameter(path, "name", request->getName());
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	httpBody = request->getPdf();
+
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
+		.then([=](web::http::http_response response)
+		{
+			if (response.status_code() >= 400)
+			{
+				throw ApiException(
+					response.status_code(),
+					utility::conversions::to_string_t("error calling postSlidesDocumentFromPdf: ") + response.reason_phrase(),
 					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
 			}
 			return response.extract_string();
@@ -5606,15 +5988,17 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::postSlidesDocumentFromSource(st
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("sourcePath"), request->getSourcePath());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("sourcePassword"), request->getSourcePassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("sourceStorage"), request->getSourceStorage());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("sourcePassword"), request->getSourcePassword());
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5653,15 +6037,17 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::postSlidesDocumentFromTemplate(
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("templatePath"), request->getTemplatePath());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("templatePassword"), request->getTemplatePassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("templateStorage"), request->getTemplateStorage());
 	if (request->isImageDataEmbeddedIsSet())
 	{
 		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("isImageDataEmbedded"), request->getIsImageDataEmbedded());
 	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("templatePassword"), request->getTemplatePassword());
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (!request->getData().empty())
@@ -5669,7 +6055,7 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::postSlidesDocumentFromTemplate(
 		httpBody = std::shared_ptr<IHttpBody>(new StringBody(request->getData()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5701,13 +6087,15 @@ pplx::task<HttpContent> SlidesApi::postSlidesPipeline(std::shared_ptr<PostSlides
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getPipeline() != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getPipeline()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5755,13 +6143,15 @@ pplx::task<std::shared_ptr<DocumentReplaceResult>> SlidesApi::postSlidesPresenta
 	{
 		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("ignoreCase"), request->getIgnoreCase());
 	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5796,13 +6186,15 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::postSlidesReorder(std::shared_ptr
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("newPosition"), request->getNewPosition());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5837,13 +6229,15 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::postSlidesReorderMany(std::shared
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("oldPositions"), request->getOldPositions());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("newPositions"), request->getNewPositions());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5887,10 +6281,12 @@ pplx::task<HttpContent> SlidesApi::postSlidesSaveAs(std::shared_ptr<PostSlidesSa
 	ApiClient::setPathParameter(path, "format", request->getFormat());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), request->getFontsFolder());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getOptions() != nullptr)
@@ -5898,7 +6294,7 @@ pplx::task<HttpContent> SlidesApi::postSlidesSaveAs(std::shared_ptr<PostSlidesSa
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getOptions()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5934,9 +6330,11 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::postSlidesSetDocument
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getProperties() != nullptr)
@@ -5944,7 +6342,7 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::postSlidesSetDocument
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getProperties()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -5994,13 +6392,15 @@ pplx::task<std::shared_ptr<SlideReplaceResult>> SlidesApi::postSlidesSlideReplac
 	{
 		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("ignoreCase"), request->getIgnoreCase());
 	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6051,10 +6451,12 @@ pplx::task<std::shared_ptr<SplitDocumentResult>> SlidesApi::postSlidesSplit(std:
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("from"), request->getFrom());
 	}
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("destFolder"), request->getDestFolder());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), request->getFontsFolder());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getOptions() != nullptr)
@@ -6062,7 +6464,7 @@ pplx::task<std::shared_ptr<SplitDocumentResult>> SlidesApi::postSlidesSplit(std:
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getOptions()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6109,7 +6511,6 @@ pplx::task<HttpContent> SlidesApi::postSubshapeSaveAs(std::shared_ptr<PostSubsha
 	ApiClient::setPathParameter(path, "format", request->getFormat());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	if (request->scaleXIsSet())
@@ -6123,13 +6524,16 @@ pplx::task<HttpContent> SlidesApi::postSubshapeSaveAs(std::shared_ptr<PostSubsha
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("bounds"), request->getBounds());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), request->getFontsFolder());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getOptions() != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getOptions()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6168,9 +6572,11 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::putChartCategory(std::shared_ptr<P
 	ApiClient::setPathParameter(path, "categoryIndex", request->getCategoryIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getCategory() != nullptr)
@@ -6178,7 +6584,7 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::putChartCategory(std::shared_ptr<P
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getCategory()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6219,9 +6625,11 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::putChartDataPoint(std::shared_ptr<
 	ApiClient::setPathParameter(path, "pointIndex", request->getPointIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDataPoint() != nullptr)
@@ -6229,7 +6637,7 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::putChartDataPoint(std::shared_ptr<
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDataPoint()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6269,9 +6677,11 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::putChartSeries(std::shared_ptr<Put
 	ApiClient::setPathParameter(path, "seriesIndex", request->getSeriesIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getSeries() != nullptr)
@@ -6279,7 +6689,7 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::putChartSeries(std::shared_ptr<Put
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getSeries()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6317,9 +6727,11 @@ pplx::task<std::shared_ptr<LayoutSlide>> SlidesApi::putLayoutSlide(std::shared_p
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getSlideDto() != nullptr)
@@ -6327,7 +6739,7 @@ pplx::task<std::shared_ptr<LayoutSlide>> SlidesApi::putLayoutSlide(std::shared_p
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getSlideDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6365,9 +6777,11 @@ pplx::task<std::shared_ptr<NotesSlideHeaderFooter>> SlidesApi::putNotesSlideHead
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
@@ -6375,7 +6789,7 @@ pplx::task<std::shared_ptr<NotesSlideHeaderFooter>> SlidesApi::putNotesSlideHead
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6427,7 +6841,6 @@ pplx::task<void> SlidesApi::putNotesSlideShapeSaveAs(std::shared_ptr<PutNotesSli
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("outPath"), request->getOutPath());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	if (request->scaleXIsSet())
@@ -6441,13 +6854,16 @@ pplx::task<void> SlidesApi::putNotesSlideShapeSaveAs(std::shared_ptr<PutNotesSli
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("bounds"), request->getBounds());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), request->getFontsFolder());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getOptions() != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getOptions()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6481,9 +6897,11 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::putPresentationMerge(std::share
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getRequest() != nullptr)
@@ -6491,7 +6909,7 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::putPresentationMerge(std::share
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getRequest()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6531,13 +6949,15 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::putSection(std::shared_ptr<PutS
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("sectionName"), request->getSectionName());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6574,9 +6994,11 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::putSections(std::shared_ptr<Put
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getSections() != nullptr)
@@ -6584,7 +7006,7 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::putSections(std::shared_ptr<Put
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getSections()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6625,9 +7047,11 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::putSetParagraphPortionProperties
 	ApiClient::setPathParameter(path, "portionIndex", request->getPortionIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
@@ -6635,7 +7059,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::putSetParagraphPortionProperties
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6675,9 +7099,11 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::putSetParagraphProperties(std:
 	ApiClient::setPathParameter(path, "paragraphIndex", request->getParagraphIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
@@ -6685,7 +7111,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::putSetParagraphProperties(std:
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6727,9 +7153,11 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::putSetSubshapeParagraphPortionPr
 	ApiClient::setPathParameter(path, "portionIndex", request->getPortionIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
@@ -6737,7 +7165,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::putSetSubshapeParagraphPortionPr
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6778,9 +7206,11 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::putSetSubshapeParagraphPropert
 	ApiClient::setPathParameter(path, "paragraphIndex", request->getParagraphIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
@@ -6788,7 +7218,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::putSetSubshapeParagraphPropert
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6840,7 +7270,6 @@ pplx::task<void> SlidesApi::putShapeSaveAs(std::shared_ptr<PutShapeSaveAsRequest
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("outPath"), request->getOutPath());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	if (request->scaleXIsSet())
@@ -6854,13 +7283,16 @@ pplx::task<void> SlidesApi::putShapeSaveAs(std::shared_ptr<PutShapeSaveAsRequest
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("bounds"), request->getBounds());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), request->getFontsFolder());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getOptions() != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getOptions()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6895,9 +7327,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::putSlideAnimation(std::sh
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getAnimation() != nullptr)
@@ -6905,7 +7339,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::putSlideAnimation(std::sh
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getAnimation()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6944,9 +7378,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::putSlideAnimationEffect(s
 	ApiClient::setPathParameter(path, "effectIndex", request->getEffectIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getEffect() != nullptr)
@@ -6954,7 +7390,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::putSlideAnimationEffect(s
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getEffect()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -6994,9 +7430,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::putSlideAnimationInteract
 	ApiClient::setPathParameter(path, "effectIndex", request->getEffectIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getEffect() != nullptr)
@@ -7004,7 +7442,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::putSlideAnimationInteract
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getEffect()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7042,9 +7480,11 @@ pplx::task<std::shared_ptr<HeaderFooter>> SlidesApi::putSlideHeaderFooter(std::s
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
@@ -7052,7 +7492,7 @@ pplx::task<std::shared_ptr<HeaderFooter>> SlidesApi::putSlideHeaderFooter(std::s
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7111,10 +7551,12 @@ pplx::task<void> SlidesApi::putSlideSaveAs(std::shared_ptr<PutSlideSaveAsRequest
 	{
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("height"), request->getHeight());
 	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), request->getFontsFolder());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getOptions() != nullptr)
@@ -7122,7 +7564,7 @@ pplx::task<void> SlidesApi::putSlideSaveAs(std::shared_ptr<PutSlideSaveAsRequest
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getOptions()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7158,9 +7600,11 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::putSlideShapeInfo(std::shared_
 	ApiClient::setPathParameter(path, "shapeIndex", request->getShapeIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
@@ -7168,7 +7612,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::putSlideShapeInfo(std::shared_
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7208,9 +7652,11 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::putSlideSubshapeInfo(std::shar
 	ApiClient::setPathParameter(path, "shapeIndex", request->getShapeIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
@@ -7218,7 +7664,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::putSlideSubshapeInfo(std::shar
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7266,13 +7712,15 @@ pplx::task<void> SlidesApi::putSlidesConvert(std::shared_ptr<PutSlidesConvertReq
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("outPath"), request->getOutPath());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), request->getFontsFolder());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	httpBody = request->getDocument();
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7302,9 +7750,11 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::putSlidesDocumentFromHtml(std::
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (!request->getHtml().empty())
@@ -7312,7 +7762,7 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::putSlidesDocumentFromHtml(std::
 		httpBody = std::shared_ptr<IHttpBody>(new StringBody(request->getHtml()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7349,9 +7799,11 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::putSlidesHeaderFooter(std::shar
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
@@ -7359,7 +7811,7 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::putSlidesHeaderFooter(std::shar
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7376,6 +7828,55 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::putSlidesHeaderFooter(std::shar
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<Document> result(new Document());
+			result->fromJson(json);
+			return result;
+		});
+}
+
+pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::putSlidesProtectionProperties(std::shared_ptr<PutSlidesProtectionPropertiesRequest> request)
+{
+	// verify the required parameter 'name' is set
+	if (request->getName().empty())
+	{
+		throw std::invalid_argument("Missing required parameter: request.name");
+	}
+	if (request->getDto() == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.dto");
+	}
+	utility::string_t path = utility::conversions::to_string_t("/slides/{name}/protectionProperties");
+	ApiClient::setPathParameter(path, "name", request->getName());
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	if (request->getDto() != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
+	}
+
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
+		.then([=](web::http::http_response response)
+		{
+			if (response.status_code() >= 400)
+			{
+				throw ApiException(
+					response.status_code(),
+					utility::conversions::to_string_t("error calling putSlidesProtectionProperties: ") + response.reason_phrase(),
+					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			}
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<ProtectionProperties> result(new ProtectionProperties());
 			result->fromJson(json);
 			return result;
 		});
@@ -7409,10 +7910,12 @@ pplx::task<void> SlidesApi::putSlidesSaveAs(std::shared_ptr<PutSlidesSaveAsReque
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("outPath"), request->getOutPath());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), request->getFontsFolder());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getOptions() != nullptr)
@@ -7420,7 +7923,7 @@ pplx::task<void> SlidesApi::putSlidesSaveAs(std::shared_ptr<PutSlidesSaveAsReque
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getOptions()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7460,9 +7963,11 @@ pplx::task<std::shared_ptr<DocumentProperty>> SlidesApi::putSlidesSetDocumentPro
 	ApiClient::setPathParameter(path, "propertyName", request->getPropertyName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getProperty() != nullptr)
@@ -7470,7 +7975,7 @@ pplx::task<std::shared_ptr<DocumentProperty>> SlidesApi::putSlidesSetDocumentPro
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getProperty()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7508,9 +8013,11 @@ pplx::task<std::shared_ptr<Slide>> SlidesApi::putSlidesSlide(std::shared_ptr<Put
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getSlideDto() != nullptr)
@@ -7518,7 +8025,7 @@ pplx::task<std::shared_ptr<Slide>> SlidesApi::putSlidesSlide(std::shared_ptr<Put
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getSlideDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7557,8 +8064,10 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::putSlidesSlideBackground
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getBackground() != nullptr)
@@ -7566,7 +8075,7 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::putSlidesSlideBackground
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getBackground()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7607,12 +8116,14 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::putSlidesSlideBackground
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("color"), request->getColor());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7634,6 +8145,55 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::putSlidesSlideBackground
 		});
 }
 
+pplx::task<std::shared_ptr<SlideProperties>> SlidesApi::putSlidesSlideProperties(std::shared_ptr<PutSlidesSlidePropertiesRequest> request)
+{
+	// verify the required parameter 'name' is set
+	if (request->getName().empty())
+	{
+		throw std::invalid_argument("Missing required parameter: request.name");
+	}
+	if (request->getDto() == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.dto");
+	}
+	utility::string_t path = utility::conversions::to_string_t("/slides/{name}/slideProperties");
+	ApiClient::setPathParameter(path, "name", request->getName());
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	if (request->getDto() != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
+	}
+
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
+		.then([=](web::http::http_response response)
+		{
+			if (response.status_code() >= 400)
+			{
+				throw ApiException(
+					response.status_code(),
+					utility::conversions::to_string_t("error calling putSlidesSlideProperties: ") + response.reason_phrase(),
+					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			}
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<SlideProperties> result(new SlideProperties());
+			result->fromJson(json);
+			return result;
+		});
+}
+
 pplx::task<std::shared_ptr<Document>> SlidesApi::putSlidesSlideSize(std::shared_ptr<PutSlidesSlideSizeRequest> request)
 {
 	// verify the required parameter 'name' is set
@@ -7645,7 +8205,6 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::putSlidesSlideSize(std::shared_
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	if (request->widthIsSet())
@@ -7659,9 +8218,12 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::putSlidesSlideSize(std::shared_
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("sizeType"), request->getSizeType());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("scaleType"), request->getScaleType());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7698,9 +8260,11 @@ pplx::task<std::shared_ptr<ViewProperties>> SlidesApi::putSlidesViewProperties(s
 	ApiClient::setPathParameter(path, "name", request->getName());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
@@ -7708,7 +8272,7 @@ pplx::task<std::shared_ptr<ViewProperties>> SlidesApi::putSlidesViewProperties(s
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7761,7 +8325,6 @@ pplx::task<void> SlidesApi::putSubshapeSaveAs(std::shared_ptr<PutSubshapeSaveAsR
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("outPath"), request->getOutPath());
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
 	if (request->scaleXIsSet())
@@ -7775,13 +8338,16 @@ pplx::task<void> SlidesApi::putSubshapeSaveAs(std::shared_ptr<PutSubshapeSaveAsR
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("bounds"), request->getBounds());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), request->getFontsFolder());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getOptions() != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getOptions()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7816,9 +8382,11 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::putUpdateNotesSlide(std::shar
 	ApiClient::setPathParameter(path, "slideIndex", request->getSlideIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
@@ -7826,7 +8394,7 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::putUpdateNotesSlide(std::shar
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7865,9 +8433,11 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::putUpdateNotesSlideShape(std::
 	ApiClient::setPathParameter(path, "shapeIndex", request->getShapeIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
@@ -7875,7 +8445,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::putUpdateNotesSlideShape(std::
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7915,9 +8485,11 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::putUpdateNotesSlideShapeParagr
 	ApiClient::setPathParameter(path, "paragraphIndex", request->getParagraphIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
@@ -7925,7 +8497,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::putUpdateNotesSlideShapeParagr
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -7966,9 +8538,11 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::putUpdateNotesSlideShapePortion(
 	ApiClient::setPathParameter(path, "portionIndex", request->getPortionIndex());
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("password"), request->getPassword());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), request->getFolder());
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), request->getStorage());
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), request->getPassword());
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	if (request->getDto() != nullptr)
@@ -7976,7 +8550,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::putUpdateNotesSlideShapePortion(
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->getDto()->toJson()));
 	}
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -8010,9 +8584,11 @@ pplx::task<std::shared_ptr<StorageExist>> SlidesApi::storageExists(std::shared_p
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)
@@ -8046,10 +8622,12 @@ pplx::task<std::shared_ptr<FilesUploadResult>> SlidesApi::uploadFile(std::shared
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storageName"), request->getStorageName());
 
+	std::map<utility::string_t, utility::string_t> headerParams;
+
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	httpBody = request->getFile();
 
-	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, httpBody)
+	return m_ApiClient->callApi(path, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody)
 		.then([=](web::http::http_response response)
 		{
 			if (response.status_code() >= 400)

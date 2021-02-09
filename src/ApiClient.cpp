@@ -43,6 +43,7 @@ pplx::task<web::http::http_response> ApiClient::callApi(
 	const utility::string_t& path,
 	const utility::string_t& method,
 	const std::map<utility::string_t, utility::string_t>& queryParams,
+	const std::map<utility::string_t, utility::string_t>& headerParams,
 	const std::shared_ptr<asposeslidescloud::model::IHttpBody> postBody) const
 {
 	web::http::client::http_client_config cfg;
@@ -56,7 +57,7 @@ pplx::task<web::http::http_response> ApiClient::callApi(
 	}
 	request.set_request_uri(builder.to_uri());
 	request.set_method(method);
-	setRequestHeaders(request);
+	setRequestHeaders(request, headerParams);
 	logRequest(request);
 	if (postBody != nullptr)
 	{
@@ -81,7 +82,8 @@ pplx::task<web::http::http_response> ApiClient::callApi(
 	});
 }
 
-void ApiClient::setRequestHeaders(web::http::http_request& request) const
+void ApiClient::setRequestHeaders(
+	web::http::http_request& request, const std::map<utility::string_t, utility::string_t>& headerParams) const
 {
 	request.headers().add(utility::conversions::to_string_t("x-aspose-client"), utility::conversions::to_string_t("c++ sdk"));
 	request.headers().add(utility::conversions::to_string_t("x-aspose-client-version"), m_Configuration->getApiVersion());
@@ -90,6 +92,10 @@ void ApiClient::setRequestHeaders(web::http::http_request& request) const
 		request.headers().add(utility::conversions::to_string_t("x-aspose-timeout"), m_Configuration->getTimeout());
 	}
 	for (auto& kvp : m_Configuration->getHeaders())
+	{
+		request.headers().add(kvp.first, kvp.second);
+	}
+	for (auto& kvp : headerParams)
 	{
 		request.headers().add(kvp.first, kvp.second);
 	}

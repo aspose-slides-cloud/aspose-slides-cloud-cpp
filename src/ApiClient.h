@@ -46,6 +46,7 @@ public:
 		const utility::string_t& path,
 		const utility::string_t& method,
 		const std::map<utility::string_t, utility::string_t>& queryParams,
+		const std::map<utility::string_t, utility::string_t>& headerParams,
 		const std::shared_ptr<asposeslidescloud::model::IHttpBody> postBody) const;
 
 	static utility::string_t parameterToString(utility::string_t value);
@@ -64,7 +65,7 @@ public:
 	void logString(utility::string_t contents) const;
 private:
 	std::shared_ptr<ApiConfiguration> m_Configuration;
-	void setRequestHeaders(web::http::http_request& request) const;
+	void setRequestHeaders(web::http::http_request& request, const std::map<utility::string_t, utility::string_t>& headerParams) const;
 	void logRequest(web::http::http_request& request) const;
 	void logResponse(web::http::http_response& response) const;
 };

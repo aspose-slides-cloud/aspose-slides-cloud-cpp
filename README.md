@@ -24,6 +24,12 @@ This repository contains Aspose.Slides Cloud SDK for C++ source code. This SDK a
 **Web:** HTML
 **Other:** SWF (export whole presentations)
 
+## Enhancements in Version 21.1
+* New **PostSlidesDocumentFromPdf** method allows creating presentations or adding slides to it using a PDF file as a source.
+* New **GetSlidesSlideProperties**, **GetSlidesProtectionProperties**, **PutSlidesSlideProperties**, **PutSlidesProtectionProperties** allow to get/set presentaion properties like slide size, orientaion, read-only etc.
+* **PutSlidesDocumentFromHtml** method is deprecated and will be deleted in 21.4 release. Use **PostSlidesDocumentFromHtml** method instead.
+* **PutSlidesSlideSize** method is deprecated and will be deleted in 21.4 release. Use **PutSlidesProtectionProperties** method instead.
+
 ## Enhancements in Version 20.12
 - Updated the SDK to run with cloud image.
 - **HttpRequestTimeout** property is added to SDK configuration. It allows specifying a custom timeout (in seconds) for **HTTP** requests made by the SDK.
@@ -69,7 +75,7 @@ std::shared_ptr<PostSlidesConvertRequest> request = std::make_shared<PostSlidesC
 request->setFormat(utility::conversions::to_string_t("pdf"));
 request->setDocument(std::make_shared<std::ifstream>("MyPresentation.pptx", std::ios::binary));
 std::ofstream fs("MyPresentation.pdf", std::ios::binary);
-api->postSlidesConvert().get().writeTo(versionStream);
+api->postSlidesConvert().get().writeTo(fs);
 ```
 You can check more [Examples](Examples) of using the SDK.
 
