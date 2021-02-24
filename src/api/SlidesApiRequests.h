@@ -4501,8 +4501,12 @@ public:
 
 	ASPOSE_DLL_EXPORT std::shared_ptr<Pipeline> getPipeline() const;
 	ASPOSE_DLL_EXPORT void setPipeline(std::shared_ptr<Pipeline> value);
+
+	ASPOSE_DLL_EXPORT std::vector<utility::string_t> getFiles() const;
+	ASPOSE_DLL_EXPORT void setFiles(std::vector<utility::string_t> value);
 protected:
 	std::shared_ptr<Pipeline> m_pipeline;
+	std::vector<utility::string_t> m_files;
 };
 
 class  PostSlidesPresentationReplaceTextRequest

@@ -62,7 +62,7 @@ public:
 	ASPOSE_DLL_EXPORT bool firstSlideNumberIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetFirstSlideNumber();
 	/// <summary>
-	/// Last used view mode.
+	/// Slide orientation.
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getOrientation() const;
 	ASPOSE_DLL_EXPORT void setOrientation(utility::string_t value);

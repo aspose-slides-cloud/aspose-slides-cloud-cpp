@@ -80,6 +80,11 @@ public:
 	ASPOSE_DLL_EXPORT utility::string_t getStyle() const;
 	ASPOSE_DLL_EXPORT void setStyle(utility::string_t value);
 	/// <summary>
+	/// Sketch type.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getSketchType() const;
+	ASPOSE_DLL_EXPORT void setSketchType(utility::string_t value);
+	/// <summary>
 	/// Begin arrowhead.
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::shared_ptr<ArrowHeadProperties> getBeginArrowHead() const;
@@ -120,6 +125,7 @@ protected:
 	utility::string_t m_DashStyle;
 	utility::string_t m_JoinStyle;
 	utility::string_t m_Style;
+	utility::string_t m_SketchType;
 	std::shared_ptr<ArrowHeadProperties> m_BeginArrowHead;
 	std::shared_ptr<ArrowHeadProperties> m_EndArrowHead;
 	std::shared_ptr<CustomDashPattern> m_CustomDashPattern;

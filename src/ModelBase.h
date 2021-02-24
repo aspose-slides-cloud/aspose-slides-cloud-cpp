@@ -53,7 +53,6 @@ public:
 	template<class T>
 	static web::json::value toJson(const std::shared_ptr<T>& value)
 	{
-		std::cout << "baba" << std::endl;
 		return value->toJson();
 	}
 
@@ -63,7 +62,7 @@ public:
     static double doubleFromJson(web::json::value& val);
     static utility::string_t stringFromJson(web::json::value& val);
     static utility::datetime dateFromJson(web::json::value& val);
-	static web::json::value* getField(web::json::value& val, std::string name);
+    static web::json::value* getField(web::json::value& val, std::string name);
 };
 
 }

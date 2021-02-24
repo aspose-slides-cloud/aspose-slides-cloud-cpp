@@ -9585,6 +9585,16 @@ void PostSlidesPipelineRequest::setPipeline(std::shared_ptr<Pipeline> value)
 	m_pipeline = value;
 }
 
+std::vector<utility::string_t> PostSlidesPipelineRequest::getFiles() const
+{
+	return m_files;
+}
+
+void PostSlidesPipelineRequest::setFiles(std::vector<utility::string_t> value)
+{
+	m_files = value;
+}
+
 PostSlidesPresentationReplaceTextRequest::PostSlidesPresentationReplaceTextRequest()
 {
 	m_ignoreCaseIsSet = false;

@@ -1775,6 +1775,7 @@ public:
 	{
 		std::shared_ptr<PostSlidesPipelineRequest> request = std::make_shared<PostSlidesPipelineRequest>();
 		request->setPipeline(utils->getTestValueForClass<Pipeline>("postSlidesPipeline", "pipeline"));
+		request->setFiles(utils->getBinArrayTestValue("postSlidesPipeline", "files"));
 		return request;
 	}
 
@@ -32621,6 +32622,42 @@ TEST_F(SlidesApiTest, postSlidesPipelinePipeline) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("postSlidesPipeline", "pipeline"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postSlidesPipelineFiles) {
+	std::shared_ptr<PostSlidesPipelineRequest> request = getPostSlidesPipelineRequest();
+	request->setFiles(utils->getInvalidBinArrayTestValue("postSlidesPipeline", "files", request->getFiles()));
+	utils->initialize("postSlidesPipeline", "files", request->getFiles());
+
+	bool failed = true;
+	try
+	{
+		api->postSlidesPipeline(request).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postSlidesPipeline", "files");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postSlidesPipeline", "files", request->getFiles());
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postSlidesPipeline", "files");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postSlidesPipeline", "files", request->getFiles());
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postSlidesPipeline", "files"))
 	{
 		FAIL() << "Must have failed";
 	}

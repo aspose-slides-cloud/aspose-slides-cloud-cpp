@@ -54,6 +54,11 @@ void TestUtils::initialize(std::string functionName, std::string parameterName, 
 	initialize(functionName, parameterName, utility::conversions::to_string_t(""));
 }
 
+void TestUtils::initialize(std::string functionName, std::string parameterName, std::vector<utility::string_t> parameterValue)
+{
+	initialize(functionName, parameterName, utility::conversions::to_string_t(""));
+}
+
 void TestUtils::initialize(std::string functionName, std::string parameterName, utility::string_t parameterValue)
 {
 	std::map<utility::string_t, web::json::value> files;
@@ -181,6 +186,12 @@ std::shared_ptr<HttpContent> TestUtils::getBinaryTestValue(std::string functionN
 	return uploadContent;
 }
 
+std::vector<utility::string_t> TestUtils::getBinArrayTestValue(std::string functionName, std::string parameterName)
+{
+	std::vector<utility::string_t> value;
+	return value;
+}
+
 utility::string_t TestUtils::getTestValue(std::string functionName, std::string parameterName)
 {
 	utility::string_t value = utility::conversions::to_string_t("testValue");
@@ -241,6 +252,11 @@ int32_t TestUtils::getInvalidIntTestValue(std::string functionName, std::string 
 std::shared_ptr<HttpContent> TestUtils::getInvalidBinaryTestValue(std::string functionName, std::string parameterName, std::shared_ptr<HttpContent> value)
 {
 	return nullptr;
+}
+
+std::vector<utility::string_t> TestUtils::getInvalidBinArrayTestValue(std::string functionName, std::string parameterName, std::vector<utility::string_t> value)
+{
+	return value;
 }
 
 std::vector<int32_t> TestUtils::getInvalidIntVectorTestValue(std::string functionName, std::string parameterName, std::vector<int32_t> value)
@@ -317,6 +333,11 @@ utility::string_t TestUtils::getExpectedMessage(std::string functionName, std::s
 }
 
 utility::string_t TestUtils::getExpectedMessage(std::string functionName, std::string parameterName, std::vector<int32_t> value)
+{
+	return getExpectedMessage(functionName, parameterName, utility::conversions::to_string_t(""));
+}
+
+utility::string_t TestUtils::getExpectedMessage(std::string functionName, std::string parameterName, std::vector<utility::string_t> value)
 {
 	return getExpectedMessage(functionName, parameterName, utility::conversions::to_string_t(""));
 }

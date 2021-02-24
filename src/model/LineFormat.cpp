@@ -95,6 +95,17 @@ void LineFormat::setStyle(utility::string_t value)
 	
 }
 
+utility::string_t LineFormat::getSketchType() const
+{
+	return m_SketchType;
+}
+
+void LineFormat::setSketchType(utility::string_t value)
+{
+	m_SketchType = value;
+	
+}
+
 std::shared_ptr<ArrowHeadProperties> LineFormat::getBeginArrowHead() const
 {
 	return m_BeginArrowHead;
@@ -204,6 +215,10 @@ web::json::value LineFormat::toJson() const
 	{
 		val[utility::conversions::to_string_t("Style")] = ModelBase::toJson(m_Style);
 	}
+	if (!m_SketchType.empty())
+	{
+		val[utility::conversions::to_string_t("SketchType")] = ModelBase::toJson(m_SketchType);
+	}
 	if (m_BeginArrowHead != nullptr)
 	{
 		val[utility::conversions::to_string_t("BeginArrowHead")] = ModelBase::toJson(m_BeginArrowHead);
@@ -257,6 +272,11 @@ void LineFormat::fromJson(web::json::value& val)
 	if(jsonForStyle != nullptr && !jsonForStyle->is_null())
 	{
 		setStyle(ModelBase::stringFromJson(*jsonForStyle));
+	}
+	web::json::value* jsonForSketchType = ModelBase::getField(val, "SketchType");
+	if(jsonForSketchType != nullptr && !jsonForSketchType->is_null())
+	{
+		setSketchType(ModelBase::stringFromJson(*jsonForSketchType));
 	}
 	web::json::value* jsonForBeginArrowHead = ModelBase::getField(val, "BeginArrowHead");
 	if(jsonForBeginArrowHead != nullptr && !jsonForBeginArrowHead->is_null())

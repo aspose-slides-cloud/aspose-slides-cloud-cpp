@@ -40,6 +40,7 @@ public:
 	void initialize(std::string functionName, std::string parameterName);
 	void initialize(std::string functionName, std::string parameterName, bool parameterValue);
 	void initialize(std::string functionName, std::string parameterName, std::vector<int32_t> parameterValue);
+	void initialize(std::string functionName, std::string parameterName, std::vector<utility::string_t> parameterValue);
 	void initialize(std::string functionName, std::string parameterName, utility::string_t parameterValue);
 
 	template<typename T>
@@ -50,6 +51,7 @@ public:
 	bool getBoolTestValue(std::string functionName, std::string parameterName);
 	bool* getOptionalBoolTestValue(std::string functionName, std::string parameterName);
 	std::shared_ptr<HttpContent> getBinaryTestValue(std::string functionName, std::string parameterName);
+	std::vector<utility::string_t> getBinArrayTestValue(std::string functionName, std::string parameterName);
 	int32_t getIntTestValue(std::string functionName, std::string parameterName);
 	int32_t* getOptionalIntTestValue(std::string functionName, std::string parameterName);
 	double getDoubleTestValue(std::string functionName, std::string parameterName);
@@ -63,6 +65,7 @@ public:
 
 	bool getInvalidBoolTestValue(std::string functionName, std::string parameterName, bool value);
 	std::shared_ptr<HttpContent> getInvalidBinaryTestValue(std::string functionName, std::string parameterName, std::shared_ptr<HttpContent> value);
+	std::vector<utility::string_t> getInvalidBinArrayTestValue(std::string functionName, std::string parameterName, std::vector<utility::string_t> value);
 	int32_t getInvalidIntTestValue(std::string functionName, std::string parameterName, int32_t value);
 	std::vector<int32_t> getInvalidIntVectorTestValue(std::string functionName, std::string parameterName, std::vector<int32_t> value);
 	double getInvalidDoubleTestValue(std::string functionName, std::string parameterName, double value);
@@ -76,6 +79,7 @@ public:
 
 	utility::string_t getExpectedMessage(std::string functionName, std::string parameterName, int32_t value);
 	utility::string_t getExpectedMessage(std::string functionName, std::string parameterName, std::vector<int32_t> value);
+	utility::string_t getExpectedMessage(std::string functionName, std::string parameterName, std::vector<utility::string_t> value);
 	utility::string_t getExpectedMessage(std::string functionName, std::string parameterName, utility::string_t value);
 
 	template<typename T>
