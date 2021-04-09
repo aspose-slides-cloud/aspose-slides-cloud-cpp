@@ -44,7 +44,7 @@ void TestUtils::initialize(std::string functionName, std::string parameterName)
 	initialize(functionName, parameterName, utility::conversions::to_string_t(""));
 }
 
-void TestUtils::initialize(std::string functionName, std::string parameterName, bool parameterValue)
+void TestUtils::initialize(std::string functionName, std::string parameterName, int32_t parameterValue)
 {
 	initialize(functionName, parameterName, utility::conversions::to_string_t(""));
 }
@@ -54,7 +54,7 @@ void TestUtils::initialize(std::string functionName, std::string parameterName, 
 	initialize(functionName, parameterName, utility::conversions::to_string_t(""));
 }
 
-void TestUtils::initialize(std::string functionName, std::string parameterName, std::vector<utility::string_t> parameterValue)
+void TestUtils::initialize(std::string functionName, std::string parameterName, std::vector<std::shared_ptr<HttpContent>> parameterValue)
 {
 	initialize(functionName, parameterName, utility::conversions::to_string_t(""));
 }
@@ -84,17 +84,11 @@ void TestUtils::initialize(std::string functionName, std::string parameterName, 
 		utility::string_t action = kvp.second[utility::conversions::to_string_t("Action")].as_string();
 		if (boost::iequals(action, "Put"))
 		{
-			std::shared_ptr<CopyFileRequest> copyRequest = std::make_shared<CopyFileRequest>();
-			copyRequest->setSrcPath(
-				utility::conversions::to_string_t("TempTests/") + kvp.second[utility::conversions::to_string_t("ActualName")].as_string());
-			copyRequest->setDestPath(kvp.first);
-			m_api->copyFile(copyRequest).wait();
+			m_api->copyFile(utility::conversions::to_string_t("TempTests/") + kvp.second[utility::conversions::to_string_t("ActualName")].as_string(), kvp.first).wait();
 		}
 		else if (boost::iequals(action, "Delete"))
 		{
-			std::shared_ptr<DeleteFileRequest> deleteRequest = std::make_shared<DeleteFileRequest>();
-			deleteRequest->setPath(kvp.first);
-			m_api->deleteFile(deleteRequest).wait();
+			m_api->deleteFile(kvp.first).wait();
 		}
 	}
 }
@@ -121,15 +115,14 @@ bool TestUtils::getBoolTestValue(std::string functionName, std::string parameter
 	return value->as_bool();
 }
 
-bool* TestUtils::getOptionalBoolTestValue(std::string functionName, std::string parameterName)
+boost::optional<bool> TestUtils::getOptionalBoolTestValue(std::string functionName, std::string parameterName)
 {
 	web::json::value* value = getTestJsonValue(functionName, parameterName);
-	if (value == nullptr || value->is_null())
+	boost::optional<bool> boolValue = boost::optional<bool>();
+	if (value != nullptr && !value->is_null())
 	{
-		return nullptr;
+		boolValue = value->as_bool();
 	}
-	bool* boolValue;
-	boolValue = new bool(value->as_bool());
 	return boolValue;
 }
 
@@ -138,15 +131,14 @@ int32_t TestUtils::getIntTestValue(std::string functionName, std::string paramet
 	return std::stoi(getTestValue(functionName, parameterName));
 }
 
-int32_t* TestUtils::getOptionalIntTestValue(std::string functionName, std::string parameterName)
+boost::optional<int32_t> TestUtils::getOptionalIntTestValue(std::string functionName, std::string parameterName)
 {
 	web::json::value* value = getTestJsonValue(functionName, parameterName);
-	if (value == nullptr || value->is_null())
+	boost::optional<int32_t> intValue = boost::optional<int32_t>();
+	if (value != nullptr && !value->is_null())
 	{
-		return nullptr;
+		intValue = value->as_integer();
 	}
-	int32_t* intValue;
-	intValue = new int32_t(value->as_integer());
 	return intValue;
 }
 
@@ -170,9 +162,9 @@ double TestUtils::getDoubleTestValue(std::string functionName, std::string param
 	return 1;
 }
 
-double* TestUtils::getOptionalDoubleTestValue(std::string functionName, std::string parameterName)
+boost::optional<double> TestUtils::getOptionalDoubleTestValue(std::string functionName, std::string parameterName)
 {
-	return nullptr;
+	return boost::optional<double>();
 }
 
 std::shared_ptr<HttpContent> TestUtils::getBinaryTestValue(std::string functionName, std::string parameterName)
@@ -186,9 +178,17 @@ std::shared_ptr<HttpContent> TestUtils::getBinaryTestValue(std::string functionN
 	return uploadContent;
 }
 
-std::vector<utility::string_t> TestUtils::getBinArrayTestValue(std::string functionName, std::string parameterName)
+std::vector<std::shared_ptr<HttpContent>> TestUtils::getBinArrayTestValue(std::string functionName, std::string parameterName)
 {
-	std::vector<utility::string_t> value;
+	std::vector<std::shared_ptr<HttpContent>> value;
+	std::shared_ptr<HttpContent> file1 = std::make_shared<HttpContent>();
+	utility::string_t path = utility::conversions::to_string_t("TestData/test.pptx");
+	file1->setData(std::make_shared<std::ifstream>(path, std::ios::binary));
+	value.push_back(file1);
+	std::shared_ptr<HttpContent> file2 = std::make_shared<HttpContent>();
+	path = utility::conversions::to_string_t("TestData/test-unprotected.pptx");
+	file2->setData(std::make_shared<std::ifstream>(path, std::ios::binary));
+	value.push_back(file2);
 	return value;
 }
 
@@ -230,12 +230,12 @@ web::json::value* TestUtils::getTestJsonValue(std::string functionName, std::str
 	return value;
 }
 
-bool TestUtils::getInvalidBoolTestValue(std::string functionName, std::string parameterName, bool value)
+boost::optional<bool> TestUtils::getInvalidBoolTestValue(std::string functionName, std::string parameterName, boost::optional<bool> value)
 {
 	return true;
 }
 
-int32_t TestUtils::getInvalidIntTestValue(std::string functionName, std::string parameterName, int32_t value)
+boost::optional<int32_t> TestUtils::getInvalidIntTestValue(std::string functionName, std::string parameterName, boost::optional<int32_t> value)
 {
 	web::json::value* ivalueJson = getInvalidTestValue(functionName, parameterName);
 	if (ivalueJson == nullptr)
@@ -254,7 +254,7 @@ std::shared_ptr<HttpContent> TestUtils::getInvalidBinaryTestValue(std::string fu
 	return nullptr;
 }
 
-std::vector<utility::string_t> TestUtils::getInvalidBinArrayTestValue(std::string functionName, std::string parameterName, std::vector<utility::string_t> value)
+std::vector<std::shared_ptr<HttpContent>> TestUtils::getInvalidBinArrayTestValue(std::string functionName, std::string parameterName, std::vector<std::shared_ptr<HttpContent>> value)
 {
 	return value;
 }
@@ -278,7 +278,7 @@ std::vector<int32_t> TestUtils::getInvalidIntVectorTestValue(std::string functio
 	return value;
 }
 
-double TestUtils::getInvalidDoubleTestValue(std::string functionName, std::string parameterName, double value)
+boost::optional<double> TestUtils::getInvalidDoubleTestValue(std::string functionName, std::string parameterName, boost::optional<double> value)
 {
 	return 1;
 }
@@ -337,7 +337,7 @@ utility::string_t TestUtils::getExpectedMessage(std::string functionName, std::s
 	return getExpectedMessage(functionName, parameterName, utility::conversions::to_string_t(""));
 }
 
-utility::string_t TestUtils::getExpectedMessage(std::string functionName, std::string parameterName, std::vector<utility::string_t> value)
+utility::string_t TestUtils::getExpectedMessage(std::string functionName, std::string parameterName, std::vector<std::shared_ptr<HttpContent>> value)
 {
 	return getExpectedMessage(functionName, parameterName, utility::conversions::to_string_t(""));
 }
@@ -368,12 +368,10 @@ void TestUtils::initRules()
 
 void TestUtils::initTestFiles()
 {
-	std::shared_ptr<DownloadFileRequest> downloadRequest = std::make_shared<DownloadFileRequest>();
-	downloadRequest->setPath(utility::conversions::to_string_t("TempTests/version.txt"));
 	std::string version = "";
 	std::ostringstream versionStream;
 	try {
-		m_api->downloadFile(downloadRequest).get().writeTo(versionStream);
+		m_api->downloadFile(utility::conversions::to_string_t("TempTests/version.txt")).get().writeTo(versionStream);
 		version = versionStream.str();
 	}
 	catch (...) {
@@ -385,19 +383,13 @@ void TestUtils::initTestFiles()
 		boost::filesystem::directory_iterator end_itr;
 		for (boost::filesystem::directory_iterator itr(p); itr != end_itr; ++itr)
 		{
-			std::shared_ptr<UploadFileRequest> uploadRequest = std::make_shared<UploadFileRequest>();
-			uploadRequest->setPath(utility::conversions::to_string_t("TempTests/" + itr->path().filename().string()));
 			std::shared_ptr<HttpContent> uploadContent = std::make_shared<HttpContent>();
 			uploadContent->setData(std::make_shared<std::ifstream>(itr->path().string(), std::ios::binary));
-			uploadRequest->setFile(uploadContent);
-			m_api->uploadFile(uploadRequest).wait();
+			m_api->uploadFile(utility::conversions::to_string_t("TempTests/" + itr->path().filename().string()), uploadContent).wait();
 		}
-		std::shared_ptr<UploadFileRequest> uploadRequest = std::make_shared<UploadFileRequest>();
-		uploadRequest->setPath(utility::conversions::to_string_t("TempTests/version.txt"));
 		std::shared_ptr<HttpContent> uploadContent = std::make_shared<HttpContent>();
 		uploadContent->setData(std::make_shared<std::stringstream>(TEST_DATA_VERSION));
-		uploadRequest->setFile(uploadContent);
-		m_api->uploadFile(uploadRequest).wait();
+		m_api->uploadFile(utility::conversions::to_string_t("TempTests/version.txt"), uploadContent).wait();
 	}
 }
 

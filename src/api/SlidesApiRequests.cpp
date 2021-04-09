@@ -3323,16 +3323,6 @@ void GetNotesSlideHeaderFooterRequest::setPassword(utility::string_t value)
 	m_password = value;
 }
 
-utility::string_t GetNotesSlideHeaderFooterRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void GetNotesSlideHeaderFooterRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 utility::string_t GetNotesSlideHeaderFooterRequest::getFolder() const
 {
 	return m_folder;
@@ -3341,6 +3331,16 @@ utility::string_t GetNotesSlideHeaderFooterRequest::getFolder() const
 void GetNotesSlideHeaderFooterRequest::setFolder(utility::string_t value)
 {
 	m_folder = value;
+}
+
+utility::string_t GetNotesSlideHeaderFooterRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void GetNotesSlideHeaderFooterRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 GetNotesSlideShapeRequest::GetNotesSlideShapeRequest()
@@ -4867,16 +4867,6 @@ void GetSlidesDocumentRequest::setPassword(utility::string_t value)
 	m_password = value;
 }
 
-utility::string_t GetSlidesDocumentRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void GetSlidesDocumentRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 utility::string_t GetSlidesDocumentRequest::getFolder() const
 {
 	return m_folder;
@@ -4885,6 +4875,16 @@ utility::string_t GetSlidesDocumentRequest::getFolder() const
 void GetSlidesDocumentRequest::setFolder(utility::string_t value)
 {
 	m_folder = value;
+}
+
+utility::string_t GetSlidesDocumentRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void GetSlidesDocumentRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 GetSlidesDocumentPropertiesRequest::GetSlidesDocumentPropertiesRequest()
@@ -6478,6 +6478,27 @@ void PostAddNewParagraphRequest::setDto(std::shared_ptr<Paragraph> value)
 	m_dto = value;
 }
 
+int32_t PostAddNewParagraphRequest::getPosition() const
+{
+	return m_position;
+}
+
+void PostAddNewParagraphRequest::setPosition(int32_t value)
+{
+	m_position = value;
+	m_positionIsSet = true;
+}
+
+bool PostAddNewParagraphRequest::positionIsSet() const
+{
+	return m_positionIsSet;
+}
+
+void PostAddNewParagraphRequest::unsetPosition()
+{
+	m_positionIsSet = false;
+}
+
 utility::string_t PostAddNewParagraphRequest::getPassword() const
 {
 	return m_password;
@@ -6506,27 +6527,6 @@ utility::string_t PostAddNewParagraphRequest::getStorage() const
 void PostAddNewParagraphRequest::setStorage(utility::string_t value)
 {
 	m_storage = value;
-}
-
-int32_t PostAddNewParagraphRequest::getPosition() const
-{
-	return m_position;
-}
-
-void PostAddNewParagraphRequest::setPosition(int32_t value)
-{
-	m_position = value;
-	m_positionIsSet = true;
-}
-
-bool PostAddNewParagraphRequest::positionIsSet() const
-{
-	return m_positionIsSet;
-}
-
-void PostAddNewParagraphRequest::unsetPosition()
-{
-	m_positionIsSet = false;
 }
 
 PostAddNewPortionRequest::PostAddNewPortionRequest()
@@ -6588,6 +6588,27 @@ void PostAddNewPortionRequest::setDto(std::shared_ptr<Portion> value)
 	m_dto = value;
 }
 
+int32_t PostAddNewPortionRequest::getPosition() const
+{
+	return m_position;
+}
+
+void PostAddNewPortionRequest::setPosition(int32_t value)
+{
+	m_position = value;
+	m_positionIsSet = true;
+}
+
+bool PostAddNewPortionRequest::positionIsSet() const
+{
+	return m_positionIsSet;
+}
+
+void PostAddNewPortionRequest::unsetPosition()
+{
+	m_positionIsSet = false;
+}
+
 utility::string_t PostAddNewPortionRequest::getPassword() const
 {
 	return m_password;
@@ -6616,27 +6637,6 @@ utility::string_t PostAddNewPortionRequest::getStorage() const
 void PostAddNewPortionRequest::setStorage(utility::string_t value)
 {
 	m_storage = value;
-}
-
-int32_t PostAddNewPortionRequest::getPosition() const
-{
-	return m_position;
-}
-
-void PostAddNewPortionRequest::setPosition(int32_t value)
-{
-	m_position = value;
-	m_positionIsSet = true;
-}
-
-bool PostAddNewPortionRequest::positionIsSet() const
-{
-	return m_positionIsSet;
-}
-
-void PostAddNewPortionRequest::unsetPosition()
-{
-	m_positionIsSet = false;
 }
 
 PostAddNewShapeRequest::PostAddNewShapeRequest()
@@ -6679,36 +6679,6 @@ void PostAddNewShapeRequest::setDto(std::shared_ptr<ShapeBase> value)
 	m_dto = value;
 }
 
-utility::string_t PostAddNewShapeRequest::getPassword() const
-{
-	return m_password;
-}
-
-void PostAddNewShapeRequest::setPassword(utility::string_t value)
-{
-	m_password = value;
-}
-
-utility::string_t PostAddNewShapeRequest::getFolder() const
-{
-	return m_folder;
-}
-
-void PostAddNewShapeRequest::setFolder(utility::string_t value)
-{
-	m_folder = value;
-}
-
-utility::string_t PostAddNewShapeRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PostAddNewShapeRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 int32_t PostAddNewShapeRequest::getShapeToClone() const
 {
 	return m_shapeToClone;
@@ -6749,6 +6719,36 @@ bool PostAddNewShapeRequest::positionIsSet() const
 void PostAddNewShapeRequest::unsetPosition()
 {
 	m_positionIsSet = false;
+}
+
+utility::string_t PostAddNewShapeRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostAddNewShapeRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PostAddNewShapeRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PostAddNewShapeRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t PostAddNewShapeRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostAddNewShapeRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 PostAddNewSubshapeRequest::PostAddNewSubshapeRequest()
@@ -6801,36 +6801,6 @@ void PostAddNewSubshapeRequest::setDto(std::shared_ptr<ShapeBase> value)
 	m_dto = value;
 }
 
-utility::string_t PostAddNewSubshapeRequest::getPassword() const
-{
-	return m_password;
-}
-
-void PostAddNewSubshapeRequest::setPassword(utility::string_t value)
-{
-	m_password = value;
-}
-
-utility::string_t PostAddNewSubshapeRequest::getFolder() const
-{
-	return m_folder;
-}
-
-void PostAddNewSubshapeRequest::setFolder(utility::string_t value)
-{
-	m_folder = value;
-}
-
-utility::string_t PostAddNewSubshapeRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PostAddNewSubshapeRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 int32_t PostAddNewSubshapeRequest::getShapeToClone() const
 {
 	return m_shapeToClone;
@@ -6871,6 +6841,36 @@ bool PostAddNewSubshapeRequest::positionIsSet() const
 void PostAddNewSubshapeRequest::unsetPosition()
 {
 	m_positionIsSet = false;
+}
+
+utility::string_t PostAddNewSubshapeRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostAddNewSubshapeRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PostAddNewSubshapeRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PostAddNewSubshapeRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t PostAddNewSubshapeRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostAddNewSubshapeRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 PostAddNewSubshapeParagraphRequest::PostAddNewSubshapeParagraphRequest()
@@ -6932,6 +6932,27 @@ void PostAddNewSubshapeParagraphRequest::setDto(std::shared_ptr<Paragraph> value
 	m_dto = value;
 }
 
+int32_t PostAddNewSubshapeParagraphRequest::getPosition() const
+{
+	return m_position;
+}
+
+void PostAddNewSubshapeParagraphRequest::setPosition(int32_t value)
+{
+	m_position = value;
+	m_positionIsSet = true;
+}
+
+bool PostAddNewSubshapeParagraphRequest::positionIsSet() const
+{
+	return m_positionIsSet;
+}
+
+void PostAddNewSubshapeParagraphRequest::unsetPosition()
+{
+	m_positionIsSet = false;
+}
+
 utility::string_t PostAddNewSubshapeParagraphRequest::getPassword() const
 {
 	return m_password;
@@ -6960,27 +6981,6 @@ utility::string_t PostAddNewSubshapeParagraphRequest::getStorage() const
 void PostAddNewSubshapeParagraphRequest::setStorage(utility::string_t value)
 {
 	m_storage = value;
-}
-
-int32_t PostAddNewSubshapeParagraphRequest::getPosition() const
-{
-	return m_position;
-}
-
-void PostAddNewSubshapeParagraphRequest::setPosition(int32_t value)
-{
-	m_position = value;
-	m_positionIsSet = true;
-}
-
-bool PostAddNewSubshapeParagraphRequest::positionIsSet() const
-{
-	return m_positionIsSet;
-}
-
-void PostAddNewSubshapeParagraphRequest::unsetPosition()
-{
-	m_positionIsSet = false;
 }
 
 PostAddNewSubshapePortionRequest::PostAddNewSubshapePortionRequest()
@@ -7052,6 +7052,27 @@ void PostAddNewSubshapePortionRequest::setDto(std::shared_ptr<Portion> value)
 	m_dto = value;
 }
 
+int32_t PostAddNewSubshapePortionRequest::getPosition() const
+{
+	return m_position;
+}
+
+void PostAddNewSubshapePortionRequest::setPosition(int32_t value)
+{
+	m_position = value;
+	m_positionIsSet = true;
+}
+
+bool PostAddNewSubshapePortionRequest::positionIsSet() const
+{
+	return m_positionIsSet;
+}
+
+void PostAddNewSubshapePortionRequest::unsetPosition()
+{
+	m_positionIsSet = false;
+}
+
 utility::string_t PostAddNewSubshapePortionRequest::getPassword() const
 {
 	return m_password;
@@ -7080,27 +7101,6 @@ utility::string_t PostAddNewSubshapePortionRequest::getStorage() const
 void PostAddNewSubshapePortionRequest::setStorage(utility::string_t value)
 {
 	m_storage = value;
-}
-
-int32_t PostAddNewSubshapePortionRequest::getPosition() const
-{
-	return m_position;
-}
-
-void PostAddNewSubshapePortionRequest::setPosition(int32_t value)
-{
-	m_position = value;
-	m_positionIsSet = true;
-}
-
-bool PostAddNewSubshapePortionRequest::positionIsSet() const
-{
-	return m_positionIsSet;
-}
-
-void PostAddNewSubshapePortionRequest::unsetPosition()
-{
-	m_positionIsSet = false;
 }
 
 PostAddNotesSlideRequest::PostAddNotesSlideRequest()
@@ -7167,6 +7167,106 @@ utility::string_t PostAddNotesSlideRequest::getStorage() const
 }
 
 void PostAddNotesSlideRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
+PostAlignShapesRequest::PostAlignShapesRequest()
+{
+	m_alignToSlideIsSet = false;
+}
+
+PostAlignShapesRequest::~PostAlignShapesRequest()
+{
+}
+
+utility::string_t PostAlignShapesRequest::getName() const
+{
+	return m_name;
+}
+
+void PostAlignShapesRequest::setName(utility::string_t value)
+{
+	m_name = value;
+}
+
+int32_t PostAlignShapesRequest::getSlideIndex() const
+{
+	return m_slideIndex;
+}
+
+void PostAlignShapesRequest::setSlideIndex(int32_t value)
+{
+	m_slideIndex = value;
+}
+
+utility::string_t PostAlignShapesRequest::getAlignmentType() const
+{
+	return m_alignmentType;
+}
+
+void PostAlignShapesRequest::setAlignmentType(utility::string_t value)
+{
+	m_alignmentType = value;
+}
+
+bool PostAlignShapesRequest::getAlignToSlide() const
+{
+	return m_alignToSlide;
+}
+
+void PostAlignShapesRequest::setAlignToSlide(bool value)
+{
+	m_alignToSlide = value;
+	m_alignToSlideIsSet = true;
+}
+
+bool PostAlignShapesRequest::alignToSlideIsSet() const
+{
+	return m_alignToSlideIsSet;
+}
+
+void PostAlignShapesRequest::unsetAlignToSlide()
+{
+	m_alignToSlideIsSet = false;
+}
+
+std::vector<int32_t> PostAlignShapesRequest::getShapes() const
+{
+	return m_shapes;
+}
+
+void PostAlignShapesRequest::setShapes(std::vector<int32_t> value)
+{
+	m_shapes = value;
+}
+
+utility::string_t PostAlignShapesRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostAlignShapesRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PostAlignShapesRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PostAlignShapesRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t PostAlignShapesRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostAlignShapesRequest::setStorage(utility::string_t value)
 {
 	m_storage = value;
 }
@@ -7613,6 +7713,480 @@ void PostCopyMasterSlideFromSourcePresentationRequest::setStorage(utility::strin
 	m_storage = value;
 }
 
+PostExportImageWithDefaultFormatRequest::PostExportImageWithDefaultFormatRequest()
+{
+}
+
+PostExportImageWithDefaultFormatRequest::~PostExportImageWithDefaultFormatRequest()
+{
+}
+
+std::shared_ptr<HttpContent> PostExportImageWithDefaultFormatRequest::getDocument() const
+{
+	return m_document;
+}
+
+void PostExportImageWithDefaultFormatRequest::setDocument(std::shared_ptr<HttpContent> value)
+{
+	m_document = value;
+}
+
+int32_t PostExportImageWithDefaultFormatRequest::getIndex() const
+{
+	return m_index;
+}
+
+void PostExportImageWithDefaultFormatRequest::setIndex(int32_t value)
+{
+	m_index = value;
+}
+
+utility::string_t PostExportImageWithDefaultFormatRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostExportImageWithDefaultFormatRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+PostExportImageWithFormatRequest::PostExportImageWithFormatRequest()
+{
+}
+
+PostExportImageWithFormatRequest::~PostExportImageWithFormatRequest()
+{
+}
+
+std::shared_ptr<HttpContent> PostExportImageWithFormatRequest::getDocument() const
+{
+	return m_document;
+}
+
+void PostExportImageWithFormatRequest::setDocument(std::shared_ptr<HttpContent> value)
+{
+	m_document = value;
+}
+
+int32_t PostExportImageWithFormatRequest::getIndex() const
+{
+	return m_index;
+}
+
+void PostExportImageWithFormatRequest::setIndex(int32_t value)
+{
+	m_index = value;
+}
+
+utility::string_t PostExportImageWithFormatRequest::getFormat() const
+{
+	return m_format;
+}
+
+void PostExportImageWithFormatRequest::setFormat(utility::string_t value)
+{
+	m_format = value;
+}
+
+utility::string_t PostExportImageWithFormatRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostExportImageWithFormatRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+PostExportImagesFromRequestWithFormatRequest::PostExportImagesFromRequestWithFormatRequest()
+{
+}
+
+PostExportImagesFromRequestWithFormatRequest::~PostExportImagesFromRequestWithFormatRequest()
+{
+}
+
+std::shared_ptr<HttpContent> PostExportImagesFromRequestWithFormatRequest::getDocument() const
+{
+	return m_document;
+}
+
+void PostExportImagesFromRequestWithFormatRequest::setDocument(std::shared_ptr<HttpContent> value)
+{
+	m_document = value;
+}
+
+utility::string_t PostExportImagesFromRequestWithFormatRequest::getFormat() const
+{
+	return m_format;
+}
+
+void PostExportImagesFromRequestWithFormatRequest::setFormat(utility::string_t value)
+{
+	m_format = value;
+}
+
+utility::string_t PostExportImagesFromRequestWithFormatRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostExportImagesFromRequestWithFormatRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+PostExportImagesWithDefaultFormatRequest::PostExportImagesWithDefaultFormatRequest()
+{
+}
+
+PostExportImagesWithDefaultFormatRequest::~PostExportImagesWithDefaultFormatRequest()
+{
+}
+
+utility::string_t PostExportImagesWithDefaultFormatRequest::getName() const
+{
+	return m_name;
+}
+
+void PostExportImagesWithDefaultFormatRequest::setName(utility::string_t value)
+{
+	m_name = value;
+}
+
+utility::string_t PostExportImagesWithDefaultFormatRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostExportImagesWithDefaultFormatRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PostExportImagesWithDefaultFormatRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PostExportImagesWithDefaultFormatRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t PostExportImagesWithDefaultFormatRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostExportImagesWithDefaultFormatRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
+PostExportImagesWithFormatRequest::PostExportImagesWithFormatRequest()
+{
+}
+
+PostExportImagesWithFormatRequest::~PostExportImagesWithFormatRequest()
+{
+}
+
+utility::string_t PostExportImagesWithFormatRequest::getName() const
+{
+	return m_name;
+}
+
+void PostExportImagesWithFormatRequest::setName(utility::string_t value)
+{
+	m_name = value;
+}
+
+utility::string_t PostExportImagesWithFormatRequest::getFormat() const
+{
+	return m_format;
+}
+
+void PostExportImagesWithFormatRequest::setFormat(utility::string_t value)
+{
+	m_format = value;
+}
+
+utility::string_t PostExportImagesWithFormatRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostExportImagesWithFormatRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PostExportImagesWithFormatRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PostExportImagesWithFormatRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t PostExportImagesWithFormatRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostExportImagesWithFormatRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
+PostExportShapeRequest::PostExportShapeRequest()
+{
+	m_scaleXIsSet = false;
+	m_scaleYIsSet = false;
+}
+
+PostExportShapeRequest::~PostExportShapeRequest()
+{
+}
+
+std::shared_ptr<HttpContent> PostExportShapeRequest::getDocument() const
+{
+	return m_document;
+}
+
+void PostExportShapeRequest::setDocument(std::shared_ptr<HttpContent> value)
+{
+	m_document = value;
+}
+
+int32_t PostExportShapeRequest::getSlideIndex() const
+{
+	return m_slideIndex;
+}
+
+void PostExportShapeRequest::setSlideIndex(int32_t value)
+{
+	m_slideIndex = value;
+}
+
+int32_t PostExportShapeRequest::getShapeIndex() const
+{
+	return m_shapeIndex;
+}
+
+void PostExportShapeRequest::setShapeIndex(int32_t value)
+{
+	m_shapeIndex = value;
+}
+
+utility::string_t PostExportShapeRequest::getFormat() const
+{
+	return m_format;
+}
+
+void PostExportShapeRequest::setFormat(utility::string_t value)
+{
+	m_format = value;
+}
+
+utility::string_t PostExportShapeRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostExportShapeRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PostExportShapeRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostExportShapeRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
+double PostExportShapeRequest::getScaleX() const
+{
+	return m_scaleX;
+}
+
+void PostExportShapeRequest::setScaleX(double value)
+{
+	m_scaleX = value;
+	m_scaleXIsSet = true;
+}
+
+bool PostExportShapeRequest::scaleXIsSet() const
+{
+	return m_scaleXIsSet;
+}
+
+void PostExportShapeRequest::unsetScaleX()
+{
+	m_scaleXIsSet = false;
+}
+
+double PostExportShapeRequest::getScaleY() const
+{
+	return m_scaleY;
+}
+
+void PostExportShapeRequest::setScaleY(double value)
+{
+	m_scaleY = value;
+	m_scaleYIsSet = true;
+}
+
+bool PostExportShapeRequest::scaleYIsSet() const
+{
+	return m_scaleYIsSet;
+}
+
+void PostExportShapeRequest::unsetScaleY()
+{
+	m_scaleYIsSet = false;
+}
+
+utility::string_t PostExportShapeRequest::getBounds() const
+{
+	return m_bounds;
+}
+
+void PostExportShapeRequest::setBounds(utility::string_t value)
+{
+	m_bounds = value;
+}
+
+utility::string_t PostExportShapeRequest::getFontsFolder() const
+{
+	return m_fontsFolder;
+}
+
+void PostExportShapeRequest::setFontsFolder(utility::string_t value)
+{
+	m_fontsFolder = value;
+}
+
+PostExportSlideRequest::PostExportSlideRequest()
+{
+	m_widthIsSet = false;
+	m_heightIsSet = false;
+}
+
+PostExportSlideRequest::~PostExportSlideRequest()
+{
+}
+
+std::shared_ptr<HttpContent> PostExportSlideRequest::getDocument() const
+{
+	return m_document;
+}
+
+void PostExportSlideRequest::setDocument(std::shared_ptr<HttpContent> value)
+{
+	m_document = value;
+}
+
+int32_t PostExportSlideRequest::getSlideIndex() const
+{
+	return m_slideIndex;
+}
+
+void PostExportSlideRequest::setSlideIndex(int32_t value)
+{
+	m_slideIndex = value;
+}
+
+utility::string_t PostExportSlideRequest::getFormat() const
+{
+	return m_format;
+}
+
+void PostExportSlideRequest::setFormat(utility::string_t value)
+{
+	m_format = value;
+}
+
+int32_t PostExportSlideRequest::getWidth() const
+{
+	return m_width;
+}
+
+void PostExportSlideRequest::setWidth(int32_t value)
+{
+	m_width = value;
+	m_widthIsSet = true;
+}
+
+bool PostExportSlideRequest::widthIsSet() const
+{
+	return m_widthIsSet;
+}
+
+void PostExportSlideRequest::unsetWidth()
+{
+	m_widthIsSet = false;
+}
+
+int32_t PostExportSlideRequest::getHeight() const
+{
+	return m_height;
+}
+
+void PostExportSlideRequest::setHeight(int32_t value)
+{
+	m_height = value;
+	m_heightIsSet = true;
+}
+
+bool PostExportSlideRequest::heightIsSet() const
+{
+	return m_heightIsSet;
+}
+
+void PostExportSlideRequest::unsetHeight()
+{
+	m_heightIsSet = false;
+}
+
+utility::string_t PostExportSlideRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostExportSlideRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PostExportSlideRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostExportSlideRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
+utility::string_t PostExportSlideRequest::getFontsFolder() const
+{
+	return m_fontsFolder;
+}
+
+void PostExportSlideRequest::setFontsFolder(utility::string_t value)
+{
+	m_fontsFolder = value;
+}
+
 PostGetNotesSlideRequest::PostGetNotesSlideRequest()
 {
 }
@@ -7791,6 +8365,34 @@ void PostGetNotesSlideWithFormatRequest::setFontsFolder(utility::string_t value)
 	m_fontsFolder = value;
 }
 
+PostImagesFromRequestWithDefaultFormatRequest::PostImagesFromRequestWithDefaultFormatRequest()
+{
+}
+
+PostImagesFromRequestWithDefaultFormatRequest::~PostImagesFromRequestWithDefaultFormatRequest()
+{
+}
+
+std::shared_ptr<HttpContent> PostImagesFromRequestWithDefaultFormatRequest::getDocument() const
+{
+	return m_document;
+}
+
+void PostImagesFromRequestWithDefaultFormatRequest::setDocument(std::shared_ptr<HttpContent> value)
+{
+	m_document = value;
+}
+
+utility::string_t PostImagesFromRequestWithDefaultFormatRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostImagesFromRequestWithDefaultFormatRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
 PostNotesSlideAddNewParagraphRequest::PostNotesSlideAddNewParagraphRequest()
 {
 	m_positionIsSet = false;
@@ -7840,6 +8442,27 @@ void PostNotesSlideAddNewParagraphRequest::setDto(std::shared_ptr<Paragraph> val
 	m_dto = value;
 }
 
+int32_t PostNotesSlideAddNewParagraphRequest::getPosition() const
+{
+	return m_position;
+}
+
+void PostNotesSlideAddNewParagraphRequest::setPosition(int32_t value)
+{
+	m_position = value;
+	m_positionIsSet = true;
+}
+
+bool PostNotesSlideAddNewParagraphRequest::positionIsSet() const
+{
+	return m_positionIsSet;
+}
+
+void PostNotesSlideAddNewParagraphRequest::unsetPosition()
+{
+	m_positionIsSet = false;
+}
+
 utility::string_t PostNotesSlideAddNewParagraphRequest::getPassword() const
 {
 	return m_password;
@@ -7868,27 +8491,6 @@ utility::string_t PostNotesSlideAddNewParagraphRequest::getStorage() const
 void PostNotesSlideAddNewParagraphRequest::setStorage(utility::string_t value)
 {
 	m_storage = value;
-}
-
-int32_t PostNotesSlideAddNewParagraphRequest::getPosition() const
-{
-	return m_position;
-}
-
-void PostNotesSlideAddNewParagraphRequest::setPosition(int32_t value)
-{
-	m_position = value;
-	m_positionIsSet = true;
-}
-
-bool PostNotesSlideAddNewParagraphRequest::positionIsSet() const
-{
-	return m_positionIsSet;
-}
-
-void PostNotesSlideAddNewParagraphRequest::unsetPosition()
-{
-	m_positionIsSet = false;
 }
 
 PostNotesSlideAddNewPortionRequest::PostNotesSlideAddNewPortionRequest()
@@ -7950,6 +8552,27 @@ void PostNotesSlideAddNewPortionRequest::setDto(std::shared_ptr<Portion> value)
 	m_dto = value;
 }
 
+int32_t PostNotesSlideAddNewPortionRequest::getPosition() const
+{
+	return m_position;
+}
+
+void PostNotesSlideAddNewPortionRequest::setPosition(int32_t value)
+{
+	m_position = value;
+	m_positionIsSet = true;
+}
+
+bool PostNotesSlideAddNewPortionRequest::positionIsSet() const
+{
+	return m_positionIsSet;
+}
+
+void PostNotesSlideAddNewPortionRequest::unsetPosition()
+{
+	m_positionIsSet = false;
+}
+
 utility::string_t PostNotesSlideAddNewPortionRequest::getPassword() const
 {
 	return m_password;
@@ -7978,27 +8601,6 @@ utility::string_t PostNotesSlideAddNewPortionRequest::getStorage() const
 void PostNotesSlideAddNewPortionRequest::setStorage(utility::string_t value)
 {
 	m_storage = value;
-}
-
-int32_t PostNotesSlideAddNewPortionRequest::getPosition() const
-{
-	return m_position;
-}
-
-void PostNotesSlideAddNewPortionRequest::setPosition(int32_t value)
-{
-	m_position = value;
-	m_positionIsSet = true;
-}
-
-bool PostNotesSlideAddNewPortionRequest::positionIsSet() const
-{
-	return m_positionIsSet;
-}
-
-void PostNotesSlideAddNewPortionRequest::unsetPosition()
-{
-	m_positionIsSet = false;
 }
 
 PostNotesSlideAddNewShapeRequest::PostNotesSlideAddNewShapeRequest()
@@ -8041,36 +8643,6 @@ void PostNotesSlideAddNewShapeRequest::setDto(std::shared_ptr<ShapeBase> value)
 	m_dto = value;
 }
 
-utility::string_t PostNotesSlideAddNewShapeRequest::getPassword() const
-{
-	return m_password;
-}
-
-void PostNotesSlideAddNewShapeRequest::setPassword(utility::string_t value)
-{
-	m_password = value;
-}
-
-utility::string_t PostNotesSlideAddNewShapeRequest::getFolder() const
-{
-	return m_folder;
-}
-
-void PostNotesSlideAddNewShapeRequest::setFolder(utility::string_t value)
-{
-	m_folder = value;
-}
-
-utility::string_t PostNotesSlideAddNewShapeRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PostNotesSlideAddNewShapeRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 int32_t PostNotesSlideAddNewShapeRequest::getShapeToClone() const
 {
 	return m_shapeToClone;
@@ -8111,6 +8683,36 @@ bool PostNotesSlideAddNewShapeRequest::positionIsSet() const
 void PostNotesSlideAddNewShapeRequest::unsetPosition()
 {
 	m_positionIsSet = false;
+}
+
+utility::string_t PostNotesSlideAddNewShapeRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostNotesSlideAddNewShapeRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PostNotesSlideAddNewShapeRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PostNotesSlideAddNewShapeRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t PostNotesSlideAddNewShapeRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostNotesSlideAddNewShapeRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 PostNotesSlideShapeSaveAsRequest::PostNotesSlideShapeSaveAsRequest()
@@ -8173,36 +8775,6 @@ void PostNotesSlideShapeSaveAsRequest::setOptions(std::shared_ptr<IShapeExportOp
 	m_options = value;
 }
 
-utility::string_t PostNotesSlideShapeSaveAsRequest::getPassword() const
-{
-	return m_password;
-}
-
-void PostNotesSlideShapeSaveAsRequest::setPassword(utility::string_t value)
-{
-	m_password = value;
-}
-
-utility::string_t PostNotesSlideShapeSaveAsRequest::getFolder() const
-{
-	return m_folder;
-}
-
-void PostNotesSlideShapeSaveAsRequest::setFolder(utility::string_t value)
-{
-	m_folder = value;
-}
-
-utility::string_t PostNotesSlideShapeSaveAsRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PostNotesSlideShapeSaveAsRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 double PostNotesSlideShapeSaveAsRequest::getScaleX() const
 {
 	return m_scaleX;
@@ -8255,6 +8827,36 @@ void PostNotesSlideShapeSaveAsRequest::setBounds(utility::string_t value)
 	m_bounds = value;
 }
 
+utility::string_t PostNotesSlideShapeSaveAsRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostNotesSlideShapeSaveAsRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PostNotesSlideShapeSaveAsRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PostNotesSlideShapeSaveAsRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t PostNotesSlideShapeSaveAsRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostNotesSlideShapeSaveAsRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
 utility::string_t PostNotesSlideShapeSaveAsRequest::getFontsFolder() const
 {
 	return m_fontsFolder;
@@ -8303,6 +8905,16 @@ void PostPresentationMergeRequest::setPassword(utility::string_t value)
 	m_password = value;
 }
 
+utility::string_t PostPresentationMergeRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PostPresentationMergeRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
 utility::string_t PostPresentationMergeRequest::getStorage() const
 {
 	return m_storage;
@@ -8313,14 +8925,220 @@ void PostPresentationMergeRequest::setStorage(utility::string_t value)
 	m_storage = value;
 }
 
-utility::string_t PostPresentationMergeRequest::getFolder() const
+PostPresentationReplaceTextRequest::PostPresentationReplaceTextRequest()
 {
-	return m_folder;
+	m_ignoreCaseIsSet = false;
 }
 
-void PostPresentationMergeRequest::setFolder(utility::string_t value)
+PostPresentationReplaceTextRequest::~PostPresentationReplaceTextRequest()
 {
-	m_folder = value;
+}
+
+std::shared_ptr<HttpContent> PostPresentationReplaceTextRequest::getDocument() const
+{
+	return m_document;
+}
+
+void PostPresentationReplaceTextRequest::setDocument(std::shared_ptr<HttpContent> value)
+{
+	m_document = value;
+}
+
+utility::string_t PostPresentationReplaceTextRequest::getOldValue() const
+{
+	return m_oldValue;
+}
+
+void PostPresentationReplaceTextRequest::setOldValue(utility::string_t value)
+{
+	m_oldValue = value;
+}
+
+utility::string_t PostPresentationReplaceTextRequest::getNewValue() const
+{
+	return m_newValue;
+}
+
+void PostPresentationReplaceTextRequest::setNewValue(utility::string_t value)
+{
+	m_newValue = value;
+}
+
+bool PostPresentationReplaceTextRequest::getIgnoreCase() const
+{
+	return m_ignoreCase;
+}
+
+void PostPresentationReplaceTextRequest::setIgnoreCase(bool value)
+{
+	m_ignoreCase = value;
+	m_ignoreCaseIsSet = true;
+}
+
+bool PostPresentationReplaceTextRequest::ignoreCaseIsSet() const
+{
+	return m_ignoreCaseIsSet;
+}
+
+void PostPresentationReplaceTextRequest::unsetIgnoreCase()
+{
+	m_ignoreCaseIsSet = false;
+}
+
+utility::string_t PostPresentationReplaceTextRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostPresentationReplaceTextRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+PostPresentationSplitRequest::PostPresentationSplitRequest()
+{
+	m_widthIsSet = false;
+	m_heightIsSet = false;
+	m_fromIsSet = false;
+	m_toIsSet = false;
+}
+
+PostPresentationSplitRequest::~PostPresentationSplitRequest()
+{
+}
+
+std::shared_ptr<HttpContent> PostPresentationSplitRequest::getDocument() const
+{
+	return m_document;
+}
+
+void PostPresentationSplitRequest::setDocument(std::shared_ptr<HttpContent> value)
+{
+	m_document = value;
+}
+
+utility::string_t PostPresentationSplitRequest::getFormat() const
+{
+	return m_format;
+}
+
+void PostPresentationSplitRequest::setFormat(utility::string_t value)
+{
+	m_format = value;
+}
+
+int32_t PostPresentationSplitRequest::getWidth() const
+{
+	return m_width;
+}
+
+void PostPresentationSplitRequest::setWidth(int32_t value)
+{
+	m_width = value;
+	m_widthIsSet = true;
+}
+
+bool PostPresentationSplitRequest::widthIsSet() const
+{
+	return m_widthIsSet;
+}
+
+void PostPresentationSplitRequest::unsetWidth()
+{
+	m_widthIsSet = false;
+}
+
+int32_t PostPresentationSplitRequest::getHeight() const
+{
+	return m_height;
+}
+
+void PostPresentationSplitRequest::setHeight(int32_t value)
+{
+	m_height = value;
+	m_heightIsSet = true;
+}
+
+bool PostPresentationSplitRequest::heightIsSet() const
+{
+	return m_heightIsSet;
+}
+
+void PostPresentationSplitRequest::unsetHeight()
+{
+	m_heightIsSet = false;
+}
+
+int32_t PostPresentationSplitRequest::getFrom() const
+{
+	return m_from;
+}
+
+void PostPresentationSplitRequest::setFrom(int32_t value)
+{
+	m_from = value;
+	m_fromIsSet = true;
+}
+
+bool PostPresentationSplitRequest::fromIsSet() const
+{
+	return m_fromIsSet;
+}
+
+void PostPresentationSplitRequest::unsetFrom()
+{
+	m_fromIsSet = false;
+}
+
+int32_t PostPresentationSplitRequest::getTo() const
+{
+	return m_to;
+}
+
+void PostPresentationSplitRequest::setTo(int32_t value)
+{
+	m_to = value;
+	m_toIsSet = true;
+}
+
+bool PostPresentationSplitRequest::toIsSet() const
+{
+	return m_toIsSet;
+}
+
+void PostPresentationSplitRequest::unsetTo()
+{
+	m_toIsSet = false;
+}
+
+utility::string_t PostPresentationSplitRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostPresentationSplitRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PostPresentationSplitRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostPresentationSplitRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
+utility::string_t PostPresentationSplitRequest::getFontsFolder() const
+{
+	return m_fontsFolder;
+}
+
+void PostPresentationSplitRequest::setFontsFolder(utility::string_t value)
+{
+	m_fontsFolder = value;
 }
 
 PostSectionRequest::PostSectionRequest()
@@ -8519,36 +9337,6 @@ void PostShapeSaveAsRequest::setOptions(std::shared_ptr<IShapeExportOptions> val
 	m_options = value;
 }
 
-utility::string_t PostShapeSaveAsRequest::getPassword() const
-{
-	return m_password;
-}
-
-void PostShapeSaveAsRequest::setPassword(utility::string_t value)
-{
-	m_password = value;
-}
-
-utility::string_t PostShapeSaveAsRequest::getFolder() const
-{
-	return m_folder;
-}
-
-void PostShapeSaveAsRequest::setFolder(utility::string_t value)
-{
-	m_folder = value;
-}
-
-utility::string_t PostShapeSaveAsRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PostShapeSaveAsRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 double PostShapeSaveAsRequest::getScaleX() const
 {
 	return m_scaleX;
@@ -8599,6 +9387,36 @@ utility::string_t PostShapeSaveAsRequest::getBounds() const
 void PostShapeSaveAsRequest::setBounds(utility::string_t value)
 {
 	m_bounds = value;
+}
+
+utility::string_t PostShapeSaveAsRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostShapeSaveAsRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PostShapeSaveAsRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PostShapeSaveAsRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t PostShapeSaveAsRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostShapeSaveAsRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 utility::string_t PostShapeSaveAsRequest::getFontsFolder() const
@@ -8825,6 +9643,86 @@ void PostSlideAnimationInteractiveSequenceEffectRequest::setStorage(utility::str
 	m_storage = value;
 }
 
+PostSlideReplaceTextRequest::PostSlideReplaceTextRequest()
+{
+	m_ignoreCaseIsSet = false;
+}
+
+PostSlideReplaceTextRequest::~PostSlideReplaceTextRequest()
+{
+}
+
+std::shared_ptr<HttpContent> PostSlideReplaceTextRequest::getDocument() const
+{
+	return m_document;
+}
+
+void PostSlideReplaceTextRequest::setDocument(std::shared_ptr<HttpContent> value)
+{
+	m_document = value;
+}
+
+int32_t PostSlideReplaceTextRequest::getSlideIndex() const
+{
+	return m_slideIndex;
+}
+
+void PostSlideReplaceTextRequest::setSlideIndex(int32_t value)
+{
+	m_slideIndex = value;
+}
+
+utility::string_t PostSlideReplaceTextRequest::getOldValue() const
+{
+	return m_oldValue;
+}
+
+void PostSlideReplaceTextRequest::setOldValue(utility::string_t value)
+{
+	m_oldValue = value;
+}
+
+utility::string_t PostSlideReplaceTextRequest::getNewValue() const
+{
+	return m_newValue;
+}
+
+void PostSlideReplaceTextRequest::setNewValue(utility::string_t value)
+{
+	m_newValue = value;
+}
+
+bool PostSlideReplaceTextRequest::getIgnoreCase() const
+{
+	return m_ignoreCase;
+}
+
+void PostSlideReplaceTextRequest::setIgnoreCase(bool value)
+{
+	m_ignoreCase = value;
+	m_ignoreCaseIsSet = true;
+}
+
+bool PostSlideReplaceTextRequest::ignoreCaseIsSet() const
+{
+	return m_ignoreCaseIsSet;
+}
+
+void PostSlideReplaceTextRequest::unsetIgnoreCase()
+{
+	m_ignoreCaseIsSet = false;
+}
+
+utility::string_t PostSlideReplaceTextRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostSlideReplaceTextRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
 PostSlideSaveAsRequest::PostSlideSaveAsRequest()
 {
 	m_widthIsSet = false;
@@ -8976,6 +9874,16 @@ void PostSlidesAddRequest::setName(utility::string_t value)
 	m_name = value;
 }
 
+utility::string_t PostSlidesAddRequest::getLayoutAlias() const
+{
+	return m_layoutAlias;
+}
+
+void PostSlidesAddRequest::setLayoutAlias(utility::string_t value)
+{
+	m_layoutAlias = value;
+}
+
 int32_t PostSlidesAddRequest::getPosition() const
 {
 	return m_position;
@@ -9027,16 +9935,6 @@ void PostSlidesAddRequest::setStorage(utility::string_t value)
 	m_storage = value;
 }
 
-utility::string_t PostSlidesAddRequest::getLayoutAlias() const
-{
-	return m_layoutAlias;
-}
-
-void PostSlidesAddRequest::setLayoutAlias(utility::string_t value)
-{
-	m_layoutAlias = value;
-}
-
 PostSlidesConvertRequest::PostSlidesConvertRequest()
 {
 }
@@ -9073,6 +9971,16 @@ utility::string_t PostSlidesConvertRequest::getPassword() const
 void PostSlidesConvertRequest::setPassword(utility::string_t value)
 {
 	m_password = value;
+}
+
+utility::string_t PostSlidesConvertRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostSlidesConvertRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 utility::string_t PostSlidesConvertRequest::getFontsFolder() const
@@ -9243,16 +10151,6 @@ void PostSlidesDocumentRequest::setPassword(utility::string_t value)
 	m_password = value;
 }
 
-utility::string_t PostSlidesDocumentRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PostSlidesDocumentRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 utility::string_t PostSlidesDocumentRequest::getFolder() const
 {
 	return m_folder;
@@ -9261,6 +10159,16 @@ utility::string_t PostSlidesDocumentRequest::getFolder() const
 void PostSlidesDocumentRequest::setFolder(utility::string_t value)
 {
 	m_folder = value;
+}
+
+utility::string_t PostSlidesDocumentRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostSlidesDocumentRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 PostSlidesDocumentFromHtmlRequest::PostSlidesDocumentFromHtmlRequest()
@@ -9301,16 +10209,6 @@ void PostSlidesDocumentFromHtmlRequest::setPassword(utility::string_t value)
 	m_password = value;
 }
 
-utility::string_t PostSlidesDocumentFromHtmlRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PostSlidesDocumentFromHtmlRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 utility::string_t PostSlidesDocumentFromHtmlRequest::getFolder() const
 {
 	return m_folder;
@@ -9319,6 +10217,16 @@ utility::string_t PostSlidesDocumentFromHtmlRequest::getFolder() const
 void PostSlidesDocumentFromHtmlRequest::setFolder(utility::string_t value)
 {
 	m_folder = value;
+}
+
+utility::string_t PostSlidesDocumentFromHtmlRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostSlidesDocumentFromHtmlRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 PostSlidesDocumentFromPdfRequest::PostSlidesDocumentFromPdfRequest()
@@ -9359,16 +10267,6 @@ void PostSlidesDocumentFromPdfRequest::setPassword(utility::string_t value)
 	m_password = value;
 }
 
-utility::string_t PostSlidesDocumentFromPdfRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PostSlidesDocumentFromPdfRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 utility::string_t PostSlidesDocumentFromPdfRequest::getFolder() const
 {
 	return m_folder;
@@ -9377,6 +10275,16 @@ utility::string_t PostSlidesDocumentFromPdfRequest::getFolder() const
 void PostSlidesDocumentFromPdfRequest::setFolder(utility::string_t value)
 {
 	m_folder = value;
+}
+
+utility::string_t PostSlidesDocumentFromPdfRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostSlidesDocumentFromPdfRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 PostSlidesDocumentFromSourceRequest::PostSlidesDocumentFromSourceRequest()
@@ -9437,16 +10345,6 @@ void PostSlidesDocumentFromSourceRequest::setPassword(utility::string_t value)
 	m_password = value;
 }
 
-utility::string_t PostSlidesDocumentFromSourceRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PostSlidesDocumentFromSourceRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 utility::string_t PostSlidesDocumentFromSourceRequest::getFolder() const
 {
 	return m_folder;
@@ -9455,6 +10353,16 @@ utility::string_t PostSlidesDocumentFromSourceRequest::getFolder() const
 void PostSlidesDocumentFromSourceRequest::setFolder(utility::string_t value)
 {
 	m_folder = value;
+}
+
+utility::string_t PostSlidesDocumentFromSourceRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostSlidesDocumentFromSourceRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 PostSlidesDocumentFromTemplateRequest::PostSlidesDocumentFromTemplateRequest()
@@ -9547,6 +10455,16 @@ void PostSlidesDocumentFromTemplateRequest::setPassword(utility::string_t value)
 	m_password = value;
 }
 
+utility::string_t PostSlidesDocumentFromTemplateRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PostSlidesDocumentFromTemplateRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
 utility::string_t PostSlidesDocumentFromTemplateRequest::getStorage() const
 {
 	return m_storage;
@@ -9557,14 +10475,42 @@ void PostSlidesDocumentFromTemplateRequest::setStorage(utility::string_t value)
 	m_storage = value;
 }
 
-utility::string_t PostSlidesDocumentFromTemplateRequest::getFolder() const
+PostSlidesMergeRequest::PostSlidesMergeRequest()
 {
-	return m_folder;
 }
 
-void PostSlidesDocumentFromTemplateRequest::setFolder(utility::string_t value)
+PostSlidesMergeRequest::~PostSlidesMergeRequest()
 {
-	m_folder = value;
+}
+
+std::vector<std::shared_ptr<HttpContent>> PostSlidesMergeRequest::getFiles() const
+{
+	return m_files;
+}
+
+void PostSlidesMergeRequest::setFiles(std::vector<std::shared_ptr<HttpContent>> value)
+{
+	m_files = value;
+}
+
+std::shared_ptr<OrderedMergeRequest> PostSlidesMergeRequest::getRequest() const
+{
+	return m_request;
+}
+
+void PostSlidesMergeRequest::setRequest(std::shared_ptr<OrderedMergeRequest> value)
+{
+	m_request = value;
+}
+
+utility::string_t PostSlidesMergeRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostSlidesMergeRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
 }
 
 PostSlidesPipelineRequest::PostSlidesPipelineRequest()
@@ -9585,12 +10531,12 @@ void PostSlidesPipelineRequest::setPipeline(std::shared_ptr<Pipeline> value)
 	m_pipeline = value;
 }
 
-std::vector<utility::string_t> PostSlidesPipelineRequest::getFiles() const
+std::vector<std::shared_ptr<HttpContent>> PostSlidesPipelineRequest::getFiles() const
 {
 	return m_files;
 }
 
-void PostSlidesPipelineRequest::setFiles(std::vector<utility::string_t> value)
+void PostSlidesPipelineRequest::setFiles(std::vector<std::shared_ptr<HttpContent>> value)
 {
 	m_files = value;
 }
@@ -9869,16 +10815,6 @@ void PostSlidesSaveAsRequest::setPassword(utility::string_t value)
 	m_password = value;
 }
 
-utility::string_t PostSlidesSaveAsRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PostSlidesSaveAsRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 utility::string_t PostSlidesSaveAsRequest::getFolder() const
 {
 	return m_folder;
@@ -9887,6 +10823,16 @@ utility::string_t PostSlidesSaveAsRequest::getFolder() const
 void PostSlidesSaveAsRequest::setFolder(utility::string_t value)
 {
 	m_folder = value;
+}
+
+utility::string_t PostSlidesSaveAsRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostSlidesSaveAsRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 utility::string_t PostSlidesSaveAsRequest::getFontsFolder() const
@@ -10061,8 +11007,8 @@ PostSlidesSplitRequest::PostSlidesSplitRequest()
 {
 	m_widthIsSet = false;
 	m_heightIsSet = false;
-	m_toIsSet = false;
 	m_fromIsSet = false;
+	m_toIsSet = false;
 }
 
 PostSlidesSplitRequest::~PostSlidesSplitRequest()
@@ -10141,27 +11087,6 @@ void PostSlidesSplitRequest::unsetHeight()
 	m_heightIsSet = false;
 }
 
-int32_t PostSlidesSplitRequest::getTo() const
-{
-	return m_to;
-}
-
-void PostSlidesSplitRequest::setTo(int32_t value)
-{
-	m_to = value;
-	m_toIsSet = true;
-}
-
-bool PostSlidesSplitRequest::toIsSet() const
-{
-	return m_toIsSet;
-}
-
-void PostSlidesSplitRequest::unsetTo()
-{
-	m_toIsSet = false;
-}
-
 int32_t PostSlidesSplitRequest::getFrom() const
 {
 	return m_from;
@@ -10181,6 +11106,27 @@ bool PostSlidesSplitRequest::fromIsSet() const
 void PostSlidesSplitRequest::unsetFrom()
 {
 	m_fromIsSet = false;
+}
+
+int32_t PostSlidesSplitRequest::getTo() const
+{
+	return m_to;
+}
+
+void PostSlidesSplitRequest::setTo(int32_t value)
+{
+	m_to = value;
+	m_toIsSet = true;
+}
+
+bool PostSlidesSplitRequest::toIsSet() const
+{
+	return m_toIsSet;
+}
+
+void PostSlidesSplitRequest::unsetTo()
+{
+	m_toIsSet = false;
 }
 
 utility::string_t PostSlidesSplitRequest::getDestFolder() const
@@ -10203,16 +11149,6 @@ void PostSlidesSplitRequest::setPassword(utility::string_t value)
 	m_password = value;
 }
 
-utility::string_t PostSlidesSplitRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PostSlidesSplitRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 utility::string_t PostSlidesSplitRequest::getFolder() const
 {
 	return m_folder;
@@ -10221,6 +11157,16 @@ utility::string_t PostSlidesSplitRequest::getFolder() const
 void PostSlidesSplitRequest::setFolder(utility::string_t value)
 {
 	m_folder = value;
+}
+
+utility::string_t PostSlidesSplitRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostSlidesSplitRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 utility::string_t PostSlidesSplitRequest::getFontsFolder() const
@@ -10303,36 +11249,6 @@ void PostSubshapeSaveAsRequest::setOptions(std::shared_ptr<IShapeExportOptions> 
 	m_options = value;
 }
 
-utility::string_t PostSubshapeSaveAsRequest::getPassword() const
-{
-	return m_password;
-}
-
-void PostSubshapeSaveAsRequest::setPassword(utility::string_t value)
-{
-	m_password = value;
-}
-
-utility::string_t PostSubshapeSaveAsRequest::getFolder() const
-{
-	return m_folder;
-}
-
-void PostSubshapeSaveAsRequest::setFolder(utility::string_t value)
-{
-	m_folder = value;
-}
-
-utility::string_t PostSubshapeSaveAsRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PostSubshapeSaveAsRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 double PostSubshapeSaveAsRequest::getScaleX() const
 {
 	return m_scaleX;
@@ -10383,6 +11299,36 @@ utility::string_t PostSubshapeSaveAsRequest::getBounds() const
 void PostSubshapeSaveAsRequest::setBounds(utility::string_t value)
 {
 	m_bounds = value;
+}
+
+utility::string_t PostSubshapeSaveAsRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostSubshapeSaveAsRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PostSubshapeSaveAsRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PostSubshapeSaveAsRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t PostSubshapeSaveAsRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostSubshapeSaveAsRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 utility::string_t PostSubshapeSaveAsRequest::getFontsFolder() const
@@ -10669,6 +11615,270 @@ void PutChartSeriesRequest::setStorage(utility::string_t value)
 	m_storage = value;
 }
 
+PutExportShapeRequest::PutExportShapeRequest()
+{
+	m_scaleXIsSet = false;
+	m_scaleYIsSet = false;
+}
+
+PutExportShapeRequest::~PutExportShapeRequest()
+{
+}
+
+std::shared_ptr<HttpContent> PutExportShapeRequest::getDocument() const
+{
+	return m_document;
+}
+
+void PutExportShapeRequest::setDocument(std::shared_ptr<HttpContent> value)
+{
+	m_document = value;
+}
+
+int32_t PutExportShapeRequest::getSlideIndex() const
+{
+	return m_slideIndex;
+}
+
+void PutExportShapeRequest::setSlideIndex(int32_t value)
+{
+	m_slideIndex = value;
+}
+
+int32_t PutExportShapeRequest::getShapeIndex() const
+{
+	return m_shapeIndex;
+}
+
+void PutExportShapeRequest::setShapeIndex(int32_t value)
+{
+	m_shapeIndex = value;
+}
+
+utility::string_t PutExportShapeRequest::getFormat() const
+{
+	return m_format;
+}
+
+void PutExportShapeRequest::setFormat(utility::string_t value)
+{
+	m_format = value;
+}
+
+utility::string_t PutExportShapeRequest::getOutPath() const
+{
+	return m_outPath;
+}
+
+void PutExportShapeRequest::setOutPath(utility::string_t value)
+{
+	m_outPath = value;
+}
+
+utility::string_t PutExportShapeRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PutExportShapeRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PutExportShapeRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PutExportShapeRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
+double PutExportShapeRequest::getScaleX() const
+{
+	return m_scaleX;
+}
+
+void PutExportShapeRequest::setScaleX(double value)
+{
+	m_scaleX = value;
+	m_scaleXIsSet = true;
+}
+
+bool PutExportShapeRequest::scaleXIsSet() const
+{
+	return m_scaleXIsSet;
+}
+
+void PutExportShapeRequest::unsetScaleX()
+{
+	m_scaleXIsSet = false;
+}
+
+double PutExportShapeRequest::getScaleY() const
+{
+	return m_scaleY;
+}
+
+void PutExportShapeRequest::setScaleY(double value)
+{
+	m_scaleY = value;
+	m_scaleYIsSet = true;
+}
+
+bool PutExportShapeRequest::scaleYIsSet() const
+{
+	return m_scaleYIsSet;
+}
+
+void PutExportShapeRequest::unsetScaleY()
+{
+	m_scaleYIsSet = false;
+}
+
+utility::string_t PutExportShapeRequest::getBounds() const
+{
+	return m_bounds;
+}
+
+void PutExportShapeRequest::setBounds(utility::string_t value)
+{
+	m_bounds = value;
+}
+
+utility::string_t PutExportShapeRequest::getFontsFolder() const
+{
+	return m_fontsFolder;
+}
+
+void PutExportShapeRequest::setFontsFolder(utility::string_t value)
+{
+	m_fontsFolder = value;
+}
+
+PutExportSlideRequest::PutExportSlideRequest()
+{
+	m_widthIsSet = false;
+	m_heightIsSet = false;
+}
+
+PutExportSlideRequest::~PutExportSlideRequest()
+{
+}
+
+std::shared_ptr<HttpContent> PutExportSlideRequest::getDocument() const
+{
+	return m_document;
+}
+
+void PutExportSlideRequest::setDocument(std::shared_ptr<HttpContent> value)
+{
+	m_document = value;
+}
+
+int32_t PutExportSlideRequest::getSlideIndex() const
+{
+	return m_slideIndex;
+}
+
+void PutExportSlideRequest::setSlideIndex(int32_t value)
+{
+	m_slideIndex = value;
+}
+
+utility::string_t PutExportSlideRequest::getFormat() const
+{
+	return m_format;
+}
+
+void PutExportSlideRequest::setFormat(utility::string_t value)
+{
+	m_format = value;
+}
+
+utility::string_t PutExportSlideRequest::getOutPath() const
+{
+	return m_outPath;
+}
+
+void PutExportSlideRequest::setOutPath(utility::string_t value)
+{
+	m_outPath = value;
+}
+
+int32_t PutExportSlideRequest::getWidth() const
+{
+	return m_width;
+}
+
+void PutExportSlideRequest::setWidth(int32_t value)
+{
+	m_width = value;
+	m_widthIsSet = true;
+}
+
+bool PutExportSlideRequest::widthIsSet() const
+{
+	return m_widthIsSet;
+}
+
+void PutExportSlideRequest::unsetWidth()
+{
+	m_widthIsSet = false;
+}
+
+int32_t PutExportSlideRequest::getHeight() const
+{
+	return m_height;
+}
+
+void PutExportSlideRequest::setHeight(int32_t value)
+{
+	m_height = value;
+	m_heightIsSet = true;
+}
+
+bool PutExportSlideRequest::heightIsSet() const
+{
+	return m_heightIsSet;
+}
+
+void PutExportSlideRequest::unsetHeight()
+{
+	m_heightIsSet = false;
+}
+
+utility::string_t PutExportSlideRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PutExportSlideRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PutExportSlideRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PutExportSlideRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
+utility::string_t PutExportSlideRequest::getFontsFolder() const
+{
+	return m_fontsFolder;
+}
+
+void PutExportSlideRequest::setFontsFolder(utility::string_t value)
+{
+	m_fontsFolder = value;
+}
+
 PutLayoutSlideRequest::PutLayoutSlideRequest()
 {
 }
@@ -10785,16 +11995,6 @@ void PutNotesSlideHeaderFooterRequest::setPassword(utility::string_t value)
 	m_password = value;
 }
 
-utility::string_t PutNotesSlideHeaderFooterRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PutNotesSlideHeaderFooterRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 utility::string_t PutNotesSlideHeaderFooterRequest::getFolder() const
 {
 	return m_folder;
@@ -10803,6 +12003,16 @@ utility::string_t PutNotesSlideHeaderFooterRequest::getFolder() const
 void PutNotesSlideHeaderFooterRequest::setFolder(utility::string_t value)
 {
 	m_folder = value;
+}
+
+utility::string_t PutNotesSlideHeaderFooterRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PutNotesSlideHeaderFooterRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 PutNotesSlideShapeSaveAsRequest::PutNotesSlideShapeSaveAsRequest()
@@ -10875,36 +12085,6 @@ void PutNotesSlideShapeSaveAsRequest::setOptions(std::shared_ptr<IShapeExportOpt
 	m_options = value;
 }
 
-utility::string_t PutNotesSlideShapeSaveAsRequest::getPassword() const
-{
-	return m_password;
-}
-
-void PutNotesSlideShapeSaveAsRequest::setPassword(utility::string_t value)
-{
-	m_password = value;
-}
-
-utility::string_t PutNotesSlideShapeSaveAsRequest::getFolder() const
-{
-	return m_folder;
-}
-
-void PutNotesSlideShapeSaveAsRequest::setFolder(utility::string_t value)
-{
-	m_folder = value;
-}
-
-utility::string_t PutNotesSlideShapeSaveAsRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PutNotesSlideShapeSaveAsRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 double PutNotesSlideShapeSaveAsRequest::getScaleX() const
 {
 	return m_scaleX;
@@ -10957,6 +12137,36 @@ void PutNotesSlideShapeSaveAsRequest::setBounds(utility::string_t value)
 	m_bounds = value;
 }
 
+utility::string_t PutNotesSlideShapeSaveAsRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PutNotesSlideShapeSaveAsRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PutNotesSlideShapeSaveAsRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PutNotesSlideShapeSaveAsRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t PutNotesSlideShapeSaveAsRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PutNotesSlideShapeSaveAsRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
 utility::string_t PutNotesSlideShapeSaveAsRequest::getFontsFolder() const
 {
 	return m_fontsFolder;
@@ -11005,6 +12215,16 @@ void PutPresentationMergeRequest::setPassword(utility::string_t value)
 	m_password = value;
 }
 
+utility::string_t PutPresentationMergeRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PutPresentationMergeRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
 utility::string_t PutPresentationMergeRequest::getStorage() const
 {
 	return m_storage;
@@ -11015,14 +12235,160 @@ void PutPresentationMergeRequest::setStorage(utility::string_t value)
 	m_storage = value;
 }
 
-utility::string_t PutPresentationMergeRequest::getFolder() const
+PutPresentationSplitRequest::PutPresentationSplitRequest()
 {
-	return m_folder;
+	m_widthIsSet = false;
+	m_heightIsSet = false;
+	m_fromIsSet = false;
+	m_toIsSet = false;
 }
 
-void PutPresentationMergeRequest::setFolder(utility::string_t value)
+PutPresentationSplitRequest::~PutPresentationSplitRequest()
 {
-	m_folder = value;
+}
+
+std::shared_ptr<HttpContent> PutPresentationSplitRequest::getDocument() const
+{
+	return m_document;
+}
+
+void PutPresentationSplitRequest::setDocument(std::shared_ptr<HttpContent> value)
+{
+	m_document = value;
+}
+
+utility::string_t PutPresentationSplitRequest::getFormat() const
+{
+	return m_format;
+}
+
+void PutPresentationSplitRequest::setFormat(utility::string_t value)
+{
+	m_format = value;
+}
+
+utility::string_t PutPresentationSplitRequest::getDestFolder() const
+{
+	return m_destFolder;
+}
+
+void PutPresentationSplitRequest::setDestFolder(utility::string_t value)
+{
+	m_destFolder = value;
+}
+
+int32_t PutPresentationSplitRequest::getWidth() const
+{
+	return m_width;
+}
+
+void PutPresentationSplitRequest::setWidth(int32_t value)
+{
+	m_width = value;
+	m_widthIsSet = true;
+}
+
+bool PutPresentationSplitRequest::widthIsSet() const
+{
+	return m_widthIsSet;
+}
+
+void PutPresentationSplitRequest::unsetWidth()
+{
+	m_widthIsSet = false;
+}
+
+int32_t PutPresentationSplitRequest::getHeight() const
+{
+	return m_height;
+}
+
+void PutPresentationSplitRequest::setHeight(int32_t value)
+{
+	m_height = value;
+	m_heightIsSet = true;
+}
+
+bool PutPresentationSplitRequest::heightIsSet() const
+{
+	return m_heightIsSet;
+}
+
+void PutPresentationSplitRequest::unsetHeight()
+{
+	m_heightIsSet = false;
+}
+
+int32_t PutPresentationSplitRequest::getFrom() const
+{
+	return m_from;
+}
+
+void PutPresentationSplitRequest::setFrom(int32_t value)
+{
+	m_from = value;
+	m_fromIsSet = true;
+}
+
+bool PutPresentationSplitRequest::fromIsSet() const
+{
+	return m_fromIsSet;
+}
+
+void PutPresentationSplitRequest::unsetFrom()
+{
+	m_fromIsSet = false;
+}
+
+int32_t PutPresentationSplitRequest::getTo() const
+{
+	return m_to;
+}
+
+void PutPresentationSplitRequest::setTo(int32_t value)
+{
+	m_to = value;
+	m_toIsSet = true;
+}
+
+bool PutPresentationSplitRequest::toIsSet() const
+{
+	return m_toIsSet;
+}
+
+void PutPresentationSplitRequest::unsetTo()
+{
+	m_toIsSet = false;
+}
+
+utility::string_t PutPresentationSplitRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PutPresentationSplitRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PutPresentationSplitRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PutPresentationSplitRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
+utility::string_t PutPresentationSplitRequest::getFontsFolder() const
+{
+	return m_fontsFolder;
+}
+
+void PutPresentationSplitRequest::setFontsFolder(utility::string_t value)
+{
+	m_fontsFolder = value;
 }
 
 PutSectionRequest::PutSectionRequest()
@@ -11613,36 +12979,6 @@ void PutShapeSaveAsRequest::setOptions(std::shared_ptr<IShapeExportOptions> valu
 	m_options = value;
 }
 
-utility::string_t PutShapeSaveAsRequest::getPassword() const
-{
-	return m_password;
-}
-
-void PutShapeSaveAsRequest::setPassword(utility::string_t value)
-{
-	m_password = value;
-}
-
-utility::string_t PutShapeSaveAsRequest::getFolder() const
-{
-	return m_folder;
-}
-
-void PutShapeSaveAsRequest::setFolder(utility::string_t value)
-{
-	m_folder = value;
-}
-
-utility::string_t PutShapeSaveAsRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PutShapeSaveAsRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 double PutShapeSaveAsRequest::getScaleX() const
 {
 	return m_scaleX;
@@ -11693,6 +13029,36 @@ utility::string_t PutShapeSaveAsRequest::getBounds() const
 void PutShapeSaveAsRequest::setBounds(utility::string_t value)
 {
 	m_bounds = value;
+}
+
+utility::string_t PutShapeSaveAsRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PutShapeSaveAsRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PutShapeSaveAsRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PutShapeSaveAsRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t PutShapeSaveAsRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PutShapeSaveAsRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 utility::string_t PutShapeSaveAsRequest::getFontsFolder() const
@@ -12363,6 +13729,16 @@ void PutSlidesConvertRequest::setPassword(utility::string_t value)
 	m_password = value;
 }
 
+utility::string_t PutSlidesConvertRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PutSlidesConvertRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
 utility::string_t PutSlidesConvertRequest::getFontsFolder() const
 {
 	return m_fontsFolder;
@@ -12411,16 +13787,6 @@ void PutSlidesDocumentFromHtmlRequest::setPassword(utility::string_t value)
 	m_password = value;
 }
 
-utility::string_t PutSlidesDocumentFromHtmlRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PutSlidesDocumentFromHtmlRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 utility::string_t PutSlidesDocumentFromHtmlRequest::getFolder() const
 {
 	return m_folder;
@@ -12429,6 +13795,16 @@ utility::string_t PutSlidesDocumentFromHtmlRequest::getFolder() const
 void PutSlidesDocumentFromHtmlRequest::setFolder(utility::string_t value)
 {
 	m_folder = value;
+}
+
+utility::string_t PutSlidesDocumentFromHtmlRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PutSlidesDocumentFromHtmlRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 PutSlidesHeaderFooterRequest::PutSlidesHeaderFooterRequest()
@@ -12469,6 +13845,16 @@ void PutSlidesHeaderFooterRequest::setPassword(utility::string_t value)
 	m_password = value;
 }
 
+utility::string_t PutSlidesHeaderFooterRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PutSlidesHeaderFooterRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
 utility::string_t PutSlidesHeaderFooterRequest::getStorage() const
 {
 	return m_storage;
@@ -12479,14 +13865,62 @@ void PutSlidesHeaderFooterRequest::setStorage(utility::string_t value)
 	m_storage = value;
 }
 
-utility::string_t PutSlidesHeaderFooterRequest::getFolder() const
+PutSlidesMergeRequest::PutSlidesMergeRequest()
 {
-	return m_folder;
 }
 
-void PutSlidesHeaderFooterRequest::setFolder(utility::string_t value)
+PutSlidesMergeRequest::~PutSlidesMergeRequest()
 {
-	m_folder = value;
+}
+
+utility::string_t PutSlidesMergeRequest::getOutPath() const
+{
+	return m_outPath;
+}
+
+void PutSlidesMergeRequest::setOutPath(utility::string_t value)
+{
+	m_outPath = value;
+}
+
+std::vector<std::shared_ptr<HttpContent>> PutSlidesMergeRequest::getFiles() const
+{
+	return m_files;
+}
+
+void PutSlidesMergeRequest::setFiles(std::vector<std::shared_ptr<HttpContent>> value)
+{
+	m_files = value;
+}
+
+std::shared_ptr<OrderedMergeRequest> PutSlidesMergeRequest::getRequest() const
+{
+	return m_request;
+}
+
+void PutSlidesMergeRequest::setRequest(std::shared_ptr<OrderedMergeRequest> value)
+{
+	m_request = value;
+}
+
+utility::string_t PutSlidesMergeRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PutSlidesMergeRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PutSlidesMergeRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PutSlidesMergeRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 PutSlidesProtectionPropertiesRequest::PutSlidesProtectionPropertiesRequest()
@@ -12565,16 +13999,6 @@ void PutSlidesSaveAsRequest::setName(utility::string_t value)
 	m_name = value;
 }
 
-utility::string_t PutSlidesSaveAsRequest::getOutPath() const
-{
-	return m_outPath;
-}
-
-void PutSlidesSaveAsRequest::setOutPath(utility::string_t value)
-{
-	m_outPath = value;
-}
-
 utility::string_t PutSlidesSaveAsRequest::getFormat() const
 {
 	return m_format;
@@ -12583,6 +14007,16 @@ utility::string_t PutSlidesSaveAsRequest::getFormat() const
 void PutSlidesSaveAsRequest::setFormat(utility::string_t value)
 {
 	m_format = value;
+}
+
+utility::string_t PutSlidesSaveAsRequest::getOutPath() const
+{
+	return m_outPath;
+}
+
+void PutSlidesSaveAsRequest::setOutPath(utility::string_t value)
+{
+	m_outPath = value;
 }
 
 std::shared_ptr<ExportOptions> PutSlidesSaveAsRequest::getOptions() const
@@ -12605,16 +14039,6 @@ void PutSlidesSaveAsRequest::setPassword(utility::string_t value)
 	m_password = value;
 }
 
-utility::string_t PutSlidesSaveAsRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PutSlidesSaveAsRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 utility::string_t PutSlidesSaveAsRequest::getFolder() const
 {
 	return m_folder;
@@ -12623,6 +14047,16 @@ utility::string_t PutSlidesSaveAsRequest::getFolder() const
 void PutSlidesSaveAsRequest::setFolder(utility::string_t value)
 {
 	m_folder = value;
+}
+
+utility::string_t PutSlidesSaveAsRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PutSlidesSaveAsRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 utility::string_t PutSlidesSaveAsRequest::getFontsFolder() const
@@ -12809,16 +14243,6 @@ void PutSlidesSlideBackgroundRequest::setBackground(std::shared_ptr<SlideBackgro
 	m_background = value;
 }
 
-utility::string_t PutSlidesSlideBackgroundRequest::getFolder() const
-{
-	return m_folder;
-}
-
-void PutSlidesSlideBackgroundRequest::setFolder(utility::string_t value)
-{
-	m_folder = value;
-}
-
 utility::string_t PutSlidesSlideBackgroundRequest::getPassword() const
 {
 	return m_password;
@@ -12827,6 +14251,16 @@ utility::string_t PutSlidesSlideBackgroundRequest::getPassword() const
 void PutSlidesSlideBackgroundRequest::setPassword(utility::string_t value)
 {
 	m_password = value;
+}
+
+utility::string_t PutSlidesSlideBackgroundRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PutSlidesSlideBackgroundRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
 }
 
 utility::string_t PutSlidesSlideBackgroundRequest::getStorage() const
@@ -12877,16 +14311,6 @@ void PutSlidesSlideBackgroundColorRequest::setColor(utility::string_t value)
 	m_color = value;
 }
 
-utility::string_t PutSlidesSlideBackgroundColorRequest::getFolder() const
-{
-	return m_folder;
-}
-
-void PutSlidesSlideBackgroundColorRequest::setFolder(utility::string_t value)
-{
-	m_folder = value;
-}
-
 utility::string_t PutSlidesSlideBackgroundColorRequest::getPassword() const
 {
 	return m_password;
@@ -12895,6 +14319,16 @@ utility::string_t PutSlidesSlideBackgroundColorRequest::getPassword() const
 void PutSlidesSlideBackgroundColorRequest::setPassword(utility::string_t value)
 {
 	m_password = value;
+}
+
+utility::string_t PutSlidesSlideBackgroundColorRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PutSlidesSlideBackgroundColorRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
 }
 
 utility::string_t PutSlidesSlideBackgroundColorRequest::getStorage() const
@@ -12985,36 +14419,6 @@ void PutSlidesSlideSizeRequest::setName(utility::string_t value)
 	m_name = value;
 }
 
-utility::string_t PutSlidesSlideSizeRequest::getPassword() const
-{
-	return m_password;
-}
-
-void PutSlidesSlideSizeRequest::setPassword(utility::string_t value)
-{
-	m_password = value;
-}
-
-utility::string_t PutSlidesSlideSizeRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PutSlidesSlideSizeRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
-utility::string_t PutSlidesSlideSizeRequest::getFolder() const
-{
-	return m_folder;
-}
-
-void PutSlidesSlideSizeRequest::setFolder(utility::string_t value)
-{
-	m_folder = value;
-}
-
 int32_t PutSlidesSlideSizeRequest::getWidth() const
 {
 	return m_width;
@@ -13075,6 +14479,36 @@ utility::string_t PutSlidesSlideSizeRequest::getScaleType() const
 void PutSlidesSlideSizeRequest::setScaleType(utility::string_t value)
 {
 	m_scaleType = value;
+}
+
+utility::string_t PutSlidesSlideSizeRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PutSlidesSlideSizeRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PutSlidesSlideSizeRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PutSlidesSlideSizeRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t PutSlidesSlideSizeRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PutSlidesSlideSizeRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 PutSlidesViewPropertiesRequest::PutSlidesViewPropertiesRequest()
@@ -13215,36 +14649,6 @@ void PutSubshapeSaveAsRequest::setOptions(std::shared_ptr<IShapeExportOptions> v
 	m_options = value;
 }
 
-utility::string_t PutSubshapeSaveAsRequest::getPassword() const
-{
-	return m_password;
-}
-
-void PutSubshapeSaveAsRequest::setPassword(utility::string_t value)
-{
-	m_password = value;
-}
-
-utility::string_t PutSubshapeSaveAsRequest::getFolder() const
-{
-	return m_folder;
-}
-
-void PutSubshapeSaveAsRequest::setFolder(utility::string_t value)
-{
-	m_folder = value;
-}
-
-utility::string_t PutSubshapeSaveAsRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PutSubshapeSaveAsRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 double PutSubshapeSaveAsRequest::getScaleX() const
 {
 	return m_scaleX;
@@ -13295,6 +14699,36 @@ utility::string_t PutSubshapeSaveAsRequest::getBounds() const
 void PutSubshapeSaveAsRequest::setBounds(utility::string_t value)
 {
 	m_bounds = value;
+}
+
+utility::string_t PutSubshapeSaveAsRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PutSubshapeSaveAsRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PutSubshapeSaveAsRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PutSubshapeSaveAsRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t PutSubshapeSaveAsRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PutSubshapeSaveAsRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 utility::string_t PutSubshapeSaveAsRequest::getFontsFolder() const

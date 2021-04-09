@@ -44,7 +44,8 @@ pplx::task<web::http::http_response> ApiClient::callApi(
 	const utility::string_t& method,
 	const std::map<utility::string_t, utility::string_t>& queryParams,
 	const std::map<utility::string_t, utility::string_t>& headerParams,
-	const std::shared_ptr<asposeslidescloud::model::IHttpBody> postBody) const
+	const std::shared_ptr<asposeslidescloud::model::IHttpBody> postBody,
+	const std::vector<std::shared_ptr<asposeslidescloud::model::HttpContent>> files) const
 {
 	web::http::client::http_client_config cfg;
 	cfg.set_timeout(std::chrono::minutes(2));
@@ -59,7 +60,46 @@ pplx::task<web::http::http_response> ApiClient::callApi(
 	request.set_method(method);
 	setRequestHeaders(request, headerParams);
 	logRequest(request);
-	if (postBody != nullptr)
+	int parts = (postBody != nullptr ? 1 : 0) + files.size();
+	if (parts > 1)
+	{
+		std::stringstream data;
+		const std::string boundary = "d7ddb511-6a48-4686-b6a1-10301783b2bc";
+		if (postBody != nullptr)
+		{
+			data << "\r\n--" << boundary << "\r\n";
+			data << "Content-Disposition: form-data; name=\"data\"\r\n";
+			data << "Content-Type: text/json\r\n";
+			data << "\r\n";
+			postBody->writeTo(data);
+		}
+		for (int i = 0; i < files.size(); i++)
+		{
+			utility::string_t partName = files[i]->getName().empty() ? utility::conversions::to_string_t("file" + std::to_string(i)) : files[i]->getName();
+			utility::string_t fileName = files[i]->getFileName().empty() ? utility::conversions::to_string_t("file" + std::to_string(i)) : files[i]->getFileName();
+			data << "\r\n--" << boundary << "\r\n";
+			data << "Content-Disposition: form-data; name=\"" << utility::conversions::to_utf8string(partName) << "\"; filename=\"" + utility::conversions::to_utf8string(fileName) + "\"\r\n";
+			data << "Content-Type: application/octet-stream\r\n";
+			data << "\r\n";
+			files[i]->writeTo(data);
+		}
+		data << "\r\n--" << boundary << "--\r\n";
+		auto bodyString = data.str();
+		auto length = bodyString.size();
+		try
+		{
+			logString(utility::conversions::to_string_t(bodyString));
+		}
+		catch (...)
+		{
+			logString(utility::conversions::to_string_t("length: " + std::to_string(length)));
+		}
+		request.set_body(
+			concurrency::streams::bytestream::open_istream(std::move(bodyString)),
+			length,
+			utility::conversions::to_string_t("multipart/form-data;boundary=" + boundary));
+	}
+	else if (postBody != nullptr)
 	{
 		std::stringstream data;
 		postBody->writeTo(data);

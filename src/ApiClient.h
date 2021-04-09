@@ -31,7 +31,7 @@
 #include <boost/algorithm/string/replace.hpp>
 #include "ApiConfiguration.h"
 #include "ApiException.h"
-#include "IHttpBody.h"
+#include "HttpContent.h"
 
 namespace asposeslidescloud {
 namespace api {
@@ -47,7 +47,8 @@ public:
 		const utility::string_t& method,
 		const std::map<utility::string_t, utility::string_t>& queryParams,
 		const std::map<utility::string_t, utility::string_t>& headerParams,
-		const std::shared_ptr<asposeslidescloud::model::IHttpBody> postBody) const;
+		const std::shared_ptr<asposeslidescloud::model::IHttpBody> postBody,
+		const std::vector<std::shared_ptr<asposeslidescloud::model::HttpContent>> files) const;
 
 	static utility::string_t parameterToString(utility::string_t value);
 	static utility::string_t parameterToString(int32_t value);

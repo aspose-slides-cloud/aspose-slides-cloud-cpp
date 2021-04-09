@@ -182,6 +182,7 @@
     <ClCompile Include="model\ShapeExportFormat.cpp" />
     <ClCompile Include="model\ShapeImageExportOptions.cpp" />
     <ClCompile Include="model\ShapeThumbnailBounds.cpp" />
+    <ClCompile Include="model\ShapesAlignmentType.cpp" />
     <ClCompile Include="model\SizeType.cpp" />
     <ClCompile Include="model\SlideComment.cpp" />
     <ClCompile Include="model\SlideExportFormat.cpp" />
@@ -358,6 +359,7 @@
     <ClInclude Include="model\ShapeExportFormat.h" />
     <ClInclude Include="model\ShapeImageExportOptions.h" />
     <ClInclude Include="model\ShapeThumbnailBounds.h" />
+    <ClInclude Include="model\ShapesAlignmentType.h" />
     <ClInclude Include="model\SizeType.h" />
     <ClInclude Include="model\SlideComment.h" />
     <ClInclude Include="model\SlideExportFormat.h" />

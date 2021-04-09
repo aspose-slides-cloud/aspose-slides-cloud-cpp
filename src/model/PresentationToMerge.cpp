@@ -82,6 +82,17 @@ void PresentationToMerge::unsetSlides()
 	m_SlidesIsSet = false;
 }
 
+utility::string_t PresentationToMerge::getSource() const
+{
+	return m_Source;
+}
+
+void PresentationToMerge::setSource(utility::string_t value)
+{
+	m_Source = value;
+	
+}
+
 web::json::value PresentationToMerge::toJson() const
 {
 	web::json::value val = web::json::value::object();
@@ -103,6 +114,10 @@ web::json::value PresentationToMerge::toJson() const
 		{
 			val[utility::conversions::to_string_t("Slides")] = web::json::value::array(jsonArray);
 		}
+	}
+	if (!m_Source.empty())
+	{
+		val[utility::conversions::to_string_t("Source")] = ModelBase::toJson(m_Source);
 	}
 	return val;
 }
@@ -130,6 +145,11 @@ void PresentationToMerge::fromJson(web::json::value& val)
 				m_Slides.push_back(ModelBase::int32_tFromJson(item));
 			}
         	}
+	}
+	web::json::value* jsonForSource = ModelBase::getField(val, "Source");
+	if(jsonForSource != nullptr && !jsonForSource->is_null())
+	{
+		setSource(ModelBase::stringFromJson(*jsonForSource));
 	}
 }
 
