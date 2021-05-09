@@ -34,6 +34,7 @@
 
 #include "ResourceBase.h"
 
+#include <cpprest/details/basic_types.h>
 #include "../model/ResourceBase.h"
 #include "../model/ResourceUri.h"
 #include <vector>
@@ -67,12 +68,36 @@ public:
 	ASPOSE_DLL_EXPORT void setReadOnlyRecommended(bool value);
 	ASPOSE_DLL_EXPORT bool readOnlyRecommendedIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetReadOnlyRecommended();
+	/// <summary>
+	/// Password for read protection.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getReadPassword() const;
+	ASPOSE_DLL_EXPORT void setReadPassword(utility::string_t value);
+	/// <summary>
+	/// Password for write protection.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getWritePassword() const;
+	ASPOSE_DLL_EXPORT void setWritePassword(utility::string_t value);
+	/// <summary>
+	/// Returns true if the presentation protected for editing. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getIsWriteProtected() const;
+	ASPOSE_DLL_EXPORT void setIsWriteProtected(bool value);
+	/// <summary>
+	/// Returns true if the presentation protected for reading. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getIsEncrypted() const;
+	ASPOSE_DLL_EXPORT void setIsEncrypted(bool value);
 
 protected:
 	bool m_EncryptDocumentProperties;
 	bool m_EncryptDocumentPropertiesIsSet;
 	bool m_ReadOnlyRecommended;
 	bool m_ReadOnlyRecommendedIsSet;
+	utility::string_t m_ReadPassword;
+	utility::string_t m_WritePassword;
+	bool m_IsWriteProtected;
+	bool m_IsEncrypted;
 };
 
 }

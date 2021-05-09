@@ -2415,6 +2415,82 @@ void DeleteSlidesDocumentPropertyRequest::setStorage(utility::string_t value)
 	m_storage = value;
 }
 
+DeleteSlidesProtectionPropertiesRequest::DeleteSlidesProtectionPropertiesRequest()
+{
+}
+
+DeleteSlidesProtectionPropertiesRequest::~DeleteSlidesProtectionPropertiesRequest()
+{
+}
+
+utility::string_t DeleteSlidesProtectionPropertiesRequest::getName() const
+{
+	return m_name;
+}
+
+void DeleteSlidesProtectionPropertiesRequest::setName(utility::string_t value)
+{
+	m_name = value;
+}
+
+utility::string_t DeleteSlidesProtectionPropertiesRequest::getPassword() const
+{
+	return m_password;
+}
+
+void DeleteSlidesProtectionPropertiesRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t DeleteSlidesProtectionPropertiesRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void DeleteSlidesProtectionPropertiesRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t DeleteSlidesProtectionPropertiesRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void DeleteSlidesProtectionPropertiesRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
+DeleteSlidesProtectionPropertiesOnlineRequest::DeleteSlidesProtectionPropertiesOnlineRequest()
+{
+}
+
+DeleteSlidesProtectionPropertiesOnlineRequest::~DeleteSlidesProtectionPropertiesOnlineRequest()
+{
+}
+
+std::shared_ptr<HttpContent> DeleteSlidesProtectionPropertiesOnlineRequest::getDocument() const
+{
+	return m_document;
+}
+
+void DeleteSlidesProtectionPropertiesOnlineRequest::setDocument(std::shared_ptr<HttpContent> value)
+{
+	m_document = value;
+}
+
+utility::string_t DeleteSlidesProtectionPropertiesOnlineRequest::getPassword() const
+{
+	return m_password;
+}
+
+void DeleteSlidesProtectionPropertiesOnlineRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
 DeleteSlidesSlideBackgroundRequest::DeleteSlidesSlideBackgroundRequest()
 {
 }
@@ -2841,6 +2917,64 @@ utility::string_t DeleteSubshapePortionsRequest::getStorage() const
 }
 
 void DeleteSubshapePortionsRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
+DeleteWatermarkRequest::DeleteWatermarkRequest()
+{
+}
+
+DeleteWatermarkRequest::~DeleteWatermarkRequest()
+{
+}
+
+utility::string_t DeleteWatermarkRequest::getName() const
+{
+	return m_name;
+}
+
+void DeleteWatermarkRequest::setName(utility::string_t value)
+{
+	m_name = value;
+}
+
+utility::string_t DeleteWatermarkRequest::getShapeName() const
+{
+	return m_shapeName;
+}
+
+void DeleteWatermarkRequest::setShapeName(utility::string_t value)
+{
+	m_shapeName = value;
+}
+
+utility::string_t DeleteWatermarkRequest::getPassword() const
+{
+	return m_password;
+}
+
+void DeleteWatermarkRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t DeleteWatermarkRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void DeleteWatermarkRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t DeleteWatermarkRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void DeleteWatermarkRequest::setStorage(utility::string_t value)
 {
 	m_storage = value;
 }
@@ -7993,26 +8127,6 @@ void PostExportShapeRequest::setFormat(utility::string_t value)
 	m_format = value;
 }
 
-utility::string_t PostExportShapeRequest::getPassword() const
-{
-	return m_password;
-}
-
-void PostExportShapeRequest::setPassword(utility::string_t value)
-{
-	m_password = value;
-}
-
-utility::string_t PostExportShapeRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PostExportShapeRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 double PostExportShapeRequest::getScaleX() const
 {
 	return m_scaleX;
@@ -8063,6 +8177,26 @@ utility::string_t PostExportShapeRequest::getBounds() const
 void PostExportShapeRequest::setBounds(utility::string_t value)
 {
 	m_bounds = value;
+}
+
+utility::string_t PostExportShapeRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostExportShapeRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PostExportShapeRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostExportShapeRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 utility::string_t PostExportShapeRequest::getFontsFolder() const
@@ -8363,6 +8497,122 @@ utility::string_t PostGetNotesSlideWithFormatRequest::getFontsFolder() const
 void PostGetNotesSlideWithFormatRequest::setFontsFolder(utility::string_t value)
 {
 	m_fontsFolder = value;
+}
+
+PostImageWatermarkRequest::PostImageWatermarkRequest()
+{
+}
+
+PostImageWatermarkRequest::~PostImageWatermarkRequest()
+{
+}
+
+utility::string_t PostImageWatermarkRequest::getName() const
+{
+	return m_name;
+}
+
+void PostImageWatermarkRequest::setName(utility::string_t value)
+{
+	m_name = value;
+}
+
+std::shared_ptr<HttpContent> PostImageWatermarkRequest::getImage() const
+{
+	return m_image;
+}
+
+void PostImageWatermarkRequest::setImage(std::shared_ptr<HttpContent> value)
+{
+	m_image = value;
+}
+
+std::shared_ptr<PictureFrame> PostImageWatermarkRequest::getPictureFrame() const
+{
+	return m_pictureFrame;
+}
+
+void PostImageWatermarkRequest::setPictureFrame(std::shared_ptr<PictureFrame> value)
+{
+	m_pictureFrame = value;
+}
+
+utility::string_t PostImageWatermarkRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostImageWatermarkRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PostImageWatermarkRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PostImageWatermarkRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t PostImageWatermarkRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostImageWatermarkRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
+PostImageWatermarkOnlineRequest::PostImageWatermarkOnlineRequest()
+{
+}
+
+PostImageWatermarkOnlineRequest::~PostImageWatermarkOnlineRequest()
+{
+}
+
+std::shared_ptr<HttpContent> PostImageWatermarkOnlineRequest::getDocument() const
+{
+	return m_document;
+}
+
+void PostImageWatermarkOnlineRequest::setDocument(std::shared_ptr<HttpContent> value)
+{
+	m_document = value;
+}
+
+std::shared_ptr<HttpContent> PostImageWatermarkOnlineRequest::getImage() const
+{
+	return m_image;
+}
+
+void PostImageWatermarkOnlineRequest::setImage(std::shared_ptr<HttpContent> value)
+{
+	m_image = value;
+}
+
+std::shared_ptr<PictureFrame> PostImageWatermarkOnlineRequest::getPictureFrame() const
+{
+	return m_pictureFrame;
+}
+
+void PostImageWatermarkOnlineRequest::setPictureFrame(std::shared_ptr<PictureFrame> value)
+{
+	m_pictureFrame = value;
+}
+
+utility::string_t PostImageWatermarkOnlineRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostImageWatermarkOnlineRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
 }
 
 PostImagesFromRequestWithDefaultFormatRequest::PostImagesFromRequestWithDefaultFormatRequest()
@@ -11341,6 +11591,244 @@ void PostSubshapeSaveAsRequest::setFontsFolder(utility::string_t value)
 	m_fontsFolder = value;
 }
 
+PostWatermarkRequest::PostWatermarkRequest()
+{
+	m_fontHeightIsSet = false;
+}
+
+PostWatermarkRequest::~PostWatermarkRequest()
+{
+}
+
+utility::string_t PostWatermarkRequest::getName() const
+{
+	return m_name;
+}
+
+void PostWatermarkRequest::setName(utility::string_t value)
+{
+	m_name = value;
+}
+
+std::shared_ptr<Shape> PostWatermarkRequest::getShape() const
+{
+	return m_shape;
+}
+
+void PostWatermarkRequest::setShape(std::shared_ptr<Shape> value)
+{
+	m_shape = value;
+}
+
+double PostWatermarkRequest::getFontHeight() const
+{
+	return m_fontHeight;
+}
+
+void PostWatermarkRequest::setFontHeight(double value)
+{
+	m_fontHeight = value;
+	m_fontHeightIsSet = true;
+}
+
+bool PostWatermarkRequest::fontHeightIsSet() const
+{
+	return m_fontHeightIsSet;
+}
+
+void PostWatermarkRequest::unsetFontHeight()
+{
+	m_fontHeightIsSet = false;
+}
+
+utility::string_t PostWatermarkRequest::getText() const
+{
+	return m_text;
+}
+
+void PostWatermarkRequest::setText(utility::string_t value)
+{
+	m_text = value;
+}
+
+utility::string_t PostWatermarkRequest::getFontName() const
+{
+	return m_fontName;
+}
+
+void PostWatermarkRequest::setFontName(utility::string_t value)
+{
+	m_fontName = value;
+}
+
+utility::string_t PostWatermarkRequest::getFontColor() const
+{
+	return m_fontColor;
+}
+
+void PostWatermarkRequest::setFontColor(utility::string_t value)
+{
+	m_fontColor = value;
+}
+
+utility::string_t PostWatermarkRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostWatermarkRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PostWatermarkRequest::getFolder() const
+{
+	return m_folder;
+}
+
+void PostWatermarkRequest::setFolder(utility::string_t value)
+{
+	m_folder = value;
+}
+
+utility::string_t PostWatermarkRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PostWatermarkRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
+}
+
+PostWatermarkDeleteOnlineRequest::PostWatermarkDeleteOnlineRequest()
+{
+}
+
+PostWatermarkDeleteOnlineRequest::~PostWatermarkDeleteOnlineRequest()
+{
+}
+
+std::shared_ptr<HttpContent> PostWatermarkDeleteOnlineRequest::getDocument() const
+{
+	return m_document;
+}
+
+void PostWatermarkDeleteOnlineRequest::setDocument(std::shared_ptr<HttpContent> value)
+{
+	m_document = value;
+}
+
+utility::string_t PostWatermarkDeleteOnlineRequest::getShapeName() const
+{
+	return m_shapeName;
+}
+
+void PostWatermarkDeleteOnlineRequest::setShapeName(utility::string_t value)
+{
+	m_shapeName = value;
+}
+
+utility::string_t PostWatermarkDeleteOnlineRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostWatermarkDeleteOnlineRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+PostWatermarkOnlineRequest::PostWatermarkOnlineRequest()
+{
+	m_fontHeightIsSet = false;
+}
+
+PostWatermarkOnlineRequest::~PostWatermarkOnlineRequest()
+{
+}
+
+std::shared_ptr<HttpContent> PostWatermarkOnlineRequest::getDocument() const
+{
+	return m_document;
+}
+
+void PostWatermarkOnlineRequest::setDocument(std::shared_ptr<HttpContent> value)
+{
+	m_document = value;
+}
+
+std::shared_ptr<Shape> PostWatermarkOnlineRequest::getShape() const
+{
+	return m_shape;
+}
+
+void PostWatermarkOnlineRequest::setShape(std::shared_ptr<Shape> value)
+{
+	m_shape = value;
+}
+
+double PostWatermarkOnlineRequest::getFontHeight() const
+{
+	return m_fontHeight;
+}
+
+void PostWatermarkOnlineRequest::setFontHeight(double value)
+{
+	m_fontHeight = value;
+	m_fontHeightIsSet = true;
+}
+
+bool PostWatermarkOnlineRequest::fontHeightIsSet() const
+{
+	return m_fontHeightIsSet;
+}
+
+void PostWatermarkOnlineRequest::unsetFontHeight()
+{
+	m_fontHeightIsSet = false;
+}
+
+utility::string_t PostWatermarkOnlineRequest::getText() const
+{
+	return m_text;
+}
+
+void PostWatermarkOnlineRequest::setText(utility::string_t value)
+{
+	m_text = value;
+}
+
+utility::string_t PostWatermarkOnlineRequest::getFontName() const
+{
+	return m_fontName;
+}
+
+void PostWatermarkOnlineRequest::setFontName(utility::string_t value)
+{
+	m_fontName = value;
+}
+
+utility::string_t PostWatermarkOnlineRequest::getFontColor() const
+{
+	return m_fontColor;
+}
+
+void PostWatermarkOnlineRequest::setFontColor(utility::string_t value)
+{
+	m_fontColor = value;
+}
+
+utility::string_t PostWatermarkOnlineRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PostWatermarkOnlineRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
 PutChartCategoryRequest::PutChartCategoryRequest()
 {
 }
@@ -11675,26 +12163,6 @@ void PutExportShapeRequest::setOutPath(utility::string_t value)
 	m_outPath = value;
 }
 
-utility::string_t PutExportShapeRequest::getPassword() const
-{
-	return m_password;
-}
-
-void PutExportShapeRequest::setPassword(utility::string_t value)
-{
-	m_password = value;
-}
-
-utility::string_t PutExportShapeRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PutExportShapeRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 double PutExportShapeRequest::getScaleX() const
 {
 	return m_scaleX;
@@ -11745,6 +12213,26 @@ utility::string_t PutExportShapeRequest::getBounds() const
 void PutExportShapeRequest::setBounds(utility::string_t value)
 {
 	m_bounds = value;
+}
+
+utility::string_t PutExportShapeRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PutExportShapeRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
+}
+
+utility::string_t PutExportShapeRequest::getStorage() const
+{
+	return m_storage;
+}
+
+void PutExportShapeRequest::setStorage(utility::string_t value)
+{
+	m_storage = value;
 }
 
 utility::string_t PutExportShapeRequest::getFontsFolder() const
@@ -13749,64 +14237,6 @@ void PutSlidesConvertRequest::setFontsFolder(utility::string_t value)
 	m_fontsFolder = value;
 }
 
-PutSlidesDocumentFromHtmlRequest::PutSlidesDocumentFromHtmlRequest()
-{
-}
-
-PutSlidesDocumentFromHtmlRequest::~PutSlidesDocumentFromHtmlRequest()
-{
-}
-
-utility::string_t PutSlidesDocumentFromHtmlRequest::getName() const
-{
-	return m_name;
-}
-
-void PutSlidesDocumentFromHtmlRequest::setName(utility::string_t value)
-{
-	m_name = value;
-}
-
-utility::string_t PutSlidesDocumentFromHtmlRequest::getHtml() const
-{
-	return m_html;
-}
-
-void PutSlidesDocumentFromHtmlRequest::setHtml(utility::string_t value)
-{
-	m_html = value;
-}
-
-utility::string_t PutSlidesDocumentFromHtmlRequest::getPassword() const
-{
-	return m_password;
-}
-
-void PutSlidesDocumentFromHtmlRequest::setPassword(utility::string_t value)
-{
-	m_password = value;
-}
-
-utility::string_t PutSlidesDocumentFromHtmlRequest::getFolder() const
-{
-	return m_folder;
-}
-
-void PutSlidesDocumentFromHtmlRequest::setFolder(utility::string_t value)
-{
-	m_folder = value;
-}
-
-utility::string_t PutSlidesDocumentFromHtmlRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PutSlidesDocumentFromHtmlRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
 PutSlidesHeaderFooterRequest::PutSlidesHeaderFooterRequest()
 {
 }
@@ -13979,6 +14409,44 @@ utility::string_t PutSlidesProtectionPropertiesRequest::getStorage() const
 void PutSlidesProtectionPropertiesRequest::setStorage(utility::string_t value)
 {
 	m_storage = value;
+}
+
+PutSlidesProtectionPropertiesOnlineRequest::PutSlidesProtectionPropertiesOnlineRequest()
+{
+}
+
+PutSlidesProtectionPropertiesOnlineRequest::~PutSlidesProtectionPropertiesOnlineRequest()
+{
+}
+
+std::shared_ptr<HttpContent> PutSlidesProtectionPropertiesOnlineRequest::getDocument() const
+{
+	return m_document;
+}
+
+void PutSlidesProtectionPropertiesOnlineRequest::setDocument(std::shared_ptr<HttpContent> value)
+{
+	m_document = value;
+}
+
+std::shared_ptr<ProtectionProperties> PutSlidesProtectionPropertiesOnlineRequest::getDto() const
+{
+	return m_dto;
+}
+
+void PutSlidesProtectionPropertiesOnlineRequest::setDto(std::shared_ptr<ProtectionProperties> value)
+{
+	m_dto = value;
+}
+
+utility::string_t PutSlidesProtectionPropertiesOnlineRequest::getPassword() const
+{
+	return m_password;
+}
+
+void PutSlidesProtectionPropertiesOnlineRequest::setPassword(utility::string_t value)
+{
+	m_password = value;
 }
 
 PutSlidesSaveAsRequest::PutSlidesSaveAsRequest()
@@ -14395,118 +14863,6 @@ utility::string_t PutSlidesSlidePropertiesRequest::getStorage() const
 }
 
 void PutSlidesSlidePropertiesRequest::setStorage(utility::string_t value)
-{
-	m_storage = value;
-}
-
-PutSlidesSlideSizeRequest::PutSlidesSlideSizeRequest()
-{
-	m_widthIsSet = false;
-	m_heightIsSet = false;
-}
-
-PutSlidesSlideSizeRequest::~PutSlidesSlideSizeRequest()
-{
-}
-
-utility::string_t PutSlidesSlideSizeRequest::getName() const
-{
-	return m_name;
-}
-
-void PutSlidesSlideSizeRequest::setName(utility::string_t value)
-{
-	m_name = value;
-}
-
-int32_t PutSlidesSlideSizeRequest::getWidth() const
-{
-	return m_width;
-}
-
-void PutSlidesSlideSizeRequest::setWidth(int32_t value)
-{
-	m_width = value;
-	m_widthIsSet = true;
-}
-
-bool PutSlidesSlideSizeRequest::widthIsSet() const
-{
-	return m_widthIsSet;
-}
-
-void PutSlidesSlideSizeRequest::unsetWidth()
-{
-	m_widthIsSet = false;
-}
-
-int32_t PutSlidesSlideSizeRequest::getHeight() const
-{
-	return m_height;
-}
-
-void PutSlidesSlideSizeRequest::setHeight(int32_t value)
-{
-	m_height = value;
-	m_heightIsSet = true;
-}
-
-bool PutSlidesSlideSizeRequest::heightIsSet() const
-{
-	return m_heightIsSet;
-}
-
-void PutSlidesSlideSizeRequest::unsetHeight()
-{
-	m_heightIsSet = false;
-}
-
-utility::string_t PutSlidesSlideSizeRequest::getSizeType() const
-{
-	return m_sizeType;
-}
-
-void PutSlidesSlideSizeRequest::setSizeType(utility::string_t value)
-{
-	m_sizeType = value;
-}
-
-utility::string_t PutSlidesSlideSizeRequest::getScaleType() const
-{
-	return m_scaleType;
-}
-
-void PutSlidesSlideSizeRequest::setScaleType(utility::string_t value)
-{
-	m_scaleType = value;
-}
-
-utility::string_t PutSlidesSlideSizeRequest::getPassword() const
-{
-	return m_password;
-}
-
-void PutSlidesSlideSizeRequest::setPassword(utility::string_t value)
-{
-	m_password = value;
-}
-
-utility::string_t PutSlidesSlideSizeRequest::getFolder() const
-{
-	return m_folder;
-}
-
-void PutSlidesSlideSizeRequest::setFolder(utility::string_t value)
-{
-	m_folder = value;
-}
-
-utility::string_t PutSlidesSlideSizeRequest::getStorage() const
-{
-	return m_storage;
-}
-
-void PutSlidesSlideSizeRequest::setStorage(utility::string_t value)
 {
 	m_storage = value;
 }

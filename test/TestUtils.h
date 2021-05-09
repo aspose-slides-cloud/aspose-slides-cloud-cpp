@@ -120,7 +120,7 @@ template<typename T>
 std::shared_ptr<T> TestUtils::getTestValueForClass(std::string functionName, std::string parameterName)
 {
 	web::json::value* jsonValue = getTestJsonValue(functionName, parameterName);
-	if (jsonValue == nullptr)
+	if (jsonValue == nullptr || jsonValue->is_null())
 	{
 		return nullptr;
 	}

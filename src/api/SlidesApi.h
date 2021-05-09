@@ -73,6 +73,7 @@
 #include "../model/OrderedMergeRequest.h"
 #include "../model/Paragraph.h"
 #include "../model/Paragraphs.h"
+#include "../model/PictureFrame.h"
 #include "../model/Pipeline.h"
 #include "../model/Placeholder.h"
 #include "../model/Placeholders.h"
@@ -82,6 +83,7 @@
 #include "../model/ProtectionProperties.h"
 #include "../model/Sections.h"
 #include "../model/Series.h"
+#include "../model/Shape.h"
 #include "../model/ShapeBase.h"
 #include "../model/Shapes.h"
 #include "../model/Slide.h"
@@ -461,6 +463,26 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<DocumentProperties>> deleteSlidesDocumentProperty(std::shared_ptr<DeleteSlidesDocumentPropertyRequest> request);
 
 	/// <summary>
+	/// Resets all presentation protection settings. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ProtectionProperties>> deleteProtection(utility::string_t name, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Resets all presentation protection settings. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ProtectionProperties>> deleteSlidesProtectionProperties(std::shared_ptr<DeleteSlidesProtectionPropertiesRequest> request);
+
+	/// <summary>
+	/// Resets all presentation protection settings. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> deleteProtectionOnline(std::shared_ptr<HttpContent> document, utility::string_t password);
+
+	/// <summary>
+	/// Resets all presentation protection settings. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> deleteSlidesProtectionPropertiesOnline(std::shared_ptr<DeleteSlidesProtectionPropertiesOnlineRequest> request);
+
+	/// <summary>
 	/// Remove background from a slide.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideBackground>> deleteBackground(utility::string_t name, int32_t slideIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
@@ -509,6 +531,16 @@ public:
 	/// Remove a range of portions (for smart art and group shapes).
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portions>> deleteSubshapePortions(std::shared_ptr<DeleteSubshapePortionsRequest> request);
+
+	/// <summary>
+	/// Removes shapes with name \&quot;watermark\&quot; from the presentation.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<void> deleteWatermark(utility::string_t name, utility::string_t shapeName = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Removes shapes with name \&quot;watermark\&quot; from the presentation.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<void> deleteWatermark(std::shared_ptr<DeleteWatermarkRequest> request);
 
 	/// <summary>
 	/// Download file
@@ -1283,7 +1315,7 @@ public:
 	/// <summary>
 	/// Render shape to specified picture format.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadShapeOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), boost::optional<double> scaleX = double(), boost::optional<double> scaleY = double(), utility::string_t bounds = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadShapeOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, boost::optional<double> scaleX = double(), boost::optional<double> scaleY = double(), utility::string_t bounds = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
 
 	/// <summary>
 	/// Render shape to specified picture format.
@@ -1329,6 +1361,26 @@ public:
 	/// Convert notes slide to the specified image format.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> postGetNotesSlideWithFormat(std::shared_ptr<PostGetNotesSlideWithFormatRequest> request);
+
+	/// <summary>
+	/// Adds an image watermark to each slide of the presentation.  Image can be provided as a part of the form or withing PictureFrame DTO for detailed customization. Both options are applicable simultaneously. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<void> createImageWatermark(utility::string_t name, std::shared_ptr<HttpContent> image = std::shared_ptr<HttpContent>(), std::shared_ptr<PictureFrame> pictureFrame = std::shared_ptr<PictureFrame>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Adds an image watermark to each slide of the presentation.  Image can be provided as a part of the form or withing PictureFrame DTO for detailed customization. Both options are applicable simultaneously. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<void> postImageWatermark(std::shared_ptr<PostImageWatermarkRequest> request);
+
+	/// <summary>
+	/// Adds an image watermark to each slide of the presentation.  Image can be provided as a part of the form or withing PictureFrame DTO for detailed customization. Both options are applicable simultaneously. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> createImageWatermarkOnline(std::shared_ptr<HttpContent> document, std::shared_ptr<HttpContent> image = std::shared_ptr<HttpContent>(), std::shared_ptr<PictureFrame> pictureFrame = std::shared_ptr<PictureFrame>(), utility::string_t password = utility::string_t());
+
+	/// <summary>
+	/// Adds an image watermark to each slide of the presentation.  Image can be provided as a part of the form or withing PictureFrame DTO for detailed customization. Both options are applicable simultaneously. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> postImageWatermarkOnline(std::shared_ptr<PostImageWatermarkOnlineRequest> request);
 
 	/// <summary>
 	/// Get all presentation images.
@@ -1671,6 +1723,36 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> postSubshapeSaveAs(std::shared_ptr<PostSubshapeSaveAsRequest> request);
 
 	/// <summary>
+	/// Adds a text watermark to each slide of the presentation. Text watermark can be setup via method arguments or withing Shape DTO for detailed customization. Both options are applicable simultaneously. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<void> createWatermark(utility::string_t name, std::shared_ptr<Shape> shape = std::shared_ptr<Shape>(), boost::optional<double> fontHeight = double(), utility::string_t text = utility::string_t(), utility::string_t fontName = utility::string_t(), utility::string_t fontColor = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Adds a text watermark to each slide of the presentation. Text watermark can be setup via method arguments or withing Shape DTO for detailed customization. Both options are applicable simultaneously. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<void> postWatermark(std::shared_ptr<PostWatermarkRequest> request);
+
+	/// <summary>
+	/// Removes shapes with name \&quot;watermark\&quot; from the presentation.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> deleteWatermarkOnline(std::shared_ptr<HttpContent> document, utility::string_t shapeName = utility::string_t(), utility::string_t password = utility::string_t());
+
+	/// <summary>
+	/// Removes shapes with name \&quot;watermark\&quot; from the presentation.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> postWatermarkDeleteOnline(std::shared_ptr<PostWatermarkDeleteOnlineRequest> request);
+
+	/// <summary>
+	/// Adds a text watermark to each slide of the presentation. Text watermark can be setup via method arguments or withing Shape DTO for detailed customization. Both options are applicable simultaneously. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> createWatermarkOnline(std::shared_ptr<HttpContent> document, std::shared_ptr<Shape> shape = std::shared_ptr<Shape>(), boost::optional<double> fontHeight = double(), utility::string_t text = utility::string_t(), utility::string_t fontName = utility::string_t(), utility::string_t fontColor = utility::string_t(), utility::string_t password = utility::string_t());
+
+	/// <summary>
+	/// Adds a text watermark to each slide of the presentation. Text watermark can be setup via method arguments or withing Shape DTO for detailed customization. Both options are applicable simultaneously. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> postWatermarkOnline(std::shared_ptr<PostWatermarkOnlineRequest> request);
+
+	/// <summary>
 	/// Update a chart category.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Chart>> updateChartCategory(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t categoryIndex, std::shared_ptr<ChartCategory> category, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
@@ -1703,7 +1785,7 @@ public:
 	/// <summary>
 	/// Render shape to specified picture format.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<void> saveShapeOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, utility::string_t outPath, utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), boost::optional<double> scaleX = double(), boost::optional<double> scaleY = double(), utility::string_t bounds = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<void> saveShapeOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, utility::string_t outPath, boost::optional<double> scaleX = double(), boost::optional<double> scaleY = double(), utility::string_t bounds = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
 
 	/// <summary>
 	/// Render shape to specified picture format.
@@ -1921,16 +2003,6 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<void> putSlidesConvert(std::shared_ptr<PutSlidesConvertRequest> request);
 
 	/// <summary>
-	/// Update presentation document from html.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Document>> putSlidesDocumentFromHtml(utility::string_t name, utility::string_t html = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Update presentation document from html.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Document>> putSlidesDocumentFromHtml(std::shared_ptr<PutSlidesDocumentFromHtmlRequest> request);
-
-	/// <summary>
 	/// Set footers for all slides in a presentation.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Document>> setPresentationHeaderFooter(utility::string_t name, std::shared_ptr<HeaderFooter> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
@@ -1951,14 +2023,24 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<void> putSlidesMerge(std::shared_ptr<PutSlidesMergeRequest> request);
 
 	/// <summary>
-	/// Update presentation protection properties.
+	/// Updates presentation protection properties.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ProtectionProperties>> setProtectionProperties(utility::string_t name, std::shared_ptr<ProtectionProperties> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ProtectionProperties>> setProtection(utility::string_t name, std::shared_ptr<ProtectionProperties> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
-	/// Update presentation protection properties.
+	/// Updates presentation protection properties.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ProtectionProperties>> putSlidesProtectionProperties(std::shared_ptr<PutSlidesProtectionPropertiesRequest> request);
+
+	/// <summary>
+	/// Sets presentation protection options. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> setProtectionOnline(std::shared_ptr<HttpContent> document, std::shared_ptr<ProtectionProperties> dto, utility::string_t password = utility::string_t());
+
+	/// <summary>
+	/// Sets presentation protection options. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> putSlidesProtectionPropertiesOnline(std::shared_ptr<PutSlidesProtectionPropertiesOnlineRequest> request);
 
 	/// <summary>
 	/// Save a presentation to a specified format.
@@ -2019,16 +2101,6 @@ public:
 	/// Update presentation slide properties.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideProperties>> putSlidesSlideProperties(std::shared_ptr<PutSlidesSlidePropertiesRequest> request);
-
-	/// <summary>
-	/// Set slide size for a presentation.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Document>> putSlidesSlideSize(utility::string_t name, boost::optional<int32_t> width = int32_t(), boost::optional<int32_t> height = int32_t(), utility::string_t sizeType = utility::string_t(), utility::string_t scaleType = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Set slide size for a presentation.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Document>> putSlidesSlideSize(std::shared_ptr<PutSlidesSlideSizeRequest> request);
 
 	/// <summary>
 	/// Update presentation document properties.

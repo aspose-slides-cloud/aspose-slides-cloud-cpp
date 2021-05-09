@@ -173,6 +173,8 @@ std::shared_ptr<HttpContent> TestUtils::getBinaryTestValue(std::string functionN
 	utility::string_t path = utility::conversions::to_string_t("TestData/test.pptx");
 	if (boost::iequals(utility::conversions::to_string_t("PostSlidesDocumentFromPdf"), functionName)) {
 		path = utility::conversions::to_string_t("TestData/test.pdf");
+	} else if (boost::iequals(utility::conversions::to_string_t("image"), parameterName)) {
+		path = utility::conversions::to_string_t("TestData/watermark.png");
 	}
 	uploadContent->setData(std::make_shared<std::ifstream>(path, std::ios::binary));
 	return uploadContent;
@@ -294,9 +296,18 @@ utility::string_t TestUtils::getInvalidTestValue(std::string functionName, std::
 	{
 		return utility::conversions::to_string_t("");
 	}
-	utility::string_t ivalue = ivalueJson->as_string();
-	boost::replace_all(ivalue, "%v", value);
-	return ivalue;
+	else if (ivalueJson->is_string())
+	{
+		utility::string_t ivalue = ivalueJson->as_string();
+		boost::replace_all(ivalue, "%v", value);
+		return ivalue;
+	}
+	else
+	{
+		utility::string_t ivalue = ivalueJson->serialize();
+		boost::replace_all(ivalue, "%v", value);
+		return ivalue;
+	}
 }
 
 web::json::value* TestUtils::getInvalidTestValue(std::string functionName, std::string parameterName)

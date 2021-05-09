@@ -1778,6 +1778,104 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::deleteSlidesDocumentP
 	return deleteDocumentProperty(request->getName(), request->getPropertyName(), request->getPassword(), request->getFolder(), request->getStorage());
 }
 
+pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::deleteProtection(utility::string_t name, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/protection");
+	ApiClient::setPathParameter(methodPath, "name", name);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			if (response.status_code() >= 400)
+			{
+				throw ApiException(
+					response.status_code(),
+					utility::conversions::to_string_t("error calling deleteSlidesProtectionProperties: ") + response.reason_phrase(),
+					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			}
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<ProtectionProperties> result(new ProtectionProperties());
+			result->fromJson(json);
+			return result;
+		});
+}
+
+pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::deleteSlidesProtectionProperties(std::shared_ptr<DeleteSlidesProtectionPropertiesRequest> request)
+{
+	return deleteProtection(request->getName(), request->getPassword(), request->getFolder(), request->getStorage());
+}
+
+pplx::task<HttpContent> SlidesApi::deleteProtectionOnline(std::shared_ptr<HttpContent> document, utility::string_t password)
+{
+	if (document == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.document");
+	}
+	// verify the required parameter 'password' is set
+	if (password.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: password");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/protection/delete");
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			if (response.status_code() >= 400)
+			{
+				throw ApiException(
+					response.status_code(),
+					utility::conversions::to_string_t("error calling deleteSlidesProtectionPropertiesOnline: ") + response.reason_phrase(),
+					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			}
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> response)
+		{
+			HttpContent result;
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			result.setData(stream);
+			return result;
+		});
+}
+
+pplx::task<HttpContent> SlidesApi::deleteSlidesProtectionPropertiesOnline(std::shared_ptr<DeleteSlidesProtectionPropertiesOnlineRequest> request)
+{
+	return deleteProtectionOnline(request->getDocument(), request->getPassword());
+}
+
 pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::deleteBackground(utility::string_t name, int32_t slideIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
 {
 	// verify the required parameter 'name' is set
@@ -2050,6 +2148,51 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSubshapePortions(utility:
 pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSubshapePortions(std::shared_ptr<DeleteSubshapePortionsRequest> request)
 {
 	return deleteSubshapePortions(request->getName(), request->getSlideIndex(), request->getPath(), request->getShapeIndex(), request->getParagraphIndex(), request->getPortions(), request->getPassword(), request->getFolder(), request->getStorage());
+}
+
+pplx::task<void> SlidesApi::deleteWatermark(utility::string_t name, utility::string_t shapeName, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/watermark/delete");
+	ApiClient::setPathParameter(methodPath, "name", name);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapeName"), shapeName);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			if (response.status_code() >= 400)
+			{
+				throw ApiException(
+					response.status_code(),
+					utility::conversions::to_string_t("error calling deleteWatermark: ") + response.reason_phrase(),
+					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			}
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			return void();
+		});
+}
+
+pplx::task<void> SlidesApi::deleteWatermark(std::shared_ptr<DeleteWatermarkRequest> request)
+{
+	return deleteWatermark(request->getName(), request->getShapeName(), request->getPassword(), request->getFolder(), request->getStorage());
 }
 
 pplx::task<HttpContent> SlidesApi::downloadFile(utility::string_t path, utility::string_t storageName, utility::string_t versionId)
@@ -4080,7 +4223,7 @@ pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::getProtectionProper
 	{
 		throw std::invalid_argument("Missing required parameter: name");
 	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/protectionProperties");
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/protection");
 	ApiClient::setPathParameter(methodPath, "name", name);
 
 	std::map<utility::string_t, utility::string_t> queryParams;
@@ -5763,7 +5906,10 @@ pplx::task<HttpContent> SlidesApi::downloadImageDefaultFormatOnline(std::shared_
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = document;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -5818,7 +5964,10 @@ pplx::task<HttpContent> SlidesApi::downloadImageOnline(std::shared_ptr<HttpConte
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = document;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -5872,7 +6021,10 @@ pplx::task<HttpContent> SlidesApi::downloadImagesOnline(std::shared_ptr<HttpCont
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = document;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -6003,7 +6155,7 @@ pplx::task<HttpContent> SlidesApi::postExportImagesWithFormat(std::shared_ptr<Po
 	return downloadImages(request->getName(), request->getFormat(), request->getPassword(), request->getFolder(), request->getStorage());
 }
 
-pplx::task<HttpContent> SlidesApi::downloadShapeOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, utility::string_t password, utility::string_t storage, boost::optional<double> scaleX, boost::optional<double> scaleY, utility::string_t bounds, utility::string_t fontsFolder)
+pplx::task<HttpContent> SlidesApi::downloadShapeOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, boost::optional<double> scaleX, boost::optional<double> scaleY, utility::string_t bounds, utility::string_t password, utility::string_t storage, utility::string_t fontsFolder)
 {
 	if (document == nullptr)
 	{
@@ -6025,7 +6177,6 @@ pplx::task<HttpContent> SlidesApi::downloadShapeOnline(std::shared_ptr<HttpConte
 	ApiClient::setPathParameter(methodPath, "format", format);
 
 	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
 	if (scaleX.has_value())
 	{
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("scaleX"), scaleX.value());
@@ -6035,6 +6186,7 @@ pplx::task<HttpContent> SlidesApi::downloadShapeOnline(std::shared_ptr<HttpConte
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("scaleY"), scaleY.value());
 	}
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("bounds"), bounds);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
@@ -6042,7 +6194,10 @@ pplx::task<HttpContent> SlidesApi::downloadShapeOnline(std::shared_ptr<HttpConte
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = document;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -6067,7 +6222,7 @@ pplx::task<HttpContent> SlidesApi::downloadShapeOnline(std::shared_ptr<HttpConte
 
 pplx::task<HttpContent> SlidesApi::postExportShape(std::shared_ptr<PostExportShapeRequest> request)
 {
-	return downloadShapeOnline(request->getDocument(), request->getSlideIndex(), request->getShapeIndex(), request->getFormat(), request->getPassword(), request->getStorage(), request->getScaleX(), request->getScaleY(), request->getBounds(), request->getFontsFolder());
+	return downloadShapeOnline(request->getDocument(), request->getSlideIndex(), request->getShapeIndex(), request->getFormat(), request->getScaleX(), request->getScaleY(), request->getBounds(), request->getPassword(), request->getStorage(), request->getFontsFolder());
 }
 
 pplx::task<HttpContent> SlidesApi::downloadSlideOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, utility::string_t format, boost::optional<int32_t> width, boost::optional<int32_t> height, utility::string_t password, utility::string_t storage, utility::string_t fontsFolder)
@@ -6107,7 +6262,10 @@ pplx::task<HttpContent> SlidesApi::downloadSlideOnline(std::shared_ptr<HttpConte
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = document;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -6151,7 +6309,10 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::getNotesSlideOnline(std::shar
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = document;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -6196,7 +6357,10 @@ pplx::task<std::shared_ptr<EntityExists>> SlidesApi::notesSlideExistsOnline(std:
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = document;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -6261,7 +6425,10 @@ pplx::task<HttpContent> SlidesApi::downloadNotesSlideOnline(std::shared_ptr<Http
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = document;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -6289,6 +6456,112 @@ pplx::task<HttpContent> SlidesApi::postGetNotesSlideWithFormat(std::shared_ptr<P
 	return downloadNotesSlideOnline(request->getDocument(), request->getSlideIndex(), request->getFormat(), request->getWidth(), request->getHeight(), request->getPassword(), request->getFontsFolder());
 }
 
+pplx::task<void> SlidesApi::createImageWatermark(utility::string_t name, std::shared_ptr<HttpContent> image, std::shared_ptr<PictureFrame> pictureFrame, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/watermark/image");
+	ApiClient::setPathParameter(methodPath, "name", name);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (image != nullptr)
+	{
+		requestFiles.push_back(image);
+	}
+	if (pictureFrame != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(pictureFrame->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			if (response.status_code() >= 400)
+			{
+				throw ApiException(
+					response.status_code(),
+					utility::conversions::to_string_t("error calling postImageWatermark: ") + response.reason_phrase(),
+					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			}
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			return void();
+		});
+}
+
+pplx::task<void> SlidesApi::postImageWatermark(std::shared_ptr<PostImageWatermarkRequest> request)
+{
+	return createImageWatermark(request->getName(), request->getImage(), request->getPictureFrame(), request->getPassword(), request->getFolder(), request->getStorage());
+}
+
+pplx::task<HttpContent> SlidesApi::createImageWatermarkOnline(std::shared_ptr<HttpContent> document, std::shared_ptr<HttpContent> image, std::shared_ptr<PictureFrame> pictureFrame, utility::string_t password)
+{
+	if (document == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.document");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/watermark/image");
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
+	if (image != nullptr)
+	{
+		requestFiles.push_back(image);
+	}
+	if (pictureFrame != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(pictureFrame->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			if (response.status_code() >= 400)
+			{
+				throw ApiException(
+					response.status_code(),
+					utility::conversions::to_string_t("error calling postImageWatermarkOnline: ") + response.reason_phrase(),
+					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			}
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> response)
+		{
+			HttpContent result;
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			result.setData(stream);
+			return result;
+		});
+}
+
+pplx::task<HttpContent> SlidesApi::postImageWatermarkOnline(std::shared_ptr<PostImageWatermarkOnlineRequest> request)
+{
+	return createImageWatermarkOnline(request->getDocument(), request->getImage(), request->getPictureFrame(), request->getPassword());
+}
+
 pplx::task<HttpContent> SlidesApi::downloadImagesDefaultFormatOnline(std::shared_ptr<HttpContent> document, utility::string_t password)
 {
 	if (document == nullptr)
@@ -6304,7 +6577,10 @@ pplx::task<HttpContent> SlidesApi::downloadImagesDefaultFormatOnline(std::shared
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = document;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -6678,7 +6954,10 @@ pplx::task<HttpContent> SlidesApi::replacePresentationTextOnline(std::shared_ptr
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = document;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -6750,7 +7029,10 @@ pplx::task<HttpContent> SlidesApi::splitOnline(std::shared_ptr<HttpContent> docu
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = document;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -7155,7 +7437,10 @@ pplx::task<HttpContent> SlidesApi::replaceSlideTextOnline(std::shared_ptr<HttpCo
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = document;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -7334,7 +7619,10 @@ pplx::task<HttpContent> SlidesApi::convert(std::shared_ptr<HttpContent> document
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = document;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -7437,7 +7725,10 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::createPresentation(utility::str
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = data;
+	if (data != nullptr)
+	{
+		requestFiles.push_back(data);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -7536,7 +7827,10 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::importFromPdf(utility::string_t
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = pdf;
+	if (pdf != nullptr)
+	{
+		requestFiles.push_back(pdf);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -7689,7 +7983,7 @@ pplx::task<HttpContent> SlidesApi::mergeOnline(std::vector<std::shared_ptr<HttpC
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	requestFiles = files;
+	requestFiles.insert(requestFiles.end(), files.begin(), files.end());
 	if (request != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->toJson()));
@@ -7739,7 +8033,7 @@ pplx::task<HttpContent> SlidesApi::pipeline(std::shared_ptr<Pipeline> pipeline, 
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(pipeline->toJson()));
 	}
-	requestFiles = files;
+	requestFiles.insert(requestFiles.end(), files.begin(), files.end());
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -8258,6 +8552,165 @@ pplx::task<HttpContent> SlidesApi::postSubshapeSaveAs(std::shared_ptr<PostSubsha
 	return downloadSubshape(request->getName(), request->getSlideIndex(), request->getPath(), request->getShapeIndex(), request->getFormat(), request->getOptions(), request->getScaleX(), request->getScaleY(), request->getBounds(), request->getPassword(), request->getFolder(), request->getStorage(), request->getFontsFolder());
 }
 
+pplx::task<void> SlidesApi::createWatermark(utility::string_t name, std::shared_ptr<Shape> shape, boost::optional<double> fontHeight, utility::string_t text, utility::string_t fontName, utility::string_t fontColor, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/watermark");
+	ApiClient::setPathParameter(methodPath, "name", name);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	if (fontHeight.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontHeight"), fontHeight.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("text"), text);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontName"), fontName);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontColor"), fontColor);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (shape != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(shape->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			if (response.status_code() >= 400)
+			{
+				throw ApiException(
+					response.status_code(),
+					utility::conversions::to_string_t("error calling postWatermark: ") + response.reason_phrase(),
+					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			}
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			return void();
+		});
+}
+
+pplx::task<void> SlidesApi::postWatermark(std::shared_ptr<PostWatermarkRequest> request)
+{
+	return createWatermark(request->getName(), request->getShape(), request->getFontHeight(), request->getText(), request->getFontName(), request->getFontColor(), request->getPassword(), request->getFolder(), request->getStorage());
+}
+
+pplx::task<HttpContent> SlidesApi::deleteWatermarkOnline(std::shared_ptr<HttpContent> document, utility::string_t shapeName, utility::string_t password)
+{
+	if (document == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.document");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/watermark/delete");
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapeName"), shapeName);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			if (response.status_code() >= 400)
+			{
+				throw ApiException(
+					response.status_code(),
+					utility::conversions::to_string_t("error calling postWatermarkDeleteOnline: ") + response.reason_phrase(),
+					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			}
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> response)
+		{
+			HttpContent result;
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			result.setData(stream);
+			return result;
+		});
+}
+
+pplx::task<HttpContent> SlidesApi::postWatermarkDeleteOnline(std::shared_ptr<PostWatermarkDeleteOnlineRequest> request)
+{
+	return deleteWatermarkOnline(request->getDocument(), request->getShapeName(), request->getPassword());
+}
+
+pplx::task<HttpContent> SlidesApi::createWatermarkOnline(std::shared_ptr<HttpContent> document, std::shared_ptr<Shape> shape, boost::optional<double> fontHeight, utility::string_t text, utility::string_t fontName, utility::string_t fontColor, utility::string_t password)
+{
+	if (document == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.document");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/watermark");
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	if (fontHeight.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontHeight"), fontHeight.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("text"), text);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontName"), fontName);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontColor"), fontColor);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
+	if (shape != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(shape->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			if (response.status_code() >= 400)
+			{
+				throw ApiException(
+					response.status_code(),
+					utility::conversions::to_string_t("error calling postWatermarkOnline: ") + response.reason_phrase(),
+					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			}
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> response)
+		{
+			HttpContent result;
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			result.setData(stream);
+			return result;
+		});
+}
+
+pplx::task<HttpContent> SlidesApi::postWatermarkOnline(std::shared_ptr<PostWatermarkOnlineRequest> request)
+{
+	return createWatermarkOnline(request->getDocument(), request->getShape(), request->getFontHeight(), request->getText(), request->getFontName(), request->getFontColor(), request->getPassword());
+}
+
 pplx::task<std::shared_ptr<Chart>> SlidesApi::updateChartCategory(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t categoryIndex, std::shared_ptr<ChartCategory> category, utility::string_t password, utility::string_t folder, utility::string_t storage)
 {
 	// verify the required parameter 'name' is set
@@ -8433,7 +8886,7 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::putChartSeries(std::shared_ptr<Put
 	return updateChartSeries(request->getName(), request->getSlideIndex(), request->getShapeIndex(), request->getSeriesIndex(), request->getSeries(), request->getPassword(), request->getFolder(), request->getStorage());
 }
 
-pplx::task<void> SlidesApi::saveShapeOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, utility::string_t outPath, utility::string_t password, utility::string_t storage, boost::optional<double> scaleX, boost::optional<double> scaleY, utility::string_t bounds, utility::string_t fontsFolder)
+pplx::task<void> SlidesApi::saveShapeOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, utility::string_t outPath, boost::optional<double> scaleX, boost::optional<double> scaleY, utility::string_t bounds, utility::string_t password, utility::string_t storage, utility::string_t fontsFolder)
 {
 	if (document == nullptr)
 	{
@@ -8461,7 +8914,6 @@ pplx::task<void> SlidesApi::saveShapeOnline(std::shared_ptr<HttpContent> documen
 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("outPath"), outPath);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
 	if (scaleX.has_value())
 	{
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("scaleX"), scaleX.value());
@@ -8471,6 +8923,7 @@ pplx::task<void> SlidesApi::saveShapeOnline(std::shared_ptr<HttpContent> documen
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("scaleY"), scaleY.value());
 	}
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("bounds"), bounds);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
@@ -8478,7 +8931,10 @@ pplx::task<void> SlidesApi::saveShapeOnline(std::shared_ptr<HttpContent> documen
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = document;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -8501,7 +8957,7 @@ pplx::task<void> SlidesApi::saveShapeOnline(std::shared_ptr<HttpContent> documen
 
 pplx::task<void> SlidesApi::putExportShape(std::shared_ptr<PutExportShapeRequest> request)
 {
-	return saveShapeOnline(request->getDocument(), request->getSlideIndex(), request->getShapeIndex(), request->getFormat(), request->getOutPath(), request->getPassword(), request->getStorage(), request->getScaleX(), request->getScaleY(), request->getBounds(), request->getFontsFolder());
+	return saveShapeOnline(request->getDocument(), request->getSlideIndex(), request->getShapeIndex(), request->getFormat(), request->getOutPath(), request->getScaleX(), request->getScaleY(), request->getBounds(), request->getPassword(), request->getStorage(), request->getFontsFolder());
 }
 
 pplx::task<void> SlidesApi::saveSlideOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, utility::string_t format, utility::string_t outPath, boost::optional<int32_t> width, boost::optional<int32_t> height, utility::string_t password, utility::string_t storage, utility::string_t fontsFolder)
@@ -8547,7 +9003,10 @@ pplx::task<void> SlidesApi::saveSlideOnline(std::shared_ptr<HttpContent> documen
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = document;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -8862,7 +9321,10 @@ pplx::task<std::shared_ptr<SplitDocumentResult>> SlidesApi::splitAndSaveOnline(s
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = document;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -9779,7 +10241,10 @@ pplx::task<void> SlidesApi::convertAndSave(std::shared_ptr<HttpContent> document
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = document;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -9803,57 +10268,6 @@ pplx::task<void> SlidesApi::convertAndSave(std::shared_ptr<HttpContent> document
 pplx::task<void> SlidesApi::putSlidesConvert(std::shared_ptr<PutSlidesConvertRequest> request)
 {
 	return convertAndSave(request->getDocument(), request->getFormat(), request->getOutPath(), request->getPassword(), request->getStorage(), request->getFontsFolder());
-}
-
-pplx::task<std::shared_ptr<Document>> SlidesApi::putSlidesDocumentFromHtml(utility::string_t name, utility::string_t html, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/fromHtml");
-	ApiClient::setPathParameter(methodPath, "name", name);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	if (!html.empty())
-	{
-		httpBody = std::shared_ptr<IHttpBody>(new StringBody(html));
-	}
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling putSlidesDocumentFromHtml: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Document> result(new Document());
-			result->fromJson(json);
-			return result;
-		});
-}
-
-pplx::task<std::shared_ptr<Document>> SlidesApi::putSlidesDocumentFromHtml(std::shared_ptr<PutSlidesDocumentFromHtmlRequest> request)
-{
-	return putSlidesDocumentFromHtml(request->getName(), request->getHtml(), request->getPassword(), request->getFolder(), request->getStorage());
 }
 
 pplx::task<std::shared_ptr<Document>> SlidesApi::setPresentationHeaderFooter(utility::string_t name, std::shared_ptr<HeaderFooter> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
@@ -9929,7 +10343,7 @@ pplx::task<void> SlidesApi::mergeAndSaveOnline(utility::string_t outPath, std::v
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	requestFiles = files;
+	requestFiles.insert(requestFiles.end(), files.begin(), files.end());
 	if (request != nullptr)
 	{
 		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(request->toJson()));
@@ -9959,7 +10373,7 @@ pplx::task<void> SlidesApi::putSlidesMerge(std::shared_ptr<PutSlidesMergeRequest
 	return mergeAndSaveOnline(request->getOutPath(), request->getFiles(), request->getRequest(), request->getPassword(), request->getStorage());
 }
 
-pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::setProtectionProperties(utility::string_t name, std::shared_ptr<ProtectionProperties> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::setProtection(utility::string_t name, std::shared_ptr<ProtectionProperties> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -9970,7 +10384,7 @@ pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::setProtectionProper
 	{
 		throw std::invalid_argument("Missing required parameter: request.dto");
 	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/protectionProperties");
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/protection");
 	ApiClient::setPathParameter(methodPath, "name", name);
 
 	std::map<utility::string_t, utility::string_t> queryParams;
@@ -10011,7 +10425,61 @@ pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::setProtectionProper
 
 pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::putSlidesProtectionProperties(std::shared_ptr<PutSlidesProtectionPropertiesRequest> request)
 {
-	return setProtectionProperties(request->getName(), request->getDto(), request->getPassword(), request->getFolder(), request->getStorage());
+	return setProtection(request->getName(), request->getDto(), request->getPassword(), request->getFolder(), request->getStorage());
+}
+
+pplx::task<HttpContent> SlidesApi::setProtectionOnline(std::shared_ptr<HttpContent> document, std::shared_ptr<ProtectionProperties> dto, utility::string_t password)
+{
+	if (document == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.document");
+	}
+	if (dto == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.dto");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/protection");
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
+	if (dto != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			if (response.status_code() >= 400)
+			{
+				throw ApiException(
+					response.status_code(),
+					utility::conversions::to_string_t("error calling putSlidesProtectionPropertiesOnline: ") + response.reason_phrase(),
+					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
+			}
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> response)
+		{
+			HttpContent result;
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			result.setData(stream);
+			return result;
+		});
+}
+
+pplx::task<HttpContent> SlidesApi::putSlidesProtectionPropertiesOnline(std::shared_ptr<PutSlidesProtectionPropertiesOnlineRequest> request)
+{
+	return setProtectionOnline(request->getDocument(), request->getDto(), request->getPassword());
 }
 
 pplx::task<void> SlidesApi::savePresentation(utility::string_t name, utility::string_t format, utility::string_t outPath, std::shared_ptr<ExportOptions> options, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder)
@@ -10360,63 +10828,6 @@ pplx::task<std::shared_ptr<SlideProperties>> SlidesApi::setSlideProperties(utili
 pplx::task<std::shared_ptr<SlideProperties>> SlidesApi::putSlidesSlideProperties(std::shared_ptr<PutSlidesSlidePropertiesRequest> request)
 {
 	return setSlideProperties(request->getName(), request->getDto(), request->getPassword(), request->getFolder(), request->getStorage());
-}
-
-pplx::task<std::shared_ptr<Document>> SlidesApi::putSlidesSlideSize(utility::string_t name, boost::optional<int32_t> width, boost::optional<int32_t> height, utility::string_t sizeType, utility::string_t scaleType, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slideSize");
-	ApiClient::setPathParameter(methodPath, "name", name);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	if (width.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("width"), width.value());
-	}
-	if (height.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("height"), height.value());
-	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("sizeType"), sizeType);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("scaleType"), scaleType);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling putSlidesSlideSize: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Document> result(new Document());
-			result->fromJson(json);
-			return result;
-		});
-}
-
-pplx::task<std::shared_ptr<Document>> SlidesApi::putSlidesSlideSize(std::shared_ptr<PutSlidesSlideSizeRequest> request)
-{
-	return putSlidesSlideSize(request->getName(), request->getWidth(), request->getHeight(), request->getSizeType(), request->getScaleType(), request->getPassword(), request->getFolder(), request->getStorage());
 }
 
 pplx::task<std::shared_ptr<ViewProperties>> SlidesApi::setViewProperties(utility::string_t name, std::shared_ptr<ViewProperties> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
@@ -10852,7 +11263,10 @@ pplx::task<std::shared_ptr<FilesUploadResult>> SlidesApi::uploadFile(utility::st
 
 	std::shared_ptr<IHttpBody> httpBody = nullptr;
 	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	httpBody = file;
+	if (file != nullptr)
+	{
+		requestFiles.push_back(file);
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)

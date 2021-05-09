@@ -9037,6 +9037,254 @@ TEST_F(SlidesApiTest, deleteSlidesDocumentPropertyInvalidStorage) {
 	}
 }
 
+TEST_F(SlidesApiTest, deleteSlidesProtectionProperties) {
+	utility::string_t paramName = utils->getTestValue("deleteSlidesProtectionProperties", "name");
+	utility::string_t paramPassword = utils->getTestValue("deleteSlidesProtectionProperties", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteSlidesProtectionProperties", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteSlidesProtectionProperties", "storage");
+	utils->initialize("deleteSlidesProtectionProperties", "");
+	std::shared_ptr<ProtectionProperties> result = api->deleteProtection(paramName, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, deleteSlidesProtectionPropertiesInvalidName) {
+	utility::string_t paramName = utils->getTestValue("deleteSlidesProtectionProperties", "name");
+	utility::string_t paramPassword = utils->getTestValue("deleteSlidesProtectionProperties", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteSlidesProtectionProperties", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteSlidesProtectionProperties", "storage");
+	paramName = utils->getInvalidTestValue("deleteSlidesProtectionProperties", "name", paramName);
+	utils->initialize("deleteSlidesProtectionProperties", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->deleteProtection(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteSlidesProtectionProperties", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteSlidesProtectionProperties", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteSlidesProtectionProperties", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteSlidesProtectionProperties", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteSlidesProtectionProperties", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteSlidesProtectionPropertiesInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("deleteSlidesProtectionProperties", "name");
+	utility::string_t paramPassword = utils->getTestValue("deleteSlidesProtectionProperties", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteSlidesProtectionProperties", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteSlidesProtectionProperties", "storage");
+	paramPassword = utils->getInvalidTestValue("deleteSlidesProtectionProperties", "password", paramPassword);
+	utils->initialize("deleteSlidesProtectionProperties", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->deleteProtection(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteSlidesProtectionProperties", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteSlidesProtectionProperties", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteSlidesProtectionProperties", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteSlidesProtectionProperties", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteSlidesProtectionProperties", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteSlidesProtectionPropertiesInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("deleteSlidesProtectionProperties", "name");
+	utility::string_t paramPassword = utils->getTestValue("deleteSlidesProtectionProperties", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteSlidesProtectionProperties", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteSlidesProtectionProperties", "storage");
+	paramFolder = utils->getInvalidTestValue("deleteSlidesProtectionProperties", "folder", paramFolder);
+	utils->initialize("deleteSlidesProtectionProperties", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->deleteProtection(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteSlidesProtectionProperties", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteSlidesProtectionProperties", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteSlidesProtectionProperties", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteSlidesProtectionProperties", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteSlidesProtectionProperties", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteSlidesProtectionPropertiesInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("deleteSlidesProtectionProperties", "name");
+	utility::string_t paramPassword = utils->getTestValue("deleteSlidesProtectionProperties", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteSlidesProtectionProperties", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteSlidesProtectionProperties", "storage");
+	paramStorage = utils->getInvalidTestValue("deleteSlidesProtectionProperties", "storage", paramStorage);
+	utils->initialize("deleteSlidesProtectionProperties", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->deleteProtection(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteSlidesProtectionProperties", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteSlidesProtectionProperties", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteSlidesProtectionProperties", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteSlidesProtectionProperties", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteSlidesProtectionProperties", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteSlidesProtectionPropertiesOnline) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("deleteSlidesProtectionPropertiesOnline", "document");
+	utility::string_t paramPassword = utils->getTestValue("deleteSlidesProtectionPropertiesOnline", "password");
+	utils->initialize("deleteSlidesProtectionPropertiesOnline", "");
+	HttpContent result = api->deleteProtectionOnline(paramDocument, paramPassword).get();
+	EXPECT_FALSE(result.getData()->eof());
+}
+
+TEST_F(SlidesApiTest, deleteSlidesProtectionPropertiesOnlineInvalidDocument) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("deleteSlidesProtectionPropertiesOnline", "document");
+	utility::string_t paramPassword = utils->getTestValue("deleteSlidesProtectionPropertiesOnline", "password");
+	paramDocument = utils->getInvalidBinaryTestValue("deleteSlidesProtectionPropertiesOnline", "document", paramDocument);
+	utils->initialize("deleteSlidesProtectionPropertiesOnline", "document", paramDocument);
+
+	bool failed = true;
+	try
+	{
+		api->deleteProtectionOnline(paramDocument, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteSlidesProtectionPropertiesOnline", "document");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteSlidesProtectionPropertiesOnline", "document", paramDocument);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteSlidesProtectionPropertiesOnline", "document");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteSlidesProtectionPropertiesOnline", "document", paramDocument);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteSlidesProtectionPropertiesOnline", "document"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteSlidesProtectionPropertiesOnlineInvalidPassword) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("deleteSlidesProtectionPropertiesOnline", "document");
+	utility::string_t paramPassword = utils->getTestValue("deleteSlidesProtectionPropertiesOnline", "password");
+	paramPassword = utils->getInvalidTestValue("deleteSlidesProtectionPropertiesOnline", "password", paramPassword);
+	utils->initialize("deleteSlidesProtectionPropertiesOnline", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->deleteProtectionOnline(paramDocument, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteSlidesProtectionPropertiesOnline", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteSlidesProtectionPropertiesOnline", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteSlidesProtectionPropertiesOnline", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteSlidesProtectionPropertiesOnline", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteSlidesProtectionPropertiesOnline", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, deleteSlidesSlideBackground) {
 	utility::string_t paramName = utils->getTestValue("deleteSlidesSlideBackground", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("deleteSlidesSlideBackground", "slideIndex");
@@ -10781,6 +11029,216 @@ TEST_F(SlidesApiTest, deleteSubshapePortionsInvalidStorage) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("deleteSubshapePortions", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteWatermark) {
+	utility::string_t paramName = utils->getTestValue("deleteWatermark", "name");
+	utility::string_t paramShapeName = utils->getTestValue("deleteWatermark", "shapeName");
+	utility::string_t paramPassword = utils->getTestValue("deleteWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteWatermark", "storage");
+	utils->initialize("deleteWatermark", "");
+	api->deleteWatermark(paramName, paramShapeName, paramPassword, paramFolder, paramStorage).wait();
+}
+
+TEST_F(SlidesApiTest, deleteWatermarkInvalidName) {
+	utility::string_t paramName = utils->getTestValue("deleteWatermark", "name");
+	utility::string_t paramShapeName = utils->getTestValue("deleteWatermark", "shapeName");
+	utility::string_t paramPassword = utils->getTestValue("deleteWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteWatermark", "storage");
+	paramName = utils->getInvalidTestValue("deleteWatermark", "name", paramName);
+	utils->initialize("deleteWatermark", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->deleteWatermark(paramName, paramShapeName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteWatermark", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteWatermark", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteWatermark", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteWatermark", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteWatermark", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteWatermarkInvalidShapeName) {
+	utility::string_t paramName = utils->getTestValue("deleteWatermark", "name");
+	utility::string_t paramShapeName = utils->getTestValue("deleteWatermark", "shapeName");
+	utility::string_t paramPassword = utils->getTestValue("deleteWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteWatermark", "storage");
+	paramShapeName = utils->getInvalidTestValue("deleteWatermark", "shapeName", paramShapeName);
+	utils->initialize("deleteWatermark", "shapeName", paramShapeName);
+
+	bool failed = true;
+	try
+	{
+		api->deleteWatermark(paramName, paramShapeName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteWatermark", "shapeName");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteWatermark", "shapeName", paramShapeName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteWatermark", "shapeName");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteWatermark", "shapeName", paramShapeName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteWatermark", "shapeName"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteWatermarkInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("deleteWatermark", "name");
+	utility::string_t paramShapeName = utils->getTestValue("deleteWatermark", "shapeName");
+	utility::string_t paramPassword = utils->getTestValue("deleteWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteWatermark", "storage");
+	paramPassword = utils->getInvalidTestValue("deleteWatermark", "password", paramPassword);
+	utils->initialize("deleteWatermark", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->deleteWatermark(paramName, paramShapeName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteWatermark", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteWatermark", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteWatermark", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteWatermark", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteWatermark", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteWatermarkInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("deleteWatermark", "name");
+	utility::string_t paramShapeName = utils->getTestValue("deleteWatermark", "shapeName");
+	utility::string_t paramPassword = utils->getTestValue("deleteWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteWatermark", "storage");
+	paramFolder = utils->getInvalidTestValue("deleteWatermark", "folder", paramFolder);
+	utils->initialize("deleteWatermark", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->deleteWatermark(paramName, paramShapeName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteWatermark", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteWatermark", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteWatermark", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteWatermark", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteWatermark", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteWatermarkInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("deleteWatermark", "name");
+	utility::string_t paramShapeName = utils->getTestValue("deleteWatermark", "shapeName");
+	utility::string_t paramPassword = utils->getTestValue("deleteWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteWatermark", "storage");
+	paramStorage = utils->getInvalidTestValue("deleteWatermark", "storage", paramStorage);
+	utils->initialize("deleteWatermark", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->deleteWatermark(paramName, paramShapeName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteWatermark", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteWatermark", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteWatermark", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteWatermark", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteWatermark", "storage"))
 	{
 		FAIL() << "Must have failed";
 	}
@@ -29484,14 +29942,14 @@ TEST_F(SlidesApiTest, postExportShape) {
 	int32_t paramSlideIndex = utils->getIntTestValue("postExportShape", "slideIndex");
 	int32_t paramShapeIndex = utils->getIntTestValue("postExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("postExportShape", "format");
-	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("postExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("postExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("postExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("postExportShape", "fontsFolder");
 	utils->initialize("postExportShape", "");
-	HttpContent result = api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).get();
+	HttpContent result = api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).get();
 	EXPECT_FALSE(result.getData()->eof());
 }
 
@@ -29500,11 +29958,11 @@ TEST_F(SlidesApiTest, postExportShapeInvalidDocument) {
 	int32_t paramSlideIndex = utils->getIntTestValue("postExportShape", "slideIndex");
 	int32_t paramShapeIndex = utils->getIntTestValue("postExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("postExportShape", "format");
-	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("postExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("postExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("postExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("postExportShape", "fontsFolder");
 	paramDocument = utils->getInvalidBinaryTestValue("postExportShape", "document", paramDocument);
 	utils->initialize("postExportShape", "document", paramDocument);
@@ -29512,7 +29970,7 @@ TEST_F(SlidesApiTest, postExportShapeInvalidDocument) {
 	bool failed = true;
 	try
 	{
-		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -29545,11 +30003,11 @@ TEST_F(SlidesApiTest, postExportShapeInvalidSlideIndex) {
 	int32_t paramSlideIndex = utils->getIntTestValue("postExportShape", "slideIndex");
 	int32_t paramShapeIndex = utils->getIntTestValue("postExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("postExportShape", "format");
-	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("postExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("postExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("postExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("postExportShape", "fontsFolder");
 	paramSlideIndex = utils->getInvalidIntTestValue("postExportShape", "slideIndex", paramSlideIndex).value();
 	utils->initialize("postExportShape", "slideIndex", paramSlideIndex);
@@ -29557,7 +30015,7 @@ TEST_F(SlidesApiTest, postExportShapeInvalidSlideIndex) {
 	bool failed = true;
 	try
 	{
-		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -29590,11 +30048,11 @@ TEST_F(SlidesApiTest, postExportShapeInvalidShapeIndex) {
 	int32_t paramSlideIndex = utils->getIntTestValue("postExportShape", "slideIndex");
 	int32_t paramShapeIndex = utils->getIntTestValue("postExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("postExportShape", "format");
-	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("postExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("postExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("postExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("postExportShape", "fontsFolder");
 	paramShapeIndex = utils->getInvalidIntTestValue("postExportShape", "shapeIndex", paramShapeIndex).value();
 	utils->initialize("postExportShape", "shapeIndex", paramShapeIndex);
@@ -29602,7 +30060,7 @@ TEST_F(SlidesApiTest, postExportShapeInvalidShapeIndex) {
 	bool failed = true;
 	try
 	{
-		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -29635,11 +30093,11 @@ TEST_F(SlidesApiTest, postExportShapeInvalidFormat) {
 	int32_t paramSlideIndex = utils->getIntTestValue("postExportShape", "slideIndex");
 	int32_t paramShapeIndex = utils->getIntTestValue("postExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("postExportShape", "format");
-	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("postExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("postExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("postExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("postExportShape", "fontsFolder");
 	paramFormat = utils->getInvalidTestValue("postExportShape", "format", paramFormat);
 	utils->initialize("postExportShape", "format", paramFormat);
@@ -29647,7 +30105,7 @@ TEST_F(SlidesApiTest, postExportShapeInvalidFormat) {
 	bool failed = true;
 	try
 	{
-		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -29675,106 +30133,16 @@ TEST_F(SlidesApiTest, postExportShapeInvalidFormat) {
 	}
 }
 
-TEST_F(SlidesApiTest, postExportShapeInvalidPassword) {
-	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postExportShape", "document");
-	int32_t paramSlideIndex = utils->getIntTestValue("postExportShape", "slideIndex");
-	int32_t paramShapeIndex = utils->getIntTestValue("postExportShape", "shapeIndex");
-	utility::string_t paramFormat = utils->getTestValue("postExportShape", "format");
-	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
-	auto paramScaleX = utils->getOptionalDoubleTestValue("postExportShape", "scaleX");
-	auto paramScaleY = utils->getOptionalDoubleTestValue("postExportShape", "scaleY");
-	utility::string_t paramBounds = utils->getTestValue("postExportShape", "bounds");
-	utility::string_t paramFontsFolder = utils->getTestValue("postExportShape", "fontsFolder");
-	paramPassword = utils->getInvalidTestValue("postExportShape", "password", paramPassword);
-	utils->initialize("postExportShape", "password", paramPassword);
-
-	bool failed = true;
-	try
-	{
-		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("postExportShape", "password");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("postExportShape", "password", paramPassword);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("postExportShape", "password");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("postExportShape", "password", paramPassword);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("postExportShape", "password"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, postExportShapeInvalidStorage) {
-	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postExportShape", "document");
-	int32_t paramSlideIndex = utils->getIntTestValue("postExportShape", "slideIndex");
-	int32_t paramShapeIndex = utils->getIntTestValue("postExportShape", "shapeIndex");
-	utility::string_t paramFormat = utils->getTestValue("postExportShape", "format");
-	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
-	auto paramScaleX = utils->getOptionalDoubleTestValue("postExportShape", "scaleX");
-	auto paramScaleY = utils->getOptionalDoubleTestValue("postExportShape", "scaleY");
-	utility::string_t paramBounds = utils->getTestValue("postExportShape", "bounds");
-	utility::string_t paramFontsFolder = utils->getTestValue("postExportShape", "fontsFolder");
-	paramStorage = utils->getInvalidTestValue("postExportShape", "storage", paramStorage);
-	utils->initialize("postExportShape", "storage", paramStorage);
-
-	bool failed = true;
-	try
-	{
-		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("postExportShape", "storage");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("postExportShape", "storage", paramStorage);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("postExportShape", "storage");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("postExportShape", "storage", paramStorage);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("postExportShape", "storage"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
 TEST_F(SlidesApiTest, postExportShapeInvalidScaleX) {
 	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postExportShape", "document");
 	int32_t paramSlideIndex = utils->getIntTestValue("postExportShape", "slideIndex");
 	int32_t paramShapeIndex = utils->getIntTestValue("postExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("postExportShape", "format");
-	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("postExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("postExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("postExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("postExportShape", "fontsFolder");
 	paramScaleX = utils->getInvalidDoubleTestValue("postExportShape", "scaleX", paramScaleX).value();
 	utils->initialize("postExportShape", "scaleX", paramScaleX);
@@ -29782,7 +30150,7 @@ TEST_F(SlidesApiTest, postExportShapeInvalidScaleX) {
 	bool failed = true;
 	try
 	{
-		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -29815,11 +30183,11 @@ TEST_F(SlidesApiTest, postExportShapeInvalidScaleY) {
 	int32_t paramSlideIndex = utils->getIntTestValue("postExportShape", "slideIndex");
 	int32_t paramShapeIndex = utils->getIntTestValue("postExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("postExportShape", "format");
-	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("postExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("postExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("postExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("postExportShape", "fontsFolder");
 	paramScaleY = utils->getInvalidDoubleTestValue("postExportShape", "scaleY", paramScaleY).value();
 	utils->initialize("postExportShape", "scaleY", paramScaleY);
@@ -29827,7 +30195,7 @@ TEST_F(SlidesApiTest, postExportShapeInvalidScaleY) {
 	bool failed = true;
 	try
 	{
-		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -29860,11 +30228,11 @@ TEST_F(SlidesApiTest, postExportShapeInvalidBounds) {
 	int32_t paramSlideIndex = utils->getIntTestValue("postExportShape", "slideIndex");
 	int32_t paramShapeIndex = utils->getIntTestValue("postExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("postExportShape", "format");
-	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("postExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("postExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("postExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("postExportShape", "fontsFolder");
 	paramBounds = utils->getInvalidTestValue("postExportShape", "bounds", paramBounds);
 	utils->initialize("postExportShape", "bounds", paramBounds);
@@ -29872,7 +30240,7 @@ TEST_F(SlidesApiTest, postExportShapeInvalidBounds) {
 	bool failed = true;
 	try
 	{
-		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -29900,16 +30268,106 @@ TEST_F(SlidesApiTest, postExportShapeInvalidBounds) {
 	}
 }
 
+TEST_F(SlidesApiTest, postExportShapeInvalidPassword) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postExportShape", "document");
+	int32_t paramSlideIndex = utils->getIntTestValue("postExportShape", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("postExportShape", "shapeIndex");
+	utility::string_t paramFormat = utils->getTestValue("postExportShape", "format");
+	auto paramScaleX = utils->getOptionalDoubleTestValue("postExportShape", "scaleX");
+	auto paramScaleY = utils->getOptionalDoubleTestValue("postExportShape", "scaleY");
+	utility::string_t paramBounds = utils->getTestValue("postExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("postExportShape", "fontsFolder");
+	paramPassword = utils->getInvalidTestValue("postExportShape", "password", paramPassword);
+	utils->initialize("postExportShape", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postExportShape", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postExportShape", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postExportShape", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postExportShape", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postExportShape", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postExportShapeInvalidStorage) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postExportShape", "document");
+	int32_t paramSlideIndex = utils->getIntTestValue("postExportShape", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("postExportShape", "shapeIndex");
+	utility::string_t paramFormat = utils->getTestValue("postExportShape", "format");
+	auto paramScaleX = utils->getOptionalDoubleTestValue("postExportShape", "scaleX");
+	auto paramScaleY = utils->getOptionalDoubleTestValue("postExportShape", "scaleY");
+	utility::string_t paramBounds = utils->getTestValue("postExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("postExportShape", "fontsFolder");
+	paramStorage = utils->getInvalidTestValue("postExportShape", "storage", paramStorage);
+	utils->initialize("postExportShape", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postExportShape", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postExportShape", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postExportShape", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postExportShape", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postExportShape", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, postExportShapeInvalidFontsFolder) {
 	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postExportShape", "document");
 	int32_t paramSlideIndex = utils->getIntTestValue("postExportShape", "slideIndex");
 	int32_t paramShapeIndex = utils->getIntTestValue("postExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("postExportShape", "format");
-	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("postExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("postExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("postExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("postExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("postExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("postExportShape", "fontsFolder");
 	paramFontsFolder = utils->getInvalidTestValue("postExportShape", "fontsFolder", paramFontsFolder);
 	utils->initialize("postExportShape", "fontsFolder", paramFontsFolder);
@@ -29917,7 +30375,7 @@ TEST_F(SlidesApiTest, postExportShapeInvalidFontsFolder) {
 	bool failed = true;
 	try
 	{
-		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+		api->downloadShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -30851,6 +31309,429 @@ TEST_F(SlidesApiTest, postGetNotesSlideWithFormatInvalidFontsFolder) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("postGetNotesSlideWithFormat", "fontsFolder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postImageWatermark) {
+	utility::string_t paramName = utils->getTestValue("postImageWatermark", "name");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("postImageWatermark", "image");
+	std::shared_ptr<PictureFrame> paramPictureFrame = utils->getTestValueForClass<PictureFrame>("postImageWatermark", "pictureFrame");
+	utility::string_t paramPassword = utils->getTestValue("postImageWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("postImageWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("postImageWatermark", "storage");
+	utils->initialize("postImageWatermark", "");
+	api->createImageWatermark(paramName, paramImage, paramPictureFrame, paramPassword, paramFolder, paramStorage).wait();
+}
+
+TEST_F(SlidesApiTest, postImageWatermarkInvalidName) {
+	utility::string_t paramName = utils->getTestValue("postImageWatermark", "name");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("postImageWatermark", "image");
+	std::shared_ptr<PictureFrame> paramPictureFrame = utils->getTestValueForClass<PictureFrame>("postImageWatermark", "pictureFrame");
+	utility::string_t paramPassword = utils->getTestValue("postImageWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("postImageWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("postImageWatermark", "storage");
+	paramName = utils->getInvalidTestValue("postImageWatermark", "name", paramName);
+	utils->initialize("postImageWatermark", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->createImageWatermark(paramName, paramImage, paramPictureFrame, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermark", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermark", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermark", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermark", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postImageWatermark", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postImageWatermarkInvalidImage) {
+	utility::string_t paramName = utils->getTestValue("postImageWatermark", "name");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("postImageWatermark", "image");
+	std::shared_ptr<PictureFrame> paramPictureFrame = utils->getTestValueForClass<PictureFrame>("postImageWatermark", "pictureFrame");
+	utility::string_t paramPassword = utils->getTestValue("postImageWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("postImageWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("postImageWatermark", "storage");
+	paramImage = utils->getInvalidBinaryTestValue("postImageWatermark", "image", paramImage);
+	utils->initialize("postImageWatermark", "image", paramImage);
+
+	bool failed = true;
+	try
+	{
+		api->createImageWatermark(paramName, paramImage, paramPictureFrame, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermark", "image");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermark", "image", paramImage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermark", "image");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermark", "image", paramImage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postImageWatermark", "image"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postImageWatermarkInvalidPictureFrame) {
+	utility::string_t paramName = utils->getTestValue("postImageWatermark", "name");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("postImageWatermark", "image");
+	std::shared_ptr<PictureFrame> paramPictureFrame = utils->getTestValueForClass<PictureFrame>("postImageWatermark", "pictureFrame");
+	utility::string_t paramPassword = utils->getTestValue("postImageWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("postImageWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("postImageWatermark", "storage");
+	paramPictureFrame = utils->getInvalidTestValueForClass<>("postImageWatermark", "pictureFrame", paramPictureFrame);
+	utils->initialize("postImageWatermark", "pictureFrame", paramPictureFrame);
+
+	bool failed = true;
+	try
+	{
+		api->createImageWatermark(paramName, paramImage, paramPictureFrame, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermark", "pictureFrame");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermark", "pictureFrame", paramPictureFrame);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermark", "pictureFrame");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermark", "pictureFrame", paramPictureFrame);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postImageWatermark", "pictureFrame"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postImageWatermarkInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("postImageWatermark", "name");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("postImageWatermark", "image");
+	std::shared_ptr<PictureFrame> paramPictureFrame = utils->getTestValueForClass<PictureFrame>("postImageWatermark", "pictureFrame");
+	utility::string_t paramPassword = utils->getTestValue("postImageWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("postImageWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("postImageWatermark", "storage");
+	paramPassword = utils->getInvalidTestValue("postImageWatermark", "password", paramPassword);
+	utils->initialize("postImageWatermark", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->createImageWatermark(paramName, paramImage, paramPictureFrame, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermark", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermark", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermark", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermark", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postImageWatermark", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postImageWatermarkInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("postImageWatermark", "name");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("postImageWatermark", "image");
+	std::shared_ptr<PictureFrame> paramPictureFrame = utils->getTestValueForClass<PictureFrame>("postImageWatermark", "pictureFrame");
+	utility::string_t paramPassword = utils->getTestValue("postImageWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("postImageWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("postImageWatermark", "storage");
+	paramFolder = utils->getInvalidTestValue("postImageWatermark", "folder", paramFolder);
+	utils->initialize("postImageWatermark", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->createImageWatermark(paramName, paramImage, paramPictureFrame, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermark", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermark", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermark", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermark", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postImageWatermark", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postImageWatermarkInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("postImageWatermark", "name");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("postImageWatermark", "image");
+	std::shared_ptr<PictureFrame> paramPictureFrame = utils->getTestValueForClass<PictureFrame>("postImageWatermark", "pictureFrame");
+	utility::string_t paramPassword = utils->getTestValue("postImageWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("postImageWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("postImageWatermark", "storage");
+	paramStorage = utils->getInvalidTestValue("postImageWatermark", "storage", paramStorage);
+	utils->initialize("postImageWatermark", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->createImageWatermark(paramName, paramImage, paramPictureFrame, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermark", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermark", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermark", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermark", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postImageWatermark", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postImageWatermarkOnline) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postImageWatermarkOnline", "document");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("postImageWatermarkOnline", "image");
+	std::shared_ptr<PictureFrame> paramPictureFrame = utils->getTestValueForClass<PictureFrame>("postImageWatermarkOnline", "pictureFrame");
+	utility::string_t paramPassword = utils->getTestValue("postImageWatermarkOnline", "password");
+	utils->initialize("postImageWatermarkOnline", "");
+	HttpContent result = api->createImageWatermarkOnline(paramDocument, paramImage, paramPictureFrame, paramPassword).get();
+	EXPECT_FALSE(result.getData()->eof());
+}
+
+TEST_F(SlidesApiTest, postImageWatermarkOnlineInvalidDocument) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postImageWatermarkOnline", "document");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("postImageWatermarkOnline", "image");
+	std::shared_ptr<PictureFrame> paramPictureFrame = utils->getTestValueForClass<PictureFrame>("postImageWatermarkOnline", "pictureFrame");
+	utility::string_t paramPassword = utils->getTestValue("postImageWatermarkOnline", "password");
+	paramDocument = utils->getInvalidBinaryTestValue("postImageWatermarkOnline", "document", paramDocument);
+	utils->initialize("postImageWatermarkOnline", "document", paramDocument);
+
+	bool failed = true;
+	try
+	{
+		api->createImageWatermarkOnline(paramDocument, paramImage, paramPictureFrame, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermarkOnline", "document");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermarkOnline", "document", paramDocument);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermarkOnline", "document");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermarkOnline", "document", paramDocument);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postImageWatermarkOnline", "document"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postImageWatermarkOnlineInvalidImage) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postImageWatermarkOnline", "document");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("postImageWatermarkOnline", "image");
+	std::shared_ptr<PictureFrame> paramPictureFrame = utils->getTestValueForClass<PictureFrame>("postImageWatermarkOnline", "pictureFrame");
+	utility::string_t paramPassword = utils->getTestValue("postImageWatermarkOnline", "password");
+	paramImage = utils->getInvalidBinaryTestValue("postImageWatermarkOnline", "image", paramImage);
+	utils->initialize("postImageWatermarkOnline", "image", paramImage);
+
+	bool failed = true;
+	try
+	{
+		api->createImageWatermarkOnline(paramDocument, paramImage, paramPictureFrame, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermarkOnline", "image");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermarkOnline", "image", paramImage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermarkOnline", "image");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermarkOnline", "image", paramImage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postImageWatermarkOnline", "image"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postImageWatermarkOnlineInvalidPictureFrame) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postImageWatermarkOnline", "document");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("postImageWatermarkOnline", "image");
+	std::shared_ptr<PictureFrame> paramPictureFrame = utils->getTestValueForClass<PictureFrame>("postImageWatermarkOnline", "pictureFrame");
+	utility::string_t paramPassword = utils->getTestValue("postImageWatermarkOnline", "password");
+	paramPictureFrame = utils->getInvalidTestValueForClass<>("postImageWatermarkOnline", "pictureFrame", paramPictureFrame);
+	utils->initialize("postImageWatermarkOnline", "pictureFrame", paramPictureFrame);
+
+	bool failed = true;
+	try
+	{
+		api->createImageWatermarkOnline(paramDocument, paramImage, paramPictureFrame, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermarkOnline", "pictureFrame");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermarkOnline", "pictureFrame", paramPictureFrame);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermarkOnline", "pictureFrame");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermarkOnline", "pictureFrame", paramPictureFrame);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postImageWatermarkOnline", "pictureFrame"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postImageWatermarkOnlineInvalidPassword) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postImageWatermarkOnline", "document");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("postImageWatermarkOnline", "image");
+	std::shared_ptr<PictureFrame> paramPictureFrame = utils->getTestValueForClass<PictureFrame>("postImageWatermarkOnline", "pictureFrame");
+	utility::string_t paramPassword = utils->getTestValue("postImageWatermarkOnline", "password");
+	paramPassword = utils->getInvalidTestValue("postImageWatermarkOnline", "password", paramPassword);
+	utils->initialize("postImageWatermarkOnline", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->createImageWatermarkOnline(paramDocument, paramImage, paramPictureFrame, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermarkOnline", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermarkOnline", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postImageWatermarkOnline", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postImageWatermarkOnline", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postImageWatermarkOnline", "password"))
 	{
 		FAIL() << "Must have failed";
 	}
@@ -41532,6 +42413,846 @@ TEST_F(SlidesApiTest, postSubshapeSaveAsInvalidFontsFolder) {
 	}
 }
 
+TEST_F(SlidesApiTest, postWatermark) {
+	utility::string_t paramName = utils->getTestValue("postWatermark", "name");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermark", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermark", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermark", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermark", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermark", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("postWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("postWatermark", "storage");
+	utils->initialize("postWatermark", "");
+	api->createWatermark(paramName, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword, paramFolder, paramStorage).wait();
+}
+
+TEST_F(SlidesApiTest, postWatermarkInvalidName) {
+	utility::string_t paramName = utils->getTestValue("postWatermark", "name");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermark", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermark", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermark", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermark", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermark", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("postWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("postWatermark", "storage");
+	paramName = utils->getInvalidTestValue("postWatermark", "name", paramName);
+	utils->initialize("postWatermark", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->createWatermark(paramName, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermark", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkInvalidShape) {
+	utility::string_t paramName = utils->getTestValue("postWatermark", "name");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermark", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermark", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermark", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermark", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermark", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("postWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("postWatermark", "storage");
+	paramShape = utils->getInvalidTestValueForClass<>("postWatermark", "shape", paramShape);
+	utils->initialize("postWatermark", "shape", paramShape);
+
+	bool failed = true;
+	try
+	{
+		api->createWatermark(paramName, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "shape");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "shape", paramShape);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "shape");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "shape", paramShape);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermark", "shape"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkInvalidFontHeight) {
+	utility::string_t paramName = utils->getTestValue("postWatermark", "name");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermark", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermark", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermark", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermark", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermark", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("postWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("postWatermark", "storage");
+	paramFontHeight = utils->getInvalidDoubleTestValue("postWatermark", "fontHeight", paramFontHeight).value();
+	utils->initialize("postWatermark", "fontHeight", paramFontHeight);
+
+	bool failed = true;
+	try
+	{
+		api->createWatermark(paramName, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "fontHeight");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "fontHeight", paramFontHeight);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "fontHeight");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "fontHeight", paramFontHeight);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermark", "fontHeight"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkInvalidText) {
+	utility::string_t paramName = utils->getTestValue("postWatermark", "name");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermark", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermark", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermark", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermark", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermark", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("postWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("postWatermark", "storage");
+	paramText = utils->getInvalidTestValue("postWatermark", "text", paramText);
+	utils->initialize("postWatermark", "text", paramText);
+
+	bool failed = true;
+	try
+	{
+		api->createWatermark(paramName, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "text");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "text", paramText);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "text");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "text", paramText);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermark", "text"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkInvalidFontName) {
+	utility::string_t paramName = utils->getTestValue("postWatermark", "name");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermark", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermark", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermark", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermark", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermark", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("postWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("postWatermark", "storage");
+	paramFontName = utils->getInvalidTestValue("postWatermark", "fontName", paramFontName);
+	utils->initialize("postWatermark", "fontName", paramFontName);
+
+	bool failed = true;
+	try
+	{
+		api->createWatermark(paramName, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "fontName");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "fontName", paramFontName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "fontName");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "fontName", paramFontName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermark", "fontName"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkInvalidFontColor) {
+	utility::string_t paramName = utils->getTestValue("postWatermark", "name");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermark", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermark", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermark", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermark", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermark", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("postWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("postWatermark", "storage");
+	paramFontColor = utils->getInvalidTestValue("postWatermark", "fontColor", paramFontColor);
+	utils->initialize("postWatermark", "fontColor", paramFontColor);
+
+	bool failed = true;
+	try
+	{
+		api->createWatermark(paramName, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "fontColor");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "fontColor", paramFontColor);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "fontColor");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "fontColor", paramFontColor);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermark", "fontColor"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("postWatermark", "name");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermark", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermark", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermark", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermark", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermark", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("postWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("postWatermark", "storage");
+	paramPassword = utils->getInvalidTestValue("postWatermark", "password", paramPassword);
+	utils->initialize("postWatermark", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->createWatermark(paramName, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermark", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("postWatermark", "name");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermark", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermark", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermark", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermark", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermark", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("postWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("postWatermark", "storage");
+	paramFolder = utils->getInvalidTestValue("postWatermark", "folder", paramFolder);
+	utils->initialize("postWatermark", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->createWatermark(paramName, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermark", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("postWatermark", "name");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermark", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermark", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermark", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermark", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermark", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermark", "password");
+	utility::string_t paramFolder = utils->getTestValue("postWatermark", "folder");
+	utility::string_t paramStorage = utils->getTestValue("postWatermark", "storage");
+	paramStorage = utils->getInvalidTestValue("postWatermark", "storage", paramStorage);
+	utils->initialize("postWatermark", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->createWatermark(paramName, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermark", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermark", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermark", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkDeleteOnline) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postWatermarkDeleteOnline", "document");
+	utility::string_t paramShapeName = utils->getTestValue("postWatermarkDeleteOnline", "shapeName");
+	utility::string_t paramPassword = utils->getTestValue("postWatermarkDeleteOnline", "password");
+	utils->initialize("postWatermarkDeleteOnline", "");
+	HttpContent result = api->deleteWatermarkOnline(paramDocument, paramShapeName, paramPassword).get();
+	EXPECT_FALSE(result.getData()->eof());
+}
+
+TEST_F(SlidesApiTest, postWatermarkDeleteOnlineInvalidDocument) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postWatermarkDeleteOnline", "document");
+	utility::string_t paramShapeName = utils->getTestValue("postWatermarkDeleteOnline", "shapeName");
+	utility::string_t paramPassword = utils->getTestValue("postWatermarkDeleteOnline", "password");
+	paramDocument = utils->getInvalidBinaryTestValue("postWatermarkDeleteOnline", "document", paramDocument);
+	utils->initialize("postWatermarkDeleteOnline", "document", paramDocument);
+
+	bool failed = true;
+	try
+	{
+		api->deleteWatermarkOnline(paramDocument, paramShapeName, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkDeleteOnline", "document");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkDeleteOnline", "document", paramDocument);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkDeleteOnline", "document");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkDeleteOnline", "document", paramDocument);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermarkDeleteOnline", "document"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkDeleteOnlineInvalidShapeName) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postWatermarkDeleteOnline", "document");
+	utility::string_t paramShapeName = utils->getTestValue("postWatermarkDeleteOnline", "shapeName");
+	utility::string_t paramPassword = utils->getTestValue("postWatermarkDeleteOnline", "password");
+	paramShapeName = utils->getInvalidTestValue("postWatermarkDeleteOnline", "shapeName", paramShapeName);
+	utils->initialize("postWatermarkDeleteOnline", "shapeName", paramShapeName);
+
+	bool failed = true;
+	try
+	{
+		api->deleteWatermarkOnline(paramDocument, paramShapeName, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkDeleteOnline", "shapeName");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkDeleteOnline", "shapeName", paramShapeName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkDeleteOnline", "shapeName");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkDeleteOnline", "shapeName", paramShapeName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermarkDeleteOnline", "shapeName"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkDeleteOnlineInvalidPassword) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postWatermarkDeleteOnline", "document");
+	utility::string_t paramShapeName = utils->getTestValue("postWatermarkDeleteOnline", "shapeName");
+	utility::string_t paramPassword = utils->getTestValue("postWatermarkDeleteOnline", "password");
+	paramPassword = utils->getInvalidTestValue("postWatermarkDeleteOnline", "password", paramPassword);
+	utils->initialize("postWatermarkDeleteOnline", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->deleteWatermarkOnline(paramDocument, paramShapeName, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkDeleteOnline", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkDeleteOnline", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkDeleteOnline", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkDeleteOnline", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermarkDeleteOnline", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkOnline) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postWatermarkOnline", "document");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermarkOnline", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermarkOnline", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermarkOnline", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermarkOnline", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermarkOnline", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermarkOnline", "password");
+	utils->initialize("postWatermarkOnline", "");
+	HttpContent result = api->createWatermarkOnline(paramDocument, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword).get();
+	EXPECT_FALSE(result.getData()->eof());
+}
+
+TEST_F(SlidesApiTest, postWatermarkOnlineInvalidDocument) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postWatermarkOnline", "document");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermarkOnline", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermarkOnline", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermarkOnline", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermarkOnline", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermarkOnline", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermarkOnline", "password");
+	paramDocument = utils->getInvalidBinaryTestValue("postWatermarkOnline", "document", paramDocument);
+	utils->initialize("postWatermarkOnline", "document", paramDocument);
+
+	bool failed = true;
+	try
+	{
+		api->createWatermarkOnline(paramDocument, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkOnline", "document");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkOnline", "document", paramDocument);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkOnline", "document");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkOnline", "document", paramDocument);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermarkOnline", "document"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkOnlineInvalidShape) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postWatermarkOnline", "document");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermarkOnline", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermarkOnline", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermarkOnline", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermarkOnline", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermarkOnline", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermarkOnline", "password");
+	paramShape = utils->getInvalidTestValueForClass<>("postWatermarkOnline", "shape", paramShape);
+	utils->initialize("postWatermarkOnline", "shape", paramShape);
+
+	bool failed = true;
+	try
+	{
+		api->createWatermarkOnline(paramDocument, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkOnline", "shape");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkOnline", "shape", paramShape);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkOnline", "shape");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkOnline", "shape", paramShape);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermarkOnline", "shape"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkOnlineInvalidFontHeight) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postWatermarkOnline", "document");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermarkOnline", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermarkOnline", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermarkOnline", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermarkOnline", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermarkOnline", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermarkOnline", "password");
+	paramFontHeight = utils->getInvalidDoubleTestValue("postWatermarkOnline", "fontHeight", paramFontHeight).value();
+	utils->initialize("postWatermarkOnline", "fontHeight", paramFontHeight);
+
+	bool failed = true;
+	try
+	{
+		api->createWatermarkOnline(paramDocument, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkOnline", "fontHeight");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkOnline", "fontHeight", paramFontHeight);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkOnline", "fontHeight");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkOnline", "fontHeight", paramFontHeight);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermarkOnline", "fontHeight"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkOnlineInvalidText) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postWatermarkOnline", "document");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermarkOnline", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermarkOnline", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermarkOnline", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermarkOnline", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermarkOnline", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermarkOnline", "password");
+	paramText = utils->getInvalidTestValue("postWatermarkOnline", "text", paramText);
+	utils->initialize("postWatermarkOnline", "text", paramText);
+
+	bool failed = true;
+	try
+	{
+		api->createWatermarkOnline(paramDocument, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkOnline", "text");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkOnline", "text", paramText);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkOnline", "text");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkOnline", "text", paramText);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermarkOnline", "text"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkOnlineInvalidFontName) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postWatermarkOnline", "document");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermarkOnline", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermarkOnline", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermarkOnline", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermarkOnline", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermarkOnline", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermarkOnline", "password");
+	paramFontName = utils->getInvalidTestValue("postWatermarkOnline", "fontName", paramFontName);
+	utils->initialize("postWatermarkOnline", "fontName", paramFontName);
+
+	bool failed = true;
+	try
+	{
+		api->createWatermarkOnline(paramDocument, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkOnline", "fontName");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkOnline", "fontName", paramFontName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkOnline", "fontName");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkOnline", "fontName", paramFontName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermarkOnline", "fontName"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkOnlineInvalidFontColor) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postWatermarkOnline", "document");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermarkOnline", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermarkOnline", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermarkOnline", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermarkOnline", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermarkOnline", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermarkOnline", "password");
+	paramFontColor = utils->getInvalidTestValue("postWatermarkOnline", "fontColor", paramFontColor);
+	utils->initialize("postWatermarkOnline", "fontColor", paramFontColor);
+
+	bool failed = true;
+	try
+	{
+		api->createWatermarkOnline(paramDocument, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkOnline", "fontColor");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkOnline", "fontColor", paramFontColor);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkOnline", "fontColor");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkOnline", "fontColor", paramFontColor);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermarkOnline", "fontColor"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, postWatermarkOnlineInvalidPassword) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("postWatermarkOnline", "document");
+	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("postWatermarkOnline", "shape");
+	auto paramFontHeight = utils->getOptionalDoubleTestValue("postWatermarkOnline", "fontHeight");
+	utility::string_t paramText = utils->getTestValue("postWatermarkOnline", "text");
+	utility::string_t paramFontName = utils->getTestValue("postWatermarkOnline", "fontName");
+	utility::string_t paramFontColor = utils->getTestValue("postWatermarkOnline", "fontColor");
+	utility::string_t paramPassword = utils->getTestValue("postWatermarkOnline", "password");
+	paramPassword = utils->getInvalidTestValue("postWatermarkOnline", "password", paramPassword);
+	utils->initialize("postWatermarkOnline", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->createWatermarkOnline(paramDocument, paramShape, paramFontHeight, paramText, paramFontName, paramFontColor, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkOnline", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkOnline", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("postWatermarkOnline", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("postWatermarkOnline", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("postWatermarkOnline", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, putChartCategory) {
 	utility::string_t paramName = utils->getTestValue("putChartCategory", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("putChartCategory", "slideIndex");
@@ -42665,14 +44386,14 @@ TEST_F(SlidesApiTest, putExportShape) {
 	int32_t paramShapeIndex = utils->getIntTestValue("putExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("putExportShape", "format");
 	utility::string_t paramOutPath = utils->getTestValue("putExportShape", "outPath");
-	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("putExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("putExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("putExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("putExportShape", "fontsFolder");
 	utils->initialize("putExportShape", "");
-	api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+	api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 }
 
 TEST_F(SlidesApiTest, putExportShapeInvalidDocument) {
@@ -42681,11 +44402,11 @@ TEST_F(SlidesApiTest, putExportShapeInvalidDocument) {
 	int32_t paramShapeIndex = utils->getIntTestValue("putExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("putExportShape", "format");
 	utility::string_t paramOutPath = utils->getTestValue("putExportShape", "outPath");
-	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("putExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("putExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("putExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("putExportShape", "fontsFolder");
 	paramDocument = utils->getInvalidBinaryTestValue("putExportShape", "document", paramDocument);
 	utils->initialize("putExportShape", "document", paramDocument);
@@ -42693,7 +44414,7 @@ TEST_F(SlidesApiTest, putExportShapeInvalidDocument) {
 	bool failed = true;
 	try
 	{
-		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -42727,11 +44448,11 @@ TEST_F(SlidesApiTest, putExportShapeInvalidSlideIndex) {
 	int32_t paramShapeIndex = utils->getIntTestValue("putExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("putExportShape", "format");
 	utility::string_t paramOutPath = utils->getTestValue("putExportShape", "outPath");
-	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("putExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("putExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("putExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("putExportShape", "fontsFolder");
 	paramSlideIndex = utils->getInvalidIntTestValue("putExportShape", "slideIndex", paramSlideIndex).value();
 	utils->initialize("putExportShape", "slideIndex", paramSlideIndex);
@@ -42739,7 +44460,7 @@ TEST_F(SlidesApiTest, putExportShapeInvalidSlideIndex) {
 	bool failed = true;
 	try
 	{
-		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -42773,11 +44494,11 @@ TEST_F(SlidesApiTest, putExportShapeInvalidShapeIndex) {
 	int32_t paramShapeIndex = utils->getIntTestValue("putExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("putExportShape", "format");
 	utility::string_t paramOutPath = utils->getTestValue("putExportShape", "outPath");
-	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("putExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("putExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("putExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("putExportShape", "fontsFolder");
 	paramShapeIndex = utils->getInvalidIntTestValue("putExportShape", "shapeIndex", paramShapeIndex).value();
 	utils->initialize("putExportShape", "shapeIndex", paramShapeIndex);
@@ -42785,7 +44506,7 @@ TEST_F(SlidesApiTest, putExportShapeInvalidShapeIndex) {
 	bool failed = true;
 	try
 	{
-		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -42819,11 +44540,11 @@ TEST_F(SlidesApiTest, putExportShapeInvalidFormat) {
 	int32_t paramShapeIndex = utils->getIntTestValue("putExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("putExportShape", "format");
 	utility::string_t paramOutPath = utils->getTestValue("putExportShape", "outPath");
-	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("putExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("putExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("putExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("putExportShape", "fontsFolder");
 	paramFormat = utils->getInvalidTestValue("putExportShape", "format", paramFormat);
 	utils->initialize("putExportShape", "format", paramFormat);
@@ -42831,7 +44552,7 @@ TEST_F(SlidesApiTest, putExportShapeInvalidFormat) {
 	bool failed = true;
 	try
 	{
-		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -42865,11 +44586,11 @@ TEST_F(SlidesApiTest, putExportShapeInvalidOutPath) {
 	int32_t paramShapeIndex = utils->getIntTestValue("putExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("putExportShape", "format");
 	utility::string_t paramOutPath = utils->getTestValue("putExportShape", "outPath");
-	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("putExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("putExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("putExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("putExportShape", "fontsFolder");
 	paramOutPath = utils->getInvalidTestValue("putExportShape", "outPath", paramOutPath);
 	utils->initialize("putExportShape", "outPath", paramOutPath);
@@ -42877,7 +44598,7 @@ TEST_F(SlidesApiTest, putExportShapeInvalidOutPath) {
 	bool failed = true;
 	try
 	{
-		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -42905,109 +44626,17 @@ TEST_F(SlidesApiTest, putExportShapeInvalidOutPath) {
 	}
 }
 
-TEST_F(SlidesApiTest, putExportShapeInvalidPassword) {
-	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("putExportShape", "document");
-	int32_t paramSlideIndex = utils->getIntTestValue("putExportShape", "slideIndex");
-	int32_t paramShapeIndex = utils->getIntTestValue("putExportShape", "shapeIndex");
-	utility::string_t paramFormat = utils->getTestValue("putExportShape", "format");
-	utility::string_t paramOutPath = utils->getTestValue("putExportShape", "outPath");
-	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
-	auto paramScaleX = utils->getOptionalDoubleTestValue("putExportShape", "scaleX");
-	auto paramScaleY = utils->getOptionalDoubleTestValue("putExportShape", "scaleY");
-	utility::string_t paramBounds = utils->getTestValue("putExportShape", "bounds");
-	utility::string_t paramFontsFolder = utils->getTestValue("putExportShape", "fontsFolder");
-	paramPassword = utils->getInvalidTestValue("putExportShape", "password", paramPassword);
-	utils->initialize("putExportShape", "password", paramPassword);
-
-	bool failed = true;
-	try
-	{
-		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("putExportShape", "password");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("putExportShape", "password", paramPassword);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("putExportShape", "password");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("putExportShape", "password", paramPassword);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("putExportShape", "password"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, putExportShapeInvalidStorage) {
-	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("putExportShape", "document");
-	int32_t paramSlideIndex = utils->getIntTestValue("putExportShape", "slideIndex");
-	int32_t paramShapeIndex = utils->getIntTestValue("putExportShape", "shapeIndex");
-	utility::string_t paramFormat = utils->getTestValue("putExportShape", "format");
-	utility::string_t paramOutPath = utils->getTestValue("putExportShape", "outPath");
-	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
-	auto paramScaleX = utils->getOptionalDoubleTestValue("putExportShape", "scaleX");
-	auto paramScaleY = utils->getOptionalDoubleTestValue("putExportShape", "scaleY");
-	utility::string_t paramBounds = utils->getTestValue("putExportShape", "bounds");
-	utility::string_t paramFontsFolder = utils->getTestValue("putExportShape", "fontsFolder");
-	paramStorage = utils->getInvalidTestValue("putExportShape", "storage", paramStorage);
-	utils->initialize("putExportShape", "storage", paramStorage);
-
-	bool failed = true;
-	try
-	{
-		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("putExportShape", "storage");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("putExportShape", "storage", paramStorage);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("putExportShape", "storage");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("putExportShape", "storage", paramStorage);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("putExportShape", "storage"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
 TEST_F(SlidesApiTest, putExportShapeInvalidScaleX) {
 	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("putExportShape", "document");
 	int32_t paramSlideIndex = utils->getIntTestValue("putExportShape", "slideIndex");
 	int32_t paramShapeIndex = utils->getIntTestValue("putExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("putExportShape", "format");
 	utility::string_t paramOutPath = utils->getTestValue("putExportShape", "outPath");
-	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("putExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("putExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("putExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("putExportShape", "fontsFolder");
 	paramScaleX = utils->getInvalidDoubleTestValue("putExportShape", "scaleX", paramScaleX).value();
 	utils->initialize("putExportShape", "scaleX", paramScaleX);
@@ -43015,7 +44644,7 @@ TEST_F(SlidesApiTest, putExportShapeInvalidScaleX) {
 	bool failed = true;
 	try
 	{
-		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -43049,11 +44678,11 @@ TEST_F(SlidesApiTest, putExportShapeInvalidScaleY) {
 	int32_t paramShapeIndex = utils->getIntTestValue("putExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("putExportShape", "format");
 	utility::string_t paramOutPath = utils->getTestValue("putExportShape", "outPath");
-	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("putExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("putExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("putExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("putExportShape", "fontsFolder");
 	paramScaleY = utils->getInvalidDoubleTestValue("putExportShape", "scaleY", paramScaleY).value();
 	utils->initialize("putExportShape", "scaleY", paramScaleY);
@@ -43061,7 +44690,7 @@ TEST_F(SlidesApiTest, putExportShapeInvalidScaleY) {
 	bool failed = true;
 	try
 	{
-		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -43095,11 +44724,11 @@ TEST_F(SlidesApiTest, putExportShapeInvalidBounds) {
 	int32_t paramShapeIndex = utils->getIntTestValue("putExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("putExportShape", "format");
 	utility::string_t paramOutPath = utils->getTestValue("putExportShape", "outPath");
-	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("putExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("putExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("putExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("putExportShape", "fontsFolder");
 	paramBounds = utils->getInvalidTestValue("putExportShape", "bounds", paramBounds);
 	utils->initialize("putExportShape", "bounds", paramBounds);
@@ -43107,7 +44736,7 @@ TEST_F(SlidesApiTest, putExportShapeInvalidBounds) {
 	bool failed = true;
 	try
 	{
-		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -43135,17 +44764,109 @@ TEST_F(SlidesApiTest, putExportShapeInvalidBounds) {
 	}
 }
 
+TEST_F(SlidesApiTest, putExportShapeInvalidPassword) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("putExportShape", "document");
+	int32_t paramSlideIndex = utils->getIntTestValue("putExportShape", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("putExportShape", "shapeIndex");
+	utility::string_t paramFormat = utils->getTestValue("putExportShape", "format");
+	utility::string_t paramOutPath = utils->getTestValue("putExportShape", "outPath");
+	auto paramScaleX = utils->getOptionalDoubleTestValue("putExportShape", "scaleX");
+	auto paramScaleY = utils->getOptionalDoubleTestValue("putExportShape", "scaleY");
+	utility::string_t paramBounds = utils->getTestValue("putExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("putExportShape", "fontsFolder");
+	paramPassword = utils->getInvalidTestValue("putExportShape", "password", paramPassword);
+	utils->initialize("putExportShape", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("putExportShape", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("putExportShape", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("putExportShape", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("putExportShape", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("putExportShape", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, putExportShapeInvalidStorage) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("putExportShape", "document");
+	int32_t paramSlideIndex = utils->getIntTestValue("putExportShape", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("putExportShape", "shapeIndex");
+	utility::string_t paramFormat = utils->getTestValue("putExportShape", "format");
+	utility::string_t paramOutPath = utils->getTestValue("putExportShape", "outPath");
+	auto paramScaleX = utils->getOptionalDoubleTestValue("putExportShape", "scaleX");
+	auto paramScaleY = utils->getOptionalDoubleTestValue("putExportShape", "scaleY");
+	utility::string_t paramBounds = utils->getTestValue("putExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("putExportShape", "fontsFolder");
+	paramStorage = utils->getInvalidTestValue("putExportShape", "storage", paramStorage);
+	utils->initialize("putExportShape", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("putExportShape", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("putExportShape", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("putExportShape", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("putExportShape", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("putExportShape", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, putExportShapeInvalidFontsFolder) {
 	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("putExportShape", "document");
 	int32_t paramSlideIndex = utils->getIntTestValue("putExportShape", "slideIndex");
 	int32_t paramShapeIndex = utils->getIntTestValue("putExportShape", "shapeIndex");
 	utility::string_t paramFormat = utils->getTestValue("putExportShape", "format");
 	utility::string_t paramOutPath = utils->getTestValue("putExportShape", "outPath");
-	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
-	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	auto paramScaleX = utils->getOptionalDoubleTestValue("putExportShape", "scaleX");
 	auto paramScaleY = utils->getOptionalDoubleTestValue("putExportShape", "scaleY");
 	utility::string_t paramBounds = utils->getTestValue("putExportShape", "bounds");
+	utility::string_t paramPassword = utils->getTestValue("putExportShape", "password");
+	utility::string_t paramStorage = utils->getTestValue("putExportShape", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("putExportShape", "fontsFolder");
 	paramFontsFolder = utils->getInvalidTestValue("putExportShape", "fontsFolder", paramFontsFolder);
 	utils->initialize("putExportShape", "fontsFolder", paramFontsFolder);
@@ -43153,7 +44874,7 @@ TEST_F(SlidesApiTest, putExportShapeInvalidFontsFolder) {
 	bool failed = true;
 	try
 	{
-		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramPassword, paramStorage, paramScaleX, paramScaleY, paramBounds, paramFontsFolder).wait();
+		api->saveShapeOnline(paramDocument, paramSlideIndex, paramShapeIndex, paramFormat, paramOutPath, paramScaleX, paramScaleY, paramBounds, paramPassword, paramStorage, paramFontsFolder).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -50808,217 +52529,6 @@ TEST_F(SlidesApiTest, putSlidesConvertInvalidFontsFolder) {
 	}
 }
 
-TEST_F(SlidesApiTest, putSlidesDocumentFromHtml) {
-	utility::string_t paramName = utils->getTestValue("putSlidesDocumentFromHtml", "name");
-	utility::string_t paramHtml = utils->getTestValue("putSlidesDocumentFromHtml", "html");
-	utility::string_t paramPassword = utils->getTestValue("putSlidesDocumentFromHtml", "password");
-	utility::string_t paramFolder = utils->getTestValue("putSlidesDocumentFromHtml", "folder");
-	utility::string_t paramStorage = utils->getTestValue("putSlidesDocumentFromHtml", "storage");
-	utils->initialize("putSlidesDocumentFromHtml", "");
-	std::shared_ptr<Document> result = api->putSlidesDocumentFromHtml(paramName, paramHtml, paramPassword, paramFolder, paramStorage).get();
-	EXPECT_NE(nullptr, result);
-}
-
-TEST_F(SlidesApiTest, putSlidesDocumentFromHtmlInvalidName) {
-	utility::string_t paramName = utils->getTestValue("putSlidesDocumentFromHtml", "name");
-	utility::string_t paramHtml = utils->getTestValue("putSlidesDocumentFromHtml", "html");
-	utility::string_t paramPassword = utils->getTestValue("putSlidesDocumentFromHtml", "password");
-	utility::string_t paramFolder = utils->getTestValue("putSlidesDocumentFromHtml", "folder");
-	utility::string_t paramStorage = utils->getTestValue("putSlidesDocumentFromHtml", "storage");
-	paramName = utils->getInvalidTestValue("putSlidesDocumentFromHtml", "name", paramName);
-	utils->initialize("putSlidesDocumentFromHtml", "name", paramName);
-
-	bool failed = true;
-	try
-	{
-		api->putSlidesDocumentFromHtml(paramName, paramHtml, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("putSlidesDocumentFromHtml", "name");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesDocumentFromHtml", "name", paramName);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("putSlidesDocumentFromHtml", "name");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesDocumentFromHtml", "name", paramName);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("putSlidesDocumentFromHtml", "name"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, putSlidesDocumentFromHtmlInvalidHtml) {
-	utility::string_t paramName = utils->getTestValue("putSlidesDocumentFromHtml", "name");
-	utility::string_t paramHtml = utils->getTestValue("putSlidesDocumentFromHtml", "html");
-	utility::string_t paramPassword = utils->getTestValue("putSlidesDocumentFromHtml", "password");
-	utility::string_t paramFolder = utils->getTestValue("putSlidesDocumentFromHtml", "folder");
-	utility::string_t paramStorage = utils->getTestValue("putSlidesDocumentFromHtml", "storage");
-	paramHtml = utils->getInvalidTestValue("putSlidesDocumentFromHtml", "html", paramHtml);
-	utils->initialize("putSlidesDocumentFromHtml", "html", paramHtml);
-
-	bool failed = true;
-	try
-	{
-		api->putSlidesDocumentFromHtml(paramName, paramHtml, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("putSlidesDocumentFromHtml", "html");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesDocumentFromHtml", "html", paramHtml);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("putSlidesDocumentFromHtml", "html");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesDocumentFromHtml", "html", paramHtml);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("putSlidesDocumentFromHtml", "html"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, putSlidesDocumentFromHtmlInvalidPassword) {
-	utility::string_t paramName = utils->getTestValue("putSlidesDocumentFromHtml", "name");
-	utility::string_t paramHtml = utils->getTestValue("putSlidesDocumentFromHtml", "html");
-	utility::string_t paramPassword = utils->getTestValue("putSlidesDocumentFromHtml", "password");
-	utility::string_t paramFolder = utils->getTestValue("putSlidesDocumentFromHtml", "folder");
-	utility::string_t paramStorage = utils->getTestValue("putSlidesDocumentFromHtml", "storage");
-	paramPassword = utils->getInvalidTestValue("putSlidesDocumentFromHtml", "password", paramPassword);
-	utils->initialize("putSlidesDocumentFromHtml", "password", paramPassword);
-
-	bool failed = true;
-	try
-	{
-		api->putSlidesDocumentFromHtml(paramName, paramHtml, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("putSlidesDocumentFromHtml", "password");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesDocumentFromHtml", "password", paramPassword);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("putSlidesDocumentFromHtml", "password");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesDocumentFromHtml", "password", paramPassword);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("putSlidesDocumentFromHtml", "password"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, putSlidesDocumentFromHtmlInvalidFolder) {
-	utility::string_t paramName = utils->getTestValue("putSlidesDocumentFromHtml", "name");
-	utility::string_t paramHtml = utils->getTestValue("putSlidesDocumentFromHtml", "html");
-	utility::string_t paramPassword = utils->getTestValue("putSlidesDocumentFromHtml", "password");
-	utility::string_t paramFolder = utils->getTestValue("putSlidesDocumentFromHtml", "folder");
-	utility::string_t paramStorage = utils->getTestValue("putSlidesDocumentFromHtml", "storage");
-	paramFolder = utils->getInvalidTestValue("putSlidesDocumentFromHtml", "folder", paramFolder);
-	utils->initialize("putSlidesDocumentFromHtml", "folder", paramFolder);
-
-	bool failed = true;
-	try
-	{
-		api->putSlidesDocumentFromHtml(paramName, paramHtml, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("putSlidesDocumentFromHtml", "folder");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesDocumentFromHtml", "folder", paramFolder);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("putSlidesDocumentFromHtml", "folder");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesDocumentFromHtml", "folder", paramFolder);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("putSlidesDocumentFromHtml", "folder"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, putSlidesDocumentFromHtmlInvalidStorage) {
-	utility::string_t paramName = utils->getTestValue("putSlidesDocumentFromHtml", "name");
-	utility::string_t paramHtml = utils->getTestValue("putSlidesDocumentFromHtml", "html");
-	utility::string_t paramPassword = utils->getTestValue("putSlidesDocumentFromHtml", "password");
-	utility::string_t paramFolder = utils->getTestValue("putSlidesDocumentFromHtml", "folder");
-	utility::string_t paramStorage = utils->getTestValue("putSlidesDocumentFromHtml", "storage");
-	paramStorage = utils->getInvalidTestValue("putSlidesDocumentFromHtml", "storage", paramStorage);
-	utils->initialize("putSlidesDocumentFromHtml", "storage", paramStorage);
-
-	bool failed = true;
-	try
-	{
-		api->putSlidesDocumentFromHtml(paramName, paramHtml, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("putSlidesDocumentFromHtml", "storage");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesDocumentFromHtml", "storage", paramStorage);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("putSlidesDocumentFromHtml", "storage");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesDocumentFromHtml", "storage", paramStorage);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("putSlidesDocumentFromHtml", "storage"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
 TEST_F(SlidesApiTest, putSlidesHeaderFooter) {
 	utility::string_t paramName = utils->getTestValue("putSlidesHeaderFooter", "name");
 	std::shared_ptr<HeaderFooter> paramDto = utils->getTestValueForClass<HeaderFooter>("putSlidesHeaderFooter", "dto");
@@ -51447,7 +52957,7 @@ TEST_F(SlidesApiTest, putSlidesProtectionProperties) {
 	utility::string_t paramFolder = utils->getTestValue("putSlidesProtectionProperties", "folder");
 	utility::string_t paramStorage = utils->getTestValue("putSlidesProtectionProperties", "storage");
 	utils->initialize("putSlidesProtectionProperties", "");
-	std::shared_ptr<ProtectionProperties> result = api->setProtectionProperties(paramName, paramDto, paramPassword, paramFolder, paramStorage).get();
+	std::shared_ptr<ProtectionProperties> result = api->setProtection(paramName, paramDto, paramPassword, paramFolder, paramStorage).get();
 	EXPECT_NE(nullptr, result);
 }
 
@@ -51463,7 +52973,7 @@ TEST_F(SlidesApiTest, putSlidesProtectionPropertiesInvalidName) {
 	bool failed = true;
 	try
 	{
-		api->setProtectionProperties(paramName, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		api->setProtection(paramName, paramDto, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -51503,7 +53013,7 @@ TEST_F(SlidesApiTest, putSlidesProtectionPropertiesInvalidDto) {
 	bool failed = true;
 	try
 	{
-		api->setProtectionProperties(paramName, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		api->setProtection(paramName, paramDto, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -51543,7 +53053,7 @@ TEST_F(SlidesApiTest, putSlidesProtectionPropertiesInvalidPassword) {
 	bool failed = true;
 	try
 	{
-		api->setProtectionProperties(paramName, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		api->setProtection(paramName, paramDto, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -51583,7 +53093,7 @@ TEST_F(SlidesApiTest, putSlidesProtectionPropertiesInvalidFolder) {
 	bool failed = true;
 	try
 	{
-		api->setProtectionProperties(paramName, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		api->setProtection(paramName, paramDto, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -51623,7 +53133,7 @@ TEST_F(SlidesApiTest, putSlidesProtectionPropertiesInvalidStorage) {
 	bool failed = true;
 	try
 	{
-		api->setProtectionProperties(paramName, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		api->setProtection(paramName, paramDto, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -51646,6 +53156,129 @@ TEST_F(SlidesApiTest, putSlidesProtectionPropertiesInvalidStorage) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("putSlidesProtectionProperties", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, putSlidesProtectionPropertiesOnline) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("putSlidesProtectionPropertiesOnline", "document");
+	std::shared_ptr<ProtectionProperties> paramDto = utils->getTestValueForClass<ProtectionProperties>("putSlidesProtectionPropertiesOnline", "dto");
+	utility::string_t paramPassword = utils->getTestValue("putSlidesProtectionPropertiesOnline", "password");
+	utils->initialize("putSlidesProtectionPropertiesOnline", "");
+	HttpContent result = api->setProtectionOnline(paramDocument, paramDto, paramPassword).get();
+	EXPECT_FALSE(result.getData()->eof());
+}
+
+TEST_F(SlidesApiTest, putSlidesProtectionPropertiesOnlineInvalidDocument) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("putSlidesProtectionPropertiesOnline", "document");
+	std::shared_ptr<ProtectionProperties> paramDto = utils->getTestValueForClass<ProtectionProperties>("putSlidesProtectionPropertiesOnline", "dto");
+	utility::string_t paramPassword = utils->getTestValue("putSlidesProtectionPropertiesOnline", "password");
+	paramDocument = utils->getInvalidBinaryTestValue("putSlidesProtectionPropertiesOnline", "document", paramDocument);
+	utils->initialize("putSlidesProtectionPropertiesOnline", "document", paramDocument);
+
+	bool failed = true;
+	try
+	{
+		api->setProtectionOnline(paramDocument, paramDto, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("putSlidesProtectionPropertiesOnline", "document");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesProtectionPropertiesOnline", "document", paramDocument);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("putSlidesProtectionPropertiesOnline", "document");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesProtectionPropertiesOnline", "document", paramDocument);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("putSlidesProtectionPropertiesOnline", "document"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, putSlidesProtectionPropertiesOnlineInvalidDto) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("putSlidesProtectionPropertiesOnline", "document");
+	std::shared_ptr<ProtectionProperties> paramDto = utils->getTestValueForClass<ProtectionProperties>("putSlidesProtectionPropertiesOnline", "dto");
+	utility::string_t paramPassword = utils->getTestValue("putSlidesProtectionPropertiesOnline", "password");
+	paramDto = utils->getInvalidTestValueForClass<>("putSlidesProtectionPropertiesOnline", "dto", paramDto);
+	utils->initialize("putSlidesProtectionPropertiesOnline", "dto", paramDto);
+
+	bool failed = true;
+	try
+	{
+		api->setProtectionOnline(paramDocument, paramDto, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("putSlidesProtectionPropertiesOnline", "dto");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesProtectionPropertiesOnline", "dto", paramDto);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("putSlidesProtectionPropertiesOnline", "dto");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesProtectionPropertiesOnline", "dto", paramDto);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("putSlidesProtectionPropertiesOnline", "dto"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, putSlidesProtectionPropertiesOnlineInvalidPassword) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("putSlidesProtectionPropertiesOnline", "document");
+	std::shared_ptr<ProtectionProperties> paramDto = utils->getTestValueForClass<ProtectionProperties>("putSlidesProtectionPropertiesOnline", "dto");
+	utility::string_t paramPassword = utils->getTestValue("putSlidesProtectionPropertiesOnline", "password");
+	paramPassword = utils->getInvalidTestValue("putSlidesProtectionPropertiesOnline", "password", paramPassword);
+	utils->initialize("putSlidesProtectionPropertiesOnline", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->setProtectionOnline(paramDocument, paramDto, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("putSlidesProtectionPropertiesOnline", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesProtectionPropertiesOnline", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("putSlidesProtectionPropertiesOnline", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("putSlidesProtectionPropertiesOnline", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("putSlidesProtectionPropertiesOnline", "password"))
 	{
 		FAIL() << "Must have failed";
 	}
@@ -53246,364 +54879,6 @@ TEST_F(SlidesApiTest, putSlidesSlidePropertiesInvalidStorage) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("putSlidesSlideProperties", "storage"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, putSlidesSlideSize) {
-	utility::string_t paramName = utils->getTestValue("putSlidesSlideSize", "name");
-	auto paramWidth = utils->getOptionalIntTestValue("putSlidesSlideSize", "width");
-	auto paramHeight = utils->getOptionalIntTestValue("putSlidesSlideSize", "height");
-	utility::string_t paramSizeType = utils->getTestValue("putSlidesSlideSize", "sizeType");
-	utility::string_t paramScaleType = utils->getTestValue("putSlidesSlideSize", "scaleType");
-	utility::string_t paramPassword = utils->getTestValue("putSlidesSlideSize", "password");
-	utility::string_t paramFolder = utils->getTestValue("putSlidesSlideSize", "folder");
-	utility::string_t paramStorage = utils->getTestValue("putSlidesSlideSize", "storage");
-	utils->initialize("putSlidesSlideSize", "");
-	std::shared_ptr<Document> result = api->putSlidesSlideSize(paramName, paramWidth, paramHeight, paramSizeType, paramScaleType, paramPassword, paramFolder, paramStorage).get();
-	EXPECT_NE(nullptr, result);
-}
-
-TEST_F(SlidesApiTest, putSlidesSlideSizeInvalidName) {
-	utility::string_t paramName = utils->getTestValue("putSlidesSlideSize", "name");
-	auto paramWidth = utils->getOptionalIntTestValue("putSlidesSlideSize", "width");
-	auto paramHeight = utils->getOptionalIntTestValue("putSlidesSlideSize", "height");
-	utility::string_t paramSizeType = utils->getTestValue("putSlidesSlideSize", "sizeType");
-	utility::string_t paramScaleType = utils->getTestValue("putSlidesSlideSize", "scaleType");
-	utility::string_t paramPassword = utils->getTestValue("putSlidesSlideSize", "password");
-	utility::string_t paramFolder = utils->getTestValue("putSlidesSlideSize", "folder");
-	utility::string_t paramStorage = utils->getTestValue("putSlidesSlideSize", "storage");
-	paramName = utils->getInvalidTestValue("putSlidesSlideSize", "name", paramName);
-	utils->initialize("putSlidesSlideSize", "name", paramName);
-
-	bool failed = true;
-	try
-	{
-		api->putSlidesSlideSize(paramName, paramWidth, paramHeight, paramSizeType, paramScaleType, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("putSlidesSlideSize", "name");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesSlideSize", "name", paramName);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("putSlidesSlideSize", "name");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesSlideSize", "name", paramName);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("putSlidesSlideSize", "name"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, putSlidesSlideSizeInvalidWidth) {
-	utility::string_t paramName = utils->getTestValue("putSlidesSlideSize", "name");
-	auto paramWidth = utils->getOptionalIntTestValue("putSlidesSlideSize", "width");
-	auto paramHeight = utils->getOptionalIntTestValue("putSlidesSlideSize", "height");
-	utility::string_t paramSizeType = utils->getTestValue("putSlidesSlideSize", "sizeType");
-	utility::string_t paramScaleType = utils->getTestValue("putSlidesSlideSize", "scaleType");
-	utility::string_t paramPassword = utils->getTestValue("putSlidesSlideSize", "password");
-	utility::string_t paramFolder = utils->getTestValue("putSlidesSlideSize", "folder");
-	utility::string_t paramStorage = utils->getTestValue("putSlidesSlideSize", "storage");
-	paramWidth = utils->getInvalidIntTestValue("putSlidesSlideSize", "width", paramWidth).value();
-	utils->initialize("putSlidesSlideSize", "width", paramWidth);
-
-	bool failed = true;
-	try
-	{
-		api->putSlidesSlideSize(paramName, paramWidth, paramHeight, paramSizeType, paramScaleType, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("putSlidesSlideSize", "width");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesSlideSize", "width", paramWidth);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("putSlidesSlideSize", "width");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesSlideSize", "width", paramWidth);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("putSlidesSlideSize", "width"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, putSlidesSlideSizeInvalidHeight) {
-	utility::string_t paramName = utils->getTestValue("putSlidesSlideSize", "name");
-	auto paramWidth = utils->getOptionalIntTestValue("putSlidesSlideSize", "width");
-	auto paramHeight = utils->getOptionalIntTestValue("putSlidesSlideSize", "height");
-	utility::string_t paramSizeType = utils->getTestValue("putSlidesSlideSize", "sizeType");
-	utility::string_t paramScaleType = utils->getTestValue("putSlidesSlideSize", "scaleType");
-	utility::string_t paramPassword = utils->getTestValue("putSlidesSlideSize", "password");
-	utility::string_t paramFolder = utils->getTestValue("putSlidesSlideSize", "folder");
-	utility::string_t paramStorage = utils->getTestValue("putSlidesSlideSize", "storage");
-	paramHeight = utils->getInvalidIntTestValue("putSlidesSlideSize", "height", paramHeight).value();
-	utils->initialize("putSlidesSlideSize", "height", paramHeight);
-
-	bool failed = true;
-	try
-	{
-		api->putSlidesSlideSize(paramName, paramWidth, paramHeight, paramSizeType, paramScaleType, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("putSlidesSlideSize", "height");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesSlideSize", "height", paramHeight);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("putSlidesSlideSize", "height");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesSlideSize", "height", paramHeight);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("putSlidesSlideSize", "height"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, putSlidesSlideSizeInvalidSizeType) {
-	utility::string_t paramName = utils->getTestValue("putSlidesSlideSize", "name");
-	auto paramWidth = utils->getOptionalIntTestValue("putSlidesSlideSize", "width");
-	auto paramHeight = utils->getOptionalIntTestValue("putSlidesSlideSize", "height");
-	utility::string_t paramSizeType = utils->getTestValue("putSlidesSlideSize", "sizeType");
-	utility::string_t paramScaleType = utils->getTestValue("putSlidesSlideSize", "scaleType");
-	utility::string_t paramPassword = utils->getTestValue("putSlidesSlideSize", "password");
-	utility::string_t paramFolder = utils->getTestValue("putSlidesSlideSize", "folder");
-	utility::string_t paramStorage = utils->getTestValue("putSlidesSlideSize", "storage");
-	paramSizeType = utils->getInvalidTestValue("putSlidesSlideSize", "sizeType", paramSizeType);
-	utils->initialize("putSlidesSlideSize", "sizeType", paramSizeType);
-
-	bool failed = true;
-	try
-	{
-		api->putSlidesSlideSize(paramName, paramWidth, paramHeight, paramSizeType, paramScaleType, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("putSlidesSlideSize", "sizeType");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesSlideSize", "sizeType", paramSizeType);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("putSlidesSlideSize", "sizeType");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesSlideSize", "sizeType", paramSizeType);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("putSlidesSlideSize", "sizeType"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, putSlidesSlideSizeInvalidScaleType) {
-	utility::string_t paramName = utils->getTestValue("putSlidesSlideSize", "name");
-	auto paramWidth = utils->getOptionalIntTestValue("putSlidesSlideSize", "width");
-	auto paramHeight = utils->getOptionalIntTestValue("putSlidesSlideSize", "height");
-	utility::string_t paramSizeType = utils->getTestValue("putSlidesSlideSize", "sizeType");
-	utility::string_t paramScaleType = utils->getTestValue("putSlidesSlideSize", "scaleType");
-	utility::string_t paramPassword = utils->getTestValue("putSlidesSlideSize", "password");
-	utility::string_t paramFolder = utils->getTestValue("putSlidesSlideSize", "folder");
-	utility::string_t paramStorage = utils->getTestValue("putSlidesSlideSize", "storage");
-	paramScaleType = utils->getInvalidTestValue("putSlidesSlideSize", "scaleType", paramScaleType);
-	utils->initialize("putSlidesSlideSize", "scaleType", paramScaleType);
-
-	bool failed = true;
-	try
-	{
-		api->putSlidesSlideSize(paramName, paramWidth, paramHeight, paramSizeType, paramScaleType, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("putSlidesSlideSize", "scaleType");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesSlideSize", "scaleType", paramScaleType);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("putSlidesSlideSize", "scaleType");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesSlideSize", "scaleType", paramScaleType);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("putSlidesSlideSize", "scaleType"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, putSlidesSlideSizeInvalidPassword) {
-	utility::string_t paramName = utils->getTestValue("putSlidesSlideSize", "name");
-	auto paramWidth = utils->getOptionalIntTestValue("putSlidesSlideSize", "width");
-	auto paramHeight = utils->getOptionalIntTestValue("putSlidesSlideSize", "height");
-	utility::string_t paramSizeType = utils->getTestValue("putSlidesSlideSize", "sizeType");
-	utility::string_t paramScaleType = utils->getTestValue("putSlidesSlideSize", "scaleType");
-	utility::string_t paramPassword = utils->getTestValue("putSlidesSlideSize", "password");
-	utility::string_t paramFolder = utils->getTestValue("putSlidesSlideSize", "folder");
-	utility::string_t paramStorage = utils->getTestValue("putSlidesSlideSize", "storage");
-	paramPassword = utils->getInvalidTestValue("putSlidesSlideSize", "password", paramPassword);
-	utils->initialize("putSlidesSlideSize", "password", paramPassword);
-
-	bool failed = true;
-	try
-	{
-		api->putSlidesSlideSize(paramName, paramWidth, paramHeight, paramSizeType, paramScaleType, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("putSlidesSlideSize", "password");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesSlideSize", "password", paramPassword);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("putSlidesSlideSize", "password");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesSlideSize", "password", paramPassword);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("putSlidesSlideSize", "password"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, putSlidesSlideSizeInvalidFolder) {
-	utility::string_t paramName = utils->getTestValue("putSlidesSlideSize", "name");
-	auto paramWidth = utils->getOptionalIntTestValue("putSlidesSlideSize", "width");
-	auto paramHeight = utils->getOptionalIntTestValue("putSlidesSlideSize", "height");
-	utility::string_t paramSizeType = utils->getTestValue("putSlidesSlideSize", "sizeType");
-	utility::string_t paramScaleType = utils->getTestValue("putSlidesSlideSize", "scaleType");
-	utility::string_t paramPassword = utils->getTestValue("putSlidesSlideSize", "password");
-	utility::string_t paramFolder = utils->getTestValue("putSlidesSlideSize", "folder");
-	utility::string_t paramStorage = utils->getTestValue("putSlidesSlideSize", "storage");
-	paramFolder = utils->getInvalidTestValue("putSlidesSlideSize", "folder", paramFolder);
-	utils->initialize("putSlidesSlideSize", "folder", paramFolder);
-
-	bool failed = true;
-	try
-	{
-		api->putSlidesSlideSize(paramName, paramWidth, paramHeight, paramSizeType, paramScaleType, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("putSlidesSlideSize", "folder");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesSlideSize", "folder", paramFolder);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("putSlidesSlideSize", "folder");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesSlideSize", "folder", paramFolder);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("putSlidesSlideSize", "folder"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, putSlidesSlideSizeInvalidStorage) {
-	utility::string_t paramName = utils->getTestValue("putSlidesSlideSize", "name");
-	auto paramWidth = utils->getOptionalIntTestValue("putSlidesSlideSize", "width");
-	auto paramHeight = utils->getOptionalIntTestValue("putSlidesSlideSize", "height");
-	utility::string_t paramSizeType = utils->getTestValue("putSlidesSlideSize", "sizeType");
-	utility::string_t paramScaleType = utils->getTestValue("putSlidesSlideSize", "scaleType");
-	utility::string_t paramPassword = utils->getTestValue("putSlidesSlideSize", "password");
-	utility::string_t paramFolder = utils->getTestValue("putSlidesSlideSize", "folder");
-	utility::string_t paramStorage = utils->getTestValue("putSlidesSlideSize", "storage");
-	paramStorage = utils->getInvalidTestValue("putSlidesSlideSize", "storage", paramStorage);
-	utils->initialize("putSlidesSlideSize", "storage", paramStorage);
-
-	bool failed = true;
-	try
-	{
-		api->putSlidesSlideSize(paramName, paramWidth, paramHeight, paramSizeType, paramScaleType, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("putSlidesSlideSize", "storage");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesSlideSize", "storage", paramStorage);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("putSlidesSlideSize", "storage");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("putSlidesSlideSize", "storage", paramStorage);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("putSlidesSlideSize", "storage"))
 	{
 		FAIL() << "Must have failed";
 	}

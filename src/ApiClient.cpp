@@ -99,6 +99,23 @@ pplx::task<web::http::http_response> ApiClient::callApi(
 			length,
 			utility::conversions::to_string_t("multipart/form-data;boundary=" + boundary));
 	}
+	else if (files.size() > 0)
+	{
+		std::stringstream data;
+		files[0]->writeTo(data);
+		auto bodyString = data.str();
+		auto length = bodyString.size();
+		try {
+			logString(utility::conversions::to_string_t(bodyString));
+		}
+		catch (...) {
+			logString(utility::conversions::to_string_t("length: " + std::to_string(length)));
+		}
+		request.set_body(
+			concurrency::streams::bytestream::open_istream(std::move(bodyString)),
+			length,
+			utility::conversions::to_string_t("application/octet-stream"));
+	}
 	else if (postBody != nullptr)
 	{
 		std::stringstream data;

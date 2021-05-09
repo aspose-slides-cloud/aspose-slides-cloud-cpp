@@ -82,6 +82,50 @@ void ProtectionProperties::unsetReadOnlyRecommended()
 	m_ReadOnlyRecommendedIsSet = false;
 }
 
+utility::string_t ProtectionProperties::getReadPassword() const
+{
+	return m_ReadPassword;
+}
+
+void ProtectionProperties::setReadPassword(utility::string_t value)
+{
+	m_ReadPassword = value;
+	
+}
+
+utility::string_t ProtectionProperties::getWritePassword() const
+{
+	return m_WritePassword;
+}
+
+void ProtectionProperties::setWritePassword(utility::string_t value)
+{
+	m_WritePassword = value;
+	
+}
+
+bool ProtectionProperties::getIsWriteProtected() const
+{
+	return m_IsWriteProtected;
+}
+
+void ProtectionProperties::setIsWriteProtected(bool value)
+{
+	m_IsWriteProtected = value;
+	
+}
+
+bool ProtectionProperties::getIsEncrypted() const
+{
+	return m_IsEncrypted;
+}
+
+void ProtectionProperties::setIsEncrypted(bool value)
+{
+	m_IsEncrypted = value;
+	
+}
+
 web::json::value ProtectionProperties::toJson() const
 {
 	web::json::value val = this->ResourceBase::toJson();
@@ -93,6 +137,16 @@ web::json::value ProtectionProperties::toJson() const
 	{
 		val[utility::conversions::to_string_t("ReadOnlyRecommended")] = ModelBase::toJson(m_ReadOnlyRecommended);
 	}
+	if (!m_ReadPassword.empty())
+	{
+		val[utility::conversions::to_string_t("ReadPassword")] = ModelBase::toJson(m_ReadPassword);
+	}
+	if (!m_WritePassword.empty())
+	{
+		val[utility::conversions::to_string_t("WritePassword")] = ModelBase::toJson(m_WritePassword);
+	}
+	val[utility::conversions::to_string_t("IsWriteProtected")] = ModelBase::toJson(m_IsWriteProtected);
+	val[utility::conversions::to_string_t("IsEncrypted")] = ModelBase::toJson(m_IsEncrypted);
 	return val;
 }
 
@@ -108,6 +162,26 @@ void ProtectionProperties::fromJson(web::json::value& val)
 	if(jsonForReadOnlyRecommended != nullptr && !jsonForReadOnlyRecommended->is_null())
 	{
 		setReadOnlyRecommended(ModelBase::boolFromJson(*jsonForReadOnlyRecommended));
+	}
+	web::json::value* jsonForReadPassword = ModelBase::getField(val, "ReadPassword");
+	if(jsonForReadPassword != nullptr && !jsonForReadPassword->is_null())
+	{
+		setReadPassword(ModelBase::stringFromJson(*jsonForReadPassword));
+	}
+	web::json::value* jsonForWritePassword = ModelBase::getField(val, "WritePassword");
+	if(jsonForWritePassword != nullptr && !jsonForWritePassword->is_null())
+	{
+		setWritePassword(ModelBase::stringFromJson(*jsonForWritePassword));
+	}
+	web::json::value* jsonForIsWriteProtected = ModelBase::getField(val, "IsWriteProtected");
+	if(jsonForIsWriteProtected != nullptr && !jsonForIsWriteProtected->is_null())
+	{
+		setIsWriteProtected(ModelBase::boolFromJson(*jsonForIsWriteProtected));
+	}
+	web::json::value* jsonForIsEncrypted = ModelBase::getField(val, "IsEncrypted");
+	if(jsonForIsEncrypted != nullptr && !jsonForIsEncrypted->is_null())
+	{
+		setIsEncrypted(ModelBase::boolFromJson(*jsonForIsEncrypted));
 	}
 }
 
