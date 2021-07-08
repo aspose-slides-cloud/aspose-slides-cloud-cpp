@@ -171,7 +171,7 @@ std::shared_ptr<HttpContent> TestUtils::getBinaryTestValue(std::string functionN
 {
 	std::shared_ptr<HttpContent> uploadContent = std::make_shared<HttpContent>();
 	utility::string_t path = utility::conversions::to_string_t("TestData/test.pptx");
-	if (boost::iequals(utility::conversions::to_string_t("PostSlidesDocumentFromPdf"), functionName)) {
+	if (boost::iequals(utility::conversions::to_string_t("ImportFromPdf"), functionName)) {
 		path = utility::conversions::to_string_t("TestData/test.pdf");
 	} else if (boost::iequals(utility::conversions::to_string_t("image"), parameterName)) {
 		path = utility::conversions::to_string_t("TestData/watermark.png");

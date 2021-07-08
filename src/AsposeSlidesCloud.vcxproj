@@ -125,7 +125,6 @@
     <ClCompile Include="MultipartFormData.cpp" />
     <ClCompile Include="ApiException.cpp" />
     <ClCompile Include="api\SlidesApi.cpp" />
-    <ClCompile Include="api\SlidesApiRequests.cpp" />
     <ClCompile Include="model\ApiInfo.cpp" />
     <ClCompile Include="model\ArrowHeadProperties.cpp" />
     <ClCompile Include="model\Axes.cpp" />
@@ -300,7 +299,6 @@
     <ClInclude Include="MultipartFormData.h" />
     <ClInclude Include="ApiException.h" />
     <ClInclude Include="api\SlidesApi.h" />
-    <ClInclude Include="api\SlidesApiRequests.h" />
     <ClInclude Include="model\ApiInfo.h" />
     <ClInclude Include="model\ArrowHeadProperties.h" />
     <ClInclude Include="model\Axes.h" />

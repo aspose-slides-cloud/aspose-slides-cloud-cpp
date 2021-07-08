@@ -75,8 +75,8 @@ pplx::task<web::http::http_response> ApiClient::callApi(
 		}
 		for (int i = 0; i < files.size(); i++)
 		{
-			utility::string_t partName = files[i]->getName().empty() ? utility::conversions::to_string_t("file" + std::to_string(i)) : files[i]->getName();
-			utility::string_t fileName = files[i]->getFileName().empty() ? utility::conversions::to_string_t("file" + std::to_string(i)) : files[i]->getFileName();
+			utility::string_t partName = files[i]->getName().empty() ? utility::conversions::to_string_t("file" + std::to_string(i + 1)) : files[i]->getName();
+			utility::string_t fileName = files[i]->getFileName().empty() ? utility::conversions::to_string_t("file" + std::to_string(i + 1)) : files[i]->getFileName();
 			data << "\r\n--" << boundary << "\r\n";
 			data << "Content-Disposition: form-data; name=\"" << utility::conversions::to_utf8string(partName) << "\"; filename=\"" + utility::conversions::to_utf8string(fileName) + "\"\r\n";
 			data << "Content-Type: application/octet-stream\r\n";
