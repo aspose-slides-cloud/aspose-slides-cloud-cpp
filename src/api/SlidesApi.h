@@ -120,12 +120,12 @@ public:
 	/// <summary>
 	/// Convert presentation from request content to format specified.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<HttpContent> convert(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> convert(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::vector<int32_t> slides = std::vector<int32_t>());
 
 	/// <summary>
 	/// Convert presentation from request content to format specified.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<void> convertAndSave(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t outPath, utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<void> convertAndSave(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t outPath, utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::vector<int32_t> slides = std::vector<int32_t>());
 
 	/// <summary>
 	/// Copy file
@@ -580,7 +580,7 @@ public:
 	/// <summary>
 	/// Save a presentation to a specified format.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadPresentation(utility::string_t name, utility::string_t format, std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadPresentation(utility::string_t name, utility::string_t format, std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::vector<int32_t> slides = std::vector<int32_t>());
 
 	/// <summary>
 	/// Render shape to specified picture format.
@@ -970,7 +970,7 @@ public:
 	/// <summary>
 	/// Save a presentation to a specified format.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<void> savePresentation(utility::string_t name, utility::string_t format, utility::string_t outPath, std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<void> savePresentation(utility::string_t name, utility::string_t format, utility::string_t outPath, std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::vector<int32_t> slides = std::vector<int32_t>());
 
 	/// <summary>
 	/// Render shape to specified picture format.

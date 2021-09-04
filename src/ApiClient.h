@@ -64,6 +64,7 @@ public:
 	static void setBoolQueryParameter(
 		std::map<utility::string_t, utility::string_t>& queryParams, utility::string_t name, bool value);
 	void logString(utility::string_t contents) const;
+	void assertResponseException(web::http::http_response response, std::string methodName) const;
 private:
 	std::shared_ptr<ApiConfiguration> m_Configuration;
 	void setRequestHeaders(web::http::http_request& request, const std::map<utility::string_t, utility::string_t>& headerParams) const;

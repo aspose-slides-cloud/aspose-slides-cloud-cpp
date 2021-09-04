@@ -441,8 +441,9 @@ TEST_F(SlidesApiTest, convert) {
 	utility::string_t paramPassword = utils->getTestValue("convert", "password");
 	utility::string_t paramStorage = utils->getTestValue("convert", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("convert", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("convert", "slides");
 	utils->initialize("convert", "");
-	HttpContent result = api->convert(paramDocument, paramFormat, paramPassword, paramStorage, paramFontsFolder).get();
+	HttpContent result = api->convert(paramDocument, paramFormat, paramPassword, paramStorage, paramFontsFolder, paramSlides).get();
 	EXPECT_FALSE(result.getData()->eof());
 }
 
@@ -452,13 +453,14 @@ TEST_F(SlidesApiTest, convertInvalidDocument) {
 	utility::string_t paramPassword = utils->getTestValue("convert", "password");
 	utility::string_t paramStorage = utils->getTestValue("convert", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("convert", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("convert", "slides");
 	paramDocument = utils->getInvalidBinaryTestValue("convert", "document", paramDocument);
 	utils->initialize("convert", "document", paramDocument);
 
 	bool failed = true;
 	try
 	{
-		api->convert(paramDocument, paramFormat, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->convert(paramDocument, paramFormat, paramPassword, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -492,13 +494,14 @@ TEST_F(SlidesApiTest, convertInvalidFormat) {
 	utility::string_t paramPassword = utils->getTestValue("convert", "password");
 	utility::string_t paramStorage = utils->getTestValue("convert", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("convert", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("convert", "slides");
 	paramFormat = utils->getInvalidTestValue("convert", "format", paramFormat);
 	utils->initialize("convert", "format", paramFormat);
 
 	bool failed = true;
 	try
 	{
-		api->convert(paramDocument, paramFormat, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->convert(paramDocument, paramFormat, paramPassword, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -532,13 +535,14 @@ TEST_F(SlidesApiTest, convertInvalidPassword) {
 	utility::string_t paramPassword = utils->getTestValue("convert", "password");
 	utility::string_t paramStorage = utils->getTestValue("convert", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("convert", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("convert", "slides");
 	paramPassword = utils->getInvalidTestValue("convert", "password", paramPassword);
 	utils->initialize("convert", "password", paramPassword);
 
 	bool failed = true;
 	try
 	{
-		api->convert(paramDocument, paramFormat, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->convert(paramDocument, paramFormat, paramPassword, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -572,13 +576,14 @@ TEST_F(SlidesApiTest, convertInvalidStorage) {
 	utility::string_t paramPassword = utils->getTestValue("convert", "password");
 	utility::string_t paramStorage = utils->getTestValue("convert", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("convert", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("convert", "slides");
 	paramStorage = utils->getInvalidTestValue("convert", "storage", paramStorage);
 	utils->initialize("convert", "storage", paramStorage);
 
 	bool failed = true;
 	try
 	{
-		api->convert(paramDocument, paramFormat, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->convert(paramDocument, paramFormat, paramPassword, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -612,13 +617,14 @@ TEST_F(SlidesApiTest, convertInvalidFontsFolder) {
 	utility::string_t paramPassword = utils->getTestValue("convert", "password");
 	utility::string_t paramStorage = utils->getTestValue("convert", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("convert", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("convert", "slides");
 	paramFontsFolder = utils->getInvalidTestValue("convert", "fontsFolder", paramFontsFolder);
 	utils->initialize("convert", "fontsFolder", paramFontsFolder);
 
 	bool failed = true;
 	try
 	{
-		api->convert(paramDocument, paramFormat, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->convert(paramDocument, paramFormat, paramPassword, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -646,6 +652,47 @@ TEST_F(SlidesApiTest, convertInvalidFontsFolder) {
 	}
 }
 
+TEST_F(SlidesApiTest, convertInvalidSlides) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("convert", "document");
+	utility::string_t paramFormat = utils->getTestValue("convert", "format");
+	utility::string_t paramPassword = utils->getTestValue("convert", "password");
+	utility::string_t paramStorage = utils->getTestValue("convert", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("convert", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("convert", "slides");
+	paramSlides = utils->getInvalidIntVectorTestValue("convert", "slides", paramSlides);
+	utils->initialize("convert", "slides", paramSlides);
+
+	bool failed = true;
+	try
+	{
+		api->convert(paramDocument, paramFormat, paramPassword, paramStorage, paramFontsFolder, paramSlides).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("convert", "slides");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("convert", "slides", paramSlides);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("convert", "slides");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("convert", "slides", paramSlides);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("convert", "slides"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, convertAndSave) {
 	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("convertAndSave", "document");
 	utility::string_t paramFormat = utils->getTestValue("convertAndSave", "format");
@@ -653,8 +700,9 @@ TEST_F(SlidesApiTest, convertAndSave) {
 	utility::string_t paramPassword = utils->getTestValue("convertAndSave", "password");
 	utility::string_t paramStorage = utils->getTestValue("convertAndSave", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("convertAndSave", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("convertAndSave", "slides");
 	utils->initialize("convertAndSave", "");
-	api->convertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder).wait();
+	api->convertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder, paramSlides).wait();
 }
 
 TEST_F(SlidesApiTest, convertAndSaveInvalidDocument) {
@@ -664,13 +712,14 @@ TEST_F(SlidesApiTest, convertAndSaveInvalidDocument) {
 	utility::string_t paramPassword = utils->getTestValue("convertAndSave", "password");
 	utility::string_t paramStorage = utils->getTestValue("convertAndSave", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("convertAndSave", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("convertAndSave", "slides");
 	paramDocument = utils->getInvalidBinaryTestValue("convertAndSave", "document", paramDocument);
 	utils->initialize("convertAndSave", "document", paramDocument);
 
 	bool failed = true;
 	try
 	{
-		api->convertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->convertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -705,13 +754,14 @@ TEST_F(SlidesApiTest, convertAndSaveInvalidFormat) {
 	utility::string_t paramPassword = utils->getTestValue("convertAndSave", "password");
 	utility::string_t paramStorage = utils->getTestValue("convertAndSave", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("convertAndSave", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("convertAndSave", "slides");
 	paramFormat = utils->getInvalidTestValue("convertAndSave", "format", paramFormat);
 	utils->initialize("convertAndSave", "format", paramFormat);
 
 	bool failed = true;
 	try
 	{
-		api->convertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->convertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -746,13 +796,14 @@ TEST_F(SlidesApiTest, convertAndSaveInvalidOutPath) {
 	utility::string_t paramPassword = utils->getTestValue("convertAndSave", "password");
 	utility::string_t paramStorage = utils->getTestValue("convertAndSave", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("convertAndSave", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("convertAndSave", "slides");
 	paramOutPath = utils->getInvalidTestValue("convertAndSave", "outPath", paramOutPath);
 	utils->initialize("convertAndSave", "outPath", paramOutPath);
 
 	bool failed = true;
 	try
 	{
-		api->convertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->convertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -787,13 +838,14 @@ TEST_F(SlidesApiTest, convertAndSaveInvalidPassword) {
 	utility::string_t paramPassword = utils->getTestValue("convertAndSave", "password");
 	utility::string_t paramStorage = utils->getTestValue("convertAndSave", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("convertAndSave", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("convertAndSave", "slides");
 	paramPassword = utils->getInvalidTestValue("convertAndSave", "password", paramPassword);
 	utils->initialize("convertAndSave", "password", paramPassword);
 
 	bool failed = true;
 	try
 	{
-		api->convertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->convertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -828,13 +880,14 @@ TEST_F(SlidesApiTest, convertAndSaveInvalidStorage) {
 	utility::string_t paramPassword = utils->getTestValue("convertAndSave", "password");
 	utility::string_t paramStorage = utils->getTestValue("convertAndSave", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("convertAndSave", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("convertAndSave", "slides");
 	paramStorage = utils->getInvalidTestValue("convertAndSave", "storage", paramStorage);
 	utils->initialize("convertAndSave", "storage", paramStorage);
 
 	bool failed = true;
 	try
 	{
-		api->convertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->convertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -869,13 +922,14 @@ TEST_F(SlidesApiTest, convertAndSaveInvalidFontsFolder) {
 	utility::string_t paramPassword = utils->getTestValue("convertAndSave", "password");
 	utility::string_t paramStorage = utils->getTestValue("convertAndSave", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("convertAndSave", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("convertAndSave", "slides");
 	paramFontsFolder = utils->getInvalidTestValue("convertAndSave", "fontsFolder", paramFontsFolder);
 	utils->initialize("convertAndSave", "fontsFolder", paramFontsFolder);
 
 	bool failed = true;
 	try
 	{
-		api->convertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->convertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -898,6 +952,48 @@ TEST_F(SlidesApiTest, convertAndSaveInvalidFontsFolder) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("convertAndSave", "fontsFolder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, convertAndSaveInvalidSlides) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("convertAndSave", "document");
+	utility::string_t paramFormat = utils->getTestValue("convertAndSave", "format");
+	utility::string_t paramOutPath = utils->getTestValue("convertAndSave", "outPath");
+	utility::string_t paramPassword = utils->getTestValue("convertAndSave", "password");
+	utility::string_t paramStorage = utils->getTestValue("convertAndSave", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("convertAndSave", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("convertAndSave", "slides");
+	paramSlides = utils->getInvalidIntVectorTestValue("convertAndSave", "slides", paramSlides);
+	utils->initialize("convertAndSave", "slides", paramSlides);
+
+	bool failed = true;
+	try
+	{
+		api->convertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder, paramSlides).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("convertAndSave", "slides");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("convertAndSave", "slides", paramSlides);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("convertAndSave", "slides");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("convertAndSave", "slides", paramSlides);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("convertAndSave", "slides"))
 	{
 		FAIL() << "Must have failed";
 	}
@@ -25552,8 +25648,9 @@ TEST_F(SlidesApiTest, downloadPresentation) {
 	utility::string_t paramFolder = utils->getTestValue("downloadPresentation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("downloadPresentation", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("downloadPresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("downloadPresentation", "slides");
 	utils->initialize("downloadPresentation", "");
-	HttpContent result = api->downloadPresentation(paramName, paramFormat, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder).get();
+	HttpContent result = api->downloadPresentation(paramName, paramFormat, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).get();
 	EXPECT_FALSE(result.getData()->eof());
 }
 
@@ -25565,13 +25662,14 @@ TEST_F(SlidesApiTest, downloadPresentationInvalidName) {
 	utility::string_t paramFolder = utils->getTestValue("downloadPresentation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("downloadPresentation", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("downloadPresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("downloadPresentation", "slides");
 	paramName = utils->getInvalidTestValue("downloadPresentation", "name", paramName);
 	utils->initialize("downloadPresentation", "name", paramName);
 
 	bool failed = true;
 	try
 	{
-		api->downloadPresentation(paramName, paramFormat, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		api->downloadPresentation(paramName, paramFormat, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -25607,13 +25705,14 @@ TEST_F(SlidesApiTest, downloadPresentationInvalidFormat) {
 	utility::string_t paramFolder = utils->getTestValue("downloadPresentation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("downloadPresentation", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("downloadPresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("downloadPresentation", "slides");
 	paramFormat = utils->getInvalidTestValue("downloadPresentation", "format", paramFormat);
 	utils->initialize("downloadPresentation", "format", paramFormat);
 
 	bool failed = true;
 	try
 	{
-		api->downloadPresentation(paramName, paramFormat, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		api->downloadPresentation(paramName, paramFormat, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -25649,13 +25748,14 @@ TEST_F(SlidesApiTest, downloadPresentationInvalidOptions) {
 	utility::string_t paramFolder = utils->getTestValue("downloadPresentation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("downloadPresentation", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("downloadPresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("downloadPresentation", "slides");
 	paramOptions = utils->getInvalidTestValueForClass<>("downloadPresentation", "options", paramOptions);
 	utils->initialize("downloadPresentation", "options", paramOptions);
 
 	bool failed = true;
 	try
 	{
-		api->downloadPresentation(paramName, paramFormat, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		api->downloadPresentation(paramName, paramFormat, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -25691,13 +25791,14 @@ TEST_F(SlidesApiTest, downloadPresentationInvalidPassword) {
 	utility::string_t paramFolder = utils->getTestValue("downloadPresentation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("downloadPresentation", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("downloadPresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("downloadPresentation", "slides");
 	paramPassword = utils->getInvalidTestValue("downloadPresentation", "password", paramPassword);
 	utils->initialize("downloadPresentation", "password", paramPassword);
 
 	bool failed = true;
 	try
 	{
-		api->downloadPresentation(paramName, paramFormat, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		api->downloadPresentation(paramName, paramFormat, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -25733,13 +25834,14 @@ TEST_F(SlidesApiTest, downloadPresentationInvalidFolder) {
 	utility::string_t paramFolder = utils->getTestValue("downloadPresentation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("downloadPresentation", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("downloadPresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("downloadPresentation", "slides");
 	paramFolder = utils->getInvalidTestValue("downloadPresentation", "folder", paramFolder);
 	utils->initialize("downloadPresentation", "folder", paramFolder);
 
 	bool failed = true;
 	try
 	{
-		api->downloadPresentation(paramName, paramFormat, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		api->downloadPresentation(paramName, paramFormat, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -25775,13 +25877,14 @@ TEST_F(SlidesApiTest, downloadPresentationInvalidStorage) {
 	utility::string_t paramFolder = utils->getTestValue("downloadPresentation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("downloadPresentation", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("downloadPresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("downloadPresentation", "slides");
 	paramStorage = utils->getInvalidTestValue("downloadPresentation", "storage", paramStorage);
 	utils->initialize("downloadPresentation", "storage", paramStorage);
 
 	bool failed = true;
 	try
 	{
-		api->downloadPresentation(paramName, paramFormat, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		api->downloadPresentation(paramName, paramFormat, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -25817,13 +25920,14 @@ TEST_F(SlidesApiTest, downloadPresentationInvalidFontsFolder) {
 	utility::string_t paramFolder = utils->getTestValue("downloadPresentation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("downloadPresentation", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("downloadPresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("downloadPresentation", "slides");
 	paramFontsFolder = utils->getInvalidTestValue("downloadPresentation", "fontsFolder", paramFontsFolder);
 	utils->initialize("downloadPresentation", "fontsFolder", paramFontsFolder);
 
 	bool failed = true;
 	try
 	{
-		api->downloadPresentation(paramName, paramFormat, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		api->downloadPresentation(paramName, paramFormat, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -25846,6 +25950,49 @@ TEST_F(SlidesApiTest, downloadPresentationInvalidFontsFolder) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("downloadPresentation", "fontsFolder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, downloadPresentationInvalidSlides) {
+	utility::string_t paramName = utils->getTestValue("downloadPresentation", "name");
+	utility::string_t paramFormat = utils->getTestValue("downloadPresentation", "format");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("downloadPresentation", "options");
+	utility::string_t paramPassword = utils->getTestValue("downloadPresentation", "password");
+	utility::string_t paramFolder = utils->getTestValue("downloadPresentation", "folder");
+	utility::string_t paramStorage = utils->getTestValue("downloadPresentation", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("downloadPresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("downloadPresentation", "slides");
+	paramSlides = utils->getInvalidIntVectorTestValue("downloadPresentation", "slides", paramSlides);
+	utils->initialize("downloadPresentation", "slides", paramSlides);
+
+	bool failed = true;
+	try
+	{
+		api->downloadPresentation(paramName, paramFormat, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("downloadPresentation", "slides");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("downloadPresentation", "slides", paramSlides);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("downloadPresentation", "slides");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("downloadPresentation", "slides", paramSlides);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("downloadPresentation", "slides"))
 	{
 		FAIL() << "Must have failed";
 	}
@@ -44514,8 +44661,9 @@ TEST_F(SlidesApiTest, savePresentation) {
 	utility::string_t paramFolder = utils->getTestValue("savePresentation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("savePresentation", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("savePresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("savePresentation", "slides");
 	utils->initialize("savePresentation", "");
-	api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+	api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
 }
 
 TEST_F(SlidesApiTest, savePresentationInvalidName) {
@@ -44527,13 +44675,14 @@ TEST_F(SlidesApiTest, savePresentationInvalidName) {
 	utility::string_t paramFolder = utils->getTestValue("savePresentation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("savePresentation", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("savePresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("savePresentation", "slides");
 	paramName = utils->getInvalidTestValue("savePresentation", "name", paramName);
 	utils->initialize("savePresentation", "name", paramName);
 
 	bool failed = true;
 	try
 	{
-		api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44570,13 +44719,14 @@ TEST_F(SlidesApiTest, savePresentationInvalidFormat) {
 	utility::string_t paramFolder = utils->getTestValue("savePresentation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("savePresentation", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("savePresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("savePresentation", "slides");
 	paramFormat = utils->getInvalidTestValue("savePresentation", "format", paramFormat);
 	utils->initialize("savePresentation", "format", paramFormat);
 
 	bool failed = true;
 	try
 	{
-		api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44613,13 +44763,14 @@ TEST_F(SlidesApiTest, savePresentationInvalidOutPath) {
 	utility::string_t paramFolder = utils->getTestValue("savePresentation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("savePresentation", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("savePresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("savePresentation", "slides");
 	paramOutPath = utils->getInvalidTestValue("savePresentation", "outPath", paramOutPath);
 	utils->initialize("savePresentation", "outPath", paramOutPath);
 
 	bool failed = true;
 	try
 	{
-		api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44656,13 +44807,14 @@ TEST_F(SlidesApiTest, savePresentationInvalidOptions) {
 	utility::string_t paramFolder = utils->getTestValue("savePresentation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("savePresentation", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("savePresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("savePresentation", "slides");
 	paramOptions = utils->getInvalidTestValueForClass<>("savePresentation", "options", paramOptions);
 	utils->initialize("savePresentation", "options", paramOptions);
 
 	bool failed = true;
 	try
 	{
-		api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44699,13 +44851,14 @@ TEST_F(SlidesApiTest, savePresentationInvalidPassword) {
 	utility::string_t paramFolder = utils->getTestValue("savePresentation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("savePresentation", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("savePresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("savePresentation", "slides");
 	paramPassword = utils->getInvalidTestValue("savePresentation", "password", paramPassword);
 	utils->initialize("savePresentation", "password", paramPassword);
 
 	bool failed = true;
 	try
 	{
-		api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44742,13 +44895,14 @@ TEST_F(SlidesApiTest, savePresentationInvalidFolder) {
 	utility::string_t paramFolder = utils->getTestValue("savePresentation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("savePresentation", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("savePresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("savePresentation", "slides");
 	paramFolder = utils->getInvalidTestValue("savePresentation", "folder", paramFolder);
 	utils->initialize("savePresentation", "folder", paramFolder);
 
 	bool failed = true;
 	try
 	{
-		api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44785,13 +44939,14 @@ TEST_F(SlidesApiTest, savePresentationInvalidStorage) {
 	utility::string_t paramFolder = utils->getTestValue("savePresentation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("savePresentation", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("savePresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("savePresentation", "slides");
 	paramStorage = utils->getInvalidTestValue("savePresentation", "storage", paramStorage);
 	utils->initialize("savePresentation", "storage", paramStorage);
 
 	bool failed = true;
 	try
 	{
-		api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44828,13 +44983,14 @@ TEST_F(SlidesApiTest, savePresentationInvalidFontsFolder) {
 	utility::string_t paramFolder = utils->getTestValue("savePresentation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("savePresentation", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("savePresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("savePresentation", "slides");
 	paramFontsFolder = utils->getInvalidTestValue("savePresentation", "fontsFolder", paramFontsFolder);
 	utils->initialize("savePresentation", "fontsFolder", paramFontsFolder);
 
 	bool failed = true;
 	try
 	{
-		api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44857,6 +45013,50 @@ TEST_F(SlidesApiTest, savePresentationInvalidFontsFolder) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("savePresentation", "fontsFolder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, savePresentationInvalidSlides) {
+	utility::string_t paramName = utils->getTestValue("savePresentation", "name");
+	utility::string_t paramFormat = utils->getTestValue("savePresentation", "format");
+	utility::string_t paramOutPath = utils->getTestValue("savePresentation", "outPath");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("savePresentation", "options");
+	utility::string_t paramPassword = utils->getTestValue("savePresentation", "password");
+	utility::string_t paramFolder = utils->getTestValue("savePresentation", "folder");
+	utility::string_t paramStorage = utils->getTestValue("savePresentation", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("savePresentation", "fontsFolder");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("savePresentation", "slides");
+	paramSlides = utils->getInvalidIntVectorTestValue("savePresentation", "slides", paramSlides);
+	utils->initialize("savePresentation", "slides", paramSlides);
+
+	bool failed = true;
+	try
+	{
+		api->savePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("savePresentation", "slides");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("savePresentation", "slides", paramSlides);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("savePresentation", "slides");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("savePresentation", "slides", paramSlides);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("savePresentation", "slides"))
 	{
 		FAIL() << "Must have failed";
 	}

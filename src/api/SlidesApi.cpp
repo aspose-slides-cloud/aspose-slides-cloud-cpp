@@ -87,13 +87,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignShapes(utility::string_t nam
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling alignShapes: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "alignShapes");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -106,7 +100,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignShapes(utility::string_t nam
 		});
 }
 
-pplx::task<HttpContent> SlidesApi::convert(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t password, utility::string_t storage, utility::string_t fontsFolder)
+pplx::task<HttpContent> SlidesApi::convert(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t password, utility::string_t storage, utility::string_t fontsFolder, std::vector<int32_t> slides)
 {
 	if (document == nullptr)
 	{
@@ -128,6 +122,7 @@ pplx::task<HttpContent> SlidesApi::convert(std::shared_ptr<HttpContent> document
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("slides"), slides);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -142,13 +137,7 @@ pplx::task<HttpContent> SlidesApi::convert(std::shared_ptr<HttpContent> document
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling convert: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "convert");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -160,7 +149,7 @@ pplx::task<HttpContent> SlidesApi::convert(std::shared_ptr<HttpContent> document
 		});
 }
 
-pplx::task<void> SlidesApi::convertAndSave(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t outPath, utility::string_t password, utility::string_t storage, utility::string_t fontsFolder)
+pplx::task<void> SlidesApi::convertAndSave(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t outPath, utility::string_t password, utility::string_t storage, utility::string_t fontsFolder, std::vector<int32_t> slides)
 {
 	if (document == nullptr)
 	{
@@ -188,6 +177,7 @@ pplx::task<void> SlidesApi::convertAndSave(std::shared_ptr<HttpContent> document
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("outPath"), outPath);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("slides"), slides);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -202,13 +192,7 @@ pplx::task<void> SlidesApi::convertAndSave(std::shared_ptr<HttpContent> document
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling convertAndSave: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "convertAndSave");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -247,13 +231,7 @@ pplx::task<void> SlidesApi::copyFile(utility::string_t srcPath, utility::string_
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling copyFile: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "copyFile");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -291,13 +269,7 @@ pplx::task<void> SlidesApi::copyFolder(utility::string_t srcPath, utility::strin
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling copyFolder: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "copyFolder");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -339,13 +311,7 @@ pplx::task<std::shared_ptr<LayoutSlide>> SlidesApi::copyLayoutSlide(utility::str
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling copyLayoutSlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "copyLayoutSlide");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -394,13 +360,7 @@ pplx::task<std::shared_ptr<MasterSlide>> SlidesApi::copyMasterSlide(utility::str
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling copyMasterSlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "copyMasterSlide");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -444,13 +404,7 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::copySlide(utility::string_t name,
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling copySlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "copySlide");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -495,13 +449,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createAnimationEffect(uti
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createAnimationEffect: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createAnimationEffect");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -546,13 +494,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createAnimationInteractiv
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createAnimationInteractiveSequence: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createAnimationInteractiveSequence");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -598,13 +540,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createAnimationInteractiv
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createAnimationInteractiveSequenceEffect: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createAnimationInteractiveSequenceEffect");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -650,13 +586,7 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::createChartCategory(utility::strin
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createChartCategory: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createChartCategory");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -703,13 +633,7 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::createChartDataPoint(utility::stri
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createChartDataPoint: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createChartDataPoint");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -755,13 +679,7 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::createChartSeries(utility::string_
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createChartSeries: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createChartSeries");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -806,13 +724,7 @@ pplx::task<std::shared_ptr<SlideComments>> SlidesApi::createComment(utility::str
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createComment: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createComment");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -857,13 +769,7 @@ pplx::task<HttpContent> SlidesApi::createCommentOnline(std::shared_ptr<HttpConte
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createCommentOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createCommentOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -896,13 +802,7 @@ pplx::task<void> SlidesApi::createFolder(utility::string_t path, utility::string
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createFolder: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createFolder");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -943,13 +843,7 @@ pplx::task<void> SlidesApi::createImageWatermark(utility::string_t name, std::sh
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createImageWatermark: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createImageWatermark");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -990,13 +884,7 @@ pplx::task<HttpContent> SlidesApi::createImageWatermarkOnline(std::shared_ptr<Ht
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createImageWatermarkOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createImageWatermarkOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -1040,13 +928,7 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::createNotesSlide(utility::str
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createNotesSlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createNotesSlide");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -1096,13 +978,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createNotesSlideParagraph(util
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createNotesSlideParagraph: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createNotesSlideParagraph");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -1153,13 +1029,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::createNotesSlidePortion(utility:
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createNotesSlidePortion: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createNotesSlidePortion");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -1212,13 +1082,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createNotesSlideShape(utility:
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createNotesSlideShape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createNotesSlideShape");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -1268,13 +1132,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createParagraph(utility::strin
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createParagraph: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createParagraph");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -1325,13 +1183,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::createPortion(utility::string_t 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createPortion: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createPortion");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -1372,13 +1224,7 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::createPresentation(utility::str
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createPresentation: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createPresentation");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -1417,13 +1263,7 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::createPresentationFromSource(ut
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createPresentationFromSource: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createPresentationFromSource");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -1475,13 +1315,7 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::createPresentationFromTemplate(
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createPresentationFromTemplate: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createPresentationFromTemplate");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -1524,13 +1358,7 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::createSection(utility::string_t
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createSection: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createSection");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -1579,13 +1407,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createShape(utility::string_t 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createShape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createShape");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -1626,13 +1448,7 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::createSlide(utility::string_t nam
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createSlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createSlide");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -1687,13 +1503,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createSubshape(utility::string
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createSubshape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createSubshape");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -1749,13 +1559,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createSubshapeParagraph(utilit
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createSubshapeParagraph: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createSubshapeParagraph");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -1812,13 +1616,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::createSubshapePortion(utility::s
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createSubshapePortion: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createSubshapePortion");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -1865,13 +1663,7 @@ pplx::task<void> SlidesApi::createWatermark(utility::string_t name, std::shared_
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createWatermark: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createWatermark");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -1915,13 +1707,7 @@ pplx::task<HttpContent> SlidesApi::createWatermarkOnline(std::shared_ptr<HttpCon
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling createWatermarkOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "createWatermarkOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -1957,13 +1743,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimation(utility::
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteAnimation: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteAnimation");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2001,13 +1781,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimationEffect(uti
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteAnimationEffect: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteAnimationEffect");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2045,13 +1819,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimationInteractiv
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteAnimationInteractiveSequence: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteAnimationInteractiveSequence");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2090,13 +1858,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimationInteractiv
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteAnimationInteractiveSequenceEffect: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteAnimationInteractiveSequenceEffect");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2133,13 +1895,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimationInteractiv
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteAnimationInteractiveSequences: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteAnimationInteractiveSequences");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2176,13 +1932,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimationMainSequen
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteAnimationMainSequence: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteAnimationMainSequence");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2219,13 +1969,7 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::deleteBackground(utility
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteBackground: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteBackground");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2264,13 +2008,7 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::deleteChartCategory(utility::strin
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteChartCategory: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteChartCategory");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2310,13 +2048,7 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::deleteChartDataPoint(utility::stri
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteChartDataPoint: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteChartDataPoint");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2355,13 +2087,7 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::deleteChartSeries(utility::string_
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteChartSeries: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteChartSeries");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2398,13 +2124,7 @@ pplx::task<void> SlidesApi::deleteComments(utility::string_t name, utility::stri
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteComments: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteComments");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2438,13 +2158,7 @@ pplx::task<HttpContent> SlidesApi::deleteCommentsOnline(std::shared_ptr<HttpCont
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteCommentsOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteCommentsOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -2479,13 +2193,7 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::deleteDocumentPropert
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteDocumentProperties: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteDocumentProperties");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2527,13 +2235,7 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::deleteDocumentPropert
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteDocumentProperty: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteDocumentProperty");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2568,13 +2270,7 @@ pplx::task<void> SlidesApi::deleteFile(utility::string_t path, utility::string_t
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteFile: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteFile");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2609,13 +2305,7 @@ pplx::task<void> SlidesApi::deleteFolder(utility::string_t path, utility::string
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteFolder: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteFolder");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2649,13 +2339,7 @@ pplx::task<std::shared_ptr<Slide>> SlidesApi::deleteNotesSlide(utility::string_t
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteNotesSlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteNotesSlide");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2694,13 +2378,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteNotesSlideParagraph(uti
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteNotesSlideParagraph: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteNotesSlideParagraph");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2739,13 +2417,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteNotesSlideParagraphs(ut
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteNotesSlideParagraphs: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteNotesSlideParagraphs");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2785,13 +2457,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteNotesSlidePortion(utility
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteNotesSlidePortion: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteNotesSlidePortion");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2831,13 +2497,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteNotesSlidePortions(utilit
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteNotesSlidePortions: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteNotesSlidePortions");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2875,13 +2535,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteNotesSlideShape(utility::st
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteNotesSlideShape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteNotesSlideShape");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2919,13 +2573,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteNotesSlideShapes(utility::s
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteNotesSlideShapes: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteNotesSlideShapes");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -2964,13 +2612,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteParagraph(utility::stri
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteParagraph: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteParagraph");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3009,13 +2651,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteParagraphs(utility::str
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteParagraphs: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteParagraphs");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3055,13 +2691,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deletePortion(utility::string_t
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deletePortion: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deletePortion");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3101,13 +2731,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deletePortions(utility::string_
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deletePortions: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deletePortions");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3143,13 +2767,7 @@ pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::deleteProtection(ut
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteProtection: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteProtection");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3190,13 +2808,7 @@ pplx::task<HttpContent> SlidesApi::deleteProtectionOnline(std::shared_ptr<HttpCo
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteProtectionOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteProtectionOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -3236,13 +2848,7 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::deleteSection(utility::string_t
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteSection: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteSection");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3283,13 +2889,7 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::deleteSections(utility::string_
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteSections: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteSections");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3327,13 +2927,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteShape(utility::string_t nam
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteShape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteShape");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3371,13 +2965,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteShapes(utility::string_t na
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteShapes: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteShapes");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3414,13 +3002,7 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::deleteSlide(utility::string_t nam
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteSlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteSlide");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3458,13 +3040,7 @@ pplx::task<std::shared_ptr<SlideComments>> SlidesApi::deleteSlideComments(utilit
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteSlideComments: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteSlideComments");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3502,13 +3078,7 @@ pplx::task<HttpContent> SlidesApi::deleteSlideCommentsOnline(std::shared_ptr<Htt
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteSlideCommentsOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteSlideCommentsOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -3544,13 +3114,7 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::deleteSlides(utility::string_t na
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteSlides: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteSlides");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3594,13 +3158,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSubshape(utility::string_t 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteSubshape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteSubshape");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3645,13 +3203,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSubshapeParagraph(utili
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteSubshapeParagraph: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteSubshapeParagraph");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3696,13 +3248,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSubshapeParagraphs(util
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteSubshapeParagraphs: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteSubshapeParagraphs");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3748,13 +3294,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSubshapePortion(utility::
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteSubshapePortion: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteSubshapePortion");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3800,13 +3340,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSubshapePortions(utility:
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteSubshapePortions: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteSubshapePortions");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3850,13 +3384,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSubshapes(utility::string_t
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteSubshapes: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteSubshapes");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3893,13 +3421,7 @@ pplx::task<void> SlidesApi::deleteWatermark(utility::string_t name, utility::str
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteWatermark: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteWatermark");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -3933,13 +3455,7 @@ pplx::task<HttpContent> SlidesApi::deleteWatermarkOnline(std::shared_ptr<HttpCon
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling deleteWatermarkOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "deleteWatermarkOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -3973,13 +3489,7 @@ pplx::task<HttpContent> SlidesApi::downloadFile(utility::string_t path, utility:
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadFile: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadFile");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4026,13 +3536,7 @@ pplx::task<HttpContent> SlidesApi::downloadImage(utility::string_t name, int32_t
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadImage: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadImage");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4068,13 +3572,7 @@ pplx::task<HttpContent> SlidesApi::downloadImageDefaultFormat(utility::string_t 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadImageDefaultFormat: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadImageDefaultFormat");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4110,13 +3608,7 @@ pplx::task<HttpContent> SlidesApi::downloadImageDefaultFormatOnline(std::shared_
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadImageDefaultFormatOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadImageDefaultFormatOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4163,13 +3655,7 @@ pplx::task<HttpContent> SlidesApi::downloadImageOnline(std::shared_ptr<HttpConte
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadImageOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadImageOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4215,13 +3701,7 @@ pplx::task<HttpContent> SlidesApi::downloadImages(utility::string_t name, utilit
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadImages: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadImages");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4256,13 +3736,7 @@ pplx::task<HttpContent> SlidesApi::downloadImagesDefaultFormat(utility::string_t
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadImagesDefaultFormat: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadImagesDefaultFormat");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4297,13 +3771,7 @@ pplx::task<HttpContent> SlidesApi::downloadImagesDefaultFormatOnline(std::shared
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadImagesDefaultFormatOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadImagesDefaultFormatOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4349,13 +3817,7 @@ pplx::task<HttpContent> SlidesApi::downloadImagesOnline(std::shared_ptr<HttpCont
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadImagesOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadImagesOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4411,13 +3873,7 @@ pplx::task<HttpContent> SlidesApi::downloadNotesSlide(utility::string_t name, in
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadNotesSlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadNotesSlide");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4473,13 +3929,7 @@ pplx::task<HttpContent> SlidesApi::downloadNotesSlideOnline(std::shared_ptr<Http
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadNotesSlideOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadNotesSlideOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4541,13 +3991,7 @@ pplx::task<HttpContent> SlidesApi::downloadNotesSlideShape(utility::string_t nam
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadNotesSlideShape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadNotesSlideShape");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4559,7 +4003,7 @@ pplx::task<HttpContent> SlidesApi::downloadNotesSlideShape(utility::string_t nam
 		});
 }
 
-pplx::task<HttpContent> SlidesApi::downloadPresentation(utility::string_t name, utility::string_t format, std::shared_ptr<ExportOptions> options, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder)
+pplx::task<HttpContent> SlidesApi::downloadPresentation(utility::string_t name, utility::string_t format, std::shared_ptr<ExportOptions> options, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder, std::vector<int32_t> slides)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -4584,6 +4028,7 @@ pplx::task<HttpContent> SlidesApi::downloadPresentation(utility::string_t name, 
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("slides"), slides);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -4598,13 +4043,7 @@ pplx::task<HttpContent> SlidesApi::downloadPresentation(utility::string_t name, 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadPresentation: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadPresentation");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4666,13 +4105,7 @@ pplx::task<HttpContent> SlidesApi::downloadShape(utility::string_t name, int32_t
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadShape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadShape");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4731,13 +4164,7 @@ pplx::task<HttpContent> SlidesApi::downloadShapeOnline(std::shared_ptr<HttpConte
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadShapeOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadShapeOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4797,13 +4224,7 @@ pplx::task<HttpContent> SlidesApi::downloadSlide(utility::string_t name, int32_t
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadSlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadSlide");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4860,13 +4281,7 @@ pplx::task<HttpContent> SlidesApi::downloadSlideOnline(std::shared_ptr<HttpConte
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadSlideOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadSlideOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4934,13 +4349,7 @@ pplx::task<HttpContent> SlidesApi::downloadSubshape(utility::string_t name, int3
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling downloadSubshape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "downloadSubshape");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -4980,13 +4389,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::getAnimation(utility::str
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getAnimation: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getAnimation");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5013,13 +4416,7 @@ pplx::task<std::shared_ptr<ApiInfo>> SlidesApi::getApiInfo()
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getApiInfo: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getApiInfo");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5056,13 +4453,7 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::getBackground(utility::s
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getBackground: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getBackground");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5099,13 +4490,7 @@ pplx::task<std::shared_ptr<ColorScheme>> SlidesApi::getColorScheme(utility::stri
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getColorScheme: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getColorScheme");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5133,13 +4518,7 @@ pplx::task<std::shared_ptr<DiscUsage>> SlidesApi::getDiscUsage(utility::string_t
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getDiscUsage: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getDiscUsage");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5175,13 +4554,7 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::getDocumentProperties
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getDocumentProperties: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getDocumentProperties");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5223,13 +4596,7 @@ pplx::task<std::shared_ptr<DocumentProperty>> SlidesApi::getDocumentProperty(uti
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getDocumentProperty: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getDocumentProperty");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5263,13 +4630,7 @@ pplx::task<std::shared_ptr<FileVersions>> SlidesApi::getFileVersions(utility::st
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getFileVersions: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getFileVersions");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5303,13 +4664,7 @@ pplx::task<std::shared_ptr<FilesList>> SlidesApi::getFilesList(utility::string_t
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getFilesList: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getFilesList");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5346,13 +4701,7 @@ pplx::task<std::shared_ptr<FontScheme>> SlidesApi::getFontScheme(utility::string
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getFontScheme: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getFontScheme");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5389,13 +4738,7 @@ pplx::task<std::shared_ptr<FormatScheme>> SlidesApi::getFormatScheme(utility::st
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getFormatScheme: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getFormatScheme");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5432,13 +4775,7 @@ pplx::task<std::shared_ptr<LayoutSlide>> SlidesApi::getLayoutSlide(utility::stri
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getLayoutSlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getLayoutSlide");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5474,13 +4811,7 @@ pplx::task<std::shared_ptr<LayoutSlides>> SlidesApi::getLayoutSlides(utility::st
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getLayoutSlides: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getLayoutSlides");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5517,13 +4848,7 @@ pplx::task<std::shared_ptr<MasterSlide>> SlidesApi::getMasterSlide(utility::stri
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getMasterSlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getMasterSlide");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5559,13 +4884,7 @@ pplx::task<std::shared_ptr<MasterSlides>> SlidesApi::getMasterSlides(utility::st
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getMasterSlides: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getMasterSlides");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5602,13 +4921,7 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::getNotesSlide(utility::string
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getNotesSlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getNotesSlide");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5645,13 +4958,7 @@ pplx::task<std::shared_ptr<NotesSlideHeaderFooter>> SlidesApi::getNotesSlideHead
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getNotesSlideHeaderFooter: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getNotesSlideHeaderFooter");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5688,13 +4995,7 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::getNotesSlideOnline(std::shar
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getNotesSlideOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getNotesSlideOnline");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5733,13 +5034,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getNotesSlideParagraph(utility
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getNotesSlideParagraph: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getNotesSlideParagraph");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5777,13 +5072,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getNotesSlideParagraphs(utili
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getNotesSlideParagraphs: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getNotesSlideParagraphs");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5823,13 +5112,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getNotesSlidePortion(utility::st
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getNotesSlidePortion: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getNotesSlidePortion");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5868,13 +5151,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::getNotesSlidePortions(utility::
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getNotesSlidePortions: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getNotesSlidePortions");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5912,13 +5189,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getNotesSlideShape(utility::st
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getNotesSlideShape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getNotesSlideShape");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -5955,13 +5226,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getNotesSlideShapes(utility::stri
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getNotesSlideShapes: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getNotesSlideShapes");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6000,13 +5265,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getParagraph(utility::string_t
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getParagraph: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getParagraph");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6044,13 +5303,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getParagraphs(utility::string
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getParagraphs: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getParagraphs");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6088,13 +5341,7 @@ pplx::task<std::shared_ptr<Placeholder>> SlidesApi::getPlaceholder(utility::stri
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getPlaceholder: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getPlaceholder");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6131,13 +5378,7 @@ pplx::task<std::shared_ptr<Placeholders>> SlidesApi::getPlaceholders(utility::st
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getPlaceholders: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getPlaceholders");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6177,13 +5418,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getPortion(utility::string_t nam
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getPortion: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getPortion");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6222,13 +5457,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::getPortions(utility::string_t n
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getPortions: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getPortions");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6264,13 +5493,7 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::getPresentation(utility::string
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getPresentation: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getPresentation");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6306,13 +5529,7 @@ pplx::task<std::shared_ptr<Images>> SlidesApi::getPresentationImages(utility::st
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getPresentationImages: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getPresentationImages");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6352,13 +5569,7 @@ pplx::task<std::shared_ptr<TextItems>> SlidesApi::getPresentationTextItems(utili
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getPresentationTextItems: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getPresentationTextItems");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6394,13 +5605,7 @@ pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::getProtectionProper
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getProtectionProperties: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getProtectionProperties");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6436,13 +5641,7 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::getSections(utility::string_t n
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getSections: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getSections");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6480,13 +5679,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getShape(utility::string_t nam
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getShape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getShape");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6523,13 +5716,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getShapes(utility::string_t name,
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getShapes: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getShapes");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6566,13 +5753,7 @@ pplx::task<std::shared_ptr<Slide>> SlidesApi::getSlide(utility::string_t name, i
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getSlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getSlide");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6609,13 +5790,7 @@ pplx::task<std::shared_ptr<SlideComments>> SlidesApi::getSlideComments(utility::
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getSlideComments: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getSlideComments");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6652,13 +5827,7 @@ pplx::task<std::shared_ptr<HeaderFooter>> SlidesApi::getSlideHeaderFooter(utilit
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getSlideHeaderFooter: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getSlideHeaderFooter");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6695,13 +5864,7 @@ pplx::task<std::shared_ptr<Images>> SlidesApi::getSlideImages(utility::string_t 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getSlideImages: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getSlideImages");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6737,13 +5900,7 @@ pplx::task<std::shared_ptr<SlideProperties>> SlidesApi::getSlideProperties(utili
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getSlideProperties: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getSlideProperties");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6784,13 +5941,7 @@ pplx::task<std::shared_ptr<TextItems>> SlidesApi::getSlideTextItems(utility::str
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getSlideTextItems: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getSlideTextItems");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6826,13 +5977,7 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::getSlides(utility::string_t name,
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getSlides: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getSlides");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6876,13 +6021,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getSubshape(utility::string_t 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getSubshape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getSubshape");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6927,13 +6066,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getSubshapeParagraph(utility::
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getSubshapeParagraph: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getSubshapeParagraph");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -6977,13 +6110,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getSubshapeParagraphs(utility
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getSubshapeParagraphs: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getSubshapeParagraphs");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7029,13 +6156,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getSubshapePortion(utility::stri
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getSubshapePortion: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getSubshapePortion");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7080,13 +6201,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::getSubshapePortions(utility::st
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getSubshapePortions: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getSubshapePortions");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7129,13 +6244,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getSubshapes(utility::string_t na
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getSubshapes: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getSubshapes");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7172,13 +6281,7 @@ pplx::task<std::shared_ptr<Theme>> SlidesApi::getTheme(utility::string_t name, i
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getTheme: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getTheme");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7214,13 +6317,7 @@ pplx::task<std::shared_ptr<ViewProperties>> SlidesApi::getViewProperties(utility
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling getViewProperties: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "getViewProperties");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7260,13 +6357,7 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::importFromHtml(utility::string_
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling importFromHtml: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "importFromHtml");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7306,13 +6397,7 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::importFromPdf(utility::string_t
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling importFromPdf: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "importFromPdf");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7356,13 +6441,7 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::merge(utility::string_t name, s
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling merge: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "merge");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7401,13 +6480,7 @@ pplx::task<void> SlidesApi::mergeAndSaveOnline(utility::string_t outPath, std::v
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling mergeAndSaveOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "mergeAndSaveOnline");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7437,13 +6510,7 @@ pplx::task<HttpContent> SlidesApi::mergeOnline(std::vector<std::shared_ptr<HttpC
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling mergeOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "mergeOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -7484,13 +6551,7 @@ pplx::task<void> SlidesApi::moveFile(utility::string_t srcPath, utility::string_
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling moveFile: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "moveFile");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7528,13 +6589,7 @@ pplx::task<void> SlidesApi::moveFolder(utility::string_t srcPath, utility::strin
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling moveFolder: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "moveFolder");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7569,13 +6624,7 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::moveSection(utility::string_t n
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling moveSection: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "moveSection");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7613,13 +6662,7 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::moveSlide(utility::string_t name,
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling moveSlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "moveSlide");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7656,13 +6699,7 @@ pplx::task<std::shared_ptr<EntityExists>> SlidesApi::notesSlideExists(utility::s
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling notesSlideExists: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "notesSlideExists");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7699,13 +6736,7 @@ pplx::task<std::shared_ptr<EntityExists>> SlidesApi::notesSlideExistsOnline(std:
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling notesSlideExistsOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "notesSlideExistsOnline");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7740,13 +6771,7 @@ pplx::task<std::shared_ptr<ObjectExist>> SlidesApi::objectExists(utility::string
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling objectExists: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "objectExists");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7790,13 +6815,7 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::orderedMerge(utility::string_t 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling orderedMerge: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "orderedMerge");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7832,13 +6851,7 @@ pplx::task<HttpContent> SlidesApi::pipeline(std::shared_ptr<Pipeline> pipeline, 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling pipeline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "pipeline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -7875,13 +6888,7 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::reorderSlides(utility::string_t n
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling reorderSlides: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "reorderSlides");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7933,13 +6940,7 @@ pplx::task<std::shared_ptr<DocumentReplaceResult>> SlidesApi::replacePresentatio
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling replacePresentationText: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "replacePresentationText");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -7991,13 +6992,7 @@ pplx::task<HttpContent> SlidesApi::replacePresentationTextOnline(std::shared_ptr
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling replacePresentationTextOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "replacePresentationTextOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -8049,13 +7044,7 @@ pplx::task<std::shared_ptr<SlideReplaceResult>> SlidesApi::replaceSlideText(util
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling replaceSlideText: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "replaceSlideText");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -8108,13 +7097,7 @@ pplx::task<HttpContent> SlidesApi::replaceSlideTextOnline(std::shared_ptr<HttpCo
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling replaceSlideTextOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "replaceSlideTextOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -8182,13 +7165,7 @@ pplx::task<void> SlidesApi::saveNotesSlideShape(utility::string_t name, int32_t 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling saveNotesSlideShape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "saveNotesSlideShape");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -8198,7 +7175,7 @@ pplx::task<void> SlidesApi::saveNotesSlideShape(utility::string_t name, int32_t 
 		});
 }
 
-pplx::task<void> SlidesApi::savePresentation(utility::string_t name, utility::string_t format, utility::string_t outPath, std::shared_ptr<ExportOptions> options, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder)
+pplx::task<void> SlidesApi::savePresentation(utility::string_t name, utility::string_t format, utility::string_t outPath, std::shared_ptr<ExportOptions> options, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder, std::vector<int32_t> slides)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -8229,6 +7206,7 @@ pplx::task<void> SlidesApi::savePresentation(utility::string_t name, utility::st
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("slides"), slides);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -8243,13 +7221,7 @@ pplx::task<void> SlidesApi::savePresentation(utility::string_t name, utility::st
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling savePresentation: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "savePresentation");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -8315,13 +7287,7 @@ pplx::task<void> SlidesApi::saveShape(utility::string_t name, int32_t slideIndex
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling saveShape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "saveShape");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -8384,13 +7350,7 @@ pplx::task<void> SlidesApi::saveShapeOnline(std::shared_ptr<HttpContent> documen
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling saveShapeOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "saveShapeOnline");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -8454,13 +7414,7 @@ pplx::task<void> SlidesApi::saveSlide(utility::string_t name, int32_t slideIndex
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling saveSlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "saveSlide");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -8521,13 +7475,7 @@ pplx::task<void> SlidesApi::saveSlideOnline(std::shared_ptr<HttpContent> documen
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling saveSlideOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "saveSlideOnline");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -8599,13 +7547,7 @@ pplx::task<void> SlidesApi::saveSubshape(utility::string_t name, int32_t slideIn
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling saveSubshape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "saveSubshape");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -8647,13 +7589,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::setAnimation(utility::str
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling setAnimation: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "setAnimation");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -8698,13 +7634,7 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::setBackground(utility::s
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling setBackground: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "setBackground");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -8747,13 +7677,7 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::setBackgroundColor(utili
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling setBackgroundColor: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "setBackgroundColor");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -8797,13 +7721,7 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::setDocumentProperties
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling setDocumentProperties: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "setDocumentProperties");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -8853,13 +7771,7 @@ pplx::task<std::shared_ptr<DocumentProperty>> SlidesApi::setDocumentProperty(uti
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling setDocumentProperty: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "setDocumentProperty");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -8904,13 +7816,7 @@ pplx::task<std::shared_ptr<NotesSlideHeaderFooter>> SlidesApi::setNotesSlideHead
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling setNotesSlideHeaderFooter: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "setNotesSlideHeaderFooter");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -8954,13 +7860,7 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::setPresentationHeaderFooter(uti
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling setPresentationHeaderFooter: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "setPresentationHeaderFooter");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -9004,13 +7904,7 @@ pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::setProtection(utili
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling setProtection: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "setProtection");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -9054,13 +7948,7 @@ pplx::task<HttpContent> SlidesApi::setProtectionOnline(std::shared_ptr<HttpConte
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling setProtectionOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "setProtectionOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -9103,13 +7991,7 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::setSections(utility::string_t n
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling setSections: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "setSections");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -9154,13 +8036,7 @@ pplx::task<std::shared_ptr<HeaderFooter>> SlidesApi::setSlideHeaderFooter(utilit
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling setSlideHeaderFooter: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "setSlideHeaderFooter");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -9204,13 +8080,7 @@ pplx::task<std::shared_ptr<SlideProperties>> SlidesApi::setSlideProperties(utili
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling setSlideProperties: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "setSlideProperties");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -9254,13 +8124,7 @@ pplx::task<std::shared_ptr<ViewProperties>> SlidesApi::setViewProperties(utility
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling setViewProperties: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "setViewProperties");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -9319,13 +8183,7 @@ pplx::task<std::shared_ptr<SplitDocumentResult>> SlidesApi::split(utility::strin
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling split: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "split");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -9391,13 +8249,7 @@ pplx::task<std::shared_ptr<SplitDocumentResult>> SlidesApi::splitAndSaveOnline(s
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling splitAndSaveOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "splitAndSaveOnline");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -9462,13 +8314,7 @@ pplx::task<HttpContent> SlidesApi::splitOnline(std::shared_ptr<HttpContent> docu
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling splitOnline: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "splitOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> response)
@@ -9500,13 +8346,7 @@ pplx::task<std::shared_ptr<StorageExist>> SlidesApi::storageExists(utility::stri
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling storageExists: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "storageExists");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -9552,13 +8392,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::updateAnimationEffect(uti
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updateAnimationEffect: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updateAnimationEffect");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -9605,13 +8439,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::updateAnimationInteractiv
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updateAnimationInteractiveSequenceEffect: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updateAnimationInteractiveSequenceEffect");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -9658,13 +8486,7 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::updateChartCategory(utility::strin
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updateChartCategory: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updateChartCategory");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -9712,13 +8534,7 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::updateChartDataPoint(utility::stri
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updateChartDataPoint: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updateChartDataPoint");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -9765,13 +8581,7 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::updateChartSeries(utility::string_
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updateChartSeries: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updateChartSeries");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -9816,13 +8626,7 @@ pplx::task<std::shared_ptr<LayoutSlide>> SlidesApi::updateLayoutSlide(utility::s
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updateLayoutSlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updateLayoutSlide");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -9867,13 +8671,7 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::updateNotesSlide(utility::str
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updateNotesSlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updateNotesSlide");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -9920,13 +8718,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateNotesSlideParagraph(util
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updateNotesSlideParagraph: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updateNotesSlideParagraph");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -9974,13 +8766,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::updateNotesSlidePortion(utility:
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updateNotesSlidePortion: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updateNotesSlidePortion");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -10026,13 +8812,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateNotesSlideShape(utility:
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updateNotesSlideShape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updateNotesSlideShape");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -10079,13 +8859,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateParagraph(utility::strin
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updateParagraph: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updateParagraph");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -10133,13 +8907,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::updatePortion(utility::string_t 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updatePortion: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updatePortion");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -10182,13 +8950,7 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::updateSection(utility::string_t
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updateSection: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updateSection");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -10234,13 +8996,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateShape(utility::string_t 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updateShape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updateShape");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -10285,13 +9041,7 @@ pplx::task<std::shared_ptr<Slide>> SlidesApi::updateSlide(utility::string_t name
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updateSlide: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updateSlide");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -10343,13 +9093,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateSubshape(utility::string
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updateSubshape: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updateSubshape");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -10402,13 +9146,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateSubshapeParagraph(utilit
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updateSubshapeParagraph: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updateSubshapeParagraph");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -10462,13 +9200,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::updateSubshapePortion(utility::s
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling updateSubshapePortion: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "updateSubshapePortion");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)
@@ -10510,13 +9242,7 @@ pplx::task<std::shared_ptr<FilesUploadResult>> SlidesApi::uploadFile(utility::st
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
 		{
-			if (response.status_code() >= 400)
-			{
-				throw ApiException(
-					response.status_code(),
-					utility::conversions::to_string_t("error calling uploadFile: ") + response.reason_phrase(),
-					std::make_shared<std::stringstream>(response.extract_utf8string(true).get()));
-			}
+			m_ApiClient->assertResponseException(response, "uploadFile");
 			return response.extract_string();
 		})
 		.then([=](utility::string_t response)

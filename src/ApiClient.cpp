@@ -281,5 +281,21 @@ utility::string_t ApiClient::parameterToString(bool value)
 	return utility::conversions::to_string_t(value ? "true" : "false");
 }
 
+void ApiClient::assertResponseException(web::http::http_response response, std::string methodName) const
+{
+	if (response.status_code() >= 400)
+	{
+		std::string content = response.extract_utf8string(true).get();
+		if (content.length() == 0)
+		{
+			content = utility::conversions::to_utf8string(response.reason_phrase());
+		}
+		throw ApiException(
+			response.status_code(),
+			utility::conversions::to_string_t("error calling " + methodName + ": ") + response.reason_phrase(),
+			std::make_shared<std::stringstream>(content));
+	}
+}
+
 }
 }
