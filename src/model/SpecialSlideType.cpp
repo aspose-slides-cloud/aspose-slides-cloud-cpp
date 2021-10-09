@@ -23,51 +23,31 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-/*
- * ExportOptions.h
- *
- * Represents export options for whole presentation.
- */
 
-#ifndef _ExportOptions_H_
-#define _ExportOptions_H_
 
-#include "../ModelBase.h"
-
-#include <cpprest/details/basic_types.h>
+#include "SpecialSlideType.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-/// <summary>
-/// Represents export options for whole presentation.
-/// </summary>
-class  ExportOptions : public ModelBase
+SpecialSlideType::SpecialSlideType()
 {
-public:
-	ASPOSE_DLL_EXPORT ExportOptions();
-	ASPOSE_DLL_EXPORT virtual ~ExportOptions();
+}
 
-	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
-	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
+SpecialSlideType::~SpecialSlideType()
+{
+}
 
-	/// <summary>
-	/// Default regular font for rendering the presentation. 
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getDefaultRegularFont() const;
-	ASPOSE_DLL_EXPORT void setDefaultRegularFont(utility::string_t value);
-	/// <summary>
-	/// 
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getFormat() const;
-	ASPOSE_DLL_EXPORT void setFormat(utility::string_t value);
+web::json::value SpecialSlideType::toJson() const
+{
+	web::json::value val = web::json::value::object();
+	return val;
+}
 
-protected:
-	utility::string_t m_DefaultRegularFont;
-	utility::string_t m_Format;
-};
+void SpecialSlideType::fromJson(web::json::value& val)
+{
+}
 
 }
 }
 
-#endif /* _ExportOptions_H_ */

@@ -185,6 +185,7 @@
     <ClCompile Include="model\SlideExportFormat.cpp" />
     <ClCompile Include="model\SmartArtNode.cpp" />
     <ClCompile Include="model\SoftEdgeEffect.cpp" />
+    <ClCompile Include="model\SpecialSlideType.cpp" />
     <ClCompile Include="model\StorageExist.cpp" />
     <ClCompile Include="model\StorageFile.cpp" />
     <ClCompile Include="model\TableCell.cpp" />
@@ -359,6 +360,7 @@
     <ClInclude Include="model\SlideExportFormat.h" />
     <ClInclude Include="model\SmartArtNode.h" />
     <ClInclude Include="model\SoftEdgeEffect.h" />
+    <ClInclude Include="model\SpecialSlideType.h" />
     <ClInclude Include="model\StorageExist.h" />
     <ClInclude Include="model\StorageFile.h" />
     <ClInclude Include="model\TableCell.h" />

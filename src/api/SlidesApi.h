@@ -118,14 +118,19 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> alignShapes(utility::string_t name, int32_t slideIndex, utility::string_t alignmentType, boost::optional<bool> alignToSlide = bool(), std::vector<int32_t> shapes = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
-	/// Convert presentation from request content to format specified.
+	/// Changes the placement of selected shapes on the master slide. Aligns shapes to the margins or the edge of the slide or aligns them relative to each other.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<HttpContent> convert(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::vector<int32_t> slides = std::vector<int32_t>());
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> alignSpecialSlideShapes(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t alignmentType, boost::optional<bool> alignToSlide = bool(), std::vector<int32_t> shapes = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Convert presentation from request content to format specified.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<void> convertAndSave(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t outPath, utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::vector<int32_t> slides = std::vector<int32_t>());
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> convert(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::vector<int32_t> slides = std::vector<int32_t>(), std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>());
+
+	/// <summary>
+	/// Convert presentation from request content to format specified.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<void> convertAndSave(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t outPath, utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::vector<int32_t> slides = std::vector<int32_t>(), std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>());
 
 	/// <summary>
 	/// Copy file
@@ -215,21 +220,6 @@ public:
 	/// <summary>
 	/// Creates new paragraph.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> createNotesSlideParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::shared_ptr<Paragraph> dto, boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Creates new portion.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portion>> createNotesSlidePortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Portion> dto, boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Create new shape.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ShapeBase>> createNotesSlideShape(utility::string_t name, int32_t slideIndex, std::shared_ptr<ShapeBase> dto, boost::optional<int32_t> shapeToClone = int32_t(), boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Creates new paragraph.
-	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> createParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::shared_ptr<Paragraph> dto, boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
@@ -266,6 +256,51 @@ public:
 	/// Create a slide.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Slides>> createSlide(utility::string_t name, utility::string_t layoutAlias = utility::string_t(), boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Add an effect to special slide (master, layout, notes) animation.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> createSpecialSlideAnimationEffect(utility::string_t name, int32_t slideIndex, utility::string_t slideType, std::shared_ptr<Effect> effect, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Set special slide (master, layout, notes) animation.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> createSpecialSlideAnimationInteractiveSequence(utility::string_t name, int32_t slideIndex, utility::string_t slideType, std::shared_ptr<InteractiveSequence> sequence, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Add an animation effect to a special slide (master, layout, notes) interactive sequence.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> createSpecialSlideAnimationInteractiveSequenceEffect(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t sequenceIndex, std::shared_ptr<Effect> effect, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Creates new paragraph.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> createSpecialSlideParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, std::shared_ptr<Paragraph> dto, boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Creates new portion.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portion>> createSpecialSlidePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Portion> dto, boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Create new shape.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ShapeBase>> createSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, std::shared_ptr<ShapeBase> dto = std::shared_ptr<ShapeBase>(), boost::optional<int32_t> shapeToClone = int32_t(), boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Create new shape (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ShapeBase>> createSpecialSlideSubshape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, std::shared_ptr<ShapeBase> dto = std::shared_ptr<ShapeBase>(), boost::optional<int32_t> shapeToClone = int32_t(), boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Creates new paragraph (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> createSpecialSlideSubshapeParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, std::shared_ptr<Paragraph> dto, boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Creates new portion (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portion>> createSpecialSlideSubshapePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Portion> dto, boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Create new shape (for smart art and group shapes).
@@ -380,36 +415,6 @@ public:
 	/// <summary>
 	/// Remove a paragraph.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraphs>> deleteNotesSlideParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Remove a range of paragraphs.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraphs>> deleteNotesSlideParagraphs(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::vector<int32_t> paragraphs = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Remove a portion.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portions>> deleteNotesSlidePortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Remove a range of portions.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portions>> deleteNotesSlidePortions(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, std::vector<int32_t> portions = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Remove a shape.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> deleteNotesSlideShape(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Remove a range of shapes.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> deleteNotesSlideShapes(utility::string_t name, int32_t slideIndex, std::vector<int32_t> shapes = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Remove a paragraph.
-	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraphs>> deleteParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
@@ -476,6 +481,96 @@ public:
 	/// Delete presentation slides.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Slides>> deleteSlides(utility::string_t name, std::vector<int32_t> slides = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Remove animation from a special slide (master, layout, notes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> deleteSpecialSlideAnimation(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Remove an effect from special slide (master, layout, notes) animation.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> deleteSpecialSlideAnimationEffect(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t effectIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Remove an interactive sequence from special slide (master, layout, notes) animation.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> deleteSpecialSlideAnimationInteractiveSequence(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t sequenceIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Remove an effect from special slide (master, layout, notes) animation interactive sequence.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> deleteSpecialSlideAnimationInteractiveSequenceEffect(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t sequenceIndex, int32_t effectIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Clear all interactive sequences from special slide (master, layout, notes) animation.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> deleteSpecialSlideAnimationInteractiveSequences(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Clear main sequence in special slide (master, layout, notes) animation.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> deleteSpecialSlideAnimationMainSequence(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Remove a paragraph.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraphs>> deleteSpecialSlideParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Remove a range of paragraphs.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraphs>> deleteSpecialSlideParagraphs(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, std::vector<int32_t> paragraphs = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Remove a portion.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portions>> deleteSpecialSlidePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Remove a range of portions.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portions>> deleteSpecialSlidePortions(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, std::vector<int32_t> portions = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Remove a shape.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> deleteSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Remove a range of shapes.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> deleteSpecialSlideShapes(utility::string_t name, int32_t slideIndex, utility::string_t slideType, std::vector<int32_t> shapes = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Remove a shape (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> deleteSpecialSlideSubshape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Remove a paragraph (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraphs>> deleteSpecialSlideSubshapeParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Remove a range of paragraphs (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraphs>> deleteSpecialSlideSubshapeParagraphs(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, std::vector<int32_t> paragraphs = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Remove a portion (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portions>> deleteSpecialSlideSubshapePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Remove a range of portions (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portions>> deleteSpecialSlideSubshapePortions(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, std::vector<int32_t> portions = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Remove a range of shapes (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> deleteSpecialSlideSubshapes(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, std::vector<int32_t> shapes = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Remove a shape (for smart art and group shapes).
@@ -573,11 +668,6 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadNotesSlideOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, utility::string_t format, boost::optional<int32_t> width = int32_t(), boost::optional<int32_t> height = int32_t(), utility::string_t password = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
 
 	/// <summary>
-	/// Render shape to specified picture format.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadNotesSlideShape(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, std::shared_ptr<IShapeExportOptions> options = std::shared_ptr<IShapeExportOptions>(), boost::optional<double> scaleX = double(), boost::optional<double> scaleY = double(), utility::string_t bounds = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
-
-	/// <summary>
 	/// Save a presentation to a specified format.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadPresentation(utility::string_t name, utility::string_t format, std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::vector<int32_t> slides = std::vector<int32_t>());
@@ -590,7 +680,7 @@ public:
 	/// <summary>
 	/// Render shape to specified picture format.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadShapeOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, boost::optional<double> scaleX = double(), boost::optional<double> scaleY = double(), utility::string_t bounds = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadShapeOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, boost::optional<double> scaleX = double(), boost::optional<double> scaleY = double(), utility::string_t bounds = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::shared_ptr<IShapeExportOptions> options = std::shared_ptr<IShapeExportOptions>());
 
 	/// <summary>
 	/// Save a slide to a specified format.
@@ -600,7 +690,17 @@ public:
 	/// <summary>
 	/// Save a slide to a specified format.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadSlideOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, utility::string_t format, boost::optional<int32_t> width = int32_t(), boost::optional<int32_t> height = int32_t(), utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadSlideOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, utility::string_t format, boost::optional<int32_t> width = int32_t(), boost::optional<int32_t> height = int32_t(), utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>());
+
+	/// <summary>
+	/// Render shape to specified picture format.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, utility::string_t format, std::shared_ptr<IShapeExportOptions> options = std::shared_ptr<IShapeExportOptions>(), boost::optional<double> scaleX = double(), boost::optional<double> scaleY = double(), utility::string_t bounds = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
+
+	/// <summary>
+	/// Render shape to specified picture format (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadSpecialSlideSubshape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, utility::string_t format, std::shared_ptr<IShapeExportOptions> options = std::shared_ptr<IShapeExportOptions>(), boost::optional<double> scaleX = double(), boost::optional<double> scaleY = double(), utility::string_t bounds = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
 
 	/// <summary>
 	/// Render shape to specified picture format (for smart art and group shapes).
@@ -696,36 +796,6 @@ public:
 	/// Read notes slide info.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<NotesSlide>> getNotesSlideOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, utility::string_t password = utility::string_t());
-
-	/// <summary>
-	/// Read shape paragraph info.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> getNotesSlideParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Read shape paragraphs info.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraphs>> getNotesSlideParagraphs(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Read paragraph portion info.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portion>> getNotesSlidePortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Read paragraph portions info.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portions>> getNotesSlidePortions(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Read slide shape info.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ShapeBase>> getNotesSlideShape(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Read slide shapes info.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> getNotesSlideShapes(utility::string_t name, int32_t slideIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Read shape paragraph info.
@@ -826,6 +896,71 @@ public:
 	/// Read presentation slides info.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Slides>> getSlides(utility::string_t name, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Read special slide (master, layout, notes) animation effects.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> getSpecialSlideAnimation(utility::string_t name, int32_t slideIndex, utility::string_t slideType, boost::optional<int32_t> shapeIndex = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Read shape paragraph info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> getSpecialSlideParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Read special shape paragraphs info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraphs>> getSpecialSlideParagraphs(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Read paragraph portion info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portion>> getSpecialSlidePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Read paragraph portions info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portions>> getSpecialSlidePortions(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Read special slide shape info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ShapeBase>> getSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Read special slide shapes info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> getSpecialSlideShapes(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Read special slide shape info (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ShapeBase>> getSpecialSlideSubshape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Read shape paragraph info (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> getSpecialSlideSubshapeParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Read shape paragraphs info (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraphs>> getSpecialSlideSubshapeParagraphs(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Read paragraph portion info (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portion>> getSpecialSlideSubshapePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Read paragraph portions info (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portions>> getSpecialSlideSubshapePortions(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Read special slide shapes info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> getSpecialSlideSubshapes(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Read slide shape info (for smart art and group shapes).
@@ -963,11 +1098,6 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> replaceSlideTextOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, utility::string_t oldValue, utility::string_t newValue, boost::optional<bool> ignoreCase = bool(), utility::string_t password = utility::string_t());
 
 	/// <summary>
-	/// Render shape to specified picture format.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<void> saveNotesSlideShape(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, utility::string_t outPath, std::shared_ptr<IShapeExportOptions> options = std::shared_ptr<IShapeExportOptions>(), boost::optional<double> scaleX = double(), boost::optional<double> scaleY = double(), utility::string_t bounds = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
-
-	/// <summary>
 	/// Save a presentation to a specified format.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<void> savePresentation(utility::string_t name, utility::string_t format, utility::string_t outPath, std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::vector<int32_t> slides = std::vector<int32_t>());
@@ -980,7 +1110,7 @@ public:
 	/// <summary>
 	/// Render shape to specified picture format.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<void> saveShapeOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, utility::string_t outPath, boost::optional<double> scaleX = double(), boost::optional<double> scaleY = double(), utility::string_t bounds = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<void> saveShapeOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, utility::string_t outPath, boost::optional<double> scaleX = double(), boost::optional<double> scaleY = double(), utility::string_t bounds = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::shared_ptr<IShapeExportOptions> options = std::shared_ptr<IShapeExportOptions>());
 
 	/// <summary>
 	/// Save a slide to a specified format.
@@ -990,7 +1120,17 @@ public:
 	/// <summary>
 	/// Save a slide to a specified format.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<void> saveSlideOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, utility::string_t format, utility::string_t outPath, boost::optional<int32_t> width = int32_t(), boost::optional<int32_t> height = int32_t(), utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<void> saveSlideOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, utility::string_t format, utility::string_t outPath, boost::optional<int32_t> width = int32_t(), boost::optional<int32_t> height = int32_t(), utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>());
+
+	/// <summary>
+	/// Render shape to specified picture format.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<void> saveSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, utility::string_t format, utility::string_t outPath, std::shared_ptr<IShapeExportOptions> options = std::shared_ptr<IShapeExportOptions>(), boost::optional<double> scaleX = double(), boost::optional<double> scaleY = double(), utility::string_t bounds = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
+
+	/// <summary>
+	/// Render shape to specified picture format.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<void> saveSpecialSlideSubshape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, utility::string_t format, utility::string_t outPath, std::shared_ptr<IShapeExportOptions> options = std::shared_ptr<IShapeExportOptions>(), boost::optional<double> scaleX = double(), boost::optional<double> scaleY = double(), utility::string_t bounds = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
 
 	/// <summary>
 	/// Render shape to specified picture format.
@@ -1058,6 +1198,11 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideProperties>> setSlideProperties(utility::string_t name, std::shared_ptr<SlideProperties> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
+	/// Set special slide (master, layout, notes) animation.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> setSpecialSlideAnimation(utility::string_t name, int32_t slideIndex, utility::string_t slideType, std::shared_ptr<SlideAnimation> animation, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
 	/// Update presentation document properties.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ViewProperties>> setViewProperties(utility::string_t name, std::shared_ptr<ViewProperties> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
@@ -1120,21 +1265,6 @@ public:
 	/// <summary>
 	/// Update paragraph properties.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> updateNotesSlideParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Paragraph> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Update portion properties.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portion>> updateNotesSlidePortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, std::shared_ptr<Portion> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Update shape properties.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ShapeBase>> updateNotesSlideShape(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::shared_ptr<ShapeBase> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Update paragraph properties.
-	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> updateParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Paragraph> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
@@ -1156,6 +1286,46 @@ public:
 	/// Update a slide.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Slide>> updateSlide(utility::string_t name, int32_t slideIndex, std::shared_ptr<Slide> slideDto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Modify an animation effect for a special slide (master, layout, notes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> updateSpecialSlideAnimationEffect(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t effectIndex, std::shared_ptr<Effect> effect, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Modify an animation effect for a special slide (master, layout, notes) interactive sequence.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> updateSpecialSlideAnimationInteractiveSequenceEffect(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t sequenceIndex, int32_t effectIndex, std::shared_ptr<Effect> effect, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Update paragraph properties.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> updateSpecialSlideParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Paragraph> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Update portion properties.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portion>> updateSpecialSlidePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, std::shared_ptr<Portion> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Update shape properties.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ShapeBase>> updateSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, std::shared_ptr<ShapeBase> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Update shape properties (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ShapeBase>> updateSpecialSlideSubshape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, std::shared_ptr<ShapeBase> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Update paragraph properties (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> updateSpecialSlideSubshapeParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Paragraph> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Update portion properties (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portion>> updateSpecialSlideSubshapePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, std::shared_ptr<Portion> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Update shape properties (for smart art and group shapes).
