@@ -56,11 +56,15 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT double getScaleX() const;
 	ASPOSE_DLL_EXPORT void setScaleX(double value);
+	ASPOSE_DLL_EXPORT bool scaleXIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetScaleX();
 	/// <summary>
 	/// Get or sets scaling ratio by Y axis.
 	/// </summary>
 	ASPOSE_DLL_EXPORT double getScaleY() const;
 	ASPOSE_DLL_EXPORT void setScaleY(double value);
+	ASPOSE_DLL_EXPORT bool scaleYIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetScaleY();
 	/// <summary>
 	/// Get or sets thumbnail bounds
 	/// </summary>
@@ -74,7 +78,9 @@ public:
 
 protected:
 	double m_ScaleX;
+	bool m_ScaleXIsSet;
 	double m_ScaleY;
+	bool m_ScaleYIsSet;
 	utility::string_t m_ThumbnailBounds;
 	utility::string_t m_Format;
 };

@@ -32,6 +32,9 @@ namespace model {
 
 XpsExportOptions::XpsExportOptions()
 {
+	m_ShowHiddenSlidesIsSet = false;
+	m_SaveMetafilesAsPngIsSet = false;
+	m_DrawSlidesFrameIsSet = false;
 }
 
 XpsExportOptions::~XpsExportOptions()
@@ -46,7 +49,17 @@ bool XpsExportOptions::getShowHiddenSlides() const
 void XpsExportOptions::setShowHiddenSlides(bool value)
 {
 	m_ShowHiddenSlides = value;
-	
+	m_ShowHiddenSlidesIsSet = true;
+}
+
+bool XpsExportOptions::showHiddenSlidesIsSet() const
+{
+	return m_ShowHiddenSlidesIsSet;
+}
+
+void XpsExportOptions::unsetShowHiddenSlides()
+{
+	m_ShowHiddenSlidesIsSet = false;
 }
 
 bool XpsExportOptions::getSaveMetafilesAsPng() const
@@ -57,7 +70,17 @@ bool XpsExportOptions::getSaveMetafilesAsPng() const
 void XpsExportOptions::setSaveMetafilesAsPng(bool value)
 {
 	m_SaveMetafilesAsPng = value;
-	
+	m_SaveMetafilesAsPngIsSet = true;
+}
+
+bool XpsExportOptions::saveMetafilesAsPngIsSet() const
+{
+	return m_SaveMetafilesAsPngIsSet;
+}
+
+void XpsExportOptions::unsetSaveMetafilesAsPng()
+{
+	m_SaveMetafilesAsPngIsSet = false;
 }
 
 bool XpsExportOptions::getDrawSlidesFrame() const
@@ -68,15 +91,34 @@ bool XpsExportOptions::getDrawSlidesFrame() const
 void XpsExportOptions::setDrawSlidesFrame(bool value)
 {
 	m_DrawSlidesFrame = value;
-	
+	m_DrawSlidesFrameIsSet = true;
+}
+
+bool XpsExportOptions::drawSlidesFrameIsSet() const
+{
+	return m_DrawSlidesFrameIsSet;
+}
+
+void XpsExportOptions::unsetDrawSlidesFrame()
+{
+	m_DrawSlidesFrameIsSet = false;
 }
 
 web::json::value XpsExportOptions::toJson() const
 {
 	web::json::value val = this->ExportOptions::toJson();
-	val[utility::conversions::to_string_t("ShowHiddenSlides")] = ModelBase::toJson(m_ShowHiddenSlides);
-	val[utility::conversions::to_string_t("SaveMetafilesAsPng")] = ModelBase::toJson(m_SaveMetafilesAsPng);
-	val[utility::conversions::to_string_t("DrawSlidesFrame")] = ModelBase::toJson(m_DrawSlidesFrame);
+	if(m_ShowHiddenSlidesIsSet)
+	{
+		val[utility::conversions::to_string_t("ShowHiddenSlides")] = ModelBase::toJson(m_ShowHiddenSlides);
+	}
+	if(m_SaveMetafilesAsPngIsSet)
+	{
+		val[utility::conversions::to_string_t("SaveMetafilesAsPng")] = ModelBase::toJson(m_SaveMetafilesAsPng);
+	}
+	if(m_DrawSlidesFrameIsSet)
+	{
+		val[utility::conversions::to_string_t("DrawSlidesFrame")] = ModelBase::toJson(m_DrawSlidesFrame);
+	}
 	return val;
 }
 

@@ -32,6 +32,13 @@ namespace model {
 
 SvgExportOptions::SvgExportOptions()
 {
+	m_VectorizeTextIsSet = false;
+	m_MetafileRasterizationDpiIsSet = false;
+	m_Disable3DTextIsSet = false;
+	m_DisableGradientSplitIsSet = false;
+	m_DisableLineEndCroppingIsSet = false;
+	m_JpegQualityIsSet = false;
+	m_DeletePicturesCroppedAreasIsSet = false;
 }
 
 SvgExportOptions::~SvgExportOptions()
@@ -46,7 +53,17 @@ bool SvgExportOptions::getVectorizeText() const
 void SvgExportOptions::setVectorizeText(bool value)
 {
 	m_VectorizeText = value;
-	
+	m_VectorizeTextIsSet = true;
+}
+
+bool SvgExportOptions::vectorizeTextIsSet() const
+{
+	return m_VectorizeTextIsSet;
+}
+
+void SvgExportOptions::unsetVectorizeText()
+{
+	m_VectorizeTextIsSet = false;
 }
 
 int32_t SvgExportOptions::getMetafileRasterizationDpi() const
@@ -57,7 +74,17 @@ int32_t SvgExportOptions::getMetafileRasterizationDpi() const
 void SvgExportOptions::setMetafileRasterizationDpi(int32_t value)
 {
 	m_MetafileRasterizationDpi = value;
-	
+	m_MetafileRasterizationDpiIsSet = true;
+}
+
+bool SvgExportOptions::metafileRasterizationDpiIsSet() const
+{
+	return m_MetafileRasterizationDpiIsSet;
+}
+
+void SvgExportOptions::unsetMetafileRasterizationDpi()
+{
+	m_MetafileRasterizationDpiIsSet = false;
 }
 
 bool SvgExportOptions::getDisable3DText() const
@@ -68,7 +95,17 @@ bool SvgExportOptions::getDisable3DText() const
 void SvgExportOptions::setDisable3DText(bool value)
 {
 	m_Disable3DText = value;
-	
+	m_Disable3DTextIsSet = true;
+}
+
+bool SvgExportOptions::disable3DTextIsSet() const
+{
+	return m_Disable3DTextIsSet;
+}
+
+void SvgExportOptions::unsetDisable3DText()
+{
+	m_Disable3DTextIsSet = false;
 }
 
 bool SvgExportOptions::getDisableGradientSplit() const
@@ -79,7 +116,17 @@ bool SvgExportOptions::getDisableGradientSplit() const
 void SvgExportOptions::setDisableGradientSplit(bool value)
 {
 	m_DisableGradientSplit = value;
-	
+	m_DisableGradientSplitIsSet = true;
+}
+
+bool SvgExportOptions::disableGradientSplitIsSet() const
+{
+	return m_DisableGradientSplitIsSet;
+}
+
+void SvgExportOptions::unsetDisableGradientSplit()
+{
+	m_DisableGradientSplitIsSet = false;
 }
 
 bool SvgExportOptions::getDisableLineEndCropping() const
@@ -90,7 +137,17 @@ bool SvgExportOptions::getDisableLineEndCropping() const
 void SvgExportOptions::setDisableLineEndCropping(bool value)
 {
 	m_DisableLineEndCropping = value;
-	
+	m_DisableLineEndCroppingIsSet = true;
+}
+
+bool SvgExportOptions::disableLineEndCroppingIsSet() const
+{
+	return m_DisableLineEndCroppingIsSet;
+}
+
+void SvgExportOptions::unsetDisableLineEndCropping()
+{
+	m_DisableLineEndCroppingIsSet = false;
 }
 
 int32_t SvgExportOptions::getJpegQuality() const
@@ -101,7 +158,17 @@ int32_t SvgExportOptions::getJpegQuality() const
 void SvgExportOptions::setJpegQuality(int32_t value)
 {
 	m_JpegQuality = value;
-	
+	m_JpegQualityIsSet = true;
+}
+
+bool SvgExportOptions::jpegQualityIsSet() const
+{
+	return m_JpegQualityIsSet;
+}
+
+void SvgExportOptions::unsetJpegQuality()
+{
+	m_JpegQualityIsSet = false;
 }
 
 utility::string_t SvgExportOptions::getPicturesCompression() const
@@ -123,7 +190,17 @@ bool SvgExportOptions::getDeletePicturesCroppedAreas() const
 void SvgExportOptions::setDeletePicturesCroppedAreas(bool value)
 {
 	m_DeletePicturesCroppedAreas = value;
-	
+	m_DeletePicturesCroppedAreasIsSet = true;
+}
+
+bool SvgExportOptions::deletePicturesCroppedAreasIsSet() const
+{
+	return m_DeletePicturesCroppedAreasIsSet;
+}
+
+void SvgExportOptions::unsetDeletePicturesCroppedAreas()
+{
+	m_DeletePicturesCroppedAreasIsSet = false;
 }
 
 utility::string_t SvgExportOptions::getExternalFontsHandling() const
@@ -140,17 +217,38 @@ void SvgExportOptions::setExternalFontsHandling(utility::string_t value)
 web::json::value SvgExportOptions::toJson() const
 {
 	web::json::value val = this->ExportOptions::toJson();
-	val[utility::conversions::to_string_t("VectorizeText")] = ModelBase::toJson(m_VectorizeText);
-	val[utility::conversions::to_string_t("MetafileRasterizationDpi")] = ModelBase::toJson(m_MetafileRasterizationDpi);
-	val[utility::conversions::to_string_t("Disable3DText")] = ModelBase::toJson(m_Disable3DText);
-	val[utility::conversions::to_string_t("DisableGradientSplit")] = ModelBase::toJson(m_DisableGradientSplit);
-	val[utility::conversions::to_string_t("DisableLineEndCropping")] = ModelBase::toJson(m_DisableLineEndCropping);
-	val[utility::conversions::to_string_t("JpegQuality")] = ModelBase::toJson(m_JpegQuality);
+	if(m_VectorizeTextIsSet)
+	{
+		val[utility::conversions::to_string_t("VectorizeText")] = ModelBase::toJson(m_VectorizeText);
+	}
+	if(m_MetafileRasterizationDpiIsSet)
+	{
+		val[utility::conversions::to_string_t("MetafileRasterizationDpi")] = ModelBase::toJson(m_MetafileRasterizationDpi);
+	}
+	if(m_Disable3DTextIsSet)
+	{
+		val[utility::conversions::to_string_t("Disable3DText")] = ModelBase::toJson(m_Disable3DText);
+	}
+	if(m_DisableGradientSplitIsSet)
+	{
+		val[utility::conversions::to_string_t("DisableGradientSplit")] = ModelBase::toJson(m_DisableGradientSplit);
+	}
+	if(m_DisableLineEndCroppingIsSet)
+	{
+		val[utility::conversions::to_string_t("DisableLineEndCropping")] = ModelBase::toJson(m_DisableLineEndCropping);
+	}
+	if(m_JpegQualityIsSet)
+	{
+		val[utility::conversions::to_string_t("JpegQuality")] = ModelBase::toJson(m_JpegQuality);
+	}
 	if (!m_PicturesCompression.empty())
 	{
 		val[utility::conversions::to_string_t("PicturesCompression")] = ModelBase::toJson(m_PicturesCompression);
 	}
-	val[utility::conversions::to_string_t("DeletePicturesCroppedAreas")] = ModelBase::toJson(m_DeletePicturesCroppedAreas);
+	if(m_DeletePicturesCroppedAreasIsSet)
+	{
+		val[utility::conversions::to_string_t("DeletePicturesCroppedAreas")] = ModelBase::toJson(m_DeletePicturesCroppedAreas);
+	}
 	if (!m_ExternalFontsHandling.empty())
 	{
 		val[utility::conversions::to_string_t("ExternalFontsHandling")] = ModelBase::toJson(m_ExternalFontsHandling);

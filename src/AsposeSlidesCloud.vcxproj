@@ -130,6 +130,7 @@
     <ClCompile Include="model\Axes.cpp" />
     <ClCompile Include="model\Axis.cpp" />
     <ClCompile Include="model\BlurEffect.cpp" />
+    <ClCompile Include="model\Camera.cpp" />
     <ClCompile Include="model\ChartCategory.cpp" />
     <ClCompile Include="model\ChartTitle.cpp" />
     <ClCompile Include="model\ChartWall.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="model\InputFile.cpp" />
     <ClCompile Include="model\InteractiveSequence.cpp" />
     <ClCompile Include="model\Legend.cpp" />
+    <ClCompile Include="model\LightRig.cpp" />
     <ClCompile Include="model\LineFormat.cpp" />
     <ClCompile Include="model\MergingSource.cpp" />
     <ClCompile Include="model\NormalViewRestoredProperties.cpp" />
@@ -177,6 +179,7 @@
     <ClCompile Include="model\ResourceUri.cpp" />
     <ClCompile Include="model\Series.cpp" />
     <ClCompile Include="model\SeriesMarker.cpp" />
+    <ClCompile Include="model\ShapeBevel.cpp" />
     <ClCompile Include="model\ShapeExportFormat.cpp" />
     <ClCompile Include="model\ShapeImageExportOptions.cpp" />
     <ClCompile Include="model\ShapeThumbnailBounds.cpp" />
@@ -193,6 +196,7 @@
     <ClCompile Include="model\TableRow.cpp" />
     <ClCompile Include="model\Task.cpp" />
     <ClCompile Include="model\TextItem.cpp" />
+    <ClCompile Include="model\ThreeDFormat.cpp" />
     <ClCompile Include="model\AddLayoutSlide.cpp" />
     <ClCompile Include="model\AddMasterSlide.cpp" />
     <ClCompile Include="model\AddShape.cpp" />
@@ -208,6 +212,7 @@
     <ClCompile Include="model\FormatScheme.cpp" />
     <ClCompile Include="model\GradientFill.cpp" />
     <ClCompile Include="model\HeaderFooter.cpp" />
+    <ClCompile Include="model\Html5ExportOptions.cpp" />
     <ClCompile Include="model\HtmlExportOptions.cpp" />
     <ClCompile Include="model\Image.cpp" />
     <ClCompile Include="model\ImageExportOptions.cpp" />
@@ -305,6 +310,7 @@
     <ClInclude Include="model\Axes.h" />
     <ClInclude Include="model\Axis.h" />
     <ClInclude Include="model\BlurEffect.h" />
+    <ClInclude Include="model\Camera.h" />
     <ClInclude Include="model\ChartCategory.h" />
     <ClInclude Include="model\ChartTitle.h" />
     <ClInclude Include="model\ChartWall.h" />
@@ -334,6 +340,7 @@
     <ClInclude Include="model\InputFile.h" />
     <ClInclude Include="model\InteractiveSequence.h" />
     <ClInclude Include="model\Legend.h" />
+    <ClInclude Include="model\LightRig.h" />
     <ClInclude Include="model\LineFormat.h" />
     <ClInclude Include="model\MergingSource.h" />
     <ClInclude Include="model\NormalViewRestoredProperties.h" />
@@ -352,6 +359,7 @@
     <ClInclude Include="model\ResourceUri.h" />
     <ClInclude Include="model\Series.h" />
     <ClInclude Include="model\SeriesMarker.h" />
+    <ClInclude Include="model\ShapeBevel.h" />
     <ClInclude Include="model\ShapeExportFormat.h" />
     <ClInclude Include="model\ShapeImageExportOptions.h" />
     <ClInclude Include="model\ShapeThumbnailBounds.h" />
@@ -368,6 +376,7 @@
     <ClInclude Include="model\TableRow.h" />
     <ClInclude Include="model\Task.h" />
     <ClInclude Include="model\TextItem.h" />
+    <ClInclude Include="model\ThreeDFormat.h" />
     <ClInclude Include="model\AddLayoutSlide.h" />
     <ClInclude Include="model\AddMasterSlide.h" />
     <ClInclude Include="model\AddShape.h" />
@@ -383,6 +392,7 @@
     <ClInclude Include="model\FormatScheme.h" />
     <ClInclude Include="model\GradientFill.h" />
     <ClInclude Include="model\HeaderFooter.h" />
+    <ClInclude Include="model\Html5ExportOptions.h" />
     <ClInclude Include="model\HtmlExportOptions.h" />
     <ClInclude Include="model\Image.h" />
     <ClInclude Include="model\ImageExportOptions.h" />

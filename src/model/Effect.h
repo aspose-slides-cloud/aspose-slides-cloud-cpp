@@ -72,6 +72,13 @@ public:
 	ASPOSE_DLL_EXPORT int32_t getShapeIndex() const;
 	ASPOSE_DLL_EXPORT void setShapeIndex(int32_t value);
 	/// <summary>
+	/// Paragraph index.
+	/// </summary>
+	ASPOSE_DLL_EXPORT int32_t getParagraphIndex() const;
+	ASPOSE_DLL_EXPORT void setParagraphIndex(int32_t value);
+	ASPOSE_DLL_EXPORT bool paragraphIndexIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetParagraphIndex();
+	/// <summary>
 	/// Effect trigger type.
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getTriggerType() const;
@@ -143,6 +150,8 @@ protected:
 	utility::string_t m_Subtype;
 	utility::string_t m_PresetClassType;
 	int32_t m_ShapeIndex;
+	int32_t m_ParagraphIndex;
+	bool m_ParagraphIndexIsSet;
 	utility::string_t m_TriggerType;
 	double m_Accelerate;
 	bool m_AccelerateIsSet;

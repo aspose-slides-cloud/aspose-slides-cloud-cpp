@@ -67,6 +67,8 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT int32_t getCommentsAreaWidth() const;
 	ASPOSE_DLL_EXPORT void setCommentsAreaWidth(int32_t value);
+	ASPOSE_DLL_EXPORT bool commentsAreaWidthIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetCommentsAreaWidth();
 	/// <summary>
 	/// Gets or sets the color of comments area (Applies only if comments are displayed on the right).
 	/// </summary>
@@ -77,6 +79,7 @@ protected:
 	utility::string_t m_NotesPosition;
 	utility::string_t m_CommentsPosition;
 	int32_t m_CommentsAreaWidth;
+	bool m_CommentsAreaWidthIsSet;
 	utility::string_t m_CommentsAreaColor;
 };
 

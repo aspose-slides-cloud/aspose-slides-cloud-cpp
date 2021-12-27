@@ -63,6 +63,8 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getEmbedFullFonts() const;
 	ASPOSE_DLL_EXPORT void setEmbedFullFonts(bool value);
+	ASPOSE_DLL_EXPORT bool embedFullFontsIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetEmbedFullFonts();
 	/// <summary>
 	/// Desired conformance level for generated PDF document.
 	/// </summary>
@@ -73,26 +75,36 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT double getSufficientResolution() const;
 	ASPOSE_DLL_EXPORT void setSufficientResolution(double value);
+	ASPOSE_DLL_EXPORT bool sufficientResolutionIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetSufficientResolution();
 	/// <summary>
 	/// Returns or sets a value determining the quality of the JPEG images inside PDF document.
 	/// </summary>
 	ASPOSE_DLL_EXPORT int32_t getJpegQuality() const;
 	ASPOSE_DLL_EXPORT void setJpegQuality(int32_t value);
+	ASPOSE_DLL_EXPORT bool jpegQualityIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetJpegQuality();
 	/// <summary>
 	/// True to draw black frame around each slide.
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getDrawSlidesFrame() const;
 	ASPOSE_DLL_EXPORT void setDrawSlidesFrame(bool value);
+	ASPOSE_DLL_EXPORT bool drawSlidesFrameIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetDrawSlidesFrame();
 	/// <summary>
 	/// Specifies whether the generated document should include hidden slides or not. Default is false. 
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getShowHiddenSlides() const;
 	ASPOSE_DLL_EXPORT void setShowHiddenSlides(bool value);
+	ASPOSE_DLL_EXPORT bool showHiddenSlidesIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetShowHiddenSlides();
 	/// <summary>
 	/// True to convert all metafiles used in a presentation to the PNG images.
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getSaveMetafilesAsPng() const;
 	ASPOSE_DLL_EXPORT void setSaveMetafilesAsPng(bool value);
+	ASPOSE_DLL_EXPORT bool saveMetafilesAsPngIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetSaveMetafilesAsPng();
 	/// <summary>
 	/// Setting user password to protect the PDF document. 
 	/// </summary>
@@ -103,6 +115,8 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getEmbedTrueTypeFontsForASCII() const;
 	ASPOSE_DLL_EXPORT void setEmbedTrueTypeFontsForASCII(bool value);
+	ASPOSE_DLL_EXPORT bool embedTrueTypeFontsForASCIIIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetEmbedTrueTypeFontsForASCII();
 	/// <summary>
 	/// Returns or sets an array of user-defined names of font families which Aspose.Slides should consider common.
 	/// </summary>
@@ -123,6 +137,8 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT int32_t getCommentsAreaWidth() const;
 	ASPOSE_DLL_EXPORT void setCommentsAreaWidth(int32_t value);
+	ASPOSE_DLL_EXPORT bool commentsAreaWidthIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetCommentsAreaWidth();
 	/// <summary>
 	/// Gets or sets the color of comments area (Applies only if comments are displayed on the right).
 	/// </summary>
@@ -133,6 +149,8 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getShowCommentsByNoAuthor() const;
 	ASPOSE_DLL_EXPORT void setShowCommentsByNoAuthor(bool value);
+	ASPOSE_DLL_EXPORT bool showCommentsByNoAuthorIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetShowCommentsByNoAuthor();
 	/// <summary>
 	/// Image transparent color.
 	/// </summary>
@@ -143,6 +161,8 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getApplyImageTransparent() const;
 	ASPOSE_DLL_EXPORT void setApplyImageTransparent(bool value);
+	ASPOSE_DLL_EXPORT bool applyImageTransparentIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetApplyImageTransparent();
 	/// <summary>
 	/// Access permissions that should be granted when the document is opened with user access.  Default is AccessPermissions.None.             
 	/// </summary>
@@ -152,22 +172,32 @@ public:
 protected:
 	utility::string_t m_TextCompression;
 	bool m_EmbedFullFonts;
+	bool m_EmbedFullFontsIsSet;
 	utility::string_t m_Compliance;
 	double m_SufficientResolution;
+	bool m_SufficientResolutionIsSet;
 	int32_t m_JpegQuality;
+	bool m_JpegQualityIsSet;
 	bool m_DrawSlidesFrame;
+	bool m_DrawSlidesFrameIsSet;
 	bool m_ShowHiddenSlides;
+	bool m_ShowHiddenSlidesIsSet;
 	bool m_SaveMetafilesAsPng;
+	bool m_SaveMetafilesAsPngIsSet;
 	utility::string_t m_Password;
 	bool m_EmbedTrueTypeFontsForASCII;
+	bool m_EmbedTrueTypeFontsForASCIIIsSet;
 	std::vector<utility::string_t> m_AdditionalCommonFontFamilies;
 	utility::string_t m_NotesPosition;
 	utility::string_t m_CommentsPosition;
 	int32_t m_CommentsAreaWidth;
+	bool m_CommentsAreaWidthIsSet;
 	utility::string_t m_CommentsAreaColor;
 	bool m_ShowCommentsByNoAuthor;
+	bool m_ShowCommentsByNoAuthorIsSet;
 	utility::string_t m_ImageTransparentColor;
 	bool m_ApplyImageTransparent;
+	bool m_ApplyImageTransparentIsSet;
 	utility::string_t m_AccessPermissions;
 };
 

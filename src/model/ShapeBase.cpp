@@ -225,6 +225,17 @@ void ShapeBase::setEffectFormat(std::shared_ptr<EffectFormat> value)
 	
 }
 
+std::shared_ptr<ThreeDFormat> ShapeBase::getThreeDFormat() const
+{
+	return m_ThreeDFormat;
+}
+
+void ShapeBase::setThreeDFormat(std::shared_ptr<ThreeDFormat> value)
+{
+	m_ThreeDFormat = value;
+	
+}
+
 std::shared_ptr<LineFormat> ShapeBase::getLineFormat() const
 {
 	return m_LineFormat;
@@ -294,6 +305,10 @@ web::json::value ShapeBase::toJson() const
 	if (m_EffectFormat != nullptr)
 	{
 		val[utility::conversions::to_string_t("EffectFormat")] = ModelBase::toJson(m_EffectFormat);
+	}
+	if (m_ThreeDFormat != nullptr)
+	{
+		val[utility::conversions::to_string_t("ThreeDFormat")] = ModelBase::toJson(m_ThreeDFormat);
 	}
 	if (m_LineFormat != nullptr)
 	{
@@ -374,6 +389,13 @@ void ShapeBase::fromJson(web::json::value& val)
 		std::shared_ptr<EffectFormat> newItem(new EffectFormat());
 		newItem->fromJson(*jsonForEffectFormat);
 		setEffectFormat(newItem);
+	}
+	web::json::value* jsonForThreeDFormat = ModelBase::getField(val, "ThreeDFormat");
+	if(jsonForThreeDFormat != nullptr && !jsonForThreeDFormat->is_null())
+	{
+		std::shared_ptr<ThreeDFormat> newItem(new ThreeDFormat());
+		newItem->fromJson(*jsonForThreeDFormat);
+		setThreeDFormat(newItem);
 	}
 	web::json::value* jsonForLineFormat = ModelBase::getField(val, "LineFormat");
 	if(jsonForLineFormat != nullptr && !jsonForLineFormat->is_null())

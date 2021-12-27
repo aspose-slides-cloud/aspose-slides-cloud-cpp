@@ -57,31 +57,43 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getVectorizeText() const;
 	ASPOSE_DLL_EXPORT void setVectorizeText(bool value);
+	ASPOSE_DLL_EXPORT bool vectorizeTextIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetVectorizeText();
 	/// <summary>
 	/// Returns or sets the lower resolution limit for metafile rasterization.
 	/// </summary>
 	ASPOSE_DLL_EXPORT int32_t getMetafileRasterizationDpi() const;
 	ASPOSE_DLL_EXPORT void setMetafileRasterizationDpi(int32_t value);
+	ASPOSE_DLL_EXPORT bool metafileRasterizationDpiIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetMetafileRasterizationDpi();
 	/// <summary>
 	/// Determines whether the 3D text is disabled in SVG.
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getDisable3DText() const;
 	ASPOSE_DLL_EXPORT void setDisable3DText(bool value);
+	ASPOSE_DLL_EXPORT bool disable3DTextIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetDisable3DText();
 	/// <summary>
 	/// Disables splitting FromCornerX and FromCenter gradients.
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getDisableGradientSplit() const;
 	ASPOSE_DLL_EXPORT void setDisableGradientSplit(bool value);
+	ASPOSE_DLL_EXPORT bool disableGradientSplitIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetDisableGradientSplit();
 	/// <summary>
 	/// SVG 1.1 lacks ability to define insets for markers. Aspose.Slides SVG writing engine has workaround for that problem: it crops end of line with arrow, so, line doesn&#39;t overlap markers. This option switches off such behavior.
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getDisableLineEndCropping() const;
 	ASPOSE_DLL_EXPORT void setDisableLineEndCropping(bool value);
+	ASPOSE_DLL_EXPORT bool disableLineEndCroppingIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetDisableLineEndCropping();
 	/// <summary>
 	/// Determines JPEG encoding quality.
 	/// </summary>
 	ASPOSE_DLL_EXPORT int32_t getJpegQuality() const;
 	ASPOSE_DLL_EXPORT void setJpegQuality(int32_t value);
+	ASPOSE_DLL_EXPORT bool jpegQualityIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetJpegQuality();
 	/// <summary>
 	/// Represents the pictures compression level
 	/// </summary>
@@ -92,6 +104,8 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getDeletePicturesCroppedAreas() const;
 	ASPOSE_DLL_EXPORT void setDeletePicturesCroppedAreas(bool value);
+	ASPOSE_DLL_EXPORT bool deletePicturesCroppedAreasIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetDeletePicturesCroppedAreas();
 	/// <summary>
 	/// Determines a way of handling externally loaded fonts.
 	/// </summary>
@@ -100,13 +114,20 @@ public:
 
 protected:
 	bool m_VectorizeText;
+	bool m_VectorizeTextIsSet;
 	int32_t m_MetafileRasterizationDpi;
+	bool m_MetafileRasterizationDpiIsSet;
 	bool m_Disable3DText;
+	bool m_Disable3DTextIsSet;
 	bool m_DisableGradientSplit;
+	bool m_DisableGradientSplitIsSet;
 	bool m_DisableLineEndCropping;
+	bool m_DisableLineEndCroppingIsSet;
 	int32_t m_JpegQuality;
+	bool m_JpegQualityIsSet;
 	utility::string_t m_PicturesCompression;
 	bool m_DeletePicturesCroppedAreas;
+	bool m_DeletePicturesCroppedAreasIsSet;
 	utility::string_t m_ExternalFontsHandling;
 };
 

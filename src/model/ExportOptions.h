@@ -57,6 +57,20 @@ public:
 	ASPOSE_DLL_EXPORT utility::string_t getDefaultRegularFont() const;
 	ASPOSE_DLL_EXPORT void setDefaultRegularFont(utility::string_t value);
 	/// <summary>
+	/// Gets or sets the height of slides in the output format, e.g. image size, pdf page size etc.
+	/// </summary>
+	ASPOSE_DLL_EXPORT int32_t getHeight() const;
+	ASPOSE_DLL_EXPORT void setHeight(int32_t value);
+	ASPOSE_DLL_EXPORT bool heightIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetHeight();
+	/// <summary>
+	/// Gets or sets the height of slides in the output format, e.g. image size, pdf page size etc.
+	/// </summary>
+	ASPOSE_DLL_EXPORT int32_t getWidth() const;
+	ASPOSE_DLL_EXPORT void setWidth(int32_t value);
+	ASPOSE_DLL_EXPORT bool widthIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetWidth();
+	/// <summary>
 	/// 
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getFormat() const;
@@ -64,6 +78,10 @@ public:
 
 protected:
 	utility::string_t m_DefaultRegularFont;
+	int32_t m_Height;
+	bool m_HeightIsSet;
+	int32_t m_Width;
+	bool m_WidthIsSet;
 	utility::string_t m_Format;
 };
 

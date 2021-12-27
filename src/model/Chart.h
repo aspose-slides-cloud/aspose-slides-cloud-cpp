@@ -40,6 +40,7 @@
 #include "../model/Axes.h"
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
+#include "../model/ThreeDFormat.h"
 #include <vector>
 #include "../model/ChartTitle.h"
 #include "../model/Legend.h"

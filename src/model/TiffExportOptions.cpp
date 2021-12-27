@@ -32,10 +32,11 @@ namespace model {
 
 TiffExportOptions::TiffExportOptions()
 {
-	m_WidthIsSet = false;
-	m_HeightIsSet = false;
 	m_DpiXIsSet = false;
 	m_DpiYIsSet = false;
+	m_ShowHiddenSlidesIsSet = false;
+	m_CommentsAreaWidthIsSet = false;
+	m_ShowCommentsByNoAuthorIsSet = false;
 }
 
 TiffExportOptions::~TiffExportOptions()
@@ -51,48 +52,6 @@ void TiffExportOptions::setCompression(utility::string_t value)
 {
 	m_Compression = value;
 	
-}
-
-int32_t TiffExportOptions::getWidth() const
-{
-	return m_Width;
-}
-
-void TiffExportOptions::setWidth(int32_t value)
-{
-	m_Width = value;
-	m_WidthIsSet = true;
-}
-
-bool TiffExportOptions::widthIsSet() const
-{
-	return m_WidthIsSet;
-}
-
-void TiffExportOptions::unsetWidth()
-{
-	m_WidthIsSet = false;
-}
-
-int32_t TiffExportOptions::getHeight() const
-{
-	return m_Height;
-}
-
-void TiffExportOptions::setHeight(int32_t value)
-{
-	m_Height = value;
-	m_HeightIsSet = true;
-}
-
-bool TiffExportOptions::heightIsSet() const
-{
-	return m_HeightIsSet;
-}
-
-void TiffExportOptions::unsetHeight()
-{
-	m_HeightIsSet = false;
 }
 
 int32_t TiffExportOptions::getDpiX() const
@@ -145,7 +104,17 @@ bool TiffExportOptions::getShowHiddenSlides() const
 void TiffExportOptions::setShowHiddenSlides(bool value)
 {
 	m_ShowHiddenSlides = value;
-	
+	m_ShowHiddenSlidesIsSet = true;
+}
+
+bool TiffExportOptions::showHiddenSlidesIsSet() const
+{
+	return m_ShowHiddenSlidesIsSet;
+}
+
+void TiffExportOptions::unsetShowHiddenSlides()
+{
+	m_ShowHiddenSlidesIsSet = false;
 }
 
 utility::string_t TiffExportOptions::getPixelFormat() const
@@ -189,7 +158,17 @@ int32_t TiffExportOptions::getCommentsAreaWidth() const
 void TiffExportOptions::setCommentsAreaWidth(int32_t value)
 {
 	m_CommentsAreaWidth = value;
-	
+	m_CommentsAreaWidthIsSet = true;
+}
+
+bool TiffExportOptions::commentsAreaWidthIsSet() const
+{
+	return m_CommentsAreaWidthIsSet;
+}
+
+void TiffExportOptions::unsetCommentsAreaWidth()
+{
+	m_CommentsAreaWidthIsSet = false;
 }
 
 utility::string_t TiffExportOptions::getCommentsAreaColor() const
@@ -211,7 +190,17 @@ bool TiffExportOptions::getShowCommentsByNoAuthor() const
 void TiffExportOptions::setShowCommentsByNoAuthor(bool value)
 {
 	m_ShowCommentsByNoAuthor = value;
-	
+	m_ShowCommentsByNoAuthorIsSet = true;
+}
+
+bool TiffExportOptions::showCommentsByNoAuthorIsSet() const
+{
+	return m_ShowCommentsByNoAuthorIsSet;
+}
+
+void TiffExportOptions::unsetShowCommentsByNoAuthor()
+{
+	m_ShowCommentsByNoAuthorIsSet = false;
 }
 
 web::json::value TiffExportOptions::toJson() const
@@ -221,14 +210,6 @@ web::json::value TiffExportOptions::toJson() const
 	{
 		val[utility::conversions::to_string_t("Compression")] = ModelBase::toJson(m_Compression);
 	}
-	if(m_WidthIsSet)
-	{
-		val[utility::conversions::to_string_t("Width")] = ModelBase::toJson(m_Width);
-	}
-	if(m_HeightIsSet)
-	{
-		val[utility::conversions::to_string_t("Height")] = ModelBase::toJson(m_Height);
-	}
 	if(m_DpiXIsSet)
 	{
 		val[utility::conversions::to_string_t("DpiX")] = ModelBase::toJson(m_DpiX);
@@ -237,7 +218,10 @@ web::json::value TiffExportOptions::toJson() const
 	{
 		val[utility::conversions::to_string_t("DpiY")] = ModelBase::toJson(m_DpiY);
 	}
-	val[utility::conversions::to_string_t("ShowHiddenSlides")] = ModelBase::toJson(m_ShowHiddenSlides);
+	if(m_ShowHiddenSlidesIsSet)
+	{
+		val[utility::conversions::to_string_t("ShowHiddenSlides")] = ModelBase::toJson(m_ShowHiddenSlides);
+	}
 	if (!m_PixelFormat.empty())
 	{
 		val[utility::conversions::to_string_t("PixelFormat")] = ModelBase::toJson(m_PixelFormat);
@@ -250,12 +234,18 @@ web::json::value TiffExportOptions::toJson() const
 	{
 		val[utility::conversions::to_string_t("CommentsPosition")] = ModelBase::toJson(m_CommentsPosition);
 	}
-	val[utility::conversions::to_string_t("CommentsAreaWidth")] = ModelBase::toJson(m_CommentsAreaWidth);
+	if(m_CommentsAreaWidthIsSet)
+	{
+		val[utility::conversions::to_string_t("CommentsAreaWidth")] = ModelBase::toJson(m_CommentsAreaWidth);
+	}
 	if (!m_CommentsAreaColor.empty())
 	{
 		val[utility::conversions::to_string_t("CommentsAreaColor")] = ModelBase::toJson(m_CommentsAreaColor);
 	}
-	val[utility::conversions::to_string_t("ShowCommentsByNoAuthor")] = ModelBase::toJson(m_ShowCommentsByNoAuthor);
+	if(m_ShowCommentsByNoAuthorIsSet)
+	{
+		val[utility::conversions::to_string_t("ShowCommentsByNoAuthor")] = ModelBase::toJson(m_ShowCommentsByNoAuthor);
+	}
 	return val;
 }
 
@@ -266,16 +256,6 @@ void TiffExportOptions::fromJson(web::json::value& val)
 	if(jsonForCompression != nullptr && !jsonForCompression->is_null())
 	{
 		setCompression(ModelBase::stringFromJson(*jsonForCompression));
-	}
-	web::json::value* jsonForWidth = ModelBase::getField(val, "Width");
-	if(jsonForWidth != nullptr && !jsonForWidth->is_null() && jsonForWidth->is_number())
-	{
-		setWidth(ModelBase::int32_tFromJson(*jsonForWidth));
-	}
-	web::json::value* jsonForHeight = ModelBase::getField(val, "Height");
-	if(jsonForHeight != nullptr && !jsonForHeight->is_null() && jsonForHeight->is_number())
-	{
-		setHeight(ModelBase::int32_tFromJson(*jsonForHeight));
 	}
 	web::json::value* jsonForDpiX = ModelBase::getField(val, "DpiX");
 	if(jsonForDpiX != nullptr && !jsonForDpiX->is_null() && jsonForDpiX->is_number())

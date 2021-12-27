@@ -32,6 +32,7 @@ namespace model {
 
 Effect::Effect()
 {
+	m_ParagraphIndexIsSet = false;
 	m_AccelerateIsSet = false;
 	m_AutoReverseIsSet = false;
 	m_DecelerateIsSet = false;
@@ -88,6 +89,27 @@ void Effect::setShapeIndex(int32_t value)
 {
 	m_ShapeIndex = value;
 	
+}
+
+int32_t Effect::getParagraphIndex() const
+{
+	return m_ParagraphIndex;
+}
+
+void Effect::setParagraphIndex(int32_t value)
+{
+	m_ParagraphIndex = value;
+	m_ParagraphIndexIsSet = true;
+}
+
+bool Effect::paragraphIndexIsSet() const
+{
+	return m_ParagraphIndexIsSet;
+}
+
+void Effect::unsetParagraphIndex()
+{
+	m_ParagraphIndexIsSet = false;
 }
 
 utility::string_t Effect::getTriggerType() const
@@ -296,6 +318,10 @@ web::json::value Effect::toJson() const
 		val[utility::conversions::to_string_t("PresetClassType")] = ModelBase::toJson(m_PresetClassType);
 	}
 	val[utility::conversions::to_string_t("ShapeIndex")] = ModelBase::toJson(m_ShapeIndex);
+	if(m_ParagraphIndexIsSet)
+	{
+		val[utility::conversions::to_string_t("ParagraphIndex")] = ModelBase::toJson(m_ParagraphIndex);
+	}
 	if (!m_TriggerType.empty())
 	{
 		val[utility::conversions::to_string_t("TriggerType")] = ModelBase::toJson(m_TriggerType);
@@ -360,6 +386,11 @@ void Effect::fromJson(web::json::value& val)
 	if(jsonForShapeIndex != nullptr && !jsonForShapeIndex->is_null() && jsonForShapeIndex->is_number())
 	{
 		setShapeIndex(ModelBase::int32_tFromJson(*jsonForShapeIndex));
+	}
+	web::json::value* jsonForParagraphIndex = ModelBase::getField(val, "ParagraphIndex");
+	if(jsonForParagraphIndex != nullptr && !jsonForParagraphIndex->is_null() && jsonForParagraphIndex->is_number())
+	{
+		setParagraphIndex(ModelBase::int32_tFromJson(*jsonForParagraphIndex));
 	}
 	web::json::value* jsonForTriggerType = ModelBase::getField(val, "TriggerType");
 	if(jsonForTriggerType != nullptr && !jsonForTriggerType->is_null())

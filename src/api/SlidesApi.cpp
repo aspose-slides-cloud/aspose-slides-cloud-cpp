@@ -64,6 +64,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignShapes(utility::string_t nam
 	{
 		throw std::invalid_argument("Missing required parameter: alignmentType");
 	}
+	// validate the parameter 'alignmentType'
+	if (!boost::iequals(alignmentType, "AlignLeft") && !boost::iequals(alignmentType, "AlignRight") && !boost::iequals(alignmentType, "AlignCenter") && !boost::iequals(alignmentType, "AlignTop") && !boost::iequals(alignmentType, "AlignMiddle") && !boost::iequals(alignmentType, "AlignBottom") && !boost::iequals(alignmentType, "DistributeHorizontally") && !boost::iequals(alignmentType, "DistributeVertically"))
+	{
+		throw std::invalid_argument("Invalid value for alignmentType. Must be one of AlignLeft, AlignRight, AlignCenter, AlignTop, AlignMiddle, AlignBottom, DistributeHorizontally, DistributeVertically.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/align/{alignmentType}");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -117,6 +122,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignSpecialSlideShapes(utility::
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	// verify the required parameter 'alignmentType' is set
 	if (alignmentType.empty())
 	{
@@ -126,6 +136,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignSpecialSlideShapes(utility::
 	if (alignmentType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: alignmentType");
+	}
+	// validate the parameter 'alignmentType'
+	if (!boost::iequals(alignmentType, "AlignLeft") && !boost::iequals(alignmentType, "AlignRight") && !boost::iequals(alignmentType, "AlignCenter") && !boost::iequals(alignmentType, "AlignTop") && !boost::iequals(alignmentType, "AlignMiddle") && !boost::iequals(alignmentType, "AlignBottom") && !boost::iequals(alignmentType, "DistributeHorizontally") && !boost::iequals(alignmentType, "DistributeVertically"))
+	{
+		throw std::invalid_argument("Invalid value for alignmentType. Must be one of AlignLeft, AlignRight, AlignCenter, AlignTop, AlignMiddle, AlignBottom, DistributeHorizontally, DistributeVertically.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/align/{alignmentType}");
 	ApiClient::setPathParameter(methodPath, "name", name);
@@ -180,6 +195,11 @@ pplx::task<HttpContent> SlidesApi::convert(std::shared_ptr<HttpContent> document
 	{
 		throw std::invalid_argument("Missing required parameter: format");
 	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Pdf") && !boost::iequals(format, "Xps") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Pptx") && !boost::iequals(format, "Odp") && !boost::iequals(format, "Otp") && !boost::iequals(format, "Ppt") && !boost::iequals(format, "Pps") && !boost::iequals(format, "Ppsx") && !boost::iequals(format, "Pptm") && !boost::iequals(format, "Ppsm") && !boost::iequals(format, "Pot") && !boost::iequals(format, "Potx") && !boost::iequals(format, "Potm") && !boost::iequals(format, "Html") && !boost::iequals(format, "Html5") && !boost::iequals(format, "Swf") && !boost::iequals(format, "Svg") && !boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Fodp"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Pdf, Xps, Tiff, Pptx, Odp, Otp, Ppt, Pps, Ppsx, Pptm, Ppsm, Pot, Potx, Potm, Html, Html5, Swf, Svg, Jpeg, Png, Gif, Bmp, Fodp.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/convert/{format}");
 	ApiClient::setPathParameter(methodPath, "format", format);
 
@@ -232,6 +252,11 @@ pplx::task<void> SlidesApi::convertAndSave(std::shared_ptr<HttpContent> document
 	if (format.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Pdf") && !boost::iequals(format, "Xps") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Pptx") && !boost::iequals(format, "Odp") && !boost::iequals(format, "Otp") && !boost::iequals(format, "Ppt") && !boost::iequals(format, "Pps") && !boost::iequals(format, "Ppsx") && !boost::iequals(format, "Pptm") && !boost::iequals(format, "Ppsm") && !boost::iequals(format, "Pot") && !boost::iequals(format, "Potx") && !boost::iequals(format, "Potm") && !boost::iequals(format, "Html") && !boost::iequals(format, "Html5") && !boost::iequals(format, "Swf") && !boost::iequals(format, "Svg") && !boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Fodp"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Pdf, Xps, Tiff, Pptx, Odp, Otp, Ppt, Pps, Ppsx, Pptm, Ppsm, Pot, Potx, Potm, Html, Html5, Swf, Svg, Jpeg, Png, Gif, Bmp, Fodp.");
 	}
 	// verify the required parameter 'outPath' is set
 	if (outPath.empty())
@@ -1396,6 +1421,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createSpecialSlideAnimati
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	if (effect == nullptr)
 	{
 		throw std::invalid_argument("Missing required parameter: request.effect");
@@ -1451,6 +1481,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createSpecialSlideAnimati
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	if (sequence == nullptr)
 	{
@@ -1508,6 +1543,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createSpecialSlideAnimati
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	if (effect == nullptr)
 	{
 		throw std::invalid_argument("Missing required parameter: request.effect");
@@ -1564,6 +1604,11 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createSpecialSlideParagraph(ut
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	if (dto == nullptr)
 	{
@@ -1625,6 +1670,11 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::createSpecialSlidePortion(utilit
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	if (dto == nullptr)
 	{
@@ -1688,6 +1738,11 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createSpecialSlideShape(utilit
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -1747,6 +1802,11 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createSpecialSlideSubshape(uti
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
@@ -1814,6 +1874,11 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createSpecialSlideSubshapePara
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
 	{
@@ -1880,6 +1945,11 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::createSpecialSlideSubshapePortio
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
@@ -3381,6 +3451,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/animation");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -3428,6 +3503,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/animation/mainSequence/{effectIndex}");
 	ApiClient::setPathParameter(methodPath, "name", name);
@@ -3478,6 +3558,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/animation/interactiveSequences/{sequenceIndex}");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -3526,6 +3611,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/animation/interactiveSequences/{sequenceIndex}/{effectIndex}");
 	ApiClient::setPathParameter(methodPath, "name", name);
@@ -3577,6 +3667,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/animation/interactiveSequences");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -3625,6 +3720,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/animation/mainSequence");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -3672,6 +3772,11 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideParagraph(u
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{shapeIndex}/paragraphs/{paragraphIndex}");
 	ApiClient::setPathParameter(methodPath, "name", name);
@@ -3723,6 +3828,11 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideParagraphs(
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{shapeIndex}/paragraphs");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -3772,6 +3882,11 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlidePortion(utili
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{shapeIndex}/paragraphs/{paragraphIndex}/portions/{portionIndex}");
 	ApiClient::setPathParameter(methodPath, "name", name);
@@ -3824,6 +3939,11 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlidePortions(util
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{shapeIndex}/paragraphs/{paragraphIndex}/portions");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -3875,6 +3995,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideShape(utility::
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{shapeIndex}");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -3924,6 +4049,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideShapes(utility:
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -3972,6 +4102,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideSubshape(utilit
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
@@ -4027,6 +4162,11 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideSubshapePar
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
@@ -4084,6 +4224,11 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideSubshapePar
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
 	{
@@ -4139,6 +4284,11 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlideSubshapePorti
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
@@ -4197,6 +4347,11 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlideSubshapePorti
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
 	{
@@ -4253,6 +4408,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideSubshapes(utili
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
@@ -4683,6 +4843,11 @@ pplx::task<HttpContent> SlidesApi::downloadImage(utility::string_t name, int32_t
 	{
 		throw std::invalid_argument("Missing required parameter: format");
 	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/images/{index}/{format}");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "index", index);
@@ -4801,6 +4966,11 @@ pplx::task<HttpContent> SlidesApi::downloadImageOnline(std::shared_ptr<HttpConte
 	{
 		throw std::invalid_argument("Missing required parameter: format");
 	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/images/{index}/{format}");
 	ApiClient::setPathParameter(methodPath, "index", index);
 	ApiClient::setPathParameter(methodPath, "format", format);
@@ -4848,6 +5018,11 @@ pplx::task<HttpContent> SlidesApi::downloadImages(utility::string_t name, utilit
 	if (format.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/images/download/{format}");
 	ApiClient::setPathParameter(methodPath, "name", name);
@@ -4964,6 +5139,11 @@ pplx::task<HttpContent> SlidesApi::downloadImagesOnline(std::shared_ptr<HttpCont
 	{
 		throw std::invalid_argument("Missing required parameter: format");
 	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/images/download/{format}");
 	ApiClient::setPathParameter(methodPath, "format", format);
 
@@ -5010,6 +5190,11 @@ pplx::task<HttpContent> SlidesApi::downloadNotesSlide(utility::string_t name, in
 	if (format.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/notesSlide/{format}");
 	ApiClient::setPathParameter(methodPath, "name", name);
@@ -5065,6 +5250,11 @@ pplx::task<HttpContent> SlidesApi::downloadNotesSlideOnline(std::shared_ptr<Http
 	if (format.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/slides/{slideIndex}/notesSlide/{format}");
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -5123,6 +5313,11 @@ pplx::task<HttpContent> SlidesApi::downloadPresentation(utility::string_t name, 
 	{
 		throw std::invalid_argument("Missing required parameter: format");
 	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Pdf") && !boost::iequals(format, "Xps") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Pptx") && !boost::iequals(format, "Odp") && !boost::iequals(format, "Otp") && !boost::iequals(format, "Ppt") && !boost::iequals(format, "Pps") && !boost::iequals(format, "Ppsx") && !boost::iequals(format, "Pptm") && !boost::iequals(format, "Ppsm") && !boost::iequals(format, "Pot") && !boost::iequals(format, "Potx") && !boost::iequals(format, "Potm") && !boost::iequals(format, "Html") && !boost::iequals(format, "Html5") && !boost::iequals(format, "Swf") && !boost::iequals(format, "Svg") && !boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Fodp"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Pdf, Xps, Tiff, Pptx, Odp, Otp, Ppt, Pps, Ppsx, Pptm, Ppsm, Pot, Potx, Potm, Html, Html5, Swf, Svg, Jpeg, Png, Gif, Bmp, Fodp.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/{format}");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "format", format);
@@ -5174,6 +5369,16 @@ pplx::task<HttpContent> SlidesApi::downloadShape(utility::string_t name, int32_t
 	if (format.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Svg"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Svg.");
+	}
+	// validate the parameter 'bounds'
+	if (!bounds.empty() && !boost::iequals(bounds, "Slide") && !boost::iequals(bounds, "Shape") && !boost::iequals(bounds, "Appearance"))
+	{
+		throw std::invalid_argument("Invalid value for bounds. Must be one of Slide, Shape, Appearance.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/{format}");
 	ApiClient::setPathParameter(methodPath, "name", name);
@@ -5235,6 +5440,16 @@ pplx::task<HttpContent> SlidesApi::downloadShapeOnline(std::shared_ptr<HttpConte
 	if (format.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Svg"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Svg.");
+	}
+	// validate the parameter 'bounds'
+	if (!bounds.empty() && !boost::iequals(bounds, "Slide") && !boost::iequals(bounds, "Shape") && !boost::iequals(bounds, "Appearance"))
+	{
+		throw std::invalid_argument("Invalid value for bounds. Must be one of Slide, Shape, Appearance.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/slides/{slideIndex}/shapes/{shapeIndex}/{format}");
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -5300,6 +5515,11 @@ pplx::task<HttpContent> SlidesApi::downloadSlide(utility::string_t name, int32_t
 	{
 		throw std::invalid_argument("Missing required parameter: format");
 	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Html") && !boost::iequals(format, "Pdf") && !boost::iequals(format, "Xps") && !boost::iequals(format, "Pptx") && !boost::iequals(format, "Odp") && !boost::iequals(format, "Otp") && !boost::iequals(format, "Ppt") && !boost::iequals(format, "Pps") && !boost::iequals(format, "Ppsx") && !boost::iequals(format, "Pptm") && !boost::iequals(format, "Ppsm") && !boost::iequals(format, "Potx") && !boost::iequals(format, "Pot") && !boost::iequals(format, "Potm") && !boost::iequals(format, "Svg") && !boost::iequals(format, "Fodp"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Html, Pdf, Xps, Pptx, Odp, Otp, Ppt, Pps, Ppsx, Pptm, Ppsm, Potx, Pot, Potm, Svg, Fodp.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{format}");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -5358,6 +5578,11 @@ pplx::task<HttpContent> SlidesApi::downloadSlideOnline(std::shared_ptr<HttpConte
 	if (format.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Html") && !boost::iequals(format, "Pdf") && !boost::iequals(format, "Xps") && !boost::iequals(format, "Pptx") && !boost::iequals(format, "Odp") && !boost::iequals(format, "Otp") && !boost::iequals(format, "Ppt") && !boost::iequals(format, "Pps") && !boost::iequals(format, "Ppsx") && !boost::iequals(format, "Pptm") && !boost::iequals(format, "Ppsm") && !boost::iequals(format, "Potx") && !boost::iequals(format, "Pot") && !boost::iequals(format, "Potm") && !boost::iequals(format, "Svg") && !boost::iequals(format, "Fodp"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Html, Pdf, Xps, Pptx, Odp, Otp, Ppt, Pps, Ppsx, Pptm, Ppsm, Potx, Pot, Potm, Svg, Fodp.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/slides/{slideIndex}/{format}");
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -5421,6 +5646,11 @@ pplx::task<HttpContent> SlidesApi::downloadSpecialSlideShape(utility::string_t n
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	// verify the required parameter 'format' is set
 	if (format.empty())
 	{
@@ -5430,6 +5660,16 @@ pplx::task<HttpContent> SlidesApi::downloadSpecialSlideShape(utility::string_t n
 	if (format.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Svg"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Svg.");
+	}
+	// validate the parameter 'bounds'
+	if (!bounds.empty() && !boost::iequals(bounds, "Slide") && !boost::iequals(bounds, "Shape") && !boost::iequals(bounds, "Appearance"))
+	{
+		throw std::invalid_argument("Invalid value for bounds. Must be one of Slide, Shape, Appearance.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{shapeIndex}/{format}");
 	ApiClient::setPathParameter(methodPath, "name", name);
@@ -5494,6 +5734,11 @@ pplx::task<HttpContent> SlidesApi::downloadSpecialSlideSubshape(utility::string_
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
 	{
@@ -5508,6 +5753,16 @@ pplx::task<HttpContent> SlidesApi::downloadSpecialSlideSubshape(utility::string_
 	if (format.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Svg"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Svg.");
+	}
+	// validate the parameter 'bounds'
+	if (!bounds.empty() && !boost::iequals(bounds, "Slide") && !boost::iequals(bounds, "Shape") && !boost::iequals(bounds, "Appearance"))
+	{
+		throw std::invalid_argument("Invalid value for bounds. Must be one of Slide, Shape, Appearance.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}/{format}");
 	ApiClient::setPathParameter(methodPath, "name", name);
@@ -5578,6 +5833,16 @@ pplx::task<HttpContent> SlidesApi::downloadSubshape(utility::string_t name, int3
 	{
 		throw std::invalid_argument("Missing required parameter: format");
 	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Svg"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Svg.");
+	}
+	// validate the parameter 'bounds'
+	if (!bounds.empty() && !boost::iequals(bounds, "Slide") && !boost::iequals(bounds, "Shape") && !boost::iequals(bounds, "Appearance"))
+	{
+		throw std::invalid_argument("Invalid value for bounds. Must be one of Slide, Shape, Appearance.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/{format}");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -5624,7 +5889,7 @@ pplx::task<HttpContent> SlidesApi::downloadSubshape(utility::string_t name, int3
 		});
 }
 
-pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::getAnimation(utility::string_t name, int32_t slideIndex, boost::optional<int32_t> shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::getAnimation(utility::string_t name, int32_t slideIndex, boost::optional<int32_t> shapeIndex, boost::optional<int32_t> paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -5639,6 +5904,10 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::getAnimation(utility::str
 	if (shapeIndex.has_value())
 	{
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapeIndex"), shapeIndex.value());
+	}
+	if (paragraphIndex.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("paragraphIndex"), paragraphIndex.value());
 	}
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
@@ -7022,7 +7291,7 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::getSlides(utility::string_t name,
 		});
 }
 
-pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::getSpecialSlideAnimation(utility::string_t name, int32_t slideIndex, utility::string_t slideType, boost::optional<int32_t> shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::getSpecialSlideAnimation(utility::string_t name, int32_t slideIndex, utility::string_t slideType, boost::optional<int32_t> shapeIndex, boost::optional<int32_t> paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -7039,6 +7308,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::getSpecialSlideAnimation(
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/animation");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -7048,6 +7322,10 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::getSpecialSlideAnimation(
 	if (shapeIndex.has_value())
 	{
 		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapeIndex"), shapeIndex.value());
+	}
+	if (paragraphIndex.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("paragraphIndex"), paragraphIndex.value());
 	}
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
@@ -7090,6 +7368,11 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getSpecialSlideParagraph(utili
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{shapeIndex}/paragraphs/{paragraphIndex}");
 	ApiClient::setPathParameter(methodPath, "name", name);
@@ -7141,6 +7424,11 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getSpecialSlideParagraphs(uti
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{shapeIndex}/paragraphs");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -7189,6 +7477,11 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getSpecialSlidePortion(utility::
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{shapeIndex}/paragraphs/{paragraphIndex}/portions/{portionIndex}");
 	ApiClient::setPathParameter(methodPath, "name", name);
@@ -7241,6 +7534,11 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::getSpecialSlidePortions(utility
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{shapeIndex}/paragraphs/{paragraphIndex}/portions");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -7291,6 +7589,11 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getSpecialSlideShape(utility::
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{shapeIndex}");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -7340,6 +7643,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getSpecialSlideShapes(utility::st
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -7387,6 +7695,11 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getSpecialSlideSubshape(utilit
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
@@ -7442,6 +7755,11 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getSpecialSlideSubshapeParagra
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
@@ -7499,6 +7817,11 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getSpecialSlideSubshapeParagr
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
 	{
@@ -7553,6 +7876,11 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getSpecialSlideSubshapePortion(u
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
@@ -7611,6 +7939,11 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::getSpecialSlideSubshapePortions
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
 	{
@@ -7666,6 +7999,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getSpecialSlideSubshapes(utility:
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
@@ -8840,6 +9178,11 @@ pplx::task<void> SlidesApi::savePresentation(utility::string_t name, utility::st
 	{
 		throw std::invalid_argument("Missing required parameter: format");
 	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Pdf") && !boost::iequals(format, "Xps") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Pptx") && !boost::iequals(format, "Odp") && !boost::iequals(format, "Otp") && !boost::iequals(format, "Ppt") && !boost::iequals(format, "Pps") && !boost::iequals(format, "Ppsx") && !boost::iequals(format, "Pptm") && !boost::iequals(format, "Ppsm") && !boost::iequals(format, "Pot") && !boost::iequals(format, "Potx") && !boost::iequals(format, "Potm") && !boost::iequals(format, "Html") && !boost::iequals(format, "Html5") && !boost::iequals(format, "Swf") && !boost::iequals(format, "Svg") && !boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Fodp"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Pdf, Xps, Tiff, Pptx, Odp, Otp, Ppt, Pps, Ppsx, Pptm, Ppsm, Pot, Potx, Potm, Html, Html5, Swf, Svg, Jpeg, Png, Gif, Bmp, Fodp.");
+	}
 	// verify the required parameter 'outPath' is set
 	if (outPath.empty())
 	{
@@ -8896,10 +9239,20 @@ pplx::task<void> SlidesApi::saveShape(utility::string_t name, int32_t slideIndex
 	{
 		throw std::invalid_argument("Missing required parameter: format");
 	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Svg"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Svg.");
+	}
 	// verify the required parameter 'outPath' is set
 	if (outPath.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: outPath");
+	}
+	// validate the parameter 'bounds'
+	if (!bounds.empty() && !boost::iequals(bounds, "Slide") && !boost::iequals(bounds, "Shape") && !boost::iequals(bounds, "Appearance"))
+	{
+		throw std::invalid_argument("Invalid value for bounds. Must be one of Slide, Shape, Appearance.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/{format}");
 	ApiClient::setPathParameter(methodPath, "name", name);
@@ -8961,10 +9314,20 @@ pplx::task<void> SlidesApi::saveShapeOnline(std::shared_ptr<HttpContent> documen
 	{
 		throw std::invalid_argument("Missing required parameter: format");
 	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Svg"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Svg.");
+	}
 	// verify the required parameter 'outPath' is set
 	if (outPath.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: outPath");
+	}
+	// validate the parameter 'bounds'
+	if (!bounds.empty() && !boost::iequals(bounds, "Slide") && !boost::iequals(bounds, "Shape") && !boost::iequals(bounds, "Appearance"))
+	{
+		throw std::invalid_argument("Invalid value for bounds. Must be one of Slide, Shape, Appearance.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/slides/{slideIndex}/shapes/{shapeIndex}/{format}");
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -9029,6 +9392,11 @@ pplx::task<void> SlidesApi::saveSlide(utility::string_t name, int32_t slideIndex
 	{
 		throw std::invalid_argument("Missing required parameter: format");
 	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Html") && !boost::iequals(format, "Pdf") && !boost::iequals(format, "Xps") && !boost::iequals(format, "Pptx") && !boost::iequals(format, "Odp") && !boost::iequals(format, "Otp") && !boost::iequals(format, "Ppt") && !boost::iequals(format, "Pps") && !boost::iequals(format, "Ppsx") && !boost::iequals(format, "Pptm") && !boost::iequals(format, "Ppsm") && !boost::iequals(format, "Potx") && !boost::iequals(format, "Pot") && !boost::iequals(format, "Potm") && !boost::iequals(format, "Svg") && !boost::iequals(format, "Fodp"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Html, Pdf, Xps, Pptx, Odp, Otp, Ppt, Pps, Ppsx, Pptm, Ppsm, Potx, Pot, Potm, Svg, Fodp.");
+	}
 	// verify the required parameter 'outPath' is set
 	if (outPath.empty())
 	{
@@ -9091,6 +9459,11 @@ pplx::task<void> SlidesApi::saveSlideOnline(std::shared_ptr<HttpContent> documen
 	if (format.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Html") && !boost::iequals(format, "Pdf") && !boost::iequals(format, "Xps") && !boost::iequals(format, "Pptx") && !boost::iequals(format, "Odp") && !boost::iequals(format, "Otp") && !boost::iequals(format, "Ppt") && !boost::iequals(format, "Pps") && !boost::iequals(format, "Ppsx") && !boost::iequals(format, "Pptm") && !boost::iequals(format, "Ppsm") && !boost::iequals(format, "Potx") && !boost::iequals(format, "Pot") && !boost::iequals(format, "Potm") && !boost::iequals(format, "Svg") && !boost::iequals(format, "Fodp"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Html, Pdf, Xps, Pptx, Odp, Otp, Ppt, Pps, Ppsx, Pptm, Ppsm, Potx, Pot, Potm, Svg, Fodp.");
 	}
 	// verify the required parameter 'outPath' is set
 	if (outPath.empty())
@@ -9158,6 +9531,11 @@ pplx::task<void> SlidesApi::saveSpecialSlideShape(utility::string_t name, int32_
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	// verify the required parameter 'format' is set
 	if (format.empty())
 	{
@@ -9167,11 +9545,21 @@ pplx::task<void> SlidesApi::saveSpecialSlideShape(utility::string_t name, int32_
 	if (format.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Svg"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Svg.");
 	}
 	// verify the required parameter 'outPath' is set
 	if (outPath.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: outPath");
+	}
+	// validate the parameter 'bounds'
+	if (!bounds.empty() && !boost::iequals(bounds, "Slide") && !boost::iequals(bounds, "Shape") && !boost::iequals(bounds, "Appearance"))
+	{
+		throw std::invalid_argument("Invalid value for bounds. Must be one of Slide, Shape, Appearance.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{shapeIndex}/{format}");
 	ApiClient::setPathParameter(methodPath, "name", name);
@@ -9235,6 +9623,11 @@ pplx::task<void> SlidesApi::saveSpecialSlideSubshape(utility::string_t name, int
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
 	{
@@ -9250,10 +9643,20 @@ pplx::task<void> SlidesApi::saveSpecialSlideSubshape(utility::string_t name, int
 	{
 		throw std::invalid_argument("Missing required parameter: format");
 	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Svg"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Svg.");
+	}
 	// verify the required parameter 'outPath' is set
 	if (outPath.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: outPath");
+	}
+	// validate the parameter 'bounds'
+	if (!bounds.empty() && !boost::iequals(bounds, "Slide") && !boost::iequals(bounds, "Shape") && !boost::iequals(bounds, "Appearance"))
+	{
+		throw std::invalid_argument("Invalid value for bounds. Must be one of Slide, Shape, Appearance.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}/{format}");
 	ApiClient::setPathParameter(methodPath, "name", name);
@@ -9323,10 +9726,20 @@ pplx::task<void> SlidesApi::saveSubshape(utility::string_t name, int32_t slideIn
 	{
 		throw std::invalid_argument("Missing required parameter: format");
 	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Svg"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Svg.");
+	}
 	// verify the required parameter 'outPath' is set
 	if (outPath.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: outPath");
+	}
+	// validate the parameter 'bounds'
+	if (!bounds.empty() && !boost::iequals(bounds, "Slide") && !boost::iequals(bounds, "Shape") && !boost::iequals(bounds, "Appearance"))
+	{
+		throw std::invalid_argument("Invalid value for bounds. Must be one of Slide, Shape, Appearance.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/{format}");
 	ApiClient::setPathParameter(methodPath, "name", name);
@@ -9926,6 +10339,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::setSpecialSlideAnimation(
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	if (animation == nullptr)
 	{
 		throw std::invalid_argument("Missing required parameter: request.animation");
@@ -10016,6 +10434,11 @@ pplx::task<std::shared_ptr<SplitDocumentResult>> SlidesApi::split(utility::strin
 	{
 		throw std::invalid_argument("Missing required parameter: name");
 	}
+	// validate the parameter 'format'
+	if (!format.empty() && !boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Html") && !boost::iequals(format, "Pdf") && !boost::iequals(format, "Xps") && !boost::iequals(format, "Pptx") && !boost::iequals(format, "Odp") && !boost::iequals(format, "Otp") && !boost::iequals(format, "Ppt") && !boost::iequals(format, "Pps") && !boost::iequals(format, "Ppsx") && !boost::iequals(format, "Pptm") && !boost::iequals(format, "Ppsm") && !boost::iequals(format, "Potx") && !boost::iequals(format, "Pot") && !boost::iequals(format, "Potm") && !boost::iequals(format, "Svg") && !boost::iequals(format, "Fodp"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Html, Pdf, Xps, Pptx, Odp, Otp, Ppt, Pps, Ppsx, Pptm, Ppsm, Potx, Pot, Potm, Svg, Fodp.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/split");
 	ApiClient::setPathParameter(methodPath, "name", name);
 
@@ -10084,6 +10507,11 @@ pplx::task<std::shared_ptr<SplitDocumentResult>> SlidesApi::splitAndSaveOnline(s
 	{
 		throw std::invalid_argument("Missing required parameter: format");
 	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Html") && !boost::iequals(format, "Pdf") && !boost::iequals(format, "Xps") && !boost::iequals(format, "Pptx") && !boost::iequals(format, "Odp") && !boost::iequals(format, "Otp") && !boost::iequals(format, "Ppt") && !boost::iequals(format, "Pps") && !boost::iequals(format, "Ppsx") && !boost::iequals(format, "Pptm") && !boost::iequals(format, "Ppsm") && !boost::iequals(format, "Potx") && !boost::iequals(format, "Pot") && !boost::iequals(format, "Potm") && !boost::iequals(format, "Svg") && !boost::iequals(format, "Fodp"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Html, Pdf, Xps, Pptx, Odp, Otp, Ppt, Pps, Ppsx, Pptm, Ppsm, Potx, Pot, Potm, Svg, Fodp.");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/split/{format}");
 	ApiClient::setPathParameter(methodPath, "format", format);
 
@@ -10149,6 +10577,11 @@ pplx::task<HttpContent> SlidesApi::splitOnline(std::shared_ptr<HttpContent> docu
 	if (format.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Html") && !boost::iequals(format, "Pdf") && !boost::iequals(format, "Xps") && !boost::iequals(format, "Pptx") && !boost::iequals(format, "Odp") && !boost::iequals(format, "Otp") && !boost::iequals(format, "Ppt") && !boost::iequals(format, "Pps") && !boost::iequals(format, "Ppsx") && !boost::iequals(format, "Pptm") && !boost::iequals(format, "Ppsm") && !boost::iequals(format, "Potx") && !boost::iequals(format, "Pot") && !boost::iequals(format, "Potm") && !boost::iequals(format, "Svg") && !boost::iequals(format, "Fodp"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Html, Pdf, Xps, Pptx, Odp, Otp, Ppt, Pps, Ppsx, Pptm, Ppsm, Potx, Pot, Potm, Svg, Fodp.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/split/{format}");
 	ApiClient::setPathParameter(methodPath, "format", format);
@@ -10802,6 +11235,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::updateSpecialSlideAnimati
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	if (effect == nullptr)
 	{
 		throw std::invalid_argument("Missing required parameter: request.effect");
@@ -10858,6 +11296,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::updateSpecialSlideAnimati
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	if (effect == nullptr)
 	{
@@ -10917,6 +11360,11 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateSpecialSlideParagraph(ut
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	if (dto == nullptr)
 	{
 		throw std::invalid_argument("Missing required parameter: request.dto");
@@ -10974,6 +11422,11 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::updateSpecialSlidePortion(utilit
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	if (dto == nullptr)
 	{
@@ -11034,6 +11487,11 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateSpecialSlideShape(utilit
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	if (dto == nullptr)
 	{
 		throw std::invalid_argument("Missing required parameter: request.dto");
@@ -11090,6 +11548,11 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateSpecialSlideSubshape(uti
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
@@ -11154,6 +11617,11 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateSpecialSlideSubshapePara
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
 	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
+	}
 	// verify the required parameter 'path' is set
 	if (path.empty())
 	{
@@ -11217,6 +11685,11 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::updateSpecialSlideSubshapePortio
 	if (slideType.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: slideType");
+	}
+	// validate the parameter 'slideType'
+	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
+	{
+		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
 	// verify the required parameter 'path' is set
 	if (path.empty())

@@ -32,6 +32,16 @@ namespace model {
 
 PdfExportOptions::PdfExportOptions()
 {
+	m_EmbedFullFontsIsSet = false;
+	m_SufficientResolutionIsSet = false;
+	m_JpegQualityIsSet = false;
+	m_DrawSlidesFrameIsSet = false;
+	m_ShowHiddenSlidesIsSet = false;
+	m_SaveMetafilesAsPngIsSet = false;
+	m_EmbedTrueTypeFontsForASCIIIsSet = false;
+	m_CommentsAreaWidthIsSet = false;
+	m_ShowCommentsByNoAuthorIsSet = false;
+	m_ApplyImageTransparentIsSet = false;
 }
 
 PdfExportOptions::~PdfExportOptions()
@@ -57,7 +67,17 @@ bool PdfExportOptions::getEmbedFullFonts() const
 void PdfExportOptions::setEmbedFullFonts(bool value)
 {
 	m_EmbedFullFonts = value;
-	
+	m_EmbedFullFontsIsSet = true;
+}
+
+bool PdfExportOptions::embedFullFontsIsSet() const
+{
+	return m_EmbedFullFontsIsSet;
+}
+
+void PdfExportOptions::unsetEmbedFullFonts()
+{
+	m_EmbedFullFontsIsSet = false;
 }
 
 utility::string_t PdfExportOptions::getCompliance() const
@@ -79,7 +99,17 @@ double PdfExportOptions::getSufficientResolution() const
 void PdfExportOptions::setSufficientResolution(double value)
 {
 	m_SufficientResolution = value;
-	
+	m_SufficientResolutionIsSet = true;
+}
+
+bool PdfExportOptions::sufficientResolutionIsSet() const
+{
+	return m_SufficientResolutionIsSet;
+}
+
+void PdfExportOptions::unsetSufficientResolution()
+{
+	m_SufficientResolutionIsSet = false;
 }
 
 int32_t PdfExportOptions::getJpegQuality() const
@@ -90,7 +120,17 @@ int32_t PdfExportOptions::getJpegQuality() const
 void PdfExportOptions::setJpegQuality(int32_t value)
 {
 	m_JpegQuality = value;
-	
+	m_JpegQualityIsSet = true;
+}
+
+bool PdfExportOptions::jpegQualityIsSet() const
+{
+	return m_JpegQualityIsSet;
+}
+
+void PdfExportOptions::unsetJpegQuality()
+{
+	m_JpegQualityIsSet = false;
 }
 
 bool PdfExportOptions::getDrawSlidesFrame() const
@@ -101,7 +141,17 @@ bool PdfExportOptions::getDrawSlidesFrame() const
 void PdfExportOptions::setDrawSlidesFrame(bool value)
 {
 	m_DrawSlidesFrame = value;
-	
+	m_DrawSlidesFrameIsSet = true;
+}
+
+bool PdfExportOptions::drawSlidesFrameIsSet() const
+{
+	return m_DrawSlidesFrameIsSet;
+}
+
+void PdfExportOptions::unsetDrawSlidesFrame()
+{
+	m_DrawSlidesFrameIsSet = false;
 }
 
 bool PdfExportOptions::getShowHiddenSlides() const
@@ -112,7 +162,17 @@ bool PdfExportOptions::getShowHiddenSlides() const
 void PdfExportOptions::setShowHiddenSlides(bool value)
 {
 	m_ShowHiddenSlides = value;
-	
+	m_ShowHiddenSlidesIsSet = true;
+}
+
+bool PdfExportOptions::showHiddenSlidesIsSet() const
+{
+	return m_ShowHiddenSlidesIsSet;
+}
+
+void PdfExportOptions::unsetShowHiddenSlides()
+{
+	m_ShowHiddenSlidesIsSet = false;
 }
 
 bool PdfExportOptions::getSaveMetafilesAsPng() const
@@ -123,7 +183,17 @@ bool PdfExportOptions::getSaveMetafilesAsPng() const
 void PdfExportOptions::setSaveMetafilesAsPng(bool value)
 {
 	m_SaveMetafilesAsPng = value;
-	
+	m_SaveMetafilesAsPngIsSet = true;
+}
+
+bool PdfExportOptions::saveMetafilesAsPngIsSet() const
+{
+	return m_SaveMetafilesAsPngIsSet;
+}
+
+void PdfExportOptions::unsetSaveMetafilesAsPng()
+{
+	m_SaveMetafilesAsPngIsSet = false;
 }
 
 utility::string_t PdfExportOptions::getPassword() const
@@ -145,7 +215,17 @@ bool PdfExportOptions::getEmbedTrueTypeFontsForASCII() const
 void PdfExportOptions::setEmbedTrueTypeFontsForASCII(bool value)
 {
 	m_EmbedTrueTypeFontsForASCII = value;
-	
+	m_EmbedTrueTypeFontsForASCIIIsSet = true;
+}
+
+bool PdfExportOptions::embedTrueTypeFontsForASCIIIsSet() const
+{
+	return m_EmbedTrueTypeFontsForASCIIIsSet;
+}
+
+void PdfExportOptions::unsetEmbedTrueTypeFontsForASCII()
+{
+	m_EmbedTrueTypeFontsForASCIIIsSet = false;
 }
 
 std::vector<utility::string_t> PdfExportOptions::getAdditionalCommonFontFamilies() const
@@ -189,7 +269,17 @@ int32_t PdfExportOptions::getCommentsAreaWidth() const
 void PdfExportOptions::setCommentsAreaWidth(int32_t value)
 {
 	m_CommentsAreaWidth = value;
-	
+	m_CommentsAreaWidthIsSet = true;
+}
+
+bool PdfExportOptions::commentsAreaWidthIsSet() const
+{
+	return m_CommentsAreaWidthIsSet;
+}
+
+void PdfExportOptions::unsetCommentsAreaWidth()
+{
+	m_CommentsAreaWidthIsSet = false;
 }
 
 utility::string_t PdfExportOptions::getCommentsAreaColor() const
@@ -211,7 +301,17 @@ bool PdfExportOptions::getShowCommentsByNoAuthor() const
 void PdfExportOptions::setShowCommentsByNoAuthor(bool value)
 {
 	m_ShowCommentsByNoAuthor = value;
-	
+	m_ShowCommentsByNoAuthorIsSet = true;
+}
+
+bool PdfExportOptions::showCommentsByNoAuthorIsSet() const
+{
+	return m_ShowCommentsByNoAuthorIsSet;
+}
+
+void PdfExportOptions::unsetShowCommentsByNoAuthor()
+{
+	m_ShowCommentsByNoAuthorIsSet = false;
 }
 
 utility::string_t PdfExportOptions::getImageTransparentColor() const
@@ -233,7 +333,17 @@ bool PdfExportOptions::getApplyImageTransparent() const
 void PdfExportOptions::setApplyImageTransparent(bool value)
 {
 	m_ApplyImageTransparent = value;
-	
+	m_ApplyImageTransparentIsSet = true;
+}
+
+bool PdfExportOptions::applyImageTransparentIsSet() const
+{
+	return m_ApplyImageTransparentIsSet;
+}
+
+void PdfExportOptions::unsetApplyImageTransparent()
+{
+	m_ApplyImageTransparentIsSet = false;
 }
 
 utility::string_t PdfExportOptions::getAccessPermissions() const
@@ -254,21 +364,42 @@ web::json::value PdfExportOptions::toJson() const
 	{
 		val[utility::conversions::to_string_t("TextCompression")] = ModelBase::toJson(m_TextCompression);
 	}
-	val[utility::conversions::to_string_t("EmbedFullFonts")] = ModelBase::toJson(m_EmbedFullFonts);
+	if(m_EmbedFullFontsIsSet)
+	{
+		val[utility::conversions::to_string_t("EmbedFullFonts")] = ModelBase::toJson(m_EmbedFullFonts);
+	}
 	if (!m_Compliance.empty())
 	{
 		val[utility::conversions::to_string_t("Compliance")] = ModelBase::toJson(m_Compliance);
 	}
-	val[utility::conversions::to_string_t("SufficientResolution")] = ModelBase::toJson(m_SufficientResolution);
-	val[utility::conversions::to_string_t("JpegQuality")] = ModelBase::toJson(m_JpegQuality);
-	val[utility::conversions::to_string_t("DrawSlidesFrame")] = ModelBase::toJson(m_DrawSlidesFrame);
-	val[utility::conversions::to_string_t("ShowHiddenSlides")] = ModelBase::toJson(m_ShowHiddenSlides);
-	val[utility::conversions::to_string_t("SaveMetafilesAsPng")] = ModelBase::toJson(m_SaveMetafilesAsPng);
+	if(m_SufficientResolutionIsSet)
+	{
+		val[utility::conversions::to_string_t("SufficientResolution")] = ModelBase::toJson(m_SufficientResolution);
+	}
+	if(m_JpegQualityIsSet)
+	{
+		val[utility::conversions::to_string_t("JpegQuality")] = ModelBase::toJson(m_JpegQuality);
+	}
+	if(m_DrawSlidesFrameIsSet)
+	{
+		val[utility::conversions::to_string_t("DrawSlidesFrame")] = ModelBase::toJson(m_DrawSlidesFrame);
+	}
+	if(m_ShowHiddenSlidesIsSet)
+	{
+		val[utility::conversions::to_string_t("ShowHiddenSlides")] = ModelBase::toJson(m_ShowHiddenSlides);
+	}
+	if(m_SaveMetafilesAsPngIsSet)
+	{
+		val[utility::conversions::to_string_t("SaveMetafilesAsPng")] = ModelBase::toJson(m_SaveMetafilesAsPng);
+	}
 	if (!m_Password.empty())
 	{
 		val[utility::conversions::to_string_t("Password")] = ModelBase::toJson(m_Password);
 	}
-	val[utility::conversions::to_string_t("EmbedTrueTypeFontsForASCII")] = ModelBase::toJson(m_EmbedTrueTypeFontsForASCII);
+	if(m_EmbedTrueTypeFontsForASCIIIsSet)
+	{
+		val[utility::conversions::to_string_t("EmbedTrueTypeFontsForASCII")] = ModelBase::toJson(m_EmbedTrueTypeFontsForASCII);
+	}
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_AdditionalCommonFontFamilies)
@@ -288,17 +419,26 @@ web::json::value PdfExportOptions::toJson() const
 	{
 		val[utility::conversions::to_string_t("CommentsPosition")] = ModelBase::toJson(m_CommentsPosition);
 	}
-	val[utility::conversions::to_string_t("CommentsAreaWidth")] = ModelBase::toJson(m_CommentsAreaWidth);
+	if(m_CommentsAreaWidthIsSet)
+	{
+		val[utility::conversions::to_string_t("CommentsAreaWidth")] = ModelBase::toJson(m_CommentsAreaWidth);
+	}
 	if (!m_CommentsAreaColor.empty())
 	{
 		val[utility::conversions::to_string_t("CommentsAreaColor")] = ModelBase::toJson(m_CommentsAreaColor);
 	}
-	val[utility::conversions::to_string_t("ShowCommentsByNoAuthor")] = ModelBase::toJson(m_ShowCommentsByNoAuthor);
+	if(m_ShowCommentsByNoAuthorIsSet)
+	{
+		val[utility::conversions::to_string_t("ShowCommentsByNoAuthor")] = ModelBase::toJson(m_ShowCommentsByNoAuthor);
+	}
 	if (!m_ImageTransparentColor.empty())
 	{
 		val[utility::conversions::to_string_t("ImageTransparentColor")] = ModelBase::toJson(m_ImageTransparentColor);
 	}
-	val[utility::conversions::to_string_t("ApplyImageTransparent")] = ModelBase::toJson(m_ApplyImageTransparent);
+	if(m_ApplyImageTransparentIsSet)
+	{
+		val[utility::conversions::to_string_t("ApplyImageTransparent")] = ModelBase::toJson(m_ApplyImageTransparent);
+	}
 	if (!m_AccessPermissions.empty())
 	{
 		val[utility::conversions::to_string_t("AccessPermissions")] = ModelBase::toJson(m_AccessPermissions);

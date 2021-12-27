@@ -710,7 +710,7 @@ public:
 	/// <summary>
 	/// Read slide animation effects.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> getAnimation(utility::string_t name, int32_t slideIndex, boost::optional<int32_t> shapeIndex = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> getAnimation(utility::string_t name, int32_t slideIndex, boost::optional<int32_t> shapeIndex = int32_t(), boost::optional<int32_t> paragraphIndex = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Get API info.
@@ -900,7 +900,7 @@ public:
 	/// <summary>
 	/// Read special slide (master, layout, notes) animation effects.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> getSpecialSlideAnimation(utility::string_t name, int32_t slideIndex, utility::string_t slideType, boost::optional<int32_t> shapeIndex = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> getSpecialSlideAnimation(utility::string_t name, int32_t slideIndex, utility::string_t slideType, boost::optional<int32_t> shapeIndex = int32_t(), boost::optional<int32_t> paragraphIndex = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Read shape paragraph info.

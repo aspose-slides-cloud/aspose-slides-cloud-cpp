@@ -40,6 +40,7 @@
 #include "../model/LineFormat.h"
 #include "../model/ResourceBase.h"
 #include "../model/ResourceUri.h"
+#include "../model/ThreeDFormat.h"
 #include <vector>
 
 namespace asposeslidescloud {
@@ -128,6 +129,11 @@ public:
 	ASPOSE_DLL_EXPORT std::shared_ptr<EffectFormat> getEffectFormat() const;
 	ASPOSE_DLL_EXPORT void setEffectFormat(std::shared_ptr<EffectFormat> value);
 	/// <summary>
+	/// Gets or sets the 3D format
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<ThreeDFormat> getThreeDFormat() const;
+	ASPOSE_DLL_EXPORT void setThreeDFormat(std::shared_ptr<ThreeDFormat> value);
+	/// <summary>
 	/// Gets or sets the line format.
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::shared_ptr<LineFormat> getLineFormat() const;
@@ -156,6 +162,7 @@ protected:
 	std::shared_ptr<ResourceUri> m_Shapes;
 	std::shared_ptr<FillFormat> m_FillFormat;
 	std::shared_ptr<EffectFormat> m_EffectFormat;
+	std::shared_ptr<ThreeDFormat> m_ThreeDFormat;
 	std::shared_ptr<LineFormat> m_LineFormat;
 	utility::string_t m_Type;
 };

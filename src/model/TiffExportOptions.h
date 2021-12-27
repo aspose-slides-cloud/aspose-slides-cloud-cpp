@@ -58,20 +58,6 @@ public:
 	ASPOSE_DLL_EXPORT utility::string_t getCompression() const;
 	ASPOSE_DLL_EXPORT void setCompression(utility::string_t value);
 	/// <summary>
-	/// Width.
-	/// </summary>
-	ASPOSE_DLL_EXPORT int32_t getWidth() const;
-	ASPOSE_DLL_EXPORT void setWidth(int32_t value);
-	ASPOSE_DLL_EXPORT bool widthIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetWidth();
-	/// <summary>
-	/// Height.
-	/// </summary>
-	ASPOSE_DLL_EXPORT int32_t getHeight() const;
-	ASPOSE_DLL_EXPORT void setHeight(int32_t value);
-	ASPOSE_DLL_EXPORT bool heightIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetHeight();
-	/// <summary>
 	/// Horizontal resolution, in dots per inch.
 	/// </summary>
 	ASPOSE_DLL_EXPORT int32_t getDpiX() const;
@@ -90,6 +76,8 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getShowHiddenSlides() const;
 	ASPOSE_DLL_EXPORT void setShowHiddenSlides(bool value);
+	ASPOSE_DLL_EXPORT bool showHiddenSlidesIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetShowHiddenSlides();
 	/// <summary>
 	/// Specifies the pixel format for the generated images. Read/write ImagePixelFormat.
 	/// </summary>
@@ -110,6 +98,8 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT int32_t getCommentsAreaWidth() const;
 	ASPOSE_DLL_EXPORT void setCommentsAreaWidth(int32_t value);
+	ASPOSE_DLL_EXPORT bool commentsAreaWidthIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetCommentsAreaWidth();
 	/// <summary>
 	/// Gets or sets the color of comments area (Applies only if comments are displayed on the right).
 	/// </summary>
@@ -120,24 +110,25 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getShowCommentsByNoAuthor() const;
 	ASPOSE_DLL_EXPORT void setShowCommentsByNoAuthor(bool value);
+	ASPOSE_DLL_EXPORT bool showCommentsByNoAuthorIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetShowCommentsByNoAuthor();
 
 protected:
 	utility::string_t m_Compression;
-	int32_t m_Width;
-	bool m_WidthIsSet;
-	int32_t m_Height;
-	bool m_HeightIsSet;
 	int32_t m_DpiX;
 	bool m_DpiXIsSet;
 	int32_t m_DpiY;
 	bool m_DpiYIsSet;
 	bool m_ShowHiddenSlides;
+	bool m_ShowHiddenSlidesIsSet;
 	utility::string_t m_PixelFormat;
 	utility::string_t m_NotesPosition;
 	utility::string_t m_CommentsPosition;
 	int32_t m_CommentsAreaWidth;
+	bool m_CommentsAreaWidthIsSet;
 	utility::string_t m_CommentsAreaColor;
 	bool m_ShowCommentsByNoAuthor;
+	bool m_ShowCommentsByNoAuthorIsSet;
 };
 
 }

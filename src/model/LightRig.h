@@ -24,45 +24,77 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * GroupShape.h
+ * LightRig.h
  *
- * Represents GroupShape resource.
+ * Light rig
  */
 
-#ifndef _GroupShape_H_
-#define _GroupShape_H_
+#ifndef _LightRig_H_
+#define _LightRig_H_
 
-#include "ShapeBase.h"
+#include "../ModelBase.h"
 
-#include "../model/EffectFormat.h"
-#include "../model/ShapeBase.h"
 #include <cpprest/details/basic_types.h>
-#include "../model/FillFormat.h"
-#include "../model/LineFormat.h"
-#include "../model/ResourceUri.h"
-#include "../model/ThreeDFormat.h"
-#include <vector>
 
 namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// Represents GroupShape resource.
+/// Light rig
 /// </summary>
-class  GroupShape : public ShapeBase
+class  LightRig : public ModelBase
 {
 public:
-	ASPOSE_DLL_EXPORT GroupShape();
-	ASPOSE_DLL_EXPORT virtual ~GroupShape();
+	ASPOSE_DLL_EXPORT LightRig();
+	ASPOSE_DLL_EXPORT virtual ~LightRig();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
+	/// <summary>
+	/// Light direction
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getDirection() const;
+	ASPOSE_DLL_EXPORT void setDirection(utility::string_t value);
+	/// <summary>
+	/// Light type
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getLightType() const;
+	ASPOSE_DLL_EXPORT void setLightType(utility::string_t value);
+	/// <summary>
+	/// XRotation
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getXRotation() const;
+	ASPOSE_DLL_EXPORT void setXRotation(double value);
+	ASPOSE_DLL_EXPORT bool xRotationIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetXRotation();
+	/// <summary>
+	/// YRotation
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getYRotation() const;
+	ASPOSE_DLL_EXPORT void setYRotation(double value);
+	ASPOSE_DLL_EXPORT bool yRotationIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetYRotation();
+	/// <summary>
+	/// ZRotation
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getZRotation() const;
+	ASPOSE_DLL_EXPORT void setZRotation(double value);
+	ASPOSE_DLL_EXPORT bool zRotationIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetZRotation();
 
 protected:
+	utility::string_t m_Direction;
+	utility::string_t m_LightType;
+	double m_XRotation;
+	bool m_XRotationIsSet;
+	double m_YRotation;
+	bool m_YRotationIsSet;
+	double m_ZRotation;
+	bool m_ZRotationIsSet;
 };
 
 }
 }
 
-#endif /* _GroupShape_H_ */
+#endif /* _LightRig_H_ */

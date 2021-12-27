@@ -32,6 +32,7 @@ namespace model {
 
 ImageExportOptions::ImageExportOptions()
 {
+	m_CommentsAreaWidthIsSet = false;
 }
 
 ImageExportOptions::~ImageExportOptions()
@@ -68,7 +69,17 @@ int32_t ImageExportOptions::getCommentsAreaWidth() const
 void ImageExportOptions::setCommentsAreaWidth(int32_t value)
 {
 	m_CommentsAreaWidth = value;
-	
+	m_CommentsAreaWidthIsSet = true;
+}
+
+bool ImageExportOptions::commentsAreaWidthIsSet() const
+{
+	return m_CommentsAreaWidthIsSet;
+}
+
+void ImageExportOptions::unsetCommentsAreaWidth()
+{
+	m_CommentsAreaWidthIsSet = false;
 }
 
 utility::string_t ImageExportOptions::getCommentsAreaColor() const
@@ -93,7 +104,10 @@ web::json::value ImageExportOptions::toJson() const
 	{
 		val[utility::conversions::to_string_t("CommentsPosition")] = ModelBase::toJson(m_CommentsPosition);
 	}
-	val[utility::conversions::to_string_t("CommentsAreaWidth")] = ModelBase::toJson(m_CommentsAreaWidth);
+	if(m_CommentsAreaWidthIsSet)
+	{
+		val[utility::conversions::to_string_t("CommentsAreaWidth")] = ModelBase::toJson(m_CommentsAreaWidth);
+	}
 	if (!m_CommentsAreaColor.empty())
 	{
 		val[utility::conversions::to_string_t("CommentsAreaColor")] = ModelBase::toJson(m_CommentsAreaColor);

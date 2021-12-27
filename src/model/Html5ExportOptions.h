@@ -24,45 +24,57 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * GroupShape.h
+ * Html5ExportOptions.h
  *
- * Represents GroupShape resource.
+ * Provides options that control how a presentation is saved in Html5 format.
  */
 
-#ifndef _GroupShape_H_
-#define _GroupShape_H_
+#ifndef _Html5ExportOptions_H_
+#define _Html5ExportOptions_H_
 
-#include "ShapeBase.h"
+#include "ExportOptions.h"
 
-#include "../model/EffectFormat.h"
-#include "../model/ShapeBase.h"
+#include "../model/ExportOptions.h"
 #include <cpprest/details/basic_types.h>
-#include "../model/FillFormat.h"
-#include "../model/LineFormat.h"
-#include "../model/ResourceUri.h"
-#include "../model/ThreeDFormat.h"
-#include <vector>
 
 namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// Represents GroupShape resource.
+/// Provides options that control how a presentation is saved in Html5 format.
 /// </summary>
-class  GroupShape : public ShapeBase
+class  Html5ExportOptions : public ExportOptions
 {
 public:
-	ASPOSE_DLL_EXPORT GroupShape();
-	ASPOSE_DLL_EXPORT virtual ~GroupShape();
+	ASPOSE_DLL_EXPORT Html5ExportOptions();
+	ASPOSE_DLL_EXPORT virtual ~Html5ExportOptions();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
+	/// <summary>
+	/// Gets or sets transitions animation option.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getAnimateTransitions() const;
+	ASPOSE_DLL_EXPORT void setAnimateTransitions(bool value);
+	ASPOSE_DLL_EXPORT bool animateTransitionsIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetAnimateTransitions();
+	/// <summary>
+	/// Gets or sets shapes animation option.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getAnimateShapes() const;
+	ASPOSE_DLL_EXPORT void setAnimateShapes(bool value);
+	ASPOSE_DLL_EXPORT bool animateShapesIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetAnimateShapes();
 
 protected:
+	bool m_AnimateTransitions;
+	bool m_AnimateTransitionsIsSet;
+	bool m_AnimateShapes;
+	bool m_AnimateShapesIsSet;
 };
 
 }
 }
 
-#endif /* _GroupShape_H_ */
+#endif /* _Html5ExportOptions_H_ */

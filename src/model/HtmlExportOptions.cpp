@@ -32,6 +32,13 @@ namespace model {
 
 HtmlExportOptions::HtmlExportOptions()
 {
+	m_SaveAsZipIsSet = false;
+	m_ShowHiddenSlidesIsSet = false;
+	m_SvgResponsiveLayoutIsSet = false;
+	m_JpegQualityIsSet = false;
+	m_DeletePicturesCroppedAreasIsSet = false;
+	m_CommentsAreaWidthIsSet = false;
+	m_ShowCommentsByNoAuthorIsSet = false;
 }
 
 HtmlExportOptions::~HtmlExportOptions()
@@ -46,7 +53,17 @@ bool HtmlExportOptions::getSaveAsZip() const
 void HtmlExportOptions::setSaveAsZip(bool value)
 {
 	m_SaveAsZip = value;
-	
+	m_SaveAsZipIsSet = true;
+}
+
+bool HtmlExportOptions::saveAsZipIsSet() const
+{
+	return m_SaveAsZipIsSet;
+}
+
+void HtmlExportOptions::unsetSaveAsZip()
+{
+	m_SaveAsZipIsSet = false;
 }
 
 utility::string_t HtmlExportOptions::getSubDirectoryName() const
@@ -68,7 +85,17 @@ bool HtmlExportOptions::getShowHiddenSlides() const
 void HtmlExportOptions::setShowHiddenSlides(bool value)
 {
 	m_ShowHiddenSlides = value;
-	
+	m_ShowHiddenSlidesIsSet = true;
+}
+
+bool HtmlExportOptions::showHiddenSlidesIsSet() const
+{
+	return m_ShowHiddenSlidesIsSet;
+}
+
+void HtmlExportOptions::unsetShowHiddenSlides()
+{
+	m_ShowHiddenSlidesIsSet = false;
 }
 
 bool HtmlExportOptions::getSvgResponsiveLayout() const
@@ -79,7 +106,17 @@ bool HtmlExportOptions::getSvgResponsiveLayout() const
 void HtmlExportOptions::setSvgResponsiveLayout(bool value)
 {
 	m_SvgResponsiveLayout = value;
-	
+	m_SvgResponsiveLayoutIsSet = true;
+}
+
+bool HtmlExportOptions::svgResponsiveLayoutIsSet() const
+{
+	return m_SvgResponsiveLayoutIsSet;
+}
+
+void HtmlExportOptions::unsetSvgResponsiveLayout()
+{
+	m_SvgResponsiveLayoutIsSet = false;
 }
 
 int32_t HtmlExportOptions::getJpegQuality() const
@@ -90,7 +127,17 @@ int32_t HtmlExportOptions::getJpegQuality() const
 void HtmlExportOptions::setJpegQuality(int32_t value)
 {
 	m_JpegQuality = value;
-	
+	m_JpegQualityIsSet = true;
+}
+
+bool HtmlExportOptions::jpegQualityIsSet() const
+{
+	return m_JpegQualityIsSet;
+}
+
+void HtmlExportOptions::unsetJpegQuality()
+{
+	m_JpegQualityIsSet = false;
 }
 
 utility::string_t HtmlExportOptions::getPicturesCompression() const
@@ -112,7 +159,17 @@ bool HtmlExportOptions::getDeletePicturesCroppedAreas() const
 void HtmlExportOptions::setDeletePicturesCroppedAreas(bool value)
 {
 	m_DeletePicturesCroppedAreas = value;
-	
+	m_DeletePicturesCroppedAreasIsSet = true;
+}
+
+bool HtmlExportOptions::deletePicturesCroppedAreasIsSet() const
+{
+	return m_DeletePicturesCroppedAreasIsSet;
+}
+
+void HtmlExportOptions::unsetDeletePicturesCroppedAreas()
+{
+	m_DeletePicturesCroppedAreasIsSet = false;
 }
 
 utility::string_t HtmlExportOptions::getNotesPosition() const
@@ -145,7 +202,17 @@ int32_t HtmlExportOptions::getCommentsAreaWidth() const
 void HtmlExportOptions::setCommentsAreaWidth(int32_t value)
 {
 	m_CommentsAreaWidth = value;
-	
+	m_CommentsAreaWidthIsSet = true;
+}
+
+bool HtmlExportOptions::commentsAreaWidthIsSet() const
+{
+	return m_CommentsAreaWidthIsSet;
+}
+
+void HtmlExportOptions::unsetCommentsAreaWidth()
+{
+	m_CommentsAreaWidthIsSet = false;
 }
 
 utility::string_t HtmlExportOptions::getCommentsAreaColor() const
@@ -167,25 +234,50 @@ bool HtmlExportOptions::getShowCommentsByNoAuthor() const
 void HtmlExportOptions::setShowCommentsByNoAuthor(bool value)
 {
 	m_ShowCommentsByNoAuthor = value;
-	
+	m_ShowCommentsByNoAuthorIsSet = true;
+}
+
+bool HtmlExportOptions::showCommentsByNoAuthorIsSet() const
+{
+	return m_ShowCommentsByNoAuthorIsSet;
+}
+
+void HtmlExportOptions::unsetShowCommentsByNoAuthor()
+{
+	m_ShowCommentsByNoAuthorIsSet = false;
 }
 
 web::json::value HtmlExportOptions::toJson() const
 {
 	web::json::value val = this->ExportOptions::toJson();
-	val[utility::conversions::to_string_t("SaveAsZip")] = ModelBase::toJson(m_SaveAsZip);
+	if(m_SaveAsZipIsSet)
+	{
+		val[utility::conversions::to_string_t("SaveAsZip")] = ModelBase::toJson(m_SaveAsZip);
+	}
 	if (!m_SubDirectoryName.empty())
 	{
 		val[utility::conversions::to_string_t("SubDirectoryName")] = ModelBase::toJson(m_SubDirectoryName);
 	}
-	val[utility::conversions::to_string_t("ShowHiddenSlides")] = ModelBase::toJson(m_ShowHiddenSlides);
-	val[utility::conversions::to_string_t("SvgResponsiveLayout")] = ModelBase::toJson(m_SvgResponsiveLayout);
-	val[utility::conversions::to_string_t("JpegQuality")] = ModelBase::toJson(m_JpegQuality);
+	if(m_ShowHiddenSlidesIsSet)
+	{
+		val[utility::conversions::to_string_t("ShowHiddenSlides")] = ModelBase::toJson(m_ShowHiddenSlides);
+	}
+	if(m_SvgResponsiveLayoutIsSet)
+	{
+		val[utility::conversions::to_string_t("SvgResponsiveLayout")] = ModelBase::toJson(m_SvgResponsiveLayout);
+	}
+	if(m_JpegQualityIsSet)
+	{
+		val[utility::conversions::to_string_t("JpegQuality")] = ModelBase::toJson(m_JpegQuality);
+	}
 	if (!m_PicturesCompression.empty())
 	{
 		val[utility::conversions::to_string_t("PicturesCompression")] = ModelBase::toJson(m_PicturesCompression);
 	}
-	val[utility::conversions::to_string_t("DeletePicturesCroppedAreas")] = ModelBase::toJson(m_DeletePicturesCroppedAreas);
+	if(m_DeletePicturesCroppedAreasIsSet)
+	{
+		val[utility::conversions::to_string_t("DeletePicturesCroppedAreas")] = ModelBase::toJson(m_DeletePicturesCroppedAreas);
+	}
 	if (!m_NotesPosition.empty())
 	{
 		val[utility::conversions::to_string_t("NotesPosition")] = ModelBase::toJson(m_NotesPosition);
@@ -194,12 +286,18 @@ web::json::value HtmlExportOptions::toJson() const
 	{
 		val[utility::conversions::to_string_t("CommentsPosition")] = ModelBase::toJson(m_CommentsPosition);
 	}
-	val[utility::conversions::to_string_t("CommentsAreaWidth")] = ModelBase::toJson(m_CommentsAreaWidth);
+	if(m_CommentsAreaWidthIsSet)
+	{
+		val[utility::conversions::to_string_t("CommentsAreaWidth")] = ModelBase::toJson(m_CommentsAreaWidth);
+	}
 	if (!m_CommentsAreaColor.empty())
 	{
 		val[utility::conversions::to_string_t("CommentsAreaColor")] = ModelBase::toJson(m_CommentsAreaColor);
 	}
-	val[utility::conversions::to_string_t("ShowCommentsByNoAuthor")] = ModelBase::toJson(m_ShowCommentsByNoAuthor);
+	if(m_ShowCommentsByNoAuthorIsSet)
+	{
+		val[utility::conversions::to_string_t("ShowCommentsByNoAuthor")] = ModelBase::toJson(m_ShowCommentsByNoAuthor);
+	}
 	return val;
 }
 

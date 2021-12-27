@@ -24,57 +24,89 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * Shape.h
+ * Camera.h
  *
- * Represents AutoShape resource.
+ * Camera
  */
 
-#ifndef _Shape_H_
-#define _Shape_H_
+#ifndef _Camera_H_
+#define _Camera_H_
 
-#include "GeometryShape.h"
+#include "../ModelBase.h"
 
-#include "../model/GeometryShape.h"
-#include "../model/EffectFormat.h"
 #include <cpprest/details/basic_types.h>
-#include "../model/FillFormat.h"
-#include "../model/LineFormat.h"
-#include "../model/ResourceUri.h"
-#include "../model/ThreeDFormat.h"
-#include <vector>
 
 namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// Represents AutoShape resource.
+/// Camera
 /// </summary>
-class  Shape : public GeometryShape
+class  Camera : public ModelBase
 {
 public:
-	ASPOSE_DLL_EXPORT Shape();
-	ASPOSE_DLL_EXPORT virtual ~Shape();
+	ASPOSE_DLL_EXPORT Camera();
+	ASPOSE_DLL_EXPORT virtual ~Camera();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
 	/// <summary>
-	/// Gets or sets the text.
+	/// Camera type
 	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getText() const;
-	ASPOSE_DLL_EXPORT void setText(utility::string_t value);
+	ASPOSE_DLL_EXPORT utility::string_t getCameraType() const;
+	ASPOSE_DLL_EXPORT void setCameraType(utility::string_t value);
 	/// <summary>
-	/// Get or sets list to paragraphs list
+	/// Camera FOV
 	/// </summary>
-	ASPOSE_DLL_EXPORT std::shared_ptr<ResourceUri> getParagraphs() const;
-	ASPOSE_DLL_EXPORT void setParagraphs(std::shared_ptr<ResourceUri> value);
+	ASPOSE_DLL_EXPORT double getFieldOfViewAngle() const;
+	ASPOSE_DLL_EXPORT void setFieldOfViewAngle(double value);
+	ASPOSE_DLL_EXPORT bool fieldOfViewAngleIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetFieldOfViewAngle();
+	/// <summary>
+	/// Camera zoom
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getZoom() const;
+	ASPOSE_DLL_EXPORT void setZoom(double value);
+	ASPOSE_DLL_EXPORT bool zoomIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetZoom();
+	/// <summary>
+	/// XRotation
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getXRotation() const;
+	ASPOSE_DLL_EXPORT void setXRotation(double value);
+	ASPOSE_DLL_EXPORT bool xRotationIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetXRotation();
+	/// <summary>
+	/// YRotation
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getYRotation() const;
+	ASPOSE_DLL_EXPORT void setYRotation(double value);
+	ASPOSE_DLL_EXPORT bool yRotationIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetYRotation();
+	/// <summary>
+	/// ZRotation
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getZRotation() const;
+	ASPOSE_DLL_EXPORT void setZRotation(double value);
+	ASPOSE_DLL_EXPORT bool zRotationIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetZRotation();
 
 protected:
-	utility::string_t m_Text;
-	std::shared_ptr<ResourceUri> m_Paragraphs;
+	utility::string_t m_CameraType;
+	double m_FieldOfViewAngle;
+	bool m_FieldOfViewAngleIsSet;
+	double m_Zoom;
+	bool m_ZoomIsSet;
+	double m_XRotation;
+	bool m_XRotationIsSet;
+	double m_YRotation;
+	bool m_YRotationIsSet;
+	double m_ZRotation;
+	bool m_ZRotationIsSet;
 };
 
 }
 }
 
-#endif /* _Shape_H_ */
+#endif /* _Camera_H_ */

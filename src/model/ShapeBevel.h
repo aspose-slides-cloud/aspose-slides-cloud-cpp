@@ -24,45 +24,62 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * GroupShape.h
+ * ShapeBevel.h
  *
- * Represents GroupShape resource.
+ * ShapeBevel
  */
 
-#ifndef _GroupShape_H_
-#define _GroupShape_H_
+#ifndef _ShapeBevel_H_
+#define _ShapeBevel_H_
 
-#include "ShapeBase.h"
+#include "../ModelBase.h"
 
-#include "../model/EffectFormat.h"
-#include "../model/ShapeBase.h"
 #include <cpprest/details/basic_types.h>
-#include "../model/FillFormat.h"
-#include "../model/LineFormat.h"
-#include "../model/ResourceUri.h"
-#include "../model/ThreeDFormat.h"
-#include <vector>
 
 namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// Represents GroupShape resource.
+/// ShapeBevel
 /// </summary>
-class  GroupShape : public ShapeBase
+class  ShapeBevel : public ModelBase
 {
 public:
-	ASPOSE_DLL_EXPORT GroupShape();
-	ASPOSE_DLL_EXPORT virtual ~GroupShape();
+	ASPOSE_DLL_EXPORT ShapeBevel();
+	ASPOSE_DLL_EXPORT virtual ~ShapeBevel();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
+	/// <summary>
+	/// Bevel type
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getBevelType() const;
+	ASPOSE_DLL_EXPORT void setBevelType(utility::string_t value);
+	/// <summary>
+	/// Bevel width
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getWidth() const;
+	ASPOSE_DLL_EXPORT void setWidth(double value);
+	ASPOSE_DLL_EXPORT bool widthIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetWidth();
+	/// <summary>
+	/// Bevel height
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getHeight() const;
+	ASPOSE_DLL_EXPORT void setHeight(double value);
+	ASPOSE_DLL_EXPORT bool heightIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetHeight();
 
 protected:
+	utility::string_t m_BevelType;
+	double m_Width;
+	bool m_WidthIsSet;
+	double m_Height;
+	bool m_HeightIsSet;
 };
 
 }
 }
 
-#endif /* _GroupShape_H_ */
+#endif /* _ShapeBevel_H_ */

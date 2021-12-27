@@ -57,21 +57,30 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getShowHiddenSlides() const;
 	ASPOSE_DLL_EXPORT void setShowHiddenSlides(bool value);
+	ASPOSE_DLL_EXPORT bool showHiddenSlidesIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetShowHiddenSlides();
 	/// <summary>
 	/// True to convert all metafiles used in a presentation to the PNG images.
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getSaveMetafilesAsPng() const;
 	ASPOSE_DLL_EXPORT void setSaveMetafilesAsPng(bool value);
+	ASPOSE_DLL_EXPORT bool saveMetafilesAsPngIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetSaveMetafilesAsPng();
 	/// <summary>
 	/// True to draw black frame around each slide.
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getDrawSlidesFrame() const;
 	ASPOSE_DLL_EXPORT void setDrawSlidesFrame(bool value);
+	ASPOSE_DLL_EXPORT bool drawSlidesFrameIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetDrawSlidesFrame();
 
 protected:
 	bool m_ShowHiddenSlides;
+	bool m_ShowHiddenSlidesIsSet;
 	bool m_SaveMetafilesAsPng;
+	bool m_SaveMetafilesAsPngIsSet;
 	bool m_DrawSlidesFrame;
+	bool m_DrawSlidesFrameIsSet;
 };
 
 }

@@ -32,6 +32,8 @@ namespace model {
 
 ShapeImageExportOptions::ShapeImageExportOptions()
 {
+	m_ScaleXIsSet = false;
+	m_ScaleYIsSet = false;
 }
 
 ShapeImageExportOptions::~ShapeImageExportOptions()
@@ -46,7 +48,17 @@ double ShapeImageExportOptions::getScaleX() const
 void ShapeImageExportOptions::setScaleX(double value)
 {
 	m_ScaleX = value;
-	
+	m_ScaleXIsSet = true;
+}
+
+bool ShapeImageExportOptions::scaleXIsSet() const
+{
+	return m_ScaleXIsSet;
+}
+
+void ShapeImageExportOptions::unsetScaleX()
+{
+	m_ScaleXIsSet = false;
 }
 
 double ShapeImageExportOptions::getScaleY() const
@@ -57,7 +69,17 @@ double ShapeImageExportOptions::getScaleY() const
 void ShapeImageExportOptions::setScaleY(double value)
 {
 	m_ScaleY = value;
-	
+	m_ScaleYIsSet = true;
+}
+
+bool ShapeImageExportOptions::scaleYIsSet() const
+{
+	return m_ScaleYIsSet;
+}
+
+void ShapeImageExportOptions::unsetScaleY()
+{
+	m_ScaleYIsSet = false;
 }
 
 utility::string_t ShapeImageExportOptions::getThumbnailBounds() const
@@ -85,8 +107,14 @@ void ShapeImageExportOptions::setFormat(utility::string_t value)
 web::json::value ShapeImageExportOptions::toJson() const
 {
 	web::json::value val = web::json::value::object();
-	val[utility::conversions::to_string_t("ScaleX")] = ModelBase::toJson(m_ScaleX);
-	val[utility::conversions::to_string_t("ScaleY")] = ModelBase::toJson(m_ScaleY);
+	if(m_ScaleXIsSet)
+	{
+		val[utility::conversions::to_string_t("ScaleX")] = ModelBase::toJson(m_ScaleX);
+	}
+	if(m_ScaleYIsSet)
+	{
+		val[utility::conversions::to_string_t("ScaleY")] = ModelBase::toJson(m_ScaleY);
+	}
 	if (!m_ThumbnailBounds.empty())
 	{
 		val[utility::conversions::to_string_t("ThumbnailBounds")] = ModelBase::toJson(m_ThumbnailBounds);

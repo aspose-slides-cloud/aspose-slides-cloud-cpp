@@ -42,6 +42,7 @@
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
 #include "../model/ResourceUri.h"
+#include "../model/ThreeDFormat.h"
 #include <vector>
 
 namespace asposeslidescloud {

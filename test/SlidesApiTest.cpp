@@ -37015,11 +37015,12 @@ TEST_F(SlidesApiTest, getAnimation) {
 	utility::string_t paramName = utils->getTestValue("getAnimation", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("getAnimation", "slideIndex");
 	auto paramShapeIndex = utils->getOptionalIntTestValue("getAnimation", "shapeIndex");
+	auto paramParagraphIndex = utils->getOptionalIntTestValue("getAnimation", "paragraphIndex");
 	utility::string_t paramPassword = utils->getTestValue("getAnimation", "password");
 	utility::string_t paramFolder = utils->getTestValue("getAnimation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getAnimation", "storage");
 	utils->initialize("getAnimation", "");
-	std::shared_ptr<SlideAnimation> result = api->getAnimation(paramName, paramSlideIndex, paramShapeIndex, paramPassword, paramFolder, paramStorage).get();
+	std::shared_ptr<SlideAnimation> result = api->getAnimation(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).get();
 	EXPECT_NE(nullptr, result);
 }
 
@@ -37027,6 +37028,7 @@ TEST_F(SlidesApiTest, getAnimationInvalidName) {
 	utility::string_t paramName = utils->getTestValue("getAnimation", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("getAnimation", "slideIndex");
 	auto paramShapeIndex = utils->getOptionalIntTestValue("getAnimation", "shapeIndex");
+	auto paramParagraphIndex = utils->getOptionalIntTestValue("getAnimation", "paragraphIndex");
 	utility::string_t paramPassword = utils->getTestValue("getAnimation", "password");
 	utility::string_t paramFolder = utils->getTestValue("getAnimation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getAnimation", "storage");
@@ -37036,7 +37038,7 @@ TEST_F(SlidesApiTest, getAnimationInvalidName) {
 	bool failed = true;
 	try
 	{
-		api->getAnimation(paramName, paramSlideIndex, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getAnimation(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -37068,6 +37070,7 @@ TEST_F(SlidesApiTest, getAnimationInvalidSlideIndex) {
 	utility::string_t paramName = utils->getTestValue("getAnimation", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("getAnimation", "slideIndex");
 	auto paramShapeIndex = utils->getOptionalIntTestValue("getAnimation", "shapeIndex");
+	auto paramParagraphIndex = utils->getOptionalIntTestValue("getAnimation", "paragraphIndex");
 	utility::string_t paramPassword = utils->getTestValue("getAnimation", "password");
 	utility::string_t paramFolder = utils->getTestValue("getAnimation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getAnimation", "storage");
@@ -37077,7 +37080,7 @@ TEST_F(SlidesApiTest, getAnimationInvalidSlideIndex) {
 	bool failed = true;
 	try
 	{
-		api->getAnimation(paramName, paramSlideIndex, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getAnimation(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -37109,6 +37112,7 @@ TEST_F(SlidesApiTest, getAnimationInvalidShapeIndex) {
 	utility::string_t paramName = utils->getTestValue("getAnimation", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("getAnimation", "slideIndex");
 	auto paramShapeIndex = utils->getOptionalIntTestValue("getAnimation", "shapeIndex");
+	auto paramParagraphIndex = utils->getOptionalIntTestValue("getAnimation", "paragraphIndex");
 	utility::string_t paramPassword = utils->getTestValue("getAnimation", "password");
 	utility::string_t paramFolder = utils->getTestValue("getAnimation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getAnimation", "storage");
@@ -37118,7 +37122,7 @@ TEST_F(SlidesApiTest, getAnimationInvalidShapeIndex) {
 	bool failed = true;
 	try
 	{
-		api->getAnimation(paramName, paramSlideIndex, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getAnimation(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -37146,10 +37150,53 @@ TEST_F(SlidesApiTest, getAnimationInvalidShapeIndex) {
 	}
 }
 
+TEST_F(SlidesApiTest, getAnimationInvalidParagraphIndex) {
+	utility::string_t paramName = utils->getTestValue("getAnimation", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getAnimation", "slideIndex");
+	auto paramShapeIndex = utils->getOptionalIntTestValue("getAnimation", "shapeIndex");
+	auto paramParagraphIndex = utils->getOptionalIntTestValue("getAnimation", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getAnimation", "password");
+	utility::string_t paramFolder = utils->getTestValue("getAnimation", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getAnimation", "storage");
+	paramParagraphIndex = utils->getInvalidIntTestValue("getAnimation", "paragraphIndex", paramParagraphIndex).value();
+	utils->initialize("getAnimation", "paragraphIndex", paramParagraphIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getAnimation(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getAnimation", "paragraphIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getAnimation", "paragraphIndex", paramParagraphIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getAnimation", "paragraphIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getAnimation", "paragraphIndex", paramParagraphIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getAnimation", "paragraphIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, getAnimationInvalidPassword) {
 	utility::string_t paramName = utils->getTestValue("getAnimation", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("getAnimation", "slideIndex");
 	auto paramShapeIndex = utils->getOptionalIntTestValue("getAnimation", "shapeIndex");
+	auto paramParagraphIndex = utils->getOptionalIntTestValue("getAnimation", "paragraphIndex");
 	utility::string_t paramPassword = utils->getTestValue("getAnimation", "password");
 	utility::string_t paramFolder = utils->getTestValue("getAnimation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getAnimation", "storage");
@@ -37159,7 +37206,7 @@ TEST_F(SlidesApiTest, getAnimationInvalidPassword) {
 	bool failed = true;
 	try
 	{
-		api->getAnimation(paramName, paramSlideIndex, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getAnimation(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -37191,6 +37238,7 @@ TEST_F(SlidesApiTest, getAnimationInvalidFolder) {
 	utility::string_t paramName = utils->getTestValue("getAnimation", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("getAnimation", "slideIndex");
 	auto paramShapeIndex = utils->getOptionalIntTestValue("getAnimation", "shapeIndex");
+	auto paramParagraphIndex = utils->getOptionalIntTestValue("getAnimation", "paragraphIndex");
 	utility::string_t paramPassword = utils->getTestValue("getAnimation", "password");
 	utility::string_t paramFolder = utils->getTestValue("getAnimation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getAnimation", "storage");
@@ -37200,7 +37248,7 @@ TEST_F(SlidesApiTest, getAnimationInvalidFolder) {
 	bool failed = true;
 	try
 	{
-		api->getAnimation(paramName, paramSlideIndex, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getAnimation(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -37232,6 +37280,7 @@ TEST_F(SlidesApiTest, getAnimationInvalidStorage) {
 	utility::string_t paramName = utils->getTestValue("getAnimation", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("getAnimation", "slideIndex");
 	auto paramShapeIndex = utils->getOptionalIntTestValue("getAnimation", "shapeIndex");
+	auto paramParagraphIndex = utils->getOptionalIntTestValue("getAnimation", "paragraphIndex");
 	utility::string_t paramPassword = utils->getTestValue("getAnimation", "password");
 	utility::string_t paramFolder = utils->getTestValue("getAnimation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getAnimation", "storage");
@@ -37241,7 +37290,7 @@ TEST_F(SlidesApiTest, getAnimationInvalidStorage) {
 	bool failed = true;
 	try
 	{
-		api->getAnimation(paramName, paramSlideIndex, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getAnimation(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44484,11 +44533,12 @@ TEST_F(SlidesApiTest, getSpecialSlideAnimation) {
 	int32_t paramSlideIndex = utils->getIntTestValue("getSpecialSlideAnimation", "slideIndex");
 	utility::string_t paramSlideType = utils->getTestValue("getSpecialSlideAnimation", "slideType");
 	auto paramShapeIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "shapeIndex");
+	auto paramParagraphIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "paragraphIndex");
 	utility::string_t paramPassword = utils->getTestValue("getSpecialSlideAnimation", "password");
 	utility::string_t paramFolder = utils->getTestValue("getSpecialSlideAnimation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getSpecialSlideAnimation", "storage");
 	utils->initialize("getSpecialSlideAnimation", "");
-	std::shared_ptr<SlideAnimation> result = api->getSpecialSlideAnimation(paramName, paramSlideIndex, paramSlideType, paramShapeIndex, paramPassword, paramFolder, paramStorage).get();
+	std::shared_ptr<SlideAnimation> result = api->getSpecialSlideAnimation(paramName, paramSlideIndex, paramSlideType, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).get();
 	EXPECT_NE(nullptr, result);
 }
 
@@ -44497,6 +44547,7 @@ TEST_F(SlidesApiTest, getSpecialSlideAnimationInvalidName) {
 	int32_t paramSlideIndex = utils->getIntTestValue("getSpecialSlideAnimation", "slideIndex");
 	utility::string_t paramSlideType = utils->getTestValue("getSpecialSlideAnimation", "slideType");
 	auto paramShapeIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "shapeIndex");
+	auto paramParagraphIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "paragraphIndex");
 	utility::string_t paramPassword = utils->getTestValue("getSpecialSlideAnimation", "password");
 	utility::string_t paramFolder = utils->getTestValue("getSpecialSlideAnimation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getSpecialSlideAnimation", "storage");
@@ -44506,7 +44557,7 @@ TEST_F(SlidesApiTest, getSpecialSlideAnimationInvalidName) {
 	bool failed = true;
 	try
 	{
-		api->getSpecialSlideAnimation(paramName, paramSlideIndex, paramSlideType, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getSpecialSlideAnimation(paramName, paramSlideIndex, paramSlideType, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44539,6 +44590,7 @@ TEST_F(SlidesApiTest, getSpecialSlideAnimationInvalidSlideIndex) {
 	int32_t paramSlideIndex = utils->getIntTestValue("getSpecialSlideAnimation", "slideIndex");
 	utility::string_t paramSlideType = utils->getTestValue("getSpecialSlideAnimation", "slideType");
 	auto paramShapeIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "shapeIndex");
+	auto paramParagraphIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "paragraphIndex");
 	utility::string_t paramPassword = utils->getTestValue("getSpecialSlideAnimation", "password");
 	utility::string_t paramFolder = utils->getTestValue("getSpecialSlideAnimation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getSpecialSlideAnimation", "storage");
@@ -44548,7 +44600,7 @@ TEST_F(SlidesApiTest, getSpecialSlideAnimationInvalidSlideIndex) {
 	bool failed = true;
 	try
 	{
-		api->getSpecialSlideAnimation(paramName, paramSlideIndex, paramSlideType, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getSpecialSlideAnimation(paramName, paramSlideIndex, paramSlideType, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44581,6 +44633,7 @@ TEST_F(SlidesApiTest, getSpecialSlideAnimationInvalidSlideType) {
 	int32_t paramSlideIndex = utils->getIntTestValue("getSpecialSlideAnimation", "slideIndex");
 	utility::string_t paramSlideType = utils->getTestValue("getSpecialSlideAnimation", "slideType");
 	auto paramShapeIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "shapeIndex");
+	auto paramParagraphIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "paragraphIndex");
 	utility::string_t paramPassword = utils->getTestValue("getSpecialSlideAnimation", "password");
 	utility::string_t paramFolder = utils->getTestValue("getSpecialSlideAnimation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getSpecialSlideAnimation", "storage");
@@ -44590,7 +44643,7 @@ TEST_F(SlidesApiTest, getSpecialSlideAnimationInvalidSlideType) {
 	bool failed = true;
 	try
 	{
-		api->getSpecialSlideAnimation(paramName, paramSlideIndex, paramSlideType, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getSpecialSlideAnimation(paramName, paramSlideIndex, paramSlideType, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44623,6 +44676,7 @@ TEST_F(SlidesApiTest, getSpecialSlideAnimationInvalidShapeIndex) {
 	int32_t paramSlideIndex = utils->getIntTestValue("getSpecialSlideAnimation", "slideIndex");
 	utility::string_t paramSlideType = utils->getTestValue("getSpecialSlideAnimation", "slideType");
 	auto paramShapeIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "shapeIndex");
+	auto paramParagraphIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "paragraphIndex");
 	utility::string_t paramPassword = utils->getTestValue("getSpecialSlideAnimation", "password");
 	utility::string_t paramFolder = utils->getTestValue("getSpecialSlideAnimation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getSpecialSlideAnimation", "storage");
@@ -44632,7 +44686,7 @@ TEST_F(SlidesApiTest, getSpecialSlideAnimationInvalidShapeIndex) {
 	bool failed = true;
 	try
 	{
-		api->getSpecialSlideAnimation(paramName, paramSlideIndex, paramSlideType, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getSpecialSlideAnimation(paramName, paramSlideIndex, paramSlideType, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44660,11 +44714,55 @@ TEST_F(SlidesApiTest, getSpecialSlideAnimationInvalidShapeIndex) {
 	}
 }
 
+TEST_F(SlidesApiTest, getSpecialSlideAnimationInvalidParagraphIndex) {
+	utility::string_t paramName = utils->getTestValue("getSpecialSlideAnimation", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getSpecialSlideAnimation", "slideIndex");
+	utility::string_t paramSlideType = utils->getTestValue("getSpecialSlideAnimation", "slideType");
+	auto paramShapeIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "shapeIndex");
+	auto paramParagraphIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getSpecialSlideAnimation", "password");
+	utility::string_t paramFolder = utils->getTestValue("getSpecialSlideAnimation", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getSpecialSlideAnimation", "storage");
+	paramParagraphIndex = utils->getInvalidIntTestValue("getSpecialSlideAnimation", "paragraphIndex", paramParagraphIndex).value();
+	utils->initialize("getSpecialSlideAnimation", "paragraphIndex", paramParagraphIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getSpecialSlideAnimation(paramName, paramSlideIndex, paramSlideType, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getSpecialSlideAnimation", "paragraphIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getSpecialSlideAnimation", "paragraphIndex", paramParagraphIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getSpecialSlideAnimation", "paragraphIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getSpecialSlideAnimation", "paragraphIndex", paramParagraphIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getSpecialSlideAnimation", "paragraphIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, getSpecialSlideAnimationInvalidPassword) {
 	utility::string_t paramName = utils->getTestValue("getSpecialSlideAnimation", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("getSpecialSlideAnimation", "slideIndex");
 	utility::string_t paramSlideType = utils->getTestValue("getSpecialSlideAnimation", "slideType");
 	auto paramShapeIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "shapeIndex");
+	auto paramParagraphIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "paragraphIndex");
 	utility::string_t paramPassword = utils->getTestValue("getSpecialSlideAnimation", "password");
 	utility::string_t paramFolder = utils->getTestValue("getSpecialSlideAnimation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getSpecialSlideAnimation", "storage");
@@ -44674,7 +44772,7 @@ TEST_F(SlidesApiTest, getSpecialSlideAnimationInvalidPassword) {
 	bool failed = true;
 	try
 	{
-		api->getSpecialSlideAnimation(paramName, paramSlideIndex, paramSlideType, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getSpecialSlideAnimation(paramName, paramSlideIndex, paramSlideType, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44707,6 +44805,7 @@ TEST_F(SlidesApiTest, getSpecialSlideAnimationInvalidFolder) {
 	int32_t paramSlideIndex = utils->getIntTestValue("getSpecialSlideAnimation", "slideIndex");
 	utility::string_t paramSlideType = utils->getTestValue("getSpecialSlideAnimation", "slideType");
 	auto paramShapeIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "shapeIndex");
+	auto paramParagraphIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "paragraphIndex");
 	utility::string_t paramPassword = utils->getTestValue("getSpecialSlideAnimation", "password");
 	utility::string_t paramFolder = utils->getTestValue("getSpecialSlideAnimation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getSpecialSlideAnimation", "storage");
@@ -44716,7 +44815,7 @@ TEST_F(SlidesApiTest, getSpecialSlideAnimationInvalidFolder) {
 	bool failed = true;
 	try
 	{
-		api->getSpecialSlideAnimation(paramName, paramSlideIndex, paramSlideType, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getSpecialSlideAnimation(paramName, paramSlideIndex, paramSlideType, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44749,6 +44848,7 @@ TEST_F(SlidesApiTest, getSpecialSlideAnimationInvalidStorage) {
 	int32_t paramSlideIndex = utils->getIntTestValue("getSpecialSlideAnimation", "slideIndex");
 	utility::string_t paramSlideType = utils->getTestValue("getSpecialSlideAnimation", "slideType");
 	auto paramShapeIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "shapeIndex");
+	auto paramParagraphIndex = utils->getOptionalIntTestValue("getSpecialSlideAnimation", "paragraphIndex");
 	utility::string_t paramPassword = utils->getTestValue("getSpecialSlideAnimation", "password");
 	utility::string_t paramFolder = utils->getTestValue("getSpecialSlideAnimation", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getSpecialSlideAnimation", "storage");
@@ -44758,7 +44858,7 @@ TEST_F(SlidesApiTest, getSpecialSlideAnimationInvalidStorage) {
 	bool failed = true;
 	try
 	{
-		api->getSpecialSlideAnimation(paramName, paramSlideIndex, paramSlideType, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getSpecialSlideAnimation(paramName, paramSlideIndex, paramSlideType, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
