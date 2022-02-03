@@ -57,6 +57,7 @@
 #include "../model/FilesUploadResult.h"
 #include "../model/FontScheme.h"
 #include "../model/FormatScheme.h"
+#include "../model/GeometryPaths.h"
 #include "../model/HeaderFooter.h"
 #include "../HttpContent.h"
 #include "../model/IShapeExportOptions.h"
@@ -121,6 +122,11 @@ public:
 	/// Changes the placement of selected shapes on the master slide. Aligns shapes to the margins or the edge of the slide or aligns them relative to each other.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> alignSpecialSlideShapes(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t alignmentType, boost::optional<bool> alignToSlide = bool(), std::vector<int32_t> shapes = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Changes the placement of selected shapes on the slide. Aligns shapes to the margins or the edge of the slide or aligns them relative to each other (for group shapes only).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> alignSubshapes(utility::string_t name, int32_t slideIndex, utility::string_t path, utility::string_t alignmentType, boost::optional<bool> alignToSlide = bool(), std::vector<int32_t> shapes = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Convert presentation from request content to format specified.
@@ -668,6 +674,11 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadNotesSlideOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, utility::string_t format, boost::optional<int32_t> width = int32_t(), boost::optional<int32_t> height = int32_t(), utility::string_t password = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
 
 	/// <summary>
+	/// Convert Mathematical Text to MathML Format
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadPortionAsMathMl(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
 	/// Save a presentation to a specified format.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadPresentation(utility::string_t name, utility::string_t format, std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::vector<int32_t> slides = std::vector<int32_t>());
@@ -856,6 +867,11 @@ public:
 	/// Read slide shape info.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ShapeBase>> getShape(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Returns geometry path of the shape
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<GeometryPaths>> getShapeGeometryPath(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Read slide shapes info.
@@ -1098,6 +1114,11 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> replaceSlideTextOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, utility::string_t oldValue, utility::string_t newValue, boost::optional<bool> ignoreCase = bool(), utility::string_t password = utility::string_t());
 
 	/// <summary>
+	/// Convert Mathematical Text to MathML Format and saves result to the storage
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<void> savePortionAsMathMl(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t outPath, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
 	/// Save a presentation to a specified format.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<void> savePresentation(utility::string_t name, utility::string_t format, utility::string_t outPath, std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::vector<int32_t> slides = std::vector<int32_t>());
@@ -1186,6 +1207,11 @@ public:
 	/// Replace existing presentation sections with the ones provided in the sections DTO.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Sections>> setSections(utility::string_t name, std::shared_ptr<Sections> sections, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Sets geometry path to the shape
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ShapeBase>> setShapeGeometryPath(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::shared_ptr<GeometryPaths> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Set footer the slide.

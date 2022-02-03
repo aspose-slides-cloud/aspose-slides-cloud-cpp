@@ -34,8 +34,10 @@
 
 #include "ResourceBase.h"
 
+#include "../model/Hyperlink.h"
 #include "../model/EffectFormat.h"
 #include <cpprest/details/basic_types.h>
+#include "../model/MathParagraph.h"
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
 #include "../model/ResourceBase.h"
@@ -62,6 +64,11 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getText() const;
 	ASPOSE_DLL_EXPORT void setText(utility::string_t value);
+	/// <summary>
+	/// Math paragraph.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<MathParagraph> getMathParagraph() const;
+	ASPOSE_DLL_EXPORT void setMathParagraph(std::shared_ptr<MathParagraph> value);
 	/// <summary>
 	/// True for bold font.
 	/// </summary>
@@ -192,9 +199,20 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::shared_ptr<LineFormat> getUnderlineLineFormat() const;
 	ASPOSE_DLL_EXPORT void setUnderlineLineFormat(std::shared_ptr<LineFormat> value);
+	/// <summary>
+	/// Hyperlink defined for mouse click.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<Hyperlink> getHyperlinkClick() const;
+	ASPOSE_DLL_EXPORT void setHyperlinkClick(std::shared_ptr<Hyperlink> value);
+	/// <summary>
+	/// Hyperlink defined for mouse over.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<Hyperlink> getHyperlinkMouseOver() const;
+	ASPOSE_DLL_EXPORT void setHyperlinkMouseOver(std::shared_ptr<Hyperlink> value);
 
 protected:
 	utility::string_t m_Text;
+	std::shared_ptr<MathParagraph> m_MathParagraph;
 	utility::string_t m_FontBold;
 	utility::string_t m_FontItalic;
 	utility::string_t m_FontUnderline;
@@ -224,6 +242,8 @@ protected:
 	std::shared_ptr<LineFormat> m_LineFormat;
 	std::shared_ptr<FillFormat> m_UnderlineFillFormat;
 	std::shared_ptr<LineFormat> m_UnderlineLineFormat;
+	std::shared_ptr<Hyperlink> m_HyperlinkClick;
+	std::shared_ptr<Hyperlink> m_HyperlinkMouseOver;
 };
 
 }

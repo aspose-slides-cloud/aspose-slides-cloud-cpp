@@ -226,7 +226,18 @@ web::json::value* TestUtils::getTestJsonValue(std::string functionName, std::str
 	{
 		if (isGoodRule(rule, functionName, parameterName) && rule.has_field(utility::conversions::to_string_t("Value")))
 		{
-			value = &rule[utility::conversions::to_string_t("Value")];
+			//TODO: add TypeHierarchy util class & remove this workaround
+			if (functionName == "setShapeGeometryPath" && parameterName == "dto")
+			{
+				if (rule.has_field(utility::conversions::to_string_t("Type")) && rule[utility::conversions::to_string_t("Type")].as_string() == utility::conversions::to_string_t("GeometryPaths"))
+				{
+					value = &rule[utility::conversions::to_string_t("Value")];
+				}
+			}
+			else
+			{
+				value = &rule[utility::conversions::to_string_t("Value")];
+			}
 		}
 	}
 	return value;

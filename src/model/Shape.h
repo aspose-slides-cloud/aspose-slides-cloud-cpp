@@ -35,6 +35,7 @@
 #include "GeometryShape.h"
 
 #include "../model/GeometryShape.h"
+#include "../model/Hyperlink.h"
 #include "../model/EffectFormat.h"
 #include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"

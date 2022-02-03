@@ -39,6 +39,8 @@ AudioFrame::AudioFrame()
 	m_EmbeddedIsSet = false;
 	m_HideAtShowingIsSet = false;
 	m_PlayLoopModeIsSet = false;
+	m_PlayAcrossSlidesIsSet = false;
+	m_RewindAudioIsSet = false;
 }
 
 AudioFrame::~AudioFrame()
@@ -225,6 +227,48 @@ void AudioFrame::setBase64Data(utility::string_t value)
 	
 }
 
+bool AudioFrame::getPlayAcrossSlides() const
+{
+	return m_PlayAcrossSlides;
+}
+
+void AudioFrame::setPlayAcrossSlides(bool value)
+{
+	m_PlayAcrossSlides = value;
+	m_PlayAcrossSlidesIsSet = true;
+}
+
+bool AudioFrame::playAcrossSlidesIsSet() const
+{
+	return m_PlayAcrossSlidesIsSet;
+}
+
+void AudioFrame::unsetPlayAcrossSlides()
+{
+	m_PlayAcrossSlidesIsSet = false;
+}
+
+bool AudioFrame::getRewindAudio() const
+{
+	return m_RewindAudio;
+}
+
+void AudioFrame::setRewindAudio(bool value)
+{
+	m_RewindAudio = value;
+	m_RewindAudioIsSet = true;
+}
+
+bool AudioFrame::rewindAudioIsSet() const
+{
+	return m_RewindAudioIsSet;
+}
+
+void AudioFrame::unsetRewindAudio()
+{
+	m_RewindAudioIsSet = false;
+}
+
 web::json::value AudioFrame::toJson() const
 {
 	web::json::value val = this->GeometryShape::toJson();
@@ -267,6 +311,14 @@ web::json::value AudioFrame::toJson() const
 	if (!m_Base64Data.empty())
 	{
 		val[utility::conversions::to_string_t("Base64Data")] = ModelBase::toJson(m_Base64Data);
+	}
+	if(m_PlayAcrossSlidesIsSet)
+	{
+		val[utility::conversions::to_string_t("PlayAcrossSlides")] = ModelBase::toJson(m_PlayAcrossSlides);
+	}
+	if(m_RewindAudioIsSet)
+	{
+		val[utility::conversions::to_string_t("RewindAudio")] = ModelBase::toJson(m_RewindAudio);
 	}
 	return val;
 }
@@ -323,6 +375,16 @@ void AudioFrame::fromJson(web::json::value& val)
 	if(jsonForBase64Data != nullptr && !jsonForBase64Data->is_null())
 	{
 		setBase64Data(ModelBase::stringFromJson(*jsonForBase64Data));
+	}
+	web::json::value* jsonForPlayAcrossSlides = ModelBase::getField(val, "PlayAcrossSlides");
+	if(jsonForPlayAcrossSlides != nullptr && !jsonForPlayAcrossSlides->is_null())
+	{
+		setPlayAcrossSlides(ModelBase::boolFromJson(*jsonForPlayAcrossSlides));
+	}
+	web::json::value* jsonForRewindAudio = ModelBase::getField(val, "RewindAudio");
+	if(jsonForRewindAudio != nullptr && !jsonForRewindAudio->is_null())
+	{
+		setRewindAudio(ModelBase::boolFromJson(*jsonForRewindAudio));
 	}
 }
 

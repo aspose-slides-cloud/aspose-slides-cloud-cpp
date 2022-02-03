@@ -34,6 +34,7 @@
 
 #include "ShapeBase.h"
 
+#include "../model/Hyperlink.h"
 #include "../model/SmartArtNode.h"
 #include "../model/EffectFormat.h"
 #include "../model/ShapeBase.h"

@@ -34,6 +34,7 @@
 
 #include "ShapeBase.h"
 
+#include "../model/Hyperlink.h"
 #include "../model/EffectFormat.h"
 #include "../model/ShapeBase.h"
 #include <cpprest/details/basic_types.h>

@@ -34,6 +34,7 @@
 
 #include "ShapeBase.h"
 
+#include "../model/Hyperlink.h"
 #include "../model/EffectFormat.h"
 #include "../model/PlotArea.h"
 #include "../model/ChartCategory.h"

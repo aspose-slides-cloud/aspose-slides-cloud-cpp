@@ -35,6 +35,7 @@
 #include "GeometryShape.h"
 
 #include "../model/GeometryShape.h"
+#include "../model/Hyperlink.h"
 #include "../model/EffectFormat.h"
 #include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"
@@ -122,6 +123,20 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getBase64Data() const;
 	ASPOSE_DLL_EXPORT void setBase64Data(utility::string_t value);
+	/// <summary>
+	/// Determines whether an audio is playing across the slides.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getPlayAcrossSlides() const;
+	ASPOSE_DLL_EXPORT void setPlayAcrossSlides(bool value);
+	ASPOSE_DLL_EXPORT bool playAcrossSlidesIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetPlayAcrossSlides();
+	/// <summary>
+	/// Determines whether audio is automatically rewound to start after playing.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getRewindAudio() const;
+	ASPOSE_DLL_EXPORT void setRewindAudio(bool value);
+	ASPOSE_DLL_EXPORT bool rewindAudioIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetRewindAudio();
 
 protected:
 	int32_t m_AudioCdEndTrack;
@@ -141,6 +156,10 @@ protected:
 	utility::string_t m_PlayMode;
 	utility::string_t m_Volume;
 	utility::string_t m_Base64Data;
+	bool m_PlayAcrossSlides;
+	bool m_PlayAcrossSlidesIsSet;
+	bool m_RewindAudio;
+	bool m_RewindAudioIsSet;
 };
 
 }

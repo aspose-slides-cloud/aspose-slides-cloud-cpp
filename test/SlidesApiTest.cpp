@@ -846,6 +846,417 @@ TEST_F(SlidesApiTest, alignSpecialSlideShapesInvalidStorage) {
 	}
 }
 
+TEST_F(SlidesApiTest, alignSubshapes) {
+	utility::string_t paramName = utils->getTestValue("alignSubshapes", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("alignSubshapes", "slideIndex");
+	utility::string_t paramPath = utils->getTestValue("alignSubshapes", "path");
+	utility::string_t paramAlignmentType = utils->getTestValue("alignSubshapes", "alignmentType");
+	auto paramAlignToSlide = utils->getOptionalBoolTestValue("alignSubshapes", "alignToSlide");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("alignSubshapes", "shapes");
+	utility::string_t paramPassword = utils->getTestValue("alignSubshapes", "password");
+	utility::string_t paramFolder = utils->getTestValue("alignSubshapes", "folder");
+	utility::string_t paramStorage = utils->getTestValue("alignSubshapes", "storage");
+	utils->initialize("alignSubshapes", "");
+	std::shared_ptr<Shapes> result = api->alignSubshapes(paramName, paramSlideIndex, paramPath, paramAlignmentType, paramAlignToSlide, paramShapes, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, alignSubshapesInvalidName) {
+	utility::string_t paramName = utils->getTestValue("alignSubshapes", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("alignSubshapes", "slideIndex");
+	utility::string_t paramPath = utils->getTestValue("alignSubshapes", "path");
+	utility::string_t paramAlignmentType = utils->getTestValue("alignSubshapes", "alignmentType");
+	auto paramAlignToSlide = utils->getOptionalBoolTestValue("alignSubshapes", "alignToSlide");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("alignSubshapes", "shapes");
+	utility::string_t paramPassword = utils->getTestValue("alignSubshapes", "password");
+	utility::string_t paramFolder = utils->getTestValue("alignSubshapes", "folder");
+	utility::string_t paramStorage = utils->getTestValue("alignSubshapes", "storage");
+	paramName = utils->getInvalidTestValue("alignSubshapes", "name", paramName);
+	utils->initialize("alignSubshapes", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->alignSubshapes(paramName, paramSlideIndex, paramPath, paramAlignmentType, paramAlignToSlide, paramShapes, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("alignSubshapes", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, alignSubshapesInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("alignSubshapes", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("alignSubshapes", "slideIndex");
+	utility::string_t paramPath = utils->getTestValue("alignSubshapes", "path");
+	utility::string_t paramAlignmentType = utils->getTestValue("alignSubshapes", "alignmentType");
+	auto paramAlignToSlide = utils->getOptionalBoolTestValue("alignSubshapes", "alignToSlide");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("alignSubshapes", "shapes");
+	utility::string_t paramPassword = utils->getTestValue("alignSubshapes", "password");
+	utility::string_t paramFolder = utils->getTestValue("alignSubshapes", "folder");
+	utility::string_t paramStorage = utils->getTestValue("alignSubshapes", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("alignSubshapes", "slideIndex", paramSlideIndex).value();
+	utils->initialize("alignSubshapes", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->alignSubshapes(paramName, paramSlideIndex, paramPath, paramAlignmentType, paramAlignToSlide, paramShapes, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("alignSubshapes", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, alignSubshapesInvalidPath) {
+	utility::string_t paramName = utils->getTestValue("alignSubshapes", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("alignSubshapes", "slideIndex");
+	utility::string_t paramPath = utils->getTestValue("alignSubshapes", "path");
+	utility::string_t paramAlignmentType = utils->getTestValue("alignSubshapes", "alignmentType");
+	auto paramAlignToSlide = utils->getOptionalBoolTestValue("alignSubshapes", "alignToSlide");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("alignSubshapes", "shapes");
+	utility::string_t paramPassword = utils->getTestValue("alignSubshapes", "password");
+	utility::string_t paramFolder = utils->getTestValue("alignSubshapes", "folder");
+	utility::string_t paramStorage = utils->getTestValue("alignSubshapes", "storage");
+	paramPath = utils->getInvalidTestValue("alignSubshapes", "path", paramPath);
+	utils->initialize("alignSubshapes", "path", paramPath);
+
+	bool failed = true;
+	try
+	{
+		api->alignSubshapes(paramName, paramSlideIndex, paramPath, paramAlignmentType, paramAlignToSlide, paramShapes, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "path");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "path", paramPath);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "path");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "path", paramPath);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("alignSubshapes", "path"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, alignSubshapesInvalidAlignmentType) {
+	utility::string_t paramName = utils->getTestValue("alignSubshapes", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("alignSubshapes", "slideIndex");
+	utility::string_t paramPath = utils->getTestValue("alignSubshapes", "path");
+	utility::string_t paramAlignmentType = utils->getTestValue("alignSubshapes", "alignmentType");
+	auto paramAlignToSlide = utils->getOptionalBoolTestValue("alignSubshapes", "alignToSlide");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("alignSubshapes", "shapes");
+	utility::string_t paramPassword = utils->getTestValue("alignSubshapes", "password");
+	utility::string_t paramFolder = utils->getTestValue("alignSubshapes", "folder");
+	utility::string_t paramStorage = utils->getTestValue("alignSubshapes", "storage");
+	paramAlignmentType = utils->getInvalidTestValue("alignSubshapes", "alignmentType", paramAlignmentType);
+	utils->initialize("alignSubshapes", "alignmentType", paramAlignmentType);
+
+	bool failed = true;
+	try
+	{
+		api->alignSubshapes(paramName, paramSlideIndex, paramPath, paramAlignmentType, paramAlignToSlide, paramShapes, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "alignmentType");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "alignmentType", paramAlignmentType);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "alignmentType");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "alignmentType", paramAlignmentType);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("alignSubshapes", "alignmentType"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, alignSubshapesInvalidAlignToSlide) {
+	utility::string_t paramName = utils->getTestValue("alignSubshapes", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("alignSubshapes", "slideIndex");
+	utility::string_t paramPath = utils->getTestValue("alignSubshapes", "path");
+	utility::string_t paramAlignmentType = utils->getTestValue("alignSubshapes", "alignmentType");
+	auto paramAlignToSlide = utils->getOptionalBoolTestValue("alignSubshapes", "alignToSlide");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("alignSubshapes", "shapes");
+	utility::string_t paramPassword = utils->getTestValue("alignSubshapes", "password");
+	utility::string_t paramFolder = utils->getTestValue("alignSubshapes", "folder");
+	utility::string_t paramStorage = utils->getTestValue("alignSubshapes", "storage");
+	paramAlignToSlide = utils->getInvalidBoolTestValue("alignSubshapes", "alignToSlide", paramAlignToSlide).value();
+	utils->initialize("alignSubshapes", "alignToSlide", paramAlignToSlide);
+
+	bool failed = true;
+	try
+	{
+		api->alignSubshapes(paramName, paramSlideIndex, paramPath, paramAlignmentType, paramAlignToSlide, paramShapes, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "alignToSlide");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "alignToSlide", paramAlignToSlide);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "alignToSlide");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "alignToSlide", paramAlignToSlide);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("alignSubshapes", "alignToSlide"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, alignSubshapesInvalidShapes) {
+	utility::string_t paramName = utils->getTestValue("alignSubshapes", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("alignSubshapes", "slideIndex");
+	utility::string_t paramPath = utils->getTestValue("alignSubshapes", "path");
+	utility::string_t paramAlignmentType = utils->getTestValue("alignSubshapes", "alignmentType");
+	auto paramAlignToSlide = utils->getOptionalBoolTestValue("alignSubshapes", "alignToSlide");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("alignSubshapes", "shapes");
+	utility::string_t paramPassword = utils->getTestValue("alignSubshapes", "password");
+	utility::string_t paramFolder = utils->getTestValue("alignSubshapes", "folder");
+	utility::string_t paramStorage = utils->getTestValue("alignSubshapes", "storage");
+	paramShapes = utils->getInvalidIntVectorTestValue("alignSubshapes", "shapes", paramShapes);
+	utils->initialize("alignSubshapes", "shapes", paramShapes);
+
+	bool failed = true;
+	try
+	{
+		api->alignSubshapes(paramName, paramSlideIndex, paramPath, paramAlignmentType, paramAlignToSlide, paramShapes, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "shapes");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "shapes", paramShapes);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "shapes");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "shapes", paramShapes);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("alignSubshapes", "shapes"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, alignSubshapesInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("alignSubshapes", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("alignSubshapes", "slideIndex");
+	utility::string_t paramPath = utils->getTestValue("alignSubshapes", "path");
+	utility::string_t paramAlignmentType = utils->getTestValue("alignSubshapes", "alignmentType");
+	auto paramAlignToSlide = utils->getOptionalBoolTestValue("alignSubshapes", "alignToSlide");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("alignSubshapes", "shapes");
+	utility::string_t paramPassword = utils->getTestValue("alignSubshapes", "password");
+	utility::string_t paramFolder = utils->getTestValue("alignSubshapes", "folder");
+	utility::string_t paramStorage = utils->getTestValue("alignSubshapes", "storage");
+	paramPassword = utils->getInvalidTestValue("alignSubshapes", "password", paramPassword);
+	utils->initialize("alignSubshapes", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->alignSubshapes(paramName, paramSlideIndex, paramPath, paramAlignmentType, paramAlignToSlide, paramShapes, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("alignSubshapes", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, alignSubshapesInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("alignSubshapes", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("alignSubshapes", "slideIndex");
+	utility::string_t paramPath = utils->getTestValue("alignSubshapes", "path");
+	utility::string_t paramAlignmentType = utils->getTestValue("alignSubshapes", "alignmentType");
+	auto paramAlignToSlide = utils->getOptionalBoolTestValue("alignSubshapes", "alignToSlide");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("alignSubshapes", "shapes");
+	utility::string_t paramPassword = utils->getTestValue("alignSubshapes", "password");
+	utility::string_t paramFolder = utils->getTestValue("alignSubshapes", "folder");
+	utility::string_t paramStorage = utils->getTestValue("alignSubshapes", "storage");
+	paramFolder = utils->getInvalidTestValue("alignSubshapes", "folder", paramFolder);
+	utils->initialize("alignSubshapes", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->alignSubshapes(paramName, paramSlideIndex, paramPath, paramAlignmentType, paramAlignToSlide, paramShapes, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("alignSubshapes", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, alignSubshapesInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("alignSubshapes", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("alignSubshapes", "slideIndex");
+	utility::string_t paramPath = utils->getTestValue("alignSubshapes", "path");
+	utility::string_t paramAlignmentType = utils->getTestValue("alignSubshapes", "alignmentType");
+	auto paramAlignToSlide = utils->getOptionalBoolTestValue("alignSubshapes", "alignToSlide");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("alignSubshapes", "shapes");
+	utility::string_t paramPassword = utils->getTestValue("alignSubshapes", "password");
+	utility::string_t paramFolder = utils->getTestValue("alignSubshapes", "folder");
+	utility::string_t paramStorage = utils->getTestValue("alignSubshapes", "storage");
+	paramStorage = utils->getInvalidTestValue("alignSubshapes", "storage", paramStorage);
+	utils->initialize("alignSubshapes", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->alignSubshapes(paramName, paramSlideIndex, paramPath, paramAlignmentType, paramAlignToSlide, paramShapes, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("alignSubshapes", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("alignSubshapes", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("alignSubshapes", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, convert) {
 	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("convert", "document");
 	utility::string_t paramFormat = utils->getTestValue("convert", "format");
@@ -32679,6 +33090,364 @@ TEST_F(SlidesApiTest, downloadNotesSlideOnlineInvalidFontsFolder) {
 	}
 }
 
+TEST_F(SlidesApiTest, downloadPortionAsMathMl) {
+	utility::string_t paramName = utils->getTestValue("downloadPortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("downloadPortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("downloadPortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("downloadPortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("downloadPortionAsMathMl", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("downloadPortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("downloadPortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("downloadPortionAsMathMl", "storage");
+	utils->initialize("downloadPortionAsMathMl", "");
+	HttpContent result = api->downloadPortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_FALSE(result.getData()->eof());
+}
+
+TEST_F(SlidesApiTest, downloadPortionAsMathMlInvalidName) {
+	utility::string_t paramName = utils->getTestValue("downloadPortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("downloadPortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("downloadPortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("downloadPortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("downloadPortionAsMathMl", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("downloadPortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("downloadPortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("downloadPortionAsMathMl", "storage");
+	paramName = utils->getInvalidTestValue("downloadPortionAsMathMl", "name", paramName);
+	utils->initialize("downloadPortionAsMathMl", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->downloadPortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("downloadPortionAsMathMl", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("downloadPortionAsMathMl", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("downloadPortionAsMathMl", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("downloadPortionAsMathMl", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("downloadPortionAsMathMl", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, downloadPortionAsMathMlInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("downloadPortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("downloadPortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("downloadPortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("downloadPortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("downloadPortionAsMathMl", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("downloadPortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("downloadPortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("downloadPortionAsMathMl", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("downloadPortionAsMathMl", "slideIndex", paramSlideIndex).value();
+	utils->initialize("downloadPortionAsMathMl", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->downloadPortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("downloadPortionAsMathMl", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("downloadPortionAsMathMl", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("downloadPortionAsMathMl", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("downloadPortionAsMathMl", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("downloadPortionAsMathMl", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, downloadPortionAsMathMlInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("downloadPortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("downloadPortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("downloadPortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("downloadPortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("downloadPortionAsMathMl", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("downloadPortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("downloadPortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("downloadPortionAsMathMl", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("downloadPortionAsMathMl", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("downloadPortionAsMathMl", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->downloadPortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("downloadPortionAsMathMl", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("downloadPortionAsMathMl", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("downloadPortionAsMathMl", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("downloadPortionAsMathMl", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("downloadPortionAsMathMl", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, downloadPortionAsMathMlInvalidParagraphIndex) {
+	utility::string_t paramName = utils->getTestValue("downloadPortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("downloadPortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("downloadPortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("downloadPortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("downloadPortionAsMathMl", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("downloadPortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("downloadPortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("downloadPortionAsMathMl", "storage");
+	paramParagraphIndex = utils->getInvalidIntTestValue("downloadPortionAsMathMl", "paragraphIndex", paramParagraphIndex).value();
+	utils->initialize("downloadPortionAsMathMl", "paragraphIndex", paramParagraphIndex);
+
+	bool failed = true;
+	try
+	{
+		api->downloadPortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("downloadPortionAsMathMl", "paragraphIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("downloadPortionAsMathMl", "paragraphIndex", paramParagraphIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("downloadPortionAsMathMl", "paragraphIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("downloadPortionAsMathMl", "paragraphIndex", paramParagraphIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("downloadPortionAsMathMl", "paragraphIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, downloadPortionAsMathMlInvalidPortionIndex) {
+	utility::string_t paramName = utils->getTestValue("downloadPortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("downloadPortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("downloadPortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("downloadPortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("downloadPortionAsMathMl", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("downloadPortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("downloadPortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("downloadPortionAsMathMl", "storage");
+	paramPortionIndex = utils->getInvalidIntTestValue("downloadPortionAsMathMl", "portionIndex", paramPortionIndex).value();
+	utils->initialize("downloadPortionAsMathMl", "portionIndex", paramPortionIndex);
+
+	bool failed = true;
+	try
+	{
+		api->downloadPortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("downloadPortionAsMathMl", "portionIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("downloadPortionAsMathMl", "portionIndex", paramPortionIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("downloadPortionAsMathMl", "portionIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("downloadPortionAsMathMl", "portionIndex", paramPortionIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("downloadPortionAsMathMl", "portionIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, downloadPortionAsMathMlInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("downloadPortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("downloadPortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("downloadPortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("downloadPortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("downloadPortionAsMathMl", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("downloadPortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("downloadPortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("downloadPortionAsMathMl", "storage");
+	paramPassword = utils->getInvalidTestValue("downloadPortionAsMathMl", "password", paramPassword);
+	utils->initialize("downloadPortionAsMathMl", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->downloadPortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("downloadPortionAsMathMl", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("downloadPortionAsMathMl", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("downloadPortionAsMathMl", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("downloadPortionAsMathMl", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("downloadPortionAsMathMl", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, downloadPortionAsMathMlInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("downloadPortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("downloadPortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("downloadPortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("downloadPortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("downloadPortionAsMathMl", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("downloadPortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("downloadPortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("downloadPortionAsMathMl", "storage");
+	paramFolder = utils->getInvalidTestValue("downloadPortionAsMathMl", "folder", paramFolder);
+	utils->initialize("downloadPortionAsMathMl", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->downloadPortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("downloadPortionAsMathMl", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("downloadPortionAsMathMl", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("downloadPortionAsMathMl", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("downloadPortionAsMathMl", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("downloadPortionAsMathMl", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, downloadPortionAsMathMlInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("downloadPortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("downloadPortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("downloadPortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("downloadPortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("downloadPortionAsMathMl", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("downloadPortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("downloadPortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("downloadPortionAsMathMl", "storage");
+	paramStorage = utils->getInvalidTestValue("downloadPortionAsMathMl", "storage", paramStorage);
+	utils->initialize("downloadPortionAsMathMl", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->downloadPortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("downloadPortionAsMathMl", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("downloadPortionAsMathMl", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("downloadPortionAsMathMl", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("downloadPortionAsMathMl", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("downloadPortionAsMathMl", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, downloadPresentation) {
 	utility::string_t paramName = utils->getTestValue("downloadPresentation", "name");
 	utility::string_t paramFormat = utils->getTestValue("downloadPresentation", "format");
@@ -42878,6 +43647,264 @@ TEST_F(SlidesApiTest, getShapeInvalidStorage) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("getShape", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getShapeGeometryPath) {
+	utility::string_t paramName = utils->getTestValue("getShapeGeometryPath", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getShapeGeometryPath", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getShapeGeometryPath", "shapeIndex");
+	utility::string_t paramPassword = utils->getTestValue("getShapeGeometryPath", "password");
+	utility::string_t paramFolder = utils->getTestValue("getShapeGeometryPath", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getShapeGeometryPath", "storage");
+	utils->initialize("getShapeGeometryPath", "");
+	std::shared_ptr<GeometryPaths> result = api->getShapeGeometryPath(paramName, paramSlideIndex, paramShapeIndex, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, getShapeGeometryPathInvalidName) {
+	utility::string_t paramName = utils->getTestValue("getShapeGeometryPath", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getShapeGeometryPath", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getShapeGeometryPath", "shapeIndex");
+	utility::string_t paramPassword = utils->getTestValue("getShapeGeometryPath", "password");
+	utility::string_t paramFolder = utils->getTestValue("getShapeGeometryPath", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getShapeGeometryPath", "storage");
+	paramName = utils->getInvalidTestValue("getShapeGeometryPath", "name", paramName);
+	utils->initialize("getShapeGeometryPath", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->getShapeGeometryPath(paramName, paramSlideIndex, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getShapeGeometryPath", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getShapeGeometryPath", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getShapeGeometryPath", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getShapeGeometryPath", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getShapeGeometryPath", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getShapeGeometryPathInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("getShapeGeometryPath", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getShapeGeometryPath", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getShapeGeometryPath", "shapeIndex");
+	utility::string_t paramPassword = utils->getTestValue("getShapeGeometryPath", "password");
+	utility::string_t paramFolder = utils->getTestValue("getShapeGeometryPath", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getShapeGeometryPath", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("getShapeGeometryPath", "slideIndex", paramSlideIndex).value();
+	utils->initialize("getShapeGeometryPath", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getShapeGeometryPath(paramName, paramSlideIndex, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getShapeGeometryPath", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getShapeGeometryPath", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getShapeGeometryPath", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getShapeGeometryPath", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getShapeGeometryPath", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getShapeGeometryPathInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("getShapeGeometryPath", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getShapeGeometryPath", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getShapeGeometryPath", "shapeIndex");
+	utility::string_t paramPassword = utils->getTestValue("getShapeGeometryPath", "password");
+	utility::string_t paramFolder = utils->getTestValue("getShapeGeometryPath", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getShapeGeometryPath", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("getShapeGeometryPath", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("getShapeGeometryPath", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getShapeGeometryPath(paramName, paramSlideIndex, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getShapeGeometryPath", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getShapeGeometryPath", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getShapeGeometryPath", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getShapeGeometryPath", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getShapeGeometryPath", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getShapeGeometryPathInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("getShapeGeometryPath", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getShapeGeometryPath", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getShapeGeometryPath", "shapeIndex");
+	utility::string_t paramPassword = utils->getTestValue("getShapeGeometryPath", "password");
+	utility::string_t paramFolder = utils->getTestValue("getShapeGeometryPath", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getShapeGeometryPath", "storage");
+	paramPassword = utils->getInvalidTestValue("getShapeGeometryPath", "password", paramPassword);
+	utils->initialize("getShapeGeometryPath", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->getShapeGeometryPath(paramName, paramSlideIndex, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getShapeGeometryPath", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getShapeGeometryPath", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getShapeGeometryPath", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getShapeGeometryPath", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getShapeGeometryPath", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getShapeGeometryPathInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("getShapeGeometryPath", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getShapeGeometryPath", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getShapeGeometryPath", "shapeIndex");
+	utility::string_t paramPassword = utils->getTestValue("getShapeGeometryPath", "password");
+	utility::string_t paramFolder = utils->getTestValue("getShapeGeometryPath", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getShapeGeometryPath", "storage");
+	paramFolder = utils->getInvalidTestValue("getShapeGeometryPath", "folder", paramFolder);
+	utils->initialize("getShapeGeometryPath", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->getShapeGeometryPath(paramName, paramSlideIndex, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getShapeGeometryPath", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getShapeGeometryPath", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getShapeGeometryPath", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getShapeGeometryPath", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getShapeGeometryPath", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getShapeGeometryPathInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("getShapeGeometryPath", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getShapeGeometryPath", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getShapeGeometryPath", "shapeIndex");
+	utility::string_t paramPassword = utils->getTestValue("getShapeGeometryPath", "password");
+	utility::string_t paramFolder = utils->getTestValue("getShapeGeometryPath", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getShapeGeometryPath", "storage");
+	paramStorage = utils->getInvalidTestValue("getShapeGeometryPath", "storage", paramStorage);
+	utils->initialize("getShapeGeometryPath", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->getShapeGeometryPath(paramName, paramSlideIndex, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getShapeGeometryPath", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getShapeGeometryPath", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getShapeGeometryPath", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getShapeGeometryPath", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getShapeGeometryPath", "storage"))
 	{
 		FAIL() << "Must have failed";
 	}
@@ -55526,6 +56553,416 @@ TEST_F(SlidesApiTest, replaceSlideTextOnlineInvalidPassword) {
 	}
 }
 
+TEST_F(SlidesApiTest, savePortionAsMathMl) {
+	utility::string_t paramName = utils->getTestValue("savePortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("savePortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("savePortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("savePortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("savePortionAsMathMl", "portionIndex");
+	utility::string_t paramOutPath = utils->getTestValue("savePortionAsMathMl", "outPath");
+	utility::string_t paramPassword = utils->getTestValue("savePortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("savePortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("savePortionAsMathMl", "storage");
+	utils->initialize("savePortionAsMathMl", "");
+	api->savePortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramOutPath, paramPassword, paramFolder, paramStorage).wait();
+}
+
+TEST_F(SlidesApiTest, savePortionAsMathMlInvalidName) {
+	utility::string_t paramName = utils->getTestValue("savePortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("savePortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("savePortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("savePortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("savePortionAsMathMl", "portionIndex");
+	utility::string_t paramOutPath = utils->getTestValue("savePortionAsMathMl", "outPath");
+	utility::string_t paramPassword = utils->getTestValue("savePortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("savePortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("savePortionAsMathMl", "storage");
+	paramName = utils->getInvalidTestValue("savePortionAsMathMl", "name", paramName);
+	utils->initialize("savePortionAsMathMl", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->savePortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramOutPath, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("savePortionAsMathMl", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, savePortionAsMathMlInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("savePortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("savePortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("savePortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("savePortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("savePortionAsMathMl", "portionIndex");
+	utility::string_t paramOutPath = utils->getTestValue("savePortionAsMathMl", "outPath");
+	utility::string_t paramPassword = utils->getTestValue("savePortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("savePortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("savePortionAsMathMl", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("savePortionAsMathMl", "slideIndex", paramSlideIndex).value();
+	utils->initialize("savePortionAsMathMl", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->savePortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramOutPath, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("savePortionAsMathMl", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, savePortionAsMathMlInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("savePortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("savePortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("savePortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("savePortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("savePortionAsMathMl", "portionIndex");
+	utility::string_t paramOutPath = utils->getTestValue("savePortionAsMathMl", "outPath");
+	utility::string_t paramPassword = utils->getTestValue("savePortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("savePortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("savePortionAsMathMl", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("savePortionAsMathMl", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("savePortionAsMathMl", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->savePortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramOutPath, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("savePortionAsMathMl", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, savePortionAsMathMlInvalidParagraphIndex) {
+	utility::string_t paramName = utils->getTestValue("savePortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("savePortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("savePortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("savePortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("savePortionAsMathMl", "portionIndex");
+	utility::string_t paramOutPath = utils->getTestValue("savePortionAsMathMl", "outPath");
+	utility::string_t paramPassword = utils->getTestValue("savePortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("savePortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("savePortionAsMathMl", "storage");
+	paramParagraphIndex = utils->getInvalidIntTestValue("savePortionAsMathMl", "paragraphIndex", paramParagraphIndex).value();
+	utils->initialize("savePortionAsMathMl", "paragraphIndex", paramParagraphIndex);
+
+	bool failed = true;
+	try
+	{
+		api->savePortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramOutPath, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "paragraphIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "paragraphIndex", paramParagraphIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "paragraphIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "paragraphIndex", paramParagraphIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("savePortionAsMathMl", "paragraphIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, savePortionAsMathMlInvalidPortionIndex) {
+	utility::string_t paramName = utils->getTestValue("savePortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("savePortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("savePortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("savePortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("savePortionAsMathMl", "portionIndex");
+	utility::string_t paramOutPath = utils->getTestValue("savePortionAsMathMl", "outPath");
+	utility::string_t paramPassword = utils->getTestValue("savePortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("savePortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("savePortionAsMathMl", "storage");
+	paramPortionIndex = utils->getInvalidIntTestValue("savePortionAsMathMl", "portionIndex", paramPortionIndex).value();
+	utils->initialize("savePortionAsMathMl", "portionIndex", paramPortionIndex);
+
+	bool failed = true;
+	try
+	{
+		api->savePortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramOutPath, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "portionIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "portionIndex", paramPortionIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "portionIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "portionIndex", paramPortionIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("savePortionAsMathMl", "portionIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, savePortionAsMathMlInvalidOutPath) {
+	utility::string_t paramName = utils->getTestValue("savePortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("savePortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("savePortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("savePortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("savePortionAsMathMl", "portionIndex");
+	utility::string_t paramOutPath = utils->getTestValue("savePortionAsMathMl", "outPath");
+	utility::string_t paramPassword = utils->getTestValue("savePortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("savePortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("savePortionAsMathMl", "storage");
+	paramOutPath = utils->getInvalidTestValue("savePortionAsMathMl", "outPath", paramOutPath);
+	utils->initialize("savePortionAsMathMl", "outPath", paramOutPath);
+
+	bool failed = true;
+	try
+	{
+		api->savePortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramOutPath, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "outPath");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "outPath", paramOutPath);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "outPath");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "outPath", paramOutPath);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("savePortionAsMathMl", "outPath"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, savePortionAsMathMlInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("savePortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("savePortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("savePortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("savePortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("savePortionAsMathMl", "portionIndex");
+	utility::string_t paramOutPath = utils->getTestValue("savePortionAsMathMl", "outPath");
+	utility::string_t paramPassword = utils->getTestValue("savePortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("savePortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("savePortionAsMathMl", "storage");
+	paramPassword = utils->getInvalidTestValue("savePortionAsMathMl", "password", paramPassword);
+	utils->initialize("savePortionAsMathMl", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->savePortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramOutPath, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("savePortionAsMathMl", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, savePortionAsMathMlInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("savePortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("savePortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("savePortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("savePortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("savePortionAsMathMl", "portionIndex");
+	utility::string_t paramOutPath = utils->getTestValue("savePortionAsMathMl", "outPath");
+	utility::string_t paramPassword = utils->getTestValue("savePortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("savePortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("savePortionAsMathMl", "storage");
+	paramFolder = utils->getInvalidTestValue("savePortionAsMathMl", "folder", paramFolder);
+	utils->initialize("savePortionAsMathMl", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->savePortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramOutPath, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("savePortionAsMathMl", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, savePortionAsMathMlInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("savePortionAsMathMl", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("savePortionAsMathMl", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("savePortionAsMathMl", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("savePortionAsMathMl", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("savePortionAsMathMl", "portionIndex");
+	utility::string_t paramOutPath = utils->getTestValue("savePortionAsMathMl", "outPath");
+	utility::string_t paramPassword = utils->getTestValue("savePortionAsMathMl", "password");
+	utility::string_t paramFolder = utils->getTestValue("savePortionAsMathMl", "folder");
+	utility::string_t paramStorage = utils->getTestValue("savePortionAsMathMl", "storage");
+	paramStorage = utils->getInvalidTestValue("savePortionAsMathMl", "storage", paramStorage);
+	utils->initialize("savePortionAsMathMl", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->savePortionAsMathMl(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramOutPath, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("savePortionAsMathMl", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("savePortionAsMathMl", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("savePortionAsMathMl", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, savePresentation) {
 	utility::string_t paramName = utils->getTestValue("savePresentation", "name");
 	utility::string_t paramFormat = utils->getTestValue("savePresentation", "format");
@@ -62578,6 +64015,313 @@ TEST_F(SlidesApiTest, setSectionsInvalidStorage) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("setSections", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setShapeGeometryPath) {
+	utility::string_t paramName = utils->getTestValue("setShapeGeometryPath", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setShapeGeometryPath", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setShapeGeometryPath", "shapeIndex");
+	std::shared_ptr<GeometryPaths> paramDto = utils->getTestValueForClass<GeometryPaths>("setShapeGeometryPath", "dto");
+	utility::string_t paramPassword = utils->getTestValue("setShapeGeometryPath", "password");
+	utility::string_t paramFolder = utils->getTestValue("setShapeGeometryPath", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setShapeGeometryPath", "storage");
+	utils->initialize("setShapeGeometryPath", "");
+	std::shared_ptr<ShapeBase> result = api->setShapeGeometryPath(paramName, paramSlideIndex, paramShapeIndex, paramDto, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, setShapeGeometryPathInvalidName) {
+	utility::string_t paramName = utils->getTestValue("setShapeGeometryPath", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setShapeGeometryPath", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setShapeGeometryPath", "shapeIndex");
+	std::shared_ptr<GeometryPaths> paramDto = utils->getTestValueForClass<GeometryPaths>("setShapeGeometryPath", "dto");
+	utility::string_t paramPassword = utils->getTestValue("setShapeGeometryPath", "password");
+	utility::string_t paramFolder = utils->getTestValue("setShapeGeometryPath", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setShapeGeometryPath", "storage");
+	paramName = utils->getInvalidTestValue("setShapeGeometryPath", "name", paramName);
+	utils->initialize("setShapeGeometryPath", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->setShapeGeometryPath(paramName, paramSlideIndex, paramShapeIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setShapeGeometryPath", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setShapeGeometryPath", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setShapeGeometryPath", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setShapeGeometryPath", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setShapeGeometryPath", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setShapeGeometryPathInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("setShapeGeometryPath", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setShapeGeometryPath", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setShapeGeometryPath", "shapeIndex");
+	std::shared_ptr<GeometryPaths> paramDto = utils->getTestValueForClass<GeometryPaths>("setShapeGeometryPath", "dto");
+	utility::string_t paramPassword = utils->getTestValue("setShapeGeometryPath", "password");
+	utility::string_t paramFolder = utils->getTestValue("setShapeGeometryPath", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setShapeGeometryPath", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("setShapeGeometryPath", "slideIndex", paramSlideIndex).value();
+	utils->initialize("setShapeGeometryPath", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->setShapeGeometryPath(paramName, paramSlideIndex, paramShapeIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setShapeGeometryPath", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setShapeGeometryPath", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setShapeGeometryPath", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setShapeGeometryPath", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setShapeGeometryPath", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setShapeGeometryPathInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("setShapeGeometryPath", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setShapeGeometryPath", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setShapeGeometryPath", "shapeIndex");
+	std::shared_ptr<GeometryPaths> paramDto = utils->getTestValueForClass<GeometryPaths>("setShapeGeometryPath", "dto");
+	utility::string_t paramPassword = utils->getTestValue("setShapeGeometryPath", "password");
+	utility::string_t paramFolder = utils->getTestValue("setShapeGeometryPath", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setShapeGeometryPath", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("setShapeGeometryPath", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("setShapeGeometryPath", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->setShapeGeometryPath(paramName, paramSlideIndex, paramShapeIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setShapeGeometryPath", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setShapeGeometryPath", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setShapeGeometryPath", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setShapeGeometryPath", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setShapeGeometryPath", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setShapeGeometryPathInvalidDto) {
+	utility::string_t paramName = utils->getTestValue("setShapeGeometryPath", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setShapeGeometryPath", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setShapeGeometryPath", "shapeIndex");
+	std::shared_ptr<GeometryPaths> paramDto = utils->getTestValueForClass<GeometryPaths>("setShapeGeometryPath", "dto");
+	utility::string_t paramPassword = utils->getTestValue("setShapeGeometryPath", "password");
+	utility::string_t paramFolder = utils->getTestValue("setShapeGeometryPath", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setShapeGeometryPath", "storage");
+	paramDto = utils->getInvalidTestValueForClass<>("setShapeGeometryPath", "dto", paramDto);
+	utils->initialize("setShapeGeometryPath", "dto", paramDto);
+
+	bool failed = true;
+	try
+	{
+		api->setShapeGeometryPath(paramName, paramSlideIndex, paramShapeIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setShapeGeometryPath", "dto");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setShapeGeometryPath", "dto", paramDto);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setShapeGeometryPath", "dto");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setShapeGeometryPath", "dto", paramDto);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setShapeGeometryPath", "dto"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setShapeGeometryPathInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("setShapeGeometryPath", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setShapeGeometryPath", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setShapeGeometryPath", "shapeIndex");
+	std::shared_ptr<GeometryPaths> paramDto = utils->getTestValueForClass<GeometryPaths>("setShapeGeometryPath", "dto");
+	utility::string_t paramPassword = utils->getTestValue("setShapeGeometryPath", "password");
+	utility::string_t paramFolder = utils->getTestValue("setShapeGeometryPath", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setShapeGeometryPath", "storage");
+	paramPassword = utils->getInvalidTestValue("setShapeGeometryPath", "password", paramPassword);
+	utils->initialize("setShapeGeometryPath", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->setShapeGeometryPath(paramName, paramSlideIndex, paramShapeIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setShapeGeometryPath", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setShapeGeometryPath", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setShapeGeometryPath", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setShapeGeometryPath", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setShapeGeometryPath", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setShapeGeometryPathInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("setShapeGeometryPath", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setShapeGeometryPath", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setShapeGeometryPath", "shapeIndex");
+	std::shared_ptr<GeometryPaths> paramDto = utils->getTestValueForClass<GeometryPaths>("setShapeGeometryPath", "dto");
+	utility::string_t paramPassword = utils->getTestValue("setShapeGeometryPath", "password");
+	utility::string_t paramFolder = utils->getTestValue("setShapeGeometryPath", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setShapeGeometryPath", "storage");
+	paramFolder = utils->getInvalidTestValue("setShapeGeometryPath", "folder", paramFolder);
+	utils->initialize("setShapeGeometryPath", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->setShapeGeometryPath(paramName, paramSlideIndex, paramShapeIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setShapeGeometryPath", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setShapeGeometryPath", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setShapeGeometryPath", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setShapeGeometryPath", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setShapeGeometryPath", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setShapeGeometryPathInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("setShapeGeometryPath", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setShapeGeometryPath", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setShapeGeometryPath", "shapeIndex");
+	std::shared_ptr<GeometryPaths> paramDto = utils->getTestValueForClass<GeometryPaths>("setShapeGeometryPath", "dto");
+	utility::string_t paramPassword = utils->getTestValue("setShapeGeometryPath", "password");
+	utility::string_t paramFolder = utils->getTestValue("setShapeGeometryPath", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setShapeGeometryPath", "storage");
+	paramStorage = utils->getInvalidTestValue("setShapeGeometryPath", "storage", paramStorage);
+	utils->initialize("setShapeGeometryPath", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->setShapeGeometryPath(paramName, paramSlideIndex, paramShapeIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setShapeGeometryPath", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setShapeGeometryPath", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setShapeGeometryPath", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setShapeGeometryPath", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setShapeGeometryPath", "storage"))
 	{
 		FAIL() << "Must have failed";
 	}

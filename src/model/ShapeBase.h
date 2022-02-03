@@ -34,6 +34,7 @@
 
 #include "ResourceBase.h"
 
+#include "../model/Hyperlink.h"
 #include "../model/EffectFormat.h"
 #include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"
@@ -139,6 +140,16 @@ public:
 	ASPOSE_DLL_EXPORT std::shared_ptr<LineFormat> getLineFormat() const;
 	ASPOSE_DLL_EXPORT void setLineFormat(std::shared_ptr<LineFormat> value);
 	/// <summary>
+	/// Hyperlink defined for mouse click.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<Hyperlink> getHyperlinkClick() const;
+	ASPOSE_DLL_EXPORT void setHyperlinkClick(std::shared_ptr<Hyperlink> value);
+	/// <summary>
+	/// Hyperlink defined for mouse over.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<Hyperlink> getHyperlinkMouseOver() const;
+	ASPOSE_DLL_EXPORT void setHyperlinkMouseOver(std::shared_ptr<Hyperlink> value);
+	/// <summary>
 	/// 
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getType() const;
@@ -164,6 +175,8 @@ protected:
 	std::shared_ptr<EffectFormat> m_EffectFormat;
 	std::shared_ptr<ThreeDFormat> m_ThreeDFormat;
 	std::shared_ptr<LineFormat> m_LineFormat;
+	std::shared_ptr<Hyperlink> m_HyperlinkClick;
+	std::shared_ptr<Hyperlink> m_HyperlinkMouseOver;
 	utility::string_t m_Type;
 };
 

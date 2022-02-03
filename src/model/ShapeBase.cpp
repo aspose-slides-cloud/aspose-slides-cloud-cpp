@@ -247,6 +247,28 @@ void ShapeBase::setLineFormat(std::shared_ptr<LineFormat> value)
 	
 }
 
+std::shared_ptr<Hyperlink> ShapeBase::getHyperlinkClick() const
+{
+	return m_HyperlinkClick;
+}
+
+void ShapeBase::setHyperlinkClick(std::shared_ptr<Hyperlink> value)
+{
+	m_HyperlinkClick = value;
+	
+}
+
+std::shared_ptr<Hyperlink> ShapeBase::getHyperlinkMouseOver() const
+{
+	return m_HyperlinkMouseOver;
+}
+
+void ShapeBase::setHyperlinkMouseOver(std::shared_ptr<Hyperlink> value)
+{
+	m_HyperlinkMouseOver = value;
+	
+}
+
 utility::string_t ShapeBase::getType() const
 {
 	return m_Type;
@@ -313,6 +335,14 @@ web::json::value ShapeBase::toJson() const
 	if (m_LineFormat != nullptr)
 	{
 		val[utility::conversions::to_string_t("LineFormat")] = ModelBase::toJson(m_LineFormat);
+	}
+	if (m_HyperlinkClick != nullptr)
+	{
+		val[utility::conversions::to_string_t("HyperlinkClick")] = ModelBase::toJson(m_HyperlinkClick);
+	}
+	if (m_HyperlinkMouseOver != nullptr)
+	{
+		val[utility::conversions::to_string_t("HyperlinkMouseOver")] = ModelBase::toJson(m_HyperlinkMouseOver);
 	}
 	if (!m_Type.empty())
 	{
@@ -403,6 +433,20 @@ void ShapeBase::fromJson(web::json::value& val)
 		std::shared_ptr<LineFormat> newItem(new LineFormat());
 		newItem->fromJson(*jsonForLineFormat);
 		setLineFormat(newItem);
+	}
+	web::json::value* jsonForHyperlinkClick = ModelBase::getField(val, "HyperlinkClick");
+	if(jsonForHyperlinkClick != nullptr && !jsonForHyperlinkClick->is_null())
+	{
+		std::shared_ptr<Hyperlink> newItem(new Hyperlink());
+		newItem->fromJson(*jsonForHyperlinkClick);
+		setHyperlinkClick(newItem);
+	}
+	web::json::value* jsonForHyperlinkMouseOver = ModelBase::getField(val, "HyperlinkMouseOver");
+	if(jsonForHyperlinkMouseOver != nullptr && !jsonForHyperlinkMouseOver->is_null())
+	{
+		std::shared_ptr<Hyperlink> newItem(new Hyperlink());
+		newItem->fromJson(*jsonForHyperlinkMouseOver);
+		setHyperlinkMouseOver(newItem);
 	}
 	web::json::value* jsonForType = ModelBase::getField(val, "Type");
 	if(jsonForType != nullptr && !jsonForType->is_null())

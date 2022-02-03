@@ -54,6 +54,17 @@ void Portion::setText(utility::string_t value)
 	
 }
 
+std::shared_ptr<MathParagraph> Portion::getMathParagraph() const
+{
+	return m_MathParagraph;
+}
+
+void Portion::setMathParagraph(std::shared_ptr<MathParagraph> value)
+{
+	m_MathParagraph = value;
+	
+}
+
 utility::string_t Portion::getFontBold() const
 {
 	return m_FontBold;
@@ -368,12 +379,38 @@ void Portion::setUnderlineLineFormat(std::shared_ptr<LineFormat> value)
 	
 }
 
+std::shared_ptr<Hyperlink> Portion::getHyperlinkClick() const
+{
+	return m_HyperlinkClick;
+}
+
+void Portion::setHyperlinkClick(std::shared_ptr<Hyperlink> value)
+{
+	m_HyperlinkClick = value;
+	
+}
+
+std::shared_ptr<Hyperlink> Portion::getHyperlinkMouseOver() const
+{
+	return m_HyperlinkMouseOver;
+}
+
+void Portion::setHyperlinkMouseOver(std::shared_ptr<Hyperlink> value)
+{
+	m_HyperlinkMouseOver = value;
+	
+}
+
 web::json::value Portion::toJson() const
 {
 	web::json::value val = this->ResourceBase::toJson();
 	if (!m_Text.empty())
 	{
 		val[utility::conversions::to_string_t("Text")] = ModelBase::toJson(m_Text);
+	}
+	if (m_MathParagraph != nullptr)
+	{
+		val[utility::conversions::to_string_t("MathParagraph")] = ModelBase::toJson(m_MathParagraph);
 	}
 	if (!m_FontBold.empty())
 	{
@@ -471,6 +508,14 @@ web::json::value Portion::toJson() const
 	{
 		val[utility::conversions::to_string_t("UnderlineLineFormat")] = ModelBase::toJson(m_UnderlineLineFormat);
 	}
+	if (m_HyperlinkClick != nullptr)
+	{
+		val[utility::conversions::to_string_t("HyperlinkClick")] = ModelBase::toJson(m_HyperlinkClick);
+	}
+	if (m_HyperlinkMouseOver != nullptr)
+	{
+		val[utility::conversions::to_string_t("HyperlinkMouseOver")] = ModelBase::toJson(m_HyperlinkMouseOver);
+	}
 	return val;
 }
 
@@ -481,6 +526,13 @@ void Portion::fromJson(web::json::value& val)
 	if(jsonForText != nullptr && !jsonForText->is_null())
 	{
 		setText(ModelBase::stringFromJson(*jsonForText));
+	}
+	web::json::value* jsonForMathParagraph = ModelBase::getField(val, "MathParagraph");
+	if(jsonForMathParagraph != nullptr && !jsonForMathParagraph->is_null())
+	{
+		std::shared_ptr<MathParagraph> newItem(new MathParagraph());
+		newItem->fromJson(*jsonForMathParagraph);
+		setMathParagraph(newItem);
 	}
 	web::json::value* jsonForFontBold = ModelBase::getField(val, "FontBold");
 	if(jsonForFontBold != nullptr && !jsonForFontBold->is_null())
@@ -611,6 +663,20 @@ void Portion::fromJson(web::json::value& val)
 		std::shared_ptr<LineFormat> newItem(new LineFormat());
 		newItem->fromJson(*jsonForUnderlineLineFormat);
 		setUnderlineLineFormat(newItem);
+	}
+	web::json::value* jsonForHyperlinkClick = ModelBase::getField(val, "HyperlinkClick");
+	if(jsonForHyperlinkClick != nullptr && !jsonForHyperlinkClick->is_null())
+	{
+		std::shared_ptr<Hyperlink> newItem(new Hyperlink());
+		newItem->fromJson(*jsonForHyperlinkClick);
+		setHyperlinkClick(newItem);
+	}
+	web::json::value* jsonForHyperlinkMouseOver = ModelBase::getField(val, "HyperlinkMouseOver");
+	if(jsonForHyperlinkMouseOver != nullptr && !jsonForHyperlinkMouseOver->is_null())
+	{
+		std::shared_ptr<Hyperlink> newItem(new Hyperlink());
+		newItem->fromJson(*jsonForHyperlinkMouseOver);
+		setHyperlinkMouseOver(newItem);
 	}
 }
 
