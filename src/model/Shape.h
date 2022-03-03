@@ -37,6 +37,7 @@
 #include "../model/GeometryShape.h"
 #include "../model/Hyperlink.h"
 #include "../model/EffectFormat.h"
+#include "../model/TextFrameFormat.h"
 #include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
@@ -69,10 +70,16 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::shared_ptr<ResourceUri> getParagraphs() const;
 	ASPOSE_DLL_EXPORT void setParagraphs(std::shared_ptr<ResourceUri> value);
+	/// <summary>
+	/// Returns TextFrame&#39;s formatting properties.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<TextFrameFormat> getTextFrameFormat() const;
+	ASPOSE_DLL_EXPORT void setTextFrameFormat(std::shared_ptr<TextFrameFormat> value);
 
 protected:
 	utility::string_t m_Text;
 	std::shared_ptr<ResourceUri> m_Paragraphs;
+	std::shared_ptr<TextFrameFormat> m_TextFrameFormat;
 };
 
 }

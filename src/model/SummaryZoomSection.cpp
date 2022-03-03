@@ -25,70 +25,67 @@
 
 
 
-#include "ScatterSeries.h"
+#include "SummaryZoomSection.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-ScatterSeries::ScatterSeries()
+SummaryZoomSection::SummaryZoomSection()
 {
 }
 
-ScatterSeries::~ScatterSeries()
+SummaryZoomSection::~SummaryZoomSection()
 {
 }
 
-std::vector<std::shared_ptr<ScatterChartDataPoint>> ScatterSeries::getDataPoints() const
+utility::string_t SummaryZoomSection::getTitle() const
 {
-	return m_DataPoints;
+	return m_Title;
 }
 
-void ScatterSeries::setDataPoints(std::vector<std::shared_ptr<ScatterChartDataPoint>> value)
+void SummaryZoomSection::setTitle(utility::string_t value)
 {
-	m_DataPoints = value;
+	m_Title = value;
 	
 }
 
-web::json::value ScatterSeries::toJson() const
+utility::string_t SummaryZoomSection::getDescription() const
 {
-	web::json::value val = this->XYSeries::toJson();
+	return m_Description;
+}
+
+void SummaryZoomSection::setDescription(utility::string_t value)
+{
+	m_Description = value;
+	
+}
+
+web::json::value SummaryZoomSection::toJson() const
+{
+	web::json::value val = this->SectionZoomFrame::toJson();
+	if (!m_Title.empty())
 	{
-		std::vector<web::json::value> jsonArray;
-		for (auto& item : m_DataPoints)
-		{
-			jsonArray.push_back(ModelBase::toJson(item));
-		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("DataPoints")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("Title")] = ModelBase::toJson(m_Title);
+	}
+	if (!m_Description.empty())
+	{
+		val[utility::conversions::to_string_t("Description")] = ModelBase::toJson(m_Description);
 	}
 	return val;
 }
 
-void ScatterSeries::fromJson(web::json::value& val)
+void SummaryZoomSection::fromJson(web::json::value& val)
 {
-	this->XYSeries::fromJson(val);
-	web::json::value* jsonForDataPoints = ModelBase::getField(val, "DataPoints");
-	if(jsonForDataPoints != nullptr && !jsonForDataPoints->is_null())
+	this->SectionZoomFrame::fromJson(val);
+	web::json::value* jsonForTitle = ModelBase::getField(val, "Title");
+	if(jsonForTitle != nullptr && !jsonForTitle->is_null())
 	{
-		{
-			m_DataPoints.clear();
-			std::vector<web::json::value> jsonArray;
-			for(auto& item : jsonForDataPoints->as_array())
-			{
-				if(item.is_null())
-				{
-					m_DataPoints.push_back(std::shared_ptr<ScatterChartDataPoint>(nullptr));
-				}
-				else
-				{
-					std::shared_ptr<ScatterChartDataPoint> newItem(new ScatterChartDataPoint());
-					newItem->fromJson(item);
-					m_DataPoints.push_back( newItem );
-				}
-			}
-        	}
+		setTitle(ModelBase::stringFromJson(*jsonForTitle));
+	}
+	web::json::value* jsonForDescription = ModelBase::getField(val, "Description");
+	if(jsonForDescription != nullptr && !jsonForDescription->is_null())
+	{
+		setDescription(ModelBase::stringFromJson(*jsonForDescription));
 	}
 }
 

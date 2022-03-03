@@ -25,70 +25,68 @@
 
 
 
-#include "ScatterSeries.h"
+#include "TextFrameFormat.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-ScatterSeries::ScatterSeries()
+TextFrameFormat::TextFrameFormat()
 {
 }
 
-ScatterSeries::~ScatterSeries()
+TextFrameFormat::~TextFrameFormat()
 {
 }
 
-std::vector<std::shared_ptr<ScatterChartDataPoint>> ScatterSeries::getDataPoints() const
+std::shared_ptr<ThreeDFormat> TextFrameFormat::getThreeDFormat() const
 {
-	return m_DataPoints;
+	return m_ThreeDFormat;
 }
 
-void ScatterSeries::setDataPoints(std::vector<std::shared_ptr<ScatterChartDataPoint>> value)
+void TextFrameFormat::setThreeDFormat(std::shared_ptr<ThreeDFormat> value)
 {
-	m_DataPoints = value;
+	m_ThreeDFormat = value;
 	
 }
 
-web::json::value ScatterSeries::toJson() const
+utility::string_t TextFrameFormat::getTransform() const
 {
-	web::json::value val = this->XYSeries::toJson();
+	return m_Transform;
+}
+
+void TextFrameFormat::setTransform(utility::string_t value)
+{
+	m_Transform = value;
+	
+}
+
+web::json::value TextFrameFormat::toJson() const
+{
+	web::json::value val = web::json::value::object();
+	if (m_ThreeDFormat != nullptr)
 	{
-		std::vector<web::json::value> jsonArray;
-		for (auto& item : m_DataPoints)
-		{
-			jsonArray.push_back(ModelBase::toJson(item));
-		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("DataPoints")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("ThreeDFormat")] = ModelBase::toJson(m_ThreeDFormat);
+	}
+	if (!m_Transform.empty())
+	{
+		val[utility::conversions::to_string_t("Transform")] = ModelBase::toJson(m_Transform);
 	}
 	return val;
 }
 
-void ScatterSeries::fromJson(web::json::value& val)
+void TextFrameFormat::fromJson(web::json::value& val)
 {
-	this->XYSeries::fromJson(val);
-	web::json::value* jsonForDataPoints = ModelBase::getField(val, "DataPoints");
-	if(jsonForDataPoints != nullptr && !jsonForDataPoints->is_null())
+	web::json::value* jsonForThreeDFormat = ModelBase::getField(val, "ThreeDFormat");
+	if(jsonForThreeDFormat != nullptr && !jsonForThreeDFormat->is_null())
 	{
-		{
-			m_DataPoints.clear();
-			std::vector<web::json::value> jsonArray;
-			for(auto& item : jsonForDataPoints->as_array())
-			{
-				if(item.is_null())
-				{
-					m_DataPoints.push_back(std::shared_ptr<ScatterChartDataPoint>(nullptr));
-				}
-				else
-				{
-					std::shared_ptr<ScatterChartDataPoint> newItem(new ScatterChartDataPoint());
-					newItem->fromJson(item);
-					m_DataPoints.push_back( newItem );
-				}
-			}
-        	}
+		std::shared_ptr<ThreeDFormat> newItem(new ThreeDFormat());
+		newItem->fromJson(*jsonForThreeDFormat);
+		setThreeDFormat(newItem);
+	}
+	web::json::value* jsonForTransform = ModelBase::getField(val, "Transform");
+	if(jsonForTransform != nullptr && !jsonForTransform->is_null())
+	{
+		setTransform(ModelBase::stringFromJson(*jsonForTransform));
 	}
 }
 

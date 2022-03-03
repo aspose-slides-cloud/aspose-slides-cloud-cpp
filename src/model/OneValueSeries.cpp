@@ -49,6 +49,17 @@ void OneValueSeries::setDataPoints(std::vector<std::shared_ptr<OneValueChartData
 	
 }
 
+utility::string_t OneValueSeries::getNumberFormatOfValues() const
+{
+	return m_NumberFormatOfValues;
+}
+
+void OneValueSeries::setNumberFormatOfValues(utility::string_t value)
+{
+	m_NumberFormatOfValues = value;
+	
+}
+
 web::json::value OneValueSeries::toJson() const
 {
 	web::json::value val = this->Series::toJson();
@@ -62,6 +73,10 @@ web::json::value OneValueSeries::toJson() const
 		{
 			val[utility::conversions::to_string_t("DataPoints")] = web::json::value::array(jsonArray);
 		}
+	}
+	if (!m_NumberFormatOfValues.empty())
+	{
+		val[utility::conversions::to_string_t("NumberFormatOfValues")] = ModelBase::toJson(m_NumberFormatOfValues);
 	}
 	return val;
 }
@@ -89,6 +104,11 @@ void OneValueSeries::fromJson(web::json::value& val)
 				}
 			}
         	}
+	}
+	web::json::value* jsonForNumberFormatOfValues = ModelBase::getField(val, "NumberFormatOfValues");
+	if(jsonForNumberFormatOfValues != nullptr && !jsonForNumberFormatOfValues->is_null())
+	{
+		setNumberFormatOfValues(ModelBase::stringFromJson(*jsonForNumberFormatOfValues));
 	}
 }
 

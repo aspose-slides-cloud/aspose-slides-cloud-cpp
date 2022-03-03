@@ -201,6 +201,7 @@
     <ClCompile Include="model\TableColumn.cpp" />
     <ClCompile Include="model\TableRow.cpp" />
     <ClCompile Include="model\Task.cpp" />
+    <ClCompile Include="model\TextFrameFormat.cpp" />
     <ClCompile Include="model\TextItem.cpp" />
     <ClCompile Include="model\ThreeDFormat.cpp" />
     <ClCompile Include="model\AccentElement.cpp" />
@@ -215,7 +216,6 @@
     <ClCompile Include="model\BlockElement.cpp" />
     <ClCompile Include="model\BorderBoxElement.cpp" />
     <ClCompile Include="model\BoxElement.cpp" />
-    <ClCompile Include="model\BubbleSeries.cpp" />
     <ClCompile Include="model\ClosePathSegment.cpp" />
     <ClCompile Include="model\ColorScheme.cpp" />
     <ClCompile Include="model\CubicBezierToPathSegment.cpp" />
@@ -280,7 +280,6 @@
     <ClCompile Include="model\SaveShape.cpp" />
     <ClCompile Include="model\SaveSlide.cpp" />
     <ClCompile Include="model\ScatterChartDataPoint.cpp" />
-    <ClCompile Include="model\ScatterSeries.cpp" />
     <ClCompile Include="model\Section.cpp" />
     <ClCompile Include="model\Sections.cpp" />
     <ClCompile Include="model\ShapeBase.cpp" />
@@ -303,28 +302,37 @@
     <ClCompile Include="model\TiffExportOptions.cpp" />
     <ClCompile Include="model\UpdateBackground.cpp" />
     <ClCompile Include="model\UpdateShape.cpp" />
+    <ClCompile Include="model\VideoExportOptions.cpp" />
     <ClCompile Include="model\ViewProperties.cpp" />
+    <ClCompile Include="model\XYSeries.cpp" />
     <ClCompile Include="model\XamlExportOptions.cpp" />
     <ClCompile Include="model\XpsExportOptions.cpp" />
     <ClCompile Include="model\BoxAndWhiskerSeries.cpp" />
     <ClCompile Include="model\BubbleChartDataPoint.cpp" />
+    <ClCompile Include="model\BubbleSeries.cpp" />
     <ClCompile Include="model\Chart.cpp" />
     <ClCompile Include="model\DocumentReplaceResult.cpp" />
     <ClCompile Include="model\GeometryShape.cpp" />
     <ClCompile Include="model\GraphicalObject.cpp" />
     <ClCompile Include="model\GroupShape.cpp" />
     <ClCompile Include="model\OleObjectFrame.cpp" />
+    <ClCompile Include="model\ScatterSeries.cpp" />
     <ClCompile Include="model\SlideReplaceResult.cpp" />
     <ClCompile Include="model\SmartArt.cpp" />
+    <ClCompile Include="model\SummaryZoomFrame.cpp" />
     <ClCompile Include="model\Table.cpp" />
     <ClCompile Include="model\WaterfallChartDataPoint.cpp" />
     <ClCompile Include="model\WaterfallSeries.cpp" />
+    <ClCompile Include="model\ZoomObject.cpp" />
     <ClCompile Include="model\AudioFrame.cpp" />
     <ClCompile Include="model\Connector.cpp" />
     <ClCompile Include="model\PictureFrame.cpp" />
+    <ClCompile Include="model\SectionZoomFrame.cpp" />
     <ClCompile Include="model\Shape.cpp" />
     <ClCompile Include="model\SmartArtShape.cpp" />
     <ClCompile Include="model\VideoFrame.cpp" />
+    <ClCompile Include="model\ZoomFrame.cpp" />
+    <ClCompile Include="model\SummaryZoomSection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="defines.h" />
@@ -414,6 +422,7 @@
     <ClInclude Include="model\TableColumn.h" />
     <ClInclude Include="model\TableRow.h" />
     <ClInclude Include="model\Task.h" />
+    <ClInclude Include="model\TextFrameFormat.h" />
     <ClInclude Include="model\TextItem.h" />
     <ClInclude Include="model\ThreeDFormat.h" />
     <ClInclude Include="model\AccentElement.h" />
@@ -428,7 +437,6 @@
     <ClInclude Include="model\BlockElement.h" />
     <ClInclude Include="model\BorderBoxElement.h" />
     <ClInclude Include="model\BoxElement.h" />
-    <ClInclude Include="model\BubbleSeries.h" />
     <ClInclude Include="model\ClosePathSegment.h" />
     <ClInclude Include="model\ColorScheme.h" />
     <ClInclude Include="model\CubicBezierToPathSegment.h" />
@@ -493,7 +501,6 @@
     <ClInclude Include="model\SaveShape.h" />
     <ClInclude Include="model\SaveSlide.h" />
     <ClInclude Include="model\ScatterChartDataPoint.h" />
-    <ClInclude Include="model\ScatterSeries.h" />
     <ClInclude Include="model\Section.h" />
     <ClInclude Include="model\Sections.h" />
     <ClInclude Include="model\ShapeBase.h" />
@@ -516,28 +523,37 @@
     <ClInclude Include="model\TiffExportOptions.h" />
     <ClInclude Include="model\UpdateBackground.h" />
     <ClInclude Include="model\UpdateShape.h" />
+    <ClInclude Include="model\VideoExportOptions.h" />
     <ClInclude Include="model\ViewProperties.h" />
+    <ClInclude Include="model\XYSeries.h" />
     <ClInclude Include="model\XamlExportOptions.h" />
     <ClInclude Include="model\XpsExportOptions.h" />
     <ClInclude Include="model\BoxAndWhiskerSeries.h" />
     <ClInclude Include="model\BubbleChartDataPoint.h" />
+    <ClInclude Include="model\BubbleSeries.h" />
     <ClInclude Include="model\Chart.h" />
     <ClInclude Include="model\DocumentReplaceResult.h" />
     <ClInclude Include="model\GeometryShape.h" />
     <ClInclude Include="model\GraphicalObject.h" />
     <ClInclude Include="model\GroupShape.h" />
     <ClInclude Include="model\OleObjectFrame.h" />
+    <ClInclude Include="model\ScatterSeries.h" />
     <ClInclude Include="model\SlideReplaceResult.h" />
     <ClInclude Include="model\SmartArt.h" />
+    <ClInclude Include="model\SummaryZoomFrame.h" />
     <ClInclude Include="model\Table.h" />
     <ClInclude Include="model\WaterfallChartDataPoint.h" />
     <ClInclude Include="model\WaterfallSeries.h" />
+    <ClInclude Include="model\ZoomObject.h" />
     <ClInclude Include="model\AudioFrame.h" />
     <ClInclude Include="model\Connector.h" />
     <ClInclude Include="model\PictureFrame.h" />
+    <ClInclude Include="model\SectionZoomFrame.h" />
     <ClInclude Include="model\Shape.h" />
     <ClInclude Include="model\SmartArtShape.h" />
     <ClInclude Include="model\VideoFrame.h" />
+    <ClInclude Include="model\ZoomFrame.h" />
+    <ClInclude Include="model\SummaryZoomSection.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -25,70 +25,58 @@
 
 
 
-#include "ScatterSeries.h"
+#include "ZoomFrame.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-ScatterSeries::ScatterSeries()
+ZoomFrame::ZoomFrame()
+{
+	m_TargetSlideIndexIsSet = false;
+}
+
+ZoomFrame::~ZoomFrame()
 {
 }
 
-ScatterSeries::~ScatterSeries()
+int32_t ZoomFrame::getTargetSlideIndex() const
 {
+	return m_TargetSlideIndex;
 }
 
-std::vector<std::shared_ptr<ScatterChartDataPoint>> ScatterSeries::getDataPoints() const
+void ZoomFrame::setTargetSlideIndex(int32_t value)
 {
-	return m_DataPoints;
+	m_TargetSlideIndex = value;
+	m_TargetSlideIndexIsSet = true;
 }
 
-void ScatterSeries::setDataPoints(std::vector<std::shared_ptr<ScatterChartDataPoint>> value)
+bool ZoomFrame::targetSlideIndexIsSet() const
 {
-	m_DataPoints = value;
-	
+	return m_TargetSlideIndexIsSet;
 }
 
-web::json::value ScatterSeries::toJson() const
+void ZoomFrame::unsetTargetSlideIndex()
 {
-	web::json::value val = this->XYSeries::toJson();
+	m_TargetSlideIndexIsSet = false;
+}
+
+web::json::value ZoomFrame::toJson() const
+{
+	web::json::value val = this->ZoomObject::toJson();
+	if(m_TargetSlideIndexIsSet)
 	{
-		std::vector<web::json::value> jsonArray;
-		for (auto& item : m_DataPoints)
-		{
-			jsonArray.push_back(ModelBase::toJson(item));
-		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("DataPoints")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("TargetSlideIndex")] = ModelBase::toJson(m_TargetSlideIndex);
 	}
 	return val;
 }
 
-void ScatterSeries::fromJson(web::json::value& val)
+void ZoomFrame::fromJson(web::json::value& val)
 {
-	this->XYSeries::fromJson(val);
-	web::json::value* jsonForDataPoints = ModelBase::getField(val, "DataPoints");
-	if(jsonForDataPoints != nullptr && !jsonForDataPoints->is_null())
+	this->ZoomObject::fromJson(val);
+	web::json::value* jsonForTargetSlideIndex = ModelBase::getField(val, "TargetSlideIndex");
+	if(jsonForTargetSlideIndex != nullptr && !jsonForTargetSlideIndex->is_null() && jsonForTargetSlideIndex->is_number())
 	{
-		{
-			m_DataPoints.clear();
-			std::vector<web::json::value> jsonArray;
-			for(auto& item : jsonForDataPoints->as_array())
-			{
-				if(item.is_null())
-				{
-					m_DataPoints.push_back(std::shared_ptr<ScatterChartDataPoint>(nullptr));
-				}
-				else
-				{
-					std::shared_ptr<ScatterChartDataPoint> newItem(new ScatterChartDataPoint());
-					newItem->fromJson(item);
-					m_DataPoints.push_back( newItem );
-				}
-			}
-        	}
+		setTargetSlideIndex(ModelBase::int32_tFromJson(*jsonForTargetSlideIndex));
 	}
 }
 

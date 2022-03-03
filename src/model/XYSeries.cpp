@@ -25,70 +25,67 @@
 
 
 
-#include "ScatterSeries.h"
+#include "XYSeries.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-ScatterSeries::ScatterSeries()
+XYSeries::XYSeries()
 {
 }
 
-ScatterSeries::~ScatterSeries()
+XYSeries::~XYSeries()
 {
 }
 
-std::vector<std::shared_ptr<ScatterChartDataPoint>> ScatterSeries::getDataPoints() const
+utility::string_t XYSeries::getNumberFormatOfYValues() const
 {
-	return m_DataPoints;
+	return m_NumberFormatOfYValues;
 }
 
-void ScatterSeries::setDataPoints(std::vector<std::shared_ptr<ScatterChartDataPoint>> value)
+void XYSeries::setNumberFormatOfYValues(utility::string_t value)
 {
-	m_DataPoints = value;
+	m_NumberFormatOfYValues = value;
 	
 }
 
-web::json::value ScatterSeries::toJson() const
+utility::string_t XYSeries::getNumberFormatOfXValues() const
 {
-	web::json::value val = this->XYSeries::toJson();
+	return m_NumberFormatOfXValues;
+}
+
+void XYSeries::setNumberFormatOfXValues(utility::string_t value)
+{
+	m_NumberFormatOfXValues = value;
+	
+}
+
+web::json::value XYSeries::toJson() const
+{
+	web::json::value val = this->Series::toJson();
+	if (!m_NumberFormatOfYValues.empty())
 	{
-		std::vector<web::json::value> jsonArray;
-		for (auto& item : m_DataPoints)
-		{
-			jsonArray.push_back(ModelBase::toJson(item));
-		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("DataPoints")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("NumberFormatOfYValues")] = ModelBase::toJson(m_NumberFormatOfYValues);
+	}
+	if (!m_NumberFormatOfXValues.empty())
+	{
+		val[utility::conversions::to_string_t("NumberFormatOfXValues")] = ModelBase::toJson(m_NumberFormatOfXValues);
 	}
 	return val;
 }
 
-void ScatterSeries::fromJson(web::json::value& val)
+void XYSeries::fromJson(web::json::value& val)
 {
-	this->XYSeries::fromJson(val);
-	web::json::value* jsonForDataPoints = ModelBase::getField(val, "DataPoints");
-	if(jsonForDataPoints != nullptr && !jsonForDataPoints->is_null())
+	this->Series::fromJson(val);
+	web::json::value* jsonForNumberFormatOfYValues = ModelBase::getField(val, "NumberFormatOfYValues");
+	if(jsonForNumberFormatOfYValues != nullptr && !jsonForNumberFormatOfYValues->is_null())
 	{
-		{
-			m_DataPoints.clear();
-			std::vector<web::json::value> jsonArray;
-			for(auto& item : jsonForDataPoints->as_array())
-			{
-				if(item.is_null())
-				{
-					m_DataPoints.push_back(std::shared_ptr<ScatterChartDataPoint>(nullptr));
-				}
-				else
-				{
-					std::shared_ptr<ScatterChartDataPoint> newItem(new ScatterChartDataPoint());
-					newItem->fromJson(item);
-					m_DataPoints.push_back( newItem );
-				}
-			}
-        	}
+		setNumberFormatOfYValues(ModelBase::stringFromJson(*jsonForNumberFormatOfYValues));
+	}
+	web::json::value* jsonForNumberFormatOfXValues = ModelBase::getField(val, "NumberFormatOfXValues");
+	if(jsonForNumberFormatOfXValues != nullptr && !jsonForNumberFormatOfXValues->is_null())
+	{
+		setNumberFormatOfXValues(ModelBase::stringFromJson(*jsonForNumberFormatOfXValues));
 	}
 }
 

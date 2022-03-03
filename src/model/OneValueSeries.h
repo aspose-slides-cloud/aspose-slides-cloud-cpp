@@ -63,9 +63,15 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<OneValueChartDataPoint>> getDataPoints() const;
 	ASPOSE_DLL_EXPORT void setDataPoints(std::vector<std::shared_ptr<OneValueChartDataPoint>> value);
+	/// <summary>
+	/// The number format for the series values.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getNumberFormatOfValues() const;
+	ASPOSE_DLL_EXPORT void setNumberFormatOfValues(utility::string_t value);
 
 protected:
 	std::vector<std::shared_ptr<OneValueChartDataPoint>> m_DataPoints;
+	utility::string_t m_NumberFormatOfValues;
 };
 
 }

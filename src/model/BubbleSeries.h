@@ -32,7 +32,7 @@
 #ifndef _BubbleSeries_H_
 #define _BubbleSeries_H_
 
-#include "Series.h"
+#include "XYSeries.h"
 
 #include "../model/EffectFormat.h"
 #include "../model/SeriesMarker.h"
@@ -40,8 +40,8 @@
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
 #include <vector>
-#include "../model/Series.h"
 #include "../model/BubbleChartDataPoint.h"
+#include "../model/XYSeries.h"
 
 namespace asposeslidescloud {
 namespace model {
@@ -49,7 +49,7 @@ namespace model {
 /// <summary>
 /// A bubble series.
 /// </summary>
-class  BubbleSeries : public Series
+class  BubbleSeries : public XYSeries
 {
 public:
 	ASPOSE_DLL_EXPORT BubbleSeries();
@@ -63,9 +63,15 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<BubbleChartDataPoint>> getDataPoints() const;
 	ASPOSE_DLL_EXPORT void setDataPoints(std::vector<std::shared_ptr<BubbleChartDataPoint>> value);
+	/// <summary>
+	/// The number format for the series bubble sizes.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getNumberFormatOfBubbleSizes() const;
+	ASPOSE_DLL_EXPORT void setNumberFormatOfBubbleSizes(utility::string_t value);
 
 protected:
 	std::vector<std::shared_ptr<BubbleChartDataPoint>> m_DataPoints;
+	utility::string_t m_NumberFormatOfBubbleSizes;
 };
 
 }

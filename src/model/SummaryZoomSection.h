@@ -23,75 +23,59 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+/*
+ * SummaryZoomSection.h
+ *
+ * Represents summary zoom section
+ */
 
+#ifndef _SummaryZoomSection_H_
+#define _SummaryZoomSection_H_
 
-#include "ScatterSeries.h"
+#include "SectionZoomFrame.h"
+
+#include "../model/SectionZoomFrame.h"
+#include "../model/Hyperlink.h"
+#include "../model/EffectFormat.h"
+#include <cpprest/details/basic_types.h>
+#include "../model/FillFormat.h"
+#include "../model/LineFormat.h"
+#include "../model/ResourceUri.h"
+#include "../model/ThreeDFormat.h"
+#include <vector>
 
 namespace asposeslidescloud {
 namespace model {
 
-ScatterSeries::ScatterSeries()
+/// <summary>
+/// Represents summary zoom section
+/// </summary>
+class  SummaryZoomSection : public SectionZoomFrame
 {
-}
+public:
+	ASPOSE_DLL_EXPORT SummaryZoomSection();
+	ASPOSE_DLL_EXPORT virtual ~SummaryZoomSection();
 
-ScatterSeries::~ScatterSeries()
-{
-}
+	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
+	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
-std::vector<std::shared_ptr<ScatterChartDataPoint>> ScatterSeries::getDataPoints() const
-{
-	return m_DataPoints;
-}
+	/// <summary>
+	/// Section title
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getTitle() const;
+	ASPOSE_DLL_EXPORT void setTitle(utility::string_t value);
+	/// <summary>
+	/// Description of the Summary Zoom Section object. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getDescription() const;
+	ASPOSE_DLL_EXPORT void setDescription(utility::string_t value);
 
-void ScatterSeries::setDataPoints(std::vector<std::shared_ptr<ScatterChartDataPoint>> value)
-{
-	m_DataPoints = value;
-	
-}
-
-web::json::value ScatterSeries::toJson() const
-{
-	web::json::value val = this->XYSeries::toJson();
-	{
-		std::vector<web::json::value> jsonArray;
-		for (auto& item : m_DataPoints)
-		{
-			jsonArray.push_back(ModelBase::toJson(item));
-		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("DataPoints")] = web::json::value::array(jsonArray);
-		}
-	}
-	return val;
-}
-
-void ScatterSeries::fromJson(web::json::value& val)
-{
-	this->XYSeries::fromJson(val);
-	web::json::value* jsonForDataPoints = ModelBase::getField(val, "DataPoints");
-	if(jsonForDataPoints != nullptr && !jsonForDataPoints->is_null())
-	{
-		{
-			m_DataPoints.clear();
-			std::vector<web::json::value> jsonArray;
-			for(auto& item : jsonForDataPoints->as_array())
-			{
-				if(item.is_null())
-				{
-					m_DataPoints.push_back(std::shared_ptr<ScatterChartDataPoint>(nullptr));
-				}
-				else
-				{
-					std::shared_ptr<ScatterChartDataPoint> newItem(new ScatterChartDataPoint());
-					newItem->fromJson(item);
-					m_DataPoints.push_back( newItem );
-				}
-			}
-        	}
-	}
-}
+protected:
+	utility::string_t m_Title;
+	utility::string_t m_Description;
+};
 
 }
 }
 
+#endif /* _SummaryZoomSection_H_ */

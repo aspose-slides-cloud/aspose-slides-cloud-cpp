@@ -609,6 +609,16 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> deleteSubshapes(utility::string_t name, int32_t slideIndex, utility::string_t path, std::vector<int32_t> shapes = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
+	/// Removes unused layout slides.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<LayoutSlides>> deleteUnusedLayoutSlides(utility::string_t name, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Removes unused layout slides.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> deleteUnusedLayoutSlidesOnline(std::shared_ptr<HttpContent> document, utility::string_t password = utility::string_t());
+
+	/// <summary>
 	/// Removes shapes with name \&quot;watermark\&quot; from the presentation.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<void> deleteWatermark(utility::string_t name, utility::string_t shapeName = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
@@ -1017,6 +1027,16 @@ public:
 	/// Read presentation document properties.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ViewProperties>> getViewProperties(utility::string_t name, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Highlight all matches of sample in text frame text using specified color.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shape>> highlightShapeRegex(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t regex, utility::string_t color, boost::optional<bool> wholeWordsOnly = bool(), boost::optional<bool> ignoreCase = bool(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Highlight all matches of sample in text frame text using specified color.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shape>> highlightShapeText(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t text, utility::string_t color, boost::optional<bool> wholeWordsOnly = bool(), boost::optional<bool> ignoreCase = bool(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Create presentation document from html.

@@ -23,75 +23,56 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+/*
+ * XYSeries.h
+ *
+ * Common properties for Bubble and Scatter series. 
+ */
 
+#ifndef _XYSeries_H_
+#define _XYSeries_H_
 
-#include "ScatterSeries.h"
+#include "Series.h"
+
+#include "../model/EffectFormat.h"
+#include "../model/SeriesMarker.h"
+#include <cpprest/details/basic_types.h>
+#include "../model/FillFormat.h"
+#include "../model/LineFormat.h"
+#include "../model/Series.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-ScatterSeries::ScatterSeries()
+/// <summary>
+/// Common properties for Bubble and Scatter series. 
+/// </summary>
+class  XYSeries : public Series
 {
-}
+public:
+	ASPOSE_DLL_EXPORT XYSeries();
+	ASPOSE_DLL_EXPORT virtual ~XYSeries();
 
-ScatterSeries::~ScatterSeries()
-{
-}
+	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
+	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
-std::vector<std::shared_ptr<ScatterChartDataPoint>> ScatterSeries::getDataPoints() const
-{
-	return m_DataPoints;
-}
+	/// <summary>
+	/// The number format for the series y values.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getNumberFormatOfYValues() const;
+	ASPOSE_DLL_EXPORT void setNumberFormatOfYValues(utility::string_t value);
+	/// <summary>
+	/// The number format for the series x values.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getNumberFormatOfXValues() const;
+	ASPOSE_DLL_EXPORT void setNumberFormatOfXValues(utility::string_t value);
 
-void ScatterSeries::setDataPoints(std::vector<std::shared_ptr<ScatterChartDataPoint>> value)
-{
-	m_DataPoints = value;
-	
-}
-
-web::json::value ScatterSeries::toJson() const
-{
-	web::json::value val = this->XYSeries::toJson();
-	{
-		std::vector<web::json::value> jsonArray;
-		for (auto& item : m_DataPoints)
-		{
-			jsonArray.push_back(ModelBase::toJson(item));
-		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("DataPoints")] = web::json::value::array(jsonArray);
-		}
-	}
-	return val;
-}
-
-void ScatterSeries::fromJson(web::json::value& val)
-{
-	this->XYSeries::fromJson(val);
-	web::json::value* jsonForDataPoints = ModelBase::getField(val, "DataPoints");
-	if(jsonForDataPoints != nullptr && !jsonForDataPoints->is_null())
-	{
-		{
-			m_DataPoints.clear();
-			std::vector<web::json::value> jsonArray;
-			for(auto& item : jsonForDataPoints->as_array())
-			{
-				if(item.is_null())
-				{
-					m_DataPoints.push_back(std::shared_ptr<ScatterChartDataPoint>(nullptr));
-				}
-				else
-				{
-					std::shared_ptr<ScatterChartDataPoint> newItem(new ScatterChartDataPoint());
-					newItem->fromJson(item);
-					m_DataPoints.push_back( newItem );
-				}
-			}
-        	}
-	}
-}
+protected:
+	utility::string_t m_NumberFormatOfYValues;
+	utility::string_t m_NumberFormatOfXValues;
+};
 
 }
 }
 
+#endif /* _XYSeries_H_ */

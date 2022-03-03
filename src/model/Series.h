@@ -99,26 +99,6 @@ public:
 	ASPOSE_DLL_EXPORT bool orderIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetOrder();
 	/// <summary>
-	/// The number format for the series y values.
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getNumberFormatOfYValues() const;
-	ASPOSE_DLL_EXPORT void setNumberFormatOfYValues(utility::string_t value);
-	/// <summary>
-	/// The number format for the series x values.
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getNumberFormatOfXValues() const;
-	ASPOSE_DLL_EXPORT void setNumberFormatOfXValues(utility::string_t value);
-	/// <summary>
-	/// The number format for the series values.
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getNumberFormatOfValues() const;
-	ASPOSE_DLL_EXPORT void setNumberFormatOfValues(utility::string_t value);
-	/// <summary>
-	/// The number format for the series bubble sizes.
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getNumberFormatOfBubbleSizes() const;
-	ASPOSE_DLL_EXPORT void setNumberFormatOfBubbleSizes(utility::string_t value);
-	/// <summary>
 	/// True if the series shall invert its colors if the value is negative. Applies to bar, column and bubble series.
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getInvertIfNegative() const;
@@ -170,10 +150,6 @@ protected:
 	bool m_PlotOnSecondAxisIsSet;
 	int32_t m_Order;
 	bool m_OrderIsSet;
-	utility::string_t m_NumberFormatOfYValues;
-	utility::string_t m_NumberFormatOfXValues;
-	utility::string_t m_NumberFormatOfValues;
-	utility::string_t m_NumberFormatOfBubbleSizes;
 	bool m_InvertIfNegative;
 	bool m_InvertIfNegativeIsSet;
 	int32_t m_Explosion;

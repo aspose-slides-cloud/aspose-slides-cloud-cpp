@@ -60,6 +60,17 @@ void Shape::setParagraphs(std::shared_ptr<ResourceUri> value)
 	
 }
 
+std::shared_ptr<TextFrameFormat> Shape::getTextFrameFormat() const
+{
+	return m_TextFrameFormat;
+}
+
+void Shape::setTextFrameFormat(std::shared_ptr<TextFrameFormat> value)
+{
+	m_TextFrameFormat = value;
+	
+}
+
 web::json::value Shape::toJson() const
 {
 	web::json::value val = this->GeometryShape::toJson();
@@ -70,6 +81,10 @@ web::json::value Shape::toJson() const
 	if (m_Paragraphs != nullptr)
 	{
 		val[utility::conversions::to_string_t("Paragraphs")] = ModelBase::toJson(m_Paragraphs);
+	}
+	if (m_TextFrameFormat != nullptr)
+	{
+		val[utility::conversions::to_string_t("TextFrameFormat")] = ModelBase::toJson(m_TextFrameFormat);
 	}
 	return val;
 }
@@ -88,6 +103,13 @@ void Shape::fromJson(web::json::value& val)
 		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
 		newItem->fromJson(*jsonForParagraphs);
 		setParagraphs(newItem);
+	}
+	web::json::value* jsonForTextFrameFormat = ModelBase::getField(val, "TextFrameFormat");
+	if(jsonForTextFrameFormat != nullptr && !jsonForTextFrameFormat->is_null())
+	{
+		std::shared_ptr<TextFrameFormat> newItem(new TextFrameFormat());
+		newItem->fromJson(*jsonForTextFrameFormat);
+		setTextFrameFormat(newItem);
 	}
 }
 

@@ -161,50 +161,6 @@ void Series::unsetOrder()
 	m_OrderIsSet = false;
 }
 
-utility::string_t Series::getNumberFormatOfYValues() const
-{
-	return m_NumberFormatOfYValues;
-}
-
-void Series::setNumberFormatOfYValues(utility::string_t value)
-{
-	m_NumberFormatOfYValues = value;
-	
-}
-
-utility::string_t Series::getNumberFormatOfXValues() const
-{
-	return m_NumberFormatOfXValues;
-}
-
-void Series::setNumberFormatOfXValues(utility::string_t value)
-{
-	m_NumberFormatOfXValues = value;
-	
-}
-
-utility::string_t Series::getNumberFormatOfValues() const
-{
-	return m_NumberFormatOfValues;
-}
-
-void Series::setNumberFormatOfValues(utility::string_t value)
-{
-	m_NumberFormatOfValues = value;
-	
-}
-
-utility::string_t Series::getNumberFormatOfBubbleSizes() const
-{
-	return m_NumberFormatOfBubbleSizes;
-}
-
-void Series::setNumberFormatOfBubbleSizes(utility::string_t value)
-{
-	m_NumberFormatOfBubbleSizes = value;
-	
-}
-
 bool Series::getInvertIfNegative() const
 {
 	return m_InvertIfNegative;
@@ -333,22 +289,6 @@ web::json::value Series::toJson() const
 	{
 		val[utility::conversions::to_string_t("Order")] = ModelBase::toJson(m_Order);
 	}
-	if (!m_NumberFormatOfYValues.empty())
-	{
-		val[utility::conversions::to_string_t("NumberFormatOfYValues")] = ModelBase::toJson(m_NumberFormatOfYValues);
-	}
-	if (!m_NumberFormatOfXValues.empty())
-	{
-		val[utility::conversions::to_string_t("NumberFormatOfXValues")] = ModelBase::toJson(m_NumberFormatOfXValues);
-	}
-	if (!m_NumberFormatOfValues.empty())
-	{
-		val[utility::conversions::to_string_t("NumberFormatOfValues")] = ModelBase::toJson(m_NumberFormatOfValues);
-	}
-	if (!m_NumberFormatOfBubbleSizes.empty())
-	{
-		val[utility::conversions::to_string_t("NumberFormatOfBubbleSizes")] = ModelBase::toJson(m_NumberFormatOfBubbleSizes);
-	}
 	if(m_InvertIfNegativeIsSet)
 	{
 		val[utility::conversions::to_string_t("InvertIfNegative")] = ModelBase::toJson(m_InvertIfNegative);
@@ -416,26 +356,6 @@ void Series::fromJson(web::json::value& val)
 	if(jsonForOrder != nullptr && !jsonForOrder->is_null() && jsonForOrder->is_number())
 	{
 		setOrder(ModelBase::int32_tFromJson(*jsonForOrder));
-	}
-	web::json::value* jsonForNumberFormatOfYValues = ModelBase::getField(val, "NumberFormatOfYValues");
-	if(jsonForNumberFormatOfYValues != nullptr && !jsonForNumberFormatOfYValues->is_null())
-	{
-		setNumberFormatOfYValues(ModelBase::stringFromJson(*jsonForNumberFormatOfYValues));
-	}
-	web::json::value* jsonForNumberFormatOfXValues = ModelBase::getField(val, "NumberFormatOfXValues");
-	if(jsonForNumberFormatOfXValues != nullptr && !jsonForNumberFormatOfXValues->is_null())
-	{
-		setNumberFormatOfXValues(ModelBase::stringFromJson(*jsonForNumberFormatOfXValues));
-	}
-	web::json::value* jsonForNumberFormatOfValues = ModelBase::getField(val, "NumberFormatOfValues");
-	if(jsonForNumberFormatOfValues != nullptr && !jsonForNumberFormatOfValues->is_null())
-	{
-		setNumberFormatOfValues(ModelBase::stringFromJson(*jsonForNumberFormatOfValues));
-	}
-	web::json::value* jsonForNumberFormatOfBubbleSizes = ModelBase::getField(val, "NumberFormatOfBubbleSizes");
-	if(jsonForNumberFormatOfBubbleSizes != nullptr && !jsonForNumberFormatOfBubbleSizes->is_null())
-	{
-		setNumberFormatOfBubbleSizes(ModelBase::stringFromJson(*jsonForNumberFormatOfBubbleSizes));
 	}
 	web::json::value* jsonForInvertIfNegative = ModelBase::getField(val, "InvertIfNegative");
 	if(jsonForInvertIfNegative != nullptr && !jsonForInvertIfNegative->is_null())

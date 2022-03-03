@@ -25,70 +25,58 @@
 
 
 
-#include "ScatterSeries.h"
+#include "SectionZoomFrame.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-ScatterSeries::ScatterSeries()
+SectionZoomFrame::SectionZoomFrame()
+{
+	m_TargetSectionIndexIsSet = false;
+}
+
+SectionZoomFrame::~SectionZoomFrame()
 {
 }
 
-ScatterSeries::~ScatterSeries()
+int32_t SectionZoomFrame::getTargetSectionIndex() const
 {
+	return m_TargetSectionIndex;
 }
 
-std::vector<std::shared_ptr<ScatterChartDataPoint>> ScatterSeries::getDataPoints() const
+void SectionZoomFrame::setTargetSectionIndex(int32_t value)
 {
-	return m_DataPoints;
+	m_TargetSectionIndex = value;
+	m_TargetSectionIndexIsSet = true;
 }
 
-void ScatterSeries::setDataPoints(std::vector<std::shared_ptr<ScatterChartDataPoint>> value)
+bool SectionZoomFrame::targetSectionIndexIsSet() const
 {
-	m_DataPoints = value;
-	
+	return m_TargetSectionIndexIsSet;
 }
 
-web::json::value ScatterSeries::toJson() const
+void SectionZoomFrame::unsetTargetSectionIndex()
 {
-	web::json::value val = this->XYSeries::toJson();
+	m_TargetSectionIndexIsSet = false;
+}
+
+web::json::value SectionZoomFrame::toJson() const
+{
+	web::json::value val = this->ZoomObject::toJson();
+	if(m_TargetSectionIndexIsSet)
 	{
-		std::vector<web::json::value> jsonArray;
-		for (auto& item : m_DataPoints)
-		{
-			jsonArray.push_back(ModelBase::toJson(item));
-		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("DataPoints")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("TargetSectionIndex")] = ModelBase::toJson(m_TargetSectionIndex);
 	}
 	return val;
 }
 
-void ScatterSeries::fromJson(web::json::value& val)
+void SectionZoomFrame::fromJson(web::json::value& val)
 {
-	this->XYSeries::fromJson(val);
-	web::json::value* jsonForDataPoints = ModelBase::getField(val, "DataPoints");
-	if(jsonForDataPoints != nullptr && !jsonForDataPoints->is_null())
+	this->ZoomObject::fromJson(val);
+	web::json::value* jsonForTargetSectionIndex = ModelBase::getField(val, "TargetSectionIndex");
+	if(jsonForTargetSectionIndex != nullptr && !jsonForTargetSectionIndex->is_null() && jsonForTargetSectionIndex->is_number())
 	{
-		{
-			m_DataPoints.clear();
-			std::vector<web::json::value> jsonArray;
-			for(auto& item : jsonForDataPoints->as_array())
-			{
-				if(item.is_null())
-				{
-					m_DataPoints.push_back(std::shared_ptr<ScatterChartDataPoint>(nullptr));
-				}
-				else
-				{
-					std::shared_ptr<ScatterChartDataPoint> newItem(new ScatterChartDataPoint());
-					newItem->fromJson(item);
-					m_DataPoints.push_back( newItem );
-				}
-			}
-        	}
+		setTargetSectionIndex(ModelBase::int32_tFromJson(*jsonForTargetSectionIndex));
 	}
 }
 

@@ -25,90 +25,90 @@
 
 
 
-#include "BubbleSeries.h"
+#include "SummaryZoomFrame.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-BubbleSeries::BubbleSeries()
+SummaryZoomFrame::SummaryZoomFrame()
 {
 }
 
-BubbleSeries::~BubbleSeries()
+SummaryZoomFrame::~SummaryZoomFrame()
 {
 }
 
-std::vector<std::shared_ptr<BubbleChartDataPoint>> BubbleSeries::getDataPoints() const
+utility::string_t SummaryZoomFrame::getZoomLayout() const
 {
-	return m_DataPoints;
+	return m_ZoomLayout;
 }
 
-void BubbleSeries::setDataPoints(std::vector<std::shared_ptr<BubbleChartDataPoint>> value)
+void SummaryZoomFrame::setZoomLayout(utility::string_t value)
 {
-	m_DataPoints = value;
+	m_ZoomLayout = value;
 	
 }
 
-utility::string_t BubbleSeries::getNumberFormatOfBubbleSizes() const
+std::vector<std::shared_ptr<SummaryZoomSection>> SummaryZoomFrame::getSections() const
 {
-	return m_NumberFormatOfBubbleSizes;
+	return m_Sections;
 }
 
-void BubbleSeries::setNumberFormatOfBubbleSizes(utility::string_t value)
+void SummaryZoomFrame::setSections(std::vector<std::shared_ptr<SummaryZoomSection>> value)
 {
-	m_NumberFormatOfBubbleSizes = value;
+	m_Sections = value;
 	
 }
 
-web::json::value BubbleSeries::toJson() const
+web::json::value SummaryZoomFrame::toJson() const
 {
-	web::json::value val = this->XYSeries::toJson();
+	web::json::value val = this->ShapeBase::toJson();
+	if (!m_ZoomLayout.empty())
+	{
+		val[utility::conversions::to_string_t("ZoomLayout")] = ModelBase::toJson(m_ZoomLayout);
+	}
 	{
 		std::vector<web::json::value> jsonArray;
-		for (auto& item : m_DataPoints)
+		for (auto& item : m_Sections)
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
 		if (jsonArray.size() > 0)
 		{
-			val[utility::conversions::to_string_t("DataPoints")] = web::json::value::array(jsonArray);
+			val[utility::conversions::to_string_t("Sections")] = web::json::value::array(jsonArray);
 		}
-	}
-	if (!m_NumberFormatOfBubbleSizes.empty())
-	{
-		val[utility::conversions::to_string_t("NumberFormatOfBubbleSizes")] = ModelBase::toJson(m_NumberFormatOfBubbleSizes);
 	}
 	return val;
 }
 
-void BubbleSeries::fromJson(web::json::value& val)
+void SummaryZoomFrame::fromJson(web::json::value& val)
 {
-	this->XYSeries::fromJson(val);
-	web::json::value* jsonForDataPoints = ModelBase::getField(val, "DataPoints");
-	if(jsonForDataPoints != nullptr && !jsonForDataPoints->is_null())
+	this->ShapeBase::fromJson(val);
+	web::json::value* jsonForZoomLayout = ModelBase::getField(val, "ZoomLayout");
+	if(jsonForZoomLayout != nullptr && !jsonForZoomLayout->is_null())
+	{
+		setZoomLayout(ModelBase::stringFromJson(*jsonForZoomLayout));
+	}
+	web::json::value* jsonForSections = ModelBase::getField(val, "Sections");
+	if(jsonForSections != nullptr && !jsonForSections->is_null())
 	{
 		{
-			m_DataPoints.clear();
+			m_Sections.clear();
 			std::vector<web::json::value> jsonArray;
-			for(auto& item : jsonForDataPoints->as_array())
+			for(auto& item : jsonForSections->as_array())
 			{
 				if(item.is_null())
 				{
-					m_DataPoints.push_back(std::shared_ptr<BubbleChartDataPoint>(nullptr));
+					m_Sections.push_back(std::shared_ptr<SummaryZoomSection>(nullptr));
 				}
 				else
 				{
-					std::shared_ptr<BubbleChartDataPoint> newItem(new BubbleChartDataPoint());
+					std::shared_ptr<SummaryZoomSection> newItem(new SummaryZoomSection());
 					newItem->fromJson(item);
-					m_DataPoints.push_back( newItem );
+					m_Sections.push_back( newItem );
 				}
 			}
         	}
-	}
-	web::json::value* jsonForNumberFormatOfBubbleSizes = ModelBase::getField(val, "NumberFormatOfBubbleSizes");
-	if(jsonForNumberFormatOfBubbleSizes != nullptr && !jsonForNumberFormatOfBubbleSizes->is_null())
-	{
-		setNumberFormatOfBubbleSizes(ModelBase::stringFromJson(*jsonForNumberFormatOfBubbleSizes));
 	}
 }
 

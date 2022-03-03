@@ -24,51 +24,85 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * ScatterSeries.h
+ * ZoomObject.h
  *
- * A scatter series
+ * 
  */
 
-#ifndef _ScatterSeries_H_
-#define _ScatterSeries_H_
+#ifndef _ZoomObject_H_
+#define _ZoomObject_H_
 
-#include "XYSeries.h"
+#include "ShapeBase.h"
 
+#include "../model/Hyperlink.h"
 #include "../model/EffectFormat.h"
-#include "../model/SeriesMarker.h"
-#include "../model/ScatterChartDataPoint.h"
+#include "../model/ShapeBase.h"
 #include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
+#include "../model/ResourceUri.h"
+#include "../model/ThreeDFormat.h"
 #include <vector>
-#include "../model/XYSeries.h"
 
 namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// A scatter series
+/// 
 /// </summary>
-class  ScatterSeries : public XYSeries
+class  ZoomObject : public ShapeBase
 {
 public:
-	ASPOSE_DLL_EXPORT ScatterSeries();
-	ASPOSE_DLL_EXPORT virtual ~ScatterSeries();
+	ASPOSE_DLL_EXPORT ZoomObject();
+	ASPOSE_DLL_EXPORT virtual ~ZoomObject();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
 	/// <summary>
-	/// Gets or sets the values.
+	/// Image type of a zoom object. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<ScatterChartDataPoint>> getDataPoints() const;
-	ASPOSE_DLL_EXPORT void setDataPoints(std::vector<std::shared_ptr<ScatterChartDataPoint>> value);
+	ASPOSE_DLL_EXPORT utility::string_t getImageType() const;
+	ASPOSE_DLL_EXPORT void setImageType(utility::string_t value);
+	/// <summary>
+	/// Navigation behavior in slideshow. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getReturnToParent() const;
+	ASPOSE_DLL_EXPORT void setReturnToParent(bool value);
+	ASPOSE_DLL_EXPORT bool returnToParentIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetReturnToParent();
+	/// <summary>
+	/// Specifies whether the Zoom will use the background of the destination slide.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getShowBackground() const;
+	ASPOSE_DLL_EXPORT void setShowBackground(bool value);
+	ASPOSE_DLL_EXPORT bool showBackgroundIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetShowBackground();
+	/// <summary>
+	/// Internal image link for zoom object
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<ResourceUri> getImage() const;
+	ASPOSE_DLL_EXPORT void setImage(std::shared_ptr<ResourceUri> value);
+	/// <summary>
+	/// Duration of the transition between Zoom and slide.
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getTransitionDuration() const;
+	ASPOSE_DLL_EXPORT void setTransitionDuration(double value);
+	ASPOSE_DLL_EXPORT bool transitionDurationIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetTransitionDuration();
 
 protected:
-	std::vector<std::shared_ptr<ScatterChartDataPoint>> m_DataPoints;
+	utility::string_t m_ImageType;
+	bool m_ReturnToParent;
+	bool m_ReturnToParentIsSet;
+	bool m_ShowBackground;
+	bool m_ShowBackgroundIsSet;
+	std::shared_ptr<ResourceUri> m_Image;
+	double m_TransitionDuration;
+	bool m_TransitionDurationIsSet;
 };
 
 }
 }
 
-#endif /* _ScatterSeries_H_ */
+#endif /* _ZoomObject_H_ */

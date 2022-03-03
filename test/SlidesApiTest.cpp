@@ -30576,6 +30576,254 @@ TEST_F(SlidesApiTest, deleteSubshapesInvalidStorage) {
 	}
 }
 
+TEST_F(SlidesApiTest, deleteUnusedLayoutSlides) {
+	utility::string_t paramName = utils->getTestValue("deleteUnusedLayoutSlides", "name");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedLayoutSlides", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteUnusedLayoutSlides", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteUnusedLayoutSlides", "storage");
+	utils->initialize("deleteUnusedLayoutSlides", "");
+	std::shared_ptr<LayoutSlides> result = api->deleteUnusedLayoutSlides(paramName, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, deleteUnusedLayoutSlidesInvalidName) {
+	utility::string_t paramName = utils->getTestValue("deleteUnusedLayoutSlides", "name");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedLayoutSlides", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteUnusedLayoutSlides", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteUnusedLayoutSlides", "storage");
+	paramName = utils->getInvalidTestValue("deleteUnusedLayoutSlides", "name", paramName);
+	utils->initialize("deleteUnusedLayoutSlides", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->deleteUnusedLayoutSlides(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedLayoutSlides", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedLayoutSlides", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedLayoutSlides", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedLayoutSlides", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteUnusedLayoutSlides", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteUnusedLayoutSlidesInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("deleteUnusedLayoutSlides", "name");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedLayoutSlides", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteUnusedLayoutSlides", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteUnusedLayoutSlides", "storage");
+	paramPassword = utils->getInvalidTestValue("deleteUnusedLayoutSlides", "password", paramPassword);
+	utils->initialize("deleteUnusedLayoutSlides", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->deleteUnusedLayoutSlides(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedLayoutSlides", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedLayoutSlides", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedLayoutSlides", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedLayoutSlides", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteUnusedLayoutSlides", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteUnusedLayoutSlidesInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("deleteUnusedLayoutSlides", "name");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedLayoutSlides", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteUnusedLayoutSlides", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteUnusedLayoutSlides", "storage");
+	paramFolder = utils->getInvalidTestValue("deleteUnusedLayoutSlides", "folder", paramFolder);
+	utils->initialize("deleteUnusedLayoutSlides", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->deleteUnusedLayoutSlides(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedLayoutSlides", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedLayoutSlides", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedLayoutSlides", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedLayoutSlides", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteUnusedLayoutSlides", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteUnusedLayoutSlidesInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("deleteUnusedLayoutSlides", "name");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedLayoutSlides", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteUnusedLayoutSlides", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteUnusedLayoutSlides", "storage");
+	paramStorage = utils->getInvalidTestValue("deleteUnusedLayoutSlides", "storage", paramStorage);
+	utils->initialize("deleteUnusedLayoutSlides", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->deleteUnusedLayoutSlides(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedLayoutSlides", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedLayoutSlides", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedLayoutSlides", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedLayoutSlides", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteUnusedLayoutSlides", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteUnusedLayoutSlidesOnline) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("deleteUnusedLayoutSlidesOnline", "document");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedLayoutSlidesOnline", "password");
+	utils->initialize("deleteUnusedLayoutSlidesOnline", "");
+	HttpContent result = api->deleteUnusedLayoutSlidesOnline(paramDocument, paramPassword).get();
+	EXPECT_FALSE(result.getData()->eof());
+}
+
+TEST_F(SlidesApiTest, deleteUnusedLayoutSlidesOnlineInvalidDocument) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("deleteUnusedLayoutSlidesOnline", "document");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedLayoutSlidesOnline", "password");
+	paramDocument = utils->getInvalidBinaryTestValue("deleteUnusedLayoutSlidesOnline", "document", paramDocument);
+	utils->initialize("deleteUnusedLayoutSlidesOnline", "document", paramDocument);
+
+	bool failed = true;
+	try
+	{
+		api->deleteUnusedLayoutSlidesOnline(paramDocument, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedLayoutSlidesOnline", "document");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedLayoutSlidesOnline", "document", paramDocument);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedLayoutSlidesOnline", "document");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedLayoutSlidesOnline", "document", paramDocument);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteUnusedLayoutSlidesOnline", "document"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteUnusedLayoutSlidesOnlineInvalidPassword) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("deleteUnusedLayoutSlidesOnline", "document");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedLayoutSlidesOnline", "password");
+	paramPassword = utils->getInvalidTestValue("deleteUnusedLayoutSlidesOnline", "password", paramPassword);
+	utils->initialize("deleteUnusedLayoutSlidesOnline", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->deleteUnusedLayoutSlidesOnline(paramDocument, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedLayoutSlidesOnline", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedLayoutSlidesOnline", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedLayoutSlidesOnline", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedLayoutSlidesOnline", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteUnusedLayoutSlidesOnline", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, deleteWatermark) {
 	utility::string_t paramName = utils->getTestValue("deleteWatermark", "name");
 	utility::string_t paramShapeName = utils->getTestValue("deleteWatermark", "shapeName");
@@ -52594,6 +52842,938 @@ TEST_F(SlidesApiTest, getViewPropertiesInvalidStorage) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("getViewProperties", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeRegex) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeRegex", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeRegex", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeRegex", "shapeIndex");
+	utility::string_t paramRegex = utils->getTestValue("highlightShapeRegex", "regex");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeRegex", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeRegex", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeRegex", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeRegex", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeRegex", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeRegex", "storage");
+	utils->initialize("highlightShapeRegex", "");
+	std::shared_ptr<Shape> result = api->highlightShapeRegex(paramName, paramSlideIndex, paramShapeIndex, paramRegex, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, highlightShapeRegexInvalidName) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeRegex", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeRegex", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeRegex", "shapeIndex");
+	utility::string_t paramRegex = utils->getTestValue("highlightShapeRegex", "regex");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeRegex", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeRegex", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeRegex", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeRegex", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeRegex", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeRegex", "storage");
+	paramName = utils->getInvalidTestValue("highlightShapeRegex", "name", paramName);
+	utils->initialize("highlightShapeRegex", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeRegex(paramName, paramSlideIndex, paramShapeIndex, paramRegex, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeRegex", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeRegexInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeRegex", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeRegex", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeRegex", "shapeIndex");
+	utility::string_t paramRegex = utils->getTestValue("highlightShapeRegex", "regex");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeRegex", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeRegex", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeRegex", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeRegex", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeRegex", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeRegex", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("highlightShapeRegex", "slideIndex", paramSlideIndex).value();
+	utils->initialize("highlightShapeRegex", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeRegex(paramName, paramSlideIndex, paramShapeIndex, paramRegex, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeRegex", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeRegexInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeRegex", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeRegex", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeRegex", "shapeIndex");
+	utility::string_t paramRegex = utils->getTestValue("highlightShapeRegex", "regex");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeRegex", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeRegex", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeRegex", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeRegex", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeRegex", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeRegex", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("highlightShapeRegex", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("highlightShapeRegex", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeRegex(paramName, paramSlideIndex, paramShapeIndex, paramRegex, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeRegex", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeRegexInvalidRegex) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeRegex", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeRegex", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeRegex", "shapeIndex");
+	utility::string_t paramRegex = utils->getTestValue("highlightShapeRegex", "regex");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeRegex", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeRegex", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeRegex", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeRegex", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeRegex", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeRegex", "storage");
+	paramRegex = utils->getInvalidTestValue("highlightShapeRegex", "regex", paramRegex);
+	utils->initialize("highlightShapeRegex", "regex", paramRegex);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeRegex(paramName, paramSlideIndex, paramShapeIndex, paramRegex, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "regex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "regex", paramRegex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "regex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "regex", paramRegex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeRegex", "regex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeRegexInvalidColor) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeRegex", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeRegex", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeRegex", "shapeIndex");
+	utility::string_t paramRegex = utils->getTestValue("highlightShapeRegex", "regex");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeRegex", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeRegex", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeRegex", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeRegex", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeRegex", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeRegex", "storage");
+	paramColor = utils->getInvalidTestValue("highlightShapeRegex", "color", paramColor);
+	utils->initialize("highlightShapeRegex", "color", paramColor);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeRegex(paramName, paramSlideIndex, paramShapeIndex, paramRegex, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "color");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "color", paramColor);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "color");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "color", paramColor);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeRegex", "color"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeRegexInvalidWholeWordsOnly) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeRegex", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeRegex", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeRegex", "shapeIndex");
+	utility::string_t paramRegex = utils->getTestValue("highlightShapeRegex", "regex");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeRegex", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeRegex", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeRegex", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeRegex", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeRegex", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeRegex", "storage");
+	paramWholeWordsOnly = utils->getInvalidBoolTestValue("highlightShapeRegex", "wholeWordsOnly", paramWholeWordsOnly).value();
+	utils->initialize("highlightShapeRegex", "wholeWordsOnly", paramWholeWordsOnly);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeRegex(paramName, paramSlideIndex, paramShapeIndex, paramRegex, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "wholeWordsOnly");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "wholeWordsOnly", paramWholeWordsOnly);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "wholeWordsOnly");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "wholeWordsOnly", paramWholeWordsOnly);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeRegex", "wholeWordsOnly"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeRegexInvalidIgnoreCase) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeRegex", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeRegex", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeRegex", "shapeIndex");
+	utility::string_t paramRegex = utils->getTestValue("highlightShapeRegex", "regex");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeRegex", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeRegex", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeRegex", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeRegex", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeRegex", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeRegex", "storage");
+	paramIgnoreCase = utils->getInvalidBoolTestValue("highlightShapeRegex", "ignoreCase", paramIgnoreCase).value();
+	utils->initialize("highlightShapeRegex", "ignoreCase", paramIgnoreCase);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeRegex(paramName, paramSlideIndex, paramShapeIndex, paramRegex, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "ignoreCase");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "ignoreCase", paramIgnoreCase);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "ignoreCase");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "ignoreCase", paramIgnoreCase);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeRegex", "ignoreCase"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeRegexInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeRegex", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeRegex", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeRegex", "shapeIndex");
+	utility::string_t paramRegex = utils->getTestValue("highlightShapeRegex", "regex");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeRegex", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeRegex", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeRegex", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeRegex", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeRegex", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeRegex", "storage");
+	paramPassword = utils->getInvalidTestValue("highlightShapeRegex", "password", paramPassword);
+	utils->initialize("highlightShapeRegex", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeRegex(paramName, paramSlideIndex, paramShapeIndex, paramRegex, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeRegex", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeRegexInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeRegex", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeRegex", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeRegex", "shapeIndex");
+	utility::string_t paramRegex = utils->getTestValue("highlightShapeRegex", "regex");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeRegex", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeRegex", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeRegex", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeRegex", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeRegex", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeRegex", "storage");
+	paramFolder = utils->getInvalidTestValue("highlightShapeRegex", "folder", paramFolder);
+	utils->initialize("highlightShapeRegex", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeRegex(paramName, paramSlideIndex, paramShapeIndex, paramRegex, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeRegex", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeRegexInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeRegex", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeRegex", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeRegex", "shapeIndex");
+	utility::string_t paramRegex = utils->getTestValue("highlightShapeRegex", "regex");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeRegex", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeRegex", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeRegex", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeRegex", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeRegex", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeRegex", "storage");
+	paramStorage = utils->getInvalidTestValue("highlightShapeRegex", "storage", paramStorage);
+	utils->initialize("highlightShapeRegex", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeRegex(paramName, paramSlideIndex, paramShapeIndex, paramRegex, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeRegex", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeRegex", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeRegex", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeText) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeText", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeText", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeText", "shapeIndex");
+	utility::string_t paramText = utils->getTestValue("highlightShapeText", "text");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeText", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeText", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeText", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeText", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeText", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeText", "storage");
+	utils->initialize("highlightShapeText", "");
+	std::shared_ptr<Shape> result = api->highlightShapeText(paramName, paramSlideIndex, paramShapeIndex, paramText, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, highlightShapeTextInvalidName) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeText", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeText", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeText", "shapeIndex");
+	utility::string_t paramText = utils->getTestValue("highlightShapeText", "text");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeText", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeText", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeText", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeText", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeText", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeText", "storage");
+	paramName = utils->getInvalidTestValue("highlightShapeText", "name", paramName);
+	utils->initialize("highlightShapeText", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeText(paramName, paramSlideIndex, paramShapeIndex, paramText, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeText", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeTextInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeText", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeText", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeText", "shapeIndex");
+	utility::string_t paramText = utils->getTestValue("highlightShapeText", "text");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeText", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeText", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeText", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeText", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeText", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeText", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("highlightShapeText", "slideIndex", paramSlideIndex).value();
+	utils->initialize("highlightShapeText", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeText(paramName, paramSlideIndex, paramShapeIndex, paramText, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeText", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeTextInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeText", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeText", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeText", "shapeIndex");
+	utility::string_t paramText = utils->getTestValue("highlightShapeText", "text");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeText", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeText", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeText", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeText", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeText", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeText", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("highlightShapeText", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("highlightShapeText", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeText(paramName, paramSlideIndex, paramShapeIndex, paramText, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeText", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeTextInvalidText) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeText", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeText", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeText", "shapeIndex");
+	utility::string_t paramText = utils->getTestValue("highlightShapeText", "text");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeText", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeText", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeText", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeText", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeText", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeText", "storage");
+	paramText = utils->getInvalidTestValue("highlightShapeText", "text", paramText);
+	utils->initialize("highlightShapeText", "text", paramText);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeText(paramName, paramSlideIndex, paramShapeIndex, paramText, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "text");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "text", paramText);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "text");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "text", paramText);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeText", "text"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeTextInvalidColor) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeText", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeText", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeText", "shapeIndex");
+	utility::string_t paramText = utils->getTestValue("highlightShapeText", "text");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeText", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeText", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeText", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeText", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeText", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeText", "storage");
+	paramColor = utils->getInvalidTestValue("highlightShapeText", "color", paramColor);
+	utils->initialize("highlightShapeText", "color", paramColor);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeText(paramName, paramSlideIndex, paramShapeIndex, paramText, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "color");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "color", paramColor);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "color");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "color", paramColor);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeText", "color"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeTextInvalidWholeWordsOnly) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeText", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeText", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeText", "shapeIndex");
+	utility::string_t paramText = utils->getTestValue("highlightShapeText", "text");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeText", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeText", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeText", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeText", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeText", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeText", "storage");
+	paramWholeWordsOnly = utils->getInvalidBoolTestValue("highlightShapeText", "wholeWordsOnly", paramWholeWordsOnly).value();
+	utils->initialize("highlightShapeText", "wholeWordsOnly", paramWholeWordsOnly);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeText(paramName, paramSlideIndex, paramShapeIndex, paramText, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "wholeWordsOnly");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "wholeWordsOnly", paramWholeWordsOnly);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "wholeWordsOnly");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "wholeWordsOnly", paramWholeWordsOnly);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeText", "wholeWordsOnly"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeTextInvalidIgnoreCase) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeText", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeText", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeText", "shapeIndex");
+	utility::string_t paramText = utils->getTestValue("highlightShapeText", "text");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeText", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeText", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeText", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeText", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeText", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeText", "storage");
+	paramIgnoreCase = utils->getInvalidBoolTestValue("highlightShapeText", "ignoreCase", paramIgnoreCase).value();
+	utils->initialize("highlightShapeText", "ignoreCase", paramIgnoreCase);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeText(paramName, paramSlideIndex, paramShapeIndex, paramText, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "ignoreCase");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "ignoreCase", paramIgnoreCase);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "ignoreCase");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "ignoreCase", paramIgnoreCase);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeText", "ignoreCase"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeTextInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeText", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeText", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeText", "shapeIndex");
+	utility::string_t paramText = utils->getTestValue("highlightShapeText", "text");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeText", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeText", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeText", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeText", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeText", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeText", "storage");
+	paramPassword = utils->getInvalidTestValue("highlightShapeText", "password", paramPassword);
+	utils->initialize("highlightShapeText", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeText(paramName, paramSlideIndex, paramShapeIndex, paramText, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeText", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeTextInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeText", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeText", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeText", "shapeIndex");
+	utility::string_t paramText = utils->getTestValue("highlightShapeText", "text");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeText", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeText", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeText", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeText", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeText", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeText", "storage");
+	paramFolder = utils->getInvalidTestValue("highlightShapeText", "folder", paramFolder);
+	utils->initialize("highlightShapeText", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeText(paramName, paramSlideIndex, paramShapeIndex, paramText, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeText", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, highlightShapeTextInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("highlightShapeText", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("highlightShapeText", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("highlightShapeText", "shapeIndex");
+	utility::string_t paramText = utils->getTestValue("highlightShapeText", "text");
+	utility::string_t paramColor = utils->getTestValue("highlightShapeText", "color");
+	auto paramWholeWordsOnly = utils->getOptionalBoolTestValue("highlightShapeText", "wholeWordsOnly");
+	auto paramIgnoreCase = utils->getOptionalBoolTestValue("highlightShapeText", "ignoreCase");
+	utility::string_t paramPassword = utils->getTestValue("highlightShapeText", "password");
+	utility::string_t paramFolder = utils->getTestValue("highlightShapeText", "folder");
+	utility::string_t paramStorage = utils->getTestValue("highlightShapeText", "storage");
+	paramStorage = utils->getInvalidTestValue("highlightShapeText", "storage", paramStorage);
+	utils->initialize("highlightShapeText", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->highlightShapeText(paramName, paramSlideIndex, paramShapeIndex, paramText, paramColor, paramWholeWordsOnly, paramIgnoreCase, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("highlightShapeText", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("highlightShapeText", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("highlightShapeText", "storage"))
 	{
 		FAIL() << "Must have failed";
 	}
