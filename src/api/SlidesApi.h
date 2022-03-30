@@ -89,13 +89,14 @@
 #include "../model/Slide.h"
 #include "../model/SlideAnimation.h"
 #include "../model/SlideBackground.h"
-#include "../model/SlideComment.h"
+#include "../model/SlideCommentBase.h"
 #include "../model/SlideComments.h"
 #include "../model/SlideProperties.h"
 #include "../model/SlideReplaceResult.h"
 #include "../model/Slides.h"
 #include "../model/SplitDocumentResult.h"
 #include "../model/StorageExist.h"
+#include "../model/TextBounds.h"
 #include "../model/TextItems.h"
 #include "../model/Theme.h"
 #include "../model/ViewProperties.h"
@@ -196,12 +197,12 @@ public:
 	/// <summary>
 	/// Adds the comment on the slide.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideComments>> createComment(utility::string_t name, int32_t slideIndex, std::shared_ptr<SlideComment> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideComments>> createComment(utility::string_t name, int32_t slideIndex, std::shared_ptr<SlideCommentBase> dto, boost::optional<int32_t> shapeIndex = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Adds the comment on the slide.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<HttpContent> createCommentOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, std::shared_ptr<SlideComment> dto, utility::string_t password = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> createCommentOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, std::shared_ptr<SlideCommentBase> dto, boost::optional<int32_t> shapeIndex = int32_t(), utility::string_t password = utility::string_t());
 
 	/// <summary>
 	/// Create the folder
@@ -824,6 +825,11 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> getParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
+	/// Return coordinates of rect that bounds paragraph. The rect includes all the lines of text in paragraph, including empty ones.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<TextBounds>> getParagraphRectangle(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
 	/// Read shape paragraphs info.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraphs>> getParagraphs(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
@@ -842,6 +848,11 @@ public:
 	/// Read paragraph portion info.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portion>> getPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Return coordinates of rect that bounds paragraph. The rect includes all the lines of text in paragraph, including empty ones.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<TextBounds>> getPortionRectangle(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Read paragraph portions info.
@@ -886,7 +897,7 @@ public:
 	/// <summary>
 	/// Read slide shapes info.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> getShapes(utility::string_t name, int32_t slideIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> getShapes(utility::string_t name, int32_t slideIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t shapeType = utility::string_t());
 
 	/// <summary>
 	/// Read presentation slide info.
@@ -1046,7 +1057,7 @@ public:
 	/// <summary>
 	/// Create presentation document from pdf or append pdf to an existing presentation.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Document>> importFromPdf(utility::string_t name, std::shared_ptr<HttpContent> pdf = std::shared_ptr<HttpContent>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Document>> importFromPdf(utility::string_t name, std::shared_ptr<HttpContent> pdf, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Merge the presentation with other presentations specified in the request parameter.

@@ -34,7 +34,9 @@
 
 #include "../ModelBase.h"
 
+#include "../model/FontFallbackRule.h"
 #include <cpprest/details/basic_types.h>
+#include <vector>
 
 namespace asposeslidescloud {
 namespace model {
@@ -71,6 +73,11 @@ public:
 	ASPOSE_DLL_EXPORT bool widthIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetWidth();
 	/// <summary>
+	/// Gets of sets list of font fallback rules.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<FontFallbackRule>> getFontFallbackRules() const;
+	ASPOSE_DLL_EXPORT void setFontFallbackRules(std::vector<std::shared_ptr<FontFallbackRule>> value);
+	/// <summary>
 	/// 
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getFormat() const;
@@ -82,6 +89,7 @@ protected:
 	bool m_HeightIsSet;
 	int32_t m_Width;
 	bool m_WidthIsSet;
+	std::vector<std::shared_ptr<FontFallbackRule>> m_FontFallbackRules;
 	utility::string_t m_Format;
 };
 

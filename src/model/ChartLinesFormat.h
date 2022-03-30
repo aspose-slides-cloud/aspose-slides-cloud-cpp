@@ -24,56 +24,51 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * VideoExportOptions.h
+ * ChartLinesFormat.h
  *
- * Provides options that control how a presentation is saved in an video format.
+ * Represents the lines format of chart elements. 
  */
 
-#ifndef _VideoExportOptions_H_
-#define _VideoExportOptions_H_
+#ifndef _ChartLinesFormat_H_
+#define _ChartLinesFormat_H_
 
-#include "ExportOptions.h"
+#include "../ModelBase.h"
 
-#include "../model/ExportOptions.h"
-#include "../model/FontFallbackRule.h"
-#include <cpprest/details/basic_types.h>
-#include <vector>
+#include "../model/EffectFormat.h"
+#include "../model/LineFormat.h"
 
 namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// Provides options that control how a presentation is saved in an video format.
+/// Represents the lines format of chart elements. 
 /// </summary>
-class  VideoExportOptions : public ExportOptions
+class  ChartLinesFormat : public ModelBase
 {
 public:
-	ASPOSE_DLL_EXPORT VideoExportOptions();
-	ASPOSE_DLL_EXPORT virtual ~VideoExportOptions();
+	ASPOSE_DLL_EXPORT ChartLinesFormat();
+	ASPOSE_DLL_EXPORT virtual ~ChartLinesFormat();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
 	/// <summary>
-	/// Transition duration.
+	/// Get or sets the effect format.
 	/// </summary>
-	ASPOSE_DLL_EXPORT int32_t getTransitionDuration() const;
-	ASPOSE_DLL_EXPORT void setTransitionDuration(int32_t value);
-	ASPOSE_DLL_EXPORT bool transitionDurationIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetTransitionDuration();
+	ASPOSE_DLL_EXPORT std::shared_ptr<EffectFormat> getEffectFormat() const;
+	ASPOSE_DLL_EXPORT void setEffectFormat(std::shared_ptr<EffectFormat> value);
 	/// <summary>
-	/// Video resolution type
+	/// Get or sets the line format.
 	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getVideoResolutionType() const;
-	ASPOSE_DLL_EXPORT void setVideoResolutionType(utility::string_t value);
+	ASPOSE_DLL_EXPORT std::shared_ptr<LineFormat> getLineFormat() const;
+	ASPOSE_DLL_EXPORT void setLineFormat(std::shared_ptr<LineFormat> value);
 
 protected:
-	int32_t m_TransitionDuration;
-	bool m_TransitionDurationIsSet;
-	utility::string_t m_VideoResolutionType;
+	std::shared_ptr<EffectFormat> m_EffectFormat;
+	std::shared_ptr<LineFormat> m_LineFormat;
 };
 
 }
 }
 
-#endif /* _VideoExportOptions_H_ */
+#endif /* _ChartLinesFormat_H_ */

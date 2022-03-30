@@ -35,6 +35,7 @@
 #include "../ModelBase.h"
 
 #include "../model/EffectFormat.h"
+#include "../model/ChartLinesFormat.h"
 #include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
@@ -278,6 +279,16 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::shared_ptr<LineFormat> getLineFormat() const;
 	ASPOSE_DLL_EXPORT void setLineFormat(std::shared_ptr<LineFormat> value);
+	/// <summary>
+	/// Get or sets the format of major grid lines.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<ChartLinesFormat> getMajorGridLinesFormat() const;
+	ASPOSE_DLL_EXPORT void setMajorGridLinesFormat(std::shared_ptr<ChartLinesFormat> value);
+	/// <summary>
+	/// Get or sets the format of major grid lines.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<ChartLinesFormat> getMinorGridLinesFormat() const;
+	ASPOSE_DLL_EXPORT void setMinorGridLinesFormat(std::shared_ptr<ChartLinesFormat> value);
 
 protected:
 	bool m_IsVisible;
@@ -338,6 +349,8 @@ protected:
 	std::shared_ptr<FillFormat> m_FillFormat;
 	std::shared_ptr<EffectFormat> m_EffectFormat;
 	std::shared_ptr<LineFormat> m_LineFormat;
+	std::shared_ptr<ChartLinesFormat> m_MajorGridLinesFormat;
+	std::shared_ptr<ChartLinesFormat> m_MinorGridLinesFormat;
 };
 
 }

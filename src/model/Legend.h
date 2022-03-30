@@ -109,6 +109,13 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::shared_ptr<LineFormat> getLineFormat() const;
 	ASPOSE_DLL_EXPORT void setLineFormat(std::shared_ptr<LineFormat> value);
+	/// <summary>
+	/// Get or sets value determines the visibility of legend
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getHasLegend() const;
+	ASPOSE_DLL_EXPORT void setHasLegend(bool value);
+	ASPOSE_DLL_EXPORT bool hasLegendIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetHasLegend();
 
 protected:
 	utility::string_t m_Position;
@@ -125,6 +132,8 @@ protected:
 	std::shared_ptr<FillFormat> m_FillFormat;
 	std::shared_ptr<EffectFormat> m_EffectFormat;
 	std::shared_ptr<LineFormat> m_LineFormat;
+	bool m_HasLegend;
+	bool m_HasLegendIsSet;
 };
 
 }

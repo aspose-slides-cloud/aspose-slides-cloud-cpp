@@ -23,57 +23,31 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-/*
- * VideoExportOptions.h
- *
- * Provides options that control how a presentation is saved in an video format.
- */
 
-#ifndef _VideoExportOptions_H_
-#define _VideoExportOptions_H_
 
-#include "ExportOptions.h"
-
-#include "../model/ExportOptions.h"
-#include "../model/FontFallbackRule.h"
-#include <cpprest/details/basic_types.h>
-#include <vector>
+#include "ShapeType.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-/// <summary>
-/// Provides options that control how a presentation is saved in an video format.
-/// </summary>
-class  VideoExportOptions : public ExportOptions
+ShapeType::ShapeType()
 {
-public:
-	ASPOSE_DLL_EXPORT VideoExportOptions();
-	ASPOSE_DLL_EXPORT virtual ~VideoExportOptions();
+}
 
-	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
-	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
+ShapeType::~ShapeType()
+{
+}
 
-	/// <summary>
-	/// Transition duration.
-	/// </summary>
-	ASPOSE_DLL_EXPORT int32_t getTransitionDuration() const;
-	ASPOSE_DLL_EXPORT void setTransitionDuration(int32_t value);
-	ASPOSE_DLL_EXPORT bool transitionDurationIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetTransitionDuration();
-	/// <summary>
-	/// Video resolution type
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getVideoResolutionType() const;
-	ASPOSE_DLL_EXPORT void setVideoResolutionType(utility::string_t value);
+web::json::value ShapeType::toJson() const
+{
+	web::json::value val = web::json::value::object();
+	return val;
+}
 
-protected:
-	int32_t m_TransitionDuration;
-	bool m_TransitionDurationIsSet;
-	utility::string_t m_VideoResolutionType;
-};
+void ShapeType::fromJson(web::json::value& val)
+{
+}
 
 }
 }
 
-#endif /* _VideoExportOptions_H_ */

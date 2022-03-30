@@ -37,6 +37,7 @@ Legend::Legend()
 	m_WidthIsSet = false;
 	m_HeightIsSet = false;
 	m_OverlayIsSet = false;
+	m_HasLegendIsSet = false;
 }
 
 Legend::~Legend()
@@ -192,6 +193,27 @@ void Legend::setLineFormat(std::shared_ptr<LineFormat> value)
 	
 }
 
+bool Legend::getHasLegend() const
+{
+	return m_HasLegend;
+}
+
+void Legend::setHasLegend(bool value)
+{
+	m_HasLegend = value;
+	m_HasLegendIsSet = true;
+}
+
+bool Legend::hasLegendIsSet() const
+{
+	return m_HasLegendIsSet;
+}
+
+void Legend::unsetHasLegend()
+{
+	m_HasLegendIsSet = false;
+}
+
 web::json::value Legend::toJson() const
 {
 	web::json::value val = web::json::value::object();
@@ -230,6 +252,10 @@ web::json::value Legend::toJson() const
 	if (m_LineFormat != nullptr)
 	{
 		val[utility::conversions::to_string_t("LineFormat")] = ModelBase::toJson(m_LineFormat);
+	}
+	if(m_HasLegendIsSet)
+	{
+		val[utility::conversions::to_string_t("HasLegend")] = ModelBase::toJson(m_HasLegend);
 	}
 	return val;
 }
@@ -286,6 +312,11 @@ void Legend::fromJson(web::json::value& val)
 		std::shared_ptr<LineFormat> newItem(new LineFormat());
 		newItem->fromJson(*jsonForLineFormat);
 		setLineFormat(newItem);
+	}
+	web::json::value* jsonForHasLegend = ModelBase::getField(val, "HasLegend");
+	if(jsonForHasLegend != nullptr && !jsonForHasLegend->is_null())
+	{
+		setHasLegend(ModelBase::boolFromJson(*jsonForHasLegend));
 	}
 }
 

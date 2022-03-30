@@ -24,56 +24,61 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * VideoExportOptions.h
+ * TextBounds.h
  *
- * Provides options that control how a presentation is saved in an video format.
+ * Represents text bounds within a paragraph or portion.
  */
 
-#ifndef _VideoExportOptions_H_
-#define _VideoExportOptions_H_
+#ifndef _TextBounds_H_
+#define _TextBounds_H_
 
-#include "ExportOptions.h"
+#include "../ModelBase.h"
 
-#include "../model/ExportOptions.h"
-#include "../model/FontFallbackRule.h"
-#include <cpprest/details/basic_types.h>
-#include <vector>
 
 namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// Provides options that control how a presentation is saved in an video format.
+/// Represents text bounds within a paragraph or portion.
 /// </summary>
-class  VideoExportOptions : public ExportOptions
+class  TextBounds : public ModelBase
 {
 public:
-	ASPOSE_DLL_EXPORT VideoExportOptions();
-	ASPOSE_DLL_EXPORT virtual ~VideoExportOptions();
+	ASPOSE_DLL_EXPORT TextBounds();
+	ASPOSE_DLL_EXPORT virtual ~TextBounds();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
 	/// <summary>
-	/// Transition duration.
+	/// X coordinate of the text bounds.
 	/// </summary>
-	ASPOSE_DLL_EXPORT int32_t getTransitionDuration() const;
-	ASPOSE_DLL_EXPORT void setTransitionDuration(int32_t value);
-	ASPOSE_DLL_EXPORT bool transitionDurationIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetTransitionDuration();
+	ASPOSE_DLL_EXPORT double getX() const;
+	ASPOSE_DLL_EXPORT void setX(double value);
 	/// <summary>
-	/// Video resolution type
+	/// X coordinate of the text bounds.             
 	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getVideoResolutionType() const;
-	ASPOSE_DLL_EXPORT void setVideoResolutionType(utility::string_t value);
+	ASPOSE_DLL_EXPORT double getY() const;
+	ASPOSE_DLL_EXPORT void setY(double value);
+	/// <summary>
+	/// Width of the text bounds.
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getWidth() const;
+	ASPOSE_DLL_EXPORT void setWidth(double value);
+	/// <summary>
+	/// Height of the text bounds.
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getHeight() const;
+	ASPOSE_DLL_EXPORT void setHeight(double value);
 
 protected:
-	int32_t m_TransitionDuration;
-	bool m_TransitionDurationIsSet;
-	utility::string_t m_VideoResolutionType;
+	double m_X;
+	double m_Y;
+	double m_Width;
+	double m_Height;
 };
 
 }
 }
 
-#endif /* _VideoExportOptions_H_ */
+#endif /* _TextBounds_H_ */

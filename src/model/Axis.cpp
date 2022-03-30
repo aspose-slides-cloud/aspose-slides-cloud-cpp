@@ -676,6 +676,28 @@ void Axis::setLineFormat(std::shared_ptr<LineFormat> value)
 	
 }
 
+std::shared_ptr<ChartLinesFormat> Axis::getMajorGridLinesFormat() const
+{
+	return m_MajorGridLinesFormat;
+}
+
+void Axis::setMajorGridLinesFormat(std::shared_ptr<ChartLinesFormat> value)
+{
+	m_MajorGridLinesFormat = value;
+	
+}
+
+std::shared_ptr<ChartLinesFormat> Axis::getMinorGridLinesFormat() const
+{
+	return m_MinorGridLinesFormat;
+}
+
+void Axis::setMinorGridLinesFormat(std::shared_ptr<ChartLinesFormat> value)
+{
+	m_MinorGridLinesFormat = value;
+	
+}
+
 web::json::value Axis::toJson() const
 {
 	web::json::value val = web::json::value::object();
@@ -822,6 +844,14 @@ web::json::value Axis::toJson() const
 	if (m_LineFormat != nullptr)
 	{
 		val[utility::conversions::to_string_t("LineFormat")] = ModelBase::toJson(m_LineFormat);
+	}
+	if (m_MajorGridLinesFormat != nullptr)
+	{
+		val[utility::conversions::to_string_t("MajorGridLinesFormat")] = ModelBase::toJson(m_MajorGridLinesFormat);
+	}
+	if (m_MinorGridLinesFormat != nullptr)
+	{
+		val[utility::conversions::to_string_t("MinorGridLinesFormat")] = ModelBase::toJson(m_MinorGridLinesFormat);
 	}
 	return val;
 }
@@ -1013,6 +1043,20 @@ void Axis::fromJson(web::json::value& val)
 		std::shared_ptr<LineFormat> newItem(new LineFormat());
 		newItem->fromJson(*jsonForLineFormat);
 		setLineFormat(newItem);
+	}
+	web::json::value* jsonForMajorGridLinesFormat = ModelBase::getField(val, "MajorGridLinesFormat");
+	if(jsonForMajorGridLinesFormat != nullptr && !jsonForMajorGridLinesFormat->is_null())
+	{
+		std::shared_ptr<ChartLinesFormat> newItem(new ChartLinesFormat());
+		newItem->fromJson(*jsonForMajorGridLinesFormat);
+		setMajorGridLinesFormat(newItem);
+	}
+	web::json::value* jsonForMinorGridLinesFormat = ModelBase::getField(val, "MinorGridLinesFormat");
+	if(jsonForMinorGridLinesFormat != nullptr && !jsonForMinorGridLinesFormat->is_null())
+	{
+		std::shared_ptr<ChartLinesFormat> newItem(new ChartLinesFormat());
+		newItem->fromJson(*jsonForMinorGridLinesFormat);
+		setMinorGridLinesFormat(newItem);
 	}
 }
 

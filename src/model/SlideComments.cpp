@@ -38,12 +38,12 @@ SlideComments::~SlideComments()
 {
 }
 
-std::vector<std::shared_ptr<SlideComment>> SlideComments::getList() const
+std::vector<std::shared_ptr<SlideCommentBase>> SlideComments::getList() const
 {
 	return m_List;
 }
 
-void SlideComments::setList(std::vector<std::shared_ptr<SlideComment>> value)
+void SlideComments::setList(std::vector<std::shared_ptr<SlideCommentBase>> value)
 {
 	m_List = value;
 	
@@ -79,11 +79,11 @@ void SlideComments::fromJson(web::json::value& val)
 			{
 				if(item.is_null())
 				{
-					m_List.push_back(std::shared_ptr<SlideComment>(nullptr));
+					m_List.push_back(std::shared_ptr<SlideCommentBase>(nullptr));
 				}
 				else
 				{
-					std::shared_ptr<SlideComment> newItem(new SlideComment());
+					std::shared_ptr<SlideCommentBase> newItem(new SlideCommentBase());
 					newItem->fromJson(item);
 					m_List.push_back( newItem );
 				}

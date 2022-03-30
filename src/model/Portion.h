@@ -209,6 +209,21 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::shared_ptr<Hyperlink> getHyperlinkMouseOver() const;
 	ASPOSE_DLL_EXPORT void setHyperlinkMouseOver(std::shared_ptr<Hyperlink> value);
+	/// <summary>
+	/// Returns or sets the Latin font info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getLatinFont() const;
+	ASPOSE_DLL_EXPORT void setLatinFont(utility::string_t value);
+	/// <summary>
+	/// Returns or sets the East Asian font info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getEastAsianFont() const;
+	ASPOSE_DLL_EXPORT void setEastAsianFont(utility::string_t value);
+	/// <summary>
+	/// Returns or sets the complex script font info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getComplexScriptFont() const;
+	ASPOSE_DLL_EXPORT void setComplexScriptFont(utility::string_t value);
 
 protected:
 	utility::string_t m_Text;
@@ -244,6 +259,9 @@ protected:
 	std::shared_ptr<LineFormat> m_UnderlineLineFormat;
 	std::shared_ptr<Hyperlink> m_HyperlinkClick;
 	std::shared_ptr<Hyperlink> m_HyperlinkMouseOver;
+	utility::string_t m_LatinFont;
+	utility::string_t m_EastAsianFont;
+	utility::string_t m_ComplexScriptFont;
 };
 
 }

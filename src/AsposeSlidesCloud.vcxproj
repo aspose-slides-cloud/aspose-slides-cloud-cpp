@@ -132,6 +132,7 @@
     <ClCompile Include="model\BlurEffect.cpp" />
     <ClCompile Include="model\Camera.cpp" />
     <ClCompile Include="model\ChartCategory.cpp" />
+    <ClCompile Include="model\ChartLinesFormat.cpp" />
     <ClCompile Include="model\ChartTitle.cpp" />
     <ClCompile Include="model\ChartWall.cpp" />
     <ClCompile Include="model\CommonSlideViewProperties.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="model\FilesUploadResult.cpp" />
     <ClCompile Include="model\FillFormat.cpp" />
     <ClCompile Include="model\FillOverlayEffect.cpp" />
+    <ClCompile Include="model\FontFallbackRule.cpp" />
     <ClCompile Include="model\FontSet.cpp" />
     <ClCompile Include="model\GeometryPath.cpp" />
     <ClCompile Include="model\GeometryPaths.cpp" />
@@ -189,8 +191,9 @@
     <ClCompile Include="model\ShapeExportFormat.cpp" />
     <ClCompile Include="model\ShapeImageExportOptions.cpp" />
     <ClCompile Include="model\ShapeThumbnailBounds.cpp" />
+    <ClCompile Include="model\ShapeType.cpp" />
     <ClCompile Include="model\ShapesAlignmentType.cpp" />
-    <ClCompile Include="model\SlideComment.cpp" />
+    <ClCompile Include="model\SlideCommentBase.cpp" />
     <ClCompile Include="model\SlideExportFormat.cpp" />
     <ClCompile Include="model\SmartArtNode.cpp" />
     <ClCompile Include="model\SoftEdgeEffect.cpp" />
@@ -201,6 +204,7 @@
     <ClCompile Include="model\TableColumn.cpp" />
     <ClCompile Include="model\TableRow.cpp" />
     <ClCompile Include="model\Task.cpp" />
+    <ClCompile Include="model\TextBounds.cpp" />
     <ClCompile Include="model\TextFrameFormat.cpp" />
     <ClCompile Include="model\TextItem.cpp" />
     <ClCompile Include="model\ThreeDFormat.cpp" />
@@ -287,7 +291,9 @@
     <ClCompile Include="model\Slide.cpp" />
     <ClCompile Include="model\SlideAnimation.cpp" />
     <ClCompile Include="model\SlideBackground.cpp" />
+    <ClCompile Include="model\SlideComment.cpp" />
     <ClCompile Include="model\SlideComments.cpp" />
+    <ClCompile Include="model\SlideModernComment.cpp" />
     <ClCompile Include="model\SlideProperties.cpp" />
     <ClCompile Include="model\Slides.cpp" />
     <ClCompile Include="model\SolidFill.cpp" />
@@ -353,6 +359,7 @@
     <ClInclude Include="model\BlurEffect.h" />
     <ClInclude Include="model\Camera.h" />
     <ClInclude Include="model\ChartCategory.h" />
+    <ClInclude Include="model\ChartLinesFormat.h" />
     <ClInclude Include="model\ChartTitle.h" />
     <ClInclude Include="model\ChartWall.h" />
     <ClInclude Include="model\CommonSlideViewProperties.h" />
@@ -371,6 +378,7 @@
     <ClInclude Include="model\FilesUploadResult.h" />
     <ClInclude Include="model\FillFormat.h" />
     <ClInclude Include="model\FillOverlayEffect.h" />
+    <ClInclude Include="model\FontFallbackRule.h" />
     <ClInclude Include="model\FontSet.h" />
     <ClInclude Include="model\GeometryPath.h" />
     <ClInclude Include="model\GeometryPaths.h" />
@@ -410,8 +418,9 @@
     <ClInclude Include="model\ShapeExportFormat.h" />
     <ClInclude Include="model\ShapeImageExportOptions.h" />
     <ClInclude Include="model\ShapeThumbnailBounds.h" />
+    <ClInclude Include="model\ShapeType.h" />
     <ClInclude Include="model\ShapesAlignmentType.h" />
-    <ClInclude Include="model\SlideComment.h" />
+    <ClInclude Include="model\SlideCommentBase.h" />
     <ClInclude Include="model\SlideExportFormat.h" />
     <ClInclude Include="model\SmartArtNode.h" />
     <ClInclude Include="model\SoftEdgeEffect.h" />
@@ -422,6 +431,7 @@
     <ClInclude Include="model\TableColumn.h" />
     <ClInclude Include="model\TableRow.h" />
     <ClInclude Include="model\Task.h" />
+    <ClInclude Include="model\TextBounds.h" />
     <ClInclude Include="model\TextFrameFormat.h" />
     <ClInclude Include="model\TextItem.h" />
     <ClInclude Include="model\ThreeDFormat.h" />
@@ -508,7 +518,9 @@
     <ClInclude Include="model\Slide.h" />
     <ClInclude Include="model\SlideAnimation.h" />
     <ClInclude Include="model\SlideBackground.h" />
+    <ClInclude Include="model\SlideComment.h" />
     <ClInclude Include="model\SlideComments.h" />
+    <ClInclude Include="model\SlideModernComment.h" />
     <ClInclude Include="model\SlideProperties.h" />
     <ClInclude Include="model\Slides.h" />
     <ClInclude Include="model\SolidFill.h" />

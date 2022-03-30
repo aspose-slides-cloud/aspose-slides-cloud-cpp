@@ -24,85 +24,70 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * ZoomObject.h
+ * SlideCommentBase.h
  *
- * Zoom object.
+ * Represents slide comment
  */
 
-#ifndef _ZoomObject_H_
-#define _ZoomObject_H_
+#ifndef _SlideCommentBase_H_
+#define _SlideCommentBase_H_
 
-#include "ShapeBase.h"
+#include "../ModelBase.h"
 
-#include "../model/Hyperlink.h"
-#include "../model/EffectFormat.h"
-#include "../model/ShapeBase.h"
 #include <cpprest/details/basic_types.h>
-#include "../model/FillFormat.h"
-#include "../model/LineFormat.h"
-#include "../model/ResourceUri.h"
-#include "../model/ThreeDFormat.h"
+#include "../model/SlideCommentBase.h"
 #include <vector>
 
 namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// Zoom object.
+/// Represents slide comment
 /// </summary>
-class  ZoomObject : public ShapeBase
+class  SlideCommentBase : public ModelBase
 {
 public:
-	ASPOSE_DLL_EXPORT ZoomObject();
-	ASPOSE_DLL_EXPORT virtual ~ZoomObject();
+	ASPOSE_DLL_EXPORT SlideCommentBase();
+	ASPOSE_DLL_EXPORT virtual ~SlideCommentBase();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
 	/// <summary>
-	/// Image type of a zoom object. 
+	/// Author.
 	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getImageType() const;
-	ASPOSE_DLL_EXPORT void setImageType(utility::string_t value);
+	ASPOSE_DLL_EXPORT utility::string_t getAuthor() const;
+	ASPOSE_DLL_EXPORT void setAuthor(utility::string_t value);
 	/// <summary>
-	/// Navigation behavior in slideshow. 
+	/// Text.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getReturnToParent() const;
-	ASPOSE_DLL_EXPORT void setReturnToParent(bool value);
-	ASPOSE_DLL_EXPORT bool returnToParentIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetReturnToParent();
+	ASPOSE_DLL_EXPORT utility::string_t getText() const;
+	ASPOSE_DLL_EXPORT void setText(utility::string_t value);
 	/// <summary>
-	/// Specifies whether the Zoom will use the background of the destination slide.
+	/// Creation time.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowBackground() const;
-	ASPOSE_DLL_EXPORT void setShowBackground(bool value);
-	ASPOSE_DLL_EXPORT bool showBackgroundIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetShowBackground();
+	ASPOSE_DLL_EXPORT utility::string_t getCreatedTime() const;
+	ASPOSE_DLL_EXPORT void setCreatedTime(utility::string_t value);
 	/// <summary>
-	/// Internal image link for zoom object
+	/// Child comments.
 	/// </summary>
-	ASPOSE_DLL_EXPORT std::shared_ptr<ResourceUri> getImage() const;
-	ASPOSE_DLL_EXPORT void setImage(std::shared_ptr<ResourceUri> value);
+	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<SlideCommentBase>> getChildComments() const;
+	ASPOSE_DLL_EXPORT void setChildComments(std::vector<std::shared_ptr<SlideCommentBase>> value);
 	/// <summary>
-	/// Duration of the transition between Zoom and slide.
+	/// 
 	/// </summary>
-	ASPOSE_DLL_EXPORT double getTransitionDuration() const;
-	ASPOSE_DLL_EXPORT void setTransitionDuration(double value);
-	ASPOSE_DLL_EXPORT bool transitionDurationIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetTransitionDuration();
+	ASPOSE_DLL_EXPORT utility::string_t getType() const;
+	ASPOSE_DLL_EXPORT void setType(utility::string_t value);
 
 protected:
-	utility::string_t m_ImageType;
-	bool m_ReturnToParent;
-	bool m_ReturnToParentIsSet;
-	bool m_ShowBackground;
-	bool m_ShowBackgroundIsSet;
-	std::shared_ptr<ResourceUri> m_Image;
-	double m_TransitionDuration;
-	bool m_TransitionDurationIsSet;
+	utility::string_t m_Author;
+	utility::string_t m_Text;
+	utility::string_t m_CreatedTime;
+	std::vector<std::shared_ptr<SlideCommentBase>> m_ChildComments;
+	utility::string_t m_Type;
 };
 
 }
 }
 
-#endif /* _ZoomObject_H_ */
+#endif /* _SlideCommentBase_H_ */

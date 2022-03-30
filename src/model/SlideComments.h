@@ -34,7 +34,7 @@
 
 #include "ResourceBase.h"
 
-#include "../model/SlideComment.h"
+#include "../model/SlideCommentBase.h"
 #include "../model/ResourceBase.h"
 #include "../model/ResourceUri.h"
 #include <vector>
@@ -57,11 +57,11 @@ public:
 	/// <summary>
 	/// Slide comment list.
 	/// </summary>
-	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<SlideComment>> getList() const;
-	ASPOSE_DLL_EXPORT void setList(std::vector<std::shared_ptr<SlideComment>> value);
+	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<SlideCommentBase>> getList() const;
+	ASPOSE_DLL_EXPORT void setList(std::vector<std::shared_ptr<SlideCommentBase>> value);
 
 protected:
-	std::vector<std::shared_ptr<SlideComment>> m_List;
+	std::vector<std::shared_ptr<SlideCommentBase>> m_List;
 };
 
 }

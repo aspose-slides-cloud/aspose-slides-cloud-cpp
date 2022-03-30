@@ -24,18 +24,16 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * VideoExportOptions.h
+ * FontFallbackRule.h
  *
- * Provides options that control how a presentation is saved in an video format.
+ * Represents font fallback rule.             
  */
 
-#ifndef _VideoExportOptions_H_
-#define _VideoExportOptions_H_
+#ifndef _FontFallbackRule_H_
+#define _FontFallbackRule_H_
 
-#include "ExportOptions.h"
+#include "../ModelBase.h"
 
-#include "../model/ExportOptions.h"
-#include "../model/FontFallbackRule.h"
 #include <cpprest/details/basic_types.h>
 #include <vector>
 
@@ -43,37 +41,40 @@ namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// Provides options that control how a presentation is saved in an video format.
+/// Represents font fallback rule.             
 /// </summary>
-class  VideoExportOptions : public ExportOptions
+class  FontFallbackRule : public ModelBase
 {
 public:
-	ASPOSE_DLL_EXPORT VideoExportOptions();
-	ASPOSE_DLL_EXPORT virtual ~VideoExportOptions();
+	ASPOSE_DLL_EXPORT FontFallbackRule();
+	ASPOSE_DLL_EXPORT virtual ~FontFallbackRule();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
 	/// <summary>
-	/// Transition duration.
+	/// First index of continuous unicode range.
 	/// </summary>
-	ASPOSE_DLL_EXPORT int32_t getTransitionDuration() const;
-	ASPOSE_DLL_EXPORT void setTransitionDuration(int32_t value);
-	ASPOSE_DLL_EXPORT bool transitionDurationIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetTransitionDuration();
+	ASPOSE_DLL_EXPORT int32_t getRangeStartIndex() const;
+	ASPOSE_DLL_EXPORT void setRangeStartIndex(int32_t value);
 	/// <summary>
-	/// Video resolution type
+	/// Last index of continuous unicode range.
 	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getVideoResolutionType() const;
-	ASPOSE_DLL_EXPORT void setVideoResolutionType(utility::string_t value);
+	ASPOSE_DLL_EXPORT int32_t getRangeEndIndex() const;
+	ASPOSE_DLL_EXPORT void setRangeEndIndex(int32_t value);
+	/// <summary>
+	/// List of fallback font links.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::vector<utility::string_t> getFallbackFontList() const;
+	ASPOSE_DLL_EXPORT void setFallbackFontList(std::vector<utility::string_t> value);
 
 protected:
-	int32_t m_TransitionDuration;
-	bool m_TransitionDurationIsSet;
-	utility::string_t m_VideoResolutionType;
+	int32_t m_RangeStartIndex;
+	int32_t m_RangeEndIndex;
+	std::vector<utility::string_t> m_FallbackFontList;
 };
 
 }
 }
 
-#endif /* _VideoExportOptions_H_ */
+#endif /* _FontFallbackRule_H_ */

@@ -401,6 +401,39 @@ void Portion::setHyperlinkMouseOver(std::shared_ptr<Hyperlink> value)
 	
 }
 
+utility::string_t Portion::getLatinFont() const
+{
+	return m_LatinFont;
+}
+
+void Portion::setLatinFont(utility::string_t value)
+{
+	m_LatinFont = value;
+	
+}
+
+utility::string_t Portion::getEastAsianFont() const
+{
+	return m_EastAsianFont;
+}
+
+void Portion::setEastAsianFont(utility::string_t value)
+{
+	m_EastAsianFont = value;
+	
+}
+
+utility::string_t Portion::getComplexScriptFont() const
+{
+	return m_ComplexScriptFont;
+}
+
+void Portion::setComplexScriptFont(utility::string_t value)
+{
+	m_ComplexScriptFont = value;
+	
+}
+
 web::json::value Portion::toJson() const
 {
 	web::json::value val = this->ResourceBase::toJson();
@@ -515,6 +548,18 @@ web::json::value Portion::toJson() const
 	if (m_HyperlinkMouseOver != nullptr)
 	{
 		val[utility::conversions::to_string_t("HyperlinkMouseOver")] = ModelBase::toJson(m_HyperlinkMouseOver);
+	}
+	if (!m_LatinFont.empty())
+	{
+		val[utility::conversions::to_string_t("LatinFont")] = ModelBase::toJson(m_LatinFont);
+	}
+	if (!m_EastAsianFont.empty())
+	{
+		val[utility::conversions::to_string_t("EastAsianFont")] = ModelBase::toJson(m_EastAsianFont);
+	}
+	if (!m_ComplexScriptFont.empty())
+	{
+		val[utility::conversions::to_string_t("ComplexScriptFont")] = ModelBase::toJson(m_ComplexScriptFont);
 	}
 	return val;
 }
@@ -677,6 +722,21 @@ void Portion::fromJson(web::json::value& val)
 		std::shared_ptr<Hyperlink> newItem(new Hyperlink());
 		newItem->fromJson(*jsonForHyperlinkMouseOver);
 		setHyperlinkMouseOver(newItem);
+	}
+	web::json::value* jsonForLatinFont = ModelBase::getField(val, "LatinFont");
+	if(jsonForLatinFont != nullptr && !jsonForLatinFont->is_null())
+	{
+		setLatinFont(ModelBase::stringFromJson(*jsonForLatinFont));
+	}
+	web::json::value* jsonForEastAsianFont = ModelBase::getField(val, "EastAsianFont");
+	if(jsonForEastAsianFont != nullptr && !jsonForEastAsianFont->is_null())
+	{
+		setEastAsianFont(ModelBase::stringFromJson(*jsonForEastAsianFont));
+	}
+	web::json::value* jsonForComplexScriptFont = ModelBase::getField(val, "ComplexScriptFont");
+	if(jsonForComplexScriptFont != nullptr && !jsonForComplexScriptFont->is_null())
+	{
+		setComplexScriptFont(ModelBase::stringFromJson(*jsonForComplexScriptFont));
 	}
 }
 

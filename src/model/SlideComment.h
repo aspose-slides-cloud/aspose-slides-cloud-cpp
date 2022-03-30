@@ -32,10 +32,10 @@
 #ifndef _SlideComment_H_
 #define _SlideComment_H_
 
-#include "../ModelBase.h"
+#include "SlideCommentBase.h"
 
-#include "../model/SlideComment.h"
 #include <cpprest/details/basic_types.h>
+#include "../model/SlideCommentBase.h"
 #include <vector>
 
 namespace asposeslidescloud {
@@ -44,7 +44,7 @@ namespace model {
 /// <summary>
 /// Represents comment of slide
 /// </summary>
-class  SlideComment : public ModelBase
+class  SlideComment : public SlideCommentBase
 {
 public:
 	ASPOSE_DLL_EXPORT SlideComment();
@@ -53,32 +53,8 @@ public:
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
-	/// <summary>
-	/// Author.
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getAuthor() const;
-	ASPOSE_DLL_EXPORT void setAuthor(utility::string_t value);
-	/// <summary>
-	/// Text.
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getText() const;
-	ASPOSE_DLL_EXPORT void setText(utility::string_t value);
-	/// <summary>
-	/// Creation time.
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getCreatedTime() const;
-	ASPOSE_DLL_EXPORT void setCreatedTime(utility::string_t value);
-	/// <summary>
-	/// Child comments.
-	/// </summary>
-	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<SlideComment>> getChildComments() const;
-	ASPOSE_DLL_EXPORT void setChildComments(std::vector<std::shared_ptr<SlideComment>> value);
 
 protected:
-	utility::string_t m_Author;
-	utility::string_t m_Text;
-	utility::string_t m_CreatedTime;
-	std::vector<std::shared_ptr<SlideComment>> m_ChildComments;
 };
 
 }

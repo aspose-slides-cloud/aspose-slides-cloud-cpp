@@ -853,7 +853,7 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::createChartSeries(utility::string_
 		});
 }
 
-pplx::task<std::shared_ptr<SlideComments>> SlidesApi::createComment(utility::string_t name, int32_t slideIndex, std::shared_ptr<SlideComment> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<SlideComments>> SlidesApi::createComment(utility::string_t name, int32_t slideIndex, std::shared_ptr<SlideCommentBase> dto, boost::optional<int32_t> shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -869,6 +869,10 @@ pplx::task<std::shared_ptr<SlideComments>> SlidesApi::createComment(utility::str
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
 
 	std::map<utility::string_t, utility::string_t> queryParams;
+	if (shapeIndex.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapeIndex"), shapeIndex.value());
+	}
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
 
@@ -898,7 +902,7 @@ pplx::task<std::shared_ptr<SlideComments>> SlidesApi::createComment(utility::str
 		});
 }
 
-pplx::task<HttpContent> SlidesApi::createCommentOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, std::shared_ptr<SlideComment> dto, utility::string_t password)
+pplx::task<HttpContent> SlidesApi::createCommentOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, std::shared_ptr<SlideCommentBase> dto, boost::optional<int32_t> shapeIndex, utility::string_t password)
 {
 	if (document == nullptr)
 	{
@@ -912,6 +916,10 @@ pplx::task<HttpContent> SlidesApi::createCommentOnline(std::shared_ptr<HttpConte
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
 
 	std::map<utility::string_t, utility::string_t> queryParams;
+	if (shapeIndex.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapeIndex"), shapeIndex.value());
+	}
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -6753,6 +6761,45 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getParagraph(utility::string_t
 		});
 }
 
+pplx::task<std::shared_ptr<TextBounds>> SlidesApi::getParagraphRectangle(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/paragraphs/{paragraphIndex}/bounds");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "getParagraphRectangle");
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<TextBounds> result(new TextBounds());
+			result->fromJson(json);
+			return result;
+		});
+}
+
 pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getParagraphs(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
 {
 	// verify the required parameter 'name' is set
@@ -6901,6 +6948,46 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getPortion(utility::string_t nam
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<Portion> result(new Portion());
+			result->fromJson(json);
+			return result;
+		});
+}
+
+pplx::task<std::shared_ptr<TextBounds>> SlidesApi::getPortionRectangle(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/paragraphs/{paragraphIndex}/portions/{portionIndex}/bounds");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
+	ApiClient::setPathParameter(methodPath, "portionIndex", portionIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "getPortionRectangle");
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<TextBounds> result(new TextBounds());
 			result->fromJson(json);
 			return result;
 		});
@@ -7205,12 +7292,17 @@ pplx::task<std::shared_ptr<GeometryPaths>> SlidesApi::getShapeGeometryPath(utili
 		});
 }
 
-pplx::task<std::shared_ptr<Shapes>> SlidesApi::getShapes(utility::string_t name, int32_t slideIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Shapes>> SlidesApi::getShapes(utility::string_t name, int32_t slideIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t shapeType)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: name");
+	}
+	// validate the parameter 'shapeType'
+	if (!shapeType.empty() && !boost::iequals(shapeType, "Shape") && !boost::iequals(shapeType, "Chart") && !boost::iequals(shapeType, "Table") && !boost::iequals(shapeType, "PictureFrame") && !boost::iequals(shapeType, "VideoFrame") && !boost::iequals(shapeType, "AudioFrame") && !boost::iequals(shapeType, "SmartArt") && !boost::iequals(shapeType, "OleObjectFrame") && !boost::iequals(shapeType, "GroupShape") && !boost::iequals(shapeType, "GraphicalObject") && !boost::iequals(shapeType, "Connector") && !boost::iequals(shapeType, "SmartArtShape") && !boost::iequals(shapeType, "ZoomFrame") && !boost::iequals(shapeType, "SectionZoomFrame") && !boost::iequals(shapeType, "SummaryZoomFrame") && !boost::iequals(shapeType, "SummaryZoomSection"))
+	{
+		throw std::invalid_argument("Invalid value for shapeType. Must be one of Shape, Chart, Table, PictureFrame, VideoFrame, AudioFrame, SmartArt, OleObjectFrame, GroupShape, GraphicalObject, Connector, SmartArtShape, ZoomFrame, SectionZoomFrame, SummaryZoomFrame, SummaryZoomSection.");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes");
 	ApiClient::setPathParameter(methodPath, "name", name);
@@ -7219,6 +7311,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getShapes(utility::string_t name,
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapeType"), shapeType);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -8756,6 +8849,10 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::importFromPdf(utility::string_t
 	if (name.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: name");
+	}
+	if (pdf == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.pdf");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/fromPdf");
 	ApiClient::setPathParameter(methodPath, "name", name);

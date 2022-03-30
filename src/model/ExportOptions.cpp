@@ -93,6 +93,17 @@ void ExportOptions::unsetWidth()
 	m_WidthIsSet = false;
 }
 
+std::vector<std::shared_ptr<FontFallbackRule>> ExportOptions::getFontFallbackRules() const
+{
+	return m_FontFallbackRules;
+}
+
+void ExportOptions::setFontFallbackRules(std::vector<std::shared_ptr<FontFallbackRule>> value)
+{
+	m_FontFallbackRules = value;
+	
+}
+
 utility::string_t ExportOptions::getFormat() const
 {
 	return m_Format;
@@ -119,6 +130,17 @@ web::json::value ExportOptions::toJson() const
 	{
 		val[utility::conversions::to_string_t("Width")] = ModelBase::toJson(m_Width);
 	}
+	{
+		std::vector<web::json::value> jsonArray;
+		for (auto& item : m_FontFallbackRules)
+		{
+			jsonArray.push_back(ModelBase::toJson(item));
+		}
+		if (jsonArray.size() > 0)
+		{
+			val[utility::conversions::to_string_t("FontFallbackRules")] = web::json::value::array(jsonArray);
+		}
+	}
 	if (!m_Format.empty())
 	{
 		val[utility::conversions::to_string_t("Format")] = ModelBase::toJson(m_Format);
@@ -142,6 +164,27 @@ void ExportOptions::fromJson(web::json::value& val)
 	if(jsonForWidth != nullptr && !jsonForWidth->is_null() && jsonForWidth->is_number())
 	{
 		setWidth(ModelBase::int32_tFromJson(*jsonForWidth));
+	}
+	web::json::value* jsonForFontFallbackRules = ModelBase::getField(val, "FontFallbackRules");
+	if(jsonForFontFallbackRules != nullptr && !jsonForFontFallbackRules->is_null())
+	{
+		{
+			m_FontFallbackRules.clear();
+			std::vector<web::json::value> jsonArray;
+			for(auto& item : jsonForFontFallbackRules->as_array())
+			{
+				if(item.is_null())
+				{
+					m_FontFallbackRules.push_back(std::shared_ptr<FontFallbackRule>(nullptr));
+				}
+				else
+				{
+					std::shared_ptr<FontFallbackRule> newItem(new FontFallbackRule());
+					newItem->fromJson(item);
+					m_FontFallbackRules.push_back( newItem );
+				}
+			}
+        	}
 	}
 	web::json::value* jsonForFormat = ModelBase::getField(val, "Format");
 	if(jsonForFormat != nullptr && !jsonForFormat->is_null())

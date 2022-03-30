@@ -5274,19 +5274,21 @@ TEST_F(SlidesApiTest, createChartSeriesInvalidStorage) {
 TEST_F(SlidesApiTest, createComment) {
 	utility::string_t paramName = utils->getTestValue("createComment", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("createComment", "slideIndex");
-	std::shared_ptr<SlideComment> paramDto = utils->getTestValueForClass<SlideComment>("createComment", "dto");
+	std::shared_ptr<SlideCommentBase> paramDto = utils->getTestValueForClass<SlideCommentBase>("createComment", "dto");
+	auto paramShapeIndex = utils->getOptionalIntTestValue("createComment", "shapeIndex");
 	utility::string_t paramPassword = utils->getTestValue("createComment", "password");
 	utility::string_t paramFolder = utils->getTestValue("createComment", "folder");
 	utility::string_t paramStorage = utils->getTestValue("createComment", "storage");
 	utils->initialize("createComment", "");
-	std::shared_ptr<SlideComments> result = api->createComment(paramName, paramSlideIndex, paramDto, paramPassword, paramFolder, paramStorage).get();
+	std::shared_ptr<SlideComments> result = api->createComment(paramName, paramSlideIndex, paramDto, paramShapeIndex, paramPassword, paramFolder, paramStorage).get();
 	EXPECT_NE(nullptr, result);
 }
 
 TEST_F(SlidesApiTest, createCommentInvalidName) {
 	utility::string_t paramName = utils->getTestValue("createComment", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("createComment", "slideIndex");
-	std::shared_ptr<SlideComment> paramDto = utils->getTestValueForClass<SlideComment>("createComment", "dto");
+	std::shared_ptr<SlideCommentBase> paramDto = utils->getTestValueForClass<SlideCommentBase>("createComment", "dto");
+	auto paramShapeIndex = utils->getOptionalIntTestValue("createComment", "shapeIndex");
 	utility::string_t paramPassword = utils->getTestValue("createComment", "password");
 	utility::string_t paramFolder = utils->getTestValue("createComment", "folder");
 	utility::string_t paramStorage = utils->getTestValue("createComment", "storage");
@@ -5296,7 +5298,7 @@ TEST_F(SlidesApiTest, createCommentInvalidName) {
 	bool failed = true;
 	try
 	{
-		api->createComment(paramName, paramSlideIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		api->createComment(paramName, paramSlideIndex, paramDto, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -5327,7 +5329,8 @@ TEST_F(SlidesApiTest, createCommentInvalidName) {
 TEST_F(SlidesApiTest, createCommentInvalidSlideIndex) {
 	utility::string_t paramName = utils->getTestValue("createComment", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("createComment", "slideIndex");
-	std::shared_ptr<SlideComment> paramDto = utils->getTestValueForClass<SlideComment>("createComment", "dto");
+	std::shared_ptr<SlideCommentBase> paramDto = utils->getTestValueForClass<SlideCommentBase>("createComment", "dto");
+	auto paramShapeIndex = utils->getOptionalIntTestValue("createComment", "shapeIndex");
 	utility::string_t paramPassword = utils->getTestValue("createComment", "password");
 	utility::string_t paramFolder = utils->getTestValue("createComment", "folder");
 	utility::string_t paramStorage = utils->getTestValue("createComment", "storage");
@@ -5337,7 +5340,7 @@ TEST_F(SlidesApiTest, createCommentInvalidSlideIndex) {
 	bool failed = true;
 	try
 	{
-		api->createComment(paramName, paramSlideIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		api->createComment(paramName, paramSlideIndex, paramDto, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -5368,7 +5371,8 @@ TEST_F(SlidesApiTest, createCommentInvalidSlideIndex) {
 TEST_F(SlidesApiTest, createCommentInvalidDto) {
 	utility::string_t paramName = utils->getTestValue("createComment", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("createComment", "slideIndex");
-	std::shared_ptr<SlideComment> paramDto = utils->getTestValueForClass<SlideComment>("createComment", "dto");
+	std::shared_ptr<SlideCommentBase> paramDto = utils->getTestValueForClass<SlideCommentBase>("createComment", "dto");
+	auto paramShapeIndex = utils->getOptionalIntTestValue("createComment", "shapeIndex");
 	utility::string_t paramPassword = utils->getTestValue("createComment", "password");
 	utility::string_t paramFolder = utils->getTestValue("createComment", "folder");
 	utility::string_t paramStorage = utils->getTestValue("createComment", "storage");
@@ -5378,7 +5382,7 @@ TEST_F(SlidesApiTest, createCommentInvalidDto) {
 	bool failed = true;
 	try
 	{
-		api->createComment(paramName, paramSlideIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		api->createComment(paramName, paramSlideIndex, paramDto, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -5406,10 +5410,53 @@ TEST_F(SlidesApiTest, createCommentInvalidDto) {
 	}
 }
 
+TEST_F(SlidesApiTest, createCommentInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("createComment", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createComment", "slideIndex");
+	std::shared_ptr<SlideCommentBase> paramDto = utils->getTestValueForClass<SlideCommentBase>("createComment", "dto");
+	auto paramShapeIndex = utils->getOptionalIntTestValue("createComment", "shapeIndex");
+	utility::string_t paramPassword = utils->getTestValue("createComment", "password");
+	utility::string_t paramFolder = utils->getTestValue("createComment", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createComment", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("createComment", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("createComment", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->createComment(paramName, paramSlideIndex, paramDto, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createComment", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createComment", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createComment", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createComment", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createComment", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, createCommentInvalidPassword) {
 	utility::string_t paramName = utils->getTestValue("createComment", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("createComment", "slideIndex");
-	std::shared_ptr<SlideComment> paramDto = utils->getTestValueForClass<SlideComment>("createComment", "dto");
+	std::shared_ptr<SlideCommentBase> paramDto = utils->getTestValueForClass<SlideCommentBase>("createComment", "dto");
+	auto paramShapeIndex = utils->getOptionalIntTestValue("createComment", "shapeIndex");
 	utility::string_t paramPassword = utils->getTestValue("createComment", "password");
 	utility::string_t paramFolder = utils->getTestValue("createComment", "folder");
 	utility::string_t paramStorage = utils->getTestValue("createComment", "storage");
@@ -5419,7 +5466,7 @@ TEST_F(SlidesApiTest, createCommentInvalidPassword) {
 	bool failed = true;
 	try
 	{
-		api->createComment(paramName, paramSlideIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		api->createComment(paramName, paramSlideIndex, paramDto, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -5450,7 +5497,8 @@ TEST_F(SlidesApiTest, createCommentInvalidPassword) {
 TEST_F(SlidesApiTest, createCommentInvalidFolder) {
 	utility::string_t paramName = utils->getTestValue("createComment", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("createComment", "slideIndex");
-	std::shared_ptr<SlideComment> paramDto = utils->getTestValueForClass<SlideComment>("createComment", "dto");
+	std::shared_ptr<SlideCommentBase> paramDto = utils->getTestValueForClass<SlideCommentBase>("createComment", "dto");
+	auto paramShapeIndex = utils->getOptionalIntTestValue("createComment", "shapeIndex");
 	utility::string_t paramPassword = utils->getTestValue("createComment", "password");
 	utility::string_t paramFolder = utils->getTestValue("createComment", "folder");
 	utility::string_t paramStorage = utils->getTestValue("createComment", "storage");
@@ -5460,7 +5508,7 @@ TEST_F(SlidesApiTest, createCommentInvalidFolder) {
 	bool failed = true;
 	try
 	{
-		api->createComment(paramName, paramSlideIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		api->createComment(paramName, paramSlideIndex, paramDto, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -5491,7 +5539,8 @@ TEST_F(SlidesApiTest, createCommentInvalidFolder) {
 TEST_F(SlidesApiTest, createCommentInvalidStorage) {
 	utility::string_t paramName = utils->getTestValue("createComment", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("createComment", "slideIndex");
-	std::shared_ptr<SlideComment> paramDto = utils->getTestValueForClass<SlideComment>("createComment", "dto");
+	std::shared_ptr<SlideCommentBase> paramDto = utils->getTestValueForClass<SlideCommentBase>("createComment", "dto");
+	auto paramShapeIndex = utils->getOptionalIntTestValue("createComment", "shapeIndex");
 	utility::string_t paramPassword = utils->getTestValue("createComment", "password");
 	utility::string_t paramFolder = utils->getTestValue("createComment", "folder");
 	utility::string_t paramStorage = utils->getTestValue("createComment", "storage");
@@ -5501,7 +5550,7 @@ TEST_F(SlidesApiTest, createCommentInvalidStorage) {
 	bool failed = true;
 	try
 	{
-		api->createComment(paramName, paramSlideIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		api->createComment(paramName, paramSlideIndex, paramDto, paramShapeIndex, paramPassword, paramFolder, paramStorage).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -5532,17 +5581,19 @@ TEST_F(SlidesApiTest, createCommentInvalidStorage) {
 TEST_F(SlidesApiTest, createCommentOnline) {
 	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("createCommentOnline", "document");
 	int32_t paramSlideIndex = utils->getIntTestValue("createCommentOnline", "slideIndex");
-	std::shared_ptr<SlideComment> paramDto = utils->getTestValueForClass<SlideComment>("createCommentOnline", "dto");
+	std::shared_ptr<SlideCommentBase> paramDto = utils->getTestValueForClass<SlideCommentBase>("createCommentOnline", "dto");
+	auto paramShapeIndex = utils->getOptionalIntTestValue("createCommentOnline", "shapeIndex");
 	utility::string_t paramPassword = utils->getTestValue("createCommentOnline", "password");
 	utils->initialize("createCommentOnline", "");
-	HttpContent result = api->createCommentOnline(paramDocument, paramSlideIndex, paramDto, paramPassword).get();
+	HttpContent result = api->createCommentOnline(paramDocument, paramSlideIndex, paramDto, paramShapeIndex, paramPassword).get();
 	EXPECT_FALSE(result.getData()->eof());
 }
 
 TEST_F(SlidesApiTest, createCommentOnlineInvalidDocument) {
 	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("createCommentOnline", "document");
 	int32_t paramSlideIndex = utils->getIntTestValue("createCommentOnline", "slideIndex");
-	std::shared_ptr<SlideComment> paramDto = utils->getTestValueForClass<SlideComment>("createCommentOnline", "dto");
+	std::shared_ptr<SlideCommentBase> paramDto = utils->getTestValueForClass<SlideCommentBase>("createCommentOnline", "dto");
+	auto paramShapeIndex = utils->getOptionalIntTestValue("createCommentOnline", "shapeIndex");
 	utility::string_t paramPassword = utils->getTestValue("createCommentOnline", "password");
 	paramDocument = utils->getInvalidBinaryTestValue("createCommentOnline", "document", paramDocument);
 	utils->initialize("createCommentOnline", "document", paramDocument);
@@ -5550,7 +5601,7 @@ TEST_F(SlidesApiTest, createCommentOnlineInvalidDocument) {
 	bool failed = true;
 	try
 	{
-		api->createCommentOnline(paramDocument, paramSlideIndex, paramDto, paramPassword).wait();
+		api->createCommentOnline(paramDocument, paramSlideIndex, paramDto, paramShapeIndex, paramPassword).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -5581,7 +5632,8 @@ TEST_F(SlidesApiTest, createCommentOnlineInvalidDocument) {
 TEST_F(SlidesApiTest, createCommentOnlineInvalidSlideIndex) {
 	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("createCommentOnline", "document");
 	int32_t paramSlideIndex = utils->getIntTestValue("createCommentOnline", "slideIndex");
-	std::shared_ptr<SlideComment> paramDto = utils->getTestValueForClass<SlideComment>("createCommentOnline", "dto");
+	std::shared_ptr<SlideCommentBase> paramDto = utils->getTestValueForClass<SlideCommentBase>("createCommentOnline", "dto");
+	auto paramShapeIndex = utils->getOptionalIntTestValue("createCommentOnline", "shapeIndex");
 	utility::string_t paramPassword = utils->getTestValue("createCommentOnline", "password");
 	paramSlideIndex = utils->getInvalidIntTestValue("createCommentOnline", "slideIndex", paramSlideIndex).value();
 	utils->initialize("createCommentOnline", "slideIndex", paramSlideIndex);
@@ -5589,7 +5641,7 @@ TEST_F(SlidesApiTest, createCommentOnlineInvalidSlideIndex) {
 	bool failed = true;
 	try
 	{
-		api->createCommentOnline(paramDocument, paramSlideIndex, paramDto, paramPassword).wait();
+		api->createCommentOnline(paramDocument, paramSlideIndex, paramDto, paramShapeIndex, paramPassword).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -5620,7 +5672,8 @@ TEST_F(SlidesApiTest, createCommentOnlineInvalidSlideIndex) {
 TEST_F(SlidesApiTest, createCommentOnlineInvalidDto) {
 	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("createCommentOnline", "document");
 	int32_t paramSlideIndex = utils->getIntTestValue("createCommentOnline", "slideIndex");
-	std::shared_ptr<SlideComment> paramDto = utils->getTestValueForClass<SlideComment>("createCommentOnline", "dto");
+	std::shared_ptr<SlideCommentBase> paramDto = utils->getTestValueForClass<SlideCommentBase>("createCommentOnline", "dto");
+	auto paramShapeIndex = utils->getOptionalIntTestValue("createCommentOnline", "shapeIndex");
 	utility::string_t paramPassword = utils->getTestValue("createCommentOnline", "password");
 	paramDto = utils->getInvalidTestValueForClass<>("createCommentOnline", "dto", paramDto);
 	utils->initialize("createCommentOnline", "dto", paramDto);
@@ -5628,7 +5681,7 @@ TEST_F(SlidesApiTest, createCommentOnlineInvalidDto) {
 	bool failed = true;
 	try
 	{
-		api->createCommentOnline(paramDocument, paramSlideIndex, paramDto, paramPassword).wait();
+		api->createCommentOnline(paramDocument, paramSlideIndex, paramDto, paramShapeIndex, paramPassword).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -5656,10 +5709,51 @@ TEST_F(SlidesApiTest, createCommentOnlineInvalidDto) {
 	}
 }
 
+TEST_F(SlidesApiTest, createCommentOnlineInvalidShapeIndex) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("createCommentOnline", "document");
+	int32_t paramSlideIndex = utils->getIntTestValue("createCommentOnline", "slideIndex");
+	std::shared_ptr<SlideCommentBase> paramDto = utils->getTestValueForClass<SlideCommentBase>("createCommentOnline", "dto");
+	auto paramShapeIndex = utils->getOptionalIntTestValue("createCommentOnline", "shapeIndex");
+	utility::string_t paramPassword = utils->getTestValue("createCommentOnline", "password");
+	paramShapeIndex = utils->getInvalidIntTestValue("createCommentOnline", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("createCommentOnline", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->createCommentOnline(paramDocument, paramSlideIndex, paramDto, paramShapeIndex, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createCommentOnline", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createCommentOnline", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createCommentOnline", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createCommentOnline", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createCommentOnline", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, createCommentOnlineInvalidPassword) {
 	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("createCommentOnline", "document");
 	int32_t paramSlideIndex = utils->getIntTestValue("createCommentOnline", "slideIndex");
-	std::shared_ptr<SlideComment> paramDto = utils->getTestValueForClass<SlideComment>("createCommentOnline", "dto");
+	std::shared_ptr<SlideCommentBase> paramDto = utils->getTestValueForClass<SlideCommentBase>("createCommentOnline", "dto");
+	auto paramShapeIndex = utils->getOptionalIntTestValue("createCommentOnline", "shapeIndex");
 	utility::string_t paramPassword = utils->getTestValue("createCommentOnline", "password");
 	paramPassword = utils->getInvalidTestValue("createCommentOnline", "password", paramPassword);
 	utils->initialize("createCommentOnline", "password", paramPassword);
@@ -5667,7 +5761,7 @@ TEST_F(SlidesApiTest, createCommentOnlineInvalidPassword) {
 	bool failed = true;
 	try
 	{
-		api->createCommentOnline(paramDocument, paramSlideIndex, paramDto, paramPassword).wait();
+		api->createCommentOnline(paramDocument, paramSlideIndex, paramDto, paramShapeIndex, paramPassword).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -41375,6 +41469,313 @@ TEST_F(SlidesApiTest, getParagraphInvalidStorage) {
 	}
 }
 
+TEST_F(SlidesApiTest, getParagraphRectangle) {
+	utility::string_t paramName = utils->getTestValue("getParagraphRectangle", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getParagraphRectangle", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getParagraphRectangle", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getParagraphRectangle", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getParagraphRectangle", "password");
+	utility::string_t paramFolder = utils->getTestValue("getParagraphRectangle", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getParagraphRectangle", "storage");
+	utils->initialize("getParagraphRectangle", "");
+	std::shared_ptr<TextBounds> result = api->getParagraphRectangle(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, getParagraphRectangleInvalidName) {
+	utility::string_t paramName = utils->getTestValue("getParagraphRectangle", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getParagraphRectangle", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getParagraphRectangle", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getParagraphRectangle", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getParagraphRectangle", "password");
+	utility::string_t paramFolder = utils->getTestValue("getParagraphRectangle", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getParagraphRectangle", "storage");
+	paramName = utils->getInvalidTestValue("getParagraphRectangle", "name", paramName);
+	utils->initialize("getParagraphRectangle", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->getParagraphRectangle(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getParagraphRectangle", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getParagraphRectangle", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getParagraphRectangle", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getParagraphRectangle", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getParagraphRectangle", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getParagraphRectangleInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("getParagraphRectangle", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getParagraphRectangle", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getParagraphRectangle", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getParagraphRectangle", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getParagraphRectangle", "password");
+	utility::string_t paramFolder = utils->getTestValue("getParagraphRectangle", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getParagraphRectangle", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("getParagraphRectangle", "slideIndex", paramSlideIndex).value();
+	utils->initialize("getParagraphRectangle", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getParagraphRectangle(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getParagraphRectangle", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getParagraphRectangle", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getParagraphRectangle", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getParagraphRectangle", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getParagraphRectangle", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getParagraphRectangleInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("getParagraphRectangle", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getParagraphRectangle", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getParagraphRectangle", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getParagraphRectangle", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getParagraphRectangle", "password");
+	utility::string_t paramFolder = utils->getTestValue("getParagraphRectangle", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getParagraphRectangle", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("getParagraphRectangle", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("getParagraphRectangle", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getParagraphRectangle(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getParagraphRectangle", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getParagraphRectangle", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getParagraphRectangle", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getParagraphRectangle", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getParagraphRectangle", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getParagraphRectangleInvalidParagraphIndex) {
+	utility::string_t paramName = utils->getTestValue("getParagraphRectangle", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getParagraphRectangle", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getParagraphRectangle", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getParagraphRectangle", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getParagraphRectangle", "password");
+	utility::string_t paramFolder = utils->getTestValue("getParagraphRectangle", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getParagraphRectangle", "storage");
+	paramParagraphIndex = utils->getInvalidIntTestValue("getParagraphRectangle", "paragraphIndex", paramParagraphIndex).value();
+	utils->initialize("getParagraphRectangle", "paragraphIndex", paramParagraphIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getParagraphRectangle(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getParagraphRectangle", "paragraphIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getParagraphRectangle", "paragraphIndex", paramParagraphIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getParagraphRectangle", "paragraphIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getParagraphRectangle", "paragraphIndex", paramParagraphIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getParagraphRectangle", "paragraphIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getParagraphRectangleInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("getParagraphRectangle", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getParagraphRectangle", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getParagraphRectangle", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getParagraphRectangle", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getParagraphRectangle", "password");
+	utility::string_t paramFolder = utils->getTestValue("getParagraphRectangle", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getParagraphRectangle", "storage");
+	paramPassword = utils->getInvalidTestValue("getParagraphRectangle", "password", paramPassword);
+	utils->initialize("getParagraphRectangle", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->getParagraphRectangle(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getParagraphRectangle", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getParagraphRectangle", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getParagraphRectangle", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getParagraphRectangle", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getParagraphRectangle", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getParagraphRectangleInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("getParagraphRectangle", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getParagraphRectangle", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getParagraphRectangle", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getParagraphRectangle", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getParagraphRectangle", "password");
+	utility::string_t paramFolder = utils->getTestValue("getParagraphRectangle", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getParagraphRectangle", "storage");
+	paramFolder = utils->getInvalidTestValue("getParagraphRectangle", "folder", paramFolder);
+	utils->initialize("getParagraphRectangle", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->getParagraphRectangle(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getParagraphRectangle", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getParagraphRectangle", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getParagraphRectangle", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getParagraphRectangle", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getParagraphRectangle", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getParagraphRectangleInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("getParagraphRectangle", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getParagraphRectangle", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getParagraphRectangle", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getParagraphRectangle", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getParagraphRectangle", "password");
+	utility::string_t paramFolder = utils->getTestValue("getParagraphRectangle", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getParagraphRectangle", "storage");
+	paramStorage = utils->getInvalidTestValue("getParagraphRectangle", "storage", paramStorage);
+	utils->initialize("getParagraphRectangle", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->getParagraphRectangle(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getParagraphRectangle", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getParagraphRectangle", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getParagraphRectangle", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getParagraphRectangle", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getParagraphRectangle", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, getParagraphs) {
 	utility::string_t paramName = utils->getTestValue("getParagraphs", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("getParagraphs", "slideIndex");
@@ -42455,6 +42856,364 @@ TEST_F(SlidesApiTest, getPortionInvalidStorage) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("getPortion", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getPortionRectangle) {
+	utility::string_t paramName = utils->getTestValue("getPortionRectangle", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getPortionRectangle", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getPortionRectangle", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getPortionRectangle", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getPortionRectangle", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getPortionRectangle", "password");
+	utility::string_t paramFolder = utils->getTestValue("getPortionRectangle", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getPortionRectangle", "storage");
+	utils->initialize("getPortionRectangle", "");
+	std::shared_ptr<TextBounds> result = api->getPortionRectangle(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, getPortionRectangleInvalidName) {
+	utility::string_t paramName = utils->getTestValue("getPortionRectangle", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getPortionRectangle", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getPortionRectangle", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getPortionRectangle", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getPortionRectangle", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getPortionRectangle", "password");
+	utility::string_t paramFolder = utils->getTestValue("getPortionRectangle", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getPortionRectangle", "storage");
+	paramName = utils->getInvalidTestValue("getPortionRectangle", "name", paramName);
+	utils->initialize("getPortionRectangle", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->getPortionRectangle(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getPortionRectangle", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getPortionRectangle", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getPortionRectangle", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getPortionRectangle", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getPortionRectangle", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getPortionRectangleInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("getPortionRectangle", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getPortionRectangle", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getPortionRectangle", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getPortionRectangle", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getPortionRectangle", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getPortionRectangle", "password");
+	utility::string_t paramFolder = utils->getTestValue("getPortionRectangle", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getPortionRectangle", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("getPortionRectangle", "slideIndex", paramSlideIndex).value();
+	utils->initialize("getPortionRectangle", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getPortionRectangle(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getPortionRectangle", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getPortionRectangle", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getPortionRectangle", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getPortionRectangle", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getPortionRectangle", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getPortionRectangleInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("getPortionRectangle", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getPortionRectangle", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getPortionRectangle", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getPortionRectangle", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getPortionRectangle", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getPortionRectangle", "password");
+	utility::string_t paramFolder = utils->getTestValue("getPortionRectangle", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getPortionRectangle", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("getPortionRectangle", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("getPortionRectangle", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getPortionRectangle(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getPortionRectangle", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getPortionRectangle", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getPortionRectangle", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getPortionRectangle", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getPortionRectangle", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getPortionRectangleInvalidParagraphIndex) {
+	utility::string_t paramName = utils->getTestValue("getPortionRectangle", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getPortionRectangle", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getPortionRectangle", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getPortionRectangle", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getPortionRectangle", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getPortionRectangle", "password");
+	utility::string_t paramFolder = utils->getTestValue("getPortionRectangle", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getPortionRectangle", "storage");
+	paramParagraphIndex = utils->getInvalidIntTestValue("getPortionRectangle", "paragraphIndex", paramParagraphIndex).value();
+	utils->initialize("getPortionRectangle", "paragraphIndex", paramParagraphIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getPortionRectangle(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getPortionRectangle", "paragraphIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getPortionRectangle", "paragraphIndex", paramParagraphIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getPortionRectangle", "paragraphIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getPortionRectangle", "paragraphIndex", paramParagraphIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getPortionRectangle", "paragraphIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getPortionRectangleInvalidPortionIndex) {
+	utility::string_t paramName = utils->getTestValue("getPortionRectangle", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getPortionRectangle", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getPortionRectangle", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getPortionRectangle", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getPortionRectangle", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getPortionRectangle", "password");
+	utility::string_t paramFolder = utils->getTestValue("getPortionRectangle", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getPortionRectangle", "storage");
+	paramPortionIndex = utils->getInvalidIntTestValue("getPortionRectangle", "portionIndex", paramPortionIndex).value();
+	utils->initialize("getPortionRectangle", "portionIndex", paramPortionIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getPortionRectangle(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getPortionRectangle", "portionIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getPortionRectangle", "portionIndex", paramPortionIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getPortionRectangle", "portionIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getPortionRectangle", "portionIndex", paramPortionIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getPortionRectangle", "portionIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getPortionRectangleInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("getPortionRectangle", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getPortionRectangle", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getPortionRectangle", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getPortionRectangle", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getPortionRectangle", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getPortionRectangle", "password");
+	utility::string_t paramFolder = utils->getTestValue("getPortionRectangle", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getPortionRectangle", "storage");
+	paramPassword = utils->getInvalidTestValue("getPortionRectangle", "password", paramPassword);
+	utils->initialize("getPortionRectangle", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->getPortionRectangle(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getPortionRectangle", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getPortionRectangle", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getPortionRectangle", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getPortionRectangle", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getPortionRectangle", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getPortionRectangleInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("getPortionRectangle", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getPortionRectangle", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getPortionRectangle", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getPortionRectangle", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getPortionRectangle", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getPortionRectangle", "password");
+	utility::string_t paramFolder = utils->getTestValue("getPortionRectangle", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getPortionRectangle", "storage");
+	paramFolder = utils->getInvalidTestValue("getPortionRectangle", "folder", paramFolder);
+	utils->initialize("getPortionRectangle", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->getPortionRectangle(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getPortionRectangle", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getPortionRectangle", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getPortionRectangle", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getPortionRectangle", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getPortionRectangle", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getPortionRectangleInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("getPortionRectangle", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getPortionRectangle", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getPortionRectangle", "shapeIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getPortionRectangle", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getPortionRectangle", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getPortionRectangle", "password");
+	utility::string_t paramFolder = utils->getTestValue("getPortionRectangle", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getPortionRectangle", "storage");
+	paramStorage = utils->getInvalidTestValue("getPortionRectangle", "storage", paramStorage);
+	utils->initialize("getPortionRectangle", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->getPortionRectangle(paramName, paramSlideIndex, paramShapeIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getPortionRectangle", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getPortionRectangle", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getPortionRectangle", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getPortionRectangle", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getPortionRectangle", "storage"))
 	{
 		FAIL() << "Must have failed";
 	}
@@ -44164,8 +44923,9 @@ TEST_F(SlidesApiTest, getShapes) {
 	utility::string_t paramPassword = utils->getTestValue("getShapes", "password");
 	utility::string_t paramFolder = utils->getTestValue("getShapes", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getShapes", "storage");
+	utility::string_t paramShapeType = utils->getTestValue("getShapes", "shapeType");
 	utils->initialize("getShapes", "");
-	std::shared_ptr<Shapes> result = api->getShapes(paramName, paramSlideIndex, paramPassword, paramFolder, paramStorage).get();
+	std::shared_ptr<Shapes> result = api->getShapes(paramName, paramSlideIndex, paramPassword, paramFolder, paramStorage, paramShapeType).get();
 	EXPECT_NE(nullptr, result);
 }
 
@@ -44175,13 +44935,14 @@ TEST_F(SlidesApiTest, getShapesInvalidName) {
 	utility::string_t paramPassword = utils->getTestValue("getShapes", "password");
 	utility::string_t paramFolder = utils->getTestValue("getShapes", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getShapes", "storage");
+	utility::string_t paramShapeType = utils->getTestValue("getShapes", "shapeType");
 	paramName = utils->getInvalidTestValue("getShapes", "name", paramName);
 	utils->initialize("getShapes", "name", paramName);
 
 	bool failed = true;
 	try
 	{
-		api->getShapes(paramName, paramSlideIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getShapes(paramName, paramSlideIndex, paramPassword, paramFolder, paramStorage, paramShapeType).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44215,13 +44976,14 @@ TEST_F(SlidesApiTest, getShapesInvalidSlideIndex) {
 	utility::string_t paramPassword = utils->getTestValue("getShapes", "password");
 	utility::string_t paramFolder = utils->getTestValue("getShapes", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getShapes", "storage");
+	utility::string_t paramShapeType = utils->getTestValue("getShapes", "shapeType");
 	paramSlideIndex = utils->getInvalidIntTestValue("getShapes", "slideIndex", paramSlideIndex).value();
 	utils->initialize("getShapes", "slideIndex", paramSlideIndex);
 
 	bool failed = true;
 	try
 	{
-		api->getShapes(paramName, paramSlideIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getShapes(paramName, paramSlideIndex, paramPassword, paramFolder, paramStorage, paramShapeType).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44255,13 +45017,14 @@ TEST_F(SlidesApiTest, getShapesInvalidPassword) {
 	utility::string_t paramPassword = utils->getTestValue("getShapes", "password");
 	utility::string_t paramFolder = utils->getTestValue("getShapes", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getShapes", "storage");
+	utility::string_t paramShapeType = utils->getTestValue("getShapes", "shapeType");
 	paramPassword = utils->getInvalidTestValue("getShapes", "password", paramPassword);
 	utils->initialize("getShapes", "password", paramPassword);
 
 	bool failed = true;
 	try
 	{
-		api->getShapes(paramName, paramSlideIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getShapes(paramName, paramSlideIndex, paramPassword, paramFolder, paramStorage, paramShapeType).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44295,13 +45058,14 @@ TEST_F(SlidesApiTest, getShapesInvalidFolder) {
 	utility::string_t paramPassword = utils->getTestValue("getShapes", "password");
 	utility::string_t paramFolder = utils->getTestValue("getShapes", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getShapes", "storage");
+	utility::string_t paramShapeType = utils->getTestValue("getShapes", "shapeType");
 	paramFolder = utils->getInvalidTestValue("getShapes", "folder", paramFolder);
 	utils->initialize("getShapes", "folder", paramFolder);
 
 	bool failed = true;
 	try
 	{
-		api->getShapes(paramName, paramSlideIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getShapes(paramName, paramSlideIndex, paramPassword, paramFolder, paramStorage, paramShapeType).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44335,13 +45099,14 @@ TEST_F(SlidesApiTest, getShapesInvalidStorage) {
 	utility::string_t paramPassword = utils->getTestValue("getShapes", "password");
 	utility::string_t paramFolder = utils->getTestValue("getShapes", "folder");
 	utility::string_t paramStorage = utils->getTestValue("getShapes", "storage");
+	utility::string_t paramShapeType = utils->getTestValue("getShapes", "shapeType");
 	paramStorage = utils->getInvalidTestValue("getShapes", "storage", paramStorage);
 	utils->initialize("getShapes", "storage", paramStorage);
 
 	bool failed = true;
 	try
 	{
-		api->getShapes(paramName, paramSlideIndex, paramPassword, paramFolder, paramStorage).wait();
+		api->getShapes(paramName, paramSlideIndex, paramPassword, paramFolder, paramStorage, paramShapeType).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -44364,6 +45129,47 @@ TEST_F(SlidesApiTest, getShapesInvalidStorage) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("getShapes", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getShapesInvalidShapeType) {
+	utility::string_t paramName = utils->getTestValue("getShapes", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getShapes", "slideIndex");
+	utility::string_t paramPassword = utils->getTestValue("getShapes", "password");
+	utility::string_t paramFolder = utils->getTestValue("getShapes", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getShapes", "storage");
+	utility::string_t paramShapeType = utils->getTestValue("getShapes", "shapeType");
+	paramShapeType = utils->getInvalidTestValue("getShapes", "shapeType", paramShapeType);
+	utils->initialize("getShapes", "shapeType", paramShapeType);
+
+	bool failed = true;
+	try
+	{
+		api->getShapes(paramName, paramSlideIndex, paramPassword, paramFolder, paramStorage, paramShapeType).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getShapes", "shapeType");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getShapes", "shapeType", paramShapeType);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getShapes", "shapeType");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getShapes", "shapeType", paramShapeType);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getShapes", "shapeType"))
 	{
 		FAIL() << "Must have failed";
 	}

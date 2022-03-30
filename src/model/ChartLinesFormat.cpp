@@ -23,57 +23,75 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-/*
- * VideoExportOptions.h
- *
- * Provides options that control how a presentation is saved in an video format.
- */
 
-#ifndef _VideoExportOptions_H_
-#define _VideoExportOptions_H_
 
-#include "ExportOptions.h"
-
-#include "../model/ExportOptions.h"
-#include "../model/FontFallbackRule.h"
-#include <cpprest/details/basic_types.h>
-#include <vector>
+#include "ChartLinesFormat.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-/// <summary>
-/// Provides options that control how a presentation is saved in an video format.
-/// </summary>
-class  VideoExportOptions : public ExportOptions
+ChartLinesFormat::ChartLinesFormat()
 {
-public:
-	ASPOSE_DLL_EXPORT VideoExportOptions();
-	ASPOSE_DLL_EXPORT virtual ~VideoExportOptions();
+}
 
-	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
-	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
+ChartLinesFormat::~ChartLinesFormat()
+{
+}
 
-	/// <summary>
-	/// Transition duration.
-	/// </summary>
-	ASPOSE_DLL_EXPORT int32_t getTransitionDuration() const;
-	ASPOSE_DLL_EXPORT void setTransitionDuration(int32_t value);
-	ASPOSE_DLL_EXPORT bool transitionDurationIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetTransitionDuration();
-	/// <summary>
-	/// Video resolution type
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getVideoResolutionType() const;
-	ASPOSE_DLL_EXPORT void setVideoResolutionType(utility::string_t value);
+std::shared_ptr<EffectFormat> ChartLinesFormat::getEffectFormat() const
+{
+	return m_EffectFormat;
+}
 
-protected:
-	int32_t m_TransitionDuration;
-	bool m_TransitionDurationIsSet;
-	utility::string_t m_VideoResolutionType;
-};
+void ChartLinesFormat::setEffectFormat(std::shared_ptr<EffectFormat> value)
+{
+	m_EffectFormat = value;
+	
+}
+
+std::shared_ptr<LineFormat> ChartLinesFormat::getLineFormat() const
+{
+	return m_LineFormat;
+}
+
+void ChartLinesFormat::setLineFormat(std::shared_ptr<LineFormat> value)
+{
+	m_LineFormat = value;
+	
+}
+
+web::json::value ChartLinesFormat::toJson() const
+{
+	web::json::value val = web::json::value::object();
+	if (m_EffectFormat != nullptr)
+	{
+		val[utility::conversions::to_string_t("EffectFormat")] = ModelBase::toJson(m_EffectFormat);
+	}
+	if (m_LineFormat != nullptr)
+	{
+		val[utility::conversions::to_string_t("LineFormat")] = ModelBase::toJson(m_LineFormat);
+	}
+	return val;
+}
+
+void ChartLinesFormat::fromJson(web::json::value& val)
+{
+	web::json::value* jsonForEffectFormat = ModelBase::getField(val, "EffectFormat");
+	if(jsonForEffectFormat != nullptr && !jsonForEffectFormat->is_null())
+	{
+		std::shared_ptr<EffectFormat> newItem(new EffectFormat());
+		newItem->fromJson(*jsonForEffectFormat);
+		setEffectFormat(newItem);
+	}
+	web::json::value* jsonForLineFormat = ModelBase::getField(val, "LineFormat");
+	if(jsonForLineFormat != nullptr && !jsonForLineFormat->is_null())
+	{
+		std::shared_ptr<LineFormat> newItem(new LineFormat());
+		newItem->fromJson(*jsonForLineFormat);
+		setLineFormat(newItem);
+	}
+}
 
 }
 }
 
-#endif /* _VideoExportOptions_H_ */
