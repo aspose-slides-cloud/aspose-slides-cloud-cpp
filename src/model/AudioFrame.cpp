@@ -269,6 +269,17 @@ void AudioFrame::unsetRewindAudio()
 	m_RewindAudioIsSet = false;
 }
 
+std::shared_ptr<PictureFill> AudioFrame::getPictureFillFormat() const
+{
+	return m_PictureFillFormat;
+}
+
+void AudioFrame::setPictureFillFormat(std::shared_ptr<PictureFill> value)
+{
+	m_PictureFillFormat = value;
+	
+}
+
 web::json::value AudioFrame::toJson() const
 {
 	web::json::value val = this->GeometryShape::toJson();
@@ -319,6 +330,10 @@ web::json::value AudioFrame::toJson() const
 	if(m_RewindAudioIsSet)
 	{
 		val[utility::conversions::to_string_t("RewindAudio")] = ModelBase::toJson(m_RewindAudio);
+	}
+	if (m_PictureFillFormat != nullptr)
+	{
+		val[utility::conversions::to_string_t("PictureFillFormat")] = ModelBase::toJson(m_PictureFillFormat);
 	}
 	return val;
 }
@@ -385,6 +400,13 @@ void AudioFrame::fromJson(web::json::value& val)
 	if(jsonForRewindAudio != nullptr && !jsonForRewindAudio->is_null())
 	{
 		setRewindAudio(ModelBase::boolFromJson(*jsonForRewindAudio));
+	}
+	web::json::value* jsonForPictureFillFormat = ModelBase::getField(val, "PictureFillFormat");
+	if(jsonForPictureFillFormat != nullptr && !jsonForPictureFillFormat->is_null())
+	{
+		std::shared_ptr<PictureFill> newItem(new PictureFill());
+		newItem->fromJson(*jsonForPictureFillFormat);
+		setPictureFillFormat(newItem);
 	}
 }
 

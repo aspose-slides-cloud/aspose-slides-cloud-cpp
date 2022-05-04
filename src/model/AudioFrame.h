@@ -37,6 +37,7 @@
 #include "../model/GeometryShape.h"
 #include "../model/Hyperlink.h"
 #include "../model/EffectFormat.h"
+#include "../model/PictureFill.h"
 #include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
@@ -137,6 +138,11 @@ public:
 	ASPOSE_DLL_EXPORT void setRewindAudio(bool value);
 	ASPOSE_DLL_EXPORT bool rewindAudioIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetRewindAudio();
+	/// <summary>
+	/// Picture fill format.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<PictureFill> getPictureFillFormat() const;
+	ASPOSE_DLL_EXPORT void setPictureFillFormat(std::shared_ptr<PictureFill> value);
 
 protected:
 	int32_t m_AudioCdEndTrack;
@@ -160,6 +166,7 @@ protected:
 	bool m_PlayAcrossSlidesIsSet;
 	bool m_RewindAudio;
 	bool m_RewindAudioIsSet;
+	std::shared_ptr<PictureFill> m_PictureFillFormat;
 };
 
 }

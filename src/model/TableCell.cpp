@@ -38,6 +38,8 @@ TableCell::TableCell()
 	m_MarginRightIsSet = false;
 	m_MarginLeftIsSet = false;
 	m_MarginBottomIsSet = false;
+	m_ColumnIndexIsSet = false;
+	m_RowIndexIsSet = false;
 }
 
 TableCell::~TableCell()
@@ -280,6 +282,48 @@ void TableCell::setBorderDiagonalDown(std::shared_ptr<LineFormat> value)
 	
 }
 
+int32_t TableCell::getColumnIndex() const
+{
+	return m_ColumnIndex;
+}
+
+void TableCell::setColumnIndex(int32_t value)
+{
+	m_ColumnIndex = value;
+	m_ColumnIndexIsSet = true;
+}
+
+bool TableCell::columnIndexIsSet() const
+{
+	return m_ColumnIndexIsSet;
+}
+
+void TableCell::unsetColumnIndex()
+{
+	m_ColumnIndexIsSet = false;
+}
+
+int32_t TableCell::getRowIndex() const
+{
+	return m_RowIndex;
+}
+
+void TableCell::setRowIndex(int32_t value)
+{
+	m_RowIndex = value;
+	m_RowIndexIsSet = true;
+}
+
+bool TableCell::rowIndexIsSet() const
+{
+	return m_RowIndexIsSet;
+}
+
+void TableCell::unsetRowIndex()
+{
+	m_RowIndexIsSet = false;
+}
+
 web::json::value TableCell::toJson() const
 {
 	web::json::value val = web::json::value::object();
@@ -346,6 +390,14 @@ web::json::value TableCell::toJson() const
 	if (m_BorderDiagonalDown != nullptr)
 	{
 		val[utility::conversions::to_string_t("BorderDiagonalDown")] = ModelBase::toJson(m_BorderDiagonalDown);
+	}
+	if(m_ColumnIndexIsSet)
+	{
+		val[utility::conversions::to_string_t("ColumnIndex")] = ModelBase::toJson(m_ColumnIndex);
+	}
+	if(m_RowIndexIsSet)
+	{
+		val[utility::conversions::to_string_t("RowIndex")] = ModelBase::toJson(m_RowIndex);
 	}
 	return val;
 }
@@ -445,6 +497,16 @@ void TableCell::fromJson(web::json::value& val)
 		std::shared_ptr<LineFormat> newItem(new LineFormat());
 		newItem->fromJson(*jsonForBorderDiagonalDown);
 		setBorderDiagonalDown(newItem);
+	}
+	web::json::value* jsonForColumnIndex = ModelBase::getField(val, "ColumnIndex");
+	if(jsonForColumnIndex != nullptr && !jsonForColumnIndex->is_null() && jsonForColumnIndex->is_number())
+	{
+		setColumnIndex(ModelBase::int32_tFromJson(*jsonForColumnIndex));
+	}
+	web::json::value* jsonForRowIndex = ModelBase::getField(val, "RowIndex");
+	if(jsonForRowIndex != nullptr && !jsonForRowIndex->is_null() && jsonForRowIndex->is_number())
+	{
+		setRowIndex(ModelBase::int32_tFromJson(*jsonForRowIndex));
 	}
 }
 

@@ -145,6 +145,20 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::shared_ptr<LineFormat> getBorderDiagonalDown() const;
 	ASPOSE_DLL_EXPORT void setBorderDiagonalDown(std::shared_ptr<LineFormat> value);
+	/// <summary>
+	/// Cell column index
+	/// </summary>
+	ASPOSE_DLL_EXPORT int32_t getColumnIndex() const;
+	ASPOSE_DLL_EXPORT void setColumnIndex(int32_t value);
+	ASPOSE_DLL_EXPORT bool columnIndexIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetColumnIndex();
+	/// <summary>
+	/// Cell row index
+	/// </summary>
+	ASPOSE_DLL_EXPORT int32_t getRowIndex() const;
+	ASPOSE_DLL_EXPORT void setRowIndex(int32_t value);
+	ASPOSE_DLL_EXPORT bool rowIndexIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetRowIndex();
 
 protected:
 	utility::string_t m_Text;
@@ -169,6 +183,10 @@ protected:
 	std::shared_ptr<LineFormat> m_BorderBottom;
 	std::shared_ptr<LineFormat> m_BorderDiagonalUp;
 	std::shared_ptr<LineFormat> m_BorderDiagonalDown;
+	int32_t m_ColumnIndex;
+	bool m_ColumnIndexIsSet;
+	int32_t m_RowIndex;
+	bool m_RowIndexIsSet;
 };
 
 }

@@ -38,15 +38,37 @@ GroupShape::~GroupShape()
 {
 }
 
+std::shared_ptr<ResourceUri> GroupShape::getShapes() const
+{
+	return m_Shapes;
+}
+
+void GroupShape::setShapes(std::shared_ptr<ResourceUri> value)
+{
+	m_Shapes = value;
+	
+}
+
 web::json::value GroupShape::toJson() const
 {
 	web::json::value val = this->ShapeBase::toJson();
+	if (m_Shapes != nullptr)
+	{
+		val[utility::conversions::to_string_t("Shapes")] = ModelBase::toJson(m_Shapes);
+	}
 	return val;
 }
 
 void GroupShape::fromJson(web::json::value& val)
 {
 	this->ShapeBase::fromJson(val);
+	web::json::value* jsonForShapes = ModelBase::getField(val, "Shapes");
+	if(jsonForShapes != nullptr && !jsonForShapes->is_null())
+	{
+		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
+		newItem->fromJson(*jsonForShapes);
+		setShapes(newItem);
+	}
 }
 
 }

@@ -32,11 +32,11 @@
 #ifndef _TiffExportOptions_H_
 #define _TiffExportOptions_H_
 
-#include "ExportOptions.h"
+#include "ImageExportOptionsBase.h"
 
-#include "../model/ExportOptions.h"
 #include "../model/FontFallbackRule.h"
 #include <cpprest/details/basic_types.h>
+#include "../model/ImageExportOptionsBase.h"
 #include <vector>
 
 namespace asposeslidescloud {
@@ -45,7 +45,7 @@ namespace model {
 /// <summary>
 /// Provides options that control how a presentation is saved in TIFF format.
 /// </summary>
-class  TiffExportOptions : public ExportOptions
+class  TiffExportOptions : public ImageExportOptionsBase
 {
 public:
 	ASPOSE_DLL_EXPORT TiffExportOptions();

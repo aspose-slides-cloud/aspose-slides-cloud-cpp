@@ -59,8 +59,14 @@ public:
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
+	/// <summary>
+	/// Gets or sets the link to shapes.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<ResourceUri> getShapes() const;
+	ASPOSE_DLL_EXPORT void setShapes(std::shared_ptr<ResourceUri> value);
 
 protected:
+	std::shared_ptr<ResourceUri> m_Shapes;
 };
 
 }

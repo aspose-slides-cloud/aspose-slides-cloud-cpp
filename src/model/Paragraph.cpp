@@ -368,6 +368,17 @@ void Paragraph::setPortionList(std::vector<std::shared_ptr<Portion>> value)
 	
 }
 
+std::shared_ptr<PortionFormat> Paragraph::getDefaultPortionFormat() const
+{
+	return m_DefaultPortionFormat;
+}
+
+void Paragraph::setDefaultPortionFormat(std::shared_ptr<PortionFormat> value)
+{
+	m_DefaultPortionFormat = value;
+	
+}
+
 web::json::value Paragraph::toJson() const
 {
 	web::json::value val = this->ResourceBase::toJson();
@@ -457,6 +468,10 @@ web::json::value Paragraph::toJson() const
 		{
 			val[utility::conversions::to_string_t("PortionList")] = web::json::value::array(jsonArray);
 		}
+	}
+	if (m_DefaultPortionFormat != nullptr)
+	{
+		val[utility::conversions::to_string_t("DefaultPortionFormat")] = ModelBase::toJson(m_DefaultPortionFormat);
 	}
 	return val;
 }
@@ -579,6 +594,13 @@ void Paragraph::fromJson(web::json::value& val)
 				}
 			}
         	}
+	}
+	web::json::value* jsonForDefaultPortionFormat = ModelBase::getField(val, "DefaultPortionFormat");
+	if(jsonForDefaultPortionFormat != nullptr && !jsonForDefaultPortionFormat->is_null())
+	{
+		std::shared_ptr<PortionFormat> newItem(new PortionFormat());
+		newItem->fromJson(*jsonForDefaultPortionFormat);
+		setDefaultPortionFormat(newItem);
 	}
 }
 

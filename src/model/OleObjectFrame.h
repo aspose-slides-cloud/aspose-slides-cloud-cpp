@@ -36,6 +36,7 @@
 
 #include "../model/Hyperlink.h"
 #include "../model/EffectFormat.h"
+#include "../model/PictureFill.h"
 #include "../model/ShapeBase.h"
 #include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"
@@ -69,10 +70,55 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getSubstitutePictureTitle() const;
 	ASPOSE_DLL_EXPORT void setSubstitutePictureTitle(utility::string_t value);
+	/// <summary>
+	/// OleObject image fill properties.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<PictureFill> getSubstitutePictureFormat() const;
+	ASPOSE_DLL_EXPORT void setSubstitutePictureFormat(std::shared_ptr<PictureFill> value);
+	/// <summary>
+	/// Returns or sets the name of an object.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getObjectName() const;
+	ASPOSE_DLL_EXPORT void setObjectName(utility::string_t value);
+	/// <summary>
+	/// File data of embedded OLE object. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getEmbeddedFileBase64Data() const;
+	ASPOSE_DLL_EXPORT void setEmbeddedFileBase64Data(utility::string_t value);
+	/// <summary>
+	/// File extension for the current embedded OLE object
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getEmbeddedFileExtension() const;
+	ASPOSE_DLL_EXPORT void setEmbeddedFileExtension(utility::string_t value);
+	/// <summary>
+	/// ProgID of an object.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getObjectProgId() const;
+	ASPOSE_DLL_EXPORT void setObjectProgId(utility::string_t value);
+	/// <summary>
+	/// Full path to a linked file.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getLinkPath() const;
+	ASPOSE_DLL_EXPORT void setLinkPath(utility::string_t value);
+	/// <summary>
+	/// Determines if the linked embedded object is automatically updated when the presentation is opened or printed. Read/write Boolean.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getUpdateAutomatic() const;
+	ASPOSE_DLL_EXPORT void setUpdateAutomatic(bool value);
+	ASPOSE_DLL_EXPORT bool updateAutomaticIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetUpdateAutomatic();
 
 protected:
 	bool m_IsObjectIcon;
 	utility::string_t m_SubstitutePictureTitle;
+	std::shared_ptr<PictureFill> m_SubstitutePictureFormat;
+	utility::string_t m_ObjectName;
+	utility::string_t m_EmbeddedFileBase64Data;
+	utility::string_t m_EmbeddedFileExtension;
+	utility::string_t m_ObjectProgId;
+	utility::string_t m_LinkPath;
+	bool m_UpdateAutomatic;
+	bool m_UpdateAutomaticIsSet;
 };
 
 }

@@ -36,6 +36,7 @@
 
 #include "../model/ExportOptions.h"
 #include "../model/FontFallbackRule.h"
+#include "../model/AccessPermissions.h"
 #include <cpprest/details/basic_types.h>
 #include <vector>
 
@@ -167,8 +168,8 @@ public:
 	/// <summary>
 	/// Access permissions that should be granted when the document is opened with user access.  Default is AccessPermissions.None.             
 	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getAccessPermissions() const;
-	ASPOSE_DLL_EXPORT void setAccessPermissions(utility::string_t value);
+	ASPOSE_DLL_EXPORT std::shared_ptr<AccessPermissions> getAccessPermissions() const;
+	ASPOSE_DLL_EXPORT void setAccessPermissions(std::shared_ptr<AccessPermissions> value);
 
 protected:
 	utility::string_t m_TextCompression;
@@ -199,7 +200,7 @@ protected:
 	utility::string_t m_ImageTransparentColor;
 	bool m_ApplyImageTransparent;
 	bool m_ApplyImageTransparentIsSet;
-	utility::string_t m_AccessPermissions;
+	std::shared_ptr<AccessPermissions> m_AccessPermissions;
 };
 
 }

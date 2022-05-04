@@ -95,7 +95,7 @@ void ImageExportOptions::setCommentsAreaColor(utility::string_t value)
 
 web::json::value ImageExportOptions::toJson() const
 {
-	web::json::value val = this->ExportOptions::toJson();
+	web::json::value val = this->ImageExportOptionsBase::toJson();
 	if (!m_NotesPosition.empty())
 	{
 		val[utility::conversions::to_string_t("NotesPosition")] = ModelBase::toJson(m_NotesPosition);
@@ -117,7 +117,7 @@ web::json::value ImageExportOptions::toJson() const
 
 void ImageExportOptions::fromJson(web::json::value& val)
 {
-	this->ExportOptions::fromJson(val);
+	this->ImageExportOptionsBase::fromJson(val);
 	web::json::value* jsonForNotesPosition = ModelBase::getField(val, "NotesPosition");
 	if(jsonForNotesPosition != nullptr && !jsonForNotesPosition->is_null())
 	{

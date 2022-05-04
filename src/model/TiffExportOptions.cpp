@@ -205,7 +205,7 @@ void TiffExportOptions::unsetShowCommentsByNoAuthor()
 
 web::json::value TiffExportOptions::toJson() const
 {
-	web::json::value val = this->ExportOptions::toJson();
+	web::json::value val = this->ImageExportOptionsBase::toJson();
 	if (!m_Compression.empty())
 	{
 		val[utility::conversions::to_string_t("Compression")] = ModelBase::toJson(m_Compression);
@@ -251,7 +251,7 @@ web::json::value TiffExportOptions::toJson() const
 
 void TiffExportOptions::fromJson(web::json::value& val)
 {
-	this->ExportOptions::fromJson(val);
+	this->ImageExportOptionsBase::fromJson(val);
 	web::json::value* jsonForCompression = ModelBase::getField(val, "Compression");
 	if(jsonForCompression != nullptr && !jsonForCompression->is_null())
 	{

@@ -32,11 +32,44 @@ namespace model {
 
 VideoExportOptions::VideoExportOptions()
 {
+	m_SlidesTransitionDurationIsSet = false;
 	m_TransitionDurationIsSet = false;
 }
 
 VideoExportOptions::~VideoExportOptions()
 {
+}
+
+int32_t VideoExportOptions::getSlidesTransitionDuration() const
+{
+	return m_SlidesTransitionDuration;
+}
+
+void VideoExportOptions::setSlidesTransitionDuration(int32_t value)
+{
+	m_SlidesTransitionDuration = value;
+	m_SlidesTransitionDurationIsSet = true;
+}
+
+bool VideoExportOptions::slidesTransitionDurationIsSet() const
+{
+	return m_SlidesTransitionDurationIsSet;
+}
+
+void VideoExportOptions::unsetSlidesTransitionDuration()
+{
+	m_SlidesTransitionDurationIsSet = false;
+}
+
+utility::string_t VideoExportOptions::getTransitionType() const
+{
+	return m_TransitionType;
+}
+
+void VideoExportOptions::setTransitionType(utility::string_t value)
+{
+	m_TransitionType = value;
+	
 }
 
 int32_t VideoExportOptions::getTransitionDuration() const
@@ -74,6 +107,14 @@ void VideoExportOptions::setVideoResolutionType(utility::string_t value)
 web::json::value VideoExportOptions::toJson() const
 {
 	web::json::value val = this->ExportOptions::toJson();
+	if(m_SlidesTransitionDurationIsSet)
+	{
+		val[utility::conversions::to_string_t("SlidesTransitionDuration")] = ModelBase::toJson(m_SlidesTransitionDuration);
+	}
+	if (!m_TransitionType.empty())
+	{
+		val[utility::conversions::to_string_t("TransitionType")] = ModelBase::toJson(m_TransitionType);
+	}
 	if(m_TransitionDurationIsSet)
 	{
 		val[utility::conversions::to_string_t("TransitionDuration")] = ModelBase::toJson(m_TransitionDuration);
@@ -88,6 +129,16 @@ web::json::value VideoExportOptions::toJson() const
 void VideoExportOptions::fromJson(web::json::value& val)
 {
 	this->ExportOptions::fromJson(val);
+	web::json::value* jsonForSlidesTransitionDuration = ModelBase::getField(val, "SlidesTransitionDuration");
+	if(jsonForSlidesTransitionDuration != nullptr && !jsonForSlidesTransitionDuration->is_null() && jsonForSlidesTransitionDuration->is_number())
+	{
+		setSlidesTransitionDuration(ModelBase::int32_tFromJson(*jsonForSlidesTransitionDuration));
+	}
+	web::json::value* jsonForTransitionType = ModelBase::getField(val, "TransitionType");
+	if(jsonForTransitionType != nullptr && !jsonForTransitionType->is_null())
+	{
+		setTransitionType(ModelBase::stringFromJson(*jsonForTransitionType));
+	}
 	web::json::value* jsonForTransitionDuration = ModelBase::getField(val, "TransitionDuration");
 	if(jsonForTransitionDuration != nullptr && !jsonForTransitionDuration->is_null() && jsonForTransitionDuration->is_number())
 	{

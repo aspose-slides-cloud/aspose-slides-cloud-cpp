@@ -115,11 +115,6 @@ public:
 	ASPOSE_DLL_EXPORT int32_t getZOrderPosition() const;
 	ASPOSE_DLL_EXPORT void setZOrderPosition(int32_t value);
 	/// <summary>
-	/// Gets or sets the link to shapes.
-	/// </summary>
-	ASPOSE_DLL_EXPORT std::shared_ptr<ResourceUri> getShapes() const;
-	ASPOSE_DLL_EXPORT void setShapes(std::shared_ptr<ResourceUri> value);
-	/// <summary>
 	/// Gets or sets the fill format.
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::shared_ptr<FillFormat> getFillFormat() const;
@@ -170,7 +165,6 @@ protected:
 	double m_Y;
 	bool m_YIsSet;
 	int32_t m_ZOrderPosition;
-	std::shared_ptr<ResourceUri> m_Shapes;
 	std::shared_ptr<FillFormat> m_FillFormat;
 	std::shared_ptr<EffectFormat> m_EffectFormat;
 	std::shared_ptr<ThreeDFormat> m_ThreeDFormat;

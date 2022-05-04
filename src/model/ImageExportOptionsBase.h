@@ -24,16 +24,17 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * ExportOptions.h
+ * ImageExportOptionsBase.h
  *
- * Represents export options for whole presentation.
+ * The class provides shared options for image formats.
  */
 
-#ifndef _ExportOptions_H_
-#define _ExportOptions_H_
+#ifndef _ImageExportOptionsBase_H_
+#define _ImageExportOptionsBase_H_
 
-#include "../ModelBase.h"
+#include "ExportOptions.h"
 
+#include "../model/ExportOptions.h"
 #include "../model/FontFallbackRule.h"
 #include <cpprest/details/basic_types.h>
 #include <vector>
@@ -42,40 +43,40 @@ namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// Represents export options for whole presentation.
+/// The class provides shared options for image formats.
 /// </summary>
-class  ExportOptions : public ModelBase
+class  ImageExportOptionsBase : public ExportOptions
 {
 public:
-	ASPOSE_DLL_EXPORT ExportOptions();
-	ASPOSE_DLL_EXPORT virtual ~ExportOptions();
+	ASPOSE_DLL_EXPORT ImageExportOptionsBase();
+	ASPOSE_DLL_EXPORT virtual ~ImageExportOptionsBase();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
 	/// <summary>
-	/// Default regular font for rendering the presentation. 
+	/// Gets or sets the height of slides in the output image format.
 	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getDefaultRegularFont() const;
-	ASPOSE_DLL_EXPORT void setDefaultRegularFont(utility::string_t value);
+	ASPOSE_DLL_EXPORT int32_t getHeight() const;
+	ASPOSE_DLL_EXPORT void setHeight(int32_t value);
+	ASPOSE_DLL_EXPORT bool heightIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetHeight();
 	/// <summary>
-	/// Gets of sets list of font fallback rules.
+	/// Gets or sets the height of slides in the output the output image format.
 	/// </summary>
-	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<FontFallbackRule>> getFontFallbackRules() const;
-	ASPOSE_DLL_EXPORT void setFontFallbackRules(std::vector<std::shared_ptr<FontFallbackRule>> value);
-	/// <summary>
-	/// 
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getFormat() const;
-	ASPOSE_DLL_EXPORT void setFormat(utility::string_t value);
+	ASPOSE_DLL_EXPORT int32_t getWidth() const;
+	ASPOSE_DLL_EXPORT void setWidth(int32_t value);
+	ASPOSE_DLL_EXPORT bool widthIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetWidth();
 
 protected:
-	utility::string_t m_DefaultRegularFont;
-	std::vector<std::shared_ptr<FontFallbackRule>> m_FontFallbackRules;
-	utility::string_t m_Format;
+	int32_t m_Height;
+	bool m_HeightIsSet;
+	int32_t m_Width;
+	bool m_WidthIsSet;
 };
 
 }
 }
 
-#endif /* _ExportOptions_H_ */
+#endif /* _ImageExportOptionsBase_H_ */

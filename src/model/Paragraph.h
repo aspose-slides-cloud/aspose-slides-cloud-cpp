@@ -34,6 +34,7 @@
 
 #include "ResourceBase.h"
 
+#include "../model/PortionFormat.h"
 #include "../model/Portion.h"
 #include <cpprest/details/basic_types.h>
 #include "../model/ResourceBase.h"
@@ -175,6 +176,11 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<Portion>> getPortionList() const;
 	ASPOSE_DLL_EXPORT void setPortionList(std::vector<std::shared_ptr<Portion>> value);
+	/// <summary>
+	/// Default portion format.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<PortionFormat> getDefaultPortionFormat() const;
+	ASPOSE_DLL_EXPORT void setDefaultPortionFormat(std::shared_ptr<PortionFormat> value);
 
 protected:
 	double m_MarginLeft;
@@ -207,6 +213,7 @@ protected:
 	utility::string_t m_LatinLineBreak;
 	utility::string_t m_RightToLeft;
 	std::vector<std::shared_ptr<Portion>> m_PortionList;
+	std::shared_ptr<PortionFormat> m_DefaultPortionFormat;
 };
 
 }

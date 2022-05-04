@@ -55,7 +55,19 @@ public:
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
 	/// <summary>
-	/// Transition duration.
+	/// Slides transition duration.
+	/// </summary>
+	ASPOSE_DLL_EXPORT int32_t getSlidesTransitionDuration() const;
+	ASPOSE_DLL_EXPORT void setSlidesTransitionDuration(int32_t value);
+	ASPOSE_DLL_EXPORT bool slidesTransitionDurationIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetSlidesTransitionDuration();
+	/// <summary>
+	/// Video transition type
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getTransitionType() const;
+	ASPOSE_DLL_EXPORT void setTransitionType(utility::string_t value);
+	/// <summary>
+	/// Duration of transition defined in TransitionType property.
 	/// </summary>
 	ASPOSE_DLL_EXPORT int32_t getTransitionDuration() const;
 	ASPOSE_DLL_EXPORT void setTransitionDuration(int32_t value);
@@ -68,6 +80,9 @@ public:
 	ASPOSE_DLL_EXPORT void setVideoResolutionType(utility::string_t value);
 
 protected:
+	int32_t m_SlidesTransitionDuration;
+	bool m_SlidesTransitionDurationIsSet;
+	utility::string_t m_TransitionType;
 	int32_t m_TransitionDuration;
 	bool m_TransitionDurationIsSet;
 	utility::string_t m_VideoResolutionType;

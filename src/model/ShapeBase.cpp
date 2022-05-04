@@ -192,17 +192,6 @@ void ShapeBase::setZOrderPosition(int32_t value)
 	
 }
 
-std::shared_ptr<ResourceUri> ShapeBase::getShapes() const
-{
-	return m_Shapes;
-}
-
-void ShapeBase::setShapes(std::shared_ptr<ResourceUri> value)
-{
-	m_Shapes = value;
-	
-}
-
 std::shared_ptr<FillFormat> ShapeBase::getFillFormat() const
 {
 	return m_FillFormat;
@@ -316,10 +305,6 @@ web::json::value ShapeBase::toJson() const
 		val[utility::conversions::to_string_t("Y")] = ModelBase::toJson(m_Y);
 	}
 	val[utility::conversions::to_string_t("ZOrderPosition")] = ModelBase::toJson(m_ZOrderPosition);
-	if (m_Shapes != nullptr)
-	{
-		val[utility::conversions::to_string_t("Shapes")] = ModelBase::toJson(m_Shapes);
-	}
 	if (m_FillFormat != nullptr)
 	{
 		val[utility::conversions::to_string_t("FillFormat")] = ModelBase::toJson(m_FillFormat);
@@ -398,13 +383,6 @@ void ShapeBase::fromJson(web::json::value& val)
 	if(jsonForZOrderPosition != nullptr && !jsonForZOrderPosition->is_null() && jsonForZOrderPosition->is_number())
 	{
 		setZOrderPosition(ModelBase::int32_tFromJson(*jsonForZOrderPosition));
-	}
-	web::json::value* jsonForShapes = ModelBase::getField(val, "Shapes");
-	if(jsonForShapes != nullptr && !jsonForShapes->is_null())
-	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForShapes);
-		setShapes(newItem);
 	}
 	web::json::value* jsonForFillFormat = ModelBase::getField(val, "FillFormat");
 	if(jsonForFillFormat != nullptr && !jsonForFillFormat->is_null())

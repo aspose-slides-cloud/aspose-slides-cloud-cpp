@@ -106,7 +106,7 @@ void GifExportOptions::unsetDefaultDelay()
 
 web::json::value GifExportOptions::toJson() const
 {
-	web::json::value val = this->ExportOptions::toJson();
+	web::json::value val = this->ImageExportOptionsBase::toJson();
 	if(m_ExportHiddenSlidesIsSet)
 	{
 		val[utility::conversions::to_string_t("ExportHiddenSlides")] = ModelBase::toJson(m_ExportHiddenSlides);
@@ -124,7 +124,7 @@ web::json::value GifExportOptions::toJson() const
 
 void GifExportOptions::fromJson(web::json::value& val)
 {
-	this->ExportOptions::fromJson(val);
+	this->ImageExportOptionsBase::fromJson(val);
 	web::json::value* jsonForExportHiddenSlides = ModelBase::getField(val, "ExportHiddenSlides");
 	if(jsonForExportHiddenSlides != nullptr && !jsonForExportHiddenSlides->is_null())
 	{

@@ -346,12 +346,12 @@ void PdfExportOptions::unsetApplyImageTransparent()
 	m_ApplyImageTransparentIsSet = false;
 }
 
-utility::string_t PdfExportOptions::getAccessPermissions() const
+std::shared_ptr<AccessPermissions> PdfExportOptions::getAccessPermissions() const
 {
 	return m_AccessPermissions;
 }
 
-void PdfExportOptions::setAccessPermissions(utility::string_t value)
+void PdfExportOptions::setAccessPermissions(std::shared_ptr<AccessPermissions> value)
 {
 	m_AccessPermissions = value;
 	
@@ -439,7 +439,7 @@ web::json::value PdfExportOptions::toJson() const
 	{
 		val[utility::conversions::to_string_t("ApplyImageTransparent")] = ModelBase::toJson(m_ApplyImageTransparent);
 	}
-	if (!m_AccessPermissions.empty())
+	if (m_AccessPermissions != nullptr)
 	{
 		val[utility::conversions::to_string_t("AccessPermissions")] = ModelBase::toJson(m_AccessPermissions);
 	}
@@ -549,7 +549,9 @@ void PdfExportOptions::fromJson(web::json::value& val)
 	web::json::value* jsonForAccessPermissions = ModelBase::getField(val, "AccessPermissions");
 	if(jsonForAccessPermissions != nullptr && !jsonForAccessPermissions->is_null())
 	{
-		setAccessPermissions(ModelBase::stringFromJson(*jsonForAccessPermissions));
+		std::shared_ptr<AccessPermissions> newItem(new AccessPermissions());
+		newItem->fromJson(*jsonForAccessPermissions);
+		setAccessPermissions(newItem);
 	}
 }
 
