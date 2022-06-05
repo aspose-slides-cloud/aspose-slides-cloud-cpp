@@ -25,58 +25,67 @@
 
 
 
-#include "WaterfallChartDataPoint.h"
+#include "DuotoneEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-WaterfallChartDataPoint::WaterfallChartDataPoint()
-{
-	m_SetAsTotalIsSet = false;
-}
-
-WaterfallChartDataPoint::~WaterfallChartDataPoint()
+DuotoneEffect::DuotoneEffect()
 {
 }
 
-bool WaterfallChartDataPoint::getSetAsTotal() const
+DuotoneEffect::~DuotoneEffect()
 {
-	return m_SetAsTotal;
 }
 
-void WaterfallChartDataPoint::setSetAsTotal(bool value)
+utility::string_t DuotoneEffect::getColor1() const
 {
-	m_SetAsTotal = value;
-	m_SetAsTotalIsSet = true;
+	return m_Color1;
 }
 
-bool WaterfallChartDataPoint::setAsTotalIsSet() const
+void DuotoneEffect::setColor1(utility::string_t value)
 {
-	return m_SetAsTotalIsSet;
+	m_Color1 = value;
+	
 }
 
-void WaterfallChartDataPoint::unsetSetAsTotal()
+utility::string_t DuotoneEffect::getColor2() const
 {
-	m_SetAsTotalIsSet = false;
+	return m_Color2;
 }
 
-web::json::value WaterfallChartDataPoint::toJson() const
+void DuotoneEffect::setColor2(utility::string_t value)
 {
-	web::json::value val = this->OneValueChartDataPoint::toJson();
-	if(m_SetAsTotalIsSet)
+	m_Color2 = value;
+	
+}
+
+web::json::value DuotoneEffect::toJson() const
+{
+	web::json::value val = this->ImageTransformEffect::toJson();
+	if (!m_Color1.empty())
 	{
-		val[utility::conversions::to_string_t("SetAsTotal")] = ModelBase::toJson(m_SetAsTotal);
+		val[utility::conversions::to_string_t("Color1")] = ModelBase::toJson(m_Color1);
+	}
+	if (!m_Color2.empty())
+	{
+		val[utility::conversions::to_string_t("Color2")] = ModelBase::toJson(m_Color2);
 	}
 	return val;
 }
 
-void WaterfallChartDataPoint::fromJson(web::json::value& val)
+void DuotoneEffect::fromJson(web::json::value& val)
 {
-	this->OneValueChartDataPoint::fromJson(val);
-	web::json::value* jsonForSetAsTotal = ModelBase::getField(val, "SetAsTotal");
-	if(jsonForSetAsTotal != nullptr && !jsonForSetAsTotal->is_null())
+	this->ImageTransformEffect::fromJson(val);
+	web::json::value* jsonForColor1 = ModelBase::getField(val, "Color1");
+	if(jsonForColor1 != nullptr && !jsonForColor1->is_null())
 	{
-		setSetAsTotal(ModelBase::boolFromJson(*jsonForSetAsTotal));
+		setColor1(ModelBase::stringFromJson(*jsonForColor1));
+	}
+	web::json::value* jsonForColor2 = ModelBase::getField(val, "Color2");
+	if(jsonForColor2 != nullptr && !jsonForColor2->is_null())
+	{
+		setColor2(ModelBase::stringFromJson(*jsonForColor2));
 	}
 }
 

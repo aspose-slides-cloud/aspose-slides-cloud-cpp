@@ -23,54 +23,66 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-/*
- * OneValueChartDataPoint.h
- *
- * One value chart data point.
- */
 
-#ifndef _OneValueChartDataPoint_H_
-#define _OneValueChartDataPoint_H_
 
-#include "DataPoint.h"
-
-#include "../model/DataPoint.h"
+#include "TintEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-/// <summary>
-/// One value chart data point.
-/// </summary>
-class  OneValueChartDataPoint : public DataPoint
+TintEffect::TintEffect()
 {
-public:
-	ASPOSE_DLL_EXPORT OneValueChartDataPoint();
-	ASPOSE_DLL_EXPORT virtual ~OneValueChartDataPoint();
+}
 
-	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
-	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
+TintEffect::~TintEffect()
+{
+}
 
-	/// <summary>
-	/// Value.
-	/// </summary>
-	ASPOSE_DLL_EXPORT double getValue() const;
-	ASPOSE_DLL_EXPORT void setValue(double value);
-	/// <summary>
-	/// SetAsTotal. Applied to Waterfall data points only.
-	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSetAsTotal() const;
-	ASPOSE_DLL_EXPORT void setSetAsTotal(bool value);
-	ASPOSE_DLL_EXPORT bool setAsTotalIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetSetAsTotal();
+double TintEffect::getHue() const
+{
+	return m_Hue;
+}
 
-protected:
-	double m_Value;
-	bool m_SetAsTotal;
-	bool m_SetAsTotalIsSet;
-};
+void TintEffect::setHue(double value)
+{
+	m_Hue = value;
+	
+}
+
+double TintEffect::getAmount() const
+{
+	return m_Amount;
+}
+
+void TintEffect::setAmount(double value)
+{
+	m_Amount = value;
+	
+}
+
+web::json::value TintEffect::toJson() const
+{
+	web::json::value val = this->ImageTransformEffect::toJson();
+	val[utility::conversions::to_string_t("Hue")] = ModelBase::toJson(m_Hue);
+	val[utility::conversions::to_string_t("Amount")] = ModelBase::toJson(m_Amount);
+	return val;
+}
+
+void TintEffect::fromJson(web::json::value& val)
+{
+	this->ImageTransformEffect::fromJson(val);
+	web::json::value* jsonForHue = ModelBase::getField(val, "Hue");
+	if(jsonForHue != nullptr && !jsonForHue->is_null() && jsonForHue->is_number())
+	{
+		setHue(ModelBase::doubleFromJson(*jsonForHue));
+	}
+	web::json::value* jsonForAmount = ModelBase::getField(val, "Amount");
+	if(jsonForAmount != nullptr && !jsonForAmount->is_null() && jsonForAmount->is_number())
+	{
+		setAmount(ModelBase::doubleFromJson(*jsonForAmount));
+	}
+}
 
 }
 }
 
-#endif /* _OneValueChartDataPoint_H_ */

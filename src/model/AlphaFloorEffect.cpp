@@ -23,54 +23,32 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-/*
- * OneValueChartDataPoint.h
- *
- * One value chart data point.
- */
 
-#ifndef _OneValueChartDataPoint_H_
-#define _OneValueChartDataPoint_H_
 
-#include "DataPoint.h"
-
-#include "../model/DataPoint.h"
+#include "AlphaFloorEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-/// <summary>
-/// One value chart data point.
-/// </summary>
-class  OneValueChartDataPoint : public DataPoint
+AlphaFloorEffect::AlphaFloorEffect()
 {
-public:
-	ASPOSE_DLL_EXPORT OneValueChartDataPoint();
-	ASPOSE_DLL_EXPORT virtual ~OneValueChartDataPoint();
+}
 
-	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
-	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
+AlphaFloorEffect::~AlphaFloorEffect()
+{
+}
 
-	/// <summary>
-	/// Value.
-	/// </summary>
-	ASPOSE_DLL_EXPORT double getValue() const;
-	ASPOSE_DLL_EXPORT void setValue(double value);
-	/// <summary>
-	/// SetAsTotal. Applied to Waterfall data points only.
-	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSetAsTotal() const;
-	ASPOSE_DLL_EXPORT void setSetAsTotal(bool value);
-	ASPOSE_DLL_EXPORT bool setAsTotalIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetSetAsTotal();
+web::json::value AlphaFloorEffect::toJson() const
+{
+	web::json::value val = this->ImageTransformEffect::toJson();
+	return val;
+}
 
-protected:
-	double m_Value;
-	bool m_SetAsTotal;
-	bool m_SetAsTotalIsSet;
-};
+void AlphaFloorEffect::fromJson(web::json::value& val)
+{
+	this->ImageTransformEffect::fromJson(val);
+}
 
 }
 }
 
-#endif /* _OneValueChartDataPoint_H_ */

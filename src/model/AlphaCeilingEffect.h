@@ -24,54 +24,39 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * WaterfallSeries.h
+ * AlphaCeilingEffect.h
  *
- * One value series.
+ * Represents an Alpha Ceiling effect.
  */
 
-#ifndef _WaterfallSeries_H_
-#define _WaterfallSeries_H_
+#ifndef _AlphaCeilingEffect_H_
+#define _AlphaCeilingEffect_H_
 
-#include "OneValueSeries.h"
+#include "ImageTransformEffect.h"
 
-#include "../model/EffectFormat.h"
-#include "../model/SeriesMarker.h"
-#include "../model/OneValueSeries.h"
-#include "../model/OneValueChartDataPoint.h"
 #include <cpprest/details/basic_types.h>
-#include "../model/FillFormat.h"
-#include "../model/LineFormat.h"
-#include <vector>
+#include "../model/ImageTransformEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// One value series.
+/// Represents an Alpha Ceiling effect.
 /// </summary>
-class  WaterfallSeries : public OneValueSeries
+class  AlphaCeilingEffect : public ImageTransformEffect
 {
 public:
-	ASPOSE_DLL_EXPORT WaterfallSeries();
-	ASPOSE_DLL_EXPORT virtual ~WaterfallSeries();
+	ASPOSE_DLL_EXPORT AlphaCeilingEffect();
+	ASPOSE_DLL_EXPORT virtual ~AlphaCeilingEffect();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
-	/// <summary>
-	/// True if inner points are shown.
-	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowConnectorLines() const;
-	ASPOSE_DLL_EXPORT void setShowConnectorLines(bool value);
-	ASPOSE_DLL_EXPORT bool showConnectorLinesIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetShowConnectorLines();
 
 protected:
-	bool m_ShowConnectorLines;
-	bool m_ShowConnectorLinesIsSet;
 };
 
 }
 }
 
-#endif /* _WaterfallSeries_H_ */
+#endif /* _AlphaCeilingEffect_H_ */

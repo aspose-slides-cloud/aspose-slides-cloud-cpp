@@ -24,53 +24,51 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * OneValueChartDataPoint.h
+ * DuotoneEffect.h
  *
- * One value chart data point.
+ * Represents a Duotone effect.
  */
 
-#ifndef _OneValueChartDataPoint_H_
-#define _OneValueChartDataPoint_H_
+#ifndef _DuotoneEffect_H_
+#define _DuotoneEffect_H_
 
-#include "DataPoint.h"
+#include "ImageTransformEffect.h"
 
-#include "../model/DataPoint.h"
+#include <cpprest/details/basic_types.h>
+#include "../model/ImageTransformEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// One value chart data point.
+/// Represents a Duotone effect.
 /// </summary>
-class  OneValueChartDataPoint : public DataPoint
+class  DuotoneEffect : public ImageTransformEffect
 {
 public:
-	ASPOSE_DLL_EXPORT OneValueChartDataPoint();
-	ASPOSE_DLL_EXPORT virtual ~OneValueChartDataPoint();
+	ASPOSE_DLL_EXPORT DuotoneEffect();
+	ASPOSE_DLL_EXPORT virtual ~DuotoneEffect();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
 	/// <summary>
-	/// Value.
+	/// Returns target color format for dark pixels.
 	/// </summary>
-	ASPOSE_DLL_EXPORT double getValue() const;
-	ASPOSE_DLL_EXPORT void setValue(double value);
+	ASPOSE_DLL_EXPORT utility::string_t getColor1() const;
+	ASPOSE_DLL_EXPORT void setColor1(utility::string_t value);
 	/// <summary>
-	/// SetAsTotal. Applied to Waterfall data points only.
+	/// Returns target color format for light pixels.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSetAsTotal() const;
-	ASPOSE_DLL_EXPORT void setSetAsTotal(bool value);
-	ASPOSE_DLL_EXPORT bool setAsTotalIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetSetAsTotal();
+	ASPOSE_DLL_EXPORT utility::string_t getColor2() const;
+	ASPOSE_DLL_EXPORT void setColor2(utility::string_t value);
 
 protected:
-	double m_Value;
-	bool m_SetAsTotal;
-	bool m_SetAsTotalIsSet;
+	utility::string_t m_Color1;
+	utility::string_t m_Color2;
 };
 
 }
 }
 
-#endif /* _OneValueChartDataPoint_H_ */
+#endif /* _DuotoneEffect_H_ */

@@ -24,53 +24,52 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * OneValueChartDataPoint.h
+ * FillOverlayImageEffect.h
  *
- * One value chart data point.
+ * Represents a Fill Overlay effect. A fill overlay may be used to specify an additional fill for an object and blend the two fills together.
  */
 
-#ifndef _OneValueChartDataPoint_H_
-#define _OneValueChartDataPoint_H_
+#ifndef _FillOverlayImageEffect_H_
+#define _FillOverlayImageEffect_H_
 
-#include "DataPoint.h"
+#include "ImageTransformEffect.h"
 
-#include "../model/DataPoint.h"
+#include <cpprest/details/basic_types.h>
+#include "../model/FillFormat.h"
+#include "../model/ImageTransformEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// One value chart data point.
+/// Represents a Fill Overlay effect. A fill overlay may be used to specify an additional fill for an object and blend the two fills together.
 /// </summary>
-class  OneValueChartDataPoint : public DataPoint
+class  FillOverlayImageEffect : public ImageTransformEffect
 {
 public:
-	ASPOSE_DLL_EXPORT OneValueChartDataPoint();
-	ASPOSE_DLL_EXPORT virtual ~OneValueChartDataPoint();
+	ASPOSE_DLL_EXPORT FillOverlayImageEffect();
+	ASPOSE_DLL_EXPORT virtual ~FillOverlayImageEffect();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
 	/// <summary>
-	/// Value.
+	/// FillBlendMode.
 	/// </summary>
-	ASPOSE_DLL_EXPORT double getValue() const;
-	ASPOSE_DLL_EXPORT void setValue(double value);
+	ASPOSE_DLL_EXPORT utility::string_t getBlend() const;
+	ASPOSE_DLL_EXPORT void setBlend(utility::string_t value);
 	/// <summary>
-	/// SetAsTotal. Applied to Waterfall data points only.
+	/// Fill format.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSetAsTotal() const;
-	ASPOSE_DLL_EXPORT void setSetAsTotal(bool value);
-	ASPOSE_DLL_EXPORT bool setAsTotalIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetSetAsTotal();
+	ASPOSE_DLL_EXPORT std::shared_ptr<FillFormat> getFillFormat() const;
+	ASPOSE_DLL_EXPORT void setFillFormat(std::shared_ptr<FillFormat> value);
 
 protected:
-	double m_Value;
-	bool m_SetAsTotal;
-	bool m_SetAsTotalIsSet;
+	utility::string_t m_Blend;
+	std::shared_ptr<FillFormat> m_FillFormat;
 };
 
 }
 }
 
-#endif /* _OneValueChartDataPoint_H_ */
+#endif /* _FillOverlayImageEffect_H_ */

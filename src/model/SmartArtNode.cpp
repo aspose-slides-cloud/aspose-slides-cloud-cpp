@@ -93,6 +93,17 @@ void SmartArtNode::setOrgChartLayout(utility::string_t value)
 	
 }
 
+std::shared_ptr<ResourceUri> SmartArtNode::getParagraphs() const
+{
+	return m_Paragraphs;
+}
+
+void SmartArtNode::setParagraphs(std::shared_ptr<ResourceUri> value)
+{
+	m_Paragraphs = value;
+	
+}
+
 web::json::value SmartArtNode::toJson() const
 {
 	web::json::value val = web::json::value::object();
@@ -119,6 +130,10 @@ web::json::value SmartArtNode::toJson() const
 	if (!m_OrgChartLayout.empty())
 	{
 		val[utility::conversions::to_string_t("OrgChartLayout")] = ModelBase::toJson(m_OrgChartLayout);
+	}
+	if (m_Paragraphs != nullptr)
+	{
+		val[utility::conversions::to_string_t("Paragraphs")] = ModelBase::toJson(m_Paragraphs);
 	}
 	return val;
 }
@@ -167,6 +182,13 @@ void SmartArtNode::fromJson(web::json::value& val)
 	if(jsonForOrgChartLayout != nullptr && !jsonForOrgChartLayout->is_null())
 	{
 		setOrgChartLayout(ModelBase::stringFromJson(*jsonForOrgChartLayout));
+	}
+	web::json::value* jsonForParagraphs = ModelBase::getField(val, "Paragraphs");
+	if(jsonForParagraphs != nullptr && !jsonForParagraphs->is_null())
+	{
+		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
+		newItem->fromJson(*jsonForParagraphs);
+		setParagraphs(newItem);
 	}
 }
 

@@ -137,6 +137,17 @@ void PictureFill::setPictureFillMode(utility::string_t value)
 	
 }
 
+std::vector<std::shared_ptr<ImageTransformEffect>> PictureFill::getImageTransformList() const
+{
+	return m_ImageTransformList;
+}
+
+void PictureFill::setImageTransformList(std::vector<std::shared_ptr<ImageTransformEffect>> value)
+{
+	m_ImageTransformList = value;
+	
+}
+
 web::json::value PictureFill::toJson() const
 {
 	web::json::value val = this->FillFormat::toJson();
@@ -160,6 +171,17 @@ web::json::value PictureFill::toJson() const
 	if (!m_PictureFillMode.empty())
 	{
 		val[utility::conversions::to_string_t("PictureFillMode")] = ModelBase::toJson(m_PictureFillMode);
+	}
+	{
+		std::vector<web::json::value> jsonArray;
+		for (auto& item : m_ImageTransformList)
+		{
+			jsonArray.push_back(ModelBase::toJson(item));
+		}
+		if (jsonArray.size() > 0)
+		{
+			val[utility::conversions::to_string_t("ImageTransformList")] = web::json::value::array(jsonArray);
+		}
 	}
 	return val;
 }
@@ -213,6 +235,27 @@ void PictureFill::fromJson(web::json::value& val)
 	if(jsonForPictureFillMode != nullptr && !jsonForPictureFillMode->is_null())
 	{
 		setPictureFillMode(ModelBase::stringFromJson(*jsonForPictureFillMode));
+	}
+	web::json::value* jsonForImageTransformList = ModelBase::getField(val, "ImageTransformList");
+	if(jsonForImageTransformList != nullptr && !jsonForImageTransformList->is_null())
+	{
+		{
+			m_ImageTransformList.clear();
+			std::vector<web::json::value> jsonArray;
+			for(auto& item : jsonForImageTransformList->as_array())
+			{
+				if(item.is_null())
+				{
+					m_ImageTransformList.push_back(std::shared_ptr<ImageTransformEffect>(nullptr));
+				}
+				else
+				{
+					std::shared_ptr<ImageTransformEffect> newItem(new ImageTransformEffect());
+					newItem->fromJson(item);
+					m_ImageTransformList.push_back( newItem );
+				}
+			}
+        	}
 	}
 }
 

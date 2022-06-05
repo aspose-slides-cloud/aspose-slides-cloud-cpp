@@ -32,6 +32,11 @@ namespace model {
 
 OneValueSeries::OneValueSeries()
 {
+	m_ShowConnectorLinesIsSet = false;
+	m_ShowInnerPointsIsSet = false;
+	m_ShowMeanLineIsSet = false;
+	m_ShowMeanMarkersIsSet = false;
+	m_ShowOutlierPointsIsSet = false;
 }
 
 OneValueSeries::~OneValueSeries()
@@ -60,6 +65,122 @@ void OneValueSeries::setNumberFormatOfValues(utility::string_t value)
 	
 }
 
+bool OneValueSeries::getShowConnectorLines() const
+{
+	return m_ShowConnectorLines;
+}
+
+void OneValueSeries::setShowConnectorLines(bool value)
+{
+	m_ShowConnectorLines = value;
+	m_ShowConnectorLinesIsSet = true;
+}
+
+bool OneValueSeries::showConnectorLinesIsSet() const
+{
+	return m_ShowConnectorLinesIsSet;
+}
+
+void OneValueSeries::unsetShowConnectorLines()
+{
+	m_ShowConnectorLinesIsSet = false;
+}
+
+utility::string_t OneValueSeries::getQuartileMethod() const
+{
+	return m_QuartileMethod;
+}
+
+void OneValueSeries::setQuartileMethod(utility::string_t value)
+{
+	m_QuartileMethod = value;
+	
+}
+
+bool OneValueSeries::getShowInnerPoints() const
+{
+	return m_ShowInnerPoints;
+}
+
+void OneValueSeries::setShowInnerPoints(bool value)
+{
+	m_ShowInnerPoints = value;
+	m_ShowInnerPointsIsSet = true;
+}
+
+bool OneValueSeries::showInnerPointsIsSet() const
+{
+	return m_ShowInnerPointsIsSet;
+}
+
+void OneValueSeries::unsetShowInnerPoints()
+{
+	m_ShowInnerPointsIsSet = false;
+}
+
+bool OneValueSeries::getShowMeanLine() const
+{
+	return m_ShowMeanLine;
+}
+
+void OneValueSeries::setShowMeanLine(bool value)
+{
+	m_ShowMeanLine = value;
+	m_ShowMeanLineIsSet = true;
+}
+
+bool OneValueSeries::showMeanLineIsSet() const
+{
+	return m_ShowMeanLineIsSet;
+}
+
+void OneValueSeries::unsetShowMeanLine()
+{
+	m_ShowMeanLineIsSet = false;
+}
+
+bool OneValueSeries::getShowMeanMarkers() const
+{
+	return m_ShowMeanMarkers;
+}
+
+void OneValueSeries::setShowMeanMarkers(bool value)
+{
+	m_ShowMeanMarkers = value;
+	m_ShowMeanMarkersIsSet = true;
+}
+
+bool OneValueSeries::showMeanMarkersIsSet() const
+{
+	return m_ShowMeanMarkersIsSet;
+}
+
+void OneValueSeries::unsetShowMeanMarkers()
+{
+	m_ShowMeanMarkersIsSet = false;
+}
+
+bool OneValueSeries::getShowOutlierPoints() const
+{
+	return m_ShowOutlierPoints;
+}
+
+void OneValueSeries::setShowOutlierPoints(bool value)
+{
+	m_ShowOutlierPoints = value;
+	m_ShowOutlierPointsIsSet = true;
+}
+
+bool OneValueSeries::showOutlierPointsIsSet() const
+{
+	return m_ShowOutlierPointsIsSet;
+}
+
+void OneValueSeries::unsetShowOutlierPoints()
+{
+	m_ShowOutlierPointsIsSet = false;
+}
+
 web::json::value OneValueSeries::toJson() const
 {
 	web::json::value val = this->Series::toJson();
@@ -77,6 +198,30 @@ web::json::value OneValueSeries::toJson() const
 	if (!m_NumberFormatOfValues.empty())
 	{
 		val[utility::conversions::to_string_t("NumberFormatOfValues")] = ModelBase::toJson(m_NumberFormatOfValues);
+	}
+	if(m_ShowConnectorLinesIsSet)
+	{
+		val[utility::conversions::to_string_t("ShowConnectorLines")] = ModelBase::toJson(m_ShowConnectorLines);
+	}
+	if (!m_QuartileMethod.empty())
+	{
+		val[utility::conversions::to_string_t("QuartileMethod")] = ModelBase::toJson(m_QuartileMethod);
+	}
+	if(m_ShowInnerPointsIsSet)
+	{
+		val[utility::conversions::to_string_t("ShowInnerPoints")] = ModelBase::toJson(m_ShowInnerPoints);
+	}
+	if(m_ShowMeanLineIsSet)
+	{
+		val[utility::conversions::to_string_t("ShowMeanLine")] = ModelBase::toJson(m_ShowMeanLine);
+	}
+	if(m_ShowMeanMarkersIsSet)
+	{
+		val[utility::conversions::to_string_t("ShowMeanMarkers")] = ModelBase::toJson(m_ShowMeanMarkers);
+	}
+	if(m_ShowOutlierPointsIsSet)
+	{
+		val[utility::conversions::to_string_t("ShowOutlierPoints")] = ModelBase::toJson(m_ShowOutlierPoints);
 	}
 	return val;
 }
@@ -109,6 +254,36 @@ void OneValueSeries::fromJson(web::json::value& val)
 	if(jsonForNumberFormatOfValues != nullptr && !jsonForNumberFormatOfValues->is_null())
 	{
 		setNumberFormatOfValues(ModelBase::stringFromJson(*jsonForNumberFormatOfValues));
+	}
+	web::json::value* jsonForShowConnectorLines = ModelBase::getField(val, "ShowConnectorLines");
+	if(jsonForShowConnectorLines != nullptr && !jsonForShowConnectorLines->is_null())
+	{
+		setShowConnectorLines(ModelBase::boolFromJson(*jsonForShowConnectorLines));
+	}
+	web::json::value* jsonForQuartileMethod = ModelBase::getField(val, "QuartileMethod");
+	if(jsonForQuartileMethod != nullptr && !jsonForQuartileMethod->is_null())
+	{
+		setQuartileMethod(ModelBase::stringFromJson(*jsonForQuartileMethod));
+	}
+	web::json::value* jsonForShowInnerPoints = ModelBase::getField(val, "ShowInnerPoints");
+	if(jsonForShowInnerPoints != nullptr && !jsonForShowInnerPoints->is_null())
+	{
+		setShowInnerPoints(ModelBase::boolFromJson(*jsonForShowInnerPoints));
+	}
+	web::json::value* jsonForShowMeanLine = ModelBase::getField(val, "ShowMeanLine");
+	if(jsonForShowMeanLine != nullptr && !jsonForShowMeanLine->is_null())
+	{
+		setShowMeanLine(ModelBase::boolFromJson(*jsonForShowMeanLine));
+	}
+	web::json::value* jsonForShowMeanMarkers = ModelBase::getField(val, "ShowMeanMarkers");
+	if(jsonForShowMeanMarkers != nullptr && !jsonForShowMeanMarkers->is_null())
+	{
+		setShowMeanMarkers(ModelBase::boolFromJson(*jsonForShowMeanMarkers));
+	}
+	web::json::value* jsonForShowOutlierPoints = ModelBase::getField(val, "ShowOutlierPoints");
+	if(jsonForShowOutlierPoints != nullptr && !jsonForShowOutlierPoints->is_null())
+	{
+		setShowOutlierPoints(ModelBase::boolFromJson(*jsonForShowOutlierPoints));
 	}
 }
 

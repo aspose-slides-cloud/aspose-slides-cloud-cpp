@@ -23,54 +23,49 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-/*
- * OneValueChartDataPoint.h
- *
- * One value chart data point.
- */
 
-#ifndef _OneValueChartDataPoint_H_
-#define _OneValueChartDataPoint_H_
 
-#include "DataPoint.h"
-
-#include "../model/DataPoint.h"
+#include "AlphaModulateFixedEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-/// <summary>
-/// One value chart data point.
-/// </summary>
-class  OneValueChartDataPoint : public DataPoint
+AlphaModulateFixedEffect::AlphaModulateFixedEffect()
 {
-public:
-	ASPOSE_DLL_EXPORT OneValueChartDataPoint();
-	ASPOSE_DLL_EXPORT virtual ~OneValueChartDataPoint();
+}
 
-	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
-	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
+AlphaModulateFixedEffect::~AlphaModulateFixedEffect()
+{
+}
 
-	/// <summary>
-	/// Value.
-	/// </summary>
-	ASPOSE_DLL_EXPORT double getValue() const;
-	ASPOSE_DLL_EXPORT void setValue(double value);
-	/// <summary>
-	/// SetAsTotal. Applied to Waterfall data points only.
-	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSetAsTotal() const;
-	ASPOSE_DLL_EXPORT void setSetAsTotal(bool value);
-	ASPOSE_DLL_EXPORT bool setAsTotalIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetSetAsTotal();
+double AlphaModulateFixedEffect::getAmount() const
+{
+	return m_Amount;
+}
 
-protected:
-	double m_Value;
-	bool m_SetAsTotal;
-	bool m_SetAsTotalIsSet;
-};
+void AlphaModulateFixedEffect::setAmount(double value)
+{
+	m_Amount = value;
+	
+}
+
+web::json::value AlphaModulateFixedEffect::toJson() const
+{
+	web::json::value val = this->ImageTransformEffect::toJson();
+	val[utility::conversions::to_string_t("Amount")] = ModelBase::toJson(m_Amount);
+	return val;
+}
+
+void AlphaModulateFixedEffect::fromJson(web::json::value& val)
+{
+	this->ImageTransformEffect::fromJson(val);
+	web::json::value* jsonForAmount = ModelBase::getField(val, "Amount");
+	if(jsonForAmount != nullptr && !jsonForAmount->is_null() && jsonForAmount->is_number())
+	{
+		setAmount(ModelBase::doubleFromJson(*jsonForAmount));
+	}
+}
 
 }
 }
 
-#endif /* _OneValueChartDataPoint_H_ */

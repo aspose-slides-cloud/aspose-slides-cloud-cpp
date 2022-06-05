@@ -68,10 +68,61 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getNumberFormatOfValues() const;
 	ASPOSE_DLL_EXPORT void setNumberFormatOfValues(utility::string_t value);
+	/// <summary>
+	/// True if inner points are shown. Applied to Waterfall series only.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getShowConnectorLines() const;
+	ASPOSE_DLL_EXPORT void setShowConnectorLines(bool value);
+	ASPOSE_DLL_EXPORT bool showConnectorLinesIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetShowConnectorLines();
+	/// <summary>
+	/// Quartile method. Applied to BoxAndWhisker series only.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getQuartileMethod() const;
+	ASPOSE_DLL_EXPORT void setQuartileMethod(utility::string_t value);
+	/// <summary>
+	/// True if inner points are shown. Applied to BoxAndWhisker series only.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getShowInnerPoints() const;
+	ASPOSE_DLL_EXPORT void setShowInnerPoints(bool value);
+	ASPOSE_DLL_EXPORT bool showInnerPointsIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetShowInnerPoints();
+	/// <summary>
+	/// True if mean line is shown. Applied to BoxAndWhisker series only.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getShowMeanLine() const;
+	ASPOSE_DLL_EXPORT void setShowMeanLine(bool value);
+	ASPOSE_DLL_EXPORT bool showMeanLineIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetShowMeanLine();
+	/// <summary>
+	/// True if mean markers are shown. Applied to BoxAndWhisker series only.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getShowMeanMarkers() const;
+	ASPOSE_DLL_EXPORT void setShowMeanMarkers(bool value);
+	ASPOSE_DLL_EXPORT bool showMeanMarkersIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetShowMeanMarkers();
+	/// <summary>
+	/// True if outlier points are shown. Applied to BoxAndWhisker series only.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getShowOutlierPoints() const;
+	ASPOSE_DLL_EXPORT void setShowOutlierPoints(bool value);
+	ASPOSE_DLL_EXPORT bool showOutlierPointsIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetShowOutlierPoints();
 
 protected:
 	std::vector<std::shared_ptr<OneValueChartDataPoint>> m_DataPoints;
 	utility::string_t m_NumberFormatOfValues;
+	bool m_ShowConnectorLines;
+	bool m_ShowConnectorLinesIsSet;
+	utility::string_t m_QuartileMethod;
+	bool m_ShowInnerPoints;
+	bool m_ShowInnerPointsIsSet;
+	bool m_ShowMeanLine;
+	bool m_ShowMeanLineIsSet;
+	bool m_ShowMeanMarkers;
+	bool m_ShowMeanMarkersIsSet;
+	bool m_ShowOutlierPoints;
+	bool m_ShowOutlierPointsIsSet;
 };
 
 }

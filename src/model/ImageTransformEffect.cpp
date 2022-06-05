@@ -23,54 +23,51 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-/*
- * OneValueChartDataPoint.h
- *
- * One value chart data point.
- */
 
-#ifndef _OneValueChartDataPoint_H_
-#define _OneValueChartDataPoint_H_
 
-#include "DataPoint.h"
-
-#include "../model/DataPoint.h"
+#include "ImageTransformEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-/// <summary>
-/// One value chart data point.
-/// </summary>
-class  OneValueChartDataPoint : public DataPoint
+ImageTransformEffect::ImageTransformEffect()
 {
-public:
-	ASPOSE_DLL_EXPORT OneValueChartDataPoint();
-	ASPOSE_DLL_EXPORT virtual ~OneValueChartDataPoint();
+}
 
-	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
-	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
+ImageTransformEffect::~ImageTransformEffect()
+{
+}
 
-	/// <summary>
-	/// Value.
-	/// </summary>
-	ASPOSE_DLL_EXPORT double getValue() const;
-	ASPOSE_DLL_EXPORT void setValue(double value);
-	/// <summary>
-	/// SetAsTotal. Applied to Waterfall data points only.
-	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSetAsTotal() const;
-	ASPOSE_DLL_EXPORT void setSetAsTotal(bool value);
-	ASPOSE_DLL_EXPORT bool setAsTotalIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetSetAsTotal();
+utility::string_t ImageTransformEffect::getType() const
+{
+	return m_Type;
+}
 
-protected:
-	double m_Value;
-	bool m_SetAsTotal;
-	bool m_SetAsTotalIsSet;
-};
+void ImageTransformEffect::setType(utility::string_t value)
+{
+	m_Type = value;
+	
+}
+
+web::json::value ImageTransformEffect::toJson() const
+{
+	web::json::value val = web::json::value::object();
+	if (!m_Type.empty())
+	{
+		val[utility::conversions::to_string_t("Type")] = ModelBase::toJson(m_Type);
+	}
+	return val;
+}
+
+void ImageTransformEffect::fromJson(web::json::value& val)
+{
+	web::json::value* jsonForType = ModelBase::getField(val, "Type");
+	if(jsonForType != nullptr && !jsonForType->is_null())
+	{
+		setType(ModelBase::stringFromJson(*jsonForType));
+	}
+}
 
 }
 }
 
-#endif /* _OneValueChartDataPoint_H_ */

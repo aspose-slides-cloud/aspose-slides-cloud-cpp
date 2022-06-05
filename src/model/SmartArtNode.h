@@ -79,6 +79,11 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getOrgChartLayout() const;
 	ASPOSE_DLL_EXPORT void setOrgChartLayout(utility::string_t value);
+	/// <summary>
+	/// Get or sets list to paragraphs list
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<ResourceUri> getParagraphs() const;
+	ASPOSE_DLL_EXPORT void setParagraphs(std::shared_ptr<ResourceUri> value);
 
 protected:
 	std::vector<std::shared_ptr<SmartArtNode>> m_Nodes;
@@ -86,6 +91,7 @@ protected:
 	bool m_IsAssistant;
 	utility::string_t m_Text;
 	utility::string_t m_OrgChartLayout;
+	std::shared_ptr<ResourceUri> m_Paragraphs;
 };
 
 }

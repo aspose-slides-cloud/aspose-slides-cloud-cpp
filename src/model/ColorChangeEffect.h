@@ -24,53 +24,51 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * OneValueChartDataPoint.h
+ * ColorChangeEffect.h
  *
- * One value chart data point.
+ * Represents a Color Change effect.
  */
 
-#ifndef _OneValueChartDataPoint_H_
-#define _OneValueChartDataPoint_H_
+#ifndef _ColorChangeEffect_H_
+#define _ColorChangeEffect_H_
 
-#include "DataPoint.h"
+#include "ImageTransformEffect.h"
 
-#include "../model/DataPoint.h"
+#include <cpprest/details/basic_types.h>
+#include "../model/ImageTransformEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// One value chart data point.
+/// Represents a Color Change effect.
 /// </summary>
-class  OneValueChartDataPoint : public DataPoint
+class  ColorChangeEffect : public ImageTransformEffect
 {
 public:
-	ASPOSE_DLL_EXPORT OneValueChartDataPoint();
-	ASPOSE_DLL_EXPORT virtual ~OneValueChartDataPoint();
+	ASPOSE_DLL_EXPORT ColorChangeEffect();
+	ASPOSE_DLL_EXPORT virtual ~ColorChangeEffect();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
 	/// <summary>
-	/// Value.
+	/// Color which will be replaced.
 	/// </summary>
-	ASPOSE_DLL_EXPORT double getValue() const;
-	ASPOSE_DLL_EXPORT void setValue(double value);
+	ASPOSE_DLL_EXPORT utility::string_t getFromColor() const;
+	ASPOSE_DLL_EXPORT void setFromColor(utility::string_t value);
 	/// <summary>
-	/// SetAsTotal. Applied to Waterfall data points only.
+	/// Color which will replace.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSetAsTotal() const;
-	ASPOSE_DLL_EXPORT void setSetAsTotal(bool value);
-	ASPOSE_DLL_EXPORT bool setAsTotalIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetSetAsTotal();
+	ASPOSE_DLL_EXPORT utility::string_t getToColor() const;
+	ASPOSE_DLL_EXPORT void setToColor(utility::string_t value);
 
 protected:
-	double m_Value;
-	bool m_SetAsTotal;
-	bool m_SetAsTotalIsSet;
+	utility::string_t m_FromColor;
+	utility::string_t m_ToColor;
 };
 
 }
 }
 
-#endif /* _OneValueChartDataPoint_H_ */
+#endif /* _ColorChangeEffect_H_ */

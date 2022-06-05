@@ -23,54 +23,66 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-/*
- * OneValueChartDataPoint.h
- *
- * One value chart data point.
- */
 
-#ifndef _OneValueChartDataPoint_H_
-#define _OneValueChartDataPoint_H_
 
-#include "DataPoint.h"
-
-#include "../model/DataPoint.h"
+#include "LuminanceEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-/// <summary>
-/// One value chart data point.
-/// </summary>
-class  OneValueChartDataPoint : public DataPoint
+LuminanceEffect::LuminanceEffect()
 {
-public:
-	ASPOSE_DLL_EXPORT OneValueChartDataPoint();
-	ASPOSE_DLL_EXPORT virtual ~OneValueChartDataPoint();
+}
 
-	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
-	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
+LuminanceEffect::~LuminanceEffect()
+{
+}
 
-	/// <summary>
-	/// Value.
-	/// </summary>
-	ASPOSE_DLL_EXPORT double getValue() const;
-	ASPOSE_DLL_EXPORT void setValue(double value);
-	/// <summary>
-	/// SetAsTotal. Applied to Waterfall data points only.
-	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSetAsTotal() const;
-	ASPOSE_DLL_EXPORT void setSetAsTotal(bool value);
-	ASPOSE_DLL_EXPORT bool setAsTotalIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetSetAsTotal();
+double LuminanceEffect::getBrightness() const
+{
+	return m_Brightness;
+}
 
-protected:
-	double m_Value;
-	bool m_SetAsTotal;
-	bool m_SetAsTotalIsSet;
-};
+void LuminanceEffect::setBrightness(double value)
+{
+	m_Brightness = value;
+	
+}
+
+double LuminanceEffect::getContrast() const
+{
+	return m_Contrast;
+}
+
+void LuminanceEffect::setContrast(double value)
+{
+	m_Contrast = value;
+	
+}
+
+web::json::value LuminanceEffect::toJson() const
+{
+	web::json::value val = this->ImageTransformEffect::toJson();
+	val[utility::conversions::to_string_t("Brightness")] = ModelBase::toJson(m_Brightness);
+	val[utility::conversions::to_string_t("Contrast")] = ModelBase::toJson(m_Contrast);
+	return val;
+}
+
+void LuminanceEffect::fromJson(web::json::value& val)
+{
+	this->ImageTransformEffect::fromJson(val);
+	web::json::value* jsonForBrightness = ModelBase::getField(val, "Brightness");
+	if(jsonForBrightness != nullptr && !jsonForBrightness->is_null() && jsonForBrightness->is_number())
+	{
+		setBrightness(ModelBase::doubleFromJson(*jsonForBrightness));
+	}
+	web::json::value* jsonForContrast = ModelBase::getField(val, "Contrast");
+	if(jsonForContrast != nullptr && !jsonForContrast->is_null() && jsonForContrast->is_number())
+	{
+		setContrast(ModelBase::doubleFromJson(*jsonForContrast));
+	}
+}
 
 }
 }
 
-#endif /* _OneValueChartDataPoint_H_ */

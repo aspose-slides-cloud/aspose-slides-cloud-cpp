@@ -25,75 +25,78 @@
 
 
 
-#include "OneValueChartDataPoint.h"
+#include "HslEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-OneValueChartDataPoint::OneValueChartDataPoint()
-{
-	m_SetAsTotalIsSet = false;
-}
-
-OneValueChartDataPoint::~OneValueChartDataPoint()
+HslEffect::HslEffect()
 {
 }
 
-double OneValueChartDataPoint::getValue() const
+HslEffect::~HslEffect()
 {
-	return m_Value;
 }
 
-void OneValueChartDataPoint::setValue(double value)
+double HslEffect::getHue() const
 {
-	m_Value = value;
+	return m_Hue;
+}
+
+void HslEffect::setHue(double value)
+{
+	m_Hue = value;
 	
 }
 
-bool OneValueChartDataPoint::getSetAsTotal() const
+double HslEffect::getSaturation() const
 {
-	return m_SetAsTotal;
+	return m_Saturation;
 }
 
-void OneValueChartDataPoint::setSetAsTotal(bool value)
+void HslEffect::setSaturation(double value)
 {
-	m_SetAsTotal = value;
-	m_SetAsTotalIsSet = true;
+	m_Saturation = value;
+	
 }
 
-bool OneValueChartDataPoint::setAsTotalIsSet() const
+double HslEffect::getLuminance() const
 {
-	return m_SetAsTotalIsSet;
+	return m_Luminance;
 }
 
-void OneValueChartDataPoint::unsetSetAsTotal()
+void HslEffect::setLuminance(double value)
 {
-	m_SetAsTotalIsSet = false;
+	m_Luminance = value;
+	
 }
 
-web::json::value OneValueChartDataPoint::toJson() const
+web::json::value HslEffect::toJson() const
 {
-	web::json::value val = this->DataPoint::toJson();
-	val[utility::conversions::to_string_t("Value")] = ModelBase::toJson(m_Value);
-	if(m_SetAsTotalIsSet)
-	{
-		val[utility::conversions::to_string_t("SetAsTotal")] = ModelBase::toJson(m_SetAsTotal);
-	}
+	web::json::value val = this->ImageTransformEffect::toJson();
+	val[utility::conversions::to_string_t("Hue")] = ModelBase::toJson(m_Hue);
+	val[utility::conversions::to_string_t("Saturation")] = ModelBase::toJson(m_Saturation);
+	val[utility::conversions::to_string_t("Luminance")] = ModelBase::toJson(m_Luminance);
 	return val;
 }
 
-void OneValueChartDataPoint::fromJson(web::json::value& val)
+void HslEffect::fromJson(web::json::value& val)
 {
-	this->DataPoint::fromJson(val);
-	web::json::value* jsonForValue = ModelBase::getField(val, "Value");
-	if(jsonForValue != nullptr && !jsonForValue->is_null() && jsonForValue->is_number())
+	this->ImageTransformEffect::fromJson(val);
+	web::json::value* jsonForHue = ModelBase::getField(val, "Hue");
+	if(jsonForHue != nullptr && !jsonForHue->is_null() && jsonForHue->is_number())
 	{
-		setValue(ModelBase::doubleFromJson(*jsonForValue));
+		setHue(ModelBase::doubleFromJson(*jsonForHue));
 	}
-	web::json::value* jsonForSetAsTotal = ModelBase::getField(val, "SetAsTotal");
-	if(jsonForSetAsTotal != nullptr && !jsonForSetAsTotal->is_null())
+	web::json::value* jsonForSaturation = ModelBase::getField(val, "Saturation");
+	if(jsonForSaturation != nullptr && !jsonForSaturation->is_null() && jsonForSaturation->is_number())
 	{
-		setSetAsTotal(ModelBase::boolFromJson(*jsonForSetAsTotal));
+		setSaturation(ModelBase::doubleFromJson(*jsonForSaturation));
+	}
+	web::json::value* jsonForLuminance = ModelBase::getField(val, "Luminance");
+	if(jsonForLuminance != nullptr && !jsonForLuminance->is_null() && jsonForLuminance->is_number())
+	{
+		setLuminance(ModelBase::doubleFromJson(*jsonForLuminance));
 	}
 }
 

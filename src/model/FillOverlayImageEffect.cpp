@@ -23,54 +23,74 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-/*
- * OneValueChartDataPoint.h
- *
- * One value chart data point.
- */
 
-#ifndef _OneValueChartDataPoint_H_
-#define _OneValueChartDataPoint_H_
 
-#include "DataPoint.h"
-
-#include "../model/DataPoint.h"
+#include "FillOverlayImageEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-/// <summary>
-/// One value chart data point.
-/// </summary>
-class  OneValueChartDataPoint : public DataPoint
+FillOverlayImageEffect::FillOverlayImageEffect()
 {
-public:
-	ASPOSE_DLL_EXPORT OneValueChartDataPoint();
-	ASPOSE_DLL_EXPORT virtual ~OneValueChartDataPoint();
+}
 
-	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
-	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
+FillOverlayImageEffect::~FillOverlayImageEffect()
+{
+}
 
-	/// <summary>
-	/// Value.
-	/// </summary>
-	ASPOSE_DLL_EXPORT double getValue() const;
-	ASPOSE_DLL_EXPORT void setValue(double value);
-	/// <summary>
-	/// SetAsTotal. Applied to Waterfall data points only.
-	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSetAsTotal() const;
-	ASPOSE_DLL_EXPORT void setSetAsTotal(bool value);
-	ASPOSE_DLL_EXPORT bool setAsTotalIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetSetAsTotal();
+utility::string_t FillOverlayImageEffect::getBlend() const
+{
+	return m_Blend;
+}
 
-protected:
-	double m_Value;
-	bool m_SetAsTotal;
-	bool m_SetAsTotalIsSet;
-};
+void FillOverlayImageEffect::setBlend(utility::string_t value)
+{
+	m_Blend = value;
+	
+}
+
+std::shared_ptr<FillFormat> FillOverlayImageEffect::getFillFormat() const
+{
+	return m_FillFormat;
+}
+
+void FillOverlayImageEffect::setFillFormat(std::shared_ptr<FillFormat> value)
+{
+	m_FillFormat = value;
+	
+}
+
+web::json::value FillOverlayImageEffect::toJson() const
+{
+	web::json::value val = this->ImageTransformEffect::toJson();
+	if (!m_Blend.empty())
+	{
+		val[utility::conversions::to_string_t("Blend")] = ModelBase::toJson(m_Blend);
+	}
+	if (m_FillFormat != nullptr)
+	{
+		val[utility::conversions::to_string_t("FillFormat")] = ModelBase::toJson(m_FillFormat);
+	}
+	return val;
+}
+
+void FillOverlayImageEffect::fromJson(web::json::value& val)
+{
+	this->ImageTransformEffect::fromJson(val);
+	web::json::value* jsonForBlend = ModelBase::getField(val, "Blend");
+	if(jsonForBlend != nullptr && !jsonForBlend->is_null())
+	{
+		setBlend(ModelBase::stringFromJson(*jsonForBlend));
+	}
+	web::json::value* jsonForFillFormat = ModelBase::getField(val, "FillFormat");
+	if(jsonForFillFormat != nullptr && !jsonForFillFormat->is_null())
+	{
+		std::shared_ptr<FillFormat> newItem(new FillFormat());
+		newItem->fromJson(*jsonForFillFormat);
+		setFillFormat(newItem);
+	}
+}
 
 }
 }
 
-#endif /* _OneValueChartDataPoint_H_ */

@@ -24,53 +24,45 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * OneValueChartDataPoint.h
+ * ColorReplaceEffect.h
  *
- * One value chart data point.
+ * Represents a Color Replacement effect.
  */
 
-#ifndef _OneValueChartDataPoint_H_
-#define _OneValueChartDataPoint_H_
+#ifndef _ColorReplaceEffect_H_
+#define _ColorReplaceEffect_H_
 
-#include "DataPoint.h"
+#include "ImageTransformEffect.h"
 
-#include "../model/DataPoint.h"
+#include <cpprest/details/basic_types.h>
+#include "../model/ImageTransformEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// One value chart data point.
+/// Represents a Color Replacement effect.
 /// </summary>
-class  OneValueChartDataPoint : public DataPoint
+class  ColorReplaceEffect : public ImageTransformEffect
 {
 public:
-	ASPOSE_DLL_EXPORT OneValueChartDataPoint();
-	ASPOSE_DLL_EXPORT virtual ~OneValueChartDataPoint();
+	ASPOSE_DLL_EXPORT ColorReplaceEffect();
+	ASPOSE_DLL_EXPORT virtual ~ColorReplaceEffect();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
 	/// <summary>
-	/// Value.
+	/// Returns color format which will replace color of every pixel.
 	/// </summary>
-	ASPOSE_DLL_EXPORT double getValue() const;
-	ASPOSE_DLL_EXPORT void setValue(double value);
-	/// <summary>
-	/// SetAsTotal. Applied to Waterfall data points only.
-	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSetAsTotal() const;
-	ASPOSE_DLL_EXPORT void setSetAsTotal(bool value);
-	ASPOSE_DLL_EXPORT bool setAsTotalIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetSetAsTotal();
+	ASPOSE_DLL_EXPORT utility::string_t getColor() const;
+	ASPOSE_DLL_EXPORT void setColor(utility::string_t value);
 
 protected:
-	double m_Value;
-	bool m_SetAsTotal;
-	bool m_SetAsTotalIsSet;
+	utility::string_t m_Color;
 };
 
 }
 }
 
-#endif /* _OneValueChartDataPoint_H_ */
+#endif /* _ColorReplaceEffect_H_ */

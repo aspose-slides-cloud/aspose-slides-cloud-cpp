@@ -159,6 +159,17 @@ void VideoFrame::setBase64Data(utility::string_t value)
 	
 }
 
+std::shared_ptr<PictureFill> VideoFrame::getPictureFillFormat() const
+{
+	return m_PictureFillFormat;
+}
+
+void VideoFrame::setPictureFillFormat(std::shared_ptr<PictureFill> value)
+{
+	m_PictureFillFormat = value;
+	
+}
+
 web::json::value VideoFrame::toJson() const
 {
 	web::json::value val = this->GeometryShape::toJson();
@@ -189,6 +200,10 @@ web::json::value VideoFrame::toJson() const
 	if (!m_Base64Data.empty())
 	{
 		val[utility::conversions::to_string_t("Base64Data")] = ModelBase::toJson(m_Base64Data);
+	}
+	if (m_PictureFillFormat != nullptr)
+	{
+		val[utility::conversions::to_string_t("PictureFillFormat")] = ModelBase::toJson(m_PictureFillFormat);
 	}
 	return val;
 }
@@ -230,6 +245,13 @@ void VideoFrame::fromJson(web::json::value& val)
 	if(jsonForBase64Data != nullptr && !jsonForBase64Data->is_null())
 	{
 		setBase64Data(ModelBase::stringFromJson(*jsonForBase64Data));
+	}
+	web::json::value* jsonForPictureFillFormat = ModelBase::getField(val, "PictureFillFormat");
+	if(jsonForPictureFillFormat != nullptr && !jsonForPictureFillFormat->is_null())
+	{
+		std::shared_ptr<PictureFill> newItem(new PictureFill());
+		newItem->fromJson(*jsonForPictureFillFormat);
+		setPictureFillFormat(newItem);
 	}
 }
 

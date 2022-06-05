@@ -25,58 +25,44 @@
 
 
 
-#include "WaterfallSeries.h"
+#include "AlphaReplaceEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-WaterfallSeries::WaterfallSeries()
-{
-	m_ShowConnectorLinesIsSet = false;
-}
-
-WaterfallSeries::~WaterfallSeries()
+AlphaReplaceEffect::AlphaReplaceEffect()
 {
 }
 
-bool WaterfallSeries::getShowConnectorLines() const
+AlphaReplaceEffect::~AlphaReplaceEffect()
 {
-	return m_ShowConnectorLines;
 }
 
-void WaterfallSeries::setShowConnectorLines(bool value)
+double AlphaReplaceEffect::getAlpha() const
 {
-	m_ShowConnectorLines = value;
-	m_ShowConnectorLinesIsSet = true;
+	return m_Alpha;
 }
 
-bool WaterfallSeries::showConnectorLinesIsSet() const
+void AlphaReplaceEffect::setAlpha(double value)
 {
-	return m_ShowConnectorLinesIsSet;
+	m_Alpha = value;
+	
 }
 
-void WaterfallSeries::unsetShowConnectorLines()
+web::json::value AlphaReplaceEffect::toJson() const
 {
-	m_ShowConnectorLinesIsSet = false;
-}
-
-web::json::value WaterfallSeries::toJson() const
-{
-	web::json::value val = this->OneValueSeries::toJson();
-	if(m_ShowConnectorLinesIsSet)
-	{
-		val[utility::conversions::to_string_t("ShowConnectorLines")] = ModelBase::toJson(m_ShowConnectorLines);
-	}
+	web::json::value val = this->ImageTransformEffect::toJson();
+	val[utility::conversions::to_string_t("Alpha")] = ModelBase::toJson(m_Alpha);
 	return val;
 }
 
-void WaterfallSeries::fromJson(web::json::value& val)
+void AlphaReplaceEffect::fromJson(web::json::value& val)
 {
-	this->OneValueSeries::fromJson(val);
-	web::json::value* jsonForShowConnectorLines = ModelBase::getField(val, "ShowConnectorLines");
-	if(jsonForShowConnectorLines != nullptr && !jsonForShowConnectorLines->is_null())
+	this->ImageTransformEffect::fromJson(val);
+	web::json::value* jsonForAlpha = ModelBase::getField(val, "Alpha");
+	if(jsonForAlpha != nullptr && !jsonForAlpha->is_null() && jsonForAlpha->is_number())
 	{
-		setShowConnectorLines(ModelBase::boolFromJson(*jsonForShowConnectorLines));
+		setAlpha(ModelBase::doubleFromJson(*jsonForAlpha));
 	}
 }
 

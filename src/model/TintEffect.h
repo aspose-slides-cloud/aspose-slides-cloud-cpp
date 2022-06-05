@@ -24,53 +24,51 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * OneValueChartDataPoint.h
+ * TintEffect.h
  *
- * One value chart data point.
+ * Represents a Tint effect.
  */
 
-#ifndef _OneValueChartDataPoint_H_
-#define _OneValueChartDataPoint_H_
+#ifndef _TintEffect_H_
+#define _TintEffect_H_
 
-#include "DataPoint.h"
+#include "ImageTransformEffect.h"
 
-#include "../model/DataPoint.h"
+#include <cpprest/details/basic_types.h>
+#include "../model/ImageTransformEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// One value chart data point.
+/// Represents a Tint effect.
 /// </summary>
-class  OneValueChartDataPoint : public DataPoint
+class  TintEffect : public ImageTransformEffect
 {
 public:
-	ASPOSE_DLL_EXPORT OneValueChartDataPoint();
-	ASPOSE_DLL_EXPORT virtual ~OneValueChartDataPoint();
+	ASPOSE_DLL_EXPORT TintEffect();
+	ASPOSE_DLL_EXPORT virtual ~TintEffect();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
 	/// <summary>
-	/// Value.
+	/// Hue
 	/// </summary>
-	ASPOSE_DLL_EXPORT double getValue() const;
-	ASPOSE_DLL_EXPORT void setValue(double value);
+	ASPOSE_DLL_EXPORT double getHue() const;
+	ASPOSE_DLL_EXPORT void setHue(double value);
 	/// <summary>
-	/// SetAsTotal. Applied to Waterfall data points only.
+	/// Amount
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSetAsTotal() const;
-	ASPOSE_DLL_EXPORT void setSetAsTotal(bool value);
-	ASPOSE_DLL_EXPORT bool setAsTotalIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetSetAsTotal();
+	ASPOSE_DLL_EXPORT double getAmount() const;
+	ASPOSE_DLL_EXPORT void setAmount(double value);
 
 protected:
-	double m_Value;
-	bool m_SetAsTotal;
-	bool m_SetAsTotalIsSet;
+	double m_Hue;
+	double m_Amount;
 };
 
 }
 }
 
-#endif /* _OneValueChartDataPoint_H_ */
+#endif /* _TintEffect_H_ */

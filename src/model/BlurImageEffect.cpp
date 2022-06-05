@@ -23,54 +23,66 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-/*
- * OneValueChartDataPoint.h
- *
- * One value chart data point.
- */
 
-#ifndef _OneValueChartDataPoint_H_
-#define _OneValueChartDataPoint_H_
 
-#include "DataPoint.h"
-
-#include "../model/DataPoint.h"
+#include "BlurImageEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-/// <summary>
-/// One value chart data point.
-/// </summary>
-class  OneValueChartDataPoint : public DataPoint
+BlurImageEffect::BlurImageEffect()
 {
-public:
-	ASPOSE_DLL_EXPORT OneValueChartDataPoint();
-	ASPOSE_DLL_EXPORT virtual ~OneValueChartDataPoint();
+}
 
-	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
-	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
+BlurImageEffect::~BlurImageEffect()
+{
+}
 
-	/// <summary>
-	/// Value.
-	/// </summary>
-	ASPOSE_DLL_EXPORT double getValue() const;
-	ASPOSE_DLL_EXPORT void setValue(double value);
-	/// <summary>
-	/// SetAsTotal. Applied to Waterfall data points only.
-	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSetAsTotal() const;
-	ASPOSE_DLL_EXPORT void setSetAsTotal(bool value);
-	ASPOSE_DLL_EXPORT bool setAsTotalIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetSetAsTotal();
+double BlurImageEffect::getRadius() const
+{
+	return m_Radius;
+}
 
-protected:
-	double m_Value;
-	bool m_SetAsTotal;
-	bool m_SetAsTotalIsSet;
-};
+void BlurImageEffect::setRadius(double value)
+{
+	m_Radius = value;
+	
+}
+
+bool BlurImageEffect::getGrow() const
+{
+	return m_Grow;
+}
+
+void BlurImageEffect::setGrow(bool value)
+{
+	m_Grow = value;
+	
+}
+
+web::json::value BlurImageEffect::toJson() const
+{
+	web::json::value val = this->ImageTransformEffect::toJson();
+	val[utility::conversions::to_string_t("Radius")] = ModelBase::toJson(m_Radius);
+	val[utility::conversions::to_string_t("Grow")] = ModelBase::toJson(m_Grow);
+	return val;
+}
+
+void BlurImageEffect::fromJson(web::json::value& val)
+{
+	this->ImageTransformEffect::fromJson(val);
+	web::json::value* jsonForRadius = ModelBase::getField(val, "Radius");
+	if(jsonForRadius != nullptr && !jsonForRadius->is_null() && jsonForRadius->is_number())
+	{
+		setRadius(ModelBase::doubleFromJson(*jsonForRadius));
+	}
+	web::json::value* jsonForGrow = ModelBase::getField(val, "Grow");
+	if(jsonForGrow != nullptr && !jsonForGrow->is_null())
+	{
+		setGrow(ModelBase::boolFromJson(*jsonForGrow));
+	}
+}
 
 }
 }
 
-#endif /* _OneValueChartDataPoint_H_ */

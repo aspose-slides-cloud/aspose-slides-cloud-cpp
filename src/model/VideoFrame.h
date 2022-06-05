@@ -37,6 +37,7 @@
 #include "../model/GeometryShape.h"
 #include "../model/Hyperlink.h"
 #include "../model/EffectFormat.h"
+#include "../model/PictureFill.h"
 #include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
@@ -102,6 +103,11 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getBase64Data() const;
 	ASPOSE_DLL_EXPORT void setBase64Data(utility::string_t value);
+	/// <summary>
+	/// Picture fill format.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<PictureFill> getPictureFillFormat() const;
+	ASPOSE_DLL_EXPORT void setPictureFillFormat(std::shared_ptr<PictureFill> value);
 
 protected:
 	bool m_FullScreenMode;
@@ -115,6 +121,7 @@ protected:
 	bool m_RewindVideoIsSet;
 	utility::string_t m_Volume;
 	utility::string_t m_Base64Data;
+	std::shared_ptr<PictureFill> m_PictureFillFormat;
 };
 
 }

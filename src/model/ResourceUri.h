@@ -71,12 +71,30 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getTitle() const;
 	ASPOSE_DLL_EXPORT void setTitle(utility::string_t value);
+	/// <summary>
+	/// Resource slide index.
+	/// </summary>
+	ASPOSE_DLL_EXPORT int32_t getSlideIndex() const;
+	ASPOSE_DLL_EXPORT void setSlideIndex(int32_t value);
+	ASPOSE_DLL_EXPORT bool slideIndexIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetSlideIndex();
+	/// <summary>
+	/// Resource shape index.
+	/// </summary>
+	ASPOSE_DLL_EXPORT int32_t getShapeIndex() const;
+	ASPOSE_DLL_EXPORT void setShapeIndex(int32_t value);
+	ASPOSE_DLL_EXPORT bool shapeIndexIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetShapeIndex();
 
 protected:
 	utility::string_t m_Href;
 	utility::string_t m_Relation;
 	utility::string_t m_LinkType;
 	utility::string_t m_Title;
+	int32_t m_SlideIndex;
+	bool m_SlideIndexIsSet;
+	int32_t m_ShapeIndex;
+	bool m_ShapeIndexIsSet;
 };
 
 }

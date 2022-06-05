@@ -23,48 +23,49 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-/*
- * WaterfallChartDataPoint.h
- *
- * One value chart data point.
- */
 
-#ifndef _WaterfallChartDataPoint_H_
-#define _WaterfallChartDataPoint_H_
 
-#include "OneValueChartDataPoint.h"
-
-#include "../model/OneValueChartDataPoint.h"
+#include "BiLevelEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-/// <summary>
-/// One value chart data point.
-/// </summary>
-class  WaterfallChartDataPoint : public OneValueChartDataPoint
+BiLevelEffect::BiLevelEffect()
 {
-public:
-	ASPOSE_DLL_EXPORT WaterfallChartDataPoint();
-	ASPOSE_DLL_EXPORT virtual ~WaterfallChartDataPoint();
+}
 
-	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
-	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
+BiLevelEffect::~BiLevelEffect()
+{
+}
 
-	/// <summary>
-	/// Value.
-	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSetAsTotal() const;
-	ASPOSE_DLL_EXPORT void setSetAsTotal(bool value);
-	ASPOSE_DLL_EXPORT bool setAsTotalIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetSetAsTotal();
+double BiLevelEffect::getThreshold() const
+{
+	return m_Threshold;
+}
 
-protected:
-	bool m_SetAsTotal;
-	bool m_SetAsTotalIsSet;
-};
+void BiLevelEffect::setThreshold(double value)
+{
+	m_Threshold = value;
+	
+}
+
+web::json::value BiLevelEffect::toJson() const
+{
+	web::json::value val = this->ImageTransformEffect::toJson();
+	val[utility::conversions::to_string_t("Threshold")] = ModelBase::toJson(m_Threshold);
+	return val;
+}
+
+void BiLevelEffect::fromJson(web::json::value& val)
+{
+	this->ImageTransformEffect::fromJson(val);
+	web::json::value* jsonForThreshold = ModelBase::getField(val, "Threshold");
+	if(jsonForThreshold != nullptr && !jsonForThreshold->is_null() && jsonForThreshold->is_number())
+	{
+		setThreshold(ModelBase::doubleFromJson(*jsonForThreshold));
+	}
+}
 
 }
 }
 
-#endif /* _WaterfallChartDataPoint_H_ */

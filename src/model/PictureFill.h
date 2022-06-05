@@ -36,7 +36,9 @@
 
 #include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"
+#include "../model/ImageTransformEffect.h"
 #include "../model/ResourceUri.h"
+#include <vector>
 
 namespace asposeslidescloud {
 namespace model {
@@ -98,6 +100,11 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getPictureFillMode() const;
 	ASPOSE_DLL_EXPORT void setPictureFillMode(utility::string_t value);
+	/// <summary>
+	/// Image transform effects.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<ImageTransformEffect>> getImageTransformList() const;
+	ASPOSE_DLL_EXPORT void setImageTransformList(std::vector<std::shared_ptr<ImageTransformEffect>> value);
 
 protected:
 	double m_CropBottom;
@@ -109,6 +116,7 @@ protected:
 	utility::string_t m_Base64Data;
 	utility::string_t m_SvgData;
 	utility::string_t m_PictureFillMode;
+	std::vector<std::shared_ptr<ImageTransformEffect>> m_ImageTransformList;
 };
 
 }

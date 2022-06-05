@@ -23,54 +23,72 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-/*
- * OneValueChartDataPoint.h
- *
- * One value chart data point.
- */
 
-#ifndef _OneValueChartDataPoint_H_
-#define _OneValueChartDataPoint_H_
 
-#include "DataPoint.h"
-
-#include "../model/DataPoint.h"
+#include "ColorChangeEffect.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-/// <summary>
-/// One value chart data point.
-/// </summary>
-class  OneValueChartDataPoint : public DataPoint
+ColorChangeEffect::ColorChangeEffect()
 {
-public:
-	ASPOSE_DLL_EXPORT OneValueChartDataPoint();
-	ASPOSE_DLL_EXPORT virtual ~OneValueChartDataPoint();
+}
 
-	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
-	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
+ColorChangeEffect::~ColorChangeEffect()
+{
+}
 
-	/// <summary>
-	/// Value.
-	/// </summary>
-	ASPOSE_DLL_EXPORT double getValue() const;
-	ASPOSE_DLL_EXPORT void setValue(double value);
-	/// <summary>
-	/// SetAsTotal. Applied to Waterfall data points only.
-	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSetAsTotal() const;
-	ASPOSE_DLL_EXPORT void setSetAsTotal(bool value);
-	ASPOSE_DLL_EXPORT bool setAsTotalIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetSetAsTotal();
+utility::string_t ColorChangeEffect::getFromColor() const
+{
+	return m_FromColor;
+}
 
-protected:
-	double m_Value;
-	bool m_SetAsTotal;
-	bool m_SetAsTotalIsSet;
-};
+void ColorChangeEffect::setFromColor(utility::string_t value)
+{
+	m_FromColor = value;
+	
+}
+
+utility::string_t ColorChangeEffect::getToColor() const
+{
+	return m_ToColor;
+}
+
+void ColorChangeEffect::setToColor(utility::string_t value)
+{
+	m_ToColor = value;
+	
+}
+
+web::json::value ColorChangeEffect::toJson() const
+{
+	web::json::value val = this->ImageTransformEffect::toJson();
+	if (!m_FromColor.empty())
+	{
+		val[utility::conversions::to_string_t("FromColor")] = ModelBase::toJson(m_FromColor);
+	}
+	if (!m_ToColor.empty())
+	{
+		val[utility::conversions::to_string_t("ToColor")] = ModelBase::toJson(m_ToColor);
+	}
+	return val;
+}
+
+void ColorChangeEffect::fromJson(web::json::value& val)
+{
+	this->ImageTransformEffect::fromJson(val);
+	web::json::value* jsonForFromColor = ModelBase::getField(val, "FromColor");
+	if(jsonForFromColor != nullptr && !jsonForFromColor->is_null())
+	{
+		setFromColor(ModelBase::stringFromJson(*jsonForFromColor));
+	}
+	web::json::value* jsonForToColor = ModelBase::getField(val, "ToColor");
+	if(jsonForToColor != nullptr && !jsonForToColor->is_null())
+	{
+		setToColor(ModelBase::stringFromJson(*jsonForToColor));
+	}
+}
 
 }
 }
 
-#endif /* _OneValueChartDataPoint_H_ */

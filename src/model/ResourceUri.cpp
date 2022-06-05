@@ -32,6 +32,8 @@ namespace model {
 
 ResourceUri::ResourceUri()
 {
+	m_SlideIndexIsSet = false;
+	m_ShapeIndexIsSet = false;
 }
 
 ResourceUri::~ResourceUri()
@@ -82,6 +84,48 @@ void ResourceUri::setTitle(utility::string_t value)
 	
 }
 
+int32_t ResourceUri::getSlideIndex() const
+{
+	return m_SlideIndex;
+}
+
+void ResourceUri::setSlideIndex(int32_t value)
+{
+	m_SlideIndex = value;
+	m_SlideIndexIsSet = true;
+}
+
+bool ResourceUri::slideIndexIsSet() const
+{
+	return m_SlideIndexIsSet;
+}
+
+void ResourceUri::unsetSlideIndex()
+{
+	m_SlideIndexIsSet = false;
+}
+
+int32_t ResourceUri::getShapeIndex() const
+{
+	return m_ShapeIndex;
+}
+
+void ResourceUri::setShapeIndex(int32_t value)
+{
+	m_ShapeIndex = value;
+	m_ShapeIndexIsSet = true;
+}
+
+bool ResourceUri::shapeIndexIsSet() const
+{
+	return m_ShapeIndexIsSet;
+}
+
+void ResourceUri::unsetShapeIndex()
+{
+	m_ShapeIndexIsSet = false;
+}
+
 web::json::value ResourceUri::toJson() const
 {
 	web::json::value val = web::json::value::object();
@@ -100,6 +144,14 @@ web::json::value ResourceUri::toJson() const
 	if (!m_Title.empty())
 	{
 		val[utility::conversions::to_string_t("Title")] = ModelBase::toJson(m_Title);
+	}
+	if(m_SlideIndexIsSet)
+	{
+		val[utility::conversions::to_string_t("SlideIndex")] = ModelBase::toJson(m_SlideIndex);
+	}
+	if(m_ShapeIndexIsSet)
+	{
+		val[utility::conversions::to_string_t("ShapeIndex")] = ModelBase::toJson(m_ShapeIndex);
 	}
 	return val;
 }
@@ -125,6 +177,16 @@ void ResourceUri::fromJson(web::json::value& val)
 	if(jsonForTitle != nullptr && !jsonForTitle->is_null())
 	{
 		setTitle(ModelBase::stringFromJson(*jsonForTitle));
+	}
+	web::json::value* jsonForSlideIndex = ModelBase::getField(val, "SlideIndex");
+	if(jsonForSlideIndex != nullptr && !jsonForSlideIndex->is_null() && jsonForSlideIndex->is_number())
+	{
+		setSlideIndex(ModelBase::int32_tFromJson(*jsonForSlideIndex));
+	}
+	web::json::value* jsonForShapeIndex = ModelBase::getField(val, "ShapeIndex");
+	if(jsonForShapeIndex != nullptr && !jsonForShapeIndex->is_null() && jsonForShapeIndex->is_number())
+	{
+		setShapeIndex(ModelBase::int32_tFromJson(*jsonForShapeIndex));
 	}
 }
 
