@@ -33,6 +33,7 @@ namespace model {
 OneValueChartDataPoint::OneValueChartDataPoint()
 {
 	m_SetAsTotalIsSet = false;
+	m_InvertIfNegativeIsSet = false;
 }
 
 OneValueChartDataPoint::~OneValueChartDataPoint()
@@ -71,6 +72,27 @@ void OneValueChartDataPoint::unsetSetAsTotal()
 	m_SetAsTotalIsSet = false;
 }
 
+bool OneValueChartDataPoint::getInvertIfNegative() const
+{
+	return m_InvertIfNegative;
+}
+
+void OneValueChartDataPoint::setInvertIfNegative(bool value)
+{
+	m_InvertIfNegative = value;
+	m_InvertIfNegativeIsSet = true;
+}
+
+bool OneValueChartDataPoint::invertIfNegativeIsSet() const
+{
+	return m_InvertIfNegativeIsSet;
+}
+
+void OneValueChartDataPoint::unsetInvertIfNegative()
+{
+	m_InvertIfNegativeIsSet = false;
+}
+
 web::json::value OneValueChartDataPoint::toJson() const
 {
 	web::json::value val = this->DataPoint::toJson();
@@ -78,6 +100,10 @@ web::json::value OneValueChartDataPoint::toJson() const
 	if(m_SetAsTotalIsSet)
 	{
 		val[utility::conversions::to_string_t("SetAsTotal")] = ModelBase::toJson(m_SetAsTotal);
+	}
+	if(m_InvertIfNegativeIsSet)
+	{
+		val[utility::conversions::to_string_t("InvertIfNegative")] = ModelBase::toJson(m_InvertIfNegative);
 	}
 	return val;
 }
@@ -94,6 +120,11 @@ void OneValueChartDataPoint::fromJson(web::json::value& val)
 	if(jsonForSetAsTotal != nullptr && !jsonForSetAsTotal->is_null())
 	{
 		setSetAsTotal(ModelBase::boolFromJson(*jsonForSetAsTotal));
+	}
+	web::json::value* jsonForInvertIfNegative = ModelBase::getField(val, "InvertIfNegative");
+	if(jsonForInvertIfNegative != nullptr && !jsonForInvertIfNegative->is_null())
+	{
+		setInvertIfNegative(ModelBase::boolFromJson(*jsonForInvertIfNegative));
 	}
 }
 

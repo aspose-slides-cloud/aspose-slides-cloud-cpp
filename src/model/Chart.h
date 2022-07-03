@@ -43,6 +43,7 @@
 #include "../model/LineFormat.h"
 #include "../model/ThreeDFormat.h"
 #include <vector>
+#include "../model/ChartSeriesGroup.h"
 #include "../model/ChartTitle.h"
 #include "../model/Legend.h"
 #include "../model/ShapeBase.h"
@@ -123,6 +124,18 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::shared_ptr<PlotArea> getPlotArea() const;
 	ASPOSE_DLL_EXPORT void setPlotArea(std::shared_ptr<PlotArea> value);
+	/// <summary>
+	/// Specifies the chart area shall have rounded corners.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getHasRoundedCorners() const;
+	ASPOSE_DLL_EXPORT void setHasRoundedCorners(bool value);
+	ASPOSE_DLL_EXPORT bool hasRoundedCornersIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetHasRoundedCorners();
+	/// <summary>
+	/// Gets groups of series. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<ChartSeriesGroup>> getSeriesGroups() const;
+	ASPOSE_DLL_EXPORT void setSeriesGroups(std::vector<std::shared_ptr<ChartSeriesGroup>> value);
 
 protected:
 	utility::string_t m_ChartType;
@@ -137,6 +150,9 @@ protected:
 	std::shared_ptr<Legend> m_Legend;
 	std::shared_ptr<Axes> m_Axes;
 	std::shared_ptr<PlotArea> m_PlotArea;
+	bool m_HasRoundedCorners;
+	bool m_HasRoundedCornersIsSet;
+	std::vector<std::shared_ptr<ChartSeriesGroup>> m_SeriesGroups;
 };
 
 }

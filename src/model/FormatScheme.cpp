@@ -38,45 +38,45 @@ FormatScheme::~FormatScheme()
 {
 }
 
-std::vector<std::shared_ptr<ResourceUri>> FormatScheme::getBackgroundStyles() const
+std::vector<std::shared_ptr<FillFormat>> FormatScheme::getBackgroundStyles() const
 {
 	return m_BackgroundStyles;
 }
 
-void FormatScheme::setBackgroundStyles(std::vector<std::shared_ptr<ResourceUri>> value)
+void FormatScheme::setBackgroundStyles(std::vector<std::shared_ptr<FillFormat>> value)
 {
 	m_BackgroundStyles = value;
 	
 }
 
-std::vector<std::shared_ptr<ResourceUri>> FormatScheme::getEffectStyles() const
+std::vector<std::shared_ptr<EffectFormat>> FormatScheme::getEffectStyles() const
 {
 	return m_EffectStyles;
 }
 
-void FormatScheme::setEffectStyles(std::vector<std::shared_ptr<ResourceUri>> value)
+void FormatScheme::setEffectStyles(std::vector<std::shared_ptr<EffectFormat>> value)
 {
 	m_EffectStyles = value;
 	
 }
 
-std::vector<std::shared_ptr<ResourceUri>> FormatScheme::getFillStyles() const
+std::vector<std::shared_ptr<FillFormat>> FormatScheme::getFillStyles() const
 {
 	return m_FillStyles;
 }
 
-void FormatScheme::setFillStyles(std::vector<std::shared_ptr<ResourceUri>> value)
+void FormatScheme::setFillStyles(std::vector<std::shared_ptr<FillFormat>> value)
 {
 	m_FillStyles = value;
 	
 }
 
-std::vector<std::shared_ptr<ResourceUri>> FormatScheme::getLineStyles() const
+std::vector<std::shared_ptr<LineFormat>> FormatScheme::getLineStyles() const
 {
 	return m_LineStyles;
 }
 
-void FormatScheme::setLineStyles(std::vector<std::shared_ptr<ResourceUri>> value)
+void FormatScheme::setLineStyles(std::vector<std::shared_ptr<LineFormat>> value)
 {
 	m_LineStyles = value;
 	
@@ -145,11 +145,11 @@ void FormatScheme::fromJson(web::json::value& val)
 			{
 				if(item.is_null())
 				{
-					m_BackgroundStyles.push_back(std::shared_ptr<ResourceUri>(nullptr));
+					m_BackgroundStyles.push_back(std::shared_ptr<FillFormat>(nullptr));
 				}
 				else
 				{
-					std::shared_ptr<ResourceUri> newItem(new ResourceUri());
+					std::shared_ptr<FillFormat> newItem(new FillFormat());
 					newItem->fromJson(item);
 					m_BackgroundStyles.push_back( newItem );
 				}
@@ -166,11 +166,11 @@ void FormatScheme::fromJson(web::json::value& val)
 			{
 				if(item.is_null())
 				{
-					m_EffectStyles.push_back(std::shared_ptr<ResourceUri>(nullptr));
+					m_EffectStyles.push_back(std::shared_ptr<EffectFormat>(nullptr));
 				}
 				else
 				{
-					std::shared_ptr<ResourceUri> newItem(new ResourceUri());
+					std::shared_ptr<EffectFormat> newItem(new EffectFormat());
 					newItem->fromJson(item);
 					m_EffectStyles.push_back( newItem );
 				}
@@ -187,11 +187,11 @@ void FormatScheme::fromJson(web::json::value& val)
 			{
 				if(item.is_null())
 				{
-					m_FillStyles.push_back(std::shared_ptr<ResourceUri>(nullptr));
+					m_FillStyles.push_back(std::shared_ptr<FillFormat>(nullptr));
 				}
 				else
 				{
-					std::shared_ptr<ResourceUri> newItem(new ResourceUri());
+					std::shared_ptr<FillFormat> newItem(new FillFormat());
 					newItem->fromJson(item);
 					m_FillStyles.push_back( newItem );
 				}
@@ -208,11 +208,11 @@ void FormatScheme::fromJson(web::json::value& val)
 			{
 				if(item.is_null())
 				{
-					m_LineStyles.push_back(std::shared_ptr<ResourceUri>(nullptr));
+					m_LineStyles.push_back(std::shared_ptr<LineFormat>(nullptr));
 				}
 				else
 				{
-					std::shared_ptr<ResourceUri> newItem(new ResourceUri());
+					std::shared_ptr<LineFormat> newItem(new LineFormat());
 					newItem->fromJson(item);
 					m_LineStyles.push_back( newItem );
 				}

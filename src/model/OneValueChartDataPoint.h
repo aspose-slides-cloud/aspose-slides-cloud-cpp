@@ -63,11 +63,20 @@ public:
 	ASPOSE_DLL_EXPORT void setSetAsTotal(bool value);
 	ASPOSE_DLL_EXPORT bool setAsTotalIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetSetAsTotal();
+	/// <summary>
+	/// True if the data point shall invert its colors if the value is negative. Applies to bar, column and bubble series.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getInvertIfNegative() const;
+	ASPOSE_DLL_EXPORT void setInvertIfNegative(bool value);
+	ASPOSE_DLL_EXPORT bool invertIfNegativeIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetInvertIfNegative();
 
 protected:
 	double m_Value;
 	bool m_SetAsTotal;
 	bool m_SetAsTotalIsSet;
+	bool m_InvertIfNegative;
+	bool m_InvertIfNegativeIsSet;
 };
 
 }

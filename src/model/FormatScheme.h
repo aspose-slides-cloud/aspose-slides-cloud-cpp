@@ -34,6 +34,9 @@
 
 #include "ResourceBase.h"
 
+#include "../model/EffectFormat.h"
+#include "../model/FillFormat.h"
+#include "../model/LineFormat.h"
 #include "../model/ResourceBase.h"
 #include "../model/ResourceUri.h"
 #include <vector>
@@ -54,31 +57,31 @@ public:
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
 	/// <summary>
-	/// Background style links.
+	/// Background styles.
 	/// </summary>
-	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<ResourceUri>> getBackgroundStyles() const;
-	ASPOSE_DLL_EXPORT void setBackgroundStyles(std::vector<std::shared_ptr<ResourceUri>> value);
+	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<FillFormat>> getBackgroundStyles() const;
+	ASPOSE_DLL_EXPORT void setBackgroundStyles(std::vector<std::shared_ptr<FillFormat>> value);
 	/// <summary>
-	/// Effect style links.
+	/// Effect styles.
 	/// </summary>
-	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<ResourceUri>> getEffectStyles() const;
-	ASPOSE_DLL_EXPORT void setEffectStyles(std::vector<std::shared_ptr<ResourceUri>> value);
+	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<EffectFormat>> getEffectStyles() const;
+	ASPOSE_DLL_EXPORT void setEffectStyles(std::vector<std::shared_ptr<EffectFormat>> value);
 	/// <summary>
-	/// Fill style links.
+	/// Fill styles.
 	/// </summary>
-	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<ResourceUri>> getFillStyles() const;
-	ASPOSE_DLL_EXPORT void setFillStyles(std::vector<std::shared_ptr<ResourceUri>> value);
+	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<FillFormat>> getFillStyles() const;
+	ASPOSE_DLL_EXPORT void setFillStyles(std::vector<std::shared_ptr<FillFormat>> value);
 	/// <summary>
-	/// Line style links.
+	/// Line style.
 	/// </summary>
-	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<ResourceUri>> getLineStyles() const;
-	ASPOSE_DLL_EXPORT void setLineStyles(std::vector<std::shared_ptr<ResourceUri>> value);
+	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<LineFormat>> getLineStyles() const;
+	ASPOSE_DLL_EXPORT void setLineStyles(std::vector<std::shared_ptr<LineFormat>> value);
 
 protected:
-	std::vector<std::shared_ptr<ResourceUri>> m_BackgroundStyles;
-	std::vector<std::shared_ptr<ResourceUri>> m_EffectStyles;
-	std::vector<std::shared_ptr<ResourceUri>> m_FillStyles;
-	std::vector<std::shared_ptr<ResourceUri>> m_LineStyles;
+	std::vector<std::shared_ptr<FillFormat>> m_BackgroundStyles;
+	std::vector<std::shared_ptr<EffectFormat>> m_EffectStyles;
+	std::vector<std::shared_ptr<FillFormat>> m_FillStyles;
+	std::vector<std::shared_ptr<LineFormat>> m_LineStyles;
 };
 
 }

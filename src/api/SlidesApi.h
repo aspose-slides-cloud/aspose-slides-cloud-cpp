@@ -42,6 +42,7 @@
 #include "../model/ApiInfo.h"
 #include "../model/Chart.h"
 #include "../model/ChartCategory.h"
+#include "../model/ChartSeriesGroup.h"
 #include "../model/ColorScheme.h"
 #include "../model/DataPoint.h"
 #include "../model/DiscUsage.h"
@@ -825,6 +826,11 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> getParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
+	/// Read effective paragraph info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> getParagraphEffective(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
 	/// Return coordinates of rect that bounds paragraph. The rect includes all the lines of text in paragraph, including empty ones.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<TextBounds>> getParagraphRectangle(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
@@ -848,6 +854,11 @@ public:
 	/// Read paragraph portion info.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portion>> getPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Read effective portion info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portion>> getPortionEffective(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Return coordinates of rect that bounds paragraph. The rect includes all the lines of text in paragraph, including empty ones.
@@ -1010,6 +1021,11 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> getSubshapeParagraph(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
+	/// Read effective paragraph info (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> getSubshapeParagraphEffective(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
 	/// Read shape paragraphs info (for smart art and group shapes).
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraphs>> getSubshapeParagraphs(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
@@ -1018,6 +1034,11 @@ public:
 	/// Read paragraph portion info (for smart art and group shapes).
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portion>> getSubshapePortion(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Read effective portion info (for smart art and group shapes).
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portion>> getSubshapePortionEffective(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Read paragraph portions info (for smart art and group shapes).
@@ -1308,6 +1329,11 @@ public:
 	/// Update a series in a chart.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Chart>> updateChartSeries(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t seriesIndex, std::shared_ptr<Series> series, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Update a series group in a chart.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Chart>> updateChartSeriesGroup(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t seriesGroupIndex, std::shared_ptr<ChartSeriesGroup> seriesGroup, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Update a layoutSlide.

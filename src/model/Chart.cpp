@@ -33,6 +33,7 @@ namespace model {
 Chart::Chart()
 {
 	m_ShowDataLabelsOverMaximumIsSet = false;
+	m_HasRoundedCornersIsSet = false;
 }
 
 Chart::~Chart()
@@ -170,6 +171,38 @@ void Chart::setPlotArea(std::shared_ptr<PlotArea> value)
 	
 }
 
+bool Chart::getHasRoundedCorners() const
+{
+	return m_HasRoundedCorners;
+}
+
+void Chart::setHasRoundedCorners(bool value)
+{
+	m_HasRoundedCorners = value;
+	m_HasRoundedCornersIsSet = true;
+}
+
+bool Chart::hasRoundedCornersIsSet() const
+{
+	return m_HasRoundedCornersIsSet;
+}
+
+void Chart::unsetHasRoundedCorners()
+{
+	m_HasRoundedCornersIsSet = false;
+}
+
+std::vector<std::shared_ptr<ChartSeriesGroup>> Chart::getSeriesGroups() const
+{
+	return m_SeriesGroups;
+}
+
+void Chart::setSeriesGroups(std::vector<std::shared_ptr<ChartSeriesGroup>> value)
+{
+	m_SeriesGroups = value;
+	
+}
+
 web::json::value Chart::toJson() const
 {
 	web::json::value val = this->ShapeBase::toJson();
@@ -230,6 +263,21 @@ web::json::value Chart::toJson() const
 	if (m_PlotArea != nullptr)
 	{
 		val[utility::conversions::to_string_t("PlotArea")] = ModelBase::toJson(m_PlotArea);
+	}
+	if(m_HasRoundedCornersIsSet)
+	{
+		val[utility::conversions::to_string_t("HasRoundedCorners")] = ModelBase::toJson(m_HasRoundedCorners);
+	}
+	{
+		std::vector<web::json::value> jsonArray;
+		for (auto& item : m_SeriesGroups)
+		{
+			jsonArray.push_back(ModelBase::toJson(item));
+		}
+		if (jsonArray.size() > 0)
+		{
+			val[utility::conversions::to_string_t("SeriesGroups")] = web::json::value::array(jsonArray);
+		}
 	}
 	return val;
 }
@@ -337,6 +385,32 @@ void Chart::fromJson(web::json::value& val)
 		std::shared_ptr<PlotArea> newItem(new PlotArea());
 		newItem->fromJson(*jsonForPlotArea);
 		setPlotArea(newItem);
+	}
+	web::json::value* jsonForHasRoundedCorners = ModelBase::getField(val, "HasRoundedCorners");
+	if(jsonForHasRoundedCorners != nullptr && !jsonForHasRoundedCorners->is_null())
+	{
+		setHasRoundedCorners(ModelBase::boolFromJson(*jsonForHasRoundedCorners));
+	}
+	web::json::value* jsonForSeriesGroups = ModelBase::getField(val, "SeriesGroups");
+	if(jsonForSeriesGroups != nullptr && !jsonForSeriesGroups->is_null())
+	{
+		{
+			m_SeriesGroups.clear();
+			std::vector<web::json::value> jsonArray;
+			for(auto& item : jsonForSeriesGroups->as_array())
+			{
+				if(item.is_null())
+				{
+					m_SeriesGroups.push_back(std::shared_ptr<ChartSeriesGroup>(nullptr));
+				}
+				else
+				{
+					std::shared_ptr<ChartSeriesGroup> newItem(new ChartSeriesGroup());
+					newItem->fromJson(item);
+					m_SeriesGroups.push_back( newItem );
+				}
+			}
+        	}
 	}
 }
 
