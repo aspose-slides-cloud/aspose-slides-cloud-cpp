@@ -40,9 +40,11 @@
 #include "../StringBody.h"
 
 #include "../model/ApiInfo.h"
+#include "../model/Axis.h"
 #include "../model/Chart.h"
 #include "../model/ChartCategory.h"
 #include "../model/ChartSeriesGroup.h"
+#include "../model/ChartWall.h"
 #include "../model/ColorScheme.h"
 #include "../model/DataPoint.h"
 #include "../model/DiscUsage.h"
@@ -66,6 +68,7 @@
 #include "../model/InteractiveSequence.h"
 #include "../model/LayoutSlide.h"
 #include "../model/LayoutSlides.h"
+#include "../model/Legend.h"
 #include "../model/MasterSlide.h"
 #include "../model/MasterSlides.h"
 #include "../model/NotesSlide.h"
@@ -619,6 +622,16 @@ public:
 	/// Removes unused layout slides.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> deleteUnusedLayoutSlidesOnline(std::shared_ptr<HttpContent> document, utility::string_t password = utility::string_t());
+
+	/// <summary>
+	/// Removes unused master slides.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<MasterSlides>> deleteUnusedMasterSlides(utility::string_t name, boost::optional<bool> ignorePreserveField = bool(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Removes unused master slides.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> deleteUnusedMasterSlidesOnline(std::shared_ptr<HttpContent> document, boost::optional<bool> ignorePreserveField = bool(), utility::string_t password = utility::string_t());
 
 	/// <summary>
 	/// Removes shapes with name \&quot;watermark\&quot; from the presentation.
@@ -1226,6 +1239,26 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideBackground>> setBackgroundColor(utility::string_t name, int32_t slideIndex, utility::string_t color, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
+	/// Set chart axis.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Axis>> setChartAxis(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t axisType, std::shared_ptr<Axis> axis, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Set chart axis.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Legend>> setChartLegend(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::shared_ptr<Legend> legend, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Set a series group in a chart.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Chart>> setChartSeriesGroup(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t seriesGroupIndex, std::shared_ptr<ChartSeriesGroup> seriesGroup, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Set 3D chart wall.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ChartWall>> setChartWall(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t chartWallType, std::shared_ptr<ChartWall> chartWall, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
 	/// Set document properties.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<DocumentProperties>> setDocumentProperties(utility::string_t name, std::shared_ptr<DocumentProperties> properties, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
@@ -1329,11 +1362,6 @@ public:
 	/// Update a series in a chart.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Chart>> updateChartSeries(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t seriesIndex, std::shared_ptr<Series> series, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
-
-	/// <summary>
-	/// Update a series group in a chart.
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Chart>> updateChartSeriesGroup(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t seriesGroupIndex, std::shared_ptr<ChartSeriesGroup> seriesGroup, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Update a layoutSlide.

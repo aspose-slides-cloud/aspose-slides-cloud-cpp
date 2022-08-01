@@ -30918,6 +30918,340 @@ TEST_F(SlidesApiTest, deleteUnusedLayoutSlidesOnlineInvalidPassword) {
 	}
 }
 
+TEST_F(SlidesApiTest, deleteUnusedMasterSlides) {
+	utility::string_t paramName = utils->getTestValue("deleteUnusedMasterSlides", "name");
+	auto paramIgnorePreserveField = utils->getOptionalBoolTestValue("deleteUnusedMasterSlides", "ignorePreserveField");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedMasterSlides", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteUnusedMasterSlides", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteUnusedMasterSlides", "storage");
+	utils->initialize("deleteUnusedMasterSlides", "");
+	std::shared_ptr<MasterSlides> result = api->deleteUnusedMasterSlides(paramName, paramIgnorePreserveField, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, deleteUnusedMasterSlidesInvalidName) {
+	utility::string_t paramName = utils->getTestValue("deleteUnusedMasterSlides", "name");
+	auto paramIgnorePreserveField = utils->getOptionalBoolTestValue("deleteUnusedMasterSlides", "ignorePreserveField");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedMasterSlides", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteUnusedMasterSlides", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteUnusedMasterSlides", "storage");
+	paramName = utils->getInvalidTestValue("deleteUnusedMasterSlides", "name", paramName);
+	utils->initialize("deleteUnusedMasterSlides", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->deleteUnusedMasterSlides(paramName, paramIgnorePreserveField, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedMasterSlides", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedMasterSlides", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedMasterSlides", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedMasterSlides", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteUnusedMasterSlides", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteUnusedMasterSlidesInvalidIgnorePreserveField) {
+	utility::string_t paramName = utils->getTestValue("deleteUnusedMasterSlides", "name");
+	auto paramIgnorePreserveField = utils->getOptionalBoolTestValue("deleteUnusedMasterSlides", "ignorePreserveField");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedMasterSlides", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteUnusedMasterSlides", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteUnusedMasterSlides", "storage");
+	paramIgnorePreserveField = utils->getInvalidBoolTestValue("deleteUnusedMasterSlides", "ignorePreserveField", paramIgnorePreserveField).value();
+	utils->initialize("deleteUnusedMasterSlides", "ignorePreserveField", paramIgnorePreserveField);
+
+	bool failed = true;
+	try
+	{
+		api->deleteUnusedMasterSlides(paramName, paramIgnorePreserveField, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedMasterSlides", "ignorePreserveField");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedMasterSlides", "ignorePreserveField", paramIgnorePreserveField);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedMasterSlides", "ignorePreserveField");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedMasterSlides", "ignorePreserveField", paramIgnorePreserveField);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteUnusedMasterSlides", "ignorePreserveField"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteUnusedMasterSlidesInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("deleteUnusedMasterSlides", "name");
+	auto paramIgnorePreserveField = utils->getOptionalBoolTestValue("deleteUnusedMasterSlides", "ignorePreserveField");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedMasterSlides", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteUnusedMasterSlides", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteUnusedMasterSlides", "storage");
+	paramPassword = utils->getInvalidTestValue("deleteUnusedMasterSlides", "password", paramPassword);
+	utils->initialize("deleteUnusedMasterSlides", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->deleteUnusedMasterSlides(paramName, paramIgnorePreserveField, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedMasterSlides", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedMasterSlides", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedMasterSlides", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedMasterSlides", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteUnusedMasterSlides", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteUnusedMasterSlidesInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("deleteUnusedMasterSlides", "name");
+	auto paramIgnorePreserveField = utils->getOptionalBoolTestValue("deleteUnusedMasterSlides", "ignorePreserveField");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedMasterSlides", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteUnusedMasterSlides", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteUnusedMasterSlides", "storage");
+	paramFolder = utils->getInvalidTestValue("deleteUnusedMasterSlides", "folder", paramFolder);
+	utils->initialize("deleteUnusedMasterSlides", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->deleteUnusedMasterSlides(paramName, paramIgnorePreserveField, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedMasterSlides", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedMasterSlides", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedMasterSlides", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedMasterSlides", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteUnusedMasterSlides", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteUnusedMasterSlidesInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("deleteUnusedMasterSlides", "name");
+	auto paramIgnorePreserveField = utils->getOptionalBoolTestValue("deleteUnusedMasterSlides", "ignorePreserveField");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedMasterSlides", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteUnusedMasterSlides", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteUnusedMasterSlides", "storage");
+	paramStorage = utils->getInvalidTestValue("deleteUnusedMasterSlides", "storage", paramStorage);
+	utils->initialize("deleteUnusedMasterSlides", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->deleteUnusedMasterSlides(paramName, paramIgnorePreserveField, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedMasterSlides", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedMasterSlides", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedMasterSlides", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedMasterSlides", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteUnusedMasterSlides", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteUnusedMasterSlidesOnline) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("deleteUnusedMasterSlidesOnline", "document");
+	auto paramIgnorePreserveField = utils->getOptionalBoolTestValue("deleteUnusedMasterSlidesOnline", "ignorePreserveField");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedMasterSlidesOnline", "password");
+	utils->initialize("deleteUnusedMasterSlidesOnline", "");
+	HttpContent result = api->deleteUnusedMasterSlidesOnline(paramDocument, paramIgnorePreserveField, paramPassword).get();
+	EXPECT_FALSE(result.getData()->eof());
+}
+
+TEST_F(SlidesApiTest, deleteUnusedMasterSlidesOnlineInvalidDocument) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("deleteUnusedMasterSlidesOnline", "document");
+	auto paramIgnorePreserveField = utils->getOptionalBoolTestValue("deleteUnusedMasterSlidesOnline", "ignorePreserveField");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedMasterSlidesOnline", "password");
+	paramDocument = utils->getInvalidBinaryTestValue("deleteUnusedMasterSlidesOnline", "document", paramDocument);
+	utils->initialize("deleteUnusedMasterSlidesOnline", "document", paramDocument);
+
+	bool failed = true;
+	try
+	{
+		api->deleteUnusedMasterSlidesOnline(paramDocument, paramIgnorePreserveField, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedMasterSlidesOnline", "document");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedMasterSlidesOnline", "document", paramDocument);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedMasterSlidesOnline", "document");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedMasterSlidesOnline", "document", paramDocument);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteUnusedMasterSlidesOnline", "document"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteUnusedMasterSlidesOnlineInvalidIgnorePreserveField) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("deleteUnusedMasterSlidesOnline", "document");
+	auto paramIgnorePreserveField = utils->getOptionalBoolTestValue("deleteUnusedMasterSlidesOnline", "ignorePreserveField");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedMasterSlidesOnline", "password");
+	paramIgnorePreserveField = utils->getInvalidBoolTestValue("deleteUnusedMasterSlidesOnline", "ignorePreserveField", paramIgnorePreserveField).value();
+	utils->initialize("deleteUnusedMasterSlidesOnline", "ignorePreserveField", paramIgnorePreserveField);
+
+	bool failed = true;
+	try
+	{
+		api->deleteUnusedMasterSlidesOnline(paramDocument, paramIgnorePreserveField, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedMasterSlidesOnline", "ignorePreserveField");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedMasterSlidesOnline", "ignorePreserveField", paramIgnorePreserveField);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedMasterSlidesOnline", "ignorePreserveField");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedMasterSlidesOnline", "ignorePreserveField", paramIgnorePreserveField);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteUnusedMasterSlidesOnline", "ignorePreserveField"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteUnusedMasterSlidesOnlineInvalidPassword) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("deleteUnusedMasterSlidesOnline", "document");
+	auto paramIgnorePreserveField = utils->getOptionalBoolTestValue("deleteUnusedMasterSlidesOnline", "ignorePreserveField");
+	utility::string_t paramPassword = utils->getTestValue("deleteUnusedMasterSlidesOnline", "password");
+	paramPassword = utils->getInvalidTestValue("deleteUnusedMasterSlidesOnline", "password", paramPassword);
+	utils->initialize("deleteUnusedMasterSlidesOnline", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->deleteUnusedMasterSlidesOnline(paramDocument, paramIgnorePreserveField, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedMasterSlidesOnline", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedMasterSlidesOnline", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteUnusedMasterSlidesOnline", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteUnusedMasterSlidesOnline", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteUnusedMasterSlidesOnline", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, deleteWatermark) {
 	utility::string_t paramName = utils->getTestValue("deleteWatermark", "name");
 	utility::string_t paramShapeName = utils->getTestValue("deleteWatermark", "shapeName");
@@ -65957,6 +66291,1387 @@ TEST_F(SlidesApiTest, setBackgroundColorInvalidStorage) {
 	}
 }
 
+TEST_F(SlidesApiTest, setChartAxis) {
+	utility::string_t paramName = utils->getTestValue("setChartAxis", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartAxis", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartAxis", "shapeIndex");
+	utility::string_t paramAxisType = utils->getTestValue("setChartAxis", "axisType");
+	std::shared_ptr<Axis> paramAxis = utils->getTestValueForClass<Axis>("setChartAxis", "axis");
+	utility::string_t paramPassword = utils->getTestValue("setChartAxis", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartAxis", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartAxis", "storage");
+	utils->initialize("setChartAxis", "");
+	std::shared_ptr<Axis> result = api->setChartAxis(paramName, paramSlideIndex, paramShapeIndex, paramAxisType, paramAxis, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, setChartAxisInvalidName) {
+	utility::string_t paramName = utils->getTestValue("setChartAxis", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartAxis", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartAxis", "shapeIndex");
+	utility::string_t paramAxisType = utils->getTestValue("setChartAxis", "axisType");
+	std::shared_ptr<Axis> paramAxis = utils->getTestValueForClass<Axis>("setChartAxis", "axis");
+	utility::string_t paramPassword = utils->getTestValue("setChartAxis", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartAxis", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartAxis", "storage");
+	paramName = utils->getInvalidTestValue("setChartAxis", "name", paramName);
+	utils->initialize("setChartAxis", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->setChartAxis(paramName, paramSlideIndex, paramShapeIndex, paramAxisType, paramAxis, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartAxis", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartAxis", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartAxis", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartAxis", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartAxis", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartAxisInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("setChartAxis", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartAxis", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartAxis", "shapeIndex");
+	utility::string_t paramAxisType = utils->getTestValue("setChartAxis", "axisType");
+	std::shared_ptr<Axis> paramAxis = utils->getTestValueForClass<Axis>("setChartAxis", "axis");
+	utility::string_t paramPassword = utils->getTestValue("setChartAxis", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartAxis", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartAxis", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("setChartAxis", "slideIndex", paramSlideIndex).value();
+	utils->initialize("setChartAxis", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->setChartAxis(paramName, paramSlideIndex, paramShapeIndex, paramAxisType, paramAxis, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartAxis", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartAxis", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartAxis", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartAxis", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartAxis", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartAxisInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("setChartAxis", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartAxis", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartAxis", "shapeIndex");
+	utility::string_t paramAxisType = utils->getTestValue("setChartAxis", "axisType");
+	std::shared_ptr<Axis> paramAxis = utils->getTestValueForClass<Axis>("setChartAxis", "axis");
+	utility::string_t paramPassword = utils->getTestValue("setChartAxis", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartAxis", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartAxis", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("setChartAxis", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("setChartAxis", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->setChartAxis(paramName, paramSlideIndex, paramShapeIndex, paramAxisType, paramAxis, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartAxis", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartAxis", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartAxis", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartAxis", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartAxis", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartAxisInvalidAxisType) {
+	utility::string_t paramName = utils->getTestValue("setChartAxis", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartAxis", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartAxis", "shapeIndex");
+	utility::string_t paramAxisType = utils->getTestValue("setChartAxis", "axisType");
+	std::shared_ptr<Axis> paramAxis = utils->getTestValueForClass<Axis>("setChartAxis", "axis");
+	utility::string_t paramPassword = utils->getTestValue("setChartAxis", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartAxis", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartAxis", "storage");
+	paramAxisType = utils->getInvalidTestValue("setChartAxis", "axisType", paramAxisType);
+	utils->initialize("setChartAxis", "axisType", paramAxisType);
+
+	bool failed = true;
+	try
+	{
+		api->setChartAxis(paramName, paramSlideIndex, paramShapeIndex, paramAxisType, paramAxis, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartAxis", "axisType");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartAxis", "axisType", paramAxisType);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartAxis", "axisType");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartAxis", "axisType", paramAxisType);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartAxis", "axisType"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartAxisInvalidAxis) {
+	utility::string_t paramName = utils->getTestValue("setChartAxis", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartAxis", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartAxis", "shapeIndex");
+	utility::string_t paramAxisType = utils->getTestValue("setChartAxis", "axisType");
+	std::shared_ptr<Axis> paramAxis = utils->getTestValueForClass<Axis>("setChartAxis", "axis");
+	utility::string_t paramPassword = utils->getTestValue("setChartAxis", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartAxis", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartAxis", "storage");
+	paramAxis = utils->getInvalidTestValueForClass<>("setChartAxis", "axis", paramAxis);
+	utils->initialize("setChartAxis", "axis", paramAxis);
+
+	bool failed = true;
+	try
+	{
+		api->setChartAxis(paramName, paramSlideIndex, paramShapeIndex, paramAxisType, paramAxis, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartAxis", "axis");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartAxis", "axis", paramAxis);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartAxis", "axis");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartAxis", "axis", paramAxis);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartAxis", "axis"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartAxisInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("setChartAxis", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartAxis", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartAxis", "shapeIndex");
+	utility::string_t paramAxisType = utils->getTestValue("setChartAxis", "axisType");
+	std::shared_ptr<Axis> paramAxis = utils->getTestValueForClass<Axis>("setChartAxis", "axis");
+	utility::string_t paramPassword = utils->getTestValue("setChartAxis", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartAxis", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartAxis", "storage");
+	paramPassword = utils->getInvalidTestValue("setChartAxis", "password", paramPassword);
+	utils->initialize("setChartAxis", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->setChartAxis(paramName, paramSlideIndex, paramShapeIndex, paramAxisType, paramAxis, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartAxis", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartAxis", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartAxis", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartAxis", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartAxis", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartAxisInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("setChartAxis", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartAxis", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartAxis", "shapeIndex");
+	utility::string_t paramAxisType = utils->getTestValue("setChartAxis", "axisType");
+	std::shared_ptr<Axis> paramAxis = utils->getTestValueForClass<Axis>("setChartAxis", "axis");
+	utility::string_t paramPassword = utils->getTestValue("setChartAxis", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartAxis", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartAxis", "storage");
+	paramFolder = utils->getInvalidTestValue("setChartAxis", "folder", paramFolder);
+	utils->initialize("setChartAxis", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->setChartAxis(paramName, paramSlideIndex, paramShapeIndex, paramAxisType, paramAxis, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartAxis", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartAxis", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartAxis", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartAxis", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartAxis", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartAxisInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("setChartAxis", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartAxis", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartAxis", "shapeIndex");
+	utility::string_t paramAxisType = utils->getTestValue("setChartAxis", "axisType");
+	std::shared_ptr<Axis> paramAxis = utils->getTestValueForClass<Axis>("setChartAxis", "axis");
+	utility::string_t paramPassword = utils->getTestValue("setChartAxis", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartAxis", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartAxis", "storage");
+	paramStorage = utils->getInvalidTestValue("setChartAxis", "storage", paramStorage);
+	utils->initialize("setChartAxis", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->setChartAxis(paramName, paramSlideIndex, paramShapeIndex, paramAxisType, paramAxis, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartAxis", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartAxis", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartAxis", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartAxis", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartAxis", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartLegend) {
+	utility::string_t paramName = utils->getTestValue("setChartLegend", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartLegend", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartLegend", "shapeIndex");
+	std::shared_ptr<Legend> paramLegend = utils->getTestValueForClass<Legend>("setChartLegend", "legend");
+	utility::string_t paramPassword = utils->getTestValue("setChartLegend", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartLegend", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartLegend", "storage");
+	utils->initialize("setChartLegend", "");
+	std::shared_ptr<Legend> result = api->setChartLegend(paramName, paramSlideIndex, paramShapeIndex, paramLegend, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, setChartLegendInvalidName) {
+	utility::string_t paramName = utils->getTestValue("setChartLegend", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartLegend", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartLegend", "shapeIndex");
+	std::shared_ptr<Legend> paramLegend = utils->getTestValueForClass<Legend>("setChartLegend", "legend");
+	utility::string_t paramPassword = utils->getTestValue("setChartLegend", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartLegend", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartLegend", "storage");
+	paramName = utils->getInvalidTestValue("setChartLegend", "name", paramName);
+	utils->initialize("setChartLegend", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->setChartLegend(paramName, paramSlideIndex, paramShapeIndex, paramLegend, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartLegend", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartLegend", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartLegend", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartLegend", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartLegend", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartLegendInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("setChartLegend", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartLegend", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartLegend", "shapeIndex");
+	std::shared_ptr<Legend> paramLegend = utils->getTestValueForClass<Legend>("setChartLegend", "legend");
+	utility::string_t paramPassword = utils->getTestValue("setChartLegend", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartLegend", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartLegend", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("setChartLegend", "slideIndex", paramSlideIndex).value();
+	utils->initialize("setChartLegend", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->setChartLegend(paramName, paramSlideIndex, paramShapeIndex, paramLegend, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartLegend", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartLegend", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartLegend", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartLegend", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartLegend", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartLegendInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("setChartLegend", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartLegend", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartLegend", "shapeIndex");
+	std::shared_ptr<Legend> paramLegend = utils->getTestValueForClass<Legend>("setChartLegend", "legend");
+	utility::string_t paramPassword = utils->getTestValue("setChartLegend", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartLegend", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartLegend", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("setChartLegend", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("setChartLegend", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->setChartLegend(paramName, paramSlideIndex, paramShapeIndex, paramLegend, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartLegend", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartLegend", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartLegend", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartLegend", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartLegend", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartLegendInvalidLegend) {
+	utility::string_t paramName = utils->getTestValue("setChartLegend", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartLegend", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartLegend", "shapeIndex");
+	std::shared_ptr<Legend> paramLegend = utils->getTestValueForClass<Legend>("setChartLegend", "legend");
+	utility::string_t paramPassword = utils->getTestValue("setChartLegend", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartLegend", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartLegend", "storage");
+	paramLegend = utils->getInvalidTestValueForClass<>("setChartLegend", "legend", paramLegend);
+	utils->initialize("setChartLegend", "legend", paramLegend);
+
+	bool failed = true;
+	try
+	{
+		api->setChartLegend(paramName, paramSlideIndex, paramShapeIndex, paramLegend, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartLegend", "legend");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartLegend", "legend", paramLegend);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartLegend", "legend");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartLegend", "legend", paramLegend);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartLegend", "legend"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartLegendInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("setChartLegend", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartLegend", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartLegend", "shapeIndex");
+	std::shared_ptr<Legend> paramLegend = utils->getTestValueForClass<Legend>("setChartLegend", "legend");
+	utility::string_t paramPassword = utils->getTestValue("setChartLegend", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartLegend", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartLegend", "storage");
+	paramPassword = utils->getInvalidTestValue("setChartLegend", "password", paramPassword);
+	utils->initialize("setChartLegend", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->setChartLegend(paramName, paramSlideIndex, paramShapeIndex, paramLegend, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartLegend", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartLegend", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartLegend", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartLegend", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartLegend", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartLegendInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("setChartLegend", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartLegend", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartLegend", "shapeIndex");
+	std::shared_ptr<Legend> paramLegend = utils->getTestValueForClass<Legend>("setChartLegend", "legend");
+	utility::string_t paramPassword = utils->getTestValue("setChartLegend", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartLegend", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartLegend", "storage");
+	paramFolder = utils->getInvalidTestValue("setChartLegend", "folder", paramFolder);
+	utils->initialize("setChartLegend", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->setChartLegend(paramName, paramSlideIndex, paramShapeIndex, paramLegend, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartLegend", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartLegend", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartLegend", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartLegend", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartLegend", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartLegendInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("setChartLegend", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartLegend", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartLegend", "shapeIndex");
+	std::shared_ptr<Legend> paramLegend = utils->getTestValueForClass<Legend>("setChartLegend", "legend");
+	utility::string_t paramPassword = utils->getTestValue("setChartLegend", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartLegend", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartLegend", "storage");
+	paramStorage = utils->getInvalidTestValue("setChartLegend", "storage", paramStorage);
+	utils->initialize("setChartLegend", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->setChartLegend(paramName, paramSlideIndex, paramShapeIndex, paramLegend, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartLegend", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartLegend", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartLegend", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartLegend", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartLegend", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartSeriesGroup) {
+	utility::string_t paramName = utils->getTestValue("setChartSeriesGroup", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartSeriesGroup", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartSeriesGroup", "shapeIndex");
+	int32_t paramSeriesGroupIndex = utils->getIntTestValue("setChartSeriesGroup", "seriesGroupIndex");
+	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("setChartSeriesGroup", "seriesGroup");
+	utility::string_t paramPassword = utils->getTestValue("setChartSeriesGroup", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartSeriesGroup", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartSeriesGroup", "storage");
+	utils->initialize("setChartSeriesGroup", "");
+	std::shared_ptr<Chart> result = api->setChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, setChartSeriesGroupInvalidName) {
+	utility::string_t paramName = utils->getTestValue("setChartSeriesGroup", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartSeriesGroup", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartSeriesGroup", "shapeIndex");
+	int32_t paramSeriesGroupIndex = utils->getIntTestValue("setChartSeriesGroup", "seriesGroupIndex");
+	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("setChartSeriesGroup", "seriesGroup");
+	utility::string_t paramPassword = utils->getTestValue("setChartSeriesGroup", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartSeriesGroup", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartSeriesGroup", "storage");
+	paramName = utils->getInvalidTestValue("setChartSeriesGroup", "name", paramName);
+	utils->initialize("setChartSeriesGroup", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->setChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartSeriesGroup", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartSeriesGroup", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartSeriesGroup", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartSeriesGroup", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartSeriesGroup", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartSeriesGroupInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("setChartSeriesGroup", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartSeriesGroup", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartSeriesGroup", "shapeIndex");
+	int32_t paramSeriesGroupIndex = utils->getIntTestValue("setChartSeriesGroup", "seriesGroupIndex");
+	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("setChartSeriesGroup", "seriesGroup");
+	utility::string_t paramPassword = utils->getTestValue("setChartSeriesGroup", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartSeriesGroup", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartSeriesGroup", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("setChartSeriesGroup", "slideIndex", paramSlideIndex).value();
+	utils->initialize("setChartSeriesGroup", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->setChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartSeriesGroup", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartSeriesGroup", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartSeriesGroup", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartSeriesGroup", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartSeriesGroup", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartSeriesGroupInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("setChartSeriesGroup", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartSeriesGroup", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartSeriesGroup", "shapeIndex");
+	int32_t paramSeriesGroupIndex = utils->getIntTestValue("setChartSeriesGroup", "seriesGroupIndex");
+	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("setChartSeriesGroup", "seriesGroup");
+	utility::string_t paramPassword = utils->getTestValue("setChartSeriesGroup", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartSeriesGroup", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartSeriesGroup", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("setChartSeriesGroup", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("setChartSeriesGroup", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->setChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartSeriesGroup", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartSeriesGroup", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartSeriesGroup", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartSeriesGroup", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartSeriesGroup", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartSeriesGroupInvalidSeriesGroupIndex) {
+	utility::string_t paramName = utils->getTestValue("setChartSeriesGroup", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartSeriesGroup", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartSeriesGroup", "shapeIndex");
+	int32_t paramSeriesGroupIndex = utils->getIntTestValue("setChartSeriesGroup", "seriesGroupIndex");
+	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("setChartSeriesGroup", "seriesGroup");
+	utility::string_t paramPassword = utils->getTestValue("setChartSeriesGroup", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartSeriesGroup", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartSeriesGroup", "storage");
+	paramSeriesGroupIndex = utils->getInvalidIntTestValue("setChartSeriesGroup", "seriesGroupIndex", paramSeriesGroupIndex).value();
+	utils->initialize("setChartSeriesGroup", "seriesGroupIndex", paramSeriesGroupIndex);
+
+	bool failed = true;
+	try
+	{
+		api->setChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartSeriesGroup", "seriesGroupIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartSeriesGroup", "seriesGroupIndex", paramSeriesGroupIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartSeriesGroup", "seriesGroupIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartSeriesGroup", "seriesGroupIndex", paramSeriesGroupIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartSeriesGroup", "seriesGroupIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartSeriesGroupInvalidSeriesGroup) {
+	utility::string_t paramName = utils->getTestValue("setChartSeriesGroup", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartSeriesGroup", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartSeriesGroup", "shapeIndex");
+	int32_t paramSeriesGroupIndex = utils->getIntTestValue("setChartSeriesGroup", "seriesGroupIndex");
+	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("setChartSeriesGroup", "seriesGroup");
+	utility::string_t paramPassword = utils->getTestValue("setChartSeriesGroup", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartSeriesGroup", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartSeriesGroup", "storage");
+	paramSeriesGroup = utils->getInvalidTestValueForClass<>("setChartSeriesGroup", "seriesGroup", paramSeriesGroup);
+	utils->initialize("setChartSeriesGroup", "seriesGroup", paramSeriesGroup);
+
+	bool failed = true;
+	try
+	{
+		api->setChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartSeriesGroup", "seriesGroup");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartSeriesGroup", "seriesGroup", paramSeriesGroup);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartSeriesGroup", "seriesGroup");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartSeriesGroup", "seriesGroup", paramSeriesGroup);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartSeriesGroup", "seriesGroup"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartSeriesGroupInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("setChartSeriesGroup", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartSeriesGroup", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartSeriesGroup", "shapeIndex");
+	int32_t paramSeriesGroupIndex = utils->getIntTestValue("setChartSeriesGroup", "seriesGroupIndex");
+	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("setChartSeriesGroup", "seriesGroup");
+	utility::string_t paramPassword = utils->getTestValue("setChartSeriesGroup", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartSeriesGroup", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartSeriesGroup", "storage");
+	paramPassword = utils->getInvalidTestValue("setChartSeriesGroup", "password", paramPassword);
+	utils->initialize("setChartSeriesGroup", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->setChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartSeriesGroup", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartSeriesGroup", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartSeriesGroup", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartSeriesGroup", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartSeriesGroup", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartSeriesGroupInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("setChartSeriesGroup", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartSeriesGroup", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartSeriesGroup", "shapeIndex");
+	int32_t paramSeriesGroupIndex = utils->getIntTestValue("setChartSeriesGroup", "seriesGroupIndex");
+	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("setChartSeriesGroup", "seriesGroup");
+	utility::string_t paramPassword = utils->getTestValue("setChartSeriesGroup", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartSeriesGroup", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartSeriesGroup", "storage");
+	paramFolder = utils->getInvalidTestValue("setChartSeriesGroup", "folder", paramFolder);
+	utils->initialize("setChartSeriesGroup", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->setChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartSeriesGroup", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartSeriesGroup", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartSeriesGroup", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartSeriesGroup", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartSeriesGroup", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartSeriesGroupInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("setChartSeriesGroup", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartSeriesGroup", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartSeriesGroup", "shapeIndex");
+	int32_t paramSeriesGroupIndex = utils->getIntTestValue("setChartSeriesGroup", "seriesGroupIndex");
+	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("setChartSeriesGroup", "seriesGroup");
+	utility::string_t paramPassword = utils->getTestValue("setChartSeriesGroup", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartSeriesGroup", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartSeriesGroup", "storage");
+	paramStorage = utils->getInvalidTestValue("setChartSeriesGroup", "storage", paramStorage);
+	utils->initialize("setChartSeriesGroup", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->setChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartSeriesGroup", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartSeriesGroup", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartSeriesGroup", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartSeriesGroup", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartSeriesGroup", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartWall) {
+	utility::string_t paramName = utils->getTestValue("setChartWall", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartWall", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartWall", "shapeIndex");
+	utility::string_t paramChartWallType = utils->getTestValue("setChartWall", "chartWallType");
+	std::shared_ptr<ChartWall> paramChartWall = utils->getTestValueForClass<ChartWall>("setChartWall", "chartWall");
+	utility::string_t paramPassword = utils->getTestValue("setChartWall", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartWall", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartWall", "storage");
+	utils->initialize("setChartWall", "");
+	std::shared_ptr<ChartWall> result = api->setChartWall(paramName, paramSlideIndex, paramShapeIndex, paramChartWallType, paramChartWall, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, setChartWallInvalidName) {
+	utility::string_t paramName = utils->getTestValue("setChartWall", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartWall", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartWall", "shapeIndex");
+	utility::string_t paramChartWallType = utils->getTestValue("setChartWall", "chartWallType");
+	std::shared_ptr<ChartWall> paramChartWall = utils->getTestValueForClass<ChartWall>("setChartWall", "chartWall");
+	utility::string_t paramPassword = utils->getTestValue("setChartWall", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartWall", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartWall", "storage");
+	paramName = utils->getInvalidTestValue("setChartWall", "name", paramName);
+	utils->initialize("setChartWall", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->setChartWall(paramName, paramSlideIndex, paramShapeIndex, paramChartWallType, paramChartWall, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartWall", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartWall", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartWall", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartWall", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartWall", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartWallInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("setChartWall", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartWall", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartWall", "shapeIndex");
+	utility::string_t paramChartWallType = utils->getTestValue("setChartWall", "chartWallType");
+	std::shared_ptr<ChartWall> paramChartWall = utils->getTestValueForClass<ChartWall>("setChartWall", "chartWall");
+	utility::string_t paramPassword = utils->getTestValue("setChartWall", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartWall", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartWall", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("setChartWall", "slideIndex", paramSlideIndex).value();
+	utils->initialize("setChartWall", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->setChartWall(paramName, paramSlideIndex, paramShapeIndex, paramChartWallType, paramChartWall, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartWall", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartWall", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartWall", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartWall", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartWall", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartWallInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("setChartWall", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartWall", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartWall", "shapeIndex");
+	utility::string_t paramChartWallType = utils->getTestValue("setChartWall", "chartWallType");
+	std::shared_ptr<ChartWall> paramChartWall = utils->getTestValueForClass<ChartWall>("setChartWall", "chartWall");
+	utility::string_t paramPassword = utils->getTestValue("setChartWall", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartWall", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartWall", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("setChartWall", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("setChartWall", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->setChartWall(paramName, paramSlideIndex, paramShapeIndex, paramChartWallType, paramChartWall, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartWall", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartWall", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartWall", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartWall", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartWall", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartWallInvalidChartWallType) {
+	utility::string_t paramName = utils->getTestValue("setChartWall", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartWall", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartWall", "shapeIndex");
+	utility::string_t paramChartWallType = utils->getTestValue("setChartWall", "chartWallType");
+	std::shared_ptr<ChartWall> paramChartWall = utils->getTestValueForClass<ChartWall>("setChartWall", "chartWall");
+	utility::string_t paramPassword = utils->getTestValue("setChartWall", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartWall", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartWall", "storage");
+	paramChartWallType = utils->getInvalidTestValue("setChartWall", "chartWallType", paramChartWallType);
+	utils->initialize("setChartWall", "chartWallType", paramChartWallType);
+
+	bool failed = true;
+	try
+	{
+		api->setChartWall(paramName, paramSlideIndex, paramShapeIndex, paramChartWallType, paramChartWall, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartWall", "chartWallType");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartWall", "chartWallType", paramChartWallType);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartWall", "chartWallType");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartWall", "chartWallType", paramChartWallType);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartWall", "chartWallType"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartWallInvalidChartWall) {
+	utility::string_t paramName = utils->getTestValue("setChartWall", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartWall", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartWall", "shapeIndex");
+	utility::string_t paramChartWallType = utils->getTestValue("setChartWall", "chartWallType");
+	std::shared_ptr<ChartWall> paramChartWall = utils->getTestValueForClass<ChartWall>("setChartWall", "chartWall");
+	utility::string_t paramPassword = utils->getTestValue("setChartWall", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartWall", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartWall", "storage");
+	paramChartWall = utils->getInvalidTestValueForClass<>("setChartWall", "chartWall", paramChartWall);
+	utils->initialize("setChartWall", "chartWall", paramChartWall);
+
+	bool failed = true;
+	try
+	{
+		api->setChartWall(paramName, paramSlideIndex, paramShapeIndex, paramChartWallType, paramChartWall, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartWall", "chartWall");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartWall", "chartWall", paramChartWall);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartWall", "chartWall");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartWall", "chartWall", paramChartWall);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartWall", "chartWall"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartWallInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("setChartWall", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartWall", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartWall", "shapeIndex");
+	utility::string_t paramChartWallType = utils->getTestValue("setChartWall", "chartWallType");
+	std::shared_ptr<ChartWall> paramChartWall = utils->getTestValueForClass<ChartWall>("setChartWall", "chartWall");
+	utility::string_t paramPassword = utils->getTestValue("setChartWall", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartWall", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartWall", "storage");
+	paramPassword = utils->getInvalidTestValue("setChartWall", "password", paramPassword);
+	utils->initialize("setChartWall", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->setChartWall(paramName, paramSlideIndex, paramShapeIndex, paramChartWallType, paramChartWall, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartWall", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartWall", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartWall", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartWall", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartWall", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartWallInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("setChartWall", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartWall", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartWall", "shapeIndex");
+	utility::string_t paramChartWallType = utils->getTestValue("setChartWall", "chartWallType");
+	std::shared_ptr<ChartWall> paramChartWall = utils->getTestValueForClass<ChartWall>("setChartWall", "chartWall");
+	utility::string_t paramPassword = utils->getTestValue("setChartWall", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartWall", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartWall", "storage");
+	paramFolder = utils->getInvalidTestValue("setChartWall", "folder", paramFolder);
+	utils->initialize("setChartWall", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->setChartWall(paramName, paramSlideIndex, paramShapeIndex, paramChartWallType, paramChartWall, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartWall", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartWall", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartWall", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartWall", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartWall", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setChartWallInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("setChartWall", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("setChartWall", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("setChartWall", "shapeIndex");
+	utility::string_t paramChartWallType = utils->getTestValue("setChartWall", "chartWallType");
+	std::shared_ptr<ChartWall> paramChartWall = utils->getTestValueForClass<ChartWall>("setChartWall", "chartWall");
+	utility::string_t paramPassword = utils->getTestValue("setChartWall", "password");
+	utility::string_t paramFolder = utils->getTestValue("setChartWall", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setChartWall", "storage");
+	paramStorage = utils->getInvalidTestValue("setChartWall", "storage", paramStorage);
+	utils->initialize("setChartWall", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->setChartWall(paramName, paramSlideIndex, paramShapeIndex, paramChartWallType, paramChartWall, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setChartWall", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setChartWall", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setChartWall", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setChartWall", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setChartWall", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, setDocumentProperties) {
 	utility::string_t paramName = utils->getTestValue("setDocumentProperties", "name");
 	std::shared_ptr<DocumentProperties> paramProperties = utils->getTestValueForClass<DocumentProperties>("setDocumentProperties", "properties");
@@ -72023,364 +73738,6 @@ TEST_F(SlidesApiTest, updateChartSeriesInvalidStorage) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("updateChartSeries", "storage"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, updateChartSeriesGroup) {
-	utility::string_t paramName = utils->getTestValue("updateChartSeriesGroup", "name");
-	int32_t paramSlideIndex = utils->getIntTestValue("updateChartSeriesGroup", "slideIndex");
-	int32_t paramShapeIndex = utils->getIntTestValue("updateChartSeriesGroup", "shapeIndex");
-	int32_t paramSeriesGroupIndex = utils->getIntTestValue("updateChartSeriesGroup", "seriesGroupIndex");
-	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("updateChartSeriesGroup", "seriesGroup");
-	utility::string_t paramPassword = utils->getTestValue("updateChartSeriesGroup", "password");
-	utility::string_t paramFolder = utils->getTestValue("updateChartSeriesGroup", "folder");
-	utility::string_t paramStorage = utils->getTestValue("updateChartSeriesGroup", "storage");
-	utils->initialize("updateChartSeriesGroup", "");
-	std::shared_ptr<Chart> result = api->updateChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).get();
-	EXPECT_NE(nullptr, result);
-}
-
-TEST_F(SlidesApiTest, updateChartSeriesGroupInvalidName) {
-	utility::string_t paramName = utils->getTestValue("updateChartSeriesGroup", "name");
-	int32_t paramSlideIndex = utils->getIntTestValue("updateChartSeriesGroup", "slideIndex");
-	int32_t paramShapeIndex = utils->getIntTestValue("updateChartSeriesGroup", "shapeIndex");
-	int32_t paramSeriesGroupIndex = utils->getIntTestValue("updateChartSeriesGroup", "seriesGroupIndex");
-	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("updateChartSeriesGroup", "seriesGroup");
-	utility::string_t paramPassword = utils->getTestValue("updateChartSeriesGroup", "password");
-	utility::string_t paramFolder = utils->getTestValue("updateChartSeriesGroup", "folder");
-	utility::string_t paramStorage = utils->getTestValue("updateChartSeriesGroup", "storage");
-	paramName = utils->getInvalidTestValue("updateChartSeriesGroup", "name", paramName);
-	utils->initialize("updateChartSeriesGroup", "name", paramName);
-
-	bool failed = true;
-	try
-	{
-		api->updateChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("updateChartSeriesGroup", "name");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("updateChartSeriesGroup", "name", paramName);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("updateChartSeriesGroup", "name");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("updateChartSeriesGroup", "name", paramName);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("updateChartSeriesGroup", "name"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, updateChartSeriesGroupInvalidSlideIndex) {
-	utility::string_t paramName = utils->getTestValue("updateChartSeriesGroup", "name");
-	int32_t paramSlideIndex = utils->getIntTestValue("updateChartSeriesGroup", "slideIndex");
-	int32_t paramShapeIndex = utils->getIntTestValue("updateChartSeriesGroup", "shapeIndex");
-	int32_t paramSeriesGroupIndex = utils->getIntTestValue("updateChartSeriesGroup", "seriesGroupIndex");
-	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("updateChartSeriesGroup", "seriesGroup");
-	utility::string_t paramPassword = utils->getTestValue("updateChartSeriesGroup", "password");
-	utility::string_t paramFolder = utils->getTestValue("updateChartSeriesGroup", "folder");
-	utility::string_t paramStorage = utils->getTestValue("updateChartSeriesGroup", "storage");
-	paramSlideIndex = utils->getInvalidIntTestValue("updateChartSeriesGroup", "slideIndex", paramSlideIndex).value();
-	utils->initialize("updateChartSeriesGroup", "slideIndex", paramSlideIndex);
-
-	bool failed = true;
-	try
-	{
-		api->updateChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("updateChartSeriesGroup", "slideIndex");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("updateChartSeriesGroup", "slideIndex", paramSlideIndex);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("updateChartSeriesGroup", "slideIndex");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("updateChartSeriesGroup", "slideIndex", paramSlideIndex);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("updateChartSeriesGroup", "slideIndex"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, updateChartSeriesGroupInvalidShapeIndex) {
-	utility::string_t paramName = utils->getTestValue("updateChartSeriesGroup", "name");
-	int32_t paramSlideIndex = utils->getIntTestValue("updateChartSeriesGroup", "slideIndex");
-	int32_t paramShapeIndex = utils->getIntTestValue("updateChartSeriesGroup", "shapeIndex");
-	int32_t paramSeriesGroupIndex = utils->getIntTestValue("updateChartSeriesGroup", "seriesGroupIndex");
-	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("updateChartSeriesGroup", "seriesGroup");
-	utility::string_t paramPassword = utils->getTestValue("updateChartSeriesGroup", "password");
-	utility::string_t paramFolder = utils->getTestValue("updateChartSeriesGroup", "folder");
-	utility::string_t paramStorage = utils->getTestValue("updateChartSeriesGroup", "storage");
-	paramShapeIndex = utils->getInvalidIntTestValue("updateChartSeriesGroup", "shapeIndex", paramShapeIndex).value();
-	utils->initialize("updateChartSeriesGroup", "shapeIndex", paramShapeIndex);
-
-	bool failed = true;
-	try
-	{
-		api->updateChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("updateChartSeriesGroup", "shapeIndex");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("updateChartSeriesGroup", "shapeIndex", paramShapeIndex);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("updateChartSeriesGroup", "shapeIndex");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("updateChartSeriesGroup", "shapeIndex", paramShapeIndex);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("updateChartSeriesGroup", "shapeIndex"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, updateChartSeriesGroupInvalidSeriesGroupIndex) {
-	utility::string_t paramName = utils->getTestValue("updateChartSeriesGroup", "name");
-	int32_t paramSlideIndex = utils->getIntTestValue("updateChartSeriesGroup", "slideIndex");
-	int32_t paramShapeIndex = utils->getIntTestValue("updateChartSeriesGroup", "shapeIndex");
-	int32_t paramSeriesGroupIndex = utils->getIntTestValue("updateChartSeriesGroup", "seriesGroupIndex");
-	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("updateChartSeriesGroup", "seriesGroup");
-	utility::string_t paramPassword = utils->getTestValue("updateChartSeriesGroup", "password");
-	utility::string_t paramFolder = utils->getTestValue("updateChartSeriesGroup", "folder");
-	utility::string_t paramStorage = utils->getTestValue("updateChartSeriesGroup", "storage");
-	paramSeriesGroupIndex = utils->getInvalidIntTestValue("updateChartSeriesGroup", "seriesGroupIndex", paramSeriesGroupIndex).value();
-	utils->initialize("updateChartSeriesGroup", "seriesGroupIndex", paramSeriesGroupIndex);
-
-	bool failed = true;
-	try
-	{
-		api->updateChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("updateChartSeriesGroup", "seriesGroupIndex");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("updateChartSeriesGroup", "seriesGroupIndex", paramSeriesGroupIndex);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("updateChartSeriesGroup", "seriesGroupIndex");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("updateChartSeriesGroup", "seriesGroupIndex", paramSeriesGroupIndex);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("updateChartSeriesGroup", "seriesGroupIndex"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, updateChartSeriesGroupInvalidSeriesGroup) {
-	utility::string_t paramName = utils->getTestValue("updateChartSeriesGroup", "name");
-	int32_t paramSlideIndex = utils->getIntTestValue("updateChartSeriesGroup", "slideIndex");
-	int32_t paramShapeIndex = utils->getIntTestValue("updateChartSeriesGroup", "shapeIndex");
-	int32_t paramSeriesGroupIndex = utils->getIntTestValue("updateChartSeriesGroup", "seriesGroupIndex");
-	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("updateChartSeriesGroup", "seriesGroup");
-	utility::string_t paramPassword = utils->getTestValue("updateChartSeriesGroup", "password");
-	utility::string_t paramFolder = utils->getTestValue("updateChartSeriesGroup", "folder");
-	utility::string_t paramStorage = utils->getTestValue("updateChartSeriesGroup", "storage");
-	paramSeriesGroup = utils->getInvalidTestValueForClass<>("updateChartSeriesGroup", "seriesGroup", paramSeriesGroup);
-	utils->initialize("updateChartSeriesGroup", "seriesGroup", paramSeriesGroup);
-
-	bool failed = true;
-	try
-	{
-		api->updateChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("updateChartSeriesGroup", "seriesGroup");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("updateChartSeriesGroup", "seriesGroup", paramSeriesGroup);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("updateChartSeriesGroup", "seriesGroup");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("updateChartSeriesGroup", "seriesGroup", paramSeriesGroup);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("updateChartSeriesGroup", "seriesGroup"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, updateChartSeriesGroupInvalidPassword) {
-	utility::string_t paramName = utils->getTestValue("updateChartSeriesGroup", "name");
-	int32_t paramSlideIndex = utils->getIntTestValue("updateChartSeriesGroup", "slideIndex");
-	int32_t paramShapeIndex = utils->getIntTestValue("updateChartSeriesGroup", "shapeIndex");
-	int32_t paramSeriesGroupIndex = utils->getIntTestValue("updateChartSeriesGroup", "seriesGroupIndex");
-	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("updateChartSeriesGroup", "seriesGroup");
-	utility::string_t paramPassword = utils->getTestValue("updateChartSeriesGroup", "password");
-	utility::string_t paramFolder = utils->getTestValue("updateChartSeriesGroup", "folder");
-	utility::string_t paramStorage = utils->getTestValue("updateChartSeriesGroup", "storage");
-	paramPassword = utils->getInvalidTestValue("updateChartSeriesGroup", "password", paramPassword);
-	utils->initialize("updateChartSeriesGroup", "password", paramPassword);
-
-	bool failed = true;
-	try
-	{
-		api->updateChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("updateChartSeriesGroup", "password");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("updateChartSeriesGroup", "password", paramPassword);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("updateChartSeriesGroup", "password");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("updateChartSeriesGroup", "password", paramPassword);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("updateChartSeriesGroup", "password"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, updateChartSeriesGroupInvalidFolder) {
-	utility::string_t paramName = utils->getTestValue("updateChartSeriesGroup", "name");
-	int32_t paramSlideIndex = utils->getIntTestValue("updateChartSeriesGroup", "slideIndex");
-	int32_t paramShapeIndex = utils->getIntTestValue("updateChartSeriesGroup", "shapeIndex");
-	int32_t paramSeriesGroupIndex = utils->getIntTestValue("updateChartSeriesGroup", "seriesGroupIndex");
-	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("updateChartSeriesGroup", "seriesGroup");
-	utility::string_t paramPassword = utils->getTestValue("updateChartSeriesGroup", "password");
-	utility::string_t paramFolder = utils->getTestValue("updateChartSeriesGroup", "folder");
-	utility::string_t paramStorage = utils->getTestValue("updateChartSeriesGroup", "storage");
-	paramFolder = utils->getInvalidTestValue("updateChartSeriesGroup", "folder", paramFolder);
-	utils->initialize("updateChartSeriesGroup", "folder", paramFolder);
-
-	bool failed = true;
-	try
-	{
-		api->updateChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("updateChartSeriesGroup", "folder");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("updateChartSeriesGroup", "folder", paramFolder);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("updateChartSeriesGroup", "folder");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("updateChartSeriesGroup", "folder", paramFolder);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("updateChartSeriesGroup", "folder"))
-	{
-		FAIL() << "Must have failed";
-	}
-}
-
-TEST_F(SlidesApiTest, updateChartSeriesGroupInvalidStorage) {
-	utility::string_t paramName = utils->getTestValue("updateChartSeriesGroup", "name");
-	int32_t paramSlideIndex = utils->getIntTestValue("updateChartSeriesGroup", "slideIndex");
-	int32_t paramShapeIndex = utils->getIntTestValue("updateChartSeriesGroup", "shapeIndex");
-	int32_t paramSeriesGroupIndex = utils->getIntTestValue("updateChartSeriesGroup", "seriesGroupIndex");
-	std::shared_ptr<ChartSeriesGroup> paramSeriesGroup = utils->getTestValueForClass<ChartSeriesGroup>("updateChartSeriesGroup", "seriesGroup");
-	utility::string_t paramPassword = utils->getTestValue("updateChartSeriesGroup", "password");
-	utility::string_t paramFolder = utils->getTestValue("updateChartSeriesGroup", "folder");
-	utility::string_t paramStorage = utils->getTestValue("updateChartSeriesGroup", "storage");
-	paramStorage = utils->getInvalidTestValue("updateChartSeriesGroup", "storage", paramStorage);
-	utils->initialize("updateChartSeriesGroup", "storage", paramStorage);
-
-	bool failed = true;
-	try
-	{
-		api->updateChartSeriesGroup(paramName, paramSlideIndex, paramShapeIndex, paramSeriesGroupIndex, paramSeriesGroup, paramPassword, paramFolder, paramStorage).wait();
-		failed = false;
-	}
-	catch (ApiException ex)
-	{
-		int code = utils->getExpectedCode("updateChartSeriesGroup", "storage");
-		EXPECT_EQ(code, ex.error_code().value());
-
-		utility::string_t message = utils->getExpectedMessage("updateChartSeriesGroup", "storage", paramStorage);
-		std::string contentString;
-		std::ostringstream contentStream;
-		contentStream << ex.getContent()->rdbuf();
-		EXPECT_TRUE(boost::contains(contentStream.str(), message));
-	}
-	catch (std::invalid_argument ex)
-	{
-		int code = utils->getExpectedCode("updateChartSeriesGroup", "storage");
-		EXPECT_EQ(code, 400);
-
-		utility::string_t message = utils->getExpectedMessage("updateChartSeriesGroup", "storage", paramStorage);
-		EXPECT_TRUE(boost::contains(ex.what(), message));
-	}
-	if (!failed && utils->mustFail("updateChartSeriesGroup", "storage"))
 	{
 		FAIL() << "Must have failed";
 	}

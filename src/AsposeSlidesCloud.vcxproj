@@ -130,6 +130,7 @@
     <ClCompile Include="model\ArrowHeadProperties.cpp" />
     <ClCompile Include="model\Axes.cpp" />
     <ClCompile Include="model\Axis.cpp" />
+    <ClCompile Include="model\AxisType.cpp" />
     <ClCompile Include="model\BlurEffect.cpp" />
     <ClCompile Include="model\Camera.cpp" />
     <ClCompile Include="model\ChartCategory.cpp" />
@@ -137,6 +138,7 @@
     <ClCompile Include="model\ChartSeriesGroup.cpp" />
     <ClCompile Include="model\ChartTitle.cpp" />
     <ClCompile Include="model\ChartWall.cpp" />
+    <ClCompile Include="model\ChartWallType.cpp" />
     <ClCompile Include="model\CommonSlideViewProperties.cpp" />
     <ClCompile Include="model\CustomDashPattern.cpp" />
     <ClCompile Include="model\DataPoint.cpp" />
@@ -376,6 +378,7 @@
     <ClInclude Include="model\ArrowHeadProperties.h" />
     <ClInclude Include="model\Axes.h" />
     <ClInclude Include="model\Axis.h" />
+    <ClInclude Include="model\AxisType.h" />
     <ClInclude Include="model\BlurEffect.h" />
     <ClInclude Include="model\Camera.h" />
     <ClInclude Include="model\ChartCategory.h" />
@@ -383,6 +386,7 @@
     <ClInclude Include="model\ChartSeriesGroup.h" />
     <ClInclude Include="model\ChartTitle.h" />
     <ClInclude Include="model\ChartWall.h" />
+    <ClInclude Include="model\ChartWallType.h" />
     <ClInclude Include="model\CommonSlideViewProperties.h" />
     <ClInclude Include="model\CustomDashPattern.h" />
     <ClInclude Include="model\DataPoint.h" />
