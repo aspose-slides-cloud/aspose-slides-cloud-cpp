@@ -32,6 +32,7 @@ namespace model {
 
 Base64InputFile::Base64InputFile()
 {
+	setType(L"Base64");
 }
 
 Base64InputFile::~Base64InputFile()

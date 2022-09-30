@@ -32,6 +32,7 @@ namespace model {
 
 ColorReplaceEffect::ColorReplaceEffect()
 {
+	setType(L"ColorReplace");
 }
 
 ColorReplaceEffect::~ColorReplaceEffect()

@@ -121,6 +121,8 @@
     <ClInclude Include="TestUtils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationTest.cpp" />
+    <ClCompile Include="ChartTest.cpp" />
     <ClCompile Include="gtest\gtest-all.cc" />
     <ClCompile Include="gtest_main.cc" />
     <ClCompile Include="TestUtils.cpp" />

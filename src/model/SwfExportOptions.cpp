@@ -47,6 +47,7 @@ SwfExportOptions::SwfExportOptions()
 	m_JpegQualityIsSet = false;
 	m_CommentsAreaWidthIsSet = false;
 	m_ShowCommentsByNoAuthorIsSet = false;
+	setFormat(L"swf");
 }
 
 SwfExportOptions::~SwfExportOptions()

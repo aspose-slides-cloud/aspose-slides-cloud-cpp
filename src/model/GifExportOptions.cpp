@@ -35,6 +35,7 @@ GifExportOptions::GifExportOptions()
 	m_ExportHiddenSlidesIsSet = false;
 	m_TransitionFpsIsSet = false;
 	m_DefaultDelayIsSet = false;
+	setFormat(L"gif");
 }
 
 GifExportOptions::~GifExportOptions()

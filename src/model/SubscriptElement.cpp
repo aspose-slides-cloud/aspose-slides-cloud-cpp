@@ -32,6 +32,7 @@ namespace model {
 
 SubscriptElement::SubscriptElement()
 {
+	setType(L"SubscriptElement");
 }
 
 SubscriptElement::~SubscriptElement()

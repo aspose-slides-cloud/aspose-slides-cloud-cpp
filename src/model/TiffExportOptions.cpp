@@ -37,6 +37,7 @@ TiffExportOptions::TiffExportOptions()
 	m_ShowHiddenSlidesIsSet = false;
 	m_CommentsAreaWidthIsSet = false;
 	m_ShowCommentsByNoAuthorIsSet = false;
+	setFormat(L"tiff");
 }
 
 TiffExportOptions::~TiffExportOptions()

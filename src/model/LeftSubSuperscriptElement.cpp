@@ -32,6 +32,7 @@ namespace model {
 
 LeftSubSuperscriptElement::LeftSubSuperscriptElement()
 {
+	setType(L"LeftSubSuperscriptElement");
 }
 
 LeftSubSuperscriptElement::~LeftSubSuperscriptElement()

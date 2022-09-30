@@ -38,6 +38,7 @@
 #include "../ApiClient.h"
 #include "../JsonBody.h"
 #include "../StringBody.h"
+#include "../ClassRegistry.h"
 
 #include "../model/ApiInfo.h"
 #include "../model/Axis.h"
@@ -59,6 +60,7 @@
 #include "../model/FilesList.h"
 #include "../model/FilesUploadResult.h"
 #include "../model/FontScheme.h"
+#include "../model/FontsData.h"
 #include "../model/FormatScheme.h"
 #include "../model/GeometryPaths.h"
 #include "../model/HeaderFooter.h"
@@ -98,6 +100,7 @@
 #include "../model/SlideProperties.h"
 #include "../model/SlideReplaceResult.h"
 #include "../model/Slides.h"
+#include "../model/SmartArt.h"
 #include "../model/SplitDocumentResult.h"
 #include "../model/StorageExist.h"
 #include "../model/TextBounds.h"
@@ -269,6 +272,11 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Slides>> createSlide(utility::string_t name, utility::string_t layoutAlias = utility::string_t(), boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
+	/// Add SmartArt node
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SmartArt>> createSmartArtNode(utility::string_t name, int32_t slideIndex, int32_t smartArtIndex, utility::string_t subNode = utility::string_t(), utility::string_t text = utility::string_t(), boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
 	/// Add an effect to special slide (master, layout, notes) animation.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> createSpecialSlideAnimationEffect(utility::string_t name, int32_t slideIndex, utility::string_t slideType, std::shared_ptr<Effect> effect, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
@@ -409,6 +417,16 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<DocumentProperties>> deleteDocumentProperty(utility::string_t name, utility::string_t propertyName, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
+	/// Removes specified embedded font and returns presentation fonts info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<FontsData>> deleteEmbeddedFont(utility::string_t name, utility::string_t fontName, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Removes specified embedded font and returns presentation.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> deleteEmbeddedFontOnline(std::shared_ptr<HttpContent> document, utility::string_t fontName, utility::string_t password = utility::string_t());
+
+	/// <summary>
 	/// Delete file
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<void> deleteFile(utility::string_t path, utility::string_t storageName = utility::string_t(), utility::string_t versionId = utility::string_t());
@@ -492,6 +510,11 @@ public:
 	/// Delete presentation slides.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Slides>> deleteSlides(utility::string_t name, std::vector<int32_t> slides = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Delete SmartArt node
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SmartArt>> deleteSmartArtNode(utility::string_t name, int32_t slideIndex, int32_t smartArtIndex, int32_t nodeIndex, utility::string_t subNode = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Remove animation from a special slide (master, layout, notes).
@@ -794,6 +817,16 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<FontScheme>> getFontScheme(utility::string_t name, int32_t slideIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
+	/// Returns presentation fonts info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<FontsData>> getFonts(utility::string_t name, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Returns presentation fonts info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<FontsData>> getFontsOnline(std::shared_ptr<HttpContent> document, utility::string_t password = utility::string_t());
+
+	/// <summary>
 	/// Read slide theme format scheme info.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<FormatScheme>> getFormatScheme(utility::string_t name, int32_t slideIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
@@ -1094,6 +1127,11 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Document>> importFromPdf(utility::string_t name, std::shared_ptr<HttpContent> pdf, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
+	/// Imports shapes from SVG file.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> importShapesFromSvg(utility::string_t name, int32_t slideIndex, std::shared_ptr<HttpContent> image = std::shared_ptr<HttpContent>(), boost::optional<int32_t> x = int32_t(), boost::optional<int32_t> y = int32_t(), boost::optional<int32_t> width = int32_t(), boost::optional<int32_t> height = int32_t(), std::vector<int32_t> shapes = std::vector<int32_t>(), boost::optional<bool> group = bool(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
 	/// Merge the presentation with other presentations specified in the request parameter.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Document>> merge(utility::string_t name, std::shared_ptr<PresentationsMergeRequest> request, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
@@ -1157,6 +1195,16 @@ public:
 	/// Reorder presentation slides positions.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Slides>> reorderSlides(utility::string_t name, std::vector<int32_t> oldPositions = std::vector<int32_t>(), std::vector<int32_t> newPositions = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Replaces specified font and returns presentation fonts info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<FontsData>> replaceFont(utility::string_t name, utility::string_t sourceFont, utility::string_t targetFont, boost::optional<bool> embed = bool(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
+
+	/// <summary>
+	/// Replaces specified font and returns presentation.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> replaceFontOnline(std::shared_ptr<HttpContent> document, utility::string_t sourceFont, utility::string_t targetFont, boost::optional<bool> embed = bool(), utility::string_t password = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
 
 	/// <summary>
 	/// Replace text with a new value.
@@ -1267,6 +1315,26 @@ public:
 	/// Set document property.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<DocumentProperty>> setDocumentProperty(utility::string_t name, utility::string_t propertyName, std::shared_ptr<DocumentProperty> property, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Embeds specified font and returns presentation fonts info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<FontsData>> setEmbeddedFont(utility::string_t name, utility::string_t fontName, boost::optional<bool> onlyUsed = bool(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
+
+	/// <summary>
+	/// Embeds font from request and returns presentation fonts info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<FontsData>> setEmbeddedFontFromRequest(std::shared_ptr<HttpContent> font, utility::string_t name, boost::optional<bool> onlyUsed = bool(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Embeds font from request and returns presentation.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> setEmbeddedFontFromRequestOnline(std::shared_ptr<HttpContent> document, std::shared_ptr<HttpContent> font, boost::optional<bool> onlyUsed = bool(), utility::string_t password = utility::string_t());
+
+	/// <summary>
+	/// Embeds specified font and returns presentation.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> setEmbeddedFontOnline(std::shared_ptr<HttpContent> document, utility::string_t fontName, boost::optional<bool> onlyUsed = bool(), utility::string_t password = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
 
 	/// <summary>
 	/// Set header/footer the notes slide.

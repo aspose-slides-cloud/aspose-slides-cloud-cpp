@@ -32,6 +32,7 @@ namespace model {
 
 AccentElement::AccentElement()
 {
+	setType(L"Accent");
 }
 
 AccentElement::~AccentElement()

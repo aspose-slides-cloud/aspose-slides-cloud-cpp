@@ -33,6 +33,7 @@ namespace model {
 XamlExportOptions::XamlExportOptions()
 {
 	m_ExportHiddenSlidesIsSet = false;
+	setFormat(L"xaml");
 }
 
 XamlExportOptions::~XamlExportOptions()

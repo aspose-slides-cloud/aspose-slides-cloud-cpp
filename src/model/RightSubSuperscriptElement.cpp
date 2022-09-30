@@ -33,6 +33,7 @@ namespace model {
 RightSubSuperscriptElement::RightSubSuperscriptElement()
 {
 	m_AlignScriptsIsSet = false;
+	setType(L"RightSubSuperscriptElement");
 }
 
 RightSubSuperscriptElement::~RightSubSuperscriptElement()

@@ -32,6 +32,7 @@ namespace model {
 
 AlphaCeilingEffect::AlphaCeilingEffect()
 {
+	setType(L"AlphaCeiling");
 }
 
 AlphaCeilingEffect::~AlphaCeilingEffect()

@@ -32,6 +32,7 @@ namespace model {
 
 GradientFill::GradientFill()
 {
+	setType(L"Gradient");
 }
 
 GradientFill::~GradientFill()
@@ -121,10 +122,7 @@ web::json::value GradientFill::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("Stops")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("Stops")] = web::json::value::array(jsonArray);
 	}
 	val[utility::conversions::to_string_t("LinearAngle")] = ModelBase::toJson(m_LinearAngle);
 	val[utility::conversions::to_string_t("IsScaled")] = ModelBase::toJson(m_IsScaled);

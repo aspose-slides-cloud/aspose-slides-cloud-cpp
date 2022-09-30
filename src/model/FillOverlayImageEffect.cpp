@@ -32,6 +32,7 @@ namespace model {
 
 FillOverlayImageEffect::FillOverlayImageEffect()
 {
+	setType(L"FillOverlay");
 }
 
 FillOverlayImageEffect::~FillOverlayImageEffect()

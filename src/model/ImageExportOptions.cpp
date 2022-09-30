@@ -33,6 +33,7 @@ namespace model {
 ImageExportOptions::ImageExportOptions()
 {
 	m_CommentsAreaWidthIsSet = false;
+	setFormat(L"image");
 }
 
 ImageExportOptions::~ImageExportOptions()

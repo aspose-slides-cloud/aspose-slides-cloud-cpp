@@ -32,6 +32,7 @@ namespace model {
 
 AlphaModulateFixedEffect::AlphaModulateFixedEffect()
 {
+	setType(L"AlphaModulateFixed");
 }
 
 AlphaModulateFixedEffect::~AlphaModulateFixedEffect()

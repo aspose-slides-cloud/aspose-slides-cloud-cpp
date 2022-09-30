@@ -32,6 +32,7 @@ namespace model {
 
 HslEffect::HslEffect()
 {
+	setType(L"Hsl");
 }
 
 HslEffect::~HslEffect()

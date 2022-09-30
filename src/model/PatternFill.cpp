@@ -32,6 +32,7 @@ namespace model {
 
 PatternFill::PatternFill()
 {
+	setType(L"Pattern");
 }
 
 PatternFill::~PatternFill()

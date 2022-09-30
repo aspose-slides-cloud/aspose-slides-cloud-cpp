@@ -32,6 +32,7 @@ namespace model {
 
 AddLayoutSlide::AddLayoutSlide()
 {
+	setType(L"AddLayoutSlide");
 }
 
 AddLayoutSlide::~AddLayoutSlide()

@@ -32,6 +32,7 @@ namespace model {
 
 ColorChangeEffect::ColorChangeEffect()
 {
+	setType(L"ColorChange");
 }
 
 ColorChangeEffect::~ColorChangeEffect()

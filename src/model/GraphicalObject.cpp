@@ -32,6 +32,7 @@ namespace model {
 
 GraphicalObject::GraphicalObject()
 {
+	setType(L"GraphicalObject");
 }
 
 GraphicalObject::~GraphicalObject()

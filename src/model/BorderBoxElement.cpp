@@ -40,6 +40,7 @@ BorderBoxElement::BorderBoxElement()
 	m_StrikethroughVerticalIsSet = false;
 	m_StrikethroughBottomLeftToTopRightIsSet = false;
 	m_StrikethroughTopLeftToBottomRightIsSet = false;
+	setType(L"BorderBox");
 }
 
 BorderBoxElement::~BorderBoxElement()

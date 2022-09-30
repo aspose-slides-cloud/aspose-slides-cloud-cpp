@@ -32,6 +32,7 @@ namespace model {
 
 AlphaModulateEffect::AlphaModulateEffect()
 {
+	setType(L"AlphaModulate");
 }
 
 AlphaModulateEffect::~AlphaModulateEffect()

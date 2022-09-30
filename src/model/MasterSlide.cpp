@@ -84,10 +84,7 @@ web::json::value MasterSlide::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("LayoutSlides")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("LayoutSlides")] = web::json::value::array(jsonArray);
 	}
 	{
 		std::vector<web::json::value> jsonArray;
@@ -95,10 +92,7 @@ web::json::value MasterSlide::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("DependingSlides")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("DependingSlides")] = web::json::value::array(jsonArray);
 	}
 	return val;
 }

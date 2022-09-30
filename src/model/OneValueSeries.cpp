@@ -37,6 +37,7 @@ OneValueSeries::OneValueSeries()
 	m_ShowMeanLineIsSet = false;
 	m_ShowMeanMarkersIsSet = false;
 	m_ShowOutlierPointsIsSet = false;
+	setDataPointType(L"OneValue");
 }
 
 OneValueSeries::~OneValueSeries()
@@ -190,10 +191,7 @@ web::json::value OneValueSeries::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("DataPoints")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("DataPoints")] = web::json::value::array(jsonArray);
 	}
 	if (!m_NumberFormatOfValues.empty())
 	{

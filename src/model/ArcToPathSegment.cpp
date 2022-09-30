@@ -32,6 +32,7 @@ namespace model {
 
 ArcToPathSegment::ArcToPathSegment()
 {
+	setType(L"ArcTo");
 }
 
 ArcToPathSegment::~ArcToPathSegment()

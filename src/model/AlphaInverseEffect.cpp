@@ -32,6 +32,7 @@ namespace model {
 
 AlphaInverseEffect::AlphaInverseEffect()
 {
+	setType(L"AlphaInverse");
 }
 
 AlphaInverseEffect::~AlphaInverseEffect()

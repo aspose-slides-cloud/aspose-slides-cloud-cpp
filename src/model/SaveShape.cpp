@@ -32,6 +32,7 @@ namespace model {
 
 SaveShape::SaveShape()
 {
+	setType(L"SaveShape");
 }
 
 SaveShape::~SaveShape()

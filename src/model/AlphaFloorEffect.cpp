@@ -32,6 +32,7 @@ namespace model {
 
 AlphaFloorEffect::AlphaFloorEffect()
 {
+	setType(L"AlphaFloor");
 }
 
 AlphaFloorEffect::~AlphaFloorEffect()

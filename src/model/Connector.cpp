@@ -34,6 +34,7 @@ Connector::Connector()
 {
 	m_StartShapeConnectedToIndexIsSet = false;
 	m_EndShapeConnectedToIndexIsSet = false;
+	setType(L"Connector");
 }
 
 Connector::~Connector()

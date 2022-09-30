@@ -34,6 +34,7 @@ Chart::Chart()
 {
 	m_ShowDataLabelsOverMaximumIsSet = false;
 	m_HasRoundedCornersIsSet = false;
+	setType(L"Chart");
 }
 
 Chart::~Chart()
@@ -220,10 +221,7 @@ web::json::value Chart::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("Series")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("Series")] = web::json::value::array(jsonArray);
 	}
 	{
 		std::vector<web::json::value> jsonArray;
@@ -231,10 +229,7 @@ web::json::value Chart::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("Categories")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("Categories")] = web::json::value::array(jsonArray);
 	}
 	if (m_Title != nullptr)
 	{
@@ -274,10 +269,7 @@ web::json::value Chart::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("SeriesGroups")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("SeriesGroups")] = web::json::value::array(jsonArray);
 	}
 	return val;
 }

@@ -32,6 +32,7 @@ namespace model {
 
 BarElement::BarElement()
 {
+	setType(L"Bar");
 }
 
 BarElement::~BarElement()

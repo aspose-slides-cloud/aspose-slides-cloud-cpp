@@ -36,6 +36,7 @@
 
 #include "../model/ExportOptions.h"
 #include "../model/FontFallbackRule.h"
+#include "../model/FontSubstRule.h"
 #include <cpprest/details/basic_types.h>
 #include <vector>
 

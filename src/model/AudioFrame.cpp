@@ -41,6 +41,7 @@ AudioFrame::AudioFrame()
 	m_PlayLoopModeIsSet = false;
 	m_PlayAcrossSlidesIsSet = false;
 	m_RewindAudioIsSet = false;
+	setType(L"AudioFrame");
 }
 
 AudioFrame::~AudioFrame()

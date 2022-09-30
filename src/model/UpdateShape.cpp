@@ -32,6 +32,7 @@ namespace model {
 
 UpdateShape::UpdateShape()
 {
+	setType(L"UpdateShape");
 }
 
 UpdateShape::~UpdateShape()

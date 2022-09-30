@@ -34,6 +34,10 @@
 
 #include "DataPoint.h"
 
+#include "../model/EffectFormat.h"
+#include "../model/FillFormat.h"
+#include "../model/LineFormat.h"
+#include "../model/ThreeDFormat.h"
 #include "../model/DataPoint.h"
 
 namespace asposeslidescloud {

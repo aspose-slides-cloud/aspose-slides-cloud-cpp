@@ -36,6 +36,7 @@ VideoFrame::VideoFrame()
 	m_HideAtShowingIsSet = false;
 	m_PlayLoopModeIsSet = false;
 	m_RewindVideoIsSet = false;
+	setType(L"VideoFrame");
 }
 
 VideoFrame::~VideoFrame()

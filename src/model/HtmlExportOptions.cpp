@@ -39,6 +39,7 @@ HtmlExportOptions::HtmlExportOptions()
 	m_DeletePicturesCroppedAreasIsSet = false;
 	m_CommentsAreaWidthIsSet = false;
 	m_ShowCommentsByNoAuthorIsSet = false;
+	setFormat(L"html");
 }
 
 HtmlExportOptions::~HtmlExportOptions()

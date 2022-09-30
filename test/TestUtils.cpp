@@ -173,6 +173,8 @@ std::shared_ptr<HttpContent> TestUtils::getBinaryTestValue(std::string functionN
 	utility::string_t path = utility::conversions::to_string_t("TestData/test.pptx");
 	if (boost::iequals(utility::conversions::to_string_t("ImportFromPdf"), functionName)) {
 		path = utility::conversions::to_string_t("TestData/test.pdf");
+	} else if (boost::iequals(utility::conversions::to_string_t("ImportShapesFromSvg"), functionName)) {
+		path = utility::conversions::to_string_t("TestData/shapes.svg");
 	} else if (boost::iequals(utility::conversions::to_string_t("image"), parameterName)) {
 		path = utility::conversions::to_string_t("TestData/watermark.png");
 	}

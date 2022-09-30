@@ -32,6 +32,7 @@ namespace model {
 
 NoFill::NoFill()
 {
+	setType(L"NoFill");
 }
 
 NoFill::~NoFill()

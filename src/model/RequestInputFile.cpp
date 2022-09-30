@@ -32,6 +32,7 @@ namespace model {
 
 RequestInputFile::RequestInputFile()
 {
+	setType(L"Request");
 }
 
 RequestInputFile::~RequestInputFile()

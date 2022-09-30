@@ -80,10 +80,7 @@ web::json::value TableRow::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("Cells")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("Cells")] = web::json::value::array(jsonArray);
 	}
 	val[utility::conversions::to_string_t("MinimalHeight")] = ModelBase::toJson(m_MinimalHeight);
 	val[utility::conversions::to_string_t("Height")] = ModelBase::toJson(m_Height);

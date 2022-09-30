@@ -34,7 +34,11 @@
 
 #include "ScatterChartDataPoint.h"
 
+#include "../model/EffectFormat.h"
 #include "../model/ScatterChartDataPoint.h"
+#include "../model/FillFormat.h"
+#include "../model/LineFormat.h"
+#include "../model/ThreeDFormat.h"
 
 namespace asposeslidescloud {
 namespace model {

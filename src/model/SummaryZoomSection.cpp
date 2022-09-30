@@ -32,6 +32,7 @@ namespace model {
 
 SummaryZoomSection::SummaryZoomSection()
 {
+	setType(L"SummaryZoomSection");
 }
 
 SummaryZoomSection::~SummaryZoomSection()

@@ -42,6 +42,7 @@ PdfExportOptions::PdfExportOptions()
 	m_CommentsAreaWidthIsSet = false;
 	m_ShowCommentsByNoAuthorIsSet = false;
 	m_ApplyImageTransparentIsSet = false;
+	setFormat(L"pdf");
 }
 
 PdfExportOptions::~PdfExportOptions()
@@ -406,10 +407,7 @@ web::json::value PdfExportOptions::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("AdditionalCommonFontFamilies")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("AdditionalCommonFontFamilies")] = web::json::value::array(jsonArray);
 	}
 	if (!m_NotesPosition.empty())
 	{

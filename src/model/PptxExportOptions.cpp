@@ -32,6 +32,7 @@ namespace model {
 
 PptxExportOptions::PptxExportOptions()
 {
+	setFormat(L"pptx");
 }
 
 PptxExportOptions::~PptxExportOptions()

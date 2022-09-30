@@ -33,6 +33,7 @@ namespace model {
 RadicalElement::RadicalElement()
 {
 	m_HideDegreeIsSet = false;
+	setType(L"Radical");
 }
 
 RadicalElement::~RadicalElement()

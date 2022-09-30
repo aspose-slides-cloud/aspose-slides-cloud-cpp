@@ -32,6 +32,7 @@ namespace model {
 
 SolidFill::SolidFill()
 {
+	setType(L"Solid");
 }
 
 SolidFill::~SolidFill()

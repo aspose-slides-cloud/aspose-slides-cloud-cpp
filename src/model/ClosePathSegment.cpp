@@ -32,6 +32,7 @@ namespace model {
 
 ClosePathSegment::ClosePathSegment()
 {
+	setType(L"Close");
 }
 
 ClosePathSegment::~ClosePathSegment()

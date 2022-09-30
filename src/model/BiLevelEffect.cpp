@@ -32,6 +32,7 @@ namespace model {
 
 BiLevelEffect::BiLevelEffect()
 {
+	setType(L"BiLevel");
 }
 
 BiLevelEffect::~BiLevelEffect()

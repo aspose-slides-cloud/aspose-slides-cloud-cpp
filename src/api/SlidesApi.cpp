@@ -99,9 +99,8 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignShapes(utility::string_t nam
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Shapes> result(new Shapes());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
+			return std::static_pointer_cast<Shapes>(instance);
 		});
 }
 
@@ -173,9 +172,8 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignSpecialSlideShapes(utility::
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Shapes> result(new Shapes());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
+			return std::static_pointer_cast<Shapes>(instance);
 		});
 }
 
@@ -237,9 +235,8 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignSubshapes(utility::string_t 
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Shapes> result(new Shapes());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
+			return std::static_pointer_cast<Shapes>(instance);
 		});
 }
 
@@ -479,9 +476,8 @@ pplx::task<std::shared_ptr<LayoutSlide>> SlidesApi::copyLayoutSlide(utility::str
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<LayoutSlide> result(new LayoutSlide());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"LayoutSlide", json);
+			return std::static_pointer_cast<LayoutSlide>(instance);
 		});
 }
 
@@ -528,9 +524,8 @@ pplx::task<std::shared_ptr<MasterSlide>> SlidesApi::copyMasterSlide(utility::str
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<MasterSlide> result(new MasterSlide());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"MasterSlide", json);
+			return std::static_pointer_cast<MasterSlide>(instance);
 		});
 }
 
@@ -572,9 +567,8 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::copySlide(utility::string_t name,
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Slides> result(new Slides());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slides", json);
+			return std::static_pointer_cast<Slides>(instance);
 		});
 }
 
@@ -617,9 +611,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createAnimationEffect(uti
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -662,9 +655,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createAnimationInteractiv
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -708,9 +700,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createAnimationInteractiv
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -754,9 +745,8 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::createChartCategory(utility::strin
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Chart> result(new Chart());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
+			return std::static_pointer_cast<Chart>(instance);
 		});
 }
 
@@ -801,9 +791,8 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::createChartDataPoint(utility::stri
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Chart> result(new Chart());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
+			return std::static_pointer_cast<Chart>(instance);
 		});
 }
 
@@ -847,9 +836,8 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::createChartSeries(utility::string_
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Chart> result(new Chart());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
+			return std::static_pointer_cast<Chart>(instance);
 		});
 }
 
@@ -896,9 +884,8 @@ pplx::task<std::shared_ptr<SlideComments>> SlidesApi::createComment(utility::str
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideComments> result(new SlideComments());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideComments", json);
+			return std::static_pointer_cast<SlideComments>(instance);
 		});
 }
 
@@ -1104,9 +1091,8 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::createNotesSlide(utility::str
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<NotesSlide> result(new NotesSlide());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"NotesSlide", json);
+			return std::static_pointer_cast<NotesSlide>(instance);
 		});
 }
 
@@ -1154,9 +1140,8 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createParagraph(utility::strin
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraph> result(new Paragraph());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
+			return std::static_pointer_cast<Paragraph>(instance);
 		});
 }
 
@@ -1205,9 +1190,8 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::createPortion(utility::string_t 
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portion> result(new Portion());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
+			return std::static_pointer_cast<Portion>(instance);
 		});
 }
 
@@ -1246,9 +1230,8 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::createPresentation(utility::str
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Document> result(new Document());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
+			return std::static_pointer_cast<Document>(instance);
 		});
 }
 
@@ -1285,9 +1268,8 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::createPresentationFromSource(ut
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Document> result(new Document());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
+			return std::static_pointer_cast<Document>(instance);
 		});
 }
 
@@ -1337,9 +1319,8 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::createPresentationFromTemplate(
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Document> result(new Document());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
+			return std::static_pointer_cast<Document>(instance);
 		});
 }
 
@@ -1380,9 +1361,8 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::createSection(utility::string_t
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Sections> result(new Sections());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Sections", json);
+			return std::static_pointer_cast<Sections>(instance);
 		});
 }
 
@@ -1429,9 +1409,8 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createShape(utility::string_t 
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ShapeBase> result(new ShapeBase());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
+			return std::static_pointer_cast<ShapeBase>(instance);
 		});
 }
 
@@ -1470,9 +1449,51 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::createSlide(utility::string_t nam
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Slides> result(new Slides());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slides", json);
+			return std::static_pointer_cast<Slides>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<SmartArt>> SlidesApi::createSmartArtNode(utility::string_t name, int32_t slideIndex, int32_t smartArtIndex, utility::string_t subNode, utility::string_t text, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/SmartArts/{smartArtIndex}/nodes");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "smartArtIndex", smartArtIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subNode"), subNode);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("text"), text);
+	if (position.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), position.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "createSmartArtNode");
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SmartArt", json);
+			return std::static_pointer_cast<SmartArt>(instance);
 		});
 }
 
@@ -1531,9 +1552,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createSpecialSlideAnimati
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -1592,9 +1612,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createSpecialSlideAnimati
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -1654,9 +1673,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createSpecialSlideAnimati
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -1720,9 +1738,8 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createSpecialSlideParagraph(ut
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraph> result(new Paragraph());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
+			return std::static_pointer_cast<Paragraph>(instance);
 		});
 }
 
@@ -1787,9 +1804,8 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::createSpecialSlidePortion(utilit
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portion> result(new Portion());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
+			return std::static_pointer_cast<Portion>(instance);
 		});
 }
 
@@ -1852,9 +1868,8 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createSpecialSlideShape(utilit
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ShapeBase> result(new ShapeBase());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
+			return std::static_pointer_cast<ShapeBase>(instance);
 		});
 }
 
@@ -1923,9 +1938,8 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createSpecialSlideSubshape(uti
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ShapeBase> result(new ShapeBase());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
+			return std::static_pointer_cast<ShapeBase>(instance);
 		});
 }
 
@@ -1995,9 +2009,8 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createSpecialSlideSubshapePara
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraph> result(new Paragraph());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
+			return std::static_pointer_cast<Paragraph>(instance);
 		});
 }
 
@@ -2068,9 +2081,8 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::createSpecialSlideSubshapePortio
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portion> result(new Portion());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
+			return std::static_pointer_cast<Portion>(instance);
 		});
 }
 
@@ -2123,9 +2135,8 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createSubshape(utility::string
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ShapeBase> result(new ShapeBase());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
+			return std::static_pointer_cast<ShapeBase>(instance);
 		});
 }
 
@@ -2179,9 +2190,8 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createSubshapeParagraph(utilit
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraph> result(new Paragraph());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
+			return std::static_pointer_cast<Paragraph>(instance);
 		});
 }
 
@@ -2236,9 +2246,8 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::createSubshapePortion(utility::s
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portion> result(new Portion());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
+			return std::static_pointer_cast<Portion>(instance);
 		});
 }
 
@@ -2363,9 +2372,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimation(utility::
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -2401,9 +2409,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimationEffect(uti
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -2439,9 +2446,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimationInteractiv
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -2478,9 +2484,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimationInteractiv
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -2515,9 +2520,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimationInteractiv
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -2552,9 +2556,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimationMainSequen
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -2589,9 +2592,8 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::deleteBackground(utility
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideBackground> result(new SlideBackground());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideBackground", json);
+			return std::static_pointer_cast<SlideBackground>(instance);
 		});
 }
 
@@ -2628,9 +2630,8 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::deleteChartCategory(utility::strin
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Chart> result(new Chart());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
+			return std::static_pointer_cast<Chart>(instance);
 		});
 }
 
@@ -2668,9 +2669,8 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::deleteChartDataPoint(utility::stri
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Chart> result(new Chart());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
+			return std::static_pointer_cast<Chart>(instance);
 		});
 }
 
@@ -2707,9 +2707,8 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::deleteChartSeries(utility::string_
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Chart> result(new Chart());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
+			return std::static_pointer_cast<Chart>(instance);
 		});
 }
 
@@ -2813,9 +2812,8 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::deleteDocumentPropert
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<DocumentProperties> result(new DocumentProperties());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DocumentProperties", json);
+			return std::static_pointer_cast<DocumentProperties>(instance);
 		});
 }
 
@@ -2855,8 +2853,89 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::deleteDocumentPropert
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<DocumentProperties> result(new DocumentProperties());
-			result->fromJson(json);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DocumentProperties", json);
+			return std::static_pointer_cast<DocumentProperties>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<FontsData>> SlidesApi::deleteEmbeddedFont(utility::string_t name, utility::string_t fontName, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	// verify the required parameter 'fontName' is set
+	if (fontName.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: fontName");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/fonts/embedded/{fontName}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "fontName", fontName);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "deleteEmbeddedFont");
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FontsData", json);
+			return std::static_pointer_cast<FontsData>(instance);
+		});
+}
+
+pplx::task<HttpContent> SlidesApi::deleteEmbeddedFontOnline(std::shared_ptr<HttpContent> document, utility::string_t fontName, utility::string_t password)
+{
+	if (document == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.document");
+	}
+	// verify the required parameter 'fontName' is set
+	if (fontName.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: fontName");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/fonts/embedded/{fontName}/delete");
+	ApiClient::setPathParameter(methodPath, "fontName", fontName);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "deleteEmbeddedFontOnline");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> response)
+		{
+			HttpContent result;
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			result.setData(stream);
 			return result;
 		});
 }
@@ -2959,9 +3038,8 @@ pplx::task<std::shared_ptr<Slide>> SlidesApi::deleteNotesSlide(utility::string_t
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Slide> result(new Slide());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slide", json);
+			return std::static_pointer_cast<Slide>(instance);
 		});
 }
 
@@ -2998,9 +3076,8 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteParagraph(utility::stri
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraphs> result(new Paragraphs());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
+			return std::static_pointer_cast<Paragraphs>(instance);
 		});
 }
 
@@ -3037,9 +3114,8 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteParagraphs(utility::str
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraphs> result(new Paragraphs());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
+			return std::static_pointer_cast<Paragraphs>(instance);
 		});
 }
 
@@ -3077,9 +3153,8 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deletePortion(utility::string_t
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portions> result(new Portions());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
+			return std::static_pointer_cast<Portions>(instance);
 		});
 }
 
@@ -3117,9 +3192,8 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deletePortions(utility::string_
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portions> result(new Portions());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
+			return std::static_pointer_cast<Portions>(instance);
 		});
 }
 
@@ -3153,9 +3227,8 @@ pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::deleteProtection(ut
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ProtectionProperties> result(new ProtectionProperties());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ProtectionProperties", json);
+			return std::static_pointer_cast<ProtectionProperties>(instance);
 		});
 }
 
@@ -3234,9 +3307,8 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::deleteSection(utility::string_t
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Sections> result(new Sections());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Sections", json);
+			return std::static_pointer_cast<Sections>(instance);
 		});
 }
 
@@ -3275,9 +3347,8 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::deleteSections(utility::string_
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Sections> result(new Sections());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Sections", json);
+			return std::static_pointer_cast<Sections>(instance);
 		});
 }
 
@@ -3313,9 +3384,8 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteShape(utility::string_t nam
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Shapes> result(new Shapes());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
+			return std::static_pointer_cast<Shapes>(instance);
 		});
 }
 
@@ -3351,9 +3421,8 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteShapes(utility::string_t na
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Shapes> result(new Shapes());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
+			return std::static_pointer_cast<Shapes>(instance);
 		});
 }
 
@@ -3388,9 +3457,8 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::deleteSlide(utility::string_t nam
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Slides> result(new Slides());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slides", json);
+			return std::static_pointer_cast<Slides>(instance);
 		});
 }
 
@@ -3426,9 +3494,8 @@ pplx::task<std::shared_ptr<SlideComments>> SlidesApi::deleteSlideComments(utilit
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideComments> result(new SlideComments());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideComments", json);
+			return std::static_pointer_cast<SlideComments>(instance);
 		});
 }
 
@@ -3500,9 +3567,47 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::deleteSlides(utility::string_t na
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Slides> result(new Slides());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slides", json);
+			return std::static_pointer_cast<Slides>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<SmartArt>> SlidesApi::deleteSmartArtNode(utility::string_t name, int32_t slideIndex, int32_t smartArtIndex, int32_t nodeIndex, utility::string_t subNode, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/SmartArts/{smartArtIndex}/nodes/{nodeIndex}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "smartArtIndex", smartArtIndex);
+	ApiClient::setPathParameter(methodPath, "nodeIndex", nodeIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subNode"), subNode);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "deleteSmartArtNode");
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SmartArt", json);
+			return std::static_pointer_cast<SmartArt>(instance);
 		});
 }
 
@@ -3553,9 +3658,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -3607,9 +3711,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -3661,9 +3764,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -3716,9 +3818,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -3769,9 +3870,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -3822,9 +3922,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -3877,9 +3976,8 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideParagraph(u
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraphs> result(new Paragraphs());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
+			return std::static_pointer_cast<Paragraphs>(instance);
 		});
 }
 
@@ -3932,9 +4030,8 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideParagraphs(
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraphs> result(new Paragraphs());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
+			return std::static_pointer_cast<Paragraphs>(instance);
 		});
 }
 
@@ -3988,9 +4085,8 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlidePortion(utili
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portions> result(new Portions());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
+			return std::static_pointer_cast<Portions>(instance);
 		});
 }
 
@@ -4044,9 +4140,8 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlidePortions(util
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portions> result(new Portions());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
+			return std::static_pointer_cast<Portions>(instance);
 		});
 }
 
@@ -4098,9 +4193,8 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideShape(utility::
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Shapes> result(new Shapes());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
+			return std::static_pointer_cast<Shapes>(instance);
 		});
 }
 
@@ -4152,9 +4246,8 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideShapes(utility:
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Shapes> result(new Shapes());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
+			return std::static_pointer_cast<Shapes>(instance);
 		});
 }
 
@@ -4212,9 +4305,8 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideSubshape(utilit
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Shapes> result(new Shapes());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
+			return std::static_pointer_cast<Shapes>(instance);
 		});
 }
 
@@ -4273,9 +4365,8 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideSubshapePar
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraphs> result(new Paragraphs());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
+			return std::static_pointer_cast<Paragraphs>(instance);
 		});
 }
 
@@ -4334,9 +4425,8 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideSubshapePar
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraphs> result(new Paragraphs());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
+			return std::static_pointer_cast<Paragraphs>(instance);
 		});
 }
 
@@ -4396,9 +4486,8 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlideSubshapePorti
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portions> result(new Portions());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
+			return std::static_pointer_cast<Portions>(instance);
 		});
 }
 
@@ -4458,9 +4547,8 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlideSubshapePorti
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portions> result(new Portions());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
+			return std::static_pointer_cast<Portions>(instance);
 		});
 }
 
@@ -4518,9 +4606,8 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideSubshapes(utili
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Shapes> result(new Shapes());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
+			return std::static_pointer_cast<Shapes>(instance);
 		});
 }
 
@@ -4562,9 +4649,8 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSubshape(utility::string_t 
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Shapes> result(new Shapes());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
+			return std::static_pointer_cast<Shapes>(instance);
 		});
 }
 
@@ -4607,9 +4693,8 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSubshapeParagraph(utili
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraphs> result(new Paragraphs());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
+			return std::static_pointer_cast<Paragraphs>(instance);
 		});
 }
 
@@ -4652,9 +4737,8 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSubshapeParagraphs(util
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraphs> result(new Paragraphs());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
+			return std::static_pointer_cast<Paragraphs>(instance);
 		});
 }
 
@@ -4698,9 +4782,8 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSubshapePortion(utility::
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portions> result(new Portions());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
+			return std::static_pointer_cast<Portions>(instance);
 		});
 }
 
@@ -4744,9 +4827,8 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSubshapePortions(utility:
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portions> result(new Portions());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
+			return std::static_pointer_cast<Portions>(instance);
 		});
 }
 
@@ -4788,9 +4870,8 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSubshapes(utility::string_t
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Shapes> result(new Shapes());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
+			return std::static_pointer_cast<Shapes>(instance);
 		});
 }
 
@@ -4824,9 +4905,8 @@ pplx::task<std::shared_ptr<LayoutSlides>> SlidesApi::deleteUnusedLayoutSlides(ut
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<LayoutSlides> result(new LayoutSlides());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"LayoutSlides", json);
+			return std::static_pointer_cast<LayoutSlides>(instance);
 		});
 }
 
@@ -4899,9 +4979,8 @@ pplx::task<std::shared_ptr<MasterSlides>> SlidesApi::deleteUnusedMasterSlides(ut
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<MasterSlides> result(new MasterSlides());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"MasterSlides", json);
+			return std::static_pointer_cast<MasterSlides>(instance);
 		});
 }
 
@@ -6189,9 +6268,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::getAnimation(utility::str
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -6216,9 +6294,8 @@ pplx::task<std::shared_ptr<ApiInfo>> SlidesApi::getApiInfo()
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ApiInfo> result(new ApiInfo());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ApiInfo", json);
+			return std::static_pointer_cast<ApiInfo>(instance);
 		});
 }
 
@@ -6253,9 +6330,8 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::getBackground(utility::s
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideBackground> result(new SlideBackground());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideBackground", json);
+			return std::static_pointer_cast<SlideBackground>(instance);
 		});
 }
 
@@ -6290,9 +6366,8 @@ pplx::task<std::shared_ptr<ColorScheme>> SlidesApi::getColorScheme(utility::stri
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ColorScheme> result(new ColorScheme());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ColorScheme", json);
+			return std::static_pointer_cast<ColorScheme>(instance);
 		});
 }
 
@@ -6318,9 +6393,8 @@ pplx::task<std::shared_ptr<DiscUsage>> SlidesApi::getDiscUsage(utility::string_t
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<DiscUsage> result(new DiscUsage());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DiscUsage", json);
+			return std::static_pointer_cast<DiscUsage>(instance);
 		});
 }
 
@@ -6354,9 +6428,8 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::getDocumentProperties
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<DocumentProperties> result(new DocumentProperties());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DocumentProperties", json);
+			return std::static_pointer_cast<DocumentProperties>(instance);
 		});
 }
 
@@ -6396,9 +6469,8 @@ pplx::task<std::shared_ptr<DocumentProperty>> SlidesApi::getDocumentProperty(uti
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<DocumentProperty> result(new DocumentProperty());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DocumentProperty", json);
+			return std::static_pointer_cast<DocumentProperty>(instance);
 		});
 }
 
@@ -6430,9 +6502,8 @@ pplx::task<std::shared_ptr<FileVersions>> SlidesApi::getFileVersions(utility::st
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<FileVersions> result(new FileVersions());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FileVersions", json);
+			return std::static_pointer_cast<FileVersions>(instance);
 		});
 }
 
@@ -6464,9 +6535,8 @@ pplx::task<std::shared_ptr<FilesList>> SlidesApi::getFilesList(utility::string_t
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<FilesList> result(new FilesList());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FilesList", json);
+			return std::static_pointer_cast<FilesList>(instance);
 		});
 }
 
@@ -6501,9 +6571,78 @@ pplx::task<std::shared_ptr<FontScheme>> SlidesApi::getFontScheme(utility::string
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<FontScheme> result(new FontScheme());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FontScheme", json);
+			return std::static_pointer_cast<FontScheme>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<FontsData>> SlidesApi::getFonts(utility::string_t name, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/fonts");
+	ApiClient::setPathParameter(methodPath, "name", name);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "getFonts");
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FontsData", json);
+			return std::static_pointer_cast<FontsData>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<FontsData>> SlidesApi::getFontsOnline(std::shared_ptr<HttpContent> document, utility::string_t password)
+{
+	if (document == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.document");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/fonts");
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "getFontsOnline");
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FontsData", json);
+			return std::static_pointer_cast<FontsData>(instance);
 		});
 }
 
@@ -6538,9 +6677,8 @@ pplx::task<std::shared_ptr<FormatScheme>> SlidesApi::getFormatScheme(utility::st
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<FormatScheme> result(new FormatScheme());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FormatScheme", json);
+			return std::static_pointer_cast<FormatScheme>(instance);
 		});
 }
 
@@ -6575,9 +6713,8 @@ pplx::task<std::shared_ptr<LayoutSlide>> SlidesApi::getLayoutSlide(utility::stri
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<LayoutSlide> result(new LayoutSlide());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"LayoutSlide", json);
+			return std::static_pointer_cast<LayoutSlide>(instance);
 		});
 }
 
@@ -6611,9 +6748,8 @@ pplx::task<std::shared_ptr<LayoutSlides>> SlidesApi::getLayoutSlides(utility::st
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<LayoutSlides> result(new LayoutSlides());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"LayoutSlides", json);
+			return std::static_pointer_cast<LayoutSlides>(instance);
 		});
 }
 
@@ -6648,9 +6784,8 @@ pplx::task<std::shared_ptr<MasterSlide>> SlidesApi::getMasterSlide(utility::stri
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<MasterSlide> result(new MasterSlide());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"MasterSlide", json);
+			return std::static_pointer_cast<MasterSlide>(instance);
 		});
 }
 
@@ -6684,9 +6819,8 @@ pplx::task<std::shared_ptr<MasterSlides>> SlidesApi::getMasterSlides(utility::st
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<MasterSlides> result(new MasterSlides());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"MasterSlides", json);
+			return std::static_pointer_cast<MasterSlides>(instance);
 		});
 }
 
@@ -6721,9 +6855,8 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::getNotesSlide(utility::string
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<NotesSlide> result(new NotesSlide());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"NotesSlide", json);
+			return std::static_pointer_cast<NotesSlide>(instance);
 		});
 }
 
@@ -6758,9 +6891,8 @@ pplx::task<std::shared_ptr<NotesSlideHeaderFooter>> SlidesApi::getNotesSlideHead
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<NotesSlideHeaderFooter> result(new NotesSlideHeaderFooter());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"NotesSlideHeaderFooter", json);
+			return std::static_pointer_cast<NotesSlideHeaderFooter>(instance);
 		});
 }
 
@@ -6795,9 +6927,8 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::getNotesSlideOnline(std::shar
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<NotesSlide> result(new NotesSlide());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"NotesSlide", json);
+			return std::static_pointer_cast<NotesSlide>(instance);
 		});
 }
 
@@ -6834,9 +6965,8 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getParagraph(utility::string_t
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraph> result(new Paragraph());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
+			return std::static_pointer_cast<Paragraph>(instance);
 		});
 }
 
@@ -6873,9 +7003,8 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getParagraphEffective(utility:
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraph> result(new Paragraph());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
+			return std::static_pointer_cast<Paragraph>(instance);
 		});
 }
 
@@ -6912,9 +7041,8 @@ pplx::task<std::shared_ptr<TextBounds>> SlidesApi::getParagraphRectangle(utility
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<TextBounds> result(new TextBounds());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"TextBounds", json);
+			return std::static_pointer_cast<TextBounds>(instance);
 		});
 }
 
@@ -6950,9 +7078,8 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getParagraphs(utility::string
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraphs> result(new Paragraphs());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
+			return std::static_pointer_cast<Paragraphs>(instance);
 		});
 }
 
@@ -6988,9 +7115,8 @@ pplx::task<std::shared_ptr<Placeholder>> SlidesApi::getPlaceholder(utility::stri
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Placeholder> result(new Placeholder());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Placeholder", json);
+			return std::static_pointer_cast<Placeholder>(instance);
 		});
 }
 
@@ -7025,9 +7151,8 @@ pplx::task<std::shared_ptr<Placeholders>> SlidesApi::getPlaceholders(utility::st
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Placeholders> result(new Placeholders());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Placeholders", json);
+			return std::static_pointer_cast<Placeholders>(instance);
 		});
 }
 
@@ -7065,9 +7190,8 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getPortion(utility::string_t nam
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portion> result(new Portion());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
+			return std::static_pointer_cast<Portion>(instance);
 		});
 }
 
@@ -7105,9 +7229,8 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getPortionEffective(utility::str
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portion> result(new Portion());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
+			return std::static_pointer_cast<Portion>(instance);
 		});
 }
 
@@ -7145,9 +7268,8 @@ pplx::task<std::shared_ptr<TextBounds>> SlidesApi::getPortionRectangle(utility::
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<TextBounds> result(new TextBounds());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"TextBounds", json);
+			return std::static_pointer_cast<TextBounds>(instance);
 		});
 }
 
@@ -7184,9 +7306,8 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::getPortions(utility::string_t n
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portions> result(new Portions());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
+			return std::static_pointer_cast<Portions>(instance);
 		});
 }
 
@@ -7220,9 +7341,8 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::getPresentation(utility::string
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Document> result(new Document());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
+			return std::static_pointer_cast<Document>(instance);
 		});
 }
 
@@ -7256,9 +7376,8 @@ pplx::task<std::shared_ptr<Images>> SlidesApi::getPresentationImages(utility::st
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Images> result(new Images());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Images", json);
+			return std::static_pointer_cast<Images>(instance);
 		});
 }
 
@@ -7296,9 +7415,8 @@ pplx::task<std::shared_ptr<TextItems>> SlidesApi::getPresentationTextItems(utili
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<TextItems> result(new TextItems());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"TextItems", json);
+			return std::static_pointer_cast<TextItems>(instance);
 		});
 }
 
@@ -7332,9 +7450,8 @@ pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::getProtectionProper
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ProtectionProperties> result(new ProtectionProperties());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ProtectionProperties", json);
+			return std::static_pointer_cast<ProtectionProperties>(instance);
 		});
 }
 
@@ -7368,9 +7485,8 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::getSections(utility::string_t n
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Sections> result(new Sections());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Sections", json);
+			return std::static_pointer_cast<Sections>(instance);
 		});
 }
 
@@ -7406,9 +7522,8 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getShape(utility::string_t nam
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ShapeBase> result(new ShapeBase());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
+			return std::static_pointer_cast<ShapeBase>(instance);
 		});
 }
 
@@ -7444,9 +7559,8 @@ pplx::task<std::shared_ptr<GeometryPaths>> SlidesApi::getShapeGeometryPath(utili
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<GeometryPaths> result(new GeometryPaths());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"GeometryPaths", json);
+			return std::static_pointer_cast<GeometryPaths>(instance);
 		});
 }
 
@@ -7487,9 +7601,8 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getShapes(utility::string_t name,
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Shapes> result(new Shapes());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
+			return std::static_pointer_cast<Shapes>(instance);
 		});
 }
 
@@ -7524,9 +7637,8 @@ pplx::task<std::shared_ptr<Slide>> SlidesApi::getSlide(utility::string_t name, i
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Slide> result(new Slide());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slide", json);
+			return std::static_pointer_cast<Slide>(instance);
 		});
 }
 
@@ -7561,9 +7673,8 @@ pplx::task<std::shared_ptr<SlideComments>> SlidesApi::getSlideComments(utility::
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideComments> result(new SlideComments());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideComments", json);
+			return std::static_pointer_cast<SlideComments>(instance);
 		});
 }
 
@@ -7598,9 +7709,8 @@ pplx::task<std::shared_ptr<HeaderFooter>> SlidesApi::getSlideHeaderFooter(utilit
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<HeaderFooter> result(new HeaderFooter());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"HeaderFooter", json);
+			return std::static_pointer_cast<HeaderFooter>(instance);
 		});
 }
 
@@ -7635,9 +7745,8 @@ pplx::task<std::shared_ptr<Images>> SlidesApi::getSlideImages(utility::string_t 
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Images> result(new Images());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Images", json);
+			return std::static_pointer_cast<Images>(instance);
 		});
 }
 
@@ -7671,9 +7780,8 @@ pplx::task<std::shared_ptr<SlideProperties>> SlidesApi::getSlideProperties(utili
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideProperties> result(new SlideProperties());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideProperties", json);
+			return std::static_pointer_cast<SlideProperties>(instance);
 		});
 }
 
@@ -7712,9 +7820,8 @@ pplx::task<std::shared_ptr<TextItems>> SlidesApi::getSlideTextItems(utility::str
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<TextItems> result(new TextItems());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"TextItems", json);
+			return std::static_pointer_cast<TextItems>(instance);
 		});
 }
 
@@ -7748,9 +7855,8 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::getSlides(utility::string_t name,
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Slides> result(new Slides());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slides", json);
+			return std::static_pointer_cast<Slides>(instance);
 		});
 }
 
@@ -7809,9 +7915,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::getSpecialSlideAnimation(
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -7864,9 +7969,8 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getSpecialSlideParagraph(utili
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraph> result(new Paragraph());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
+			return std::static_pointer_cast<Paragraph>(instance);
 		});
 }
 
@@ -7918,9 +8022,8 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getSpecialSlideParagraphs(uti
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraphs> result(new Paragraphs());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
+			return std::static_pointer_cast<Paragraphs>(instance);
 		});
 }
 
@@ -7974,9 +8077,8 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getSpecialSlidePortion(utility::
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portion> result(new Portion());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
+			return std::static_pointer_cast<Portion>(instance);
 		});
 }
 
@@ -8029,9 +8131,8 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::getSpecialSlidePortions(utility
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portions> result(new Portions());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
+			return std::static_pointer_cast<Portions>(instance);
 		});
 }
 
@@ -8083,9 +8184,8 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getSpecialSlideShape(utility::
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ShapeBase> result(new ShapeBase());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
+			return std::static_pointer_cast<ShapeBase>(instance);
 		});
 }
 
@@ -8136,9 +8236,8 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getSpecialSlideShapes(utility::st
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Shapes> result(new Shapes());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
+			return std::static_pointer_cast<Shapes>(instance);
 		});
 }
 
@@ -8196,9 +8295,8 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getSpecialSlideSubshape(utilit
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ShapeBase> result(new ShapeBase());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
+			return std::static_pointer_cast<ShapeBase>(instance);
 		});
 }
 
@@ -8257,9 +8355,8 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getSpecialSlideSubshapeParagra
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraph> result(new Paragraph());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
+			return std::static_pointer_cast<Paragraph>(instance);
 		});
 }
 
@@ -8317,9 +8414,8 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getSpecialSlideSubshapeParagr
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraphs> result(new Paragraphs());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
+			return std::static_pointer_cast<Paragraphs>(instance);
 		});
 }
 
@@ -8379,9 +8475,8 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getSpecialSlideSubshapePortion(u
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portion> result(new Portion());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
+			return std::static_pointer_cast<Portion>(instance);
 		});
 }
 
@@ -8440,9 +8535,8 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::getSpecialSlideSubshapePortions
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portions> result(new Portions());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
+			return std::static_pointer_cast<Portions>(instance);
 		});
 }
 
@@ -8499,9 +8593,8 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getSpecialSlideSubshapes(utility:
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Shapes> result(new Shapes());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
+			return std::static_pointer_cast<Shapes>(instance);
 		});
 }
 
@@ -8543,9 +8636,8 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getSubshape(utility::string_t 
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ShapeBase> result(new ShapeBase());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
+			return std::static_pointer_cast<ShapeBase>(instance);
 		});
 }
 
@@ -8588,9 +8680,8 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getSubshapeParagraph(utility::
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraph> result(new Paragraph());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
+			return std::static_pointer_cast<Paragraph>(instance);
 		});
 }
 
@@ -8633,9 +8724,8 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getSubshapeParagraphEffective(
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraph> result(new Paragraph());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
+			return std::static_pointer_cast<Paragraph>(instance);
 		});
 }
 
@@ -8677,9 +8767,8 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getSubshapeParagraphs(utility
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraphs> result(new Paragraphs());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
+			return std::static_pointer_cast<Paragraphs>(instance);
 		});
 }
 
@@ -8723,9 +8812,8 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getSubshapePortion(utility::stri
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portion> result(new Portion());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
+			return std::static_pointer_cast<Portion>(instance);
 		});
 }
 
@@ -8769,9 +8857,8 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getSubshapePortionEffective(util
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portion> result(new Portion());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
+			return std::static_pointer_cast<Portion>(instance);
 		});
 }
 
@@ -8814,9 +8901,8 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::getSubshapePortions(utility::st
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portions> result(new Portions());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
+			return std::static_pointer_cast<Portions>(instance);
 		});
 }
 
@@ -8857,9 +8943,8 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getSubshapes(utility::string_t na
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Shapes> result(new Shapes());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
+			return std::static_pointer_cast<Shapes>(instance);
 		});
 }
 
@@ -8894,9 +8979,8 @@ pplx::task<std::shared_ptr<Theme>> SlidesApi::getTheme(utility::string_t name, i
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Theme> result(new Theme());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Theme", json);
+			return std::static_pointer_cast<Theme>(instance);
 		});
 }
 
@@ -8930,9 +9014,8 @@ pplx::task<std::shared_ptr<ViewProperties>> SlidesApi::getViewProperties(utility
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ViewProperties> result(new ViewProperties());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ViewProperties", json);
+			return std::static_pointer_cast<ViewProperties>(instance);
 		});
 }
 
@@ -8988,9 +9071,8 @@ pplx::task<std::shared_ptr<Shape>> SlidesApi::highlightShapeRegex(utility::strin
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Shape> result(new Shape());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shape", json);
+			return std::static_pointer_cast<Shape>(instance);
 		});
 }
 
@@ -9046,9 +9128,8 @@ pplx::task<std::shared_ptr<Shape>> SlidesApi::highlightShapeText(utility::string
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Shape> result(new Shape());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shape", json);
+			return std::static_pointer_cast<Shape>(instance);
 		});
 }
 
@@ -9086,9 +9167,8 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::importFromHtml(utility::string_
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Document> result(new Document());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
+			return std::static_pointer_cast<Document>(instance);
 		});
 }
 
@@ -9130,9 +9210,69 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::importFromPdf(utility::string_t
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Document> result(new Document());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
+			return std::static_pointer_cast<Document>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<Shapes>> SlidesApi::importShapesFromSvg(utility::string_t name, int32_t slideIndex, std::shared_ptr<HttpContent> image, boost::optional<int32_t> x, boost::optional<int32_t> y, boost::optional<int32_t> width, boost::optional<int32_t> height, std::vector<int32_t> shapes, boost::optional<bool> group, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/fromSvg");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	if (x.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("x"), x.value());
+	}
+	if (y.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("y"), y.value());
+	}
+	if (width.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("width"), width.value());
+	}
+	if (height.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("height"), height.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapes"), shapes);
+	if (group.has_value())
+	{
+		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("group"), group.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (image != nullptr)
+	{
+		requestFiles.push_back(image);
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "importShapesFromSvg");
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
+			return std::static_pointer_cast<Shapes>(instance);
 		});
 }
 
@@ -9174,9 +9314,8 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::merge(utility::string_t name, s
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Document> result(new Document());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
+			return std::static_pointer_cast<Document>(instance);
 		});
 }
 
@@ -9357,9 +9496,8 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::moveSection(utility::string_t n
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Sections> result(new Sections());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Sections", json);
+			return std::static_pointer_cast<Sections>(instance);
 		});
 }
 
@@ -9395,9 +9533,8 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::moveSlide(utility::string_t name,
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Slides> result(new Slides());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slides", json);
+			return std::static_pointer_cast<Slides>(instance);
 		});
 }
 
@@ -9432,9 +9569,8 @@ pplx::task<std::shared_ptr<EntityExists>> SlidesApi::notesSlideExists(utility::s
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<EntityExists> result(new EntityExists());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"EntityExists", json);
+			return std::static_pointer_cast<EntityExists>(instance);
 		});
 }
 
@@ -9469,9 +9605,8 @@ pplx::task<std::shared_ptr<EntityExists>> SlidesApi::notesSlideExistsOnline(std:
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<EntityExists> result(new EntityExists());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"EntityExists", json);
+			return std::static_pointer_cast<EntityExists>(instance);
 		});
 }
 
@@ -9504,9 +9639,8 @@ pplx::task<std::shared_ptr<ObjectExist>> SlidesApi::objectExists(utility::string
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ObjectExist> result(new ObjectExist());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ObjectExist", json);
+			return std::static_pointer_cast<ObjectExist>(instance);
 		});
 }
 
@@ -9548,9 +9682,8 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::orderedMerge(utility::string_t 
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Document> result(new Document());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
+			return std::static_pointer_cast<Document>(instance);
 		});
 }
 
@@ -9621,8 +9754,111 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::reorderSlides(utility::string_t n
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Slides> result(new Slides());
-			result->fromJson(json);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slides", json);
+			return std::static_pointer_cast<Slides>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<FontsData>> SlidesApi::replaceFont(utility::string_t name, utility::string_t sourceFont, utility::string_t targetFont, boost::optional<bool> embed, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	// verify the required parameter 'sourceFont' is set
+	if (sourceFont.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: sourceFont");
+	}
+	// verify the required parameter 'targetFont' is set
+	if (targetFont.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: targetFont");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/fonts/{sourceFont}/replace/{targetFont}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "sourceFont", sourceFont);
+	ApiClient::setPathParameter(methodPath, "targetFont", targetFont);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	if (embed.has_value())
+	{
+		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("embed"), embed.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "replaceFont");
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FontsData", json);
+			return std::static_pointer_cast<FontsData>(instance);
+		});
+}
+
+pplx::task<HttpContent> SlidesApi::replaceFontOnline(std::shared_ptr<HttpContent> document, utility::string_t sourceFont, utility::string_t targetFont, boost::optional<bool> embed, utility::string_t password, utility::string_t fontsFolder)
+{
+	if (document == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.document");
+	}
+	// verify the required parameter 'sourceFont' is set
+	if (sourceFont.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: sourceFont");
+	}
+	// verify the required parameter 'targetFont' is set
+	if (targetFont.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: targetFont");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/fonts/{sourceFont}/replace/{targetFont}");
+	ApiClient::setPathParameter(methodPath, "sourceFont", sourceFont);
+	ApiClient::setPathParameter(methodPath, "targetFont", targetFont);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	if (embed.has_value())
+	{
+		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("embed"), embed.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "replaceFontOnline");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> response)
+		{
+			HttpContent result;
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			result.setData(stream);
 			return result;
 		});
 }
@@ -9673,9 +9909,8 @@ pplx::task<std::shared_ptr<DocumentReplaceResult>> SlidesApi::replacePresentatio
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<DocumentReplaceResult> result(new DocumentReplaceResult());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DocumentReplaceResult", json);
+			return std::static_pointer_cast<DocumentReplaceResult>(instance);
 		});
 }
 
@@ -9777,9 +10012,8 @@ pplx::task<std::shared_ptr<SlideReplaceResult>> SlidesApi::replaceSlideText(util
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideReplaceResult> result(new SlideReplaceResult());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideReplaceResult", json);
+			return std::static_pointer_cast<SlideReplaceResult>(instance);
 		});
 }
 
@@ -10542,9 +10776,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::setAnimation(utility::str
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -10587,9 +10820,8 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::setBackground(utility::s
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideBackground> result(new SlideBackground());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideBackground", json);
+			return std::static_pointer_cast<SlideBackground>(instance);
 		});
 }
 
@@ -10630,9 +10862,8 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::setBackgroundColor(utili
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideBackground> result(new SlideBackground());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideBackground", json);
+			return std::static_pointer_cast<SlideBackground>(instance);
 		});
 }
 
@@ -10692,9 +10923,8 @@ pplx::task<std::shared_ptr<Axis>> SlidesApi::setChartAxis(utility::string_t name
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Axis> result(new Axis());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Axis", json);
+			return std::static_pointer_cast<Axis>(instance);
 		});
 }
 
@@ -10738,9 +10968,8 @@ pplx::task<std::shared_ptr<Legend>> SlidesApi::setChartLegend(utility::string_t 
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Legend> result(new Legend());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Legend", json);
+			return std::static_pointer_cast<Legend>(instance);
 		});
 }
 
@@ -10785,9 +11014,8 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::setChartSeriesGroup(utility::strin
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Chart> result(new Chart());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
+			return std::static_pointer_cast<Chart>(instance);
 		});
 }
 
@@ -10847,9 +11075,8 @@ pplx::task<std::shared_ptr<ChartWall>> SlidesApi::setChartWall(utility::string_t
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ChartWall> result(new ChartWall());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ChartWall", json);
+			return std::static_pointer_cast<ChartWall>(instance);
 		});
 }
 
@@ -10891,9 +11118,8 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::setDocumentProperties
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<DocumentProperties> result(new DocumentProperties());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DocumentProperties", json);
+			return std::static_pointer_cast<DocumentProperties>(instance);
 		});
 }
 
@@ -10941,8 +11167,193 @@ pplx::task<std::shared_ptr<DocumentProperty>> SlidesApi::setDocumentProperty(uti
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<DocumentProperty> result(new DocumentProperty());
-			result->fromJson(json);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DocumentProperty", json);
+			return std::static_pointer_cast<DocumentProperty>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<FontsData>> SlidesApi::setEmbeddedFont(utility::string_t name, utility::string_t fontName, boost::optional<bool> onlyUsed, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	// verify the required parameter 'fontName' is set
+	if (fontName.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: fontName");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/fonts/embedded/{fontName}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "fontName", fontName);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	if (onlyUsed.has_value())
+	{
+		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("onlyUsed"), onlyUsed.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "setEmbeddedFont");
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FontsData", json);
+			return std::static_pointer_cast<FontsData>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<FontsData>> SlidesApi::setEmbeddedFontFromRequest(std::shared_ptr<HttpContent> font, utility::string_t name, boost::optional<bool> onlyUsed, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	if (font == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.font");
+	}
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/fonts/embedded");
+	ApiClient::setPathParameter(methodPath, "name", name);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	if (onlyUsed.has_value())
+	{
+		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("onlyUsed"), onlyUsed.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (font != nullptr)
+	{
+		requestFiles.push_back(font);
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "setEmbeddedFontFromRequest");
+			return response.extract_string();
+		})
+		.then([=](utility::string_t response)
+		{
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FontsData", json);
+			return std::static_pointer_cast<FontsData>(instance);
+		});
+}
+
+pplx::task<HttpContent> SlidesApi::setEmbeddedFontFromRequestOnline(std::shared_ptr<HttpContent> document, std::shared_ptr<HttpContent> font, boost::optional<bool> onlyUsed, utility::string_t password)
+{
+	if (document == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.document");
+	}
+	if (font == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.font");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/fonts/embedded");
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	if (onlyUsed.has_value())
+	{
+		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("onlyUsed"), onlyUsed.value());
+	}
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
+	if (font != nullptr)
+	{
+		requestFiles.push_back(font);
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "setEmbeddedFontFromRequestOnline");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> response)
+		{
+			HttpContent result;
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			result.setData(stream);
+			return result;
+		});
+}
+
+pplx::task<HttpContent> SlidesApi::setEmbeddedFontOnline(std::shared_ptr<HttpContent> document, utility::string_t fontName, boost::optional<bool> onlyUsed, utility::string_t password, utility::string_t fontsFolder)
+{
+	if (document == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.document");
+	}
+	// verify the required parameter 'fontName' is set
+	if (fontName.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: fontName");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/fonts/embedded/{fontName}");
+	ApiClient::setPathParameter(methodPath, "fontName", fontName);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	if (onlyUsed.has_value())
+	{
+		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("onlyUsed"), onlyUsed.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "setEmbeddedFontOnline");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> response)
+		{
+			HttpContent result;
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			result.setData(stream);
 			return result;
 		});
 }
@@ -10986,9 +11397,8 @@ pplx::task<std::shared_ptr<NotesSlideHeaderFooter>> SlidesApi::setNotesSlideHead
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<NotesSlideHeaderFooter> result(new NotesSlideHeaderFooter());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"NotesSlideHeaderFooter", json);
+			return std::static_pointer_cast<NotesSlideHeaderFooter>(instance);
 		});
 }
 
@@ -11030,9 +11440,8 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::setPresentationHeaderFooter(uti
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Document> result(new Document());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
+			return std::static_pointer_cast<Document>(instance);
 		});
 }
 
@@ -11074,9 +11483,8 @@ pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::setProtection(utili
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ProtectionProperties> result(new ProtectionProperties());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ProtectionProperties", json);
+			return std::static_pointer_cast<ProtectionProperties>(instance);
 		});
 }
 
@@ -11161,9 +11569,8 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::setSections(utility::string_t n
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Sections> result(new Sections());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Sections", json);
+			return std::static_pointer_cast<Sections>(instance);
 		});
 }
 
@@ -11207,9 +11614,8 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::setShapeGeometryPath(utility::
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ShapeBase> result(new ShapeBase());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
+			return std::static_pointer_cast<ShapeBase>(instance);
 		});
 }
 
@@ -11252,9 +11658,8 @@ pplx::task<std::shared_ptr<HeaderFooter>> SlidesApi::setSlideHeaderFooter(utilit
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<HeaderFooter> result(new HeaderFooter());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"HeaderFooter", json);
+			return std::static_pointer_cast<HeaderFooter>(instance);
 		});
 }
 
@@ -11296,9 +11701,8 @@ pplx::task<std::shared_ptr<SlideProperties>> SlidesApi::setSlideProperties(utili
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideProperties> result(new SlideProperties());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideProperties", json);
+			return std::static_pointer_cast<SlideProperties>(instance);
 		});
 }
 
@@ -11357,9 +11761,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::setSpecialSlideAnimation(
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -11401,9 +11804,8 @@ pplx::task<std::shared_ptr<ViewProperties>> SlidesApi::setViewProperties(utility
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ViewProperties> result(new ViewProperties());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ViewProperties", json);
+			return std::static_pointer_cast<ViewProperties>(instance);
 		});
 }
 
@@ -11465,9 +11867,8 @@ pplx::task<std::shared_ptr<SplitDocumentResult>> SlidesApi::split(utility::strin
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SplitDocumentResult> result(new SplitDocumentResult());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SplitDocumentResult", json);
+			return std::static_pointer_cast<SplitDocumentResult>(instance);
 		});
 }
 
@@ -11536,9 +11937,8 @@ pplx::task<std::shared_ptr<SplitDocumentResult>> SlidesApi::splitAndSaveOnline(s
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SplitDocumentResult> result(new SplitDocumentResult());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SplitDocumentResult", json);
+			return std::static_pointer_cast<SplitDocumentResult>(instance);
 		});
 }
 
@@ -11638,9 +12038,8 @@ pplx::task<std::shared_ptr<StorageExist>> SlidesApi::storageExists(utility::stri
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<StorageExist> result(new StorageExist());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"StorageExist", json);
+			return std::static_pointer_cast<StorageExist>(instance);
 		});
 }
 
@@ -11684,9 +12083,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::updateAnimationEffect(uti
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -11731,9 +12129,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::updateAnimationInteractiv
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -11778,9 +12175,8 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::updateChartCategory(utility::strin
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Chart> result(new Chart());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
+			return std::static_pointer_cast<Chart>(instance);
 		});
 }
 
@@ -11826,9 +12222,8 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::updateChartDataPoint(utility::stri
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Chart> result(new Chart());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
+			return std::static_pointer_cast<Chart>(instance);
 		});
 }
 
@@ -11873,9 +12268,8 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::updateChartSeries(utility::string_
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Chart> result(new Chart());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
+			return std::static_pointer_cast<Chart>(instance);
 		});
 }
 
@@ -11918,9 +12312,8 @@ pplx::task<std::shared_ptr<LayoutSlide>> SlidesApi::updateLayoutSlide(utility::s
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<LayoutSlide> result(new LayoutSlide());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"LayoutSlide", json);
+			return std::static_pointer_cast<LayoutSlide>(instance);
 		});
 }
 
@@ -11963,9 +12356,8 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::updateNotesSlide(utility::str
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<NotesSlide> result(new NotesSlide());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"NotesSlide", json);
+			return std::static_pointer_cast<NotesSlide>(instance);
 		});
 }
 
@@ -12010,9 +12402,8 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateParagraph(utility::strin
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraph> result(new Paragraph());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
+			return std::static_pointer_cast<Paragraph>(instance);
 		});
 }
 
@@ -12058,9 +12449,8 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::updatePortion(utility::string_t 
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portion> result(new Portion());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
+			return std::static_pointer_cast<Portion>(instance);
 		});
 }
 
@@ -12101,9 +12491,8 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::updateSection(utility::string_t
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Sections> result(new Sections());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Sections", json);
+			return std::static_pointer_cast<Sections>(instance);
 		});
 }
 
@@ -12147,9 +12536,8 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateShape(utility::string_t 
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ShapeBase> result(new ShapeBase());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
+			return std::static_pointer_cast<ShapeBase>(instance);
 		});
 }
 
@@ -12192,9 +12580,8 @@ pplx::task<std::shared_ptr<Slide>> SlidesApi::updateSlide(utility::string_t name
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Slide> result(new Slide());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slide", json);
+			return std::static_pointer_cast<Slide>(instance);
 		});
 }
 
@@ -12254,9 +12641,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::updateSpecialSlideAnimati
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -12317,9 +12703,8 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::updateSpecialSlideAnimati
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<SlideAnimation> result(new SlideAnimation());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
+			return std::static_pointer_cast<SlideAnimation>(instance);
 		});
 }
 
@@ -12380,9 +12765,8 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateSpecialSlideParagraph(ut
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraph> result(new Paragraph());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
+			return std::static_pointer_cast<Paragraph>(instance);
 		});
 }
 
@@ -12444,9 +12828,8 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::updateSpecialSlidePortion(utilit
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portion> result(new Portion());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
+			return std::static_pointer_cast<Portion>(instance);
 		});
 }
 
@@ -12506,9 +12889,8 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateSpecialSlideShape(utilit
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ShapeBase> result(new ShapeBase());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
+			return std::static_pointer_cast<ShapeBase>(instance);
 		});
 }
 
@@ -12574,9 +12956,8 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateSpecialSlideSubshape(uti
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ShapeBase> result(new ShapeBase());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
+			return std::static_pointer_cast<ShapeBase>(instance);
 		});
 }
 
@@ -12643,9 +13024,8 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateSpecialSlideSubshapePara
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraph> result(new Paragraph());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
+			return std::static_pointer_cast<Paragraph>(instance);
 		});
 }
 
@@ -12713,9 +13093,8 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::updateSpecialSlideSubshapePortio
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portion> result(new Portion());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
+			return std::static_pointer_cast<Portion>(instance);
 		});
 }
 
@@ -12765,9 +13144,8 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateSubshape(utility::string
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<ShapeBase> result(new ShapeBase());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
+			return std::static_pointer_cast<ShapeBase>(instance);
 		});
 }
 
@@ -12818,9 +13196,8 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateSubshapeParagraph(utilit
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Paragraph> result(new Paragraph());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
+			return std::static_pointer_cast<Paragraph>(instance);
 		});
 }
 
@@ -12872,9 +13249,8 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::updateSubshapePortion(utility::s
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<Portion> result(new Portion());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
+			return std::static_pointer_cast<Portion>(instance);
 		});
 }
 
@@ -12914,9 +13290,8 @@ pplx::task<std::shared_ptr<FilesUploadResult>> SlidesApi::uploadFile(utility::st
 		{
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<FilesUploadResult> result(new FilesUploadResult());
-			result->fromJson(json);
-			return result;
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FilesUploadResult", json);
+			return std::static_pointer_cast<FilesUploadResult>(instance);
 		});
 }
 

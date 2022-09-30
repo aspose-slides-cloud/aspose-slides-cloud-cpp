@@ -34,6 +34,7 @@ SlideModernComment::SlideModernComment()
 {
 	m_TextSelectionStartIsSet = false;
 	m_TextSelectionLengthIsSet = false;
+	setType(L"Modern");
 }
 
 SlideModernComment::~SlideModernComment()

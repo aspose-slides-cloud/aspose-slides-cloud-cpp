@@ -32,6 +32,7 @@ namespace model {
 
 ReorderSlide::ReorderSlide()
 {
+	setType(L"ReoderSlide");
 }
 
 ReorderSlide::~ReorderSlide()

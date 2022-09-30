@@ -39,6 +39,7 @@ SvgExportOptions::SvgExportOptions()
 	m_DisableLineEndCroppingIsSet = false;
 	m_JpegQualityIsSet = false;
 	m_DeletePicturesCroppedAreasIsSet = false;
+	setFormat(L"svg");
 }
 
 SvgExportOptions::~SvgExportOptions()

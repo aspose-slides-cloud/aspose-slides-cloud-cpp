@@ -35,6 +35,7 @@ ArrayElement::ArrayElement()
 	m_MaximumDistributionIsSet = false;
 	m_ObjectDistributionIsSet = false;
 	m_RowSpacingIsSet = false;
+	setType(L"Array");
 }
 
 ArrayElement::~ArrayElement()
@@ -146,10 +147,7 @@ web::json::value ArrayElement::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("Arguments")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("Arguments")] = web::json::value::array(jsonArray);
 	}
 	if (!m_BaseJustification.empty())
 	{

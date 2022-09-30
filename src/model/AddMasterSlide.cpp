@@ -32,6 +32,7 @@ namespace model {
 
 AddMasterSlide::AddMasterSlide()
 {
+	setType(L"AddMasterSlide");
 }
 
 AddMasterSlide::~AddMasterSlide()

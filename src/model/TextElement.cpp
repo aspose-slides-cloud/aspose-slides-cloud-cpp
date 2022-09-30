@@ -32,6 +32,7 @@ namespace model {
 
 TextElement::TextElement()
 {
+	setType(L"Text");
 }
 
 TextElement::~TextElement()

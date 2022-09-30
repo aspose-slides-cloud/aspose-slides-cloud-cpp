@@ -32,6 +32,7 @@ namespace model {
 
 PathOutputFile::PathOutputFile()
 {
+	setType(L"Path");
 }
 
 PathOutputFile::~PathOutputFile()

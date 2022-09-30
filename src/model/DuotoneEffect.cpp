@@ -32,6 +32,7 @@ namespace model {
 
 DuotoneEffect::DuotoneEffect()
 {
+	setType(L"Duotone");
 }
 
 DuotoneEffect::~DuotoneEffect()

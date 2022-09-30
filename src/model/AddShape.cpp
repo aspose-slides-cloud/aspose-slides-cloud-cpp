@@ -32,6 +32,7 @@ namespace model {
 
 AddShape::AddShape()
 {
+	setType(L"AddShape");
 }
 
 AddShape::~AddShape()

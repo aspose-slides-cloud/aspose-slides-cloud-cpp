@@ -32,6 +32,7 @@ namespace model {
 
 GrayScaleEffect::GrayScaleEffect()
 {
+	setType(L"GrayScale");
 }
 
 GrayScaleEffect::~GrayScaleEffect()

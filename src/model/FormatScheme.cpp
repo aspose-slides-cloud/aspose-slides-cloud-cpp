@@ -91,10 +91,7 @@ web::json::value FormatScheme::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("BackgroundStyles")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("BackgroundStyles")] = web::json::value::array(jsonArray);
 	}
 	{
 		std::vector<web::json::value> jsonArray;
@@ -102,10 +99,7 @@ web::json::value FormatScheme::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("EffectStyles")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("EffectStyles")] = web::json::value::array(jsonArray);
 	}
 	{
 		std::vector<web::json::value> jsonArray;
@@ -113,10 +107,7 @@ web::json::value FormatScheme::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("FillStyles")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("FillStyles")] = web::json::value::array(jsonArray);
 	}
 	{
 		std::vector<web::json::value> jsonArray;
@@ -124,10 +115,7 @@ web::json::value FormatScheme::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("LineStyles")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("LineStyles")] = web::json::value::array(jsonArray);
 	}
 	return val;
 }

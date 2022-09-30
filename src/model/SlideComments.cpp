@@ -58,10 +58,7 @@ web::json::value SlideComments::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("List")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("List")] = web::json::value::array(jsonArray);
 	}
 	return val;
 }

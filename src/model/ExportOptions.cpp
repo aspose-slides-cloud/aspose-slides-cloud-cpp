@@ -60,6 +60,17 @@ void ExportOptions::setFontFallbackRules(std::vector<std::shared_ptr<FontFallbac
 	
 }
 
+std::vector<std::shared_ptr<FontSubstRule>> ExportOptions::getFontSubstRules() const
+{
+	return m_FontSubstRules;
+}
+
+void ExportOptions::setFontSubstRules(std::vector<std::shared_ptr<FontSubstRule>> value)
+{
+	m_FontSubstRules = value;
+	
+}
+
 utility::string_t ExportOptions::getFormat() const
 {
 	return m_Format;
@@ -84,10 +95,15 @@ web::json::value ExportOptions::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
+		val[utility::conversions::to_string_t("FontFallbackRules")] = web::json::value::array(jsonArray);
+	}
+	{
+		std::vector<web::json::value> jsonArray;
+		for (auto& item : m_FontSubstRules)
 		{
-			val[utility::conversions::to_string_t("FontFallbackRules")] = web::json::value::array(jsonArray);
+			jsonArray.push_back(ModelBase::toJson(item));
 		}
+		val[utility::conversions::to_string_t("FontSubstRules")] = web::json::value::array(jsonArray);
 	}
 	if (!m_Format.empty())
 	{
@@ -120,6 +136,27 @@ void ExportOptions::fromJson(web::json::value& val)
 					std::shared_ptr<FontFallbackRule> newItem(new FontFallbackRule());
 					newItem->fromJson(item);
 					m_FontFallbackRules.push_back( newItem );
+				}
+			}
+        	}
+	}
+	web::json::value* jsonForFontSubstRules = ModelBase::getField(val, "FontSubstRules");
+	if(jsonForFontSubstRules != nullptr && !jsonForFontSubstRules->is_null())
+	{
+		{
+			m_FontSubstRules.clear();
+			std::vector<web::json::value> jsonArray;
+			for(auto& item : jsonForFontSubstRules->as_array())
+			{
+				if(item.is_null())
+				{
+					m_FontSubstRules.push_back(std::shared_ptr<FontSubstRule>(nullptr));
+				}
+				else
+				{
+					std::shared_ptr<FontSubstRule> newItem(new FontSubstRule());
+					newItem->fromJson(item);
+					m_FontSubstRules.push_back( newItem );
 				}
 			}
         	}

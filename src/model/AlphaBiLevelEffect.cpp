@@ -32,6 +32,7 @@ namespace model {
 
 AlphaBiLevelEffect::AlphaBiLevelEffect()
 {
+	setType(L"AlphaBiLevel");
 }
 
 AlphaBiLevelEffect::~AlphaBiLevelEffect()

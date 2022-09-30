@@ -37,6 +37,7 @@ BoxElement::BoxElement()
 	m_DifferentialIsSet = false;
 	m_AlignmentPointIsSet = false;
 	m_ExplicitBreakIsSet = false;
+	setType(L"Box");
 }
 
 BoxElement::~BoxElement()

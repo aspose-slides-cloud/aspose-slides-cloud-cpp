@@ -33,6 +33,7 @@ namespace model {
 ZoomFrame::ZoomFrame()
 {
 	m_TargetSlideIndexIsSet = false;
+	setType(L"ZoomFrame");
 }
 
 ZoomFrame::~ZoomFrame()

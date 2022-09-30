@@ -135,10 +135,7 @@ web::json::value ChartCategory::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("ParentCategories")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("ParentCategories")] = web::json::value::array(jsonArray);
 	}
 	if(m_LevelIsSet)
 	{
@@ -166,10 +163,7 @@ web::json::value ChartCategory::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("DataPoints")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("DataPoints")] = web::json::value::array(jsonArray);
 	}
 	return val;
 }

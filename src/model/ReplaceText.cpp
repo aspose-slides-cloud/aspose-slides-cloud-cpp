@@ -32,6 +32,7 @@ namespace model {
 
 ReplaceText::ReplaceText()
 {
+	setType(L"ReplaceText");
 }
 
 ReplaceText::~ReplaceText()

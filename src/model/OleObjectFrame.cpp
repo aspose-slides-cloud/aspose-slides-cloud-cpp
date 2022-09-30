@@ -33,6 +33,7 @@ namespace model {
 OleObjectFrame::OleObjectFrame()
 {
 	m_UpdateAutomaticIsSet = false;
+	setType(L"OleObjectFrame");
 }
 
 OleObjectFrame::~OleObjectFrame()

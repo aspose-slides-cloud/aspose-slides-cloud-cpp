@@ -32,6 +32,7 @@ namespace model {
 
 PictureFrame::PictureFrame()
 {
+	setType(L"PictureFrame");
 }
 
 PictureFrame::~PictureFrame()

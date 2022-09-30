@@ -32,6 +32,7 @@ namespace model {
 
 PathInputFile::PathInputFile()
 {
+	setType(L"Path");
 }
 
 PathInputFile::~PathInputFile()

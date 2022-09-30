@@ -118,6 +118,7 @@
   <ItemGroup>
     <ClCompile Include="ApiConfiguration.cpp" />
     <ClCompile Include="ApiClient.cpp" />
+    <ClCompile Include="ClassRegistry.cpp" />
     <ClCompile Include="JsonBody.cpp" />
     <ClCompile Include="StringBody.cpp" />
     <ClCompile Include="HttpContent.cpp" />
@@ -155,8 +156,11 @@
     <ClCompile Include="model\FilesUploadResult.cpp" />
     <ClCompile Include="model\FillFormat.cpp" />
     <ClCompile Include="model\FillOverlayEffect.cpp" />
+    <ClCompile Include="model\FontData.cpp" />
     <ClCompile Include="model\FontFallbackRule.cpp" />
     <ClCompile Include="model\FontSet.cpp" />
+    <ClCompile Include="model\FontSubstRule.cpp" />
+    <ClCompile Include="model\FontsData.cpp" />
     <ClCompile Include="model\GeometryPath.cpp" />
     <ClCompile Include="model\GeometryPaths.cpp" />
     <ClCompile Include="model\GlowEffect.cpp" />
@@ -365,6 +369,7 @@
     <ClInclude Include="defines.h" />
     <ClInclude Include="ApiConfiguration.h" />
     <ClInclude Include="ApiClient.h" />
+    <ClInclude Include="ClassRegistry.h" />
     <ClInclude Include="IHttpBody.h" />
     <ClInclude Include="JsonBody.h" />
     <ClInclude Include="StringBody.h" />
@@ -403,8 +408,11 @@
     <ClInclude Include="model\FilesUploadResult.h" />
     <ClInclude Include="model\FillFormat.h" />
     <ClInclude Include="model\FillOverlayEffect.h" />
+    <ClInclude Include="model\FontData.h" />
     <ClInclude Include="model\FontFallbackRule.h" />
     <ClInclude Include="model\FontSet.h" />
+    <ClInclude Include="model\FontSubstRule.h" />
+    <ClInclude Include="model\FontsData.h" />
     <ClInclude Include="model\GeometryPath.h" />
     <ClInclude Include="model\GeometryPaths.h" />
     <ClInclude Include="model\GlowEffect.h" />

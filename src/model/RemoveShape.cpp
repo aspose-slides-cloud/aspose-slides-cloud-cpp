@@ -32,6 +32,7 @@ namespace model {
 
 RemoveShape::RemoveShape()
 {
+	setType(L"RemoveShape");
 }
 
 RemoveShape::~RemoveShape()

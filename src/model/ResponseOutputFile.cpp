@@ -32,6 +32,7 @@ namespace model {
 
 ResponseOutputFile::ResponseOutputFile()
 {
+	setType(L"Response");
 }
 
 ResponseOutputFile::~ResponseOutputFile()

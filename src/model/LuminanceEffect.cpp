@@ -32,6 +32,7 @@ namespace model {
 
 LuminanceEffect::LuminanceEffect()
 {
+	setType(L"Luminance");
 }
 
 LuminanceEffect::~LuminanceEffect()

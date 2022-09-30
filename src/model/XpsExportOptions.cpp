@@ -35,6 +35,7 @@ XpsExportOptions::XpsExportOptions()
 	m_ShowHiddenSlidesIsSet = false;
 	m_SaveMetafilesAsPngIsSet = false;
 	m_DrawSlidesFrameIsSet = false;
+	setFormat(L"xps");
 }
 
 XpsExportOptions::~XpsExportOptions()

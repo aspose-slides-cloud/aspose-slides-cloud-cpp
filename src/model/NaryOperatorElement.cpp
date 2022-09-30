@@ -35,6 +35,7 @@ NaryOperatorElement::NaryOperatorElement()
 	m_GrowToMatchOperandHeightIsSet = false;
 	m_HideSubscriptIsSet = false;
 	m_HideSuperscriptIsSet = false;
+	setType(L"NaryOperator");
 }
 
 NaryOperatorElement::~NaryOperatorElement()

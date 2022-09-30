@@ -34,6 +34,7 @@ VideoExportOptions::VideoExportOptions()
 {
 	m_SlidesTransitionDurationIsSet = false;
 	m_TransitionDurationIsSet = false;
+	setFormat(L"mpeg4");
 }
 
 VideoExportOptions::~VideoExportOptions()

@@ -32,6 +32,7 @@ namespace model {
 
 SmartArtShape::SmartArtShape()
 {
+	setType(L"SmartArtShape");
 }
 
 SmartArtShape::~SmartArtShape()

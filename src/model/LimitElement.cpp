@@ -33,6 +33,7 @@ namespace model {
 LimitElement::LimitElement()
 {
 	m_UpperLimitIsSet = false;
+	setType(L"Limit");
 }
 
 LimitElement::~LimitElement()

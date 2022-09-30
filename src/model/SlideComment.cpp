@@ -32,6 +32,7 @@ namespace model {
 
 SlideComment::SlideComment()
 {
+	setType(L"Regular");
 }
 
 SlideComment::~SlideComment()

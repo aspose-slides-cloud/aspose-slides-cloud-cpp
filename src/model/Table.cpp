@@ -39,6 +39,7 @@ Table::Table()
 	m_LastRowIsSet = false;
 	m_RightToLeftIsSet = false;
 	m_VerticalBandingIsSet = false;
+	setType(L"Table");
 }
 
 Table::~Table()
@@ -238,10 +239,7 @@ web::json::value Table::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("Rows")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("Rows")] = web::json::value::array(jsonArray);
 	}
 	{
 		std::vector<web::json::value> jsonArray;
@@ -249,10 +247,7 @@ web::json::value Table::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("Columns")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("Columns")] = web::json::value::array(jsonArray);
 	}
 	if(m_FirstColIsSet)
 	{

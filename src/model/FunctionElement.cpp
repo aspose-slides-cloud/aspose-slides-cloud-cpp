@@ -32,6 +32,7 @@ namespace model {
 
 FunctionElement::FunctionElement()
 {
+	setType(L"Function");
 }
 
 FunctionElement::~FunctionElement()

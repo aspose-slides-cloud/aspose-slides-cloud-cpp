@@ -32,6 +32,7 @@ namespace model {
 
 GroupShape::GroupShape()
 {
+	setType(L"GroupShape");
 }
 
 GroupShape::~GroupShape()

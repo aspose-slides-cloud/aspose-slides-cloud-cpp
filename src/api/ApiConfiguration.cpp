@@ -33,7 +33,7 @@ ApiConfiguration::ApiConfiguration()
 	m_BaseUrl = utility::conversions::to_string_t("https://api.aspose.cloud");
 	m_BaseAuthUrl = utility::conversions::to_string_t("");
 	m_Version = utility::conversions::to_string_t("v3.0");
-	m_ApiVersion = utility::conversions::to_string_t("22.7.0");
+	m_ApiVersion = utility::conversions::to_string_t("22.9.0");
 	m_Debug = false;
 	m_Timeout = 0;
 }

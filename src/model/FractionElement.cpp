@@ -32,6 +32,7 @@ namespace model {
 
 FractionElement::FractionElement()
 {
+	setType(L"Fraction");
 }
 
 FractionElement::~FractionElement()

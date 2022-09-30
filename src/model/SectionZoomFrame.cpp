@@ -33,6 +33,7 @@ namespace model {
 SectionZoomFrame::SectionZoomFrame()
 {
 	m_TargetSectionIndexIsSet = false;
+	setType(L"SectionZoomFrame");
 }
 
 SectionZoomFrame::~SectionZoomFrame()

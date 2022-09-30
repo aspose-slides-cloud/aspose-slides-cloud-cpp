@@ -34,6 +34,10 @@
 
 #include "../ModelBase.h"
 
+#include "../model/EffectFormat.h"
+#include "../model/FillFormat.h"
+#include "../model/LineFormat.h"
+#include "../model/ThreeDFormat.h"
 
 namespace asposeslidescloud {
 namespace model {
@@ -50,8 +54,32 @@ public:
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
+	/// <summary>
+	/// Gets or sets the fill format.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<FillFormat> getFillFormat() const;
+	ASPOSE_DLL_EXPORT void setFillFormat(std::shared_ptr<FillFormat> value);
+	/// <summary>
+	/// Gets or sets the effect format.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<EffectFormat> getEffectFormat() const;
+	ASPOSE_DLL_EXPORT void setEffectFormat(std::shared_ptr<EffectFormat> value);
+	/// <summary>
+	/// Gets or sets the 3D format
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<ThreeDFormat> getThreeDFormat() const;
+	ASPOSE_DLL_EXPORT void setThreeDFormat(std::shared_ptr<ThreeDFormat> value);
+	/// <summary>
+	/// Gets or sets the line format.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<LineFormat> getLineFormat() const;
+	ASPOSE_DLL_EXPORT void setLineFormat(std::shared_ptr<LineFormat> value);
 
 protected:
+	std::shared_ptr<FillFormat> m_FillFormat;
+	std::shared_ptr<EffectFormat> m_EffectFormat;
+	std::shared_ptr<ThreeDFormat> m_ThreeDFormat;
+	std::shared_ptr<LineFormat> m_LineFormat;
 };
 
 }

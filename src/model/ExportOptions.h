@@ -35,6 +35,7 @@
 #include "../ModelBase.h"
 
 #include "../model/FontFallbackRule.h"
+#include "../model/FontSubstRule.h"
 #include <cpprest/details/basic_types.h>
 #include <vector>
 
@@ -64,6 +65,11 @@ public:
 	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<FontFallbackRule>> getFontFallbackRules() const;
 	ASPOSE_DLL_EXPORT void setFontFallbackRules(std::vector<std::shared_ptr<FontFallbackRule>> value);
 	/// <summary>
+	/// Gets of sets list of font substitution rules.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<FontSubstRule>> getFontSubstRules() const;
+	ASPOSE_DLL_EXPORT void setFontSubstRules(std::vector<std::shared_ptr<FontSubstRule>> value);
+	/// <summary>
 	/// 
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getFormat() const;
@@ -72,6 +78,7 @@ public:
 protected:
 	utility::string_t m_DefaultRegularFont;
 	std::vector<std::shared_ptr<FontFallbackRule>> m_FontFallbackRules;
+	std::vector<std::shared_ptr<FontSubstRule>> m_FontSubstRules;
 	utility::string_t m_Format;
 };
 

@@ -34,6 +34,7 @@ Html5ExportOptions::Html5ExportOptions()
 {
 	m_AnimateTransitionsIsSet = false;
 	m_AnimateShapesIsSet = false;
+	setFormat(L"html5");
 }
 
 Html5ExportOptions::~Html5ExportOptions()

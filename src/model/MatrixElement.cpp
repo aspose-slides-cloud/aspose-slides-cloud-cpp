@@ -36,6 +36,7 @@ MatrixElement::MatrixElement()
 	m_MinColumnWidthIsSet = false;
 	m_ColumnGapIsSet = false;
 	m_RowGapIsSet = false;
+	setType(L"Matrix");
 }
 
 MatrixElement::~MatrixElement()

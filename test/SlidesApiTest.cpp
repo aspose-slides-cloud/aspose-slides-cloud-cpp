@@ -9170,6 +9170,417 @@ TEST_F(SlidesApiTest, createSlideInvalidStorage) {
 	}
 }
 
+TEST_F(SlidesApiTest, createSmartArtNode) {
+	utility::string_t paramName = utils->getTestValue("createSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("createSmartArtNode", "smartArtIndex");
+	utility::string_t paramSubNode = utils->getTestValue("createSmartArtNode", "subNode");
+	utility::string_t paramText = utils->getTestValue("createSmartArtNode", "text");
+	auto paramPosition = utils->getOptionalIntTestValue("createSmartArtNode", "position");
+	utility::string_t paramPassword = utils->getTestValue("createSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("createSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createSmartArtNode", "storage");
+	utils->initialize("createSmartArtNode", "");
+	std::shared_ptr<SmartArt> result = api->createSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramSubNode, paramText, paramPosition, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, createSmartArtNodeInvalidName) {
+	utility::string_t paramName = utils->getTestValue("createSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("createSmartArtNode", "smartArtIndex");
+	utility::string_t paramSubNode = utils->getTestValue("createSmartArtNode", "subNode");
+	utility::string_t paramText = utils->getTestValue("createSmartArtNode", "text");
+	auto paramPosition = utils->getOptionalIntTestValue("createSmartArtNode", "position");
+	utility::string_t paramPassword = utils->getTestValue("createSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("createSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createSmartArtNode", "storage");
+	paramName = utils->getInvalidTestValue("createSmartArtNode", "name", paramName);
+	utils->initialize("createSmartArtNode", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->createSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramSubNode, paramText, paramPosition, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createSmartArtNode", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createSmartArtNodeInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("createSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("createSmartArtNode", "smartArtIndex");
+	utility::string_t paramSubNode = utils->getTestValue("createSmartArtNode", "subNode");
+	utility::string_t paramText = utils->getTestValue("createSmartArtNode", "text");
+	auto paramPosition = utils->getOptionalIntTestValue("createSmartArtNode", "position");
+	utility::string_t paramPassword = utils->getTestValue("createSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("createSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createSmartArtNode", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("createSmartArtNode", "slideIndex", paramSlideIndex).value();
+	utils->initialize("createSmartArtNode", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->createSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramSubNode, paramText, paramPosition, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createSmartArtNode", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createSmartArtNodeInvalidSmartArtIndex) {
+	utility::string_t paramName = utils->getTestValue("createSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("createSmartArtNode", "smartArtIndex");
+	utility::string_t paramSubNode = utils->getTestValue("createSmartArtNode", "subNode");
+	utility::string_t paramText = utils->getTestValue("createSmartArtNode", "text");
+	auto paramPosition = utils->getOptionalIntTestValue("createSmartArtNode", "position");
+	utility::string_t paramPassword = utils->getTestValue("createSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("createSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createSmartArtNode", "storage");
+	paramSmartArtIndex = utils->getInvalidIntTestValue("createSmartArtNode", "smartArtIndex", paramSmartArtIndex).value();
+	utils->initialize("createSmartArtNode", "smartArtIndex", paramSmartArtIndex);
+
+	bool failed = true;
+	try
+	{
+		api->createSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramSubNode, paramText, paramPosition, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "smartArtIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "smartArtIndex", paramSmartArtIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "smartArtIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "smartArtIndex", paramSmartArtIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createSmartArtNode", "smartArtIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createSmartArtNodeInvalidSubNode) {
+	utility::string_t paramName = utils->getTestValue("createSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("createSmartArtNode", "smartArtIndex");
+	utility::string_t paramSubNode = utils->getTestValue("createSmartArtNode", "subNode");
+	utility::string_t paramText = utils->getTestValue("createSmartArtNode", "text");
+	auto paramPosition = utils->getOptionalIntTestValue("createSmartArtNode", "position");
+	utility::string_t paramPassword = utils->getTestValue("createSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("createSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createSmartArtNode", "storage");
+	paramSubNode = utils->getInvalidTestValue("createSmartArtNode", "subNode", paramSubNode);
+	utils->initialize("createSmartArtNode", "subNode", paramSubNode);
+
+	bool failed = true;
+	try
+	{
+		api->createSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramSubNode, paramText, paramPosition, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "subNode");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "subNode", paramSubNode);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "subNode");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "subNode", paramSubNode);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createSmartArtNode", "subNode"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createSmartArtNodeInvalidText) {
+	utility::string_t paramName = utils->getTestValue("createSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("createSmartArtNode", "smartArtIndex");
+	utility::string_t paramSubNode = utils->getTestValue("createSmartArtNode", "subNode");
+	utility::string_t paramText = utils->getTestValue("createSmartArtNode", "text");
+	auto paramPosition = utils->getOptionalIntTestValue("createSmartArtNode", "position");
+	utility::string_t paramPassword = utils->getTestValue("createSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("createSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createSmartArtNode", "storage");
+	paramText = utils->getInvalidTestValue("createSmartArtNode", "text", paramText);
+	utils->initialize("createSmartArtNode", "text", paramText);
+
+	bool failed = true;
+	try
+	{
+		api->createSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramSubNode, paramText, paramPosition, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "text");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "text", paramText);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "text");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "text", paramText);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createSmartArtNode", "text"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createSmartArtNodeInvalidPosition) {
+	utility::string_t paramName = utils->getTestValue("createSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("createSmartArtNode", "smartArtIndex");
+	utility::string_t paramSubNode = utils->getTestValue("createSmartArtNode", "subNode");
+	utility::string_t paramText = utils->getTestValue("createSmartArtNode", "text");
+	auto paramPosition = utils->getOptionalIntTestValue("createSmartArtNode", "position");
+	utility::string_t paramPassword = utils->getTestValue("createSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("createSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createSmartArtNode", "storage");
+	paramPosition = utils->getInvalidIntTestValue("createSmartArtNode", "position", paramPosition).value();
+	utils->initialize("createSmartArtNode", "position", paramPosition);
+
+	bool failed = true;
+	try
+	{
+		api->createSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramSubNode, paramText, paramPosition, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "position");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "position", paramPosition);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "position");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "position", paramPosition);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createSmartArtNode", "position"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createSmartArtNodeInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("createSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("createSmartArtNode", "smartArtIndex");
+	utility::string_t paramSubNode = utils->getTestValue("createSmartArtNode", "subNode");
+	utility::string_t paramText = utils->getTestValue("createSmartArtNode", "text");
+	auto paramPosition = utils->getOptionalIntTestValue("createSmartArtNode", "position");
+	utility::string_t paramPassword = utils->getTestValue("createSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("createSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createSmartArtNode", "storage");
+	paramPassword = utils->getInvalidTestValue("createSmartArtNode", "password", paramPassword);
+	utils->initialize("createSmartArtNode", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->createSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramSubNode, paramText, paramPosition, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createSmartArtNode", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createSmartArtNodeInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("createSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("createSmartArtNode", "smartArtIndex");
+	utility::string_t paramSubNode = utils->getTestValue("createSmartArtNode", "subNode");
+	utility::string_t paramText = utils->getTestValue("createSmartArtNode", "text");
+	auto paramPosition = utils->getOptionalIntTestValue("createSmartArtNode", "position");
+	utility::string_t paramPassword = utils->getTestValue("createSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("createSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createSmartArtNode", "storage");
+	paramFolder = utils->getInvalidTestValue("createSmartArtNode", "folder", paramFolder);
+	utils->initialize("createSmartArtNode", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->createSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramSubNode, paramText, paramPosition, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createSmartArtNode", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createSmartArtNodeInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("createSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("createSmartArtNode", "smartArtIndex");
+	utility::string_t paramSubNode = utils->getTestValue("createSmartArtNode", "subNode");
+	utility::string_t paramText = utils->getTestValue("createSmartArtNode", "text");
+	auto paramPosition = utils->getOptionalIntTestValue("createSmartArtNode", "position");
+	utility::string_t paramPassword = utils->getTestValue("createSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("createSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createSmartArtNode", "storage");
+	paramStorage = utils->getInvalidTestValue("createSmartArtNode", "storage", paramStorage);
+	utils->initialize("createSmartArtNode", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->createSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramSubNode, paramText, paramPosition, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createSmartArtNode", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createSmartArtNode", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createSmartArtNode", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, createSpecialSlideAnimationEffect) {
 	utility::string_t paramName = utils->getTestValue("createSpecialSlideAnimationEffect", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("createSpecialSlideAnimationEffect", "slideIndex");
@@ -18239,6 +18650,340 @@ TEST_F(SlidesApiTest, deleteDocumentPropertyInvalidStorage) {
 	}
 }
 
+TEST_F(SlidesApiTest, deleteEmbeddedFont) {
+	utility::string_t paramName = utils->getTestValue("deleteEmbeddedFont", "name");
+	utility::string_t paramFontName = utils->getTestValue("deleteEmbeddedFont", "fontName");
+	utility::string_t paramPassword = utils->getTestValue("deleteEmbeddedFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteEmbeddedFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteEmbeddedFont", "storage");
+	utils->initialize("deleteEmbeddedFont", "");
+	std::shared_ptr<FontsData> result = api->deleteEmbeddedFont(paramName, paramFontName, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, deleteEmbeddedFontInvalidName) {
+	utility::string_t paramName = utils->getTestValue("deleteEmbeddedFont", "name");
+	utility::string_t paramFontName = utils->getTestValue("deleteEmbeddedFont", "fontName");
+	utility::string_t paramPassword = utils->getTestValue("deleteEmbeddedFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteEmbeddedFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteEmbeddedFont", "storage");
+	paramName = utils->getInvalidTestValue("deleteEmbeddedFont", "name", paramName);
+	utils->initialize("deleteEmbeddedFont", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->deleteEmbeddedFont(paramName, paramFontName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteEmbeddedFont", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteEmbeddedFont", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteEmbeddedFont", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteEmbeddedFont", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteEmbeddedFont", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteEmbeddedFontInvalidFontName) {
+	utility::string_t paramName = utils->getTestValue("deleteEmbeddedFont", "name");
+	utility::string_t paramFontName = utils->getTestValue("deleteEmbeddedFont", "fontName");
+	utility::string_t paramPassword = utils->getTestValue("deleteEmbeddedFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteEmbeddedFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteEmbeddedFont", "storage");
+	paramFontName = utils->getInvalidTestValue("deleteEmbeddedFont", "fontName", paramFontName);
+	utils->initialize("deleteEmbeddedFont", "fontName", paramFontName);
+
+	bool failed = true;
+	try
+	{
+		api->deleteEmbeddedFont(paramName, paramFontName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteEmbeddedFont", "fontName");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteEmbeddedFont", "fontName", paramFontName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteEmbeddedFont", "fontName");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteEmbeddedFont", "fontName", paramFontName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteEmbeddedFont", "fontName"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteEmbeddedFontInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("deleteEmbeddedFont", "name");
+	utility::string_t paramFontName = utils->getTestValue("deleteEmbeddedFont", "fontName");
+	utility::string_t paramPassword = utils->getTestValue("deleteEmbeddedFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteEmbeddedFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteEmbeddedFont", "storage");
+	paramPassword = utils->getInvalidTestValue("deleteEmbeddedFont", "password", paramPassword);
+	utils->initialize("deleteEmbeddedFont", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->deleteEmbeddedFont(paramName, paramFontName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteEmbeddedFont", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteEmbeddedFont", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteEmbeddedFont", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteEmbeddedFont", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteEmbeddedFont", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteEmbeddedFontInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("deleteEmbeddedFont", "name");
+	utility::string_t paramFontName = utils->getTestValue("deleteEmbeddedFont", "fontName");
+	utility::string_t paramPassword = utils->getTestValue("deleteEmbeddedFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteEmbeddedFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteEmbeddedFont", "storage");
+	paramFolder = utils->getInvalidTestValue("deleteEmbeddedFont", "folder", paramFolder);
+	utils->initialize("deleteEmbeddedFont", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->deleteEmbeddedFont(paramName, paramFontName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteEmbeddedFont", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteEmbeddedFont", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteEmbeddedFont", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteEmbeddedFont", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteEmbeddedFont", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteEmbeddedFontInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("deleteEmbeddedFont", "name");
+	utility::string_t paramFontName = utils->getTestValue("deleteEmbeddedFont", "fontName");
+	utility::string_t paramPassword = utils->getTestValue("deleteEmbeddedFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteEmbeddedFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteEmbeddedFont", "storage");
+	paramStorage = utils->getInvalidTestValue("deleteEmbeddedFont", "storage", paramStorage);
+	utils->initialize("deleteEmbeddedFont", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->deleteEmbeddedFont(paramName, paramFontName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteEmbeddedFont", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteEmbeddedFont", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteEmbeddedFont", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteEmbeddedFont", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteEmbeddedFont", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteEmbeddedFontOnline) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("deleteEmbeddedFontOnline", "document");
+	utility::string_t paramFontName = utils->getTestValue("deleteEmbeddedFontOnline", "fontName");
+	utility::string_t paramPassword = utils->getTestValue("deleteEmbeddedFontOnline", "password");
+	utils->initialize("deleteEmbeddedFontOnline", "");
+	HttpContent result = api->deleteEmbeddedFontOnline(paramDocument, paramFontName, paramPassword).get();
+	EXPECT_FALSE(result.getData()->eof());
+}
+
+TEST_F(SlidesApiTest, deleteEmbeddedFontOnlineInvalidDocument) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("deleteEmbeddedFontOnline", "document");
+	utility::string_t paramFontName = utils->getTestValue("deleteEmbeddedFontOnline", "fontName");
+	utility::string_t paramPassword = utils->getTestValue("deleteEmbeddedFontOnline", "password");
+	paramDocument = utils->getInvalidBinaryTestValue("deleteEmbeddedFontOnline", "document", paramDocument);
+	utils->initialize("deleteEmbeddedFontOnline", "document", paramDocument);
+
+	bool failed = true;
+	try
+	{
+		api->deleteEmbeddedFontOnline(paramDocument, paramFontName, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteEmbeddedFontOnline", "document");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteEmbeddedFontOnline", "document", paramDocument);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteEmbeddedFontOnline", "document");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteEmbeddedFontOnline", "document", paramDocument);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteEmbeddedFontOnline", "document"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteEmbeddedFontOnlineInvalidFontName) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("deleteEmbeddedFontOnline", "document");
+	utility::string_t paramFontName = utils->getTestValue("deleteEmbeddedFontOnline", "fontName");
+	utility::string_t paramPassword = utils->getTestValue("deleteEmbeddedFontOnline", "password");
+	paramFontName = utils->getInvalidTestValue("deleteEmbeddedFontOnline", "fontName", paramFontName);
+	utils->initialize("deleteEmbeddedFontOnline", "fontName", paramFontName);
+
+	bool failed = true;
+	try
+	{
+		api->deleteEmbeddedFontOnline(paramDocument, paramFontName, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteEmbeddedFontOnline", "fontName");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteEmbeddedFontOnline", "fontName", paramFontName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteEmbeddedFontOnline", "fontName");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteEmbeddedFontOnline", "fontName", paramFontName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteEmbeddedFontOnline", "fontName"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteEmbeddedFontOnlineInvalidPassword) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("deleteEmbeddedFontOnline", "document");
+	utility::string_t paramFontName = utils->getTestValue("deleteEmbeddedFontOnline", "fontName");
+	utility::string_t paramPassword = utils->getTestValue("deleteEmbeddedFontOnline", "password");
+	paramPassword = utils->getInvalidTestValue("deleteEmbeddedFontOnline", "password", paramPassword);
+	utils->initialize("deleteEmbeddedFontOnline", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->deleteEmbeddedFontOnline(paramDocument, paramFontName, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteEmbeddedFontOnline", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteEmbeddedFontOnline", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteEmbeddedFontOnline", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteEmbeddedFontOnline", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteEmbeddedFontOnline", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, deleteFile) {
 	utility::string_t paramPath = utils->getTestValue("deleteFile", "path");
 	utility::string_t paramStorageName = utils->getTestValue("deleteFile", "storageName");
@@ -22145,6 +22890,364 @@ TEST_F(SlidesApiTest, deleteSlidesInvalidStorage) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("deleteSlides", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteSmartArtNode) {
+	utility::string_t paramName = utils->getTestValue("deleteSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("deleteSmartArtNode", "smartArtIndex");
+	int32_t paramNodeIndex = utils->getIntTestValue("deleteSmartArtNode", "nodeIndex");
+	utility::string_t paramSubNode = utils->getTestValue("deleteSmartArtNode", "subNode");
+	utility::string_t paramPassword = utils->getTestValue("deleteSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteSmartArtNode", "storage");
+	utils->initialize("deleteSmartArtNode", "");
+	std::shared_ptr<SmartArt> result = api->deleteSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramNodeIndex, paramSubNode, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, deleteSmartArtNodeInvalidName) {
+	utility::string_t paramName = utils->getTestValue("deleteSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("deleteSmartArtNode", "smartArtIndex");
+	int32_t paramNodeIndex = utils->getIntTestValue("deleteSmartArtNode", "nodeIndex");
+	utility::string_t paramSubNode = utils->getTestValue("deleteSmartArtNode", "subNode");
+	utility::string_t paramPassword = utils->getTestValue("deleteSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteSmartArtNode", "storage");
+	paramName = utils->getInvalidTestValue("deleteSmartArtNode", "name", paramName);
+	utils->initialize("deleteSmartArtNode", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->deleteSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramNodeIndex, paramSubNode, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteSmartArtNode", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteSmartArtNode", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteSmartArtNode", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteSmartArtNode", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteSmartArtNode", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteSmartArtNodeInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("deleteSmartArtNode", "smartArtIndex");
+	int32_t paramNodeIndex = utils->getIntTestValue("deleteSmartArtNode", "nodeIndex");
+	utility::string_t paramSubNode = utils->getTestValue("deleteSmartArtNode", "subNode");
+	utility::string_t paramPassword = utils->getTestValue("deleteSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteSmartArtNode", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("deleteSmartArtNode", "slideIndex", paramSlideIndex).value();
+	utils->initialize("deleteSmartArtNode", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramNodeIndex, paramSubNode, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteSmartArtNode", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteSmartArtNode", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteSmartArtNode", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteSmartArtNode", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteSmartArtNode", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteSmartArtNodeInvalidSmartArtIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("deleteSmartArtNode", "smartArtIndex");
+	int32_t paramNodeIndex = utils->getIntTestValue("deleteSmartArtNode", "nodeIndex");
+	utility::string_t paramSubNode = utils->getTestValue("deleteSmartArtNode", "subNode");
+	utility::string_t paramPassword = utils->getTestValue("deleteSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteSmartArtNode", "storage");
+	paramSmartArtIndex = utils->getInvalidIntTestValue("deleteSmartArtNode", "smartArtIndex", paramSmartArtIndex).value();
+	utils->initialize("deleteSmartArtNode", "smartArtIndex", paramSmartArtIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramNodeIndex, paramSubNode, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteSmartArtNode", "smartArtIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteSmartArtNode", "smartArtIndex", paramSmartArtIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteSmartArtNode", "smartArtIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteSmartArtNode", "smartArtIndex", paramSmartArtIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteSmartArtNode", "smartArtIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteSmartArtNodeInvalidNodeIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("deleteSmartArtNode", "smartArtIndex");
+	int32_t paramNodeIndex = utils->getIntTestValue("deleteSmartArtNode", "nodeIndex");
+	utility::string_t paramSubNode = utils->getTestValue("deleteSmartArtNode", "subNode");
+	utility::string_t paramPassword = utils->getTestValue("deleteSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteSmartArtNode", "storage");
+	paramNodeIndex = utils->getInvalidIntTestValue("deleteSmartArtNode", "nodeIndex", paramNodeIndex).value();
+	utils->initialize("deleteSmartArtNode", "nodeIndex", paramNodeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramNodeIndex, paramSubNode, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteSmartArtNode", "nodeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteSmartArtNode", "nodeIndex", paramNodeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteSmartArtNode", "nodeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteSmartArtNode", "nodeIndex", paramNodeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteSmartArtNode", "nodeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteSmartArtNodeInvalidSubNode) {
+	utility::string_t paramName = utils->getTestValue("deleteSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("deleteSmartArtNode", "smartArtIndex");
+	int32_t paramNodeIndex = utils->getIntTestValue("deleteSmartArtNode", "nodeIndex");
+	utility::string_t paramSubNode = utils->getTestValue("deleteSmartArtNode", "subNode");
+	utility::string_t paramPassword = utils->getTestValue("deleteSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteSmartArtNode", "storage");
+	paramSubNode = utils->getInvalidTestValue("deleteSmartArtNode", "subNode", paramSubNode);
+	utils->initialize("deleteSmartArtNode", "subNode", paramSubNode);
+
+	bool failed = true;
+	try
+	{
+		api->deleteSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramNodeIndex, paramSubNode, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteSmartArtNode", "subNode");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteSmartArtNode", "subNode", paramSubNode);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteSmartArtNode", "subNode");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteSmartArtNode", "subNode", paramSubNode);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteSmartArtNode", "subNode"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteSmartArtNodeInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("deleteSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("deleteSmartArtNode", "smartArtIndex");
+	int32_t paramNodeIndex = utils->getIntTestValue("deleteSmartArtNode", "nodeIndex");
+	utility::string_t paramSubNode = utils->getTestValue("deleteSmartArtNode", "subNode");
+	utility::string_t paramPassword = utils->getTestValue("deleteSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteSmartArtNode", "storage");
+	paramPassword = utils->getInvalidTestValue("deleteSmartArtNode", "password", paramPassword);
+	utils->initialize("deleteSmartArtNode", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->deleteSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramNodeIndex, paramSubNode, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteSmartArtNode", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteSmartArtNode", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteSmartArtNode", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteSmartArtNode", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteSmartArtNode", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteSmartArtNodeInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("deleteSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("deleteSmartArtNode", "smartArtIndex");
+	int32_t paramNodeIndex = utils->getIntTestValue("deleteSmartArtNode", "nodeIndex");
+	utility::string_t paramSubNode = utils->getTestValue("deleteSmartArtNode", "subNode");
+	utility::string_t paramPassword = utils->getTestValue("deleteSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteSmartArtNode", "storage");
+	paramFolder = utils->getInvalidTestValue("deleteSmartArtNode", "folder", paramFolder);
+	utils->initialize("deleteSmartArtNode", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->deleteSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramNodeIndex, paramSubNode, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteSmartArtNode", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteSmartArtNode", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteSmartArtNode", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteSmartArtNode", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteSmartArtNode", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteSmartArtNodeInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("deleteSmartArtNode", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteSmartArtNode", "slideIndex");
+	int32_t paramSmartArtIndex = utils->getIntTestValue("deleteSmartArtNode", "smartArtIndex");
+	int32_t paramNodeIndex = utils->getIntTestValue("deleteSmartArtNode", "nodeIndex");
+	utility::string_t paramSubNode = utils->getTestValue("deleteSmartArtNode", "subNode");
+	utility::string_t paramPassword = utils->getTestValue("deleteSmartArtNode", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteSmartArtNode", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteSmartArtNode", "storage");
+	paramStorage = utils->getInvalidTestValue("deleteSmartArtNode", "storage", paramStorage);
+	utils->initialize("deleteSmartArtNode", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->deleteSmartArtNode(paramName, paramSlideIndex, paramSmartArtIndex, paramNodeIndex, paramSubNode, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteSmartArtNode", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteSmartArtNode", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteSmartArtNode", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteSmartArtNode", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteSmartArtNode", "storage"))
 	{
 		FAIL() << "Must have failed";
 	}
@@ -39986,6 +41089,254 @@ TEST_F(SlidesApiTest, getFontSchemeInvalidStorage) {
 	}
 }
 
+TEST_F(SlidesApiTest, getFonts) {
+	utility::string_t paramName = utils->getTestValue("getFonts", "name");
+	utility::string_t paramPassword = utils->getTestValue("getFonts", "password");
+	utility::string_t paramFolder = utils->getTestValue("getFonts", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getFonts", "storage");
+	utils->initialize("getFonts", "");
+	std::shared_ptr<FontsData> result = api->getFonts(paramName, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, getFontsInvalidName) {
+	utility::string_t paramName = utils->getTestValue("getFonts", "name");
+	utility::string_t paramPassword = utils->getTestValue("getFonts", "password");
+	utility::string_t paramFolder = utils->getTestValue("getFonts", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getFonts", "storage");
+	paramName = utils->getInvalidTestValue("getFonts", "name", paramName);
+	utils->initialize("getFonts", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->getFonts(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getFonts", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getFonts", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getFonts", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getFonts", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getFonts", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getFontsInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("getFonts", "name");
+	utility::string_t paramPassword = utils->getTestValue("getFonts", "password");
+	utility::string_t paramFolder = utils->getTestValue("getFonts", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getFonts", "storage");
+	paramPassword = utils->getInvalidTestValue("getFonts", "password", paramPassword);
+	utils->initialize("getFonts", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->getFonts(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getFonts", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getFonts", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getFonts", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getFonts", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getFonts", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getFontsInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("getFonts", "name");
+	utility::string_t paramPassword = utils->getTestValue("getFonts", "password");
+	utility::string_t paramFolder = utils->getTestValue("getFonts", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getFonts", "storage");
+	paramFolder = utils->getInvalidTestValue("getFonts", "folder", paramFolder);
+	utils->initialize("getFonts", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->getFonts(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getFonts", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getFonts", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getFonts", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getFonts", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getFonts", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getFontsInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("getFonts", "name");
+	utility::string_t paramPassword = utils->getTestValue("getFonts", "password");
+	utility::string_t paramFolder = utils->getTestValue("getFonts", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getFonts", "storage");
+	paramStorage = utils->getInvalidTestValue("getFonts", "storage", paramStorage);
+	utils->initialize("getFonts", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->getFonts(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getFonts", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getFonts", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getFonts", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getFonts", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getFonts", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getFontsOnline) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("getFontsOnline", "document");
+	utility::string_t paramPassword = utils->getTestValue("getFontsOnline", "password");
+	utils->initialize("getFontsOnline", "");
+	std::shared_ptr<FontsData> result = api->getFontsOnline(paramDocument, paramPassword).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, getFontsOnlineInvalidDocument) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("getFontsOnline", "document");
+	utility::string_t paramPassword = utils->getTestValue("getFontsOnline", "password");
+	paramDocument = utils->getInvalidBinaryTestValue("getFontsOnline", "document", paramDocument);
+	utils->initialize("getFontsOnline", "document", paramDocument);
+
+	bool failed = true;
+	try
+	{
+		api->getFontsOnline(paramDocument, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getFontsOnline", "document");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getFontsOnline", "document", paramDocument);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getFontsOnline", "document");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getFontsOnline", "document", paramDocument);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getFontsOnline", "document"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getFontsOnlineInvalidPassword) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("getFontsOnline", "document");
+	utility::string_t paramPassword = utils->getTestValue("getFontsOnline", "password");
+	paramPassword = utils->getInvalidTestValue("getFontsOnline", "password", paramPassword);
+	utils->initialize("getFontsOnline", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->getFontsOnline(paramDocument, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getFontsOnline", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getFontsOnline", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getFontsOnline", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getFontsOnline", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getFontsOnline", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, getFormatScheme) {
 	utility::string_t paramName = utils->getTestValue("getFormatScheme", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("getFormatScheme", "slideIndex");
@@ -56775,6 +58126,588 @@ TEST_F(SlidesApiTest, importFromPdfInvalidStorage) {
 	}
 }
 
+TEST_F(SlidesApiTest, importShapesFromSvg) {
+	utility::string_t paramName = utils->getTestValue("importShapesFromSvg", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("importShapesFromSvg", "slideIndex");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("importShapesFromSvg", "image");
+	auto paramX = utils->getOptionalIntTestValue("importShapesFromSvg", "x");
+	auto paramY = utils->getOptionalIntTestValue("importShapesFromSvg", "y");
+	auto paramWidth = utils->getOptionalIntTestValue("importShapesFromSvg", "width");
+	auto paramHeight = utils->getOptionalIntTestValue("importShapesFromSvg", "height");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("importShapesFromSvg", "shapes");
+	auto paramGroup = utils->getOptionalBoolTestValue("importShapesFromSvg", "group");
+	utility::string_t paramPassword = utils->getTestValue("importShapesFromSvg", "password");
+	utility::string_t paramFolder = utils->getTestValue("importShapesFromSvg", "folder");
+	utility::string_t paramStorage = utils->getTestValue("importShapesFromSvg", "storage");
+	utils->initialize("importShapesFromSvg", "");
+	std::shared_ptr<Shapes> result = api->importShapesFromSvg(paramName, paramSlideIndex, paramImage, paramX, paramY, paramWidth, paramHeight, paramShapes, paramGroup, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, importShapesFromSvgInvalidName) {
+	utility::string_t paramName = utils->getTestValue("importShapesFromSvg", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("importShapesFromSvg", "slideIndex");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("importShapesFromSvg", "image");
+	auto paramX = utils->getOptionalIntTestValue("importShapesFromSvg", "x");
+	auto paramY = utils->getOptionalIntTestValue("importShapesFromSvg", "y");
+	auto paramWidth = utils->getOptionalIntTestValue("importShapesFromSvg", "width");
+	auto paramHeight = utils->getOptionalIntTestValue("importShapesFromSvg", "height");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("importShapesFromSvg", "shapes");
+	auto paramGroup = utils->getOptionalBoolTestValue("importShapesFromSvg", "group");
+	utility::string_t paramPassword = utils->getTestValue("importShapesFromSvg", "password");
+	utility::string_t paramFolder = utils->getTestValue("importShapesFromSvg", "folder");
+	utility::string_t paramStorage = utils->getTestValue("importShapesFromSvg", "storage");
+	paramName = utils->getInvalidTestValue("importShapesFromSvg", "name", paramName);
+	utils->initialize("importShapesFromSvg", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->importShapesFromSvg(paramName, paramSlideIndex, paramImage, paramX, paramY, paramWidth, paramHeight, paramShapes, paramGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("importShapesFromSvg", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, importShapesFromSvgInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("importShapesFromSvg", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("importShapesFromSvg", "slideIndex");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("importShapesFromSvg", "image");
+	auto paramX = utils->getOptionalIntTestValue("importShapesFromSvg", "x");
+	auto paramY = utils->getOptionalIntTestValue("importShapesFromSvg", "y");
+	auto paramWidth = utils->getOptionalIntTestValue("importShapesFromSvg", "width");
+	auto paramHeight = utils->getOptionalIntTestValue("importShapesFromSvg", "height");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("importShapesFromSvg", "shapes");
+	auto paramGroup = utils->getOptionalBoolTestValue("importShapesFromSvg", "group");
+	utility::string_t paramPassword = utils->getTestValue("importShapesFromSvg", "password");
+	utility::string_t paramFolder = utils->getTestValue("importShapesFromSvg", "folder");
+	utility::string_t paramStorage = utils->getTestValue("importShapesFromSvg", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("importShapesFromSvg", "slideIndex", paramSlideIndex).value();
+	utils->initialize("importShapesFromSvg", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->importShapesFromSvg(paramName, paramSlideIndex, paramImage, paramX, paramY, paramWidth, paramHeight, paramShapes, paramGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("importShapesFromSvg", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, importShapesFromSvgInvalidImage) {
+	utility::string_t paramName = utils->getTestValue("importShapesFromSvg", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("importShapesFromSvg", "slideIndex");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("importShapesFromSvg", "image");
+	auto paramX = utils->getOptionalIntTestValue("importShapesFromSvg", "x");
+	auto paramY = utils->getOptionalIntTestValue("importShapesFromSvg", "y");
+	auto paramWidth = utils->getOptionalIntTestValue("importShapesFromSvg", "width");
+	auto paramHeight = utils->getOptionalIntTestValue("importShapesFromSvg", "height");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("importShapesFromSvg", "shapes");
+	auto paramGroup = utils->getOptionalBoolTestValue("importShapesFromSvg", "group");
+	utility::string_t paramPassword = utils->getTestValue("importShapesFromSvg", "password");
+	utility::string_t paramFolder = utils->getTestValue("importShapesFromSvg", "folder");
+	utility::string_t paramStorage = utils->getTestValue("importShapesFromSvg", "storage");
+	paramImage = utils->getInvalidBinaryTestValue("importShapesFromSvg", "image", paramImage);
+	utils->initialize("importShapesFromSvg", "image", paramImage);
+
+	bool failed = true;
+	try
+	{
+		api->importShapesFromSvg(paramName, paramSlideIndex, paramImage, paramX, paramY, paramWidth, paramHeight, paramShapes, paramGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "image");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "image", paramImage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "image");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "image", paramImage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("importShapesFromSvg", "image"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, importShapesFromSvgInvalidX) {
+	utility::string_t paramName = utils->getTestValue("importShapesFromSvg", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("importShapesFromSvg", "slideIndex");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("importShapesFromSvg", "image");
+	auto paramX = utils->getOptionalIntTestValue("importShapesFromSvg", "x");
+	auto paramY = utils->getOptionalIntTestValue("importShapesFromSvg", "y");
+	auto paramWidth = utils->getOptionalIntTestValue("importShapesFromSvg", "width");
+	auto paramHeight = utils->getOptionalIntTestValue("importShapesFromSvg", "height");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("importShapesFromSvg", "shapes");
+	auto paramGroup = utils->getOptionalBoolTestValue("importShapesFromSvg", "group");
+	utility::string_t paramPassword = utils->getTestValue("importShapesFromSvg", "password");
+	utility::string_t paramFolder = utils->getTestValue("importShapesFromSvg", "folder");
+	utility::string_t paramStorage = utils->getTestValue("importShapesFromSvg", "storage");
+	paramX = utils->getInvalidIntTestValue("importShapesFromSvg", "x", paramX).value();
+	utils->initialize("importShapesFromSvg", "x", paramX);
+
+	bool failed = true;
+	try
+	{
+		api->importShapesFromSvg(paramName, paramSlideIndex, paramImage, paramX, paramY, paramWidth, paramHeight, paramShapes, paramGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "x");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "x", paramX);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "x");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "x", paramX);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("importShapesFromSvg", "x"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, importShapesFromSvgInvalidY) {
+	utility::string_t paramName = utils->getTestValue("importShapesFromSvg", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("importShapesFromSvg", "slideIndex");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("importShapesFromSvg", "image");
+	auto paramX = utils->getOptionalIntTestValue("importShapesFromSvg", "x");
+	auto paramY = utils->getOptionalIntTestValue("importShapesFromSvg", "y");
+	auto paramWidth = utils->getOptionalIntTestValue("importShapesFromSvg", "width");
+	auto paramHeight = utils->getOptionalIntTestValue("importShapesFromSvg", "height");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("importShapesFromSvg", "shapes");
+	auto paramGroup = utils->getOptionalBoolTestValue("importShapesFromSvg", "group");
+	utility::string_t paramPassword = utils->getTestValue("importShapesFromSvg", "password");
+	utility::string_t paramFolder = utils->getTestValue("importShapesFromSvg", "folder");
+	utility::string_t paramStorage = utils->getTestValue("importShapesFromSvg", "storage");
+	paramY = utils->getInvalidIntTestValue("importShapesFromSvg", "y", paramY).value();
+	utils->initialize("importShapesFromSvg", "y", paramY);
+
+	bool failed = true;
+	try
+	{
+		api->importShapesFromSvg(paramName, paramSlideIndex, paramImage, paramX, paramY, paramWidth, paramHeight, paramShapes, paramGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "y");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "y", paramY);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "y");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "y", paramY);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("importShapesFromSvg", "y"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, importShapesFromSvgInvalidWidth) {
+	utility::string_t paramName = utils->getTestValue("importShapesFromSvg", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("importShapesFromSvg", "slideIndex");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("importShapesFromSvg", "image");
+	auto paramX = utils->getOptionalIntTestValue("importShapesFromSvg", "x");
+	auto paramY = utils->getOptionalIntTestValue("importShapesFromSvg", "y");
+	auto paramWidth = utils->getOptionalIntTestValue("importShapesFromSvg", "width");
+	auto paramHeight = utils->getOptionalIntTestValue("importShapesFromSvg", "height");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("importShapesFromSvg", "shapes");
+	auto paramGroup = utils->getOptionalBoolTestValue("importShapesFromSvg", "group");
+	utility::string_t paramPassword = utils->getTestValue("importShapesFromSvg", "password");
+	utility::string_t paramFolder = utils->getTestValue("importShapesFromSvg", "folder");
+	utility::string_t paramStorage = utils->getTestValue("importShapesFromSvg", "storage");
+	paramWidth = utils->getInvalidIntTestValue("importShapesFromSvg", "width", paramWidth).value();
+	utils->initialize("importShapesFromSvg", "width", paramWidth);
+
+	bool failed = true;
+	try
+	{
+		api->importShapesFromSvg(paramName, paramSlideIndex, paramImage, paramX, paramY, paramWidth, paramHeight, paramShapes, paramGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "width");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "width", paramWidth);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "width");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "width", paramWidth);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("importShapesFromSvg", "width"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, importShapesFromSvgInvalidHeight) {
+	utility::string_t paramName = utils->getTestValue("importShapesFromSvg", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("importShapesFromSvg", "slideIndex");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("importShapesFromSvg", "image");
+	auto paramX = utils->getOptionalIntTestValue("importShapesFromSvg", "x");
+	auto paramY = utils->getOptionalIntTestValue("importShapesFromSvg", "y");
+	auto paramWidth = utils->getOptionalIntTestValue("importShapesFromSvg", "width");
+	auto paramHeight = utils->getOptionalIntTestValue("importShapesFromSvg", "height");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("importShapesFromSvg", "shapes");
+	auto paramGroup = utils->getOptionalBoolTestValue("importShapesFromSvg", "group");
+	utility::string_t paramPassword = utils->getTestValue("importShapesFromSvg", "password");
+	utility::string_t paramFolder = utils->getTestValue("importShapesFromSvg", "folder");
+	utility::string_t paramStorage = utils->getTestValue("importShapesFromSvg", "storage");
+	paramHeight = utils->getInvalidIntTestValue("importShapesFromSvg", "height", paramHeight).value();
+	utils->initialize("importShapesFromSvg", "height", paramHeight);
+
+	bool failed = true;
+	try
+	{
+		api->importShapesFromSvg(paramName, paramSlideIndex, paramImage, paramX, paramY, paramWidth, paramHeight, paramShapes, paramGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "height");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "height", paramHeight);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "height");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "height", paramHeight);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("importShapesFromSvg", "height"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, importShapesFromSvgInvalidShapes) {
+	utility::string_t paramName = utils->getTestValue("importShapesFromSvg", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("importShapesFromSvg", "slideIndex");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("importShapesFromSvg", "image");
+	auto paramX = utils->getOptionalIntTestValue("importShapesFromSvg", "x");
+	auto paramY = utils->getOptionalIntTestValue("importShapesFromSvg", "y");
+	auto paramWidth = utils->getOptionalIntTestValue("importShapesFromSvg", "width");
+	auto paramHeight = utils->getOptionalIntTestValue("importShapesFromSvg", "height");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("importShapesFromSvg", "shapes");
+	auto paramGroup = utils->getOptionalBoolTestValue("importShapesFromSvg", "group");
+	utility::string_t paramPassword = utils->getTestValue("importShapesFromSvg", "password");
+	utility::string_t paramFolder = utils->getTestValue("importShapesFromSvg", "folder");
+	utility::string_t paramStorage = utils->getTestValue("importShapesFromSvg", "storage");
+	paramShapes = utils->getInvalidIntVectorTestValue("importShapesFromSvg", "shapes", paramShapes);
+	utils->initialize("importShapesFromSvg", "shapes", paramShapes);
+
+	bool failed = true;
+	try
+	{
+		api->importShapesFromSvg(paramName, paramSlideIndex, paramImage, paramX, paramY, paramWidth, paramHeight, paramShapes, paramGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "shapes");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "shapes", paramShapes);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "shapes");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "shapes", paramShapes);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("importShapesFromSvg", "shapes"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, importShapesFromSvgInvalidGroup) {
+	utility::string_t paramName = utils->getTestValue("importShapesFromSvg", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("importShapesFromSvg", "slideIndex");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("importShapesFromSvg", "image");
+	auto paramX = utils->getOptionalIntTestValue("importShapesFromSvg", "x");
+	auto paramY = utils->getOptionalIntTestValue("importShapesFromSvg", "y");
+	auto paramWidth = utils->getOptionalIntTestValue("importShapesFromSvg", "width");
+	auto paramHeight = utils->getOptionalIntTestValue("importShapesFromSvg", "height");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("importShapesFromSvg", "shapes");
+	auto paramGroup = utils->getOptionalBoolTestValue("importShapesFromSvg", "group");
+	utility::string_t paramPassword = utils->getTestValue("importShapesFromSvg", "password");
+	utility::string_t paramFolder = utils->getTestValue("importShapesFromSvg", "folder");
+	utility::string_t paramStorage = utils->getTestValue("importShapesFromSvg", "storage");
+	paramGroup = utils->getInvalidBoolTestValue("importShapesFromSvg", "group", paramGroup).value();
+	utils->initialize("importShapesFromSvg", "group", paramGroup);
+
+	bool failed = true;
+	try
+	{
+		api->importShapesFromSvg(paramName, paramSlideIndex, paramImage, paramX, paramY, paramWidth, paramHeight, paramShapes, paramGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "group");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "group", paramGroup);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "group");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "group", paramGroup);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("importShapesFromSvg", "group"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, importShapesFromSvgInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("importShapesFromSvg", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("importShapesFromSvg", "slideIndex");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("importShapesFromSvg", "image");
+	auto paramX = utils->getOptionalIntTestValue("importShapesFromSvg", "x");
+	auto paramY = utils->getOptionalIntTestValue("importShapesFromSvg", "y");
+	auto paramWidth = utils->getOptionalIntTestValue("importShapesFromSvg", "width");
+	auto paramHeight = utils->getOptionalIntTestValue("importShapesFromSvg", "height");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("importShapesFromSvg", "shapes");
+	auto paramGroup = utils->getOptionalBoolTestValue("importShapesFromSvg", "group");
+	utility::string_t paramPassword = utils->getTestValue("importShapesFromSvg", "password");
+	utility::string_t paramFolder = utils->getTestValue("importShapesFromSvg", "folder");
+	utility::string_t paramStorage = utils->getTestValue("importShapesFromSvg", "storage");
+	paramPassword = utils->getInvalidTestValue("importShapesFromSvg", "password", paramPassword);
+	utils->initialize("importShapesFromSvg", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->importShapesFromSvg(paramName, paramSlideIndex, paramImage, paramX, paramY, paramWidth, paramHeight, paramShapes, paramGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("importShapesFromSvg", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, importShapesFromSvgInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("importShapesFromSvg", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("importShapesFromSvg", "slideIndex");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("importShapesFromSvg", "image");
+	auto paramX = utils->getOptionalIntTestValue("importShapesFromSvg", "x");
+	auto paramY = utils->getOptionalIntTestValue("importShapesFromSvg", "y");
+	auto paramWidth = utils->getOptionalIntTestValue("importShapesFromSvg", "width");
+	auto paramHeight = utils->getOptionalIntTestValue("importShapesFromSvg", "height");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("importShapesFromSvg", "shapes");
+	auto paramGroup = utils->getOptionalBoolTestValue("importShapesFromSvg", "group");
+	utility::string_t paramPassword = utils->getTestValue("importShapesFromSvg", "password");
+	utility::string_t paramFolder = utils->getTestValue("importShapesFromSvg", "folder");
+	utility::string_t paramStorage = utils->getTestValue("importShapesFromSvg", "storage");
+	paramFolder = utils->getInvalidTestValue("importShapesFromSvg", "folder", paramFolder);
+	utils->initialize("importShapesFromSvg", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->importShapesFromSvg(paramName, paramSlideIndex, paramImage, paramX, paramY, paramWidth, paramHeight, paramShapes, paramGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("importShapesFromSvg", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, importShapesFromSvgInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("importShapesFromSvg", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("importShapesFromSvg", "slideIndex");
+	std::shared_ptr<HttpContent> paramImage = utils->getBinaryTestValue("importShapesFromSvg", "image");
+	auto paramX = utils->getOptionalIntTestValue("importShapesFromSvg", "x");
+	auto paramY = utils->getOptionalIntTestValue("importShapesFromSvg", "y");
+	auto paramWidth = utils->getOptionalIntTestValue("importShapesFromSvg", "width");
+	auto paramHeight = utils->getOptionalIntTestValue("importShapesFromSvg", "height");
+	std::vector<int32_t> paramShapes = utils->getIntVectorTestValue("importShapesFromSvg", "shapes");
+	auto paramGroup = utils->getOptionalBoolTestValue("importShapesFromSvg", "group");
+	utility::string_t paramPassword = utils->getTestValue("importShapesFromSvg", "password");
+	utility::string_t paramFolder = utils->getTestValue("importShapesFromSvg", "folder");
+	utility::string_t paramStorage = utils->getTestValue("importShapesFromSvg", "storage");
+	paramStorage = utils->getInvalidTestValue("importShapesFromSvg", "storage", paramStorage);
+	utils->initialize("importShapesFromSvg", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->importShapesFromSvg(paramName, paramSlideIndex, paramImage, paramX, paramY, paramWidth, paramHeight, paramShapes, paramGroup, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("importShapesFromSvg", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("importShapesFromSvg", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("importShapesFromSvg", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, merge) {
 	utility::string_t paramName = utils->getTestValue("merge", "name");
 	std::shared_ptr<PresentationsMergeRequest> paramRequest = utils->getTestValueForClass<PresentationsMergeRequest>("merge", "request");
@@ -59168,6 +61101,622 @@ TEST_F(SlidesApiTest, reorderSlidesInvalidStorage) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("reorderSlides", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, replaceFont) {
+	utility::string_t paramName = utils->getTestValue("replaceFont", "name");
+	utility::string_t paramSourceFont = utils->getTestValue("replaceFont", "sourceFont");
+	utility::string_t paramTargetFont = utils->getTestValue("replaceFont", "targetFont");
+	auto paramEmbed = utils->getOptionalBoolTestValue("replaceFont", "embed");
+	utility::string_t paramPassword = utils->getTestValue("replaceFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("replaceFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("replaceFont", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("replaceFont", "fontsFolder");
+	utils->initialize("replaceFont", "");
+	std::shared_ptr<FontsData> result = api->replaceFont(paramName, paramSourceFont, paramTargetFont, paramEmbed, paramPassword, paramFolder, paramStorage, paramFontsFolder).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, replaceFontInvalidName) {
+	utility::string_t paramName = utils->getTestValue("replaceFont", "name");
+	utility::string_t paramSourceFont = utils->getTestValue("replaceFont", "sourceFont");
+	utility::string_t paramTargetFont = utils->getTestValue("replaceFont", "targetFont");
+	auto paramEmbed = utils->getOptionalBoolTestValue("replaceFont", "embed");
+	utility::string_t paramPassword = utils->getTestValue("replaceFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("replaceFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("replaceFont", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("replaceFont", "fontsFolder");
+	paramName = utils->getInvalidTestValue("replaceFont", "name", paramName);
+	utils->initialize("replaceFont", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->replaceFont(paramName, paramSourceFont, paramTargetFont, paramEmbed, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("replaceFont", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("replaceFont", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("replaceFont", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("replaceFont", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("replaceFont", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, replaceFontInvalidSourceFont) {
+	utility::string_t paramName = utils->getTestValue("replaceFont", "name");
+	utility::string_t paramSourceFont = utils->getTestValue("replaceFont", "sourceFont");
+	utility::string_t paramTargetFont = utils->getTestValue("replaceFont", "targetFont");
+	auto paramEmbed = utils->getOptionalBoolTestValue("replaceFont", "embed");
+	utility::string_t paramPassword = utils->getTestValue("replaceFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("replaceFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("replaceFont", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("replaceFont", "fontsFolder");
+	paramSourceFont = utils->getInvalidTestValue("replaceFont", "sourceFont", paramSourceFont);
+	utils->initialize("replaceFont", "sourceFont", paramSourceFont);
+
+	bool failed = true;
+	try
+	{
+		api->replaceFont(paramName, paramSourceFont, paramTargetFont, paramEmbed, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("replaceFont", "sourceFont");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("replaceFont", "sourceFont", paramSourceFont);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("replaceFont", "sourceFont");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("replaceFont", "sourceFont", paramSourceFont);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("replaceFont", "sourceFont"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, replaceFontInvalidTargetFont) {
+	utility::string_t paramName = utils->getTestValue("replaceFont", "name");
+	utility::string_t paramSourceFont = utils->getTestValue("replaceFont", "sourceFont");
+	utility::string_t paramTargetFont = utils->getTestValue("replaceFont", "targetFont");
+	auto paramEmbed = utils->getOptionalBoolTestValue("replaceFont", "embed");
+	utility::string_t paramPassword = utils->getTestValue("replaceFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("replaceFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("replaceFont", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("replaceFont", "fontsFolder");
+	paramTargetFont = utils->getInvalidTestValue("replaceFont", "targetFont", paramTargetFont);
+	utils->initialize("replaceFont", "targetFont", paramTargetFont);
+
+	bool failed = true;
+	try
+	{
+		api->replaceFont(paramName, paramSourceFont, paramTargetFont, paramEmbed, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("replaceFont", "targetFont");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("replaceFont", "targetFont", paramTargetFont);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("replaceFont", "targetFont");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("replaceFont", "targetFont", paramTargetFont);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("replaceFont", "targetFont"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, replaceFontInvalidEmbed) {
+	utility::string_t paramName = utils->getTestValue("replaceFont", "name");
+	utility::string_t paramSourceFont = utils->getTestValue("replaceFont", "sourceFont");
+	utility::string_t paramTargetFont = utils->getTestValue("replaceFont", "targetFont");
+	auto paramEmbed = utils->getOptionalBoolTestValue("replaceFont", "embed");
+	utility::string_t paramPassword = utils->getTestValue("replaceFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("replaceFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("replaceFont", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("replaceFont", "fontsFolder");
+	paramEmbed = utils->getInvalidBoolTestValue("replaceFont", "embed", paramEmbed).value();
+	utils->initialize("replaceFont", "embed", paramEmbed);
+
+	bool failed = true;
+	try
+	{
+		api->replaceFont(paramName, paramSourceFont, paramTargetFont, paramEmbed, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("replaceFont", "embed");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("replaceFont", "embed", paramEmbed);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("replaceFont", "embed");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("replaceFont", "embed", paramEmbed);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("replaceFont", "embed"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, replaceFontInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("replaceFont", "name");
+	utility::string_t paramSourceFont = utils->getTestValue("replaceFont", "sourceFont");
+	utility::string_t paramTargetFont = utils->getTestValue("replaceFont", "targetFont");
+	auto paramEmbed = utils->getOptionalBoolTestValue("replaceFont", "embed");
+	utility::string_t paramPassword = utils->getTestValue("replaceFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("replaceFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("replaceFont", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("replaceFont", "fontsFolder");
+	paramPassword = utils->getInvalidTestValue("replaceFont", "password", paramPassword);
+	utils->initialize("replaceFont", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->replaceFont(paramName, paramSourceFont, paramTargetFont, paramEmbed, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("replaceFont", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("replaceFont", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("replaceFont", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("replaceFont", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("replaceFont", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, replaceFontInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("replaceFont", "name");
+	utility::string_t paramSourceFont = utils->getTestValue("replaceFont", "sourceFont");
+	utility::string_t paramTargetFont = utils->getTestValue("replaceFont", "targetFont");
+	auto paramEmbed = utils->getOptionalBoolTestValue("replaceFont", "embed");
+	utility::string_t paramPassword = utils->getTestValue("replaceFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("replaceFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("replaceFont", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("replaceFont", "fontsFolder");
+	paramFolder = utils->getInvalidTestValue("replaceFont", "folder", paramFolder);
+	utils->initialize("replaceFont", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->replaceFont(paramName, paramSourceFont, paramTargetFont, paramEmbed, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("replaceFont", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("replaceFont", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("replaceFont", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("replaceFont", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("replaceFont", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, replaceFontInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("replaceFont", "name");
+	utility::string_t paramSourceFont = utils->getTestValue("replaceFont", "sourceFont");
+	utility::string_t paramTargetFont = utils->getTestValue("replaceFont", "targetFont");
+	auto paramEmbed = utils->getOptionalBoolTestValue("replaceFont", "embed");
+	utility::string_t paramPassword = utils->getTestValue("replaceFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("replaceFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("replaceFont", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("replaceFont", "fontsFolder");
+	paramStorage = utils->getInvalidTestValue("replaceFont", "storage", paramStorage);
+	utils->initialize("replaceFont", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->replaceFont(paramName, paramSourceFont, paramTargetFont, paramEmbed, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("replaceFont", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("replaceFont", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("replaceFont", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("replaceFont", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("replaceFont", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, replaceFontInvalidFontsFolder) {
+	utility::string_t paramName = utils->getTestValue("replaceFont", "name");
+	utility::string_t paramSourceFont = utils->getTestValue("replaceFont", "sourceFont");
+	utility::string_t paramTargetFont = utils->getTestValue("replaceFont", "targetFont");
+	auto paramEmbed = utils->getOptionalBoolTestValue("replaceFont", "embed");
+	utility::string_t paramPassword = utils->getTestValue("replaceFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("replaceFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("replaceFont", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("replaceFont", "fontsFolder");
+	paramFontsFolder = utils->getInvalidTestValue("replaceFont", "fontsFolder", paramFontsFolder);
+	utils->initialize("replaceFont", "fontsFolder", paramFontsFolder);
+
+	bool failed = true;
+	try
+	{
+		api->replaceFont(paramName, paramSourceFont, paramTargetFont, paramEmbed, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("replaceFont", "fontsFolder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("replaceFont", "fontsFolder", paramFontsFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("replaceFont", "fontsFolder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("replaceFont", "fontsFolder", paramFontsFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("replaceFont", "fontsFolder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, replaceFontOnline) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("replaceFontOnline", "document");
+	utility::string_t paramSourceFont = utils->getTestValue("replaceFontOnline", "sourceFont");
+	utility::string_t paramTargetFont = utils->getTestValue("replaceFontOnline", "targetFont");
+	auto paramEmbed = utils->getOptionalBoolTestValue("replaceFontOnline", "embed");
+	utility::string_t paramPassword = utils->getTestValue("replaceFontOnline", "password");
+	utility::string_t paramFontsFolder = utils->getTestValue("replaceFontOnline", "fontsFolder");
+	utils->initialize("replaceFontOnline", "");
+	HttpContent result = api->replaceFontOnline(paramDocument, paramSourceFont, paramTargetFont, paramEmbed, paramPassword, paramFontsFolder).get();
+	EXPECT_FALSE(result.getData()->eof());
+}
+
+TEST_F(SlidesApiTest, replaceFontOnlineInvalidDocument) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("replaceFontOnline", "document");
+	utility::string_t paramSourceFont = utils->getTestValue("replaceFontOnline", "sourceFont");
+	utility::string_t paramTargetFont = utils->getTestValue("replaceFontOnline", "targetFont");
+	auto paramEmbed = utils->getOptionalBoolTestValue("replaceFontOnline", "embed");
+	utility::string_t paramPassword = utils->getTestValue("replaceFontOnline", "password");
+	utility::string_t paramFontsFolder = utils->getTestValue("replaceFontOnline", "fontsFolder");
+	paramDocument = utils->getInvalidBinaryTestValue("replaceFontOnline", "document", paramDocument);
+	utils->initialize("replaceFontOnline", "document", paramDocument);
+
+	bool failed = true;
+	try
+	{
+		api->replaceFontOnline(paramDocument, paramSourceFont, paramTargetFont, paramEmbed, paramPassword, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("replaceFontOnline", "document");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("replaceFontOnline", "document", paramDocument);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("replaceFontOnline", "document");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("replaceFontOnline", "document", paramDocument);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("replaceFontOnline", "document"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, replaceFontOnlineInvalidSourceFont) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("replaceFontOnline", "document");
+	utility::string_t paramSourceFont = utils->getTestValue("replaceFontOnline", "sourceFont");
+	utility::string_t paramTargetFont = utils->getTestValue("replaceFontOnline", "targetFont");
+	auto paramEmbed = utils->getOptionalBoolTestValue("replaceFontOnline", "embed");
+	utility::string_t paramPassword = utils->getTestValue("replaceFontOnline", "password");
+	utility::string_t paramFontsFolder = utils->getTestValue("replaceFontOnline", "fontsFolder");
+	paramSourceFont = utils->getInvalidTestValue("replaceFontOnline", "sourceFont", paramSourceFont);
+	utils->initialize("replaceFontOnline", "sourceFont", paramSourceFont);
+
+	bool failed = true;
+	try
+	{
+		api->replaceFontOnline(paramDocument, paramSourceFont, paramTargetFont, paramEmbed, paramPassword, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("replaceFontOnline", "sourceFont");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("replaceFontOnline", "sourceFont", paramSourceFont);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("replaceFontOnline", "sourceFont");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("replaceFontOnline", "sourceFont", paramSourceFont);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("replaceFontOnline", "sourceFont"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, replaceFontOnlineInvalidTargetFont) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("replaceFontOnline", "document");
+	utility::string_t paramSourceFont = utils->getTestValue("replaceFontOnline", "sourceFont");
+	utility::string_t paramTargetFont = utils->getTestValue("replaceFontOnline", "targetFont");
+	auto paramEmbed = utils->getOptionalBoolTestValue("replaceFontOnline", "embed");
+	utility::string_t paramPassword = utils->getTestValue("replaceFontOnline", "password");
+	utility::string_t paramFontsFolder = utils->getTestValue("replaceFontOnline", "fontsFolder");
+	paramTargetFont = utils->getInvalidTestValue("replaceFontOnline", "targetFont", paramTargetFont);
+	utils->initialize("replaceFontOnline", "targetFont", paramTargetFont);
+
+	bool failed = true;
+	try
+	{
+		api->replaceFontOnline(paramDocument, paramSourceFont, paramTargetFont, paramEmbed, paramPassword, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("replaceFontOnline", "targetFont");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("replaceFontOnline", "targetFont", paramTargetFont);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("replaceFontOnline", "targetFont");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("replaceFontOnline", "targetFont", paramTargetFont);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("replaceFontOnline", "targetFont"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, replaceFontOnlineInvalidEmbed) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("replaceFontOnline", "document");
+	utility::string_t paramSourceFont = utils->getTestValue("replaceFontOnline", "sourceFont");
+	utility::string_t paramTargetFont = utils->getTestValue("replaceFontOnline", "targetFont");
+	auto paramEmbed = utils->getOptionalBoolTestValue("replaceFontOnline", "embed");
+	utility::string_t paramPassword = utils->getTestValue("replaceFontOnline", "password");
+	utility::string_t paramFontsFolder = utils->getTestValue("replaceFontOnline", "fontsFolder");
+	paramEmbed = utils->getInvalidBoolTestValue("replaceFontOnline", "embed", paramEmbed).value();
+	utils->initialize("replaceFontOnline", "embed", paramEmbed);
+
+	bool failed = true;
+	try
+	{
+		api->replaceFontOnline(paramDocument, paramSourceFont, paramTargetFont, paramEmbed, paramPassword, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("replaceFontOnline", "embed");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("replaceFontOnline", "embed", paramEmbed);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("replaceFontOnline", "embed");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("replaceFontOnline", "embed", paramEmbed);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("replaceFontOnline", "embed"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, replaceFontOnlineInvalidPassword) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("replaceFontOnline", "document");
+	utility::string_t paramSourceFont = utils->getTestValue("replaceFontOnline", "sourceFont");
+	utility::string_t paramTargetFont = utils->getTestValue("replaceFontOnline", "targetFont");
+	auto paramEmbed = utils->getOptionalBoolTestValue("replaceFontOnline", "embed");
+	utility::string_t paramPassword = utils->getTestValue("replaceFontOnline", "password");
+	utility::string_t paramFontsFolder = utils->getTestValue("replaceFontOnline", "fontsFolder");
+	paramPassword = utils->getInvalidTestValue("replaceFontOnline", "password", paramPassword);
+	utils->initialize("replaceFontOnline", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->replaceFontOnline(paramDocument, paramSourceFont, paramTargetFont, paramEmbed, paramPassword, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("replaceFontOnline", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("replaceFontOnline", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("replaceFontOnline", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("replaceFontOnline", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("replaceFontOnline", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, replaceFontOnlineInvalidFontsFolder) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("replaceFontOnline", "document");
+	utility::string_t paramSourceFont = utils->getTestValue("replaceFontOnline", "sourceFont");
+	utility::string_t paramTargetFont = utils->getTestValue("replaceFontOnline", "targetFont");
+	auto paramEmbed = utils->getOptionalBoolTestValue("replaceFontOnline", "embed");
+	utility::string_t paramPassword = utils->getTestValue("replaceFontOnline", "password");
+	utility::string_t paramFontsFolder = utils->getTestValue("replaceFontOnline", "fontsFolder");
+	paramFontsFolder = utils->getInvalidTestValue("replaceFontOnline", "fontsFolder", paramFontsFolder);
+	utils->initialize("replaceFontOnline", "fontsFolder", paramFontsFolder);
+
+	bool failed = true;
+	try
+	{
+		api->replaceFontOnline(paramDocument, paramSourceFont, paramTargetFont, paramEmbed, paramPassword, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("replaceFontOnline", "fontsFolder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("replaceFontOnline", "fontsFolder", paramFontsFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("replaceFontOnline", "fontsFolder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("replaceFontOnline", "fontsFolder", paramFontsFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("replaceFontOnline", "fontsFolder"))
 	{
 		FAIL() << "Must have failed";
 	}
@@ -68136,6 +70685,948 @@ TEST_F(SlidesApiTest, setDocumentPropertyInvalidStorage) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("setDocumentProperty", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFont) {
+	utility::string_t paramName = utils->getTestValue("setEmbeddedFont", "name");
+	utility::string_t paramFontName = utils->getTestValue("setEmbeddedFont", "fontName");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFont", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("setEmbeddedFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setEmbeddedFont", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("setEmbeddedFont", "fontsFolder");
+	utils->initialize("setEmbeddedFont", "");
+	std::shared_ptr<FontsData> result = api->setEmbeddedFont(paramName, paramFontName, paramOnlyUsed, paramPassword, paramFolder, paramStorage, paramFontsFolder).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontInvalidName) {
+	utility::string_t paramName = utils->getTestValue("setEmbeddedFont", "name");
+	utility::string_t paramFontName = utils->getTestValue("setEmbeddedFont", "fontName");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFont", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("setEmbeddedFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setEmbeddedFont", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("setEmbeddedFont", "fontsFolder");
+	paramName = utils->getInvalidTestValue("setEmbeddedFont", "name", paramName);
+	utils->initialize("setEmbeddedFont", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFont(paramName, paramFontName, paramOnlyUsed, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFont", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFont", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFont", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFont", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFont", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontInvalidFontName) {
+	utility::string_t paramName = utils->getTestValue("setEmbeddedFont", "name");
+	utility::string_t paramFontName = utils->getTestValue("setEmbeddedFont", "fontName");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFont", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("setEmbeddedFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setEmbeddedFont", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("setEmbeddedFont", "fontsFolder");
+	paramFontName = utils->getInvalidTestValue("setEmbeddedFont", "fontName", paramFontName);
+	utils->initialize("setEmbeddedFont", "fontName", paramFontName);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFont(paramName, paramFontName, paramOnlyUsed, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFont", "fontName");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFont", "fontName", paramFontName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFont", "fontName");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFont", "fontName", paramFontName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFont", "fontName"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontInvalidOnlyUsed) {
+	utility::string_t paramName = utils->getTestValue("setEmbeddedFont", "name");
+	utility::string_t paramFontName = utils->getTestValue("setEmbeddedFont", "fontName");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFont", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("setEmbeddedFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setEmbeddedFont", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("setEmbeddedFont", "fontsFolder");
+	paramOnlyUsed = utils->getInvalidBoolTestValue("setEmbeddedFont", "onlyUsed", paramOnlyUsed).value();
+	utils->initialize("setEmbeddedFont", "onlyUsed", paramOnlyUsed);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFont(paramName, paramFontName, paramOnlyUsed, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFont", "onlyUsed");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFont", "onlyUsed", paramOnlyUsed);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFont", "onlyUsed");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFont", "onlyUsed", paramOnlyUsed);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFont", "onlyUsed"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("setEmbeddedFont", "name");
+	utility::string_t paramFontName = utils->getTestValue("setEmbeddedFont", "fontName");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFont", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("setEmbeddedFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setEmbeddedFont", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("setEmbeddedFont", "fontsFolder");
+	paramPassword = utils->getInvalidTestValue("setEmbeddedFont", "password", paramPassword);
+	utils->initialize("setEmbeddedFont", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFont(paramName, paramFontName, paramOnlyUsed, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFont", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFont", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFont", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFont", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFont", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("setEmbeddedFont", "name");
+	utility::string_t paramFontName = utils->getTestValue("setEmbeddedFont", "fontName");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFont", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("setEmbeddedFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setEmbeddedFont", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("setEmbeddedFont", "fontsFolder");
+	paramFolder = utils->getInvalidTestValue("setEmbeddedFont", "folder", paramFolder);
+	utils->initialize("setEmbeddedFont", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFont(paramName, paramFontName, paramOnlyUsed, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFont", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFont", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFont", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFont", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFont", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("setEmbeddedFont", "name");
+	utility::string_t paramFontName = utils->getTestValue("setEmbeddedFont", "fontName");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFont", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("setEmbeddedFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setEmbeddedFont", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("setEmbeddedFont", "fontsFolder");
+	paramStorage = utils->getInvalidTestValue("setEmbeddedFont", "storage", paramStorage);
+	utils->initialize("setEmbeddedFont", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFont(paramName, paramFontName, paramOnlyUsed, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFont", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFont", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFont", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFont", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFont", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontInvalidFontsFolder) {
+	utility::string_t paramName = utils->getTestValue("setEmbeddedFont", "name");
+	utility::string_t paramFontName = utils->getTestValue("setEmbeddedFont", "fontName");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFont", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFont", "password");
+	utility::string_t paramFolder = utils->getTestValue("setEmbeddedFont", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setEmbeddedFont", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("setEmbeddedFont", "fontsFolder");
+	paramFontsFolder = utils->getInvalidTestValue("setEmbeddedFont", "fontsFolder", paramFontsFolder);
+	utils->initialize("setEmbeddedFont", "fontsFolder", paramFontsFolder);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFont(paramName, paramFontName, paramOnlyUsed, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFont", "fontsFolder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFont", "fontsFolder", paramFontsFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFont", "fontsFolder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFont", "fontsFolder", paramFontsFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFont", "fontsFolder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontFromRequest) {
+	std::shared_ptr<HttpContent> paramFont = utils->getBinaryTestValue("setEmbeddedFontFromRequest", "font");
+	utility::string_t paramName = utils->getTestValue("setEmbeddedFontFromRequest", "name");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontFromRequest", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontFromRequest", "password");
+	utility::string_t paramFolder = utils->getTestValue("setEmbeddedFontFromRequest", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setEmbeddedFontFromRequest", "storage");
+	utils->initialize("setEmbeddedFontFromRequest", "");
+	std::shared_ptr<FontsData> result = api->setEmbeddedFontFromRequest(paramFont, paramName, paramOnlyUsed, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontFromRequestInvalidFont) {
+	std::shared_ptr<HttpContent> paramFont = utils->getBinaryTestValue("setEmbeddedFontFromRequest", "font");
+	utility::string_t paramName = utils->getTestValue("setEmbeddedFontFromRequest", "name");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontFromRequest", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontFromRequest", "password");
+	utility::string_t paramFolder = utils->getTestValue("setEmbeddedFontFromRequest", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setEmbeddedFontFromRequest", "storage");
+	paramFont = utils->getInvalidBinaryTestValue("setEmbeddedFontFromRequest", "font", paramFont);
+	utils->initialize("setEmbeddedFontFromRequest", "font", paramFont);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFontFromRequest(paramFont, paramName, paramOnlyUsed, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequest", "font");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequest", "font", paramFont);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequest", "font");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequest", "font", paramFont);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFontFromRequest", "font"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontFromRequestInvalidName) {
+	std::shared_ptr<HttpContent> paramFont = utils->getBinaryTestValue("setEmbeddedFontFromRequest", "font");
+	utility::string_t paramName = utils->getTestValue("setEmbeddedFontFromRequest", "name");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontFromRequest", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontFromRequest", "password");
+	utility::string_t paramFolder = utils->getTestValue("setEmbeddedFontFromRequest", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setEmbeddedFontFromRequest", "storage");
+	paramName = utils->getInvalidTestValue("setEmbeddedFontFromRequest", "name", paramName);
+	utils->initialize("setEmbeddedFontFromRequest", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFontFromRequest(paramFont, paramName, paramOnlyUsed, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequest", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequest", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequest", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequest", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFontFromRequest", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontFromRequestInvalidOnlyUsed) {
+	std::shared_ptr<HttpContent> paramFont = utils->getBinaryTestValue("setEmbeddedFontFromRequest", "font");
+	utility::string_t paramName = utils->getTestValue("setEmbeddedFontFromRequest", "name");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontFromRequest", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontFromRequest", "password");
+	utility::string_t paramFolder = utils->getTestValue("setEmbeddedFontFromRequest", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setEmbeddedFontFromRequest", "storage");
+	paramOnlyUsed = utils->getInvalidBoolTestValue("setEmbeddedFontFromRequest", "onlyUsed", paramOnlyUsed).value();
+	utils->initialize("setEmbeddedFontFromRequest", "onlyUsed", paramOnlyUsed);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFontFromRequest(paramFont, paramName, paramOnlyUsed, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequest", "onlyUsed");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequest", "onlyUsed", paramOnlyUsed);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequest", "onlyUsed");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequest", "onlyUsed", paramOnlyUsed);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFontFromRequest", "onlyUsed"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontFromRequestInvalidPassword) {
+	std::shared_ptr<HttpContent> paramFont = utils->getBinaryTestValue("setEmbeddedFontFromRequest", "font");
+	utility::string_t paramName = utils->getTestValue("setEmbeddedFontFromRequest", "name");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontFromRequest", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontFromRequest", "password");
+	utility::string_t paramFolder = utils->getTestValue("setEmbeddedFontFromRequest", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setEmbeddedFontFromRequest", "storage");
+	paramPassword = utils->getInvalidTestValue("setEmbeddedFontFromRequest", "password", paramPassword);
+	utils->initialize("setEmbeddedFontFromRequest", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFontFromRequest(paramFont, paramName, paramOnlyUsed, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequest", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequest", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequest", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequest", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFontFromRequest", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontFromRequestInvalidFolder) {
+	std::shared_ptr<HttpContent> paramFont = utils->getBinaryTestValue("setEmbeddedFontFromRequest", "font");
+	utility::string_t paramName = utils->getTestValue("setEmbeddedFontFromRequest", "name");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontFromRequest", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontFromRequest", "password");
+	utility::string_t paramFolder = utils->getTestValue("setEmbeddedFontFromRequest", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setEmbeddedFontFromRequest", "storage");
+	paramFolder = utils->getInvalidTestValue("setEmbeddedFontFromRequest", "folder", paramFolder);
+	utils->initialize("setEmbeddedFontFromRequest", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFontFromRequest(paramFont, paramName, paramOnlyUsed, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequest", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequest", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequest", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequest", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFontFromRequest", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontFromRequestInvalidStorage) {
+	std::shared_ptr<HttpContent> paramFont = utils->getBinaryTestValue("setEmbeddedFontFromRequest", "font");
+	utility::string_t paramName = utils->getTestValue("setEmbeddedFontFromRequest", "name");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontFromRequest", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontFromRequest", "password");
+	utility::string_t paramFolder = utils->getTestValue("setEmbeddedFontFromRequest", "folder");
+	utility::string_t paramStorage = utils->getTestValue("setEmbeddedFontFromRequest", "storage");
+	paramStorage = utils->getInvalidTestValue("setEmbeddedFontFromRequest", "storage", paramStorage);
+	utils->initialize("setEmbeddedFontFromRequest", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFontFromRequest(paramFont, paramName, paramOnlyUsed, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequest", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequest", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequest", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequest", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFontFromRequest", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontFromRequestOnline) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("setEmbeddedFontFromRequestOnline", "document");
+	std::shared_ptr<HttpContent> paramFont = utils->getBinaryTestValue("setEmbeddedFontFromRequestOnline", "font");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontFromRequestOnline", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontFromRequestOnline", "password");
+	utils->initialize("setEmbeddedFontFromRequestOnline", "");
+	HttpContent result = api->setEmbeddedFontFromRequestOnline(paramDocument, paramFont, paramOnlyUsed, paramPassword).get();
+	EXPECT_FALSE(result.getData()->eof());
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontFromRequestOnlineInvalidDocument) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("setEmbeddedFontFromRequestOnline", "document");
+	std::shared_ptr<HttpContent> paramFont = utils->getBinaryTestValue("setEmbeddedFontFromRequestOnline", "font");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontFromRequestOnline", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontFromRequestOnline", "password");
+	paramDocument = utils->getInvalidBinaryTestValue("setEmbeddedFontFromRequestOnline", "document", paramDocument);
+	utils->initialize("setEmbeddedFontFromRequestOnline", "document", paramDocument);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFontFromRequestOnline(paramDocument, paramFont, paramOnlyUsed, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequestOnline", "document");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequestOnline", "document", paramDocument);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequestOnline", "document");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequestOnline", "document", paramDocument);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFontFromRequestOnline", "document"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontFromRequestOnlineInvalidFont) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("setEmbeddedFontFromRequestOnline", "document");
+	std::shared_ptr<HttpContent> paramFont = utils->getBinaryTestValue("setEmbeddedFontFromRequestOnline", "font");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontFromRequestOnline", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontFromRequestOnline", "password");
+	paramFont = utils->getInvalidBinaryTestValue("setEmbeddedFontFromRequestOnline", "font", paramFont);
+	utils->initialize("setEmbeddedFontFromRequestOnline", "font", paramFont);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFontFromRequestOnline(paramDocument, paramFont, paramOnlyUsed, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequestOnline", "font");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequestOnline", "font", paramFont);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequestOnline", "font");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequestOnline", "font", paramFont);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFontFromRequestOnline", "font"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontFromRequestOnlineInvalidOnlyUsed) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("setEmbeddedFontFromRequestOnline", "document");
+	std::shared_ptr<HttpContent> paramFont = utils->getBinaryTestValue("setEmbeddedFontFromRequestOnline", "font");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontFromRequestOnline", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontFromRequestOnline", "password");
+	paramOnlyUsed = utils->getInvalidBoolTestValue("setEmbeddedFontFromRequestOnline", "onlyUsed", paramOnlyUsed).value();
+	utils->initialize("setEmbeddedFontFromRequestOnline", "onlyUsed", paramOnlyUsed);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFontFromRequestOnline(paramDocument, paramFont, paramOnlyUsed, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequestOnline", "onlyUsed");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequestOnline", "onlyUsed", paramOnlyUsed);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequestOnline", "onlyUsed");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequestOnline", "onlyUsed", paramOnlyUsed);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFontFromRequestOnline", "onlyUsed"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontFromRequestOnlineInvalidPassword) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("setEmbeddedFontFromRequestOnline", "document");
+	std::shared_ptr<HttpContent> paramFont = utils->getBinaryTestValue("setEmbeddedFontFromRequestOnline", "font");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontFromRequestOnline", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontFromRequestOnline", "password");
+	paramPassword = utils->getInvalidTestValue("setEmbeddedFontFromRequestOnline", "password", paramPassword);
+	utils->initialize("setEmbeddedFontFromRequestOnline", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFontFromRequestOnline(paramDocument, paramFont, paramOnlyUsed, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequestOnline", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequestOnline", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontFromRequestOnline", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontFromRequestOnline", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFontFromRequestOnline", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontOnline) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("setEmbeddedFontOnline", "document");
+	utility::string_t paramFontName = utils->getTestValue("setEmbeddedFontOnline", "fontName");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontOnline", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontOnline", "password");
+	utility::string_t paramFontsFolder = utils->getTestValue("setEmbeddedFontOnline", "fontsFolder");
+	utils->initialize("setEmbeddedFontOnline", "");
+	HttpContent result = api->setEmbeddedFontOnline(paramDocument, paramFontName, paramOnlyUsed, paramPassword, paramFontsFolder).get();
+	EXPECT_FALSE(result.getData()->eof());
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontOnlineInvalidDocument) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("setEmbeddedFontOnline", "document");
+	utility::string_t paramFontName = utils->getTestValue("setEmbeddedFontOnline", "fontName");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontOnline", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontOnline", "password");
+	utility::string_t paramFontsFolder = utils->getTestValue("setEmbeddedFontOnline", "fontsFolder");
+	paramDocument = utils->getInvalidBinaryTestValue("setEmbeddedFontOnline", "document", paramDocument);
+	utils->initialize("setEmbeddedFontOnline", "document", paramDocument);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFontOnline(paramDocument, paramFontName, paramOnlyUsed, paramPassword, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontOnline", "document");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontOnline", "document", paramDocument);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontOnline", "document");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontOnline", "document", paramDocument);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFontOnline", "document"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontOnlineInvalidFontName) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("setEmbeddedFontOnline", "document");
+	utility::string_t paramFontName = utils->getTestValue("setEmbeddedFontOnline", "fontName");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontOnline", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontOnline", "password");
+	utility::string_t paramFontsFolder = utils->getTestValue("setEmbeddedFontOnline", "fontsFolder");
+	paramFontName = utils->getInvalidTestValue("setEmbeddedFontOnline", "fontName", paramFontName);
+	utils->initialize("setEmbeddedFontOnline", "fontName", paramFontName);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFontOnline(paramDocument, paramFontName, paramOnlyUsed, paramPassword, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontOnline", "fontName");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontOnline", "fontName", paramFontName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontOnline", "fontName");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontOnline", "fontName", paramFontName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFontOnline", "fontName"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontOnlineInvalidOnlyUsed) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("setEmbeddedFontOnline", "document");
+	utility::string_t paramFontName = utils->getTestValue("setEmbeddedFontOnline", "fontName");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontOnline", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontOnline", "password");
+	utility::string_t paramFontsFolder = utils->getTestValue("setEmbeddedFontOnline", "fontsFolder");
+	paramOnlyUsed = utils->getInvalidBoolTestValue("setEmbeddedFontOnline", "onlyUsed", paramOnlyUsed).value();
+	utils->initialize("setEmbeddedFontOnline", "onlyUsed", paramOnlyUsed);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFontOnline(paramDocument, paramFontName, paramOnlyUsed, paramPassword, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontOnline", "onlyUsed");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontOnline", "onlyUsed", paramOnlyUsed);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontOnline", "onlyUsed");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontOnline", "onlyUsed", paramOnlyUsed);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFontOnline", "onlyUsed"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontOnlineInvalidPassword) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("setEmbeddedFontOnline", "document");
+	utility::string_t paramFontName = utils->getTestValue("setEmbeddedFontOnline", "fontName");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontOnline", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontOnline", "password");
+	utility::string_t paramFontsFolder = utils->getTestValue("setEmbeddedFontOnline", "fontsFolder");
+	paramPassword = utils->getInvalidTestValue("setEmbeddedFontOnline", "password", paramPassword);
+	utils->initialize("setEmbeddedFontOnline", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFontOnline(paramDocument, paramFontName, paramOnlyUsed, paramPassword, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontOnline", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontOnline", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontOnline", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontOnline", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFontOnline", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, setEmbeddedFontOnlineInvalidFontsFolder) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("setEmbeddedFontOnline", "document");
+	utility::string_t paramFontName = utils->getTestValue("setEmbeddedFontOnline", "fontName");
+	auto paramOnlyUsed = utils->getOptionalBoolTestValue("setEmbeddedFontOnline", "onlyUsed");
+	utility::string_t paramPassword = utils->getTestValue("setEmbeddedFontOnline", "password");
+	utility::string_t paramFontsFolder = utils->getTestValue("setEmbeddedFontOnline", "fontsFolder");
+	paramFontsFolder = utils->getInvalidTestValue("setEmbeddedFontOnline", "fontsFolder", paramFontsFolder);
+	utils->initialize("setEmbeddedFontOnline", "fontsFolder", paramFontsFolder);
+
+	bool failed = true;
+	try
+	{
+		api->setEmbeddedFontOnline(paramDocument, paramFontName, paramOnlyUsed, paramPassword, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontOnline", "fontsFolder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontOnline", "fontsFolder", paramFontsFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("setEmbeddedFontOnline", "fontsFolder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("setEmbeddedFontOnline", "fontsFolder", paramFontsFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("setEmbeddedFontOnline", "fontsFolder"))
 	{
 		FAIL() << "Must have failed";
 	}

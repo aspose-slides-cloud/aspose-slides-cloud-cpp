@@ -32,6 +32,7 @@ namespace model {
 
 GroupingCharacterElement::GroupingCharacterElement()
 {
+	setType(L"GroupingCharacter");
 }
 
 GroupingCharacterElement::~GroupingCharacterElement()

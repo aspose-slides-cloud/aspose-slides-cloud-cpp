@@ -69,10 +69,7 @@ web::json::value PresentationsMergeRequest::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("PresentationPaths")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("PresentationPaths")] = web::json::value::array(jsonArray);
 	}
 	{
 		std::vector<web::json::value> jsonArray;
@@ -80,10 +77,7 @@ web::json::value PresentationsMergeRequest::toJson() const
 		{
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
-		if (jsonArray.size() > 0)
-		{
-			val[utility::conversions::to_string_t("PresentationPasswords")] = web::json::value::array(jsonArray);
-		}
+		val[utility::conversions::to_string_t("PresentationPasswords")] = web::json::value::array(jsonArray);
 	}
 	return val;
 }

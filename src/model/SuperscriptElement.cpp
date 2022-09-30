@@ -32,6 +32,7 @@ namespace model {
 
 SuperscriptElement::SuperscriptElement()
 {
+	setType(L"SuperscriptElement");
 }
 
 SuperscriptElement::~SuperscriptElement()
