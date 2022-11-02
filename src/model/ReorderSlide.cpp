@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ReorderSlide.h"
 
 namespace asposeslidescloud {

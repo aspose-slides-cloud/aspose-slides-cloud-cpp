@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "SaveShape.h"
 
 namespace asposeslidescloud {
@@ -121,16 +122,14 @@ void SaveShape::fromJson(web::json::value& val)
 	web::json::value* jsonForOutput = ModelBase::getField(val, "Output");
 	if(jsonForOutput != nullptr && !jsonForOutput->is_null())
 	{
-		std::shared_ptr<OutputFile> newItem(new OutputFile());
-		newItem->fromJson(*jsonForOutput);
-		setOutput(newItem);
+		std::shared_ptr<void> instanceForOutput = asposeslidescloud::api::ClassRegistry::deserialize(L"OutputFile", *jsonForOutput);
+		setOutput(std::static_pointer_cast<OutputFile>(instanceForOutput));
 	}
 	web::json::value* jsonForOptions = ModelBase::getField(val, "Options");
 	if(jsonForOptions != nullptr && !jsonForOptions->is_null())
 	{
-		std::shared_ptr<IShapeExportOptions> newItem(new IShapeExportOptions());
-		newItem->fromJson(*jsonForOptions);
-		setOptions(newItem);
+		std::shared_ptr<void> instanceForOptions = asposeslidescloud::api::ClassRegistry::deserialize(L"IShapeExportOptions", *jsonForOptions);
+		setOptions(std::static_pointer_cast<IShapeExportOptions>(instanceForOptions));
 	}
 }
 

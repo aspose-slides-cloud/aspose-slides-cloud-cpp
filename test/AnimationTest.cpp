@@ -118,7 +118,7 @@ TEST_F(AnimationTest, animationSet) {
 	dto->setInteractiveSequences(interactiveSequences);
 	std::shared_ptr<SlideAnimation> result = api->setAnimation(L"test.pptx", 1, dto, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(dto->getMainSequence().size(), result->getMainSequence().size());
-	EXPECT_EQ(0, result->getInteractiveSequences().size());
+	EXPECT_EQ(1, result->getInteractiveSequences().size());
 }
 
 TEST_F(AnimationTest, animationCreateEffect) {

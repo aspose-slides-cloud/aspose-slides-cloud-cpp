@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ScatterChartDataPoint.h"
 
 namespace asposeslidescloud {

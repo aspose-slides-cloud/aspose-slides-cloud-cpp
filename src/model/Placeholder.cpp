@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Placeholder.h"
 
 namespace asposeslidescloud {
@@ -142,9 +143,8 @@ void Placeholder::fromJson(web::json::value& val)
 	web::json::value* jsonForShape = ModelBase::getField(val, "Shape");
 	if(jsonForShape != nullptr && !jsonForShape->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForShape);
-		setShape(newItem);
+		std::shared_ptr<void> instanceForShape = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForShape);
+		setShape(std::static_pointer_cast<ResourceUri>(instanceForShape));
 	}
 }
 

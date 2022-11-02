@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "SaveSlide.h"
 
 namespace asposeslidescloud {
@@ -160,9 +161,8 @@ void SaveSlide::fromJson(web::json::value& val)
 	web::json::value* jsonForOutput = ModelBase::getField(val, "Output");
 	if(jsonForOutput != nullptr && !jsonForOutput->is_null())
 	{
-		std::shared_ptr<OutputFile> newItem(new OutputFile());
-		newItem->fromJson(*jsonForOutput);
-		setOutput(newItem);
+		std::shared_ptr<void> instanceForOutput = asposeslidescloud::api::ClassRegistry::deserialize(L"OutputFile", *jsonForOutput);
+		setOutput(std::static_pointer_cast<OutputFile>(instanceForOutput));
 	}
 	web::json::value* jsonForFormat = ModelBase::getField(val, "Format");
 	if(jsonForFormat != nullptr && !jsonForFormat->is_null())
@@ -172,9 +172,8 @@ void SaveSlide::fromJson(web::json::value& val)
 	web::json::value* jsonForOptions = ModelBase::getField(val, "Options");
 	if(jsonForOptions != nullptr && !jsonForOptions->is_null())
 	{
-		std::shared_ptr<ExportOptions> newItem(new ExportOptions());
-		newItem->fromJson(*jsonForOptions);
-		setOptions(newItem);
+		std::shared_ptr<void> instanceForOptions = asposeslidescloud::api::ClassRegistry::deserialize(L"ExportOptions", *jsonForOptions);
+		setOptions(std::static_pointer_cast<ExportOptions>(instanceForOptions));
 	}
 	web::json::value* jsonForWidth = ModelBase::getField(val, "Width");
 	if(jsonForWidth != nullptr && !jsonForWidth->is_null() && jsonForWidth->is_number())

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ShapesAlignmentType.h"
 
 namespace asposeslidescloud {

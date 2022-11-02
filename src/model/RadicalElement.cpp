@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "RadicalElement.h"
 
 namespace asposeslidescloud {
@@ -107,16 +108,14 @@ void RadicalElement::fromJson(web::json::value& val)
 	web::json::value* jsonForBase = ModelBase::getField(val, "Base");
 	if(jsonForBase != nullptr && !jsonForBase->is_null())
 	{
-		std::shared_ptr<MathElement> newItem(new MathElement());
-		newItem->fromJson(*jsonForBase);
-		setBase(newItem);
+		std::shared_ptr<void> instanceForBase = asposeslidescloud::api::ClassRegistry::deserialize(L"MathElement", *jsonForBase);
+		setBase(std::static_pointer_cast<MathElement>(instanceForBase));
 	}
 	web::json::value* jsonForDegree = ModelBase::getField(val, "Degree");
 	if(jsonForDegree != nullptr && !jsonForDegree->is_null())
 	{
-		std::shared_ptr<MathElement> newItem(new MathElement());
-		newItem->fromJson(*jsonForDegree);
-		setDegree(newItem);
+		std::shared_ptr<void> instanceForDegree = asposeslidescloud::api::ClassRegistry::deserialize(L"MathElement", *jsonForDegree);
+		setDegree(std::static_pointer_cast<MathElement>(instanceForDegree));
 	}
 	web::json::value* jsonForHideDegree = ModelBase::getField(val, "HideDegree");
 	if(jsonForHideDegree != nullptr && !jsonForHideDegree->is_null())

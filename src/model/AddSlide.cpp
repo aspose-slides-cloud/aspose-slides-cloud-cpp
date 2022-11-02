@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "AddSlide.h"
 
 namespace asposeslidescloud {
@@ -105,9 +106,8 @@ void AddSlide::fromJson(web::json::value& val)
 	web::json::value* jsonForCloneFromFile = ModelBase::getField(val, "CloneFromFile");
 	if(jsonForCloneFromFile != nullptr && !jsonForCloneFromFile->is_null())
 	{
-		std::shared_ptr<InputFile> newItem(new InputFile());
-		newItem->fromJson(*jsonForCloneFromFile);
-		setCloneFromFile(newItem);
+		std::shared_ptr<void> instanceForCloneFromFile = asposeslidescloud::api::ClassRegistry::deserialize(L"InputFile", *jsonForCloneFromFile);
+		setCloneFromFile(std::static_pointer_cast<InputFile>(instanceForCloneFromFile));
 	}
 	web::json::value* jsonForCloneFromPosition = ModelBase::getField(val, "CloneFromPosition");
 	if(jsonForCloneFromPosition != nullptr && !jsonForCloneFromPosition->is_null() && jsonForCloneFromPosition->is_number())

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "TextItem.h"
 
 namespace asposeslidescloud {
@@ -79,9 +80,8 @@ void TextItem::fromJson(web::json::value& val)
 	web::json::value* jsonForUri = ModelBase::getField(val, "Uri");
 	if(jsonForUri != nullptr && !jsonForUri->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForUri);
-		setUri(newItem);
+		std::shared_ptr<void> instanceForUri = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForUri);
+		setUri(std::static_pointer_cast<ResourceUri>(instanceForUri));
 	}
 	web::json::value* jsonForText = ModelBase::getField(val, "Text");
 	if(jsonForText != nullptr && !jsonForText->is_null())

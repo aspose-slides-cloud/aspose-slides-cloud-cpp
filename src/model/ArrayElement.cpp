@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ArrayElement.h"
 
 namespace asposeslidescloud {
@@ -141,6 +142,7 @@ void ArrayElement::unsetRowSpacing()
 web::json::value ArrayElement::toJson() const
 {
 	web::json::value val = this->MathElement::toJson();
+	if (m_Arguments.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Arguments)
@@ -189,9 +191,8 @@ void ArrayElement::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<MathElement> newItem(new MathElement());
-					newItem->fromJson(item);
-					m_Arguments.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"MathElement", item);
+					m_Arguments.push_back(std::static_pointer_cast<MathElement>(newItem));
 				}
 			}
         	}

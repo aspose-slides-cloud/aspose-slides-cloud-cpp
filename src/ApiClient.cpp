@@ -224,7 +224,7 @@ void ApiClient::setQueryParameter(
 {
 	if (!value.empty())
 	{
-		queryParams[name] = value;
+		queryParams[name] = web::uri::encode_uri(value);
 	}
 }
 
@@ -252,7 +252,7 @@ void ApiClient::setPathParameter(utility::string_t& path, std::string name, util
 {
 	if (!value.empty())
 	{
-		value = utility::conversions::to_string_t("/") + value;
+		value = utility::conversions::to_string_t("/") + web::uri::encode_uri(value);
 	}
 	boost::replace_all(path, utility::conversions::to_string_t("/{") + utility::conversions::to_string_t(name) + utility::conversions::to_string_t("}"), value);
 }

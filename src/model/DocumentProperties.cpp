@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "DocumentProperties.h"
 
 namespace asposeslidescloud {
@@ -52,6 +53,7 @@ void DocumentProperties::setList(std::vector<std::shared_ptr<DocumentProperty>> 
 web::json::value DocumentProperties::toJson() const
 {
 	web::json::value val = this->ResourceBase::toJson();
+	if (m_List.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_List)
@@ -80,9 +82,8 @@ void DocumentProperties::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<DocumentProperty> newItem(new DocumentProperty());
-					newItem->fromJson(item);
-					m_List.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"DocumentProperty", item);
+					m_List.push_back(std::static_pointer_cast<DocumentProperty>(newItem));
 				}
 			}
         	}

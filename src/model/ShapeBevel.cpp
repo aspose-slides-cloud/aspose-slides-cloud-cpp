@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ShapeBevel.h"
 
 namespace asposeslidescloud {

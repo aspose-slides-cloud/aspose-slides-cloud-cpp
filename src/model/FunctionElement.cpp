@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "FunctionElement.h"
 
 namespace asposeslidescloud {
@@ -81,16 +82,14 @@ void FunctionElement::fromJson(web::json::value& val)
 	web::json::value* jsonForName = ModelBase::getField(val, "Name");
 	if(jsonForName != nullptr && !jsonForName->is_null())
 	{
-		std::shared_ptr<MathElement> newItem(new MathElement());
-		newItem->fromJson(*jsonForName);
-		setName(newItem);
+		std::shared_ptr<void> instanceForName = asposeslidescloud::api::ClassRegistry::deserialize(L"MathElement", *jsonForName);
+		setName(std::static_pointer_cast<MathElement>(instanceForName));
 	}
 	web::json::value* jsonForBase = ModelBase::getField(val, "Base");
 	if(jsonForBase != nullptr && !jsonForBase->is_null())
 	{
-		std::shared_ptr<MathElement> newItem(new MathElement());
-		newItem->fromJson(*jsonForBase);
-		setBase(newItem);
+		std::shared_ptr<void> instanceForBase = asposeslidescloud::api::ClassRegistry::deserialize(L"MathElement", *jsonForBase);
+		setBase(std::static_pointer_cast<MathElement>(instanceForBase));
 	}
 }
 

@@ -37,6 +37,8 @@
 #include <vector>
 #include "../model/Effect.h"
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

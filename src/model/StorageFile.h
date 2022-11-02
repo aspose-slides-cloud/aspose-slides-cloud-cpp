@@ -37,6 +37,8 @@
 #include <cpprest/details/basic_types.h>
 #include <cpprest/asyncrt_utils.h>
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "MasterSlides.h"
 
 namespace asposeslidescloud {
@@ -52,6 +53,7 @@ void MasterSlides::setSlideList(std::vector<std::shared_ptr<ResourceUri>> value)
 web::json::value MasterSlides::toJson() const
 {
 	web::json::value val = this->ResourceBase::toJson();
+	if (m_SlideList.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_SlideList)
@@ -80,9 +82,8 @@ void MasterSlides::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-					newItem->fromJson(item);
-					m_SlideList.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", item);
+					m_SlideList.push_back(std::static_pointer_cast<ResourceUri>(newItem));
 				}
 			}
         	}

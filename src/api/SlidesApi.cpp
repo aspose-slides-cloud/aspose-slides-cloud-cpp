@@ -47,7 +47,7 @@ SlidesApi::~SlidesApi()
 	delete m_ApiClient;
 }
 
-pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignShapes(utility::string_t name, int32_t slideIndex, utility::string_t alignmentType, boost::optional<bool> alignToSlide, std::vector<int32_t> shapes, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignShapes(utility::string_t name, int32_t slideIndex, utility::string_t alignmentType, boost::optional<bool> alignToSlide, std::vector<int32_t> shapes, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -82,6 +82,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignShapes(utility::string_t nam
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapes"), shapes);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -93,10 +94,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignShapes(utility::string_t nam
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "alignShapes");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
@@ -104,7 +106,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignShapes(utility::string_t nam
 		});
 }
 
-pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignSpecialSlideShapes(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t alignmentType, boost::optional<bool> alignToSlide, std::vector<int32_t> shapes, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignSpecialSlideShapes(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t alignmentType, boost::optional<bool> alignToSlide, std::vector<int32_t> shapes, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -155,6 +157,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignSpecialSlideShapes(utility::
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapes"), shapes);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -166,73 +169,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignSpecialSlideShapes(utility::
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "alignSpecialSlideShapes");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
-			return std::static_pointer_cast<Shapes>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Shapes>> SlidesApi::alignSubshapes(utility::string_t name, int32_t slideIndex, utility::string_t path, utility::string_t alignmentType, boost::optional<bool> alignToSlide, std::vector<int32_t> shapes, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	// verify the required parameter 'alignmentType' is set
-	if (alignmentType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: alignmentType");
-	}
-	// verify the required parameter 'alignmentType' is set
-	if (alignmentType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: alignmentType");
-	}
-	// validate the parameter 'alignmentType'
-	if (!boost::iequals(alignmentType, "AlignLeft") && !boost::iequals(alignmentType, "AlignRight") && !boost::iequals(alignmentType, "AlignCenter") && !boost::iequals(alignmentType, "AlignTop") && !boost::iequals(alignmentType, "AlignMiddle") && !boost::iequals(alignmentType, "AlignBottom") && !boost::iequals(alignmentType, "DistributeHorizontally") && !boost::iequals(alignmentType, "DistributeVertically"))
-	{
-		throw std::invalid_argument("Invalid value for alignmentType. Must be one of AlignLeft, AlignRight, AlignCenter, AlignTop, AlignMiddle, AlignBottom, DistributeHorizontally, DistributeVertically.");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/align/{alignmentType}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "alignmentType", alignmentType);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	if (alignToSlide.has_value())
-	{
-		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("alignToSlide"), alignToSlide.value());
-	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapes"), shapes);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "alignSubshapes");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
@@ -289,10 +230,10 @@ pplx::task<HttpContent> SlidesApi::convert(std::shared_ptr<HttpContent> document
 			m_ApiClient->assertResponseException(response, "convert");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -351,10 +292,11 @@ pplx::task<void> SlidesApi::convertAndSave(std::shared_ptr<HttpContent> document
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "convertAndSave");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -390,10 +332,11 @@ pplx::task<void> SlidesApi::copyFile(utility::string_t srcPath, utility::string_
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "copyFile");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -428,10 +371,11 @@ pplx::task<void> SlidesApi::copyFolder(utility::string_t srcPath, utility::strin
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "copyFolder");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -470,10 +414,11 @@ pplx::task<std::shared_ptr<LayoutSlide>> SlidesApi::copyLayoutSlide(utility::str
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "copyLayoutSlide");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"LayoutSlide", json);
@@ -518,10 +463,11 @@ pplx::task<std::shared_ptr<MasterSlide>> SlidesApi::copyMasterSlide(utility::str
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "copyMasterSlide");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"MasterSlide", json);
@@ -561,10 +507,11 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::copySlide(utility::string_t name,
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "copySlide");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slides", json);
@@ -605,10 +552,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createAnimationEffect(uti
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createAnimationEffect");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -649,10 +597,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createAnimationInteractiv
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createAnimationInteractiveSequence");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -694,10 +643,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createAnimationInteractiv
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createAnimationInteractiveSequenceEffect");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -739,10 +689,11 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::createChartCategory(utility::strin
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createChartCategory");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
@@ -785,10 +736,11 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::createChartDataPoint(utility::stri
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createChartDataPoint");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
@@ -830,10 +782,11 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::createChartSeries(utility::string_
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createChartSeries");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
@@ -878,10 +831,11 @@ pplx::task<std::shared_ptr<SlideComments>> SlidesApi::createComment(utility::str
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createComment");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideComments", json);
@@ -928,10 +882,10 @@ pplx::task<HttpContent> SlidesApi::createCommentOnline(std::shared_ptr<HttpConte
 			m_ApiClient->assertResponseException(response, "createCommentOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -959,10 +913,11 @@ pplx::task<void> SlidesApi::createFolder(utility::string_t path, utility::string
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createFolder");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -1000,10 +955,11 @@ pplx::task<void> SlidesApi::createImageWatermark(utility::string_t name, std::sh
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createImageWatermark");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -1043,10 +999,10 @@ pplx::task<HttpContent> SlidesApi::createImageWatermarkOnline(std::shared_ptr<Ht
 			m_ApiClient->assertResponseException(response, "createImageWatermarkOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -1085,10 +1041,11 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::createNotesSlide(utility::str
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createNotesSlide");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"NotesSlide", json);
@@ -1096,7 +1053,7 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::createNotesSlide(utility::str
 		});
 }
 
-pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::shared_ptr<Paragraph> dto, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::shared_ptr<Paragraph> dto, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -1119,6 +1076,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createParagraph(utility::strin
 	}
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -1134,10 +1092,11 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createParagraph(utility::strin
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createParagraph");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
@@ -1145,7 +1104,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createParagraph(utility::strin
 		});
 }
 
-pplx::task<std::shared_ptr<Portion>> SlidesApi::createPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Portion> dto, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Portion>> SlidesApi::createPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Portion> dto, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -1169,6 +1128,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::createPortion(utility::string_t 
 	}
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -1184,10 +1144,11 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::createPortion(utility::string_t 
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createPortion");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
@@ -1224,10 +1185,11 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::createPresentation(utility::str
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createPresentation");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
@@ -1262,10 +1224,11 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::createPresentationFromSource(ut
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createPresentationFromSource");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
@@ -1313,10 +1276,11 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::createPresentationFromTemplate(
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createPresentationFromTemplate");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
@@ -1355,10 +1319,11 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::createSection(utility::string_t
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createSection");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Sections", json);
@@ -1366,7 +1331,7 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::createSection(utility::string_t
 		});
 }
 
-pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createShape(utility::string_t name, int32_t slideIndex, std::shared_ptr<ShapeBase> dto, boost::optional<int32_t> shapeToClone, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createShape(utility::string_t name, int32_t slideIndex, std::shared_ptr<ShapeBase> dto, boost::optional<int32_t> shapeToClone, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -1388,6 +1353,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createShape(utility::string_t 
 	}
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -1403,10 +1369,11 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createShape(utility::string_t 
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createShape");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
@@ -1443,10 +1410,11 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::createSlide(utility::string_t nam
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createSlide");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slides", json);
@@ -1461,7 +1429,7 @@ pplx::task<std::shared_ptr<SmartArt>> SlidesApi::createSmartArtNode(utility::str
 	{
 		throw std::invalid_argument("Missing required parameter: name");
 	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/SmartArts/{smartArtIndex}/nodes");
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/smartArts/{smartArtIndex}/nodes");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
 	ApiClient::setPathParameter(methodPath, "smartArtIndex", smartArtIndex);
@@ -1486,10 +1454,11 @@ pplx::task<std::shared_ptr<SmartArt>> SlidesApi::createSmartArtNode(utility::str
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createSmartArtNode");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SmartArt", json);
@@ -1546,10 +1515,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createSpecialSlideAnimati
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createSpecialSlideAnimationEffect");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -1606,10 +1576,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createSpecialSlideAnimati
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createSpecialSlideAnimationInteractiveSequence");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -1667,10 +1638,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createSpecialSlideAnimati
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createSpecialSlideAnimationInteractiveSequenceEffect");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -1678,7 +1650,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::createSpecialSlideAnimati
 		});
 }
 
-pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createSpecialSlideParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, std::shared_ptr<Paragraph> dto, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createSpecialSlideParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, std::shared_ptr<Paragraph> dto, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -1717,6 +1689,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createSpecialSlideParagraph(ut
 	}
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -1732,10 +1705,11 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createSpecialSlideParagraph(ut
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createSpecialSlideParagraph");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
@@ -1743,7 +1717,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createSpecialSlideParagraph(ut
 		});
 }
 
-pplx::task<std::shared_ptr<Portion>> SlidesApi::createSpecialSlidePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Portion> dto, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Portion>> SlidesApi::createSpecialSlidePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Portion> dto, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -1783,6 +1757,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::createSpecialSlidePortion(utilit
 	}
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -1798,10 +1773,11 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::createSpecialSlidePortion(utilit
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createSpecialSlidePortion");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
@@ -1809,7 +1785,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::createSpecialSlidePortion(utilit
 		});
 }
 
-pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, std::shared_ptr<ShapeBase> dto, boost::optional<int32_t> shapeToClone, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, std::shared_ptr<ShapeBase> dto, boost::optional<int32_t> shapeToClone, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -1847,6 +1823,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createSpecialSlideShape(utilit
 	}
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -1862,392 +1839,15 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createSpecialSlideShape(utilit
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createSpecialSlideShape");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
 			return std::static_pointer_cast<ShapeBase>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createSpecialSlideSubshape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, std::shared_ptr<ShapeBase> dto, boost::optional<int32_t> shapeToClone, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	if (shapeToClone.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapeToClone"), shapeToClone.value());
-	}
-	if (position.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), position.value());
-	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	if (dto != nullptr)
-	{
-		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
-	}
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "createSpecialSlideSubshape");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
-			return std::static_pointer_cast<ShapeBase>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createSpecialSlideSubshapeParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, std::shared_ptr<Paragraph> dto, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	if (dto == nullptr)
-	{
-		throw std::invalid_argument("Missing required parameter: request.dto");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}/paragraphs");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	if (position.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), position.value());
-	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	if (dto != nullptr)
-	{
-		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
-	}
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "createSpecialSlideSubshapeParagraph");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
-			return std::static_pointer_cast<Paragraph>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Portion>> SlidesApi::createSpecialSlideSubshapePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Portion> dto, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	if (dto == nullptr)
-	{
-		throw std::invalid_argument("Missing required parameter: request.dto");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}/portions");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	if (position.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), position.value());
-	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	if (dto != nullptr)
-	{
-		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
-	}
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "createSpecialSlideSubshapePortion");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
-			return std::static_pointer_cast<Portion>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createSubshape(utility::string_t name, int32_t slideIndex, utility::string_t path, std::shared_ptr<ShapeBase> dto, boost::optional<int32_t> shapeToClone, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	if (shapeToClone.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapeToClone"), shapeToClone.value());
-	}
-	if (position.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), position.value());
-	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	if (dto != nullptr)
-	{
-		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
-	}
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "createSubshape");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
-			return std::static_pointer_cast<ShapeBase>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createSubshapeParagraph(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, std::shared_ptr<Paragraph> dto, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	if (dto == nullptr)
-	{
-		throw std::invalid_argument("Missing required parameter: request.dto");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/paragraphs");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	if (position.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), position.value());
-	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	if (dto != nullptr)
-	{
-		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
-	}
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "createSubshapeParagraph");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
-			return std::static_pointer_cast<Paragraph>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Portion>> SlidesApi::createSubshapePortion(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Portion> dto, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	if (dto == nullptr)
-	{
-		throw std::invalid_argument("Missing required parameter: request.dto");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}/portions");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	if (position.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), position.value());
-	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	if (dto != nullptr)
-	{
-		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
-	}
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "createSubshapePortion");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
-			return std::static_pointer_cast<Portion>(instance);
 		});
 }
 
@@ -2286,10 +1886,11 @@ pplx::task<void> SlidesApi::createWatermark(utility::string_t name, std::shared_
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "createWatermark");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -2332,10 +1933,10 @@ pplx::task<HttpContent> SlidesApi::createWatermarkOnline(std::shared_ptr<HttpCon
 			m_ApiClient->assertResponseException(response, "createWatermarkOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -2366,10 +1967,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimation(utility::
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteAnimation");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -2403,10 +2005,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimationEffect(uti
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteAnimationEffect");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -2440,10 +2043,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimationInteractiv
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteAnimationInteractiveSequence");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -2478,10 +2082,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimationInteractiv
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteAnimationInteractiveSequenceEffect");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -2514,10 +2119,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimationInteractiv
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteAnimationInteractiveSequences");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -2550,10 +2156,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteAnimationMainSequen
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteAnimationMainSequence");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -2586,10 +2193,11 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::deleteBackground(utility
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteBackground");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideBackground", json);
@@ -2624,10 +2232,11 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::deleteChartCategory(utility::strin
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteChartCategory");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
@@ -2663,10 +2272,11 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::deleteChartDataPoint(utility::stri
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteChartDataPoint");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
@@ -2701,10 +2311,11 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::deleteChartSeries(utility::string_
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteChartSeries");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
@@ -2737,10 +2348,11 @@ pplx::task<void> SlidesApi::deleteComments(utility::string_t name, utility::stri
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteComments");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -2773,10 +2385,10 @@ pplx::task<HttpContent> SlidesApi::deleteCommentsOnline(std::shared_ptr<HttpCont
 			m_ApiClient->assertResponseException(response, "deleteCommentsOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -2806,10 +2418,11 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::deleteDocumentPropert
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteDocumentProperties");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DocumentProperties", json);
@@ -2847,10 +2460,11 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::deleteDocumentPropert
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteDocumentProperty");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DocumentProperties", json);
@@ -2888,10 +2502,11 @@ pplx::task<std::shared_ptr<FontsData>> SlidesApi::deleteEmbeddedFont(utility::st
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteEmbeddedFont");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FontsData", json);
@@ -2931,10 +2546,10 @@ pplx::task<HttpContent> SlidesApi::deleteEmbeddedFontOnline(std::shared_ptr<Http
 			m_ApiClient->assertResponseException(response, "deleteEmbeddedFontOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -2963,10 +2578,11 @@ pplx::task<void> SlidesApi::deleteFile(utility::string_t path, utility::string_t
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteFile");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -2998,10 +2614,11 @@ pplx::task<void> SlidesApi::deleteFolder(utility::string_t path, utility::string
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteFolder");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -3032,10 +2649,11 @@ pplx::task<std::shared_ptr<Slide>> SlidesApi::deleteNotesSlide(utility::string_t
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteNotesSlide");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slide", json);
@@ -3043,7 +2661,7 @@ pplx::task<std::shared_ptr<Slide>> SlidesApi::deleteNotesSlide(utility::string_t
 		});
 }
 
-pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -3059,6 +2677,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteParagraph(utility::stri
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -3070,10 +2689,11 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteParagraph(utility::stri
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteParagraph");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
@@ -3081,7 +2701,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteParagraph(utility::stri
 		});
 }
 
-pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteParagraphs(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::vector<int32_t> paragraphs, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteParagraphs(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::vector<int32_t> paragraphs, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -3097,6 +2717,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteParagraphs(utility::str
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("paragraphs"), paragraphs);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -3108,10 +2729,11 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteParagraphs(utility::str
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteParagraphs");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
@@ -3119,7 +2741,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteParagraphs(utility::str
 		});
 }
 
-pplx::task<std::shared_ptr<Portions>> SlidesApi::deletePortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Portions>> SlidesApi::deletePortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -3136,6 +2758,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deletePortion(utility::string_t
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -3147,10 +2770,11 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deletePortion(utility::string_t
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deletePortion");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
@@ -3158,7 +2782,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deletePortion(utility::string_t
 		});
 }
 
-pplx::task<std::shared_ptr<Portions>> SlidesApi::deletePortions(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, std::vector<int32_t> portions, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Portions>> SlidesApi::deletePortions(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, std::vector<int32_t> portions, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -3175,6 +2799,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deletePortions(utility::string_
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("portions"), portions);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -3186,10 +2811,11 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deletePortions(utility::string_
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deletePortions");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
@@ -3221,10 +2847,11 @@ pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::deleteProtection(ut
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteProtection");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ProtectionProperties", json);
@@ -3263,10 +2890,10 @@ pplx::task<HttpContent> SlidesApi::deleteProtectionOnline(std::shared_ptr<HttpCo
 			m_ApiClient->assertResponseException(response, "deleteProtectionOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -3301,10 +2928,11 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::deleteSection(utility::string_t
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSection");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Sections", json);
@@ -3341,10 +2969,11 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::deleteSections(utility::string_
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSections");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Sections", json);
@@ -3352,7 +2981,7 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::deleteSections(utility::string_
 		});
 }
 
-pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteShape(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteShape(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -3367,6 +2996,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteShape(utility::string_t nam
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -3378,10 +3008,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteShape(utility::string_t nam
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteShape");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
@@ -3389,7 +3020,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteShape(utility::string_t nam
 		});
 }
 
-pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteShapes(utility::string_t name, int32_t slideIndex, std::vector<int32_t> shapes, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteShapes(utility::string_t name, int32_t slideIndex, std::vector<int32_t> shapes, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -3404,6 +3035,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteShapes(utility::string_t na
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapes"), shapes);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -3415,10 +3047,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteShapes(utility::string_t na
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteShapes");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
@@ -3451,10 +3084,11 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::deleteSlide(utility::string_t nam
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSlide");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slides", json);
@@ -3488,10 +3122,11 @@ pplx::task<std::shared_ptr<SlideComments>> SlidesApi::deleteSlideComments(utilit
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSlideComments");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideComments", json);
@@ -3527,10 +3162,10 @@ pplx::task<HttpContent> SlidesApi::deleteSlideCommentsOnline(std::shared_ptr<Htt
 			m_ApiClient->assertResponseException(response, "deleteSlideCommentsOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -3561,10 +3196,11 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::deleteSlides(utility::string_t na
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSlides");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slides", json);
@@ -3579,7 +3215,7 @@ pplx::task<std::shared_ptr<SmartArt>> SlidesApi::deleteSmartArtNode(utility::str
 	{
 		throw std::invalid_argument("Missing required parameter: name");
 	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/SmartArts/{smartArtIndex}/nodes/{nodeIndex}");
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/smartArts/{smartArtIndex}/nodes/{nodeIndex}");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
 	ApiClient::setPathParameter(methodPath, "smartArtIndex", smartArtIndex);
@@ -3600,10 +3236,11 @@ pplx::task<std::shared_ptr<SmartArt>> SlidesApi::deleteSmartArtNode(utility::str
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSmartArtNode");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SmartArt", json);
@@ -3652,10 +3289,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSpecialSlideAnimation");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -3705,10 +3343,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSpecialSlideAnimationEffect");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -3758,10 +3397,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSpecialSlideAnimationInteractiveSequence");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -3812,10 +3452,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSpecialSlideAnimationInteractiveSequenceEffect");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -3864,10 +3505,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSpecialSlideAnimationInteractiveSequences");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -3916,10 +3558,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSpecialSlideAnimationMainSequence");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -3927,7 +3570,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::deleteSpecialSlideAnimati
 		});
 }
 
-pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -3959,6 +3602,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideParagraph(u
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -3970,10 +3614,11 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideParagraph(u
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSpecialSlideParagraph");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
@@ -3981,7 +3626,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideParagraph(u
 		});
 }
 
-pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideParagraphs(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, std::vector<int32_t> paragraphs, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideParagraphs(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, std::vector<int32_t> paragraphs, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -4013,6 +3658,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideParagraphs(
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("paragraphs"), paragraphs);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -4024,10 +3670,11 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideParagraphs(
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSpecialSlideParagraphs");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
@@ -4035,7 +3682,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideParagraphs(
 		});
 }
 
-pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlidePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlidePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -4068,6 +3715,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlidePortion(utili
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -4079,10 +3727,11 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlidePortion(utili
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSpecialSlidePortion");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
@@ -4090,7 +3739,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlidePortion(utili
 		});
 }
 
-pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlidePortions(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, std::vector<int32_t> portions, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlidePortions(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, std::vector<int32_t> portions, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -4123,6 +3772,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlidePortions(util
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("portions"), portions);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -4134,10 +3784,11 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlidePortions(util
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSpecialSlidePortions");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
@@ -4145,7 +3796,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlidePortions(util
 		});
 }
 
-pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -4176,6 +3827,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideShape(utility::
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -4187,10 +3839,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideShape(utility::
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSpecialSlideShape");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
@@ -4198,7 +3851,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideShape(utility::
 		});
 }
 
-pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideShapes(utility::string_t name, int32_t slideIndex, utility::string_t slideType, std::vector<int32_t> shapes, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideShapes(utility::string_t name, int32_t slideIndex, utility::string_t slideType, std::vector<int32_t> shapes, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -4229,6 +3882,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideShapes(utility:
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapes"), shapes);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -4240,634 +3894,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideShapes(utility:
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteSpecialSlideShapes");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
-			return std::static_pointer_cast<Shapes>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideSubshape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "deleteSpecialSlideSubshape");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
-			return std::static_pointer_cast<Shapes>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideSubshapeParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "deleteSpecialSlideSubshapeParagraph");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
-			return std::static_pointer_cast<Paragraphs>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSpecialSlideSubshapeParagraphs(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, std::vector<int32_t> paragraphs, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}/paragraphs");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("paragraphs"), paragraphs);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "deleteSpecialSlideSubshapeParagraphs");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
-			return std::static_pointer_cast<Paragraphs>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlideSubshapePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}/portions/{portionIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-	ApiClient::setPathParameter(methodPath, "portionIndex", portionIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "deleteSpecialSlideSubshapePortion");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
-			return std::static_pointer_cast<Portions>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSpecialSlideSubshapePortions(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, std::vector<int32_t> portions, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}/portions");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("portions"), portions);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "deleteSpecialSlideSubshapePortions");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
-			return std::static_pointer_cast<Portions>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideSubshapes(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, std::vector<int32_t> shapes, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapes"), shapes);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "deleteSpecialSlideSubshapes");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
-			return std::static_pointer_cast<Shapes>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSubshape(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "deleteSubshape");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
-			return std::static_pointer_cast<Shapes>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSubshapeParagraph(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "deleteSubshapeParagraph");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
-			return std::static_pointer_cast<Paragraphs>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteSubshapeParagraphs(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, std::vector<int32_t> paragraphs, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/paragraphs");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("paragraphs"), paragraphs);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "deleteSubshapeParagraphs");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
-			return std::static_pointer_cast<Paragraphs>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSubshapePortion(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}/portions/{portionIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-	ApiClient::setPathParameter(methodPath, "portionIndex", portionIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "deleteSubshapePortion");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
-			return std::static_pointer_cast<Portions>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteSubshapePortions(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, std::vector<int32_t> portions, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}/portions");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("portions"), portions);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "deleteSubshapePortions");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
-			return std::static_pointer_cast<Portions>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSubshapes(utility::string_t name, int32_t slideIndex, utility::string_t path, std::vector<int32_t> shapes, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapes"), shapes);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "deleteSubshapes");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
@@ -4899,10 +3930,11 @@ pplx::task<std::shared_ptr<LayoutSlides>> SlidesApi::deleteUnusedLayoutSlides(ut
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteUnusedLayoutSlides");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"LayoutSlides", json);
@@ -4936,10 +3968,10 @@ pplx::task<HttpContent> SlidesApi::deleteUnusedLayoutSlidesOnline(std::shared_pt
 			m_ApiClient->assertResponseException(response, "deleteUnusedLayoutSlidesOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -4973,10 +4005,11 @@ pplx::task<std::shared_ptr<MasterSlides>> SlidesApi::deleteUnusedMasterSlides(ut
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteUnusedMasterSlides");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"MasterSlides", json);
@@ -5014,10 +4047,10 @@ pplx::task<HttpContent> SlidesApi::deleteUnusedMasterSlidesOnline(std::shared_pt
 			m_ApiClient->assertResponseException(response, "deleteUnusedMasterSlidesOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -5048,10 +4081,11 @@ pplx::task<void> SlidesApi::deleteWatermark(utility::string_t name, utility::str
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "deleteWatermark");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -5084,10 +4118,10 @@ pplx::task<HttpContent> SlidesApi::deleteWatermarkOnline(std::shared_ptr<HttpCon
 			m_ApiClient->assertResponseException(response, "deleteWatermarkOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -5118,10 +4152,10 @@ pplx::task<HttpContent> SlidesApi::downloadFile(utility::string_t path, utility:
 			m_ApiClient->assertResponseException(response, "downloadFile");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -5170,10 +4204,10 @@ pplx::task<HttpContent> SlidesApi::downloadImage(utility::string_t name, int32_t
 			m_ApiClient->assertResponseException(response, "downloadImage");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -5206,10 +4240,10 @@ pplx::task<HttpContent> SlidesApi::downloadImageDefaultFormat(utility::string_t 
 			m_ApiClient->assertResponseException(response, "downloadImageDefaultFormat");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -5242,10 +4276,10 @@ pplx::task<HttpContent> SlidesApi::downloadImageDefaultFormatOnline(std::shared_
 			m_ApiClient->assertResponseException(response, "downloadImageDefaultFormatOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -5294,10 +4328,10 @@ pplx::task<HttpContent> SlidesApi::downloadImageOnline(std::shared_ptr<HttpConte
 			m_ApiClient->assertResponseException(response, "downloadImageOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -5345,10 +4379,10 @@ pplx::task<HttpContent> SlidesApi::downloadImages(utility::string_t name, utilit
 			m_ApiClient->assertResponseException(response, "downloadImages");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -5380,10 +4414,10 @@ pplx::task<HttpContent> SlidesApi::downloadImagesDefaultFormat(utility::string_t
 			m_ApiClient->assertResponseException(response, "downloadImagesDefaultFormat");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -5415,10 +4449,10 @@ pplx::task<HttpContent> SlidesApi::downloadImagesDefaultFormatOnline(std::shared
 			m_ApiClient->assertResponseException(response, "downloadImagesDefaultFormatOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -5466,10 +4500,10 @@ pplx::task<HttpContent> SlidesApi::downloadImagesOnline(std::shared_ptr<HttpCont
 			m_ApiClient->assertResponseException(response, "downloadImagesOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -5527,10 +4561,10 @@ pplx::task<HttpContent> SlidesApi::downloadNotesSlide(utility::string_t name, in
 			m_ApiClient->assertResponseException(response, "downloadNotesSlide");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -5588,10 +4622,10 @@ pplx::task<HttpContent> SlidesApi::downloadNotesSlideOnline(std::shared_ptr<Http
 			m_ApiClient->assertResponseException(response, "downloadNotesSlideOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -5627,10 +4661,10 @@ pplx::task<HttpContent> SlidesApi::downloadPortionAsMathMl(utility::string_t nam
 			m_ApiClient->assertResponseException(response, "downloadPortionAsMathMl");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -5684,16 +4718,16 @@ pplx::task<HttpContent> SlidesApi::downloadPresentation(utility::string_t name, 
 			m_ApiClient->assertResponseException(response, "downloadPresentation");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
 }
 
-pplx::task<HttpContent> SlidesApi::downloadShape(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, std::shared_ptr<IShapeExportOptions> options, boost::optional<double> scaleX, boost::optional<double> scaleY, utility::string_t bounds, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder)
+pplx::task<HttpContent> SlidesApi::downloadShape(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, std::shared_ptr<IShapeExportOptions> options, boost::optional<double> scaleX, boost::optional<double> scaleY, utility::string_t bounds, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -5739,6 +4773,7 @@ pplx::task<HttpContent> SlidesApi::downloadShape(utility::string_t name, int32_t
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -5756,10 +4791,10 @@ pplx::task<HttpContent> SlidesApi::downloadShape(utility::string_t name, int32_t
 			m_ApiClient->assertResponseException(response, "downloadShape");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -5829,10 +4864,10 @@ pplx::task<HttpContent> SlidesApi::downloadShapeOnline(std::shared_ptr<HttpConte
 			m_ApiClient->assertResponseException(response, "downloadShapeOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -5894,10 +4929,10 @@ pplx::task<HttpContent> SlidesApi::downloadSlide(utility::string_t name, int32_t
 			m_ApiClient->assertResponseException(response, "downloadSlide");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -5960,16 +4995,16 @@ pplx::task<HttpContent> SlidesApi::downloadSlideOnline(std::shared_ptr<HttpConte
 			m_ApiClient->assertResponseException(response, "downloadSlideOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
 }
 
-pplx::task<HttpContent> SlidesApi::downloadSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, utility::string_t format, std::shared_ptr<IShapeExportOptions> options, boost::optional<double> scaleX, boost::optional<double> scaleY, utility::string_t bounds, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder)
+pplx::task<HttpContent> SlidesApi::downloadSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, utility::string_t format, std::shared_ptr<IShapeExportOptions> options, boost::optional<double> scaleX, boost::optional<double> scaleY, utility::string_t bounds, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -6031,6 +5066,7 @@ pplx::task<HttpContent> SlidesApi::downloadSpecialSlideShape(utility::string_t n
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -6048,182 +5084,10 @@ pplx::task<HttpContent> SlidesApi::downloadSpecialSlideShape(utility::string_t n
 			m_ApiClient->assertResponseException(response, "downloadSpecialSlideShape");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
-			result.setData(stream);
-			return result;
-		});
-}
-
-pplx::task<HttpContent> SlidesApi::downloadSpecialSlideSubshape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, utility::string_t format, std::shared_ptr<IShapeExportOptions> options, boost::optional<double> scaleX, boost::optional<double> scaleY, utility::string_t bounds, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	// verify the required parameter 'format' is set
-	if (format.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: format");
-	}
-	// verify the required parameter 'format' is set
-	if (format.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: format");
-	}
-	// validate the parameter 'format'
-	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Svg"))
-	{
-		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Svg.");
-	}
-	// validate the parameter 'bounds'
-	if (!bounds.empty() && !boost::iequals(bounds, "Slide") && !boost::iequals(bounds, "Shape") && !boost::iequals(bounds, "Appearance"))
-	{
-		throw std::invalid_argument("Invalid value for bounds. Must be one of Slide, Shape, Appearance.");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}/{format}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "format", format);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	if (scaleX.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("scaleX"), scaleX.value());
-	}
-	if (scaleY.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("scaleY"), scaleY.value());
-	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("bounds"), bounds);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	if (options != nullptr)
-	{
-		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(options->toJson()));
-	}
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "downloadSpecialSlideSubshape");
-			return response.extract_vector();
-		})
-		.then([=](std::vector<unsigned char> response)
-		{
-			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
-			result.setData(stream);
-			return result;
-		});
-}
-
-pplx::task<HttpContent> SlidesApi::downloadSubshape(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, utility::string_t format, std::shared_ptr<IShapeExportOptions> options, boost::optional<double> scaleX, boost::optional<double> scaleY, utility::string_t bounds, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	// verify the required parameter 'format' is set
-	if (format.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: format");
-	}
-	// verify the required parameter 'format' is set
-	if (format.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: format");
-	}
-	// validate the parameter 'format'
-	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Svg"))
-	{
-		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Svg.");
-	}
-	// validate the parameter 'bounds'
-	if (!bounds.empty() && !boost::iequals(bounds, "Slide") && !boost::iequals(bounds, "Shape") && !boost::iequals(bounds, "Appearance"))
-	{
-		throw std::invalid_argument("Invalid value for bounds. Must be one of Slide, Shape, Appearance.");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/{format}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "format", format);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	if (scaleX.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("scaleX"), scaleX.value());
-	}
-	if (scaleY.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("scaleY"), scaleY.value());
-	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("bounds"), bounds);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	if (options != nullptr)
-	{
-		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(options->toJson()));
-	}
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "downloadSubshape");
-			return response.extract_vector();
-		})
-		.then([=](std::vector<unsigned char> response)
-		{
-			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -6262,10 +5126,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::getAnimation(utility::str
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getAnimation");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -6288,10 +5153,11 @@ pplx::task<std::shared_ptr<ApiInfo>> SlidesApi::getApiInfo()
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getApiInfo");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ApiInfo", json);
@@ -6324,10 +5190,11 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::getBackground(utility::s
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getBackground");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideBackground", json);
@@ -6360,10 +5227,11 @@ pplx::task<std::shared_ptr<ColorScheme>> SlidesApi::getColorScheme(utility::stri
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getColorScheme");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ColorScheme", json);
@@ -6387,10 +5255,11 @@ pplx::task<std::shared_ptr<DiscUsage>> SlidesApi::getDiscUsage(utility::string_t
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getDiscUsage");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DiscUsage", json);
@@ -6422,10 +5291,11 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::getDocumentProperties
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getDocumentProperties");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DocumentProperties", json);
@@ -6463,10 +5333,11 @@ pplx::task<std::shared_ptr<DocumentProperty>> SlidesApi::getDocumentProperty(uti
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getDocumentProperty");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DocumentProperty", json);
@@ -6496,10 +5367,11 @@ pplx::task<std::shared_ptr<FileVersions>> SlidesApi::getFileVersions(utility::st
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getFileVersions");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FileVersions", json);
@@ -6529,10 +5401,11 @@ pplx::task<std::shared_ptr<FilesList>> SlidesApi::getFilesList(utility::string_t
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getFilesList");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FilesList", json);
@@ -6565,10 +5438,11 @@ pplx::task<std::shared_ptr<FontScheme>> SlidesApi::getFontScheme(utility::string
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getFontScheme");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FontScheme", json);
@@ -6600,10 +5474,11 @@ pplx::task<std::shared_ptr<FontsData>> SlidesApi::getFonts(utility::string_t nam
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getFonts");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FontsData", json);
@@ -6635,10 +5510,11 @@ pplx::task<std::shared_ptr<FontsData>> SlidesApi::getFontsOnline(std::shared_ptr
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getFontsOnline");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FontsData", json);
@@ -6671,10 +5547,11 @@ pplx::task<std::shared_ptr<FormatScheme>> SlidesApi::getFormatScheme(utility::st
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getFormatScheme");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FormatScheme", json);
@@ -6707,10 +5584,11 @@ pplx::task<std::shared_ptr<LayoutSlide>> SlidesApi::getLayoutSlide(utility::stri
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getLayoutSlide");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"LayoutSlide", json);
@@ -6742,10 +5620,11 @@ pplx::task<std::shared_ptr<LayoutSlides>> SlidesApi::getLayoutSlides(utility::st
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getLayoutSlides");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"LayoutSlides", json);
@@ -6778,10 +5657,11 @@ pplx::task<std::shared_ptr<MasterSlide>> SlidesApi::getMasterSlide(utility::stri
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getMasterSlide");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"MasterSlide", json);
@@ -6813,10 +5693,11 @@ pplx::task<std::shared_ptr<MasterSlides>> SlidesApi::getMasterSlides(utility::st
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getMasterSlides");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"MasterSlides", json);
@@ -6849,10 +5730,11 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::getNotesSlide(utility::string
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getNotesSlide");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"NotesSlide", json);
@@ -6885,10 +5767,11 @@ pplx::task<std::shared_ptr<NotesSlideHeaderFooter>> SlidesApi::getNotesSlideHead
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getNotesSlideHeaderFooter");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"NotesSlideHeaderFooter", json);
@@ -6921,10 +5804,11 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::getNotesSlideOnline(std::shar
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getNotesSlideOnline");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"NotesSlide", json);
@@ -6932,7 +5816,7 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::getNotesSlideOnline(std::shar
 		});
 }
 
-pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -6948,6 +5832,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getParagraph(utility::string_t
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -6959,10 +5844,11 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getParagraph(utility::string_t
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getParagraph");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
@@ -6970,7 +5856,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getParagraph(utility::string_t
 		});
 }
 
-pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getParagraphEffective(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getParagraphEffective(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -6986,6 +5872,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getParagraphEffective(utility:
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -6997,10 +5884,11 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getParagraphEffective(utility:
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getParagraphEffective");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
@@ -7035,10 +5923,11 @@ pplx::task<std::shared_ptr<TextBounds>> SlidesApi::getParagraphRectangle(utility
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getParagraphRectangle");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"TextBounds", json);
@@ -7046,7 +5935,7 @@ pplx::task<std::shared_ptr<TextBounds>> SlidesApi::getParagraphRectangle(utility
 		});
 }
 
-pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getParagraphs(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getParagraphs(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -7061,6 +5950,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getParagraphs(utility::string
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -7072,10 +5962,11 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getParagraphs(utility::string
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getParagraphs");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
@@ -7109,10 +6000,11 @@ pplx::task<std::shared_ptr<Placeholder>> SlidesApi::getPlaceholder(utility::stri
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getPlaceholder");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Placeholder", json);
@@ -7145,10 +6037,11 @@ pplx::task<std::shared_ptr<Placeholders>> SlidesApi::getPlaceholders(utility::st
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getPlaceholders");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Placeholders", json);
@@ -7156,7 +6049,7 @@ pplx::task<std::shared_ptr<Placeholders>> SlidesApi::getPlaceholders(utility::st
 		});
 }
 
-pplx::task<std::shared_ptr<Portion>> SlidesApi::getPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Portion>> SlidesApi::getPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -7173,6 +6066,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getPortion(utility::string_t nam
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -7184,10 +6078,11 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getPortion(utility::string_t nam
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getPortion");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
@@ -7195,7 +6090,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getPortion(utility::string_t nam
 		});
 }
 
-pplx::task<std::shared_ptr<Portion>> SlidesApi::getPortionEffective(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Portion>> SlidesApi::getPortionEffective(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -7212,6 +6107,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getPortionEffective(utility::str
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -7223,10 +6119,11 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getPortionEffective(utility::str
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getPortionEffective");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
@@ -7262,10 +6159,11 @@ pplx::task<std::shared_ptr<TextBounds>> SlidesApi::getPortionRectangle(utility::
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getPortionRectangle");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"TextBounds", json);
@@ -7273,7 +6171,7 @@ pplx::task<std::shared_ptr<TextBounds>> SlidesApi::getPortionRectangle(utility::
 		});
 }
 
-pplx::task<std::shared_ptr<Portions>> SlidesApi::getPortions(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Portions>> SlidesApi::getPortions(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -7289,6 +6187,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::getPortions(utility::string_t n
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -7300,10 +6199,11 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::getPortions(utility::string_t n
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getPortions");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
@@ -7335,10 +6235,11 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::getPresentation(utility::string
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getPresentation");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
@@ -7370,10 +6271,11 @@ pplx::task<std::shared_ptr<Images>> SlidesApi::getPresentationImages(utility::st
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getPresentationImages");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Images", json);
@@ -7409,10 +6311,11 @@ pplx::task<std::shared_ptr<TextItems>> SlidesApi::getPresentationTextItems(utili
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getPresentationTextItems");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"TextItems", json);
@@ -7444,10 +6347,11 @@ pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::getProtectionProper
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getProtectionProperties");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ProtectionProperties", json);
@@ -7479,10 +6383,11 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::getSections(utility::string_t n
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getSections");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Sections", json);
@@ -7490,7 +6395,7 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::getSections(utility::string_t n
 		});
 }
 
-pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getShape(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getShape(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -7505,6 +6410,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getShape(utility::string_t nam
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -7516,10 +6422,11 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getShape(utility::string_t nam
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getShape");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
@@ -7553,10 +6460,11 @@ pplx::task<std::shared_ptr<GeometryPaths>> SlidesApi::getShapeGeometryPath(utili
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getShapeGeometryPath");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"GeometryPaths", json);
@@ -7564,7 +6472,7 @@ pplx::task<std::shared_ptr<GeometryPaths>> SlidesApi::getShapeGeometryPath(utili
 		});
 }
 
-pplx::task<std::shared_ptr<Shapes>> SlidesApi::getShapes(utility::string_t name, int32_t slideIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t shapeType)
+pplx::task<std::shared_ptr<Shapes>> SlidesApi::getShapes(utility::string_t name, int32_t slideIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t shapeType, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -7584,6 +6492,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getShapes(utility::string_t name,
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("shapeType"), shapeType);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -7595,10 +6504,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getShapes(utility::string_t name,
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getShapes");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
@@ -7631,10 +6541,11 @@ pplx::task<std::shared_ptr<Slide>> SlidesApi::getSlide(utility::string_t name, i
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getSlide");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slide", json);
@@ -7667,10 +6578,11 @@ pplx::task<std::shared_ptr<SlideComments>> SlidesApi::getSlideComments(utility::
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getSlideComments");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideComments", json);
@@ -7703,10 +6615,11 @@ pplx::task<std::shared_ptr<HeaderFooter>> SlidesApi::getSlideHeaderFooter(utilit
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getSlideHeaderFooter");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"HeaderFooter", json);
@@ -7739,10 +6652,11 @@ pplx::task<std::shared_ptr<Images>> SlidesApi::getSlideImages(utility::string_t 
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getSlideImages");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Images", json);
@@ -7774,14 +6688,51 @@ pplx::task<std::shared_ptr<SlideProperties>> SlidesApi::getSlideProperties(utili
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getSlideProperties");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideProperties", json);
 			return std::static_pointer_cast<SlideProperties>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<SlideShowProperties>> SlidesApi::getSlideShowProperties(utility::string_t name, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slideShowProperties");
+	ApiClient::setPathParameter(methodPath, "name", name);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "getSlideShowProperties");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideShowProperties", json);
+			return std::static_pointer_cast<SlideShowProperties>(instance);
 		});
 }
 
@@ -7814,10 +6765,11 @@ pplx::task<std::shared_ptr<TextItems>> SlidesApi::getSlideTextItems(utility::str
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getSlideTextItems");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"TextItems", json);
@@ -7849,10 +6801,11 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::getSlides(utility::string_t name,
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getSlides");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slides", json);
@@ -7909,10 +6862,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::getSpecialSlideAnimation(
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getSpecialSlideAnimation");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -7920,7 +6874,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::getSpecialSlideAnimation(
 		});
 }
 
-pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getSpecialSlideParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getSpecialSlideParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -7952,6 +6906,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getSpecialSlideParagraph(utili
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -7963,10 +6918,11 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getSpecialSlideParagraph(utili
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getSpecialSlideParagraph");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
@@ -7974,7 +6930,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getSpecialSlideParagraph(utili
 		});
 }
 
-pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getSpecialSlideParagraphs(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getSpecialSlideParagraphs(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -8005,6 +6961,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getSpecialSlideParagraphs(uti
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -8016,10 +6973,11 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getSpecialSlideParagraphs(uti
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getSpecialSlideParagraphs");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
@@ -8027,7 +6985,7 @@ pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getSpecialSlideParagraphs(uti
 		});
 }
 
-pplx::task<std::shared_ptr<Portion>> SlidesApi::getSpecialSlidePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Portion>> SlidesApi::getSpecialSlidePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -8060,6 +7018,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getSpecialSlidePortion(utility::
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -8071,10 +7030,11 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getSpecialSlidePortion(utility::
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getSpecialSlidePortion");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
@@ -8082,7 +7042,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::getSpecialSlidePortion(utility::
 		});
 }
 
-pplx::task<std::shared_ptr<Portions>> SlidesApi::getSpecialSlidePortions(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Portions>> SlidesApi::getSpecialSlidePortions(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -8114,6 +7074,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::getSpecialSlidePortions(utility
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -8125,10 +7086,11 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::getSpecialSlidePortions(utility
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getSpecialSlidePortions");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
@@ -8136,7 +7098,7 @@ pplx::task<std::shared_ptr<Portions>> SlidesApi::getSpecialSlidePortions(utility
 		});
 }
 
-pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -8167,6 +7129,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getSpecialSlideShape(utility::
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -8178,10 +7141,11 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getSpecialSlideShape(utility::
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getSpecialSlideShape");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
@@ -8189,7 +7153,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getSpecialSlideShape(utility::
 		});
 }
 
-pplx::task<std::shared_ptr<Shapes>> SlidesApi::getSpecialSlideShapes(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Shapes>> SlidesApi::getSpecialSlideShapes(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -8219,6 +7183,7 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getSpecialSlideShapes(utility::st
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -8230,717 +7195,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getSpecialSlideShapes(utility::st
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getSpecialSlideShapes");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
-			return std::static_pointer_cast<Shapes>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getSpecialSlideSubshape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "getSpecialSlideSubshape");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
-			return std::static_pointer_cast<ShapeBase>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getSpecialSlideSubshapeParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "getSpecialSlideSubshapeParagraph");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
-			return std::static_pointer_cast<Paragraph>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getSpecialSlideSubshapeParagraphs(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}/paragraphs");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "getSpecialSlideSubshapeParagraphs");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
-			return std::static_pointer_cast<Paragraphs>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Portion>> SlidesApi::getSpecialSlideSubshapePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}/portions/{portionIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-	ApiClient::setPathParameter(methodPath, "portionIndex", portionIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "getSpecialSlideSubshapePortion");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
-			return std::static_pointer_cast<Portion>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Portions>> SlidesApi::getSpecialSlideSubshapePortions(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}/portions");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "getSpecialSlideSubshapePortions");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
-			return std::static_pointer_cast<Portions>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Shapes>> SlidesApi::getSpecialSlideSubshapes(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "getSpecialSlideSubshapes");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
-			return std::static_pointer_cast<Shapes>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::getSubshape(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "getSubshape");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
-			return std::static_pointer_cast<ShapeBase>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getSubshapeParagraph(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "getSubshapeParagraph");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
-			return std::static_pointer_cast<Paragraph>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getSubshapeParagraphEffective(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}/effective");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "getSubshapeParagraphEffective");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
-			return std::static_pointer_cast<Paragraph>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getSubshapeParagraphs(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/paragraphs");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "getSubshapeParagraphs");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
-			return std::static_pointer_cast<Paragraphs>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Portion>> SlidesApi::getSubshapePortion(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}/portions/{portionIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-	ApiClient::setPathParameter(methodPath, "portionIndex", portionIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "getSubshapePortion");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
-			return std::static_pointer_cast<Portion>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Portion>> SlidesApi::getSubshapePortionEffective(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}/portions/{portionIndex}/effective");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-	ApiClient::setPathParameter(methodPath, "portionIndex", portionIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "getSubshapePortionEffective");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
-			return std::static_pointer_cast<Portion>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Portions>> SlidesApi::getSubshapePortions(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}/portions");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "getSubshapePortions");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
-			return std::static_pointer_cast<Portions>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Shapes>> SlidesApi::getSubshapes(utility::string_t name, int32_t slideIndex, utility::string_t path, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "getSubshapes");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
@@ -8973,10 +7232,11 @@ pplx::task<std::shared_ptr<Theme>> SlidesApi::getTheme(utility::string_t name, i
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getTheme");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Theme", json);
@@ -9008,10 +7268,11 @@ pplx::task<std::shared_ptr<ViewProperties>> SlidesApi::getViewProperties(utility
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "getViewProperties");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ViewProperties", json);
@@ -9065,10 +7326,11 @@ pplx::task<std::shared_ptr<Shape>> SlidesApi::highlightShapeRegex(utility::strin
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "highlightShapeRegex");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shape", json);
@@ -9122,10 +7384,11 @@ pplx::task<std::shared_ptr<Shape>> SlidesApi::highlightShapeText(utility::string
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "highlightShapeText");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shape", json);
@@ -9161,10 +7424,11 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::importFromHtml(utility::string_
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "importFromHtml");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
@@ -9204,10 +7468,11 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::importFromPdf(utility::string_t
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "importFromPdf");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
@@ -9265,10 +7530,11 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::importShapesFromSvg(utility::stri
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "importShapesFromSvg");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
@@ -9308,10 +7574,11 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::merge(utility::string_t name, s
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "merge");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
@@ -9346,10 +7613,11 @@ pplx::task<void> SlidesApi::mergeAndSaveOnline(utility::string_t outPath, std::v
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "mergeAndSaveOnline");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -9378,10 +7646,10 @@ pplx::task<HttpContent> SlidesApi::mergeOnline(std::vector<std::shared_ptr<HttpC
 			m_ApiClient->assertResponseException(response, "mergeOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -9417,10 +7685,11 @@ pplx::task<void> SlidesApi::moveFile(utility::string_t srcPath, utility::string_
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "moveFile");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -9455,10 +7724,11 @@ pplx::task<void> SlidesApi::moveFolder(utility::string_t srcPath, utility::strin
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "moveFolder");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -9490,10 +7760,11 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::moveSection(utility::string_t n
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "moveSection");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Sections", json);
@@ -9527,10 +7798,11 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::moveSlide(utility::string_t name,
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "moveSlide");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slides", json);
@@ -9563,10 +7835,11 @@ pplx::task<std::shared_ptr<EntityExists>> SlidesApi::notesSlideExists(utility::s
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "notesSlideExists");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"EntityExists", json);
@@ -9599,10 +7872,11 @@ pplx::task<std::shared_ptr<EntityExists>> SlidesApi::notesSlideExistsOnline(std:
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "notesSlideExistsOnline");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"EntityExists", json);
@@ -9633,10 +7907,11 @@ pplx::task<std::shared_ptr<ObjectExist>> SlidesApi::objectExists(utility::string
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "objectExists");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ObjectExist", json);
@@ -9676,10 +7951,11 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::orderedMerge(utility::string_t 
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "orderedMerge");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
@@ -9713,10 +7989,10 @@ pplx::task<HttpContent> SlidesApi::pipeline(std::shared_ptr<Pipeline> pipeline, 
 			m_ApiClient->assertResponseException(response, "pipeline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -9748,10 +8024,11 @@ pplx::task<std::shared_ptr<Slides>> SlidesApi::reorderSlides(utility::string_t n
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "reorderSlides");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slides", json);
@@ -9800,10 +8077,11 @@ pplx::task<std::shared_ptr<FontsData>> SlidesApi::replaceFont(utility::string_t 
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "replaceFont");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FontsData", json);
@@ -9854,10 +8132,10 @@ pplx::task<HttpContent> SlidesApi::replaceFontOnline(std::shared_ptr<HttpContent
 			m_ApiClient->assertResponseException(response, "replaceFontOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -9903,10 +8181,11 @@ pplx::task<std::shared_ptr<DocumentReplaceResult>> SlidesApi::replacePresentatio
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "replacePresentationText");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DocumentReplaceResult", json);
@@ -9956,10 +8235,10 @@ pplx::task<HttpContent> SlidesApi::replacePresentationTextOnline(std::shared_ptr
 			m_ApiClient->assertResponseException(response, "replacePresentationTextOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -10006,10 +8285,11 @@ pplx::task<std::shared_ptr<SlideReplaceResult>> SlidesApi::replaceSlideText(util
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "replaceSlideText");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideReplaceResult", json);
@@ -10060,10 +8340,10 @@ pplx::task<HttpContent> SlidesApi::replaceSlideTextOnline(std::shared_ptr<HttpCo
 			m_ApiClient->assertResponseException(response, "replaceSlideTextOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -10103,10 +8383,11 @@ pplx::task<void> SlidesApi::savePortionAsMathMl(utility::string_t name, int32_t 
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "savePortionAsMathMl");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -10164,16 +8445,17 @@ pplx::task<void> SlidesApi::savePresentation(utility::string_t name, utility::st
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "savePresentation");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
 }
 
-pplx::task<void> SlidesApi::saveShape(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, utility::string_t outPath, std::shared_ptr<IShapeExportOptions> options, boost::optional<double> scaleX, boost::optional<double> scaleY, utility::string_t bounds, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder)
+pplx::task<void> SlidesApi::saveShape(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, utility::string_t outPath, std::shared_ptr<IShapeExportOptions> options, boost::optional<double> scaleX, boost::optional<double> scaleY, utility::string_t bounds, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -10225,6 +8507,7 @@ pplx::task<void> SlidesApi::saveShape(utility::string_t name, int32_t slideIndex
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -10240,10 +8523,11 @@ pplx::task<void> SlidesApi::saveShape(utility::string_t name, int32_t slideIndex
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "saveShape");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -10317,10 +8601,11 @@ pplx::task<void> SlidesApi::saveShapeOnline(std::shared_ptr<HttpContent> documen
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "saveShapeOnline");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -10386,10 +8671,11 @@ pplx::task<void> SlidesApi::saveSlide(utility::string_t name, int32_t slideIndex
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "saveSlide");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -10456,16 +8742,17 @@ pplx::task<void> SlidesApi::saveSlideOnline(std::shared_ptr<HttpContent> documen
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "saveSlideOnline");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
 }
 
-pplx::task<void> SlidesApi::saveSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, utility::string_t format, utility::string_t outPath, std::shared_ptr<IShapeExportOptions> options, boost::optional<double> scaleX, boost::optional<double> scaleY, utility::string_t bounds, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder)
+pplx::task<void> SlidesApi::saveSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, utility::string_t format, utility::string_t outPath, std::shared_ptr<IShapeExportOptions> options, boost::optional<double> scaleX, boost::optional<double> scaleY, utility::string_t bounds, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -10533,6 +8820,7 @@ pplx::task<void> SlidesApi::saveSpecialSlideShape(utility::string_t name, int32_
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -10548,190 +8836,11 @@ pplx::task<void> SlidesApi::saveSpecialSlideShape(utility::string_t name, int32_
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "saveSpecialSlideShape");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
-			m_ApiClient->logString(response);
-			return void();
-		});
-}
-
-pplx::task<void> SlidesApi::saveSpecialSlideSubshape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, utility::string_t format, utility::string_t outPath, std::shared_ptr<IShapeExportOptions> options, boost::optional<double> scaleX, boost::optional<double> scaleY, utility::string_t bounds, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	// verify the required parameter 'format' is set
-	if (format.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: format");
-	}
-	// verify the required parameter 'format' is set
-	if (format.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: format");
-	}
-	// validate the parameter 'format'
-	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Svg"))
-	{
-		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Svg.");
-	}
-	// verify the required parameter 'outPath' is set
-	if (outPath.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: outPath");
-	}
-	// validate the parameter 'bounds'
-	if (!bounds.empty() && !boost::iequals(bounds, "Slide") && !boost::iequals(bounds, "Shape") && !boost::iequals(bounds, "Appearance"))
-	{
-		throw std::invalid_argument("Invalid value for bounds. Must be one of Slide, Shape, Appearance.");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}/{format}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "format", format);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("outPath"), outPath);
-	if (scaleX.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("scaleX"), scaleX.value());
-	}
-	if (scaleY.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("scaleY"), scaleY.value());
-	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("bounds"), bounds);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	if (options != nullptr)
-	{
-		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(options->toJson()));
-	}
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "saveSpecialSlideSubshape");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			return void();
-		});
-}
-
-pplx::task<void> SlidesApi::saveSubshape(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, utility::string_t format, utility::string_t outPath, std::shared_ptr<IShapeExportOptions> options, boost::optional<double> scaleX, boost::optional<double> scaleY, utility::string_t bounds, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	// verify the required parameter 'format' is set
-	if (format.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: format");
-	}
-	// verify the required parameter 'format' is set
-	if (format.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: format");
-	}
-	// validate the parameter 'format'
-	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Svg"))
-	{
-		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Svg.");
-	}
-	// verify the required parameter 'outPath' is set
-	if (outPath.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: outPath");
-	}
-	// validate the parameter 'bounds'
-	if (!bounds.empty() && !boost::iequals(bounds, "Slide") && !boost::iequals(bounds, "Shape") && !boost::iequals(bounds, "Appearance"))
-	{
-		throw std::invalid_argument("Invalid value for bounds. Must be one of Slide, Shape, Appearance.");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/{format}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "format", format);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("outPath"), outPath);
-	if (scaleX.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("scaleX"), scaleX.value());
-	}
-	if (scaleY.has_value())
-	{
-		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("scaleY"), scaleY.value());
-	}
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("bounds"), bounds);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	if (options != nullptr)
-	{
-		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(options->toJson()));
-	}
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "saveSubshape");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return void();
 		});
@@ -10770,10 +8879,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::setAnimation(utility::str
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setAnimation");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -10814,10 +8924,11 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::setBackground(utility::s
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setBackground");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideBackground", json);
@@ -10856,10 +8967,11 @@ pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::setBackgroundColor(utili
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setBackgroundColor");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideBackground", json);
@@ -10917,10 +9029,11 @@ pplx::task<std::shared_ptr<Axis>> SlidesApi::setChartAxis(utility::string_t name
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setChartAxis");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Axis", json);
@@ -10962,10 +9075,11 @@ pplx::task<std::shared_ptr<Legend>> SlidesApi::setChartLegend(utility::string_t 
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setChartLegend");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Legend", json);
@@ -11008,10 +9122,11 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::setChartSeriesGroup(utility::strin
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setChartSeriesGroup");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
@@ -11069,10 +9184,11 @@ pplx::task<std::shared_ptr<ChartWall>> SlidesApi::setChartWall(utility::string_t
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setChartWall");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ChartWall", json);
@@ -11112,10 +9228,11 @@ pplx::task<std::shared_ptr<DocumentProperties>> SlidesApi::setDocumentProperties
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setDocumentProperties");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DocumentProperties", json);
@@ -11161,10 +9278,11 @@ pplx::task<std::shared_ptr<DocumentProperty>> SlidesApi::setDocumentProperty(uti
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setDocumentProperty");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DocumentProperty", json);
@@ -11207,10 +9325,11 @@ pplx::task<std::shared_ptr<FontsData>> SlidesApi::setEmbeddedFont(utility::strin
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setEmbeddedFont");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FontsData", json);
@@ -11254,10 +9373,11 @@ pplx::task<std::shared_ptr<FontsData>> SlidesApi::setEmbeddedFontFromRequest(std
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setEmbeddedFontFromRequest");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FontsData", json);
@@ -11303,10 +9423,10 @@ pplx::task<HttpContent> SlidesApi::setEmbeddedFontFromRequestOnline(std::shared_
 			m_ApiClient->assertResponseException(response, "setEmbeddedFontFromRequestOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -11349,10 +9469,10 @@ pplx::task<HttpContent> SlidesApi::setEmbeddedFontOnline(std::shared_ptr<HttpCon
 			m_ApiClient->assertResponseException(response, "setEmbeddedFontOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -11391,10 +9511,11 @@ pplx::task<std::shared_ptr<NotesSlideHeaderFooter>> SlidesApi::setNotesSlideHead
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setNotesSlideHeaderFooter");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"NotesSlideHeaderFooter", json);
@@ -11434,10 +9555,11 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::setPresentationHeaderFooter(uti
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setPresentationHeaderFooter");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
@@ -11477,10 +9599,11 @@ pplx::task<std::shared_ptr<ProtectionProperties>> SlidesApi::setProtection(utili
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setProtection");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ProtectionProperties", json);
@@ -11522,10 +9645,10 @@ pplx::task<HttpContent> SlidesApi::setProtectionOnline(std::shared_ptr<HttpConte
 			m_ApiClient->assertResponseException(response, "setProtectionOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -11563,10 +9686,11 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::setSections(utility::string_t n
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setSections");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Sections", json);
@@ -11608,10 +9732,11 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::setShapeGeometryPath(utility::
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setShapeGeometryPath");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
@@ -11652,10 +9777,11 @@ pplx::task<std::shared_ptr<HeaderFooter>> SlidesApi::setSlideHeaderFooter(utilit
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setSlideHeaderFooter");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"HeaderFooter", json);
@@ -11695,14 +9821,59 @@ pplx::task<std::shared_ptr<SlideProperties>> SlidesApi::setSlideProperties(utili
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setSlideProperties");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideProperties", json);
 			return std::static_pointer_cast<SlideProperties>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<SlideShowProperties>> SlidesApi::setSlideShowProperties(utility::string_t name, std::shared_ptr<SlideShowProperties> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	if (dto == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.dto");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slideShowProperties");
+	ApiClient::setPathParameter(methodPath, "name", name);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (dto != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "setSlideShowProperties");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideShowProperties", json);
+			return std::static_pointer_cast<SlideShowProperties>(instance);
 		});
 }
 
@@ -11755,10 +9926,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::setSpecialSlideAnimation(
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setSpecialSlideAnimation");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -11798,10 +9970,11 @@ pplx::task<std::shared_ptr<ViewProperties>> SlidesApi::setViewProperties(utility
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "setViewProperties");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ViewProperties", json);
@@ -11861,10 +10034,11 @@ pplx::task<std::shared_ptr<SplitDocumentResult>> SlidesApi::split(utility::strin
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "split");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SplitDocumentResult", json);
@@ -11931,10 +10105,11 @@ pplx::task<std::shared_ptr<SplitDocumentResult>> SlidesApi::splitAndSaveOnline(s
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "splitAndSaveOnline");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SplitDocumentResult", json);
@@ -12002,10 +10177,10 @@ pplx::task<HttpContent> SlidesApi::splitOnline(std::shared_ptr<HttpContent> docu
 			m_ApiClient->assertResponseException(response, "splitOnline");
 			return response.extract_vector();
 		})
-		.then([=](std::vector<unsigned char> response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
 			HttpContent result;
-			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(response.begin(), response.end()));
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
 		});
@@ -12032,10 +10207,11 @@ pplx::task<std::shared_ptr<StorageExist>> SlidesApi::storageExists(utility::stri
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "storageExists");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"StorageExist", json);
@@ -12077,10 +10253,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::updateAnimationEffect(uti
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "updateAnimationEffect");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -12123,10 +10300,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::updateAnimationInteractiv
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "updateAnimationInteractiveSequenceEffect");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -12169,10 +10347,11 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::updateChartCategory(utility::strin
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "updateChartCategory");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
@@ -12216,10 +10395,11 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::updateChartDataPoint(utility::stri
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "updateChartDataPoint");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
@@ -12262,10 +10442,11 @@ pplx::task<std::shared_ptr<Chart>> SlidesApi::updateChartSeries(utility::string_
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "updateChartSeries");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Chart", json);
@@ -12306,10 +10487,11 @@ pplx::task<std::shared_ptr<LayoutSlide>> SlidesApi::updateLayoutSlide(utility::s
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "updateLayoutSlide");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"LayoutSlide", json);
@@ -12350,10 +10532,11 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::updateNotesSlide(utility::str
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "updateNotesSlide");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"NotesSlide", json);
@@ -12361,7 +10544,7 @@ pplx::task<std::shared_ptr<NotesSlide>> SlidesApi::updateNotesSlide(utility::str
 		});
 }
 
-pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Paragraph> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Paragraph> dto, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -12381,6 +10564,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateParagraph(utility::strin
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -12396,10 +10580,11 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateParagraph(utility::strin
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "updateParagraph");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
@@ -12407,7 +10592,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateParagraph(utility::strin
 		});
 }
 
-pplx::task<std::shared_ptr<Portion>> SlidesApi::updatePortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, std::shared_ptr<Portion> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Portion>> SlidesApi::updatePortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, std::shared_ptr<Portion> dto, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -12428,6 +10613,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::updatePortion(utility::string_t 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -12443,10 +10629,11 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::updatePortion(utility::string_t 
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "updatePortion");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
@@ -12485,10 +10672,11 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::updateSection(utility::string_t
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "updateSection");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Sections", json);
@@ -12496,7 +10684,7 @@ pplx::task<std::shared_ptr<Sections>> SlidesApi::updateSection(utility::string_t
 		});
 }
 
-pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateShape(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::shared_ptr<ShapeBase> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateShape(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::shared_ptr<ShapeBase> dto, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -12515,6 +10703,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateShape(utility::string_t 
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -12530,10 +10719,11 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateShape(utility::string_t 
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "updateShape");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
@@ -12574,10 +10764,11 @@ pplx::task<std::shared_ptr<Slide>> SlidesApi::updateSlide(utility::string_t name
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "updateSlide");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Slide", json);
@@ -12635,10 +10826,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::updateSpecialSlideAnimati
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "updateSpecialSlideAnimationEffect");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -12697,10 +10889,11 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::updateSpecialSlideAnimati
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "updateSpecialSlideAnimationInteractiveSequenceEffect");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"SlideAnimation", json);
@@ -12708,7 +10901,7 @@ pplx::task<std::shared_ptr<SlideAnimation>> SlidesApi::updateSpecialSlideAnimati
 		});
 }
 
-pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateSpecialSlideParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Paragraph> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateSpecialSlideParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Paragraph> dto, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -12744,6 +10937,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateSpecialSlideParagraph(ut
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -12759,10 +10953,11 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateSpecialSlideParagraph(ut
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "updateSpecialSlideParagraph");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
@@ -12770,7 +10965,7 @@ pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateSpecialSlideParagraph(ut
 		});
 }
 
-pplx::task<std::shared_ptr<Portion>> SlidesApi::updateSpecialSlidePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, std::shared_ptr<Portion> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Portion>> SlidesApi::updateSpecialSlidePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, std::shared_ptr<Portion> dto, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -12807,6 +11002,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::updateSpecialSlidePortion(utilit
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -12822,10 +11018,11 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::updateSpecialSlidePortion(utilit
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "updateSpecialSlidePortion");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
@@ -12833,7 +11030,7 @@ pplx::task<std::shared_ptr<Portion>> SlidesApi::updateSpecialSlidePortion(utilit
 		});
 }
 
-pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, std::shared_ptr<ShapeBase> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, std::shared_ptr<ShapeBase> dto, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t subShape)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -12868,6 +11065,7 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateSpecialSlideShape(utilit
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("subShape"), subShape);
 
 	std::map<utility::string_t, utility::string_t> headerParams;
 	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
@@ -12883,374 +11081,15 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateSpecialSlideShape(utilit
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "updateSpecialSlideShape");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
 			return std::static_pointer_cast<ShapeBase>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateSpecialSlideSubshape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, std::shared_ptr<ShapeBase> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	if (dto == nullptr)
-	{
-		throw std::invalid_argument("Missing required parameter: request.dto");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	if (dto != nullptr)
-	{
-		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
-	}
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "updateSpecialSlideSubshape");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
-			return std::static_pointer_cast<ShapeBase>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateSpecialSlideSubshapeParagraph(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Paragraph> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	if (dto == nullptr)
-	{
-		throw std::invalid_argument("Missing required parameter: request.dto");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	if (dto != nullptr)
-	{
-		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
-	}
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "updateSpecialSlideSubshapeParagraph");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
-			return std::static_pointer_cast<Paragraph>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Portion>> SlidesApi::updateSpecialSlideSubshapePortion(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, std::shared_ptr<Portion> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// verify the required parameter 'slideType' is set
-	if (slideType.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: slideType");
-	}
-	// validate the parameter 'slideType'
-	if (!boost::iequals(slideType, "MasterSlide") && !boost::iequals(slideType, "LayoutSlide") && !boost::iequals(slideType, "NotesSlide"))
-	{
-		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	if (dto == nullptr)
-	{
-		throw std::invalid_argument("Missing required parameter: request.dto");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}/portions/{portionIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "slideType", slideType);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-	ApiClient::setPathParameter(methodPath, "portionIndex", portionIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	if (dto != nullptr)
-	{
-		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
-	}
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "updateSpecialSlideSubshapePortion");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
-			return std::static_pointer_cast<Portion>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateSubshape(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, std::shared_ptr<ShapeBase> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	if (dto == nullptr)
-	{
-		throw std::invalid_argument("Missing required parameter: request.dto");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	if (dto != nullptr)
-	{
-		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
-	}
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "updateSubshape");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
-			return std::static_pointer_cast<ShapeBase>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateSubshapeParagraph(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, std::shared_ptr<Paragraph> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	if (dto == nullptr)
-	{
-		throw std::invalid_argument("Missing required parameter: request.dto");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	if (dto != nullptr)
-	{
-		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
-	}
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "updateSubshapeParagraph");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
-			return std::static_pointer_cast<Paragraph>(instance);
-		});
-}
-
-pplx::task<std::shared_ptr<Portion>> SlidesApi::updateSubshapePortion(utility::string_t name, int32_t slideIndex, utility::string_t path, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, std::shared_ptr<Portion> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
-{
-	// verify the required parameter 'name' is set
-	if (name.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: name");
-	}
-	// verify the required parameter 'path' is set
-	if (path.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: path");
-	}
-	if (dto == nullptr)
-	{
-		throw std::invalid_argument("Missing required parameter: request.dto");
-	}
-	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{path}/{shapeIndex}/paragraphs/{paragraphIndex}/portions/{portionIndex}");
-	ApiClient::setPathParameter(methodPath, "name", name);
-	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
-	ApiClient::setPathParameter(methodPath, "path", path);
-	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
-	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
-	ApiClient::setPathParameter(methodPath, "portionIndex", portionIndex);
-
-	std::map<utility::string_t, utility::string_t> queryParams;
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
-	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
-
-	std::map<utility::string_t, utility::string_t> headerParams;
-	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
-
-	std::shared_ptr<IHttpBody> httpBody = nullptr;
-	std::vector<std::shared_ptr<HttpContent>> requestFiles;
-	if (dto != nullptr)
-	{
-		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
-	}
-
-	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
-		.then([=](web::http::http_response response)
-		{
-			m_ApiClient->assertResponseException(response, "updateSubshapePortion");
-			return response.extract_string();
-		})
-		.then([=](utility::string_t response)
-		{
-			m_ApiClient->logString(response);
-			web::json::value json = web::json::value::parse(response);
-			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
-			return std::static_pointer_cast<Portion>(instance);
 		});
 }
 
@@ -13284,10 +11123,11 @@ pplx::task<std::shared_ptr<FilesUploadResult>> SlidesApi::uploadFile(utility::st
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "uploadFile");
-			return response.extract_string();
+			return response.extract_vector();
 		})
-		.then([=](utility::string_t response)
+		.then([=](std::vector<unsigned char> responseVector)
 		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FilesUploadResult", json);

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "PatternFill.h"
 
 namespace asposeslidescloud {

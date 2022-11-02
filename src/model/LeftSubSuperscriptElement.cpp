@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "LeftSubSuperscriptElement.h"
 
 namespace asposeslidescloud {
@@ -96,23 +97,20 @@ void LeftSubSuperscriptElement::fromJson(web::json::value& val)
 	web::json::value* jsonForBase = ModelBase::getField(val, "Base");
 	if(jsonForBase != nullptr && !jsonForBase->is_null())
 	{
-		std::shared_ptr<MathElement> newItem(new MathElement());
-		newItem->fromJson(*jsonForBase);
-		setBase(newItem);
+		std::shared_ptr<void> instanceForBase = asposeslidescloud::api::ClassRegistry::deserialize(L"MathElement", *jsonForBase);
+		setBase(std::static_pointer_cast<MathElement>(instanceForBase));
 	}
 	web::json::value* jsonForSubscript = ModelBase::getField(val, "Subscript");
 	if(jsonForSubscript != nullptr && !jsonForSubscript->is_null())
 	{
-		std::shared_ptr<MathElement> newItem(new MathElement());
-		newItem->fromJson(*jsonForSubscript);
-		setSubscript(newItem);
+		std::shared_ptr<void> instanceForSubscript = asposeslidescloud::api::ClassRegistry::deserialize(L"MathElement", *jsonForSubscript);
+		setSubscript(std::static_pointer_cast<MathElement>(instanceForSubscript));
 	}
 	web::json::value* jsonForSuperscript = ModelBase::getField(val, "Superscript");
 	if(jsonForSuperscript != nullptr && !jsonForSuperscript->is_null())
 	{
-		std::shared_ptr<MathElement> newItem(new MathElement());
-		newItem->fromJson(*jsonForSuperscript);
-		setSuperscript(newItem);
+		std::shared_ptr<void> instanceForSuperscript = asposeslidescloud::api::ClassRegistry::deserialize(L"MathElement", *jsonForSuperscript);
+		setSuperscript(std::static_pointer_cast<MathElement>(instanceForSuperscript));
 	}
 }
 

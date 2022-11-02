@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Table.h"
 
 namespace asposeslidescloud {
@@ -233,6 +234,7 @@ web::json::value Table::toJson() const
 	{
 		val[utility::conversions::to_string_t("Style")] = ModelBase::toJson(m_Style);
 	}
+	if (m_Rows.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Rows)
@@ -241,6 +243,7 @@ web::json::value Table::toJson() const
 		}
 		val[utility::conversions::to_string_t("Rows")] = web::json::value::array(jsonArray);
 	}
+	if (m_Columns.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Columns)
@@ -302,9 +305,8 @@ void Table::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<TableRow> newItem(new TableRow());
-					newItem->fromJson(item);
-					m_Rows.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"TableRow", item);
+					m_Rows.push_back(std::static_pointer_cast<TableRow>(newItem));
 				}
 			}
         	}
@@ -323,9 +325,8 @@ void Table::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<TableColumn> newItem(new TableColumn());
-					newItem->fromJson(item);
-					m_Columns.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"TableColumn", item);
+					m_Columns.push_back(std::static_pointer_cast<TableColumn>(newItem));
 				}
 			}
         	}

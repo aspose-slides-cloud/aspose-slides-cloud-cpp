@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Portions.h"
 
 namespace asposeslidescloud {
@@ -52,6 +53,7 @@ void Portions::setItems(std::vector<std::shared_ptr<Portion>> value)
 web::json::value Portions::toJson() const
 {
 	web::json::value val = this->ResourceBase::toJson();
+	if (m_Items.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Items)
@@ -80,9 +82,8 @@ void Portions::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<Portion> newItem(new Portion());
-					newItem->fromJson(item);
-					m_Items.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"Portion", item);
+					m_Items.push_back(std::static_pointer_cast<Portion>(newItem));
 				}
 			}
         	}

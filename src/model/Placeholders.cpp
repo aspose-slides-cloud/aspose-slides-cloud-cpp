@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Placeholders.h"
 
 namespace asposeslidescloud {
@@ -52,6 +53,7 @@ void Placeholders::setPlaceholderLinks(std::vector<std::shared_ptr<ResourceUri>>
 web::json::value Placeholders::toJson() const
 {
 	web::json::value val = this->ResourceBase::toJson();
+	if (m_PlaceholderLinks.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_PlaceholderLinks)
@@ -80,9 +82,8 @@ void Placeholders::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-					newItem->fromJson(item);
-					m_PlaceholderLinks.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", item);
+					m_PlaceholderLinks.push_back(std::static_pointer_cast<ResourceUri>(newItem));
 				}
 			}
         	}

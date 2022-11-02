@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Pipeline.h"
 
 namespace asposeslidescloud {
@@ -67,6 +68,7 @@ web::json::value Pipeline::toJson() const
 	{
 		val[utility::conversions::to_string_t("Input")] = ModelBase::toJson(m_Input);
 	}
+	if (m_Tasks.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Tasks)
@@ -83,9 +85,8 @@ void Pipeline::fromJson(web::json::value& val)
 	web::json::value* jsonForInput = ModelBase::getField(val, "Input");
 	if(jsonForInput != nullptr && !jsonForInput->is_null())
 	{
-		std::shared_ptr<Input> newItem(new Input());
-		newItem->fromJson(*jsonForInput);
-		setInput(newItem);
+		std::shared_ptr<void> instanceForInput = asposeslidescloud::api::ClassRegistry::deserialize(L"Input", *jsonForInput);
+		setInput(std::static_pointer_cast<Input>(instanceForInput));
 	}
 	web::json::value* jsonForTasks = ModelBase::getField(val, "Tasks");
 	if(jsonForTasks != nullptr && !jsonForTasks->is_null())
@@ -101,9 +102,8 @@ void Pipeline::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<Task> newItem(new Task());
-					newItem->fromJson(item);
-					m_Tasks.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"Task", item);
+					m_Tasks.push_back(std::static_pointer_cast<Task>(newItem));
 				}
 			}
         	}

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "BubbleSeries.h"
 
 namespace asposeslidescloud {
@@ -64,6 +65,7 @@ void BubbleSeries::setNumberFormatOfBubbleSizes(utility::string_t value)
 web::json::value BubbleSeries::toJson() const
 {
 	web::json::value val = this->XYSeries::toJson();
+	if (m_DataPoints.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_DataPoints)
@@ -96,9 +98,8 @@ void BubbleSeries::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<BubbleChartDataPoint> newItem(new BubbleChartDataPoint());
-					newItem->fromJson(item);
-					m_DataPoints.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"BubbleChartDataPoint", item);
+					m_DataPoints.push_back(std::static_pointer_cast<BubbleChartDataPoint>(newItem));
 				}
 			}
         	}

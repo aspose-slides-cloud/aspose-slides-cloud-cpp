@@ -44,6 +44,8 @@
 #include "../model/ZoomObject.h"
 #include <vector>
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

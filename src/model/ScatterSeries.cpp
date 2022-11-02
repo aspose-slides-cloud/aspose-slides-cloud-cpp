@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ScatterSeries.h"
 
 namespace asposeslidescloud {
@@ -53,6 +54,7 @@ void ScatterSeries::setDataPoints(std::vector<std::shared_ptr<ScatterChartDataPo
 web::json::value ScatterSeries::toJson() const
 {
 	web::json::value val = this->XYSeries::toJson();
+	if (m_DataPoints.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_DataPoints)
@@ -81,9 +83,8 @@ void ScatterSeries::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<ScatterChartDataPoint> newItem(new ScatterChartDataPoint());
-					newItem->fromJson(item);
-					m_DataPoints.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"ScatterChartDataPoint", item);
+					m_DataPoints.push_back(std::static_pointer_cast<ScatterChartDataPoint>(newItem));
 				}
 			}
         	}

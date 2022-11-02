@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "HslEffect.h"
 
 namespace asposeslidescloud {

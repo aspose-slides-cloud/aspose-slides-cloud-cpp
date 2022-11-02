@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "SplitDocumentResult.h"
 
 namespace asposeslidescloud {
@@ -52,6 +53,7 @@ void SplitDocumentResult::setSlides(std::vector<std::shared_ptr<ResourceUri>> va
 web::json::value SplitDocumentResult::toJson() const
 {
 	web::json::value val = this->ResourceBase::toJson();
+	if (m_Slides.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Slides)
@@ -80,9 +82,8 @@ void SplitDocumentResult::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-					newItem->fromJson(item);
-					m_Slides.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", item);
+					m_Slides.push_back(std::static_pointer_cast<ResourceUri>(newItem));
 				}
 			}
         	}

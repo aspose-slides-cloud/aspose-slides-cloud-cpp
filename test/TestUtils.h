@@ -93,6 +93,8 @@ public:
 	template<typename T>
 	utility::string_t getExpectedMessage(std::string functionName, std::string parameterName, boost::optional<T> value);
 
+	utility::string_t getFileDataAsBase64(utility::string_t path);
+
 private:
 	void initRules();
 	void initTestFiles();

@@ -40,6 +40,8 @@
 #include "../model/ImageExportOptionsBase.h"
 #include <vector>
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

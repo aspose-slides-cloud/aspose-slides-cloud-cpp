@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "SlideAnimation.h"
 
 namespace asposeslidescloud {
@@ -63,6 +64,7 @@ void SlideAnimation::setInteractiveSequences(std::vector<std::shared_ptr<Interac
 web::json::value SlideAnimation::toJson() const
 {
 	web::json::value val = this->ResourceBase::toJson();
+	if (m_MainSequence.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_MainSequence)
@@ -71,6 +73,7 @@ web::json::value SlideAnimation::toJson() const
 		}
 		val[utility::conversions::to_string_t("MainSequence")] = web::json::value::array(jsonArray);
 	}
+	if (m_InteractiveSequences.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_InteractiveSequences)
@@ -99,9 +102,8 @@ void SlideAnimation::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<Effect> newItem(new Effect());
-					newItem->fromJson(item);
-					m_MainSequence.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"Effect", item);
+					m_MainSequence.push_back(std::static_pointer_cast<Effect>(newItem));
 				}
 			}
         	}
@@ -120,9 +122,8 @@ void SlideAnimation::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<InteractiveSequence> newItem(new InteractiveSequence());
-					newItem->fromJson(item);
-					m_InteractiveSequences.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"InteractiveSequence", item);
+					m_InteractiveSequences.push_back(std::static_pointer_cast<InteractiveSequence>(newItem));
 				}
 			}
         	}

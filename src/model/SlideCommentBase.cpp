@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "SlideCommentBase.h"
 
 namespace asposeslidescloud {
@@ -108,6 +109,7 @@ web::json::value SlideCommentBase::toJson() const
 	{
 		val[utility::conversions::to_string_t("CreatedTime")] = ModelBase::toJson(m_CreatedTime);
 	}
+	if (m_ChildComments.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_ChildComments)
@@ -154,9 +156,8 @@ void SlideCommentBase::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<SlideCommentBase> newItem(new SlideCommentBase());
-					newItem->fromJson(item);
-					m_ChildComments.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"SlideCommentBase", item);
+					m_ChildComments.push_back(std::static_pointer_cast<SlideCommentBase>(newItem));
 				}
 			}
         	}

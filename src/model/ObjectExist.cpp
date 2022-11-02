@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ObjectExist.h"
 
 namespace asposeslidescloud {

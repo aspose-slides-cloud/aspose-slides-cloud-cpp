@@ -36,6 +36,8 @@
 
 #include "../model/InputFile.h"
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

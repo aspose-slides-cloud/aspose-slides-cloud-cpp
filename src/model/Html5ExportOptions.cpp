@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Html5ExportOptions.h"
 
 namespace asposeslidescloud {

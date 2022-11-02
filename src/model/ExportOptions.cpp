@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ExportOptions.h"
 
 namespace asposeslidescloud {
@@ -89,6 +90,7 @@ web::json::value ExportOptions::toJson() const
 	{
 		val[utility::conversions::to_string_t("DefaultRegularFont")] = ModelBase::toJson(m_DefaultRegularFont);
 	}
+	if (m_FontFallbackRules.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_FontFallbackRules)
@@ -97,6 +99,7 @@ web::json::value ExportOptions::toJson() const
 		}
 		val[utility::conversions::to_string_t("FontFallbackRules")] = web::json::value::array(jsonArray);
 	}
+	if (m_FontSubstRules.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_FontSubstRules)
@@ -133,9 +136,8 @@ void ExportOptions::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<FontFallbackRule> newItem(new FontFallbackRule());
-					newItem->fromJson(item);
-					m_FontFallbackRules.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"FontFallbackRule", item);
+					m_FontFallbackRules.push_back(std::static_pointer_cast<FontFallbackRule>(newItem));
 				}
 			}
         	}
@@ -154,9 +156,8 @@ void ExportOptions::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<FontSubstRule> newItem(new FontSubstRule());
-					newItem->fromJson(item);
-					m_FontSubstRules.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"FontSubstRule", item);
+					m_FontSubstRules.push_back(std::static_pointer_cast<FontSubstRule>(newItem));
 				}
 			}
         	}

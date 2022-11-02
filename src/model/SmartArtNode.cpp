@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "SmartArtNode.h"
 
 namespace asposeslidescloud {
@@ -107,6 +108,7 @@ void SmartArtNode::setParagraphs(std::shared_ptr<ResourceUri> value)
 web::json::value SmartArtNode::toJson() const
 {
 	web::json::value val = web::json::value::object();
+	if (m_Nodes.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Nodes)
@@ -151,9 +153,8 @@ void SmartArtNode::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<SmartArtNode> newItem(new SmartArtNode());
-					newItem->fromJson(item);
-					m_Nodes.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"SmartArtNode", item);
+					m_Nodes.push_back(std::static_pointer_cast<SmartArtNode>(newItem));
 				}
 			}
         	}
@@ -161,9 +162,8 @@ void SmartArtNode::fromJson(web::json::value& val)
 	web::json::value* jsonForShapes = ModelBase::getField(val, "Shapes");
 	if(jsonForShapes != nullptr && !jsonForShapes->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForShapes);
-		setShapes(newItem);
+		std::shared_ptr<void> instanceForShapes = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForShapes);
+		setShapes(std::static_pointer_cast<ResourceUri>(instanceForShapes));
 	}
 	web::json::value* jsonForIsAssistant = ModelBase::getField(val, "IsAssistant");
 	if(jsonForIsAssistant != nullptr && !jsonForIsAssistant->is_null())
@@ -183,9 +183,8 @@ void SmartArtNode::fromJson(web::json::value& val)
 	web::json::value* jsonForParagraphs = ModelBase::getField(val, "Paragraphs");
 	if(jsonForParagraphs != nullptr && !jsonForParagraphs->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForParagraphs);
-		setParagraphs(newItem);
+		std::shared_ptr<void> instanceForParagraphs = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForParagraphs);
+		setParagraphs(std::static_pointer_cast<ResourceUri>(instanceForParagraphs));
 	}
 }
 

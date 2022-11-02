@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Input.h"
 
 namespace asposeslidescloud {
@@ -94,23 +95,20 @@ void Input::fromJson(web::json::value& val)
 	web::json::value* jsonForTemplate = ModelBase::getField(val, "Template");
 	if(jsonForTemplate != nullptr && !jsonForTemplate->is_null())
 	{
-		std::shared_ptr<InputFile> newItem(new InputFile());
-		newItem->fromJson(*jsonForTemplate);
-		setTemplate(newItem);
+		std::shared_ptr<void> instanceForTemplate = asposeslidescloud::api::ClassRegistry::deserialize(L"InputFile", *jsonForTemplate);
+		setTemplate(std::static_pointer_cast<InputFile>(instanceForTemplate));
 	}
 	web::json::value* jsonForHtmlData = ModelBase::getField(val, "HtmlData");
 	if(jsonForHtmlData != nullptr && !jsonForHtmlData->is_null())
 	{
-		std::shared_ptr<InputFile> newItem(new InputFile());
-		newItem->fromJson(*jsonForHtmlData);
-		setHtmlData(newItem);
+		std::shared_ptr<void> instanceForHtmlData = asposeslidescloud::api::ClassRegistry::deserialize(L"InputFile", *jsonForHtmlData);
+		setHtmlData(std::static_pointer_cast<InputFile>(instanceForHtmlData));
 	}
 	web::json::value* jsonForTemplateData = ModelBase::getField(val, "TemplateData");
 	if(jsonForTemplateData != nullptr && !jsonForTemplateData->is_null())
 	{
-		std::shared_ptr<InputFile> newItem(new InputFile());
-		newItem->fromJson(*jsonForTemplateData);
-		setTemplateData(newItem);
+		std::shared_ptr<void> instanceForTemplateData = asposeslidescloud::api::ClassRegistry::deserialize(L"InputFile", *jsonForTemplateData);
+		setTemplateData(std::static_pointer_cast<InputFile>(instanceForTemplateData));
 	}
 }
 

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "OneValueChartDataPoint.h"
 
 namespace asposeslidescloud {

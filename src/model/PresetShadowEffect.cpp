@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "PresetShadowEffect.h"
 
 namespace asposeslidescloud {

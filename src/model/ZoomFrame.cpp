@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ZoomFrame.h"
 
 namespace asposeslidescloud {

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "NotesSlideHeaderFooter.h"
 
 namespace asposeslidescloud {

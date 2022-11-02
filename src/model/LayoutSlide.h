@@ -39,6 +39,8 @@
 #include "../model/ResourceUri.h"
 #include <vector>
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "TintEffect.h"
 
 namespace asposeslidescloud {

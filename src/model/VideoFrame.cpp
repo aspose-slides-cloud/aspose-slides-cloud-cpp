@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "VideoFrame.h"
 
 namespace asposeslidescloud {
@@ -250,9 +251,8 @@ void VideoFrame::fromJson(web::json::value& val)
 	web::json::value* jsonForPictureFillFormat = ModelBase::getField(val, "PictureFillFormat");
 	if(jsonForPictureFillFormat != nullptr && !jsonForPictureFillFormat->is_null())
 	{
-		std::shared_ptr<PictureFill> newItem(new PictureFill());
-		newItem->fromJson(*jsonForPictureFillFormat);
-		setPictureFillFormat(newItem);
+		std::shared_ptr<void> instanceForPictureFillFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"PictureFill", *jsonForPictureFillFormat);
+		setPictureFillFormat(std::static_pointer_cast<PictureFill>(instanceForPictureFillFormat));
 	}
 }
 

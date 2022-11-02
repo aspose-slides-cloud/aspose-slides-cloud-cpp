@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "OleObjectFrame.h"
 
 namespace asposeslidescloud {
@@ -204,9 +205,8 @@ void OleObjectFrame::fromJson(web::json::value& val)
 	web::json::value* jsonForSubstitutePictureFormat = ModelBase::getField(val, "SubstitutePictureFormat");
 	if(jsonForSubstitutePictureFormat != nullptr && !jsonForSubstitutePictureFormat->is_null())
 	{
-		std::shared_ptr<PictureFill> newItem(new PictureFill());
-		newItem->fromJson(*jsonForSubstitutePictureFormat);
-		setSubstitutePictureFormat(newItem);
+		std::shared_ptr<void> instanceForSubstitutePictureFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"PictureFill", *jsonForSubstitutePictureFormat);
+		setSubstitutePictureFormat(std::static_pointer_cast<PictureFill>(instanceForSubstitutePictureFormat));
 	}
 	web::json::value* jsonForObjectName = ModelBase::getField(val, "ObjectName");
 	if(jsonForObjectName != nullptr && !jsonForObjectName->is_null())

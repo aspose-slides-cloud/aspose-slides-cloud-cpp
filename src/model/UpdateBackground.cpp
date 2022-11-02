@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "UpdateBackground.h"
 
 namespace asposeslidescloud {
@@ -75,6 +76,7 @@ void UpdateBackground::setBackground(std::shared_ptr<SlideBackground> value)
 web::json::value UpdateBackground::toJson() const
 {
 	web::json::value val = this->Task::toJson();
+	if (m_Slides.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Slides)
@@ -108,9 +110,8 @@ void UpdateBackground::fromJson(web::json::value& val)
 	web::json::value* jsonForBackground = ModelBase::getField(val, "Background");
 	if(jsonForBackground != nullptr && !jsonForBackground->is_null())
 	{
-		std::shared_ptr<SlideBackground> newItem(new SlideBackground());
-		newItem->fromJson(*jsonForBackground);
-		setBackground(newItem);
+		std::shared_ptr<void> instanceForBackground = asposeslidescloud::api::ClassRegistry::deserialize(L"SlideBackground", *jsonForBackground);
+		setBackground(std::static_pointer_cast<SlideBackground>(instanceForBackground));
 	}
 }
 

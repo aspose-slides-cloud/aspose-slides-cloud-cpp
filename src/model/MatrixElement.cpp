@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "MatrixElement.h"
 
 namespace asposeslidescloud {

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "XamlExportOptions.h"
 
 namespace asposeslidescloud {

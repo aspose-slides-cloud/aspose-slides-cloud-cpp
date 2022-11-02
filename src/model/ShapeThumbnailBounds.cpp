@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ShapeThumbnailBounds.h"
 
 namespace asposeslidescloud {

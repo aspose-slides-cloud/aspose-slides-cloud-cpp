@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "GradientFillStop.h"
 
 namespace asposeslidescloud {

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Connector.h"
 
 namespace asposeslidescloud {
@@ -133,9 +134,8 @@ void Connector::fromJson(web::json::value& val)
 	web::json::value* jsonForStartShapeConnectedTo = ModelBase::getField(val, "StartShapeConnectedTo");
 	if(jsonForStartShapeConnectedTo != nullptr && !jsonForStartShapeConnectedTo->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForStartShapeConnectedTo);
-		setStartShapeConnectedTo(newItem);
+		std::shared_ptr<void> instanceForStartShapeConnectedTo = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForStartShapeConnectedTo);
+		setStartShapeConnectedTo(std::static_pointer_cast<ResourceUri>(instanceForStartShapeConnectedTo));
 	}
 	web::json::value* jsonForStartShapeConnectedToIndex = ModelBase::getField(val, "StartShapeConnectedToIndex");
 	if(jsonForStartShapeConnectedToIndex != nullptr && !jsonForStartShapeConnectedToIndex->is_null() && jsonForStartShapeConnectedToIndex->is_number())
@@ -145,9 +145,8 @@ void Connector::fromJson(web::json::value& val)
 	web::json::value* jsonForEndShapeConnectedTo = ModelBase::getField(val, "EndShapeConnectedTo");
 	if(jsonForEndShapeConnectedTo != nullptr && !jsonForEndShapeConnectedTo->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForEndShapeConnectedTo);
-		setEndShapeConnectedTo(newItem);
+		std::shared_ptr<void> instanceForEndShapeConnectedTo = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForEndShapeConnectedTo);
+		setEndShapeConnectedTo(std::static_pointer_cast<ResourceUri>(instanceForEndShapeConnectedTo));
 	}
 	web::json::value* jsonForEndShapeConnectedToIndex = ModelBase::getField(val, "EndShapeConnectedToIndex");
 	if(jsonForEndShapeConnectedToIndex != nullptr && !jsonForEndShapeConnectedToIndex->is_null() && jsonForEndShapeConnectedToIndex->is_number())

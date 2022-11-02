@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "AddShape.h"
 
 namespace asposeslidescloud {
@@ -81,9 +82,8 @@ void AddShape::fromJson(web::json::value& val)
 	web::json::value* jsonForShape = ModelBase::getField(val, "Shape");
 	if(jsonForShape != nullptr && !jsonForShape->is_null())
 	{
-		std::shared_ptr<ShapeBase> newItem(new ShapeBase());
-		newItem->fromJson(*jsonForShape);
-		setShape(newItem);
+		std::shared_ptr<void> instanceForShape = asposeslidescloud::api::ClassRegistry::deserialize(L"ShapeBase", *jsonForShape);
+		setShape(std::static_pointer_cast<ShapeBase>(instanceForShape));
 	}
 	web::json::value* jsonForShapePath = ModelBase::getField(val, "ShapePath");
 	if(jsonForShapePath != nullptr && !jsonForShapePath->is_null())

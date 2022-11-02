@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "DocumentReplaceResult.h"
 
 namespace asposeslidescloud {

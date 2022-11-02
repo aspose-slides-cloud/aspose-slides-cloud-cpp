@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Legend.h"
 
 namespace asposeslidescloud {
@@ -295,23 +296,20 @@ void Legend::fromJson(web::json::value& val)
 	web::json::value* jsonForFillFormat = ModelBase::getField(val, "FillFormat");
 	if(jsonForFillFormat != nullptr && !jsonForFillFormat->is_null())
 	{
-		std::shared_ptr<FillFormat> newItem(new FillFormat());
-		newItem->fromJson(*jsonForFillFormat);
-		setFillFormat(newItem);
+		std::shared_ptr<void> instanceForFillFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"FillFormat", *jsonForFillFormat);
+		setFillFormat(std::static_pointer_cast<FillFormat>(instanceForFillFormat));
 	}
 	web::json::value* jsonForEffectFormat = ModelBase::getField(val, "EffectFormat");
 	if(jsonForEffectFormat != nullptr && !jsonForEffectFormat->is_null())
 	{
-		std::shared_ptr<EffectFormat> newItem(new EffectFormat());
-		newItem->fromJson(*jsonForEffectFormat);
-		setEffectFormat(newItem);
+		std::shared_ptr<void> instanceForEffectFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"EffectFormat", *jsonForEffectFormat);
+		setEffectFormat(std::static_pointer_cast<EffectFormat>(instanceForEffectFormat));
 	}
 	web::json::value* jsonForLineFormat = ModelBase::getField(val, "LineFormat");
 	if(jsonForLineFormat != nullptr && !jsonForLineFormat->is_null())
 	{
-		std::shared_ptr<LineFormat> newItem(new LineFormat());
-		newItem->fromJson(*jsonForLineFormat);
-		setLineFormat(newItem);
+		std::shared_ptr<void> instanceForLineFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"LineFormat", *jsonForLineFormat);
+		setLineFormat(std::static_pointer_cast<LineFormat>(instanceForLineFormat));
 	}
 	web::json::value* jsonForHasLegend = ModelBase::getField(val, "HasLegend");
 	if(jsonForHasLegend != nullptr && !jsonForHasLegend->is_null())

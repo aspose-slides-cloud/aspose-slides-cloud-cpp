@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ResourceBase.h"
 
 namespace asposeslidescloud {
@@ -67,6 +68,7 @@ web::json::value ResourceBase::toJson() const
 	{
 		val[utility::conversions::to_string_t("SelfUri")] = ModelBase::toJson(m_SelfUri);
 	}
+	if (m_AlternateLinks.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_AlternateLinks)
@@ -83,9 +85,8 @@ void ResourceBase::fromJson(web::json::value& val)
 	web::json::value* jsonForSelfUri = ModelBase::getField(val, "SelfUri");
 	if(jsonForSelfUri != nullptr && !jsonForSelfUri->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForSelfUri);
-		setSelfUri(newItem);
+		std::shared_ptr<void> instanceForSelfUri = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForSelfUri);
+		setSelfUri(std::static_pointer_cast<ResourceUri>(instanceForSelfUri));
 	}
 	web::json::value* jsonForAlternateLinks = ModelBase::getField(val, "AlternateLinks");
 	if(jsonForAlternateLinks != nullptr && !jsonForAlternateLinks->is_null())
@@ -101,9 +102,8 @@ void ResourceBase::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-					newItem->fromJson(item);
-					m_AlternateLinks.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", item);
+					m_AlternateLinks.push_back(std::static_pointer_cast<ResourceUri>(newItem));
 				}
 			}
         	}

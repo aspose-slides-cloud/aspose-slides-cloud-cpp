@@ -43,6 +43,8 @@
 #include "../model/InnerShadowEffect.h"
 #include "../model/PresetShadowEffect.h"
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

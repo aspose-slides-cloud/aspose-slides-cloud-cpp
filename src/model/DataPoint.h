@@ -39,6 +39,8 @@
 #include "../model/LineFormat.h"
 #include "../model/ThreeDFormat.h"
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

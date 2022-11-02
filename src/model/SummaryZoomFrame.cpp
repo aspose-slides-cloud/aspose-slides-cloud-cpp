@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "SummaryZoomFrame.h"
 
 namespace asposeslidescloud {
@@ -68,6 +69,7 @@ web::json::value SummaryZoomFrame::toJson() const
 	{
 		val[utility::conversions::to_string_t("ZoomLayout")] = ModelBase::toJson(m_ZoomLayout);
 	}
+	if (m_Sections.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Sections)
@@ -101,9 +103,8 @@ void SummaryZoomFrame::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<SummaryZoomSection> newItem(new SummaryZoomSection());
-					newItem->fromJson(item);
-					m_Sections.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"SummaryZoomSection", item);
+					m_Sections.push_back(std::static_pointer_cast<SummaryZoomSection>(newItem));
 				}
 			}
         	}

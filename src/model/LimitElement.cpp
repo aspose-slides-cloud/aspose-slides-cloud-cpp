@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "LimitElement.h"
 
 namespace asposeslidescloud {
@@ -107,16 +108,14 @@ void LimitElement::fromJson(web::json::value& val)
 	web::json::value* jsonForBase = ModelBase::getField(val, "Base");
 	if(jsonForBase != nullptr && !jsonForBase->is_null())
 	{
-		std::shared_ptr<MathElement> newItem(new MathElement());
-		newItem->fromJson(*jsonForBase);
-		setBase(newItem);
+		std::shared_ptr<void> instanceForBase = asposeslidescloud::api::ClassRegistry::deserialize(L"MathElement", *jsonForBase);
+		setBase(std::static_pointer_cast<MathElement>(instanceForBase));
 	}
 	web::json::value* jsonForLimit = ModelBase::getField(val, "Limit");
 	if(jsonForLimit != nullptr && !jsonForLimit->is_null())
 	{
-		std::shared_ptr<MathElement> newItem(new MathElement());
-		newItem->fromJson(*jsonForLimit);
-		setLimit(newItem);
+		std::shared_ptr<void> instanceForLimit = asposeslidescloud::api::ClassRegistry::deserialize(L"MathElement", *jsonForLimit);
+		setLimit(std::static_pointer_cast<MathElement>(instanceForLimit));
 	}
 	web::json::value* jsonForUpperLimit = ModelBase::getField(val, "UpperLimit");
 	if(jsonForUpperLimit != nullptr && !jsonForUpperLimit->is_null())

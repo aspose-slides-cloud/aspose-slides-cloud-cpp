@@ -40,6 +40,8 @@
 #include "../model/ThreeDFormat.h"
 #include "../model/DataPoint.h"
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

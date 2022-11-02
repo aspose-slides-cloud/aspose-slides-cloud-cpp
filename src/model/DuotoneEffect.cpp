@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "DuotoneEffect.h"
 
 namespace asposeslidescloud {

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "FontsData.h"
 
 namespace asposeslidescloud {
@@ -52,6 +53,7 @@ void FontsData::setList(std::vector<std::shared_ptr<FontData>> value)
 web::json::value FontsData::toJson() const
 {
 	web::json::value val = web::json::value::object();
+	if (m_List.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_List)
@@ -79,9 +81,8 @@ void FontsData::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<FontData> newItem(new FontData());
-					newItem->fromJson(item);
-					m_List.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"FontData", item);
+					m_List.push_back(std::static_pointer_cast<FontData>(newItem));
 				}
 			}
         	}

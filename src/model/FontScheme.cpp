@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "FontScheme.h"
 
 namespace asposeslidescloud {
@@ -95,16 +96,14 @@ void FontScheme::fromJson(web::json::value& val)
 	web::json::value* jsonForMajor = ModelBase::getField(val, "Major");
 	if(jsonForMajor != nullptr && !jsonForMajor->is_null())
 	{
-		std::shared_ptr<FontSet> newItem(new FontSet());
-		newItem->fromJson(*jsonForMajor);
-		setMajor(newItem);
+		std::shared_ptr<void> instanceForMajor = asposeslidescloud::api::ClassRegistry::deserialize(L"FontSet", *jsonForMajor);
+		setMajor(std::static_pointer_cast<FontSet>(instanceForMajor));
 	}
 	web::json::value* jsonForMinor = ModelBase::getField(val, "Minor");
 	if(jsonForMinor != nullptr && !jsonForMinor->is_null())
 	{
-		std::shared_ptr<FontSet> newItem(new FontSet());
-		newItem->fromJson(*jsonForMinor);
-		setMinor(newItem);
+		std::shared_ptr<void> instanceForMinor = asposeslidescloud::api::ClassRegistry::deserialize(L"FontSet", *jsonForMinor);
+		setMinor(std::static_pointer_cast<FontSet>(instanceForMinor));
 	}
 	web::json::value* jsonForName = ModelBase::getField(val, "Name");
 	if(jsonForName != nullptr && !jsonForName->is_null())

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "TableCell.h"
 
 namespace asposeslidescloud {
@@ -452,51 +453,44 @@ void TableCell::fromJson(web::json::value& val)
 	web::json::value* jsonForFillFormat = ModelBase::getField(val, "FillFormat");
 	if(jsonForFillFormat != nullptr && !jsonForFillFormat->is_null())
 	{
-		std::shared_ptr<FillFormat> newItem(new FillFormat());
-		newItem->fromJson(*jsonForFillFormat);
-		setFillFormat(newItem);
+		std::shared_ptr<void> instanceForFillFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"FillFormat", *jsonForFillFormat);
+		setFillFormat(std::static_pointer_cast<FillFormat>(instanceForFillFormat));
 	}
 	web::json::value* jsonForBorderTop = ModelBase::getField(val, "BorderTop");
 	if(jsonForBorderTop != nullptr && !jsonForBorderTop->is_null())
 	{
-		std::shared_ptr<LineFormat> newItem(new LineFormat());
-		newItem->fromJson(*jsonForBorderTop);
-		setBorderTop(newItem);
+		std::shared_ptr<void> instanceForBorderTop = asposeslidescloud::api::ClassRegistry::deserialize(L"LineFormat", *jsonForBorderTop);
+		setBorderTop(std::static_pointer_cast<LineFormat>(instanceForBorderTop));
 	}
 	web::json::value* jsonForBorderRight = ModelBase::getField(val, "BorderRight");
 	if(jsonForBorderRight != nullptr && !jsonForBorderRight->is_null())
 	{
-		std::shared_ptr<LineFormat> newItem(new LineFormat());
-		newItem->fromJson(*jsonForBorderRight);
-		setBorderRight(newItem);
+		std::shared_ptr<void> instanceForBorderRight = asposeslidescloud::api::ClassRegistry::deserialize(L"LineFormat", *jsonForBorderRight);
+		setBorderRight(std::static_pointer_cast<LineFormat>(instanceForBorderRight));
 	}
 	web::json::value* jsonForBorderLeft = ModelBase::getField(val, "BorderLeft");
 	if(jsonForBorderLeft != nullptr && !jsonForBorderLeft->is_null())
 	{
-		std::shared_ptr<LineFormat> newItem(new LineFormat());
-		newItem->fromJson(*jsonForBorderLeft);
-		setBorderLeft(newItem);
+		std::shared_ptr<void> instanceForBorderLeft = asposeslidescloud::api::ClassRegistry::deserialize(L"LineFormat", *jsonForBorderLeft);
+		setBorderLeft(std::static_pointer_cast<LineFormat>(instanceForBorderLeft));
 	}
 	web::json::value* jsonForBorderBottom = ModelBase::getField(val, "BorderBottom");
 	if(jsonForBorderBottom != nullptr && !jsonForBorderBottom->is_null())
 	{
-		std::shared_ptr<LineFormat> newItem(new LineFormat());
-		newItem->fromJson(*jsonForBorderBottom);
-		setBorderBottom(newItem);
+		std::shared_ptr<void> instanceForBorderBottom = asposeslidescloud::api::ClassRegistry::deserialize(L"LineFormat", *jsonForBorderBottom);
+		setBorderBottom(std::static_pointer_cast<LineFormat>(instanceForBorderBottom));
 	}
 	web::json::value* jsonForBorderDiagonalUp = ModelBase::getField(val, "BorderDiagonalUp");
 	if(jsonForBorderDiagonalUp != nullptr && !jsonForBorderDiagonalUp->is_null())
 	{
-		std::shared_ptr<LineFormat> newItem(new LineFormat());
-		newItem->fromJson(*jsonForBorderDiagonalUp);
-		setBorderDiagonalUp(newItem);
+		std::shared_ptr<void> instanceForBorderDiagonalUp = asposeslidescloud::api::ClassRegistry::deserialize(L"LineFormat", *jsonForBorderDiagonalUp);
+		setBorderDiagonalUp(std::static_pointer_cast<LineFormat>(instanceForBorderDiagonalUp));
 	}
 	web::json::value* jsonForBorderDiagonalDown = ModelBase::getField(val, "BorderDiagonalDown");
 	if(jsonForBorderDiagonalDown != nullptr && !jsonForBorderDiagonalDown->is_null())
 	{
-		std::shared_ptr<LineFormat> newItem(new LineFormat());
-		newItem->fromJson(*jsonForBorderDiagonalDown);
-		setBorderDiagonalDown(newItem);
+		std::shared_ptr<void> instanceForBorderDiagonalDown = asposeslidescloud::api::ClassRegistry::deserialize(L"LineFormat", *jsonForBorderDiagonalDown);
+		setBorderDiagonalDown(std::static_pointer_cast<LineFormat>(instanceForBorderDiagonalDown));
 	}
 	web::json::value* jsonForColumnIndex = ModelBase::getField(val, "ColumnIndex");
 	if(jsonForColumnIndex != nullptr && !jsonForColumnIndex->is_null() && jsonForColumnIndex->is_number())

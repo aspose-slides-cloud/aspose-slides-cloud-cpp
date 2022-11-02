@@ -41,6 +41,8 @@
 #include "../model/LineFormat.h"
 #include "../model/Series.h"
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

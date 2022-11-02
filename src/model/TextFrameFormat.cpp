@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "TextFrameFormat.h"
 
 namespace asposeslidescloud {
@@ -79,9 +80,8 @@ void TextFrameFormat::fromJson(web::json::value& val)
 	web::json::value* jsonForThreeDFormat = ModelBase::getField(val, "ThreeDFormat");
 	if(jsonForThreeDFormat != nullptr && !jsonForThreeDFormat->is_null())
 	{
-		std::shared_ptr<ThreeDFormat> newItem(new ThreeDFormat());
-		newItem->fromJson(*jsonForThreeDFormat);
-		setThreeDFormat(newItem);
+		std::shared_ptr<void> instanceForThreeDFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"ThreeDFormat", *jsonForThreeDFormat);
+		setThreeDFormat(std::static_pointer_cast<ThreeDFormat>(instanceForThreeDFormat));
 	}
 	web::json::value* jsonForTransform = ModelBase::getField(val, "Transform");
 	if(jsonForTransform != nullptr && !jsonForTransform->is_null())

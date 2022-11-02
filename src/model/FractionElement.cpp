@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "FractionElement.h"
 
 namespace asposeslidescloud {
@@ -101,16 +102,14 @@ void FractionElement::fromJson(web::json::value& val)
 	web::json::value* jsonForNumerator = ModelBase::getField(val, "Numerator");
 	if(jsonForNumerator != nullptr && !jsonForNumerator->is_null())
 	{
-		std::shared_ptr<MathElement> newItem(new MathElement());
-		newItem->fromJson(*jsonForNumerator);
-		setNumerator(newItem);
+		std::shared_ptr<void> instanceForNumerator = asposeslidescloud::api::ClassRegistry::deserialize(L"MathElement", *jsonForNumerator);
+		setNumerator(std::static_pointer_cast<MathElement>(instanceForNumerator));
 	}
 	web::json::value* jsonForDenominator = ModelBase::getField(val, "Denominator");
 	if(jsonForDenominator != nullptr && !jsonForDenominator->is_null())
 	{
-		std::shared_ptr<MathElement> newItem(new MathElement());
-		newItem->fromJson(*jsonForDenominator);
-		setDenominator(newItem);
+		std::shared_ptr<void> instanceForDenominator = asposeslidescloud::api::ClassRegistry::deserialize(L"MathElement", *jsonForDenominator);
+		setDenominator(std::static_pointer_cast<MathElement>(instanceForDenominator));
 	}
 }
 

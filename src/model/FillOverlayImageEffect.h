@@ -38,6 +38,8 @@
 #include "../model/FillFormat.h"
 #include "../model/ImageTransformEffect.h"
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

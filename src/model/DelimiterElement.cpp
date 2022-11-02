@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "DelimiterElement.h"
 
 namespace asposeslidescloud {
@@ -119,6 +120,7 @@ void DelimiterElement::setDelimiterShape(utility::string_t value)
 web::json::value DelimiterElement::toJson() const
 {
 	web::json::value val = this->MathElement::toJson();
+	if (m_Arguments.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Arguments)
@@ -167,9 +169,8 @@ void DelimiterElement::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<MathElement> newItem(new MathElement());
-					newItem->fromJson(item);
-					m_Arguments.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"MathElement", item);
+					m_Arguments.push_back(std::static_pointer_cast<MathElement>(newItem));
 				}
 			}
         	}

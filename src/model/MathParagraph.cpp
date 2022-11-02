@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "MathParagraph.h"
 
 namespace asposeslidescloud {
@@ -63,6 +64,7 @@ void MathParagraph::setJustification(utility::string_t value)
 web::json::value MathParagraph::toJson() const
 {
 	web::json::value val = web::json::value::object();
+	if (m_MathBlockList.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_MathBlockList)
@@ -94,9 +96,8 @@ void MathParagraph::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<BlockElement> newItem(new BlockElement());
-					newItem->fromJson(item);
-					m_MathBlockList.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"BlockElement", item);
+					m_MathBlockList.push_back(std::static_pointer_cast<BlockElement>(newItem));
 				}
 			}
         	}

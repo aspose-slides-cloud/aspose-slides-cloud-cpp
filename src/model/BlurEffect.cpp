@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "BlurEffect.h"
 
 namespace asposeslidescloud {

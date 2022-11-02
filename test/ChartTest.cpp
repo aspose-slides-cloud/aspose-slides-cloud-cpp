@@ -27,6 +27,10 @@
 #include "gtest/gtest.h"
 
 #include "TestUtils.h"
+#include "model/OneValueSeries.h"
+#include "model/NoFill.h"
+#include "model/SolidFill.h"
+#include "model/GradientFill.h"
 
 using namespace asposeslidescloud::api;
 
@@ -85,628 +89,412 @@ TEST_F(ChartTest, chartInit) {
 TEST_F(ChartTest, chartGet) {
 	utils->initialize("", "");
 	std::shared_ptr<ShapeBase> result = api->getShape(L"test.pptx", 3, 1, L"password", L"TempSlidesSDK").get();
-	std::wcout << L"a ";
 	EXPECT_EQ(L"Chart", result->getType());
-	std::wcout << L"b ";
 	std::shared_ptr<Chart> chart = std::dynamic_pointer_cast<Chart>(result);
-	std::wcout << L"c ";
 	EXPECT_EQ(3, chart->getSeries().size());
-	std::wcout << L"d ";
 	EXPECT_EQ(4, chart->getCategories().size());
-	std::wcout << L"e ";
 }
 
-/*
-TEST_F(AnimationTest, animationCreateEffect) {
+TEST_F(ChartTest, chartCreate) {
 	utils->initialize("", "");
 
-	std::shared_ptr<Effect> effect(new Effect());
-	effect->setType(utility::conversions::to_string_t("Blast"));
-	effect->setShapeIndex(3);
+	std::shared_ptr<Chart> chart(new Chart());
+	chart->setChartType(L"ClusteredColumn");
+	chart->setWidth(400);
+	chart->setHeight(300);
 
-	std::shared_ptr<SlideAnimation> result = api->createAnimationEffect(utility::conversions::to_string_t("test.pptx"), 1, effect, utility::conversions::to_string_t("password"), utility::conversions::to_string_t("TempSlidesSDK")).get();
-	EXPECT_EQ(2, result->getMainSequence().size());
-	EXPECT_EQ(1, result->getInteractiveSequences().size());
+	std::shared_ptr<OneValueSeries> series1(new OneValueSeries());
+	series1->setName(L"Series1");
+	std::shared_ptr<OneValueChartDataPoint> point11(new OneValueChartDataPoint());
+	point11->setValue(40);
+	std::shared_ptr<OneValueChartDataPoint> point12(new OneValueChartDataPoint());
+	point12->setValue(50);
+	std::shared_ptr<OneValueChartDataPoint> point13(new OneValueChartDataPoint());
+	point13->setValue(70);
+	series1->setDataPoints({ point11, point12, point13 });
+
+	std::shared_ptr<OneValueSeries> series2(new OneValueSeries());
+	series2->setName(L"Series2");
+	std::shared_ptr<OneValueChartDataPoint> point21(new OneValueChartDataPoint());
+	point21->setValue(55);
+	std::shared_ptr<OneValueChartDataPoint> point22(new OneValueChartDataPoint());
+	point22->setValue(35);
+	std::shared_ptr<OneValueChartDataPoint> point23(new OneValueChartDataPoint());
+	point23->setValue(90);
+	series2->setDataPoints({ point21, point22, point23 });
+	chart->setSeries({ series1, series2 });
+
+	std::shared_ptr<ChartCategory> category1(new ChartCategory());
+	category1->setValue(L"Category1");
+	std::shared_ptr<ChartCategory> category2(new ChartCategory());
+	category2->setValue(L"Category2");
+	std::shared_ptr<ChartCategory> category3(new ChartCategory());
+	category3->setValue(L"Category3");
+	chart->setCategories({ category1, category2, category3 });
+	std::shared_ptr<ShapeBase> shape = api->createShape(L"test.pptx", 3, chart, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
+	EXPECT_EQ(2, resultChart->getSeries().size());
+	EXPECT_EQ(3, resultChart->getCategories().size());
 }
 
-TEST_F(AnimationTest, animationCreateInteractiveSequence) {
+TEST_F(ChartTest, chartUpdate) {
 	utils->initialize("", "");
 
-	std::shared_ptr<Effect> effect(new Effect());
-	effect->setType(utility::conversions::to_string_t("Blast"));
-	effect->setShapeIndex(3);
-	std::shared_ptr<InteractiveSequence> interactiveSequence(new InteractiveSequence());
-	interactiveSequence->setTriggerShapeIndex(2);
-	interactiveSequence->setEffects({ effect });
+	std::shared_ptr<Chart> chart(new Chart());
+	chart->setChartType(L"ClusteredColumn");
+	chart->setWidth(400);
+	chart->setHeight(300);
 
-	std::shared_ptr<SlideAnimation> result = api->createAnimationInteractiveSequence(utility::conversions::to_string_t("test.pptx"), 1, interactiveSequence, utility::conversions::to_string_t("password"), utility::conversions::to_string_t("TempSlidesSDK")).get();
-	EXPECT_EQ(1, result->getMainSequence().size());
-	EXPECT_EQ(2, result->getInteractiveSequences().size());
+	std::shared_ptr<OneValueSeries> series1(new OneValueSeries());
+	series1->setName(L"Series1");
+	std::shared_ptr<OneValueChartDataPoint> point11(new OneValueChartDataPoint());
+	point11->setValue(40);
+	std::shared_ptr<OneValueChartDataPoint> point12(new OneValueChartDataPoint());
+	point12->setValue(50);
+	std::shared_ptr<OneValueChartDataPoint> point13(new OneValueChartDataPoint());
+	point13->setValue(70);
+	series1->setDataPoints({ point11, point12, point13 });
+
+	std::shared_ptr<OneValueSeries> series2(new OneValueSeries());
+	series2->setName(L"Series2");
+	std::shared_ptr<OneValueChartDataPoint> point21(new OneValueChartDataPoint());
+	point21->setValue(55);
+	std::shared_ptr<OneValueChartDataPoint> point22(new OneValueChartDataPoint());
+	point22->setValue(35);
+	std::shared_ptr<OneValueChartDataPoint> point23(new OneValueChartDataPoint());
+	point23->setValue(90);
+	series2->setDataPoints({ point21, point22, point23 });
+	chart->setSeries({ series1, series2 });
+
+	std::shared_ptr<ChartCategory> category1(new ChartCategory());
+	category1->setValue(L"Category1");
+	std::shared_ptr<ChartCategory> category2(new ChartCategory());
+	category2->setValue(L"Category2");
+	std::shared_ptr<ChartCategory> category3(new ChartCategory());
+	category3->setValue(L"Category3");
+	chart->setCategories({ category1, category2, category3 });
+	std::shared_ptr<ShapeBase> shape = api->updateShape(L"test.pptx", 3, 1, chart, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
+	EXPECT_EQ(2, resultChart->getSeries().size());
+	EXPECT_EQ(3, resultChart->getCategories().size());
 }
 
-TEST_F(AnimationTest, animationCreateInteractiveSequenceEffect) {
+TEST_F(ChartTest, chartSeriesCreate) {
 	utils->initialize("", "");
 
-	std::shared_ptr<Effect> effect(new Effect());
-	effect->setType(utility::conversions::to_string_t("Blast"));
-	effect->setShapeIndex(3);
+	std::shared_ptr<OneValueSeries> series(new OneValueSeries());
+	series->setName(L"Series3");
+	std::shared_ptr<OneValueChartDataPoint> point1(new OneValueChartDataPoint());
+	point1->setValue(40);
+	std::shared_ptr<OneValueChartDataPoint> point2(new OneValueChartDataPoint());
+	point2->setValue(50);
+	std::shared_ptr<OneValueChartDataPoint> point3(new OneValueChartDataPoint());
+	point3->setValue(14);
+	std::shared_ptr<OneValueChartDataPoint> point4(new OneValueChartDataPoint());
+	point4->setValue(70);
+	series->setDataPoints({ point1, point2, point3, point4 });
 
-	std::shared_ptr<SlideAnimation> result = api->createAnimationInteractiveSequenceEffect(utility::conversions::to_string_t("test.pptx"), 1, 1, effect, utility::conversions::to_string_t("password"), utility::conversions::to_string_t("TempSlidesSDK")).get();
-	EXPECT_EQ(1, result->getMainSequence().size());
-	EXPECT_EQ(1, result->getInteractiveSequences().size());
+	std::shared_ptr<ShapeBase> shape = api->createChartSeries(L"test.pptx", 3, 1, series, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
+	EXPECT_EQ(4, resultChart->getSeries().size());
+	EXPECT_EQ(4, resultChart->getCategories().size());
 }
 
-TEST_F(AnimationTest, animationUpdateEffect) {
+TEST_F(ChartTest, chartSeriesUpdate) {
 	utils->initialize("", "");
 
-	std::shared_ptr<Effect> effect(new Effect());
-	effect->setType(utility::conversions::to_string_t("Blast"));
-	effect->setShapeIndex(3);
+	std::shared_ptr<OneValueSeries> series(new OneValueSeries());
+	series->setName(L"Series3");
+	std::shared_ptr<OneValueChartDataPoint> point1(new OneValueChartDataPoint());
+	point1->setValue(40);
+	std::shared_ptr<OneValueChartDataPoint> point2(new OneValueChartDataPoint());
+	point2->setValue(50);
+	std::shared_ptr<OneValueChartDataPoint> point3(new OneValueChartDataPoint());
+	point3->setValue(14);
+	std::shared_ptr<OneValueChartDataPoint> point4(new OneValueChartDataPoint());
+	point4->setValue(70);
+	series->setDataPoints({ point1, point2, point3, point4 });
 
-	std::shared_ptr<SlideAnimation> result = api->updateAnimationEffect(utility::conversions::to_string_t("test.pptx"), 1, 1, effect, utility::conversions::to_string_t("password"), utility::conversions::to_string_t("TempSlidesSDK")).get();
-	EXPECT_EQ(1, result->getMainSequence().size());
-	EXPECT_EQ(1, result->getInteractiveSequences().size());
+	std::shared_ptr<ShapeBase> shape = api->updateChartSeries(L"test.pptx", 3, 1, 2, series, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
+	EXPECT_EQ(3, resultChart->getSeries().size());
+	EXPECT_EQ(4, resultChart->getCategories().size());
 }
 
-TEST_F(AnimationTest, animationUpdateInteractiveSequenceEffect) {
+TEST_F(ChartTest, chartSeriesDelete) {
+	utils->initialize("", "");
+	std::shared_ptr<ShapeBase> shape = api->deleteChartSeries(L"test.pptx", 3, 1, 2, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
+	EXPECT_EQ(2, resultChart->getSeries().size());
+	EXPECT_EQ(4, resultChart->getCategories().size());
+}
+
+TEST_F(ChartTest, chartCategoryCreate) {
 	utils->initialize("", "");
 
-	std::shared_ptr<Effect> effect(new Effect());
-	effect->setType(utility::conversions::to_string_t("Blast"));
-	effect->setShapeIndex(3);
-
-	std::shared_ptr<SlideAnimation> result = api->updateAnimationInteractiveSequenceEffect(utility::conversions::to_string_t("test.pptx"), 1, 1, 1, effect, utility::conversions::to_string_t("password"), utility::conversions::to_string_t("TempSlidesSDK")).get();
-	EXPECT_EQ(1, result->getMainSequence().size());
-	EXPECT_EQ(1, result->getInteractiveSequences().size());
+	std::shared_ptr<ChartCategory> category(new ChartCategory());
+	category->setValue(L"NewCategory");
+	std::shared_ptr<OneValueChartDataPoint> point1(new OneValueChartDataPoint());
+	point1->setValue(40);
+	std::shared_ptr<OneValueChartDataPoint> point2(new OneValueChartDataPoint());
+	point2->setValue(50);
+	std::shared_ptr<OneValueChartDataPoint> point3(new OneValueChartDataPoint());
+	point3->setValue(14);
+	category->setDataPoints({ point1, point2, point3 });
+	std::shared_ptr<ShapeBase> shape = api->createChartCategory(L"test.pptx", 3, 1, category, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
+	EXPECT_EQ(3, resultChart->getSeries().size());
+	EXPECT_EQ(5, resultChart->getCategories().size());
+	std::shared_ptr<OneValueSeries> series = std::static_pointer_cast<OneValueSeries>(resultChart->getSeries()[0]);
+	EXPECT_EQ(5, series->getDataPoints().size());
+	EXPECT_EQ(category->getDataPoints()[0]->getValue(), series->getDataPoints()[4]->getValue());
 }
 
-TEST_F(AnimationTest, animationDelete) {
+TEST_F(ChartTest, chartCategoryUpdate) {
 	utils->initialize("", "");
-	std::shared_ptr<SlideAnimation> result = api->deleteAnimation(utility::conversions::to_string_t("test.pptx"), 1, utility::conversions::to_string_t("password"), utility::conversions::to_string_t("TempSlidesSDK")).get();
-	EXPECT_EQ(0, result->getMainSequence().size());
-	EXPECT_EQ(0, result->getInteractiveSequences().size());
+
+	std::shared_ptr<ChartCategory> category(new ChartCategory());
+	category->setValue(L"NewCategory");
+	std::shared_ptr<OneValueChartDataPoint> point1(new OneValueChartDataPoint());
+	point1->setValue(40);
+	std::shared_ptr<OneValueChartDataPoint> point2(new OneValueChartDataPoint());
+	point2->setValue(50);
+	std::shared_ptr<OneValueChartDataPoint> point3(new OneValueChartDataPoint());
+	point3->setValue(14);
+	category->setDataPoints({ point1, point2, point3 });
+	std::shared_ptr<ShapeBase> shape = api->updateChartCategory(L"test.pptx", 3, 1, 2, category, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
+	EXPECT_EQ(3, resultChart->getSeries().size());
+	EXPECT_EQ(4, resultChart->getCategories().size());
+	std::shared_ptr<OneValueSeries> series = std::static_pointer_cast<OneValueSeries>(resultChart->getSeries()[0]);
+	EXPECT_EQ(4, series->getDataPoints().size());
+	EXPECT_EQ(category->getDataPoints()[0]->getValue(), series->getDataPoints()[1]->getValue());
 }
 
-TEST_F(AnimationTest, animationDeleteMainSequence) {
+TEST_F(ChartTest, chartCategoryDelete) {
 	utils->initialize("", "");
-	std::shared_ptr<SlideAnimation> result = api->deleteAnimationMainSequence(utility::conversions::to_string_t("test.pptx"), 1, utility::conversions::to_string_t("password"), utility::conversions::to_string_t("TempSlidesSDK")).get();
-	EXPECT_EQ(0, result->getMainSequence().size());
-	EXPECT_EQ(1, result->getInteractiveSequences().size());
+	std::shared_ptr<ShapeBase> shape = api->deleteChartCategory(L"test.pptx", 3, 1, 2, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
+	EXPECT_EQ(3, resultChart->getSeries().size());
+	EXPECT_EQ(3, resultChart->getCategories().size());
+	std::shared_ptr<OneValueSeries> series = std::static_pointer_cast<OneValueSeries>(resultChart->getSeries()[0]);
+	EXPECT_EQ(3, series->getDataPoints().size());
 }
 
-TEST_F(AnimationTest, animationDeleteMainSequenceEffect) {
+TEST_F(ChartTest, chartDataPointCreate) {
 	utils->initialize("", "");
-	std::shared_ptr<SlideAnimation> result = api->deleteAnimationEffect(utility::conversions::to_string_t("test.pptx"), 1, 1, utility::conversions::to_string_t("password"), utility::conversions::to_string_t("TempSlidesSDK")).get();
-	EXPECT_EQ(0, result->getMainSequence().size());
-	EXPECT_EQ(1, result->getInteractiveSequences().size());
+
+	std::shared_ptr<OneValueChartDataPoint> point(new OneValueChartDataPoint());
+	point->setValue(40);
+	try
+	{
+		api->createChartDataPoint(L"test.pptx", 3, 1, 2, point, L"password", L"TempSlidesSDK").wait();
+		FAIL() << "Must have failed";
+	}
+	catch (ApiException ex)
+	{
+		EXPECT_EQ(400, ex.error_code().value());
+	}
 }
 
-TEST_F(AnimationTest, animationDeleteInteracriveSequences) {
+TEST_F(ChartTest, chartDataPointUpdate) {
 	utils->initialize("", "");
-	std::shared_ptr<SlideAnimation> result = api->deleteAnimationInteractiveSequences(utility::conversions::to_string_t("test.pptx"), 1, utility::conversions::to_string_t("password"), utility::conversions::to_string_t("TempSlidesSDK")).get();
-	EXPECT_EQ(1, result->getMainSequence().size());
-	EXPECT_EQ(0, result->getInteractiveSequences().size());
+
+	std::shared_ptr<OneValueChartDataPoint> point(new OneValueChartDataPoint());
+	point->setValue(40);
+	std::shared_ptr<ShapeBase> shape = api->updateChartDataPoint(L"test.pptx", 3, 1, 2, 2, point, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
+	EXPECT_EQ(3, resultChart->getSeries().size());
+	EXPECT_EQ(4, resultChart->getCategories().size());
+	std::shared_ptr<OneValueSeries> series = std::static_pointer_cast<OneValueSeries>(resultChart->getSeries()[1]);
+	EXPECT_EQ(4, series->getDataPoints().size());
+	EXPECT_EQ(point->getValue(), series->getDataPoints()[1]->getValue());
 }
 
-TEST_F(AnimationTest, animationDeleteInteracriveSequence) {
+TEST_F(ChartTest, chartDataPointDelete) {
 	utils->initialize("", "");
-	std::shared_ptr<SlideAnimation> result = api->deleteAnimationInteractiveSequence(utility::conversions::to_string_t("test.pptx"), 1, 1, utility::conversions::to_string_t("password"), utility::conversions::to_string_t("TempSlidesSDK")).get();
-	EXPECT_EQ(1, result->getMainSequence().size());
-	EXPECT_EQ(0, result->getInteractiveSequences().size());
+
+	std::shared_ptr<ShapeBase> shape = api->deleteChartDataPoint(L"test.pptx", 3, 1, 2, 2, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
+	EXPECT_EQ(3, resultChart->getSeries().size());
+	EXPECT_EQ(4, resultChart->getCategories().size());
+	std::shared_ptr<OneValueSeries> series = std::static_pointer_cast<OneValueSeries>(resultChart->getSeries()[1]);
+	EXPECT_EQ(4, series->getDataPoints().size());
+	EXPECT_EQ(nullptr, series->getDataPoints()[1].get());
 }
 
-TEST_F(AnimationTest, animationDeleteInteracriveSequenceEffect) {
+TEST_F(ChartTest, chartSunburst) {
 	utils->initialize("", "");
-	std::shared_ptr<SlideAnimation> result = api->deleteAnimationInteractiveSequenceEffect(utility::conversions::to_string_t("test.pptx"), 1, 1, 1, utility::conversions::to_string_t("password"), utility::conversions::to_string_t("TempSlidesSDK")).get();
-	EXPECT_EQ(1, result->getMainSequence().size());
-	EXPECT_EQ(1, result->getInteractiveSequences().size());
+
+	std::shared_ptr<Chart> chart(new Chart());
+	chart->setChartType(L"Sunburst");
+	chart->setWidth(400);
+	chart->setHeight(300);
+
+	std::shared_ptr<OneValueSeries> series1(new OneValueSeries());
+	series1->setName(L"Series1");
+	std::shared_ptr<OneValueChartDataPoint> point1(new OneValueChartDataPoint());
+	point1->setValue(40);
+	std::shared_ptr<OneValueChartDataPoint> point2(new OneValueChartDataPoint());
+	point2->setValue(50);
+	std::shared_ptr<OneValueChartDataPoint> point3(new OneValueChartDataPoint());
+	point3->setValue(70);
+	std::shared_ptr<OneValueChartDataPoint> point4(new OneValueChartDataPoint());
+	point4->setValue(60);
+	series1->setDataPoints({ point1, point2, point3, point4 });
+	chart->setSeries({ series1 });
+
+	std::shared_ptr<ChartCategory> category1(new ChartCategory());
+	category1->setValue(L"Leaf1");
+	category1->setParentCategories({ L"Branch1", L"Stem1" });
+	std::shared_ptr<ChartCategory> category2(new ChartCategory());
+	category2->setValue(L"Leaf2");
+	category2->setParentCategories({ L"Branch1", L"Stem1" });
+	std::shared_ptr<ChartCategory> category3(new ChartCategory());
+	category3->setValue(L"Branch2");
+	category3->setParentCategories({ L"Stem1" });
+	std::shared_ptr<ChartCategory> category4(new ChartCategory());
+	category4->setValue(L"Stem2");
+	chart->setCategories({ category1, category2, category3, category4 });
+	std::shared_ptr<ShapeBase> shape = api->createShape(L"test.pptx", 3, chart, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
+	EXPECT_EQ(1, resultChart->getSeries().size());
+	EXPECT_EQ(4, resultChart->getCategories().size());
 }
 
-	func testChartCreate() {
-		let expectation = self.expectation(description: "testChartCreate")
-		TestUtils.initialize("") { (response, error) -> Void in
-			let chart = Chart()
-			chart.chartType = Chart.ChartType.clusteredColumn
-			chart.width = 400
-			chart.height = 300
-			let series1 = OneValueSeries()
-			series1.name = "Series1"
-			let point11 = OneValueChartDataPoint()
-			point11.value = 40
-			let point12 = OneValueChartDataPoint()
-			point12.value = 50
-			let point13 = OneValueChartDataPoint()
-			point13.value = 70
-			series1.dataPoints = [point11, point12, point13]
-			let series2 = OneValueSeries()
-			series2.name = "Series2"
-			let point21 = OneValueChartDataPoint()
-			point21.value = 55
-			let point22 = OneValueChartDataPoint()
-			point22.value = 35
-			let point23 = OneValueChartDataPoint()
-			point23.value = 90
-			series2.dataPoints = [point21, point22, point23]
-			chart.series = [series1, series2]
-			let category1 = ChartCategory()
-			category1.value = "Category1"
-			let category2 = ChartCategory()
-			category2.value = "Category2"
-			let category3 = ChartCategory()
-			category3.value = "Category3"
-			chart.categories = [category1, category2, category3]
-			SlidesAPI.createShape("test.pptx", 3, chart, nil, nil, "password", "TempSlidesSDK") { (shape, error) -> Void in
-				XCTAssertNil(error)
-				XCTAssertNotNil(shape)
-				let chart = shape as? Chart
-				XCTAssertNotNil(chart)
-				XCTAssertNotNil(chart!.series)
-				XCTAssertNotNil(chart!.categories)
-				XCTAssertEqual(2, chart!.series!.count)
-				XCTAssertEqual(3, chart!.categories!.count)
-				expectation.fulfill()
-			}
-		}
-		self.waitForExpectations(timeout: testTimeout, handler: nil)
-	}
+TEST_F(ChartTest, chartMultilevelCategoryAxis) {
+	utils->initialize("", "");
 
-	func testChartUpdate() {
-		let expectation = self.expectation(description: "testChartUpdate")
-		TestUtils.initialize("") { (response, error) -> Void in
-			let chart = Chart()
-			chart.chartType = Chart.ChartType.clusteredColumn
-			chart.width = 400
-			chart.height = 300
-			let series1 = OneValueSeries()
-			series1.name = "Series1"
-			let point11 = OneValueChartDataPoint()
-			point11.value = 40
-			let point12 = OneValueChartDataPoint()
-			point12.value = 50
-			let point13 = OneValueChartDataPoint()
-			point13.value = 70
-			series1.dataPoints = [point11, point12, point13]
-			let series2 = OneValueSeries()
-			series2.name = "Series2"
-			let point21 = OneValueChartDataPoint()
-			point21.value = 55
-			let point22 = OneValueChartDataPoint()
-			point22.value = 35
-			let point23 = OneValueChartDataPoint()
-			point23.value = 90
-			series2.dataPoints = [point21, point22, point23]
-			chart.series = [series1, series2]
-			let category1 = ChartCategory()
-			category1.value = "Category1"
-			let category2 = ChartCategory()
-			category2.value = "Category2"
-			let category3 = ChartCategory()
-			category3.value = "Category3"
-			chart.categories = [category1, category2, category3]
-			SlidesAPI.updateShape("test.pptx", 3, 1, chart, "password", "TempSlidesSDK") { (shape, error) -> Void in
-				XCTAssertNil(error)
-				XCTAssertNotNil(shape)
-				let chart = shape as? Chart
-				XCTAssertNotNil(chart)
-				XCTAssertNotNil(chart!.series)
-				XCTAssertNotNil(chart!.categories)
-				XCTAssertEqual(2, chart!.series!.count)
-				XCTAssertEqual(3, chart!.categories!.count)
-				expectation.fulfill()
-			}
-		}
-		self.waitForExpectations(timeout: testTimeout, handler: nil)
-	}
+	std::shared_ptr<Chart> chart(new Chart());
+	chart->setChartType(L"ClusteredColumn");
+	chart->setX(100);
+	chart->setY(100);
+	chart->setWidth(400);
+	chart->setHeight(300);
 
-	func testSeriesCreate() {
-		let expectation = self.expectation(description: "testSeriesCreate")
-		TestUtils.initialize("") { (response, error) -> Void in
-			let series = OneValueSeries()
-			series.name = "Series3"
-			let point1 = OneValueChartDataPoint()
-			point1.value = 40
-			let point2 = OneValueChartDataPoint()
-			point2.value = 50
-			let point3 = OneValueChartDataPoint()
-			point3.value = 14
-			let point4 = OneValueChartDataPoint()
-			point4.value = 70
-			series.dataPoints = [point1, point2, point3, point4]
-			SlidesAPI.createChartSeries("test.pptx", 3, 1, series, "password", "TempSlidesSDK") { (chart, error) -> Void in
-				XCTAssertNil(error)
-				XCTAssertNotNil(chart)
-				XCTAssertNotNil(chart!.series)
-				XCTAssertNotNil(chart!.categories)
-				XCTAssertEqual(4, chart!.series!.count)
-				XCTAssertEqual(4, chart!.categories!.count)
-				expectation.fulfill()
-			}
-		}
-		self.waitForExpectations(timeout: testTimeout, handler: nil)
-	}
+	std::shared_ptr<OneValueSeries> series1(new OneValueSeries());
+	series1->setName(L"Series1");
+	std::shared_ptr<OneValueChartDataPoint> point1(new OneValueChartDataPoint());
+	point1->setValue(1);
+	std::shared_ptr<OneValueChartDataPoint> point2(new OneValueChartDataPoint());
+	point2->setValue(2);
+	std::shared_ptr<OneValueChartDataPoint> point3(new OneValueChartDataPoint());
+	point3->setValue(3);
+	std::shared_ptr<OneValueChartDataPoint> point4(new OneValueChartDataPoint());
+	point4->setValue(4);
+	std::shared_ptr<OneValueChartDataPoint> point5(new OneValueChartDataPoint());
+	point5->setValue(5);
+	std::shared_ptr<OneValueChartDataPoint> point6(new OneValueChartDataPoint());
+	point6->setValue(6);
+	std::shared_ptr<OneValueChartDataPoint> point7(new OneValueChartDataPoint());
+	point7->setValue(7);
+	std::shared_ptr<OneValueChartDataPoint> point8(new OneValueChartDataPoint());
+	point8->setValue(8);
+	series1->setDataPoints({ point1, point2, point3, point4, point5, point6, point7, point8 });
+	chart->setSeries({ series1 });
 
-	func testSeriesUpdate() {
-		let expectation = self.expectation(description: "testSeriesUpdate")
-		TestUtils.initialize("") { (response, error) -> Void in
-			let series = OneValueSeries()
-			series.name = "Series3"
-			let point1 = OneValueChartDataPoint()
-			point1.value = 40
-			let point2 = OneValueChartDataPoint()
-			point2.value = 50
-			let point3 = OneValueChartDataPoint()
-			point3.value = 14
-			let point4 = OneValueChartDataPoint()
-			point4.value = 70
-			series.dataPoints = [point1, point2, point3, point4]
-			SlidesAPI.updateChartSeries("test.pptx", 3, 1, 2, series, "password", "TempSlidesSDK") { (chart, error) -> Void in
-				XCTAssertNil(error)
-				XCTAssertNotNil(chart)
-				XCTAssertNotNil(chart!.series)
-				XCTAssertNotNil(chart!.categories)
-				XCTAssertEqual(3, chart!.series!.count)
-				XCTAssertEqual(4, chart!.categories!.count)
-				expectation.fulfill()
-			}
-		}
-		self.waitForExpectations(timeout: testTimeout, handler: nil)
-	}
+	std::shared_ptr<ChartCategory> category1(new ChartCategory());
+	category1->setValue(L"Category1");
+	category1->setParentCategories({ L"Subcategory1", L"Root1" });
+	std::shared_ptr<ChartCategory> category2(new ChartCategory());
+	category2->setValue(L"Category2");
+	std::shared_ptr<ChartCategory> category3(new ChartCategory());
+	category3->setValue(L"Category3");
+	category3->setParentCategories({ L"Subcategory2" });
+	std::shared_ptr<ChartCategory> category4(new ChartCategory());
+	category4->setValue(L"Category4");
+	std::shared_ptr<ChartCategory> category5(new ChartCategory());
+	category5->setValue(L"Category5");
+	category5->setParentCategories({ L"Subcategory3", L"Root2" });
+	std::shared_ptr<ChartCategory> category6(new ChartCategory());
+	category6->setValue(L"Category6");
+	std::shared_ptr<ChartCategory> category7(new ChartCategory());
+	category7->setValue(L"Category7");
+	category7->setParentCategories({ L"Subcategory4" });
+	std::shared_ptr<ChartCategory> category8(new ChartCategory());
+	category8->setValue(L"Category8");
+	chart->setCategories({ category1, category2, category3, category4, category5, category6, category7, category8 });
+	std::shared_ptr<ShapeBase> shape = api->createShape(L"test.pptx", 3, chart, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
+	EXPECT_EQ(1, resultChart->getSeries().size());
+	EXPECT_EQ(8, resultChart->getCategories().size());
+}
 
-	func testSeriesDelete() {
-		let expectation = self.expectation(description: "testSeriesDelete")
-		TestUtils.initialize("") { (response, error) -> Void in
-			SlidesAPI.deleteChartSeries("test.pptx", 3, 1, 2, "password", "TempSlidesSDK") { (chart, error) -> Void in
-				XCTAssertNil(error)
-				XCTAssertNotNil(chart)
-				XCTAssertNotNil(chart!.series)
-				XCTAssertNotNil(chart!.categories)
-				XCTAssertEqual(2, chart!.series!.count)
-				XCTAssertEqual(4, chart!.categories!.count)
-				expectation.fulfill()
-			}
-		}
-		self.waitForExpectations(timeout: testTimeout, handler: nil)
-	}
+TEST_F(ChartTest, chartHideChartLegend) {
+	utils->initialize("", "");
 
-	func testCategoryCreate() {
-		let expectation = self.expectation(description: "testCategoryCreate")
-		TestUtils.initialize("") { (response, error) -> Void in
-			let category = ChartCategory()
-			category.value = "NewCategory"
-			let point1 = OneValueChartDataPoint()
-			point1.value = 40
-			let point2 = OneValueChartDataPoint()
-			point2.value = 50
-			let point3 = OneValueChartDataPoint()
-			point3.value = 14
-			category.dataPoints = [point1, point2, point3]
-			SlidesAPI.createChartCategory("test.pptx", 3, 1, category, "password", "TempSlidesSDK") { (chart, error) -> Void in
-				XCTAssertNil(error)
-				XCTAssertNotNil(chart)
-				XCTAssertNotNil(chart!.series)
-				XCTAssertNotNil(chart!.categories)
-				XCTAssertEqual(3, chart!.series!.count)
-				XCTAssertEqual(5, chart!.categories!.count)
-				let series = chart!.series![0] as? OneValueSeries
-				XCTAssertNotNil(series)
-				XCTAssertEqual(5, series!.dataPoints!.count)
-				XCTAssertEqual(category.dataPoints![0].value, series!.dataPoints![4].value)
-				expectation.fulfill()
-			}
-		}
-		self.waitForExpectations(timeout: testTimeout, handler: nil)
-	}
+	utility::string_t fileName = L"test.pptx";
+	utility::string_t folderName = L"TempSlidesSDK";
+	utility::string_t password = L"password";
+	int slideIndex = 3;
+	int shapeIndex = 1;
 
-	func testCategoryUpdate() {
-		let expectation = self.expectation(description: "testCategoryUpdate")
-		TestUtils.initialize("") { (response, error) -> Void in
-			let category = ChartCategory()
-			category.value = "NewCategory"
-			let point1 = OneValueChartDataPoint()
-			point1.value = 40
-			let point2 = OneValueChartDataPoint()
-			point2.value = 50
-			let point3 = OneValueChartDataPoint()
-			point3.value = 14
-			category.dataPoints = [point1, point2, point3]
-			SlidesAPI.updateChartCategory("test.pptx", 3, 1, 2, category, "password", "TempSlidesSDK") { (chart, error) -> Void in
-				XCTAssertNil(error)
-				XCTAssertNotNil(chart)
-				XCTAssertNotNil(chart!.series)
-				XCTAssertNotNil(chart!.categories)
-				XCTAssertEqual(3, chart!.series!.count)
-				XCTAssertEqual(4, chart!.categories!.count)
-				XCTAssertEqual(4, (chart!.series![0] as! OneValueSeries).dataPoints!.count)
-				XCTAssertEqual(category.dataPoints![0].value, (chart!.series![0] as! OneValueSeries).dataPoints![1].value)
-				expectation.fulfill()
-			}
-		}
-		self.waitForExpectations(timeout: testTimeout, handler: nil)
-	}
+	std::shared_ptr<ShapeBase> shape = api->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
+	std::shared_ptr<Chart> chart = std::static_pointer_cast<Chart>(shape);
+	chart->getLegend()->setHasLegend(false);
+	shape = api->updateShape(fileName, slideIndex, shapeIndex, chart, password, folderName).get();
+	chart = std::static_pointer_cast<Chart>(shape);
+	EXPECT_EQ(false, chart->getLegend()->getHasLegend());
+}
 
-	func testCategoryDelete() {
-		let expectation = self.expectation(description: "testCategoryDelete")
-		TestUtils.initialize("") { (response, error) -> Void in
-			SlidesAPI.deleteChartCategory("test.pptx", 3, 1, 2, "password", "TempSlidesSDK") { (chart, error) -> Void in
-				XCTAssertNil(error)
-				XCTAssertNotNil(chart)
-				XCTAssertNotNil(chart!.series)
-				XCTAssertNotNil(chart!.categories)
-				XCTAssertEqual(3, chart!.series!.count)
-				XCTAssertEqual(3, chart!.categories!.count)
-				XCTAssertEqual(3, (chart!.series![0] as! OneValueSeries).dataPoints!.count)
-				expectation.fulfill()
-			}
-		}
-		self.waitForExpectations(timeout: testTimeout, handler: nil)
-	}
+TEST_F(ChartTest, chartGridLinesFormat) {
+	utils->initialize("", "");
 
-	func testDataPointCreate() {
-		let expectation = self.expectation(description: "testDataPointCreate")
-		TestUtils.initialize("") { (response, error) -> Void in
-			let point = OneValueChartDataPoint()
-			point.value = 40
-			SlidesAPI.createChartDataPoint("test.pptx", 3, 1, 2, point, "password", "TempSlidesSDK") { (chart, error) -> Void in
-				XCTAssertNotNil(error)
-				switch (error!) {
-				case ErrorResponse.error(let actualCode, _, _):
-					XCTAssertEqual(400, actualCode)
-				default:
-					XCTFail("Unexpected error")
-				}
-				expectation.fulfill()
-			}
-		}
-		self.waitForExpectations(timeout: testTimeout, handler: nil)
-	}
+	utility::string_t fileName = L"test.pptx";
+	utility::string_t folderName = L"TempSlidesSDK";
+	utility::string_t password = L"password";
+	int slideIndex = 3;
+	int shapeIndex = 1;
 
-	func testDataPointUpdate() {
-		let expectation = self.expectation(description: "testDataPointUpdate")
-		TestUtils.initialize("") { (response, error) -> Void in
-			let point = OneValueChartDataPoint()
-			point.value = 40
-			SlidesAPI.updateChartDataPoint("test.pptx", 3, 1, 2, 2, point, "password", "TempSlidesSDK") { (chart, error) -> Void in
-				XCTAssertNil(error)
-				XCTAssertNotNil(chart)
-				XCTAssertNotNil(chart!.series)
-				XCTAssertNotNil(chart!.categories)
-				XCTAssertEqual(3, chart!.series!.count)
-				XCTAssertEqual(4, chart!.categories!.count)
-				XCTAssertEqual(4, (chart!.series![1] as! OneValueSeries).dataPoints!.count)
-				XCTAssertEqual(point.value, (chart!.series![1] as! OneValueSeries).dataPoints![1].value)
-				expectation.fulfill()
-			}
-		}
-		self.waitForExpectations(timeout: testTimeout, handler: nil)
-	}
+	std::shared_ptr<ShapeBase> shape = api->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
+	std::shared_ptr<Chart> chart = std::static_pointer_cast<Chart>(shape);
 
-	func testDataPointDelete() {
-		let expectation = self.expectation(description: "testDataPointDelete")
-		TestUtils.initialize("") { (response, error) -> Void in
-			SlidesAPI.deleteChartDataPoint("test.pptx", 3, 1, 2, 2, "password", "TempSlidesSDK") { (chart, error) -> Void in
-				XCTAssertNil(error)
-				XCTAssertNotNil(chart)
-				XCTAssertNotNil(chart!.series)
-				XCTAssertNotNil(chart!.categories)
-				XCTAssertEqual(3, chart!.series!.count)
-				XCTAssertEqual(4, chart!.categories!.count)
-				XCTAssertNil((chart!.series![1] as! OneValueSeries).dataPoints![1].value)
-				expectation.fulfill()
-			}
-		}
-		self.waitForExpectations(timeout: testTimeout, handler: nil)
-	}
+	std::shared_ptr<Axis> horizontalAxis(new Axis());
+	std::shared_ptr<ChartLinesFormat> majorGridLinesFormat(new ChartLinesFormat());
+	std::shared_ptr<LineFormat> majorLineFormat(new LineFormat());
+	std::shared_ptr<FillFormat> majorLineFillFormat(new NoFill());
+	majorLineFormat->setFillFormat(majorLineFillFormat);
+	majorGridLinesFormat->setLineFormat(majorLineFormat);
+	horizontalAxis->setMajorGridLinesFormat(majorGridLinesFormat);
 
-	func testChartSunburst() {
-		let expectation = self.expectation(description: "testChartSunburst")
-		TestUtils.initialize("") { (response, error) -> Void in
-			let chart = Chart()
-			chart.chartType = Chart.ChartType.sunburst
-			chart.width = 400
-			chart.height = 300
-			let series1 = OneValueSeries()
-			series1.name = "Series1"
-			let point1 = OneValueChartDataPoint()
-			point1.value = 40
-			let point2 = OneValueChartDataPoint()
-			point2.value = 50
-			let point3 = OneValueChartDataPoint()
-			point3.value = 70
-			let point4 = OneValueChartDataPoint()
-			point4.value = 60
-			series1.dataPoints = [point1, point2, point3, point4]
-			chart.series = [series1]
-			let category1 = ChartCategory()
-			category1.value = "Leaf1"
-			category1.parentCategories = ["Branch1", "Stem1"]
-			let category2 = ChartCategory()
-			category2.value = "Leaf1"
-			category2.parentCategories = ["Branch1", "Stem1"]
-			let category3 = ChartCategory()
-			category3.value = "Branch2"
-			category3.parentCategories = ["Stem1"]
-			let category4 = ChartCategory()
-			category4.value = "Stem2"
-			chart.categories = [category1, category2, category3, category4]
-			SlidesAPI.createShape("test.pptx", 3, chart, nil, nil, "password", "TempSlidesSDK") { (shape, error) -> Void in
-				XCTAssertNil(error)
-				XCTAssertNotNil(shape)
-				let chart = shape as? Chart
-				XCTAssertNotNil(chart)
-				XCTAssertNotNil(chart!.series)
-				XCTAssertNotNil(chart!.categories)
-				XCTAssertEqual(1, chart!.series!.count)
-				XCTAssertEqual(4, chart!.categories!.count)
-				expectation.fulfill()
-			}
-		}
-		self.waitForExpectations(timeout: testTimeout, handler: nil)
-	}
+	std::shared_ptr<ChartLinesFormat> minorGridLinesFormat(new ChartLinesFormat());
+	std::shared_ptr<LineFormat> minorLineFormat(new LineFormat());
+	std::shared_ptr<SolidFill> minorLineFillFormat(new SolidFill());
+	minorLineFillFormat->setColor(L"Black");
+	minorLineFormat->setFillFormat(minorLineFillFormat);
+	minorGridLinesFormat->setLineFormat(minorLineFormat);
+	horizontalAxis->setMinorGridLinesFormat(minorGridLinesFormat);
 
-	func testMultilevelCategoryAxis() {
-		let expectation = self.expectation(description: "testMultilevelCategoryAxis")
-		TestUtils.initialize("") { (response, error) -> Void in
-			let chart = Chart()
-			chart.chartType = Chart.ChartType.clusteredColumn
-			chart.X = 100
-			chart.Y = 100
-			chart.width = 400
-			chart.height = 300
-			let series1 = OneValueSeries()
-			series1.name = "Series1"
-			let point1 = OneValueChartDataPoint()
-			point1.value = 1
-			let point2 = OneValueChartDataPoint()
-			point2.value = 2
-			let point3 = OneValueChartDataPoint()
-			point3.value = 3
-			let point4 = OneValueChartDataPoint()
-			point4.value = 4
-			let point5 = OneValueChartDataPoint()
-			point5.value = 5
-			let point6 = OneValueChartDataPoint()
-			point6.value = 6
-			let point7 = OneValueChartDataPoint()
-			point7.value = 7
-			let point8 = OneValueChartDataPoint()
-			point8.value = 8
-			series1.dataPoints = [point1, point2, point3, point4, point5, point6, point7, point8]
-			chart.series = [series1]
-			let category1 = ChartCategory()
-			category1.value = "Category1"
-			category1.parentCategories = ["Sub-category1", "Root1"]
-			let category2 = ChartCategory()
-			category2.value = "Category2"
-			let category3 = ChartCategory()
-			category3.parentCategories = ["Subcategory2"]
-			let category4 = ChartCategory()
-			category4.value = "Category4"
-			let category5 = ChartCategory()
-			category5.value = "Category5"
-			category5.parentCategories = ["Sub-category3", "Root2"]
-			let category6 = ChartCategory()
-			category6.value = "Category6"
-			let category7 = ChartCategory()
-			category7.value = "Category7"
-			category7.parentCategories = ["Sub-category4"]
-			let category8 = ChartCategory()
-			category8.value = "Category8"
-			chart.categories = [category1, category2, category3, category4, category5, category6, category7, category8]
-			SlidesAPI.createShape("test.pptx", 3, chart, nil, nil, "password", "TempSlidesSDK") { (shape, error) -> Void in
-				XCTAssertNil(error)
-				XCTAssertNotNil(shape)
-				let chart = shape as? Chart
-				XCTAssertNotNil(chart)
-				XCTAssertEqual(Chart.ChartType.clusteredColumn, chart!.chartType)
-				XCTAssertNotNil(chart!.series)
-				XCTAssertNotNil(chart!.categories)
-				XCTAssertEqual(1, chart!.series!.count)
-				XCTAssertEqual(8, chart!.categories!.count)
-				expectation.fulfill()
-			}
-		}
-		self.waitForExpectations(timeout: testTimeout, handler: nil)
-	}
+	std::shared_ptr<Axis> verticalAxis(new Axis());
+	std::shared_ptr<ChartLinesFormat> majorVerticalGridLinesFormat(new ChartLinesFormat());
+	std::shared_ptr<LineFormat> majorVerticalLineFormat(new LineFormat());
+	std::shared_ptr<GradientFill> gradientFill(new GradientFill());
+	std::shared_ptr<GradientFillStop> stop1(new GradientFillStop());
+	stop1->setColor(L"White");
+	stop1->setPosition(0);
+	std::shared_ptr<GradientFillStop> stop2(new GradientFillStop());
+	stop2->setColor(L"Black");
+	stop2->setPosition(1);
+	gradientFill->setStops({ stop1, stop2 });
+	majorVerticalLineFormat->setFillFormat(gradientFill);
+	majorVerticalGridLinesFormat->setLineFormat(majorVerticalLineFormat);
+	verticalAxis->setMajorGridLinesFormat(majorVerticalGridLinesFormat);
 
-	func testHideChartLegend() {
-		let expectation = self.expectation(description: "testHideChartLegend")
-		TestUtils.initialize("") { (response, error) -> Void in
-			let fileName = "test.pptx"
-			let folderName = "TempSlidesSDK"
-			let password = "password"
-			let slideIndex = 3
-			let shapeIndex = 1
-			SlidesAPI.getShape(fileName, slideIndex, shapeIndex, password, folderName) { (shape, error) -> Void in
-				XCTAssertNil(error)
-				XCTAssertNotNil(shape)
-				let chart = shape as? Chart
-				XCTAssertNotNil(chart)
-				chart!.legend!.hasLegend = false
-				SlidesAPI.updateShape(fileName, slideIndex, shapeIndex, chart!, password, folderName) { (shape, error) -> Void in
-					XCTAssertNil(error)
-					XCTAssertNotNil(shape)
-					let chart = shape as? Chart
-					XCTAssertNotNil(chart)
-					XCTAssertNotNil(chart!.legend)
-					XCTAssertEqual(false, chart!.legend!.hasLegend)
-					expectation.fulfill()
-				}
-			}
-		}
-		self.waitForExpectations(timeout: testTimeout, handler: nil)
-	}
+	std::shared_ptr<ChartLinesFormat> minorVerticalGridLinesFormat(new ChartLinesFormat());
+	std::shared_ptr<LineFormat> minorVerticalLineFormat(new LineFormat());
+	std::shared_ptr<FillFormat> minorVerticalLineFillFormat(new NoFill());
+	minorVerticalLineFormat->setFillFormat(minorVerticalLineFillFormat);
+	minorVerticalGridLinesFormat->setLineFormat(minorVerticalLineFormat);
+	verticalAxis->setMinorGridLinesFormat(minorVerticalGridLinesFormat);
 
-	func testChartGridLinesFormat() {
-		let expectation = self.expectation(description: "testChartGridLinesFormat")
-		TestUtils.initialize("") { (response, error) -> Void in
-			let fileName = "test.pptx"
-			let folderName = "TempSlidesSDK"
-			let password = "password"
-			let slideIndex = 3
-			let shapeIndex = 1
-			SlidesAPI.getShape(fileName, slideIndex, shapeIndex, password, folderName) { (shape, error) -> Void in
-				XCTAssertNil(error)
-				XCTAssertNotNil(shape)
-				let chart = shape as? Chart
-				XCTAssertNotNil(chart)
-
-				let horizontalAxis = Axis()
-				let majorGridLinesFormat = ChartLinesFormat()
-				let majorLineFormat = LineFormat()
-				majorLineFormat.fillFormat = NoFill()
-				majorGridLinesFormat.lineFormat = majorLineFormat
-				horizontalAxis.majorGridLinesFormat = majorGridLinesFormat
-
-				let minorGridLinesFormat = ChartLinesFormat()
-				let minorLineFormat = LineFormat()
-				let minorFillFormat = SolidFill()
-				minorFillFormat.color = "Black"
-				minorLineFormat.fillFormat = minorFillFormat
-				minorGridLinesFormat.lineFormat = minorLineFormat
-				horizontalAxis.minorGridLinesFormat = minorGridLinesFormat
-
-				let verticalAxis = Axis()
-
-				let majorVerticalGridLinesFormat = ChartLinesFormat()
-				let majorVerticalLineFormat = LineFormat()
-				let gradientFill = GradientFill()
-				gradientFill.direction = GradientFill.Direction.fromCorner1
-				let stop1 = GradientFillStop()
-				stop1.color = "White"
-				stop1.position = 0
-				let stop2 = GradientFillStop()
-				stop2.color = "Black"
-				stop2.position = 1
-				gradientFill.stops = [stop1, stop2]
-				majorVerticalLineFormat.fillFormat = gradientFill
-				majorVerticalGridLinesFormat.lineFormat = majorVerticalLineFormat
-				verticalAxis.majorGridLinesFormat = majorVerticalGridLinesFormat
-
-				let minorVerticalGridLinesFormat = ChartLinesFormat()
-				let minorVerticalLineFormat = LineFormat()
-				minorVerticalLineFormat.fillFormat = NoFill()
-				minorVerticalGridLinesFormat.lineFormat = minorVerticalLineFormat
-				verticalAxis.minorGridLinesFormat = minorVerticalGridLinesFormat
-
-				let axes = Axes()
-				axes.horizontalAxis = horizontalAxis
-				axes.verticalAxis = verticalAxis
-				chart!.axes = axes
-
-				SlidesAPI.updateShape(fileName, slideIndex, shapeIndex, chart!, password, folderName) { (shape, error) -> Void in
-					XCTAssertNil(error)
-					XCTAssertNotNil(shape)
-					let chart = shape as? Chart
-					XCTAssertNotNil(chart)
-					XCTAssertNotNil(chart!.legend)
-					XCTAssertEqual(FillFormat.ModelType.noFill, chart!.axes!.horizontalAxis!.majorGridLinesFormat!.lineFormat!.fillFormat!.type)
-					XCTAssertEqual(FillFormat.ModelType.solid, chart!.axes!.horizontalAxis!.minorGridLinesFormat!.lineFormat!.fillFormat!.type)
-					XCTAssertEqual(FillFormat.ModelType.gradient, chart!.axes!.verticalAxis!.majorGridLinesFormat!.lineFormat!.fillFormat!.type)
-					XCTAssertEqual(FillFormat.ModelType.noFill, chart!.axes!.verticalAxis!.minorGridLinesFormat!.lineFormat!.fillFormat!.type)
-					expectation.fulfill()
-				}
-			}
-		}
-		self.waitForExpectations(timeout: testTimeout, handler: nil)
-	}
-*/
+	std::shared_ptr<Axes> axes(new Axes());
+	axes->setHorizontalAxis(horizontalAxis);
+	axes->setVerticalAxis(verticalAxis);
+	chart->setAxes(axes);
+	shape = api->updateShape(fileName, slideIndex, shapeIndex, chart, password, folderName).get();
+	chart = std::static_pointer_cast<Chart>(shape);
+	EXPECT_EQ(L"NoFill", chart->getAxes()->getHorizontalAxis()->getMajorGridLinesFormat()->getLineFormat()->getFillFormat()->getType());
+	EXPECT_EQ(L"Solid", chart->getAxes()->getHorizontalAxis()->getMinorGridLinesFormat()->getLineFormat()->getFillFormat()->getType());
+	EXPECT_EQ(L"Gradient", chart->getAxes()->getVerticalAxis()->getMajorGridLinesFormat()->getLineFormat()->getFillFormat()->getType());
+	EXPECT_EQ(L"NoFill", chart->getAxes()->getVerticalAxis()->getMinorGridLinesFormat()->getLineFormat()->getFillFormat()->getType());
+}

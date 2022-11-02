@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Theme.h"
 
 namespace asposeslidescloud {
@@ -115,23 +116,20 @@ void Theme::fromJson(web::json::value& val)
 	web::json::value* jsonForColorScheme = ModelBase::getField(val, "ColorScheme");
 	if(jsonForColorScheme != nullptr && !jsonForColorScheme->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForColorScheme);
-		setColorScheme(newItem);
+		std::shared_ptr<void> instanceForColorScheme = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForColorScheme);
+		setColorScheme(std::static_pointer_cast<ResourceUri>(instanceForColorScheme));
 	}
 	web::json::value* jsonForFontScheme = ModelBase::getField(val, "FontScheme");
 	if(jsonForFontScheme != nullptr && !jsonForFontScheme->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForFontScheme);
-		setFontScheme(newItem);
+		std::shared_ptr<void> instanceForFontScheme = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForFontScheme);
+		setFontScheme(std::static_pointer_cast<ResourceUri>(instanceForFontScheme));
 	}
 	web::json::value* jsonForFormatScheme = ModelBase::getField(val, "FormatScheme");
 	if(jsonForFormatScheme != nullptr && !jsonForFormatScheme->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForFormatScheme);
-		setFormatScheme(newItem);
+		std::shared_ptr<void> instanceForFormatScheme = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForFormatScheme);
+		setFormatScheme(std::static_pointer_cast<ResourceUri>(instanceForFormatScheme));
 	}
 }
 

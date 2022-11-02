@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Paragraphs.h"
 
 namespace asposeslidescloud {
@@ -52,6 +53,7 @@ void Paragraphs::setParagraphLinks(std::vector<std::shared_ptr<ResourceUri>> val
 web::json::value Paragraphs::toJson() const
 {
 	web::json::value val = this->ResourceBase::toJson();
+	if (m_ParagraphLinks.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_ParagraphLinks)
@@ -80,9 +82,8 @@ void Paragraphs::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-					newItem->fromJson(item);
-					m_ParagraphLinks.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", item);
+					m_ParagraphLinks.push_back(std::static_pointer_cast<ResourceUri>(newItem));
 				}
 			}
         	}

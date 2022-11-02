@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "FilesUploadResult.h"
 
 namespace asposeslidescloud {
@@ -63,6 +64,7 @@ void FilesUploadResult::setErrors(std::vector<std::shared_ptr<Error>> value)
 web::json::value FilesUploadResult::toJson() const
 {
 	web::json::value val = web::json::value::object();
+	if (m_Uploaded.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Uploaded)
@@ -71,6 +73,7 @@ web::json::value FilesUploadResult::toJson() const
 		}
 		val[utility::conversions::to_string_t("Uploaded")] = web::json::value::array(jsonArray);
 	}
+	if (m_Errors.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Errors)
@@ -110,9 +113,8 @@ void FilesUploadResult::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<Error> newItem(new Error());
-					newItem->fromJson(item);
-					m_Errors.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"Error", item);
+					m_Errors.push_back(std::static_pointer_cast<Error>(newItem));
 				}
 			}
         	}

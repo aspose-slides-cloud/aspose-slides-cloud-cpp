@@ -36,6 +36,8 @@
 
 #include <cpprest/details/basic_types.h>
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 
@@ -144,6 +146,20 @@ public:
 	ASPOSE_DLL_EXPORT void setTriggerDelayTime(double value);
 	ASPOSE_DLL_EXPORT bool triggerDelayTimeIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetTriggerDelayTime();
+	/// <summary>
+	/// Specifies if the effect will repeat until the end of slide.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getRepeatUntilEndSlide() const;
+	ASPOSE_DLL_EXPORT void setRepeatUntilEndSlide(bool value);
+	ASPOSE_DLL_EXPORT bool repeatUntilEndSlideIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetRepeatUntilEndSlide();
+	/// <summary>
+	/// Specifies if the effect will repeat until the next click.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getRepeatUntilNextClick() const;
+	ASPOSE_DLL_EXPORT void setRepeatUntilNextClick(bool value);
+	ASPOSE_DLL_EXPORT bool repeatUntilNextClickIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetRepeatUntilNextClick();
 
 protected:
 	utility::string_t m_Type;
@@ -170,6 +186,10 @@ protected:
 	bool m_SpeedIsSet;
 	double m_TriggerDelayTime;
 	bool m_TriggerDelayTimeIsSet;
+	bool m_RepeatUntilEndSlide;
+	bool m_RepeatUntilEndSlideIsSet;
+	bool m_RepeatUntilNextClick;
+	bool m_RepeatUntilNextClickIsSet;
 };
 
 }

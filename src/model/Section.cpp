@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Section.h"
 
 namespace asposeslidescloud {
@@ -79,6 +80,7 @@ web::json::value Section::toJson() const
 		val[utility::conversions::to_string_t("Name")] = ModelBase::toJson(m_Name);
 	}
 	val[utility::conversions::to_string_t("FirstSlideIndex")] = ModelBase::toJson(m_FirstSlideIndex);
+	if (m_SlideList.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_SlideList)
@@ -117,9 +119,8 @@ void Section::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-					newItem->fromJson(item);
-					m_SlideList.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", item);
+					m_SlideList.push_back(std::static_pointer_cast<ResourceUri>(newItem));
 				}
 			}
         	}

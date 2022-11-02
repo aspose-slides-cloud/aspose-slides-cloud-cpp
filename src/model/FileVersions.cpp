@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "FileVersions.h"
 
 namespace asposeslidescloud {
@@ -52,6 +53,7 @@ void FileVersions::setValue(std::vector<std::shared_ptr<FileVersion>> value)
 web::json::value FileVersions::toJson() const
 {
 	web::json::value val = web::json::value::object();
+	if (m_Value.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Value)
@@ -79,9 +81,8 @@ void FileVersions::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<FileVersion> newItem(new FileVersion());
-					newItem->fromJson(item);
-					m_Value.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"FileVersion", item);
+					m_Value.push_back(std::static_pointer_cast<FileVersion>(newItem));
 				}
 			}
         	}

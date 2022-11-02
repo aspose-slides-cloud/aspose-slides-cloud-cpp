@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "LuminanceEffect.h"
 
 namespace asposeslidescloud {

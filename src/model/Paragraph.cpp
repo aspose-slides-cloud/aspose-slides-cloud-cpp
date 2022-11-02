@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Paragraph.h"
 
 namespace asposeslidescloud {
@@ -458,6 +459,7 @@ web::json::value Paragraph::toJson() const
 	{
 		val[utility::conversions::to_string_t("RightToLeft")] = ModelBase::toJson(m_RightToLeft);
 	}
+	if (m_PortionList.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_PortionList)
@@ -585,9 +587,8 @@ void Paragraph::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<Portion> newItem(new Portion());
-					newItem->fromJson(item);
-					m_PortionList.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"Portion", item);
+					m_PortionList.push_back(std::static_pointer_cast<Portion>(newItem));
 				}
 			}
         	}
@@ -595,9 +596,8 @@ void Paragraph::fromJson(web::json::value& val)
 	web::json::value* jsonForDefaultPortionFormat = ModelBase::getField(val, "DefaultPortionFormat");
 	if(jsonForDefaultPortionFormat != nullptr && !jsonForDefaultPortionFormat->is_null())
 	{
-		std::shared_ptr<PortionFormat> newItem(new PortionFormat());
-		newItem->fromJson(*jsonForDefaultPortionFormat);
-		setDefaultPortionFormat(newItem);
+		std::shared_ptr<void> instanceForDefaultPortionFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"PortionFormat", *jsonForDefaultPortionFormat);
+		setDefaultPortionFormat(std::static_pointer_cast<PortionFormat>(instanceForDefaultPortionFormat));
 	}
 }
 

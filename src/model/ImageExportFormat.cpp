@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ImageExportFormat.h"
 
 namespace asposeslidescloud {

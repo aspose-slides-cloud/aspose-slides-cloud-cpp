@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Shape.h"
 
 namespace asposeslidescloud {
@@ -101,16 +102,14 @@ void Shape::fromJson(web::json::value& val)
 	web::json::value* jsonForParagraphs = ModelBase::getField(val, "Paragraphs");
 	if(jsonForParagraphs != nullptr && !jsonForParagraphs->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForParagraphs);
-		setParagraphs(newItem);
+		std::shared_ptr<void> instanceForParagraphs = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForParagraphs);
+		setParagraphs(std::static_pointer_cast<ResourceUri>(instanceForParagraphs));
 	}
 	web::json::value* jsonForTextFrameFormat = ModelBase::getField(val, "TextFrameFormat");
 	if(jsonForTextFrameFormat != nullptr && !jsonForTextFrameFormat->is_null())
 	{
-		std::shared_ptr<TextFrameFormat> newItem(new TextFrameFormat());
-		newItem->fromJson(*jsonForTextFrameFormat);
-		setTextFrameFormat(newItem);
+		std::shared_ptr<void> instanceForTextFrameFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"TextFrameFormat", *jsonForTextFrameFormat);
+		setTextFrameFormat(std::static_pointer_cast<TextFrameFormat>(instanceForTextFrameFormat));
 	}
 }
 

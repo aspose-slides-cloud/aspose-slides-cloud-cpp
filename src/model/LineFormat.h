@@ -39,6 +39,8 @@
 #include "../model/ArrowHeadProperties.h"
 #include "../model/FillFormat.h"
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Camera.h"
 
 namespace asposeslidescloud {

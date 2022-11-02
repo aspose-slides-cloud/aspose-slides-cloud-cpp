@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ChartCategory.h"
 
 namespace asposeslidescloud {
@@ -129,6 +130,7 @@ void ChartCategory::setDataPoints(std::vector<std::shared_ptr<OneValueChartDataP
 web::json::value ChartCategory::toJson() const
 {
 	web::json::value val = web::json::value::object();
+	if (m_ParentCategories.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_ParentCategories)
@@ -157,6 +159,7 @@ web::json::value ChartCategory::toJson() const
 	{
 		val[utility::conversions::to_string_t("LineFormat")] = ModelBase::toJson(m_LineFormat);
 	}
+	if (m_DataPoints.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_DataPoints)
@@ -195,23 +198,20 @@ void ChartCategory::fromJson(web::json::value& val)
 	web::json::value* jsonForFillFormat = ModelBase::getField(val, "FillFormat");
 	if(jsonForFillFormat != nullptr && !jsonForFillFormat->is_null())
 	{
-		std::shared_ptr<FillFormat> newItem(new FillFormat());
-		newItem->fromJson(*jsonForFillFormat);
-		setFillFormat(newItem);
+		std::shared_ptr<void> instanceForFillFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"FillFormat", *jsonForFillFormat);
+		setFillFormat(std::static_pointer_cast<FillFormat>(instanceForFillFormat));
 	}
 	web::json::value* jsonForEffectFormat = ModelBase::getField(val, "EffectFormat");
 	if(jsonForEffectFormat != nullptr && !jsonForEffectFormat->is_null())
 	{
-		std::shared_ptr<EffectFormat> newItem(new EffectFormat());
-		newItem->fromJson(*jsonForEffectFormat);
-		setEffectFormat(newItem);
+		std::shared_ptr<void> instanceForEffectFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"EffectFormat", *jsonForEffectFormat);
+		setEffectFormat(std::static_pointer_cast<EffectFormat>(instanceForEffectFormat));
 	}
 	web::json::value* jsonForLineFormat = ModelBase::getField(val, "LineFormat");
 	if(jsonForLineFormat != nullptr && !jsonForLineFormat->is_null())
 	{
-		std::shared_ptr<LineFormat> newItem(new LineFormat());
-		newItem->fromJson(*jsonForLineFormat);
-		setLineFormat(newItem);
+		std::shared_ptr<void> instanceForLineFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"LineFormat", *jsonForLineFormat);
+		setLineFormat(std::static_pointer_cast<LineFormat>(instanceForLineFormat));
 	}
 	web::json::value* jsonForDataPoints = ModelBase::getField(val, "DataPoints");
 	if(jsonForDataPoints != nullptr && !jsonForDataPoints->is_null())
@@ -227,9 +227,8 @@ void ChartCategory::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<OneValueChartDataPoint> newItem(new OneValueChartDataPoint());
-					newItem->fromJson(item);
-					m_DataPoints.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"OneValueChartDataPoint", item);
+					m_DataPoints.push_back(std::static_pointer_cast<OneValueChartDataPoint>(newItem));
 				}
 			}
         	}

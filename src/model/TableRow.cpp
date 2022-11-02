@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "TableRow.h"
 
 namespace asposeslidescloud {
@@ -74,6 +75,7 @@ void TableRow::setHeight(double value)
 web::json::value TableRow::toJson() const
 {
 	web::json::value val = web::json::value::object();
+	if (m_Cells.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Cells)
@@ -103,9 +105,8 @@ void TableRow::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<TableCell> newItem(new TableCell());
-					newItem->fromJson(item);
-					m_Cells.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"TableCell", item);
+					m_Cells.push_back(std::static_pointer_cast<TableCell>(newItem));
 				}
 			}
         	}

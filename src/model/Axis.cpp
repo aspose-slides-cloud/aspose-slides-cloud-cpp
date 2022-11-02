@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Axis.h"
 
 namespace asposeslidescloud {
@@ -1026,37 +1027,32 @@ void Axis::fromJson(web::json::value& val)
 	web::json::value* jsonForFillFormat = ModelBase::getField(val, "FillFormat");
 	if(jsonForFillFormat != nullptr && !jsonForFillFormat->is_null())
 	{
-		std::shared_ptr<FillFormat> newItem(new FillFormat());
-		newItem->fromJson(*jsonForFillFormat);
-		setFillFormat(newItem);
+		std::shared_ptr<void> instanceForFillFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"FillFormat", *jsonForFillFormat);
+		setFillFormat(std::static_pointer_cast<FillFormat>(instanceForFillFormat));
 	}
 	web::json::value* jsonForEffectFormat = ModelBase::getField(val, "EffectFormat");
 	if(jsonForEffectFormat != nullptr && !jsonForEffectFormat->is_null())
 	{
-		std::shared_ptr<EffectFormat> newItem(new EffectFormat());
-		newItem->fromJson(*jsonForEffectFormat);
-		setEffectFormat(newItem);
+		std::shared_ptr<void> instanceForEffectFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"EffectFormat", *jsonForEffectFormat);
+		setEffectFormat(std::static_pointer_cast<EffectFormat>(instanceForEffectFormat));
 	}
 	web::json::value* jsonForLineFormat = ModelBase::getField(val, "LineFormat");
 	if(jsonForLineFormat != nullptr && !jsonForLineFormat->is_null())
 	{
-		std::shared_ptr<LineFormat> newItem(new LineFormat());
-		newItem->fromJson(*jsonForLineFormat);
-		setLineFormat(newItem);
+		std::shared_ptr<void> instanceForLineFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"LineFormat", *jsonForLineFormat);
+		setLineFormat(std::static_pointer_cast<LineFormat>(instanceForLineFormat));
 	}
 	web::json::value* jsonForMajorGridLinesFormat = ModelBase::getField(val, "MajorGridLinesFormat");
 	if(jsonForMajorGridLinesFormat != nullptr && !jsonForMajorGridLinesFormat->is_null())
 	{
-		std::shared_ptr<ChartLinesFormat> newItem(new ChartLinesFormat());
-		newItem->fromJson(*jsonForMajorGridLinesFormat);
-		setMajorGridLinesFormat(newItem);
+		std::shared_ptr<void> instanceForMajorGridLinesFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"ChartLinesFormat", *jsonForMajorGridLinesFormat);
+		setMajorGridLinesFormat(std::static_pointer_cast<ChartLinesFormat>(instanceForMajorGridLinesFormat));
 	}
 	web::json::value* jsonForMinorGridLinesFormat = ModelBase::getField(val, "MinorGridLinesFormat");
 	if(jsonForMinorGridLinesFormat != nullptr && !jsonForMinorGridLinesFormat->is_null())
 	{
-		std::shared_ptr<ChartLinesFormat> newItem(new ChartLinesFormat());
-		newItem->fromJson(*jsonForMinorGridLinesFormat);
-		setMinorGridLinesFormat(newItem);
+		std::shared_ptr<void> instanceForMinorGridLinesFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"ChartLinesFormat", *jsonForMinorGridLinesFormat);
+		setMinorGridLinesFormat(std::static_pointer_cast<ChartLinesFormat>(instanceForMinorGridLinesFormat));
 	}
 }
 

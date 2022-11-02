@@ -43,6 +43,8 @@
 #include <vector>
 #include "../model/XYSeries.h"
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

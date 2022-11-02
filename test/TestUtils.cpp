@@ -175,8 +175,12 @@ std::shared_ptr<HttpContent> TestUtils::getBinaryTestValue(std::string functionN
 		path = utility::conversions::to_string_t("TestData/test.pdf");
 	} else if (boost::iequals(utility::conversions::to_string_t("ImportShapesFromSvg"), functionName)) {
 		path = utility::conversions::to_string_t("TestData/shapes.svg");
-	} else if (boost::iequals(utility::conversions::to_string_t("image"), parameterName)) {
+	}
+	else if (boost::iequals(utility::conversions::to_string_t("image"), parameterName)) {
 		path = utility::conversions::to_string_t("TestData/watermark.png");
+	}
+	else if (boost::iequals(utility::conversions::to_string_t("font"), parameterName)) {
+		path = utility::conversions::to_string_t("TestData/calibri.ttf");
 	}
 	uploadContent->setData(std::make_shared<std::ifstream>(path, std::ios::binary));
 	return uploadContent;
@@ -427,6 +431,20 @@ bool TestUtils::isGoodRule(web::json::value rule, std::string functionName, std:
 			|| boost::iequals(rule[utility::conversions::to_string_t("Method")].as_string(), functionName))
 		&& (!rule.has_field(utility::conversions::to_string_t("Language"))
 			|| boost::iequals(rule[utility::conversions::to_string_t("Language")].as_string(), "CPP"));
+}
+
+utility::string_t TestUtils::getFileDataAsBase64(utility::string_t path)
+{
+	std::ifstream infile;
+	infile.open(path, std::ios::binary);
+	infile.seekg(0, std::ios::end);
+	size_t file_size_in_byte = infile.tellg();
+	std::vector<char> data; // used to store text data
+	data.resize(file_size_in_byte);
+	infile.seekg(0, std::ios::beg);
+	infile.read(&data[0], file_size_in_byte);
+	std::vector<unsigned char> udata(data.begin(), data.end());
+	return utility::conversions::to_base64(udata);
 }
 
 const std::string TestUtils::TEST_DATA_VERSION = "1";

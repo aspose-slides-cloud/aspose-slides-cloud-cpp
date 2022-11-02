@@ -39,6 +39,8 @@
 #include <vector>
 #include "../model/TextItem.h"
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

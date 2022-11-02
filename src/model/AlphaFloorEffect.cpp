@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "AlphaFloorEffect.h"
 
 namespace asposeslidescloud {

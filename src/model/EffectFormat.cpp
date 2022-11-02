@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "EffectFormat.h"
 
 namespace asposeslidescloud {
@@ -169,58 +170,50 @@ void EffectFormat::fromJson(web::json::value& val)
 	web::json::value* jsonForBlur = ModelBase::getField(val, "Blur");
 	if(jsonForBlur != nullptr && !jsonForBlur->is_null())
 	{
-		std::shared_ptr<BlurEffect> newItem(new BlurEffect());
-		newItem->fromJson(*jsonForBlur);
-		setBlur(newItem);
+		std::shared_ptr<void> instanceForBlur = asposeslidescloud::api::ClassRegistry::deserialize(L"BlurEffect", *jsonForBlur);
+		setBlur(std::static_pointer_cast<BlurEffect>(instanceForBlur));
 	}
 	web::json::value* jsonForGlow = ModelBase::getField(val, "Glow");
 	if(jsonForGlow != nullptr && !jsonForGlow->is_null())
 	{
-		std::shared_ptr<GlowEffect> newItem(new GlowEffect());
-		newItem->fromJson(*jsonForGlow);
-		setGlow(newItem);
+		std::shared_ptr<void> instanceForGlow = asposeslidescloud::api::ClassRegistry::deserialize(L"GlowEffect", *jsonForGlow);
+		setGlow(std::static_pointer_cast<GlowEffect>(instanceForGlow));
 	}
 	web::json::value* jsonForInnerShadow = ModelBase::getField(val, "InnerShadow");
 	if(jsonForInnerShadow != nullptr && !jsonForInnerShadow->is_null())
 	{
-		std::shared_ptr<InnerShadowEffect> newItem(new InnerShadowEffect());
-		newItem->fromJson(*jsonForInnerShadow);
-		setInnerShadow(newItem);
+		std::shared_ptr<void> instanceForInnerShadow = asposeslidescloud::api::ClassRegistry::deserialize(L"InnerShadowEffect", *jsonForInnerShadow);
+		setInnerShadow(std::static_pointer_cast<InnerShadowEffect>(instanceForInnerShadow));
 	}
 	web::json::value* jsonForOuterShadow = ModelBase::getField(val, "OuterShadow");
 	if(jsonForOuterShadow != nullptr && !jsonForOuterShadow->is_null())
 	{
-		std::shared_ptr<OuterShadowEffect> newItem(new OuterShadowEffect());
-		newItem->fromJson(*jsonForOuterShadow);
-		setOuterShadow(newItem);
+		std::shared_ptr<void> instanceForOuterShadow = asposeslidescloud::api::ClassRegistry::deserialize(L"OuterShadowEffect", *jsonForOuterShadow);
+		setOuterShadow(std::static_pointer_cast<OuterShadowEffect>(instanceForOuterShadow));
 	}
 	web::json::value* jsonForPresetShadow = ModelBase::getField(val, "PresetShadow");
 	if(jsonForPresetShadow != nullptr && !jsonForPresetShadow->is_null())
 	{
-		std::shared_ptr<PresetShadowEffect> newItem(new PresetShadowEffect());
-		newItem->fromJson(*jsonForPresetShadow);
-		setPresetShadow(newItem);
+		std::shared_ptr<void> instanceForPresetShadow = asposeslidescloud::api::ClassRegistry::deserialize(L"PresetShadowEffect", *jsonForPresetShadow);
+		setPresetShadow(std::static_pointer_cast<PresetShadowEffect>(instanceForPresetShadow));
 	}
 	web::json::value* jsonForSoftEdge = ModelBase::getField(val, "SoftEdge");
 	if(jsonForSoftEdge != nullptr && !jsonForSoftEdge->is_null())
 	{
-		std::shared_ptr<SoftEdgeEffect> newItem(new SoftEdgeEffect());
-		newItem->fromJson(*jsonForSoftEdge);
-		setSoftEdge(newItem);
+		std::shared_ptr<void> instanceForSoftEdge = asposeslidescloud::api::ClassRegistry::deserialize(L"SoftEdgeEffect", *jsonForSoftEdge);
+		setSoftEdge(std::static_pointer_cast<SoftEdgeEffect>(instanceForSoftEdge));
 	}
 	web::json::value* jsonForReflection = ModelBase::getField(val, "Reflection");
 	if(jsonForReflection != nullptr && !jsonForReflection->is_null())
 	{
-		std::shared_ptr<ReflectionEffect> newItem(new ReflectionEffect());
-		newItem->fromJson(*jsonForReflection);
-		setReflection(newItem);
+		std::shared_ptr<void> instanceForReflection = asposeslidescloud::api::ClassRegistry::deserialize(L"ReflectionEffect", *jsonForReflection);
+		setReflection(std::static_pointer_cast<ReflectionEffect>(instanceForReflection));
 	}
 	web::json::value* jsonForFillOverlay = ModelBase::getField(val, "FillOverlay");
 	if(jsonForFillOverlay != nullptr && !jsonForFillOverlay->is_null())
 	{
-		std::shared_ptr<FillOverlayEffect> newItem(new FillOverlayEffect());
-		newItem->fromJson(*jsonForFillOverlay);
-		setFillOverlay(newItem);
+		std::shared_ptr<void> instanceForFillOverlay = asposeslidescloud::api::ClassRegistry::deserialize(L"FillOverlayEffect", *jsonForFillOverlay);
+		setFillOverlay(std::static_pointer_cast<FillOverlayEffect>(instanceForFillOverlay));
 	}
 }
 

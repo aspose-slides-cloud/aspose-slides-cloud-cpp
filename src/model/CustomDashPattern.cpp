@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "CustomDashPattern.h"
 
 namespace asposeslidescloud {
@@ -63,6 +64,7 @@ void CustomDashPattern::unsetItems()
 web::json::value CustomDashPattern::toJson() const
 {
 	web::json::value val = web::json::value::object();
+	if (m_Items.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Items)

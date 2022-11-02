@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ColorChangeEffect.h"
 
 namespace asposeslidescloud {

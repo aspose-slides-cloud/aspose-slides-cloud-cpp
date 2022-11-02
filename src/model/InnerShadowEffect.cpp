@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "InnerShadowEffect.h"
 
 namespace asposeslidescloud {

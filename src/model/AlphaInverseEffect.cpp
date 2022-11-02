@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "AlphaInverseEffect.h"
 
 namespace asposeslidescloud {

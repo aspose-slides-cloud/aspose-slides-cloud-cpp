@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "GeometryShape.h"
 
 namespace asposeslidescloud {

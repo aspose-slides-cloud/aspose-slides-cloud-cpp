@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "InteractiveSequence.h"
 
 namespace asposeslidescloud {
@@ -63,6 +64,7 @@ void InteractiveSequence::setTriggerShapeIndex(int32_t value)
 web::json::value InteractiveSequence::toJson() const
 {
 	web::json::value val = web::json::value::object();
+	if (m_Effects.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Effects)
@@ -91,9 +93,8 @@ void InteractiveSequence::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<Effect> newItem(new Effect());
-					newItem->fromJson(item);
-					m_Effects.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"Effect", item);
+					m_Effects.push_back(std::static_pointer_cast<Effect>(newItem));
 				}
 			}
         	}

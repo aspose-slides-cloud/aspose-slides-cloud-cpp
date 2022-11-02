@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "FormatScheme.h"
 
 namespace asposeslidescloud {
@@ -85,6 +86,7 @@ void FormatScheme::setLineStyles(std::vector<std::shared_ptr<LineFormat>> value)
 web::json::value FormatScheme::toJson() const
 {
 	web::json::value val = this->ResourceBase::toJson();
+	if (m_BackgroundStyles.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_BackgroundStyles)
@@ -93,6 +95,7 @@ web::json::value FormatScheme::toJson() const
 		}
 		val[utility::conversions::to_string_t("BackgroundStyles")] = web::json::value::array(jsonArray);
 	}
+	if (m_EffectStyles.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_EffectStyles)
@@ -101,6 +104,7 @@ web::json::value FormatScheme::toJson() const
 		}
 		val[utility::conversions::to_string_t("EffectStyles")] = web::json::value::array(jsonArray);
 	}
+	if (m_FillStyles.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_FillStyles)
@@ -109,6 +113,7 @@ web::json::value FormatScheme::toJson() const
 		}
 		val[utility::conversions::to_string_t("FillStyles")] = web::json::value::array(jsonArray);
 	}
+	if (m_LineStyles.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_LineStyles)
@@ -137,9 +142,8 @@ void FormatScheme::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<FillFormat> newItem(new FillFormat());
-					newItem->fromJson(item);
-					m_BackgroundStyles.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"FillFormat", item);
+					m_BackgroundStyles.push_back(std::static_pointer_cast<FillFormat>(newItem));
 				}
 			}
         	}
@@ -158,9 +162,8 @@ void FormatScheme::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<EffectFormat> newItem(new EffectFormat());
-					newItem->fromJson(item);
-					m_EffectStyles.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"EffectFormat", item);
+					m_EffectStyles.push_back(std::static_pointer_cast<EffectFormat>(newItem));
 				}
 			}
         	}
@@ -179,9 +182,8 @@ void FormatScheme::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<FillFormat> newItem(new FillFormat());
-					newItem->fromJson(item);
-					m_FillStyles.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"FillFormat", item);
+					m_FillStyles.push_back(std::static_pointer_cast<FillFormat>(newItem));
 				}
 			}
         	}
@@ -200,9 +202,8 @@ void FormatScheme::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<LineFormat> newItem(new LineFormat());
-					newItem->fromJson(item);
-					m_LineStyles.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"LineFormat", item);
+					m_LineStyles.push_back(std::static_pointer_cast<LineFormat>(newItem));
 				}
 			}
         	}

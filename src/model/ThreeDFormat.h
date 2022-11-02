@@ -39,6 +39,8 @@
 #include <cpprest/details/basic_types.h>
 #include "../model/Camera.h"
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

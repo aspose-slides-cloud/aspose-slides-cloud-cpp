@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "TextBounds.h"
 
 namespace asposeslidescloud {

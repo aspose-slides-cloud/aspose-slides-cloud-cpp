@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "OrderedMergeRequest.h"
 
 namespace asposeslidescloud {
@@ -52,6 +53,7 @@ void OrderedMergeRequest::setPresentations(std::vector<std::shared_ptr<Presentat
 web::json::value OrderedMergeRequest::toJson() const
 {
 	web::json::value val = web::json::value::object();
+	if (m_Presentations.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Presentations)
@@ -79,9 +81,8 @@ void OrderedMergeRequest::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<PresentationToMerge> newItem(new PresentationToMerge());
-					newItem->fromJson(item);
-					m_Presentations.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"PresentationToMerge", item);
+					m_Presentations.push_back(std::static_pointer_cast<PresentationToMerge>(newItem));
 				}
 			}
         	}

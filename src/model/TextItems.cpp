@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "TextItems.h"
 
 namespace asposeslidescloud {
@@ -52,6 +53,7 @@ void TextItems::setItems(std::vector<std::shared_ptr<TextItem>> value)
 web::json::value TextItems::toJson() const
 {
 	web::json::value val = this->ResourceBase::toJson();
+	if (m_Items.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Items)
@@ -80,9 +82,8 @@ void TextItems::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<TextItem> newItem(new TextItem());
-					newItem->fromJson(item);
-					m_Items.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"TextItem", item);
+					m_Items.push_back(std::static_pointer_cast<TextItem>(newItem));
 				}
 			}
         	}

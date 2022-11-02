@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "PdfExportOptions.h"
 
 namespace asposeslidescloud {
@@ -401,6 +402,7 @@ web::json::value PdfExportOptions::toJson() const
 	{
 		val[utility::conversions::to_string_t("EmbedTrueTypeFontsForASCII")] = ModelBase::toJson(m_EmbedTrueTypeFontsForASCII);
 	}
+	if (m_AdditionalCommonFontFamilies.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_AdditionalCommonFontFamilies)
@@ -547,9 +549,8 @@ void PdfExportOptions::fromJson(web::json::value& val)
 	web::json::value* jsonForAccessPermissions = ModelBase::getField(val, "AccessPermissions");
 	if(jsonForAccessPermissions != nullptr && !jsonForAccessPermissions->is_null())
 	{
-		std::shared_ptr<AccessPermissions> newItem(new AccessPermissions());
-		newItem->fromJson(*jsonForAccessPermissions);
-		setAccessPermissions(newItem);
+		std::shared_ptr<void> instanceForAccessPermissions = asposeslidescloud::api::ClassRegistry::deserialize(L"AccessPermissions", *jsonForAccessPermissions);
+		setAccessPermissions(std::static_pointer_cast<AccessPermissions>(instanceForAccessPermissions));
 	}
 }
 

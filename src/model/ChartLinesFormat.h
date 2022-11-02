@@ -37,6 +37,8 @@
 #include "../model/EffectFormat.h"
 #include "../model/LineFormat.h"
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

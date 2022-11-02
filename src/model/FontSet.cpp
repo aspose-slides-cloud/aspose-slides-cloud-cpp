@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "FontSet.h"
 
 namespace asposeslidescloud {

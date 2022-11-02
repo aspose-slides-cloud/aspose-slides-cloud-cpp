@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Error.h"
 
 namespace asposeslidescloud {
@@ -124,9 +125,8 @@ void Error::fromJson(web::json::value& val)
 	web::json::value* jsonForInnerError = ModelBase::getField(val, "InnerError");
 	if(jsonForInnerError != nullptr && !jsonForInnerError->is_null())
 	{
-		std::shared_ptr<ErrorDetails> newItem(new ErrorDetails());
-		newItem->fromJson(*jsonForInnerError);
-		setInnerError(newItem);
+		std::shared_ptr<void> instanceForInnerError = asposeslidescloud::api::ClassRegistry::deserialize(L"ErrorDetails", *jsonForInnerError);
+		setInnerError(std::static_pointer_cast<ErrorDetails>(instanceForInnerError));
 	}
 }
 

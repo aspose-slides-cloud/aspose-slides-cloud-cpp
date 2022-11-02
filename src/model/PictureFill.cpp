@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "PictureFill.h"
 
 namespace asposeslidescloud {
@@ -173,6 +174,7 @@ web::json::value PictureFill::toJson() const
 	{
 		val[utility::conversions::to_string_t("PictureFillMode")] = ModelBase::toJson(m_PictureFillMode);
 	}
+	if (m_ImageTransformList.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_ImageTransformList)
@@ -215,9 +217,8 @@ void PictureFill::fromJson(web::json::value& val)
 	web::json::value* jsonForImage = ModelBase::getField(val, "Image");
 	if(jsonForImage != nullptr && !jsonForImage->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForImage);
-		setImage(newItem);
+		std::shared_ptr<void> instanceForImage = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForImage);
+		setImage(std::static_pointer_cast<ResourceUri>(instanceForImage));
 	}
 	web::json::value* jsonForBase64Data = ModelBase::getField(val, "Base64Data");
 	if(jsonForBase64Data != nullptr && !jsonForBase64Data->is_null())
@@ -248,9 +249,8 @@ void PictureFill::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<ImageTransformEffect> newItem(new ImageTransformEffect());
-					newItem->fromJson(item);
-					m_ImageTransformList.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"ImageTransformEffect", item);
+					m_ImageTransformList.push_back(std::static_pointer_cast<ImageTransformEffect>(newItem));
 				}
 			}
         	}

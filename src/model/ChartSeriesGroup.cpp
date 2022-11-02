@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ChartSeriesGroup.h"
 
 namespace asposeslidescloud {
@@ -429,9 +430,8 @@ void ChartSeriesGroup::fromJson(web::json::value& val)
 	web::json::value* jsonForHiLowLinesFormat = ModelBase::getField(val, "HiLowLinesFormat");
 	if(jsonForHiLowLinesFormat != nullptr && !jsonForHiLowLinesFormat->is_null())
 	{
-		std::shared_ptr<ChartLinesFormat> newItem(new ChartLinesFormat());
-		newItem->fromJson(*jsonForHiLowLinesFormat);
-		setHiLowLinesFormat(newItem);
+		std::shared_ptr<void> instanceForHiLowLinesFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"ChartLinesFormat", *jsonForHiLowLinesFormat);
+		setHiLowLinesFormat(std::static_pointer_cast<ChartLinesFormat>(instanceForHiLowLinesFormat));
 	}
 	web::json::value* jsonForBubbleSizeRepresentation = ModelBase::getField(val, "BubbleSizeRepresentation");
 	if(jsonForBubbleSizeRepresentation != nullptr && !jsonForBubbleSizeRepresentation->is_null())

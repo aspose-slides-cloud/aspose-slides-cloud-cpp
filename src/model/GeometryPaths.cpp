@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "GeometryPaths.h"
 
 namespace asposeslidescloud {
@@ -52,6 +53,7 @@ void GeometryPaths::setPaths(std::vector<std::shared_ptr<GeometryPath>> value)
 web::json::value GeometryPaths::toJson() const
 {
 	web::json::value val = web::json::value::object();
+	if (m_Paths.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Paths)
@@ -79,9 +81,8 @@ void GeometryPaths::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<GeometryPath> newItem(new GeometryPath());
-					newItem->fromJson(item);
-					m_Paths.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"GeometryPath", item);
+					m_Paths.push_back(std::static_pointer_cast<GeometryPath>(newItem));
 				}
 			}
         	}

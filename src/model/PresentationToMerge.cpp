@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "PresentationToMerge.h"
 
 namespace asposeslidescloud {
@@ -104,6 +105,7 @@ web::json::value PresentationToMerge::toJson() const
 	{
 		val[utility::conversions::to_string_t("Password")] = ModelBase::toJson(m_Password);
 	}
+	if (m_Slides.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Slides)

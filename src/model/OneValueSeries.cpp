@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "OneValueSeries.h"
 
 namespace asposeslidescloud {
@@ -185,6 +186,7 @@ void OneValueSeries::unsetShowOutlierPoints()
 web::json::value OneValueSeries::toJson() const
 {
 	web::json::value val = this->Series::toJson();
+	if (m_DataPoints.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_DataPoints)
@@ -241,9 +243,8 @@ void OneValueSeries::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<OneValueChartDataPoint> newItem(new OneValueChartDataPoint());
-					newItem->fromJson(item);
-					m_DataPoints.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"OneValueChartDataPoint", item);
+					m_DataPoints.push_back(std::static_pointer_cast<OneValueChartDataPoint>(newItem));
 				}
 			}
         	}

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "FilesList.h"
 
 namespace asposeslidescloud {
@@ -52,6 +53,7 @@ void FilesList::setValue(std::vector<std::shared_ptr<StorageFile>> value)
 web::json::value FilesList::toJson() const
 {
 	web::json::value val = web::json::value::object();
+	if (m_Value.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Value)
@@ -79,9 +81,8 @@ void FilesList::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<StorageFile> newItem(new StorageFile());
-					newItem->fromJson(item);
-					m_Value.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"StorageFile", item);
+					m_Value.push_back(std::static_pointer_cast<StorageFile>(newItem));
 				}
 			}
         	}

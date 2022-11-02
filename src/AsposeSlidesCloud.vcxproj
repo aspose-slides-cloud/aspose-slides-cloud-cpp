@@ -320,6 +320,7 @@
     <ClCompile Include="model\SlideComments.cpp" />
     <ClCompile Include="model\SlideModernComment.cpp" />
     <ClCompile Include="model\SlideProperties.cpp" />
+    <ClCompile Include="model\SlideShowProperties.cpp" />
     <ClCompile Include="model\Slides.cpp" />
     <ClCompile Include="model\SolidFill.cpp" />
     <ClCompile Include="model\SplitDocumentResult.cpp" />
@@ -572,6 +573,7 @@
     <ClInclude Include="model\SlideComments.h" />
     <ClInclude Include="model\SlideModernComment.h" />
     <ClInclude Include="model\SlideProperties.h" />
+    <ClInclude Include="model\SlideShowProperties.h" />
     <ClInclude Include="model\Slides.h" />
     <ClInclude Include="model\SolidFill.h" />
     <ClInclude Include="model\SplitDocumentResult.h" />

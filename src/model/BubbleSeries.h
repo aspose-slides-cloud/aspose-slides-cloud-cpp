@@ -43,6 +43,8 @@
 #include "../model/BubbleChartDataPoint.h"
 #include "../model/XYSeries.h"
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

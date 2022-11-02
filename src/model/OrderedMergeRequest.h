@@ -37,6 +37,8 @@
 #include "../model/PresentationToMerge.h"
 #include <vector>
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

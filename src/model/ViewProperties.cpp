@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ViewProperties.h"
 
 namespace asposeslidescloud {
@@ -216,30 +217,26 @@ void ViewProperties::fromJson(web::json::value& val)
 	web::json::value* jsonForRestoredLeft = ModelBase::getField(val, "RestoredLeft");
 	if(jsonForRestoredLeft != nullptr && !jsonForRestoredLeft->is_null())
 	{
-		std::shared_ptr<NormalViewRestoredProperties> newItem(new NormalViewRestoredProperties());
-		newItem->fromJson(*jsonForRestoredLeft);
-		setRestoredLeft(newItem);
+		std::shared_ptr<void> instanceForRestoredLeft = asposeslidescloud::api::ClassRegistry::deserialize(L"NormalViewRestoredProperties", *jsonForRestoredLeft);
+		setRestoredLeft(std::static_pointer_cast<NormalViewRestoredProperties>(instanceForRestoredLeft));
 	}
 	web::json::value* jsonForRestoredTop = ModelBase::getField(val, "RestoredTop");
 	if(jsonForRestoredTop != nullptr && !jsonForRestoredTop->is_null())
 	{
-		std::shared_ptr<NormalViewRestoredProperties> newItem(new NormalViewRestoredProperties());
-		newItem->fromJson(*jsonForRestoredTop);
-		setRestoredTop(newItem);
+		std::shared_ptr<void> instanceForRestoredTop = asposeslidescloud::api::ClassRegistry::deserialize(L"NormalViewRestoredProperties", *jsonForRestoredTop);
+		setRestoredTop(std::static_pointer_cast<NormalViewRestoredProperties>(instanceForRestoredTop));
 	}
 	web::json::value* jsonForSlideViewProperties = ModelBase::getField(val, "SlideViewProperties");
 	if(jsonForSlideViewProperties != nullptr && !jsonForSlideViewProperties->is_null())
 	{
-		std::shared_ptr<CommonSlideViewProperties> newItem(new CommonSlideViewProperties());
-		newItem->fromJson(*jsonForSlideViewProperties);
-		setSlideViewProperties(newItem);
+		std::shared_ptr<void> instanceForSlideViewProperties = asposeslidescloud::api::ClassRegistry::deserialize(L"CommonSlideViewProperties", *jsonForSlideViewProperties);
+		setSlideViewProperties(std::static_pointer_cast<CommonSlideViewProperties>(instanceForSlideViewProperties));
 	}
 	web::json::value* jsonForNotesViewProperties = ModelBase::getField(val, "NotesViewProperties");
 	if(jsonForNotesViewProperties != nullptr && !jsonForNotesViewProperties->is_null())
 	{
-		std::shared_ptr<CommonSlideViewProperties> newItem(new CommonSlideViewProperties());
-		newItem->fromJson(*jsonForNotesViewProperties);
-		setNotesViewProperties(newItem);
+		std::shared_ptr<void> instanceForNotesViewProperties = asposeslidescloud::api::ClassRegistry::deserialize(L"CommonSlideViewProperties", *jsonForNotesViewProperties);
+		setNotesViewProperties(std::static_pointer_cast<CommonSlideViewProperties>(instanceForNotesViewProperties));
 	}
 	web::json::value* jsonForShowComments = ModelBase::getField(val, "ShowComments");
 	if(jsonForShowComments != nullptr && !jsonForShowComments->is_null())

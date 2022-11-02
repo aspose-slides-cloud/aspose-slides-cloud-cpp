@@ -41,6 +41,8 @@
 #include <vector>
 #include "../model/CommonSlideViewProperties.h"
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

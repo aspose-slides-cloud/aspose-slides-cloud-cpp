@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Shapes.h"
 
 namespace asposeslidescloud {
@@ -52,6 +53,7 @@ void Shapes::setShapesLinks(std::vector<std::shared_ptr<ResourceUri>> value)
 web::json::value Shapes::toJson() const
 {
 	web::json::value val = this->ResourceBase::toJson();
+	if (m_ShapesLinks.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_ShapesLinks)
@@ -80,9 +82,8 @@ void Shapes::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-					newItem->fromJson(item);
-					m_ShapesLinks.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", item);
+					m_ShapesLinks.push_back(std::static_pointer_cast<ResourceUri>(newItem));
 				}
 			}
         	}

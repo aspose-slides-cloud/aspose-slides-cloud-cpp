@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "AlphaReplaceEffect.h"
 
 namespace asposeslidescloud {

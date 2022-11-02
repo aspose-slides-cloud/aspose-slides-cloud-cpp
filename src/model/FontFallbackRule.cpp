@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "FontFallbackRule.h"
 
 namespace asposeslidescloud {
@@ -76,6 +77,7 @@ web::json::value FontFallbackRule::toJson() const
 	web::json::value val = web::json::value::object();
 	val[utility::conversions::to_string_t("RangeStartIndex")] = ModelBase::toJson(m_RangeStartIndex);
 	val[utility::conversions::to_string_t("RangeEndIndex")] = ModelBase::toJson(m_RangeEndIndex);
+	if (m_FallbackFontList.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_FallbackFontList)

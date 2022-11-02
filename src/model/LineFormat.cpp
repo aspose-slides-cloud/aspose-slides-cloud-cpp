@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "LineFormat.h"
 
 namespace asposeslidescloud {
@@ -281,30 +282,26 @@ void LineFormat::fromJson(web::json::value& val)
 	web::json::value* jsonForBeginArrowHead = ModelBase::getField(val, "BeginArrowHead");
 	if(jsonForBeginArrowHead != nullptr && !jsonForBeginArrowHead->is_null())
 	{
-		std::shared_ptr<ArrowHeadProperties> newItem(new ArrowHeadProperties());
-		newItem->fromJson(*jsonForBeginArrowHead);
-		setBeginArrowHead(newItem);
+		std::shared_ptr<void> instanceForBeginArrowHead = asposeslidescloud::api::ClassRegistry::deserialize(L"ArrowHeadProperties", *jsonForBeginArrowHead);
+		setBeginArrowHead(std::static_pointer_cast<ArrowHeadProperties>(instanceForBeginArrowHead));
 	}
 	web::json::value* jsonForEndArrowHead = ModelBase::getField(val, "EndArrowHead");
 	if(jsonForEndArrowHead != nullptr && !jsonForEndArrowHead->is_null())
 	{
-		std::shared_ptr<ArrowHeadProperties> newItem(new ArrowHeadProperties());
-		newItem->fromJson(*jsonForEndArrowHead);
-		setEndArrowHead(newItem);
+		std::shared_ptr<void> instanceForEndArrowHead = asposeslidescloud::api::ClassRegistry::deserialize(L"ArrowHeadProperties", *jsonForEndArrowHead);
+		setEndArrowHead(std::static_pointer_cast<ArrowHeadProperties>(instanceForEndArrowHead));
 	}
 	web::json::value* jsonForCustomDashPattern = ModelBase::getField(val, "CustomDashPattern");
 	if(jsonForCustomDashPattern != nullptr && !jsonForCustomDashPattern->is_null())
 	{
-		std::shared_ptr<CustomDashPattern> newItem(new CustomDashPattern());
-		newItem->fromJson(*jsonForCustomDashPattern);
-		setCustomDashPattern(newItem);
+		std::shared_ptr<void> instanceForCustomDashPattern = asposeslidescloud::api::ClassRegistry::deserialize(L"CustomDashPattern", *jsonForCustomDashPattern);
+		setCustomDashPattern(std::static_pointer_cast<CustomDashPattern>(instanceForCustomDashPattern));
 	}
 	web::json::value* jsonForFillFormat = ModelBase::getField(val, "FillFormat");
 	if(jsonForFillFormat != nullptr && !jsonForFillFormat->is_null())
 	{
-		std::shared_ptr<FillFormat> newItem(new FillFormat());
-		newItem->fromJson(*jsonForFillFormat);
-		setFillFormat(newItem);
+		std::shared_ptr<void> instanceForFillFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"FillFormat", *jsonForFillFormat);
+		setFillFormat(std::static_pointer_cast<FillFormat>(instanceForFillFormat));
 	}
 	web::json::value* jsonForMiterLimit = ModelBase::getField(val, "MiterLimit");
 	if(jsonForMiterLimit != nullptr && !jsonForMiterLimit->is_null() && jsonForMiterLimit->is_number())

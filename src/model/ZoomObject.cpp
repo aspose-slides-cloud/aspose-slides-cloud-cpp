@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ZoomObject.h"
 
 namespace asposeslidescloud {
@@ -173,9 +174,8 @@ void ZoomObject::fromJson(web::json::value& val)
 	web::json::value* jsonForImage = ModelBase::getField(val, "Image");
 	if(jsonForImage != nullptr && !jsonForImage->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForImage);
-		setImage(newItem);
+		std::shared_ptr<void> instanceForImage = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForImage);
+		setImage(std::static_pointer_cast<ResourceUri>(instanceForImage));
 	}
 	web::json::value* jsonForTransitionDuration = ModelBase::getField(val, "TransitionDuration");
 	if(jsonForTransitionDuration != nullptr && !jsonForTransitionDuration->is_null() && jsonForTransitionDuration->is_number())

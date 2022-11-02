@@ -38,6 +38,8 @@
 #include "../model/PathSegment.h"
 #include <vector>
 
+#include "../ClassRegistry.h"
+
 namespace asposeslidescloud {
 namespace model {
 

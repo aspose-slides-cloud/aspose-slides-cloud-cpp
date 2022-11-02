@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Images.h"
 
 namespace asposeslidescloud {
@@ -52,6 +53,7 @@ void Images::setList(std::vector<std::shared_ptr<Image>> value)
 web::json::value Images::toJson() const
 {
 	web::json::value val = this->ResourceBase::toJson();
+	if (m_List.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_List)
@@ -80,9 +82,8 @@ void Images::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<Image> newItem(new Image());
-					newItem->fromJson(item);
-					m_List.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"Image", item);
+					m_List.push_back(std::static_pointer_cast<Image>(newItem));
 				}
 			}
         	}

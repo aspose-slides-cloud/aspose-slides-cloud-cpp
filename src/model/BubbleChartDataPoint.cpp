@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "BubbleChartDataPoint.h"
 
 namespace asposeslidescloud {

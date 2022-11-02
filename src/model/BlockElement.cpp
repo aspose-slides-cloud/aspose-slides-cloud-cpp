@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "BlockElement.h"
 
 namespace asposeslidescloud {
@@ -53,6 +54,7 @@ void BlockElement::setMathElementList(std::vector<std::shared_ptr<MathElement>> 
 web::json::value BlockElement::toJson() const
 {
 	web::json::value val = this->MathElement::toJson();
+	if (m_MathElementList.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_MathElementList)
@@ -81,9 +83,8 @@ void BlockElement::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<MathElement> newItem(new MathElement());
-					newItem->fromJson(item);
-					m_MathElementList.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"MathElement", item);
+					m_MathElementList.push_back(std::static_pointer_cast<MathElement>(newItem));
 				}
 			}
         	}

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "MoveToPathSegment.h"
 
 namespace asposeslidescloud {

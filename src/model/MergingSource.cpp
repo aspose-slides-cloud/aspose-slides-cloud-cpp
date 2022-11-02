@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "MergingSource.h"
 
 namespace asposeslidescloud {
@@ -78,6 +79,7 @@ web::json::value MergingSource::toJson() const
 	{
 		val[utility::conversions::to_string_t("Input")] = ModelBase::toJson(m_Input);
 	}
+	if (m_Slides.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Slides)
@@ -94,9 +96,8 @@ void MergingSource::fromJson(web::json::value& val)
 	web::json::value* jsonForInput = ModelBase::getField(val, "Input");
 	if(jsonForInput != nullptr && !jsonForInput->is_null())
 	{
-		std::shared_ptr<InputFile> newItem(new InputFile());
-		newItem->fromJson(*jsonForInput);
-		setInput(newItem);
+		std::shared_ptr<void> instanceForInput = asposeslidescloud::api::ClassRegistry::deserialize(L"InputFile", *jsonForInput);
+		setInput(std::static_pointer_cast<InputFile>(instanceForInput));
 	}
 	web::json::value* jsonForSlides = ModelBase::getField(val, "Slides");
 	if(jsonForSlides != nullptr && !jsonForSlides->is_null())

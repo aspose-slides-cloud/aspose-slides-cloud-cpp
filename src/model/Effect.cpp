@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Effect.h"
 
 namespace asposeslidescloud {
@@ -41,6 +42,8 @@ Effect::Effect()
 	m_RepeatDurationIsSet = false;
 	m_SpeedIsSet = false;
 	m_TriggerDelayTimeIsSet = false;
+	m_RepeatUntilEndSlideIsSet = false;
+	m_RepeatUntilNextClickIsSet = false;
 }
 
 Effect::~Effect()
@@ -302,6 +305,48 @@ void Effect::unsetTriggerDelayTime()
 	m_TriggerDelayTimeIsSet = false;
 }
 
+bool Effect::getRepeatUntilEndSlide() const
+{
+	return m_RepeatUntilEndSlide;
+}
+
+void Effect::setRepeatUntilEndSlide(bool value)
+{
+	m_RepeatUntilEndSlide = value;
+	m_RepeatUntilEndSlideIsSet = true;
+}
+
+bool Effect::repeatUntilEndSlideIsSet() const
+{
+	return m_RepeatUntilEndSlideIsSet;
+}
+
+void Effect::unsetRepeatUntilEndSlide()
+{
+	m_RepeatUntilEndSlideIsSet = false;
+}
+
+bool Effect::getRepeatUntilNextClick() const
+{
+	return m_RepeatUntilNextClick;
+}
+
+void Effect::setRepeatUntilNextClick(bool value)
+{
+	m_RepeatUntilNextClick = value;
+	m_RepeatUntilNextClickIsSet = true;
+}
+
+bool Effect::repeatUntilNextClickIsSet() const
+{
+	return m_RepeatUntilNextClickIsSet;
+}
+
+void Effect::unsetRepeatUntilNextClick()
+{
+	m_RepeatUntilNextClickIsSet = false;
+}
+
 web::json::value Effect::toJson() const
 {
 	web::json::value val = web::json::value::object();
@@ -361,6 +406,14 @@ web::json::value Effect::toJson() const
 	if(m_TriggerDelayTimeIsSet)
 	{
 		val[utility::conversions::to_string_t("TriggerDelayTime")] = ModelBase::toJson(m_TriggerDelayTime);
+	}
+	if(m_RepeatUntilEndSlideIsSet)
+	{
+		val[utility::conversions::to_string_t("RepeatUntilEndSlide")] = ModelBase::toJson(m_RepeatUntilEndSlide);
+	}
+	if(m_RepeatUntilNextClickIsSet)
+	{
+		val[utility::conversions::to_string_t("RepeatUntilNextClick")] = ModelBase::toJson(m_RepeatUntilNextClick);
 	}
 	return val;
 }
@@ -441,6 +494,16 @@ void Effect::fromJson(web::json::value& val)
 	if(jsonForTriggerDelayTime != nullptr && !jsonForTriggerDelayTime->is_null() && jsonForTriggerDelayTime->is_number())
 	{
 		setTriggerDelayTime(ModelBase::doubleFromJson(*jsonForTriggerDelayTime));
+	}
+	web::json::value* jsonForRepeatUntilEndSlide = ModelBase::getField(val, "RepeatUntilEndSlide");
+	if(jsonForRepeatUntilEndSlide != nullptr && !jsonForRepeatUntilEndSlide->is_null())
+	{
+		setRepeatUntilEndSlide(ModelBase::boolFromJson(*jsonForRepeatUntilEndSlide));
+	}
+	web::json::value* jsonForRepeatUntilNextClick = ModelBase::getField(val, "RepeatUntilNextClick");
+	if(jsonForRepeatUntilNextClick != nullptr && !jsonForRepeatUntilNextClick->is_null())
+	{
+		setRepeatUntilNextClick(ModelBase::boolFromJson(*jsonForRepeatUntilNextClick));
 	}
 }
 

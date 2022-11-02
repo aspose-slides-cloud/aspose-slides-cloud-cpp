@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Document.h"
 
 namespace asposeslidescloud {
@@ -140,44 +141,38 @@ void Document::fromJson(web::json::value& val)
 	web::json::value* jsonForDocumentProperties = ModelBase::getField(val, "DocumentProperties");
 	if(jsonForDocumentProperties != nullptr && !jsonForDocumentProperties->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForDocumentProperties);
-		setDocumentProperties(newItem);
+		std::shared_ptr<void> instanceForDocumentProperties = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForDocumentProperties);
+		setDocumentProperties(std::static_pointer_cast<ResourceUri>(instanceForDocumentProperties));
 	}
 	web::json::value* jsonForViewProperties = ModelBase::getField(val, "ViewProperties");
 	if(jsonForViewProperties != nullptr && !jsonForViewProperties->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForViewProperties);
-		setViewProperties(newItem);
+		std::shared_ptr<void> instanceForViewProperties = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForViewProperties);
+		setViewProperties(std::static_pointer_cast<ResourceUri>(instanceForViewProperties));
 	}
 	web::json::value* jsonForSlides = ModelBase::getField(val, "Slides");
 	if(jsonForSlides != nullptr && !jsonForSlides->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForSlides);
-		setSlides(newItem);
+		std::shared_ptr<void> instanceForSlides = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForSlides);
+		setSlides(std::static_pointer_cast<ResourceUri>(instanceForSlides));
 	}
 	web::json::value* jsonForImages = ModelBase::getField(val, "Images");
 	if(jsonForImages != nullptr && !jsonForImages->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForImages);
-		setImages(newItem);
+		std::shared_ptr<void> instanceForImages = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForImages);
+		setImages(std::static_pointer_cast<ResourceUri>(instanceForImages));
 	}
 	web::json::value* jsonForLayoutSlides = ModelBase::getField(val, "LayoutSlides");
 	if(jsonForLayoutSlides != nullptr && !jsonForLayoutSlides->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForLayoutSlides);
-		setLayoutSlides(newItem);
+		std::shared_ptr<void> instanceForLayoutSlides = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForLayoutSlides);
+		setLayoutSlides(std::static_pointer_cast<ResourceUri>(instanceForLayoutSlides));
 	}
 	web::json::value* jsonForMasterSlides = ModelBase::getField(val, "MasterSlides");
 	if(jsonForMasterSlides != nullptr && !jsonForMasterSlides->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForMasterSlides);
-		setMasterSlides(newItem);
+		std::shared_ptr<void> instanceForMasterSlides = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForMasterSlides);
+		setMasterSlides(std::static_pointer_cast<ResourceUri>(instanceForMasterSlides));
 	}
 }
 

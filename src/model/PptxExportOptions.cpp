@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "PptxExportOptions.h"
 
 namespace asposeslidescloud {

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "PresentationsMergeRequest.h"
 
 namespace asposeslidescloud {
@@ -63,6 +64,7 @@ void PresentationsMergeRequest::setPresentationPasswords(std::vector<utility::st
 web::json::value PresentationsMergeRequest::toJson() const
 {
 	web::json::value val = web::json::value::object();
+	if (m_PresentationPaths.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_PresentationPaths)
@@ -71,6 +73,7 @@ web::json::value PresentationsMergeRequest::toJson() const
 		}
 		val[utility::conversions::to_string_t("PresentationPaths")] = web::json::value::array(jsonArray);
 	}
+	if (m_PresentationPasswords.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_PresentationPasswords)

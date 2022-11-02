@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Axes.h"
 
 namespace asposeslidescloud {
@@ -109,30 +110,26 @@ void Axes::fromJson(web::json::value& val)
 	web::json::value* jsonForHorizontalAxis = ModelBase::getField(val, "HorizontalAxis");
 	if(jsonForHorizontalAxis != nullptr && !jsonForHorizontalAxis->is_null())
 	{
-		std::shared_ptr<Axis> newItem(new Axis());
-		newItem->fromJson(*jsonForHorizontalAxis);
-		setHorizontalAxis(newItem);
+		std::shared_ptr<void> instanceForHorizontalAxis = asposeslidescloud::api::ClassRegistry::deserialize(L"Axis", *jsonForHorizontalAxis);
+		setHorizontalAxis(std::static_pointer_cast<Axis>(instanceForHorizontalAxis));
 	}
 	web::json::value* jsonForVerticalAxis = ModelBase::getField(val, "VerticalAxis");
 	if(jsonForVerticalAxis != nullptr && !jsonForVerticalAxis->is_null())
 	{
-		std::shared_ptr<Axis> newItem(new Axis());
-		newItem->fromJson(*jsonForVerticalAxis);
-		setVerticalAxis(newItem);
+		std::shared_ptr<void> instanceForVerticalAxis = asposeslidescloud::api::ClassRegistry::deserialize(L"Axis", *jsonForVerticalAxis);
+		setVerticalAxis(std::static_pointer_cast<Axis>(instanceForVerticalAxis));
 	}
 	web::json::value* jsonForSecondaryHorizontalAxis = ModelBase::getField(val, "SecondaryHorizontalAxis");
 	if(jsonForSecondaryHorizontalAxis != nullptr && !jsonForSecondaryHorizontalAxis->is_null())
 	{
-		std::shared_ptr<Axis> newItem(new Axis());
-		newItem->fromJson(*jsonForSecondaryHorizontalAxis);
-		setSecondaryHorizontalAxis(newItem);
+		std::shared_ptr<void> instanceForSecondaryHorizontalAxis = asposeslidescloud::api::ClassRegistry::deserialize(L"Axis", *jsonForSecondaryHorizontalAxis);
+		setSecondaryHorizontalAxis(std::static_pointer_cast<Axis>(instanceForSecondaryHorizontalAxis));
 	}
 	web::json::value* jsonForSecondaryVerticalAxis = ModelBase::getField(val, "SecondaryVerticalAxis");
 	if(jsonForSecondaryVerticalAxis != nullptr && !jsonForSecondaryVerticalAxis->is_null())
 	{
-		std::shared_ptr<Axis> newItem(new Axis());
-		newItem->fromJson(*jsonForSecondaryVerticalAxis);
-		setSecondaryVerticalAxis(newItem);
+		std::shared_ptr<void> instanceForSecondaryVerticalAxis = asposeslidescloud::api::ClassRegistry::deserialize(L"Axis", *jsonForSecondaryVerticalAxis);
+		setSecondaryVerticalAxis(std::static_pointer_cast<Axis>(instanceForSecondaryVerticalAxis));
 	}
 }
 

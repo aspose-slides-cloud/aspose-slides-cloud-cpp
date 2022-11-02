@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Chart.h"
 
 namespace asposeslidescloud {
@@ -215,6 +216,7 @@ web::json::value Chart::toJson() const
 	{
 		val[utility::conversions::to_string_t("ShowDataLabelsOverMaximum")] = ModelBase::toJson(m_ShowDataLabelsOverMaximum);
 	}
+	if (m_Series.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Series)
@@ -223,6 +225,7 @@ web::json::value Chart::toJson() const
 		}
 		val[utility::conversions::to_string_t("Series")] = web::json::value::array(jsonArray);
 	}
+	if (m_Categories.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Categories)
@@ -263,6 +266,7 @@ web::json::value Chart::toJson() const
 	{
 		val[utility::conversions::to_string_t("HasRoundedCorners")] = ModelBase::toJson(m_HasRoundedCorners);
 	}
+	if (m_SeriesGroups.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_SeriesGroups)
@@ -301,9 +305,8 @@ void Chart::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<Series> newItem(new Series());
-					newItem->fromJson(item);
-					m_Series.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"Series", item);
+					m_Series.push_back(std::static_pointer_cast<Series>(newItem));
 				}
 			}
         	}
@@ -322,9 +325,8 @@ void Chart::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<ChartCategory> newItem(new ChartCategory());
-					newItem->fromJson(item);
-					m_Categories.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"ChartCategory", item);
+					m_Categories.push_back(std::static_pointer_cast<ChartCategory>(newItem));
 				}
 			}
         	}
@@ -332,51 +334,44 @@ void Chart::fromJson(web::json::value& val)
 	web::json::value* jsonForTitle = ModelBase::getField(val, "Title");
 	if(jsonForTitle != nullptr && !jsonForTitle->is_null())
 	{
-		std::shared_ptr<ChartTitle> newItem(new ChartTitle());
-		newItem->fromJson(*jsonForTitle);
-		setTitle(newItem);
+		std::shared_ptr<void> instanceForTitle = asposeslidescloud::api::ClassRegistry::deserialize(L"ChartTitle", *jsonForTitle);
+		setTitle(std::static_pointer_cast<ChartTitle>(instanceForTitle));
 	}
 	web::json::value* jsonForBackWall = ModelBase::getField(val, "BackWall");
 	if(jsonForBackWall != nullptr && !jsonForBackWall->is_null())
 	{
-		std::shared_ptr<ChartWall> newItem(new ChartWall());
-		newItem->fromJson(*jsonForBackWall);
-		setBackWall(newItem);
+		std::shared_ptr<void> instanceForBackWall = asposeslidescloud::api::ClassRegistry::deserialize(L"ChartWall", *jsonForBackWall);
+		setBackWall(std::static_pointer_cast<ChartWall>(instanceForBackWall));
 	}
 	web::json::value* jsonForSideWall = ModelBase::getField(val, "SideWall");
 	if(jsonForSideWall != nullptr && !jsonForSideWall->is_null())
 	{
-		std::shared_ptr<ChartWall> newItem(new ChartWall());
-		newItem->fromJson(*jsonForSideWall);
-		setSideWall(newItem);
+		std::shared_ptr<void> instanceForSideWall = asposeslidescloud::api::ClassRegistry::deserialize(L"ChartWall", *jsonForSideWall);
+		setSideWall(std::static_pointer_cast<ChartWall>(instanceForSideWall));
 	}
 	web::json::value* jsonForFloor = ModelBase::getField(val, "Floor");
 	if(jsonForFloor != nullptr && !jsonForFloor->is_null())
 	{
-		std::shared_ptr<ChartWall> newItem(new ChartWall());
-		newItem->fromJson(*jsonForFloor);
-		setFloor(newItem);
+		std::shared_ptr<void> instanceForFloor = asposeslidescloud::api::ClassRegistry::deserialize(L"ChartWall", *jsonForFloor);
+		setFloor(std::static_pointer_cast<ChartWall>(instanceForFloor));
 	}
 	web::json::value* jsonForLegend = ModelBase::getField(val, "Legend");
 	if(jsonForLegend != nullptr && !jsonForLegend->is_null())
 	{
-		std::shared_ptr<Legend> newItem(new Legend());
-		newItem->fromJson(*jsonForLegend);
-		setLegend(newItem);
+		std::shared_ptr<void> instanceForLegend = asposeslidescloud::api::ClassRegistry::deserialize(L"Legend", *jsonForLegend);
+		setLegend(std::static_pointer_cast<Legend>(instanceForLegend));
 	}
 	web::json::value* jsonForAxes = ModelBase::getField(val, "Axes");
 	if(jsonForAxes != nullptr && !jsonForAxes->is_null())
 	{
-		std::shared_ptr<Axes> newItem(new Axes());
-		newItem->fromJson(*jsonForAxes);
-		setAxes(newItem);
+		std::shared_ptr<void> instanceForAxes = asposeslidescloud::api::ClassRegistry::deserialize(L"Axes", *jsonForAxes);
+		setAxes(std::static_pointer_cast<Axes>(instanceForAxes));
 	}
 	web::json::value* jsonForPlotArea = ModelBase::getField(val, "PlotArea");
 	if(jsonForPlotArea != nullptr && !jsonForPlotArea->is_null())
 	{
-		std::shared_ptr<PlotArea> newItem(new PlotArea());
-		newItem->fromJson(*jsonForPlotArea);
-		setPlotArea(newItem);
+		std::shared_ptr<void> instanceForPlotArea = asposeslidescloud::api::ClassRegistry::deserialize(L"PlotArea", *jsonForPlotArea);
+		setPlotArea(std::static_pointer_cast<PlotArea>(instanceForPlotArea));
 	}
 	web::json::value* jsonForHasRoundedCorners = ModelBase::getField(val, "HasRoundedCorners");
 	if(jsonForHasRoundedCorners != nullptr && !jsonForHasRoundedCorners->is_null())
@@ -397,9 +392,8 @@ void Chart::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<ChartSeriesGroup> newItem(new ChartSeriesGroup());
-					newItem->fromJson(item);
-					m_SeriesGroups.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"ChartSeriesGroup", item);
+					m_SeriesGroups.push_back(std::static_pointer_cast<ChartSeriesGroup>(newItem));
 				}
 			}
         	}

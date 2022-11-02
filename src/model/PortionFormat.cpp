@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "PortionFormat.h"
 
 namespace asposeslidescloud {
@@ -634,51 +635,44 @@ void PortionFormat::fromJson(web::json::value& val)
 	web::json::value* jsonForFillFormat = ModelBase::getField(val, "FillFormat");
 	if(jsonForFillFormat != nullptr && !jsonForFillFormat->is_null())
 	{
-		std::shared_ptr<FillFormat> newItem(new FillFormat());
-		newItem->fromJson(*jsonForFillFormat);
-		setFillFormat(newItem);
+		std::shared_ptr<void> instanceForFillFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"FillFormat", *jsonForFillFormat);
+		setFillFormat(std::static_pointer_cast<FillFormat>(instanceForFillFormat));
 	}
 	web::json::value* jsonForEffectFormat = ModelBase::getField(val, "EffectFormat");
 	if(jsonForEffectFormat != nullptr && !jsonForEffectFormat->is_null())
 	{
-		std::shared_ptr<EffectFormat> newItem(new EffectFormat());
-		newItem->fromJson(*jsonForEffectFormat);
-		setEffectFormat(newItem);
+		std::shared_ptr<void> instanceForEffectFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"EffectFormat", *jsonForEffectFormat);
+		setEffectFormat(std::static_pointer_cast<EffectFormat>(instanceForEffectFormat));
 	}
 	web::json::value* jsonForLineFormat = ModelBase::getField(val, "LineFormat");
 	if(jsonForLineFormat != nullptr && !jsonForLineFormat->is_null())
 	{
-		std::shared_ptr<LineFormat> newItem(new LineFormat());
-		newItem->fromJson(*jsonForLineFormat);
-		setLineFormat(newItem);
+		std::shared_ptr<void> instanceForLineFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"LineFormat", *jsonForLineFormat);
+		setLineFormat(std::static_pointer_cast<LineFormat>(instanceForLineFormat));
 	}
 	web::json::value* jsonForUnderlineFillFormat = ModelBase::getField(val, "UnderlineFillFormat");
 	if(jsonForUnderlineFillFormat != nullptr && !jsonForUnderlineFillFormat->is_null())
 	{
-		std::shared_ptr<FillFormat> newItem(new FillFormat());
-		newItem->fromJson(*jsonForUnderlineFillFormat);
-		setUnderlineFillFormat(newItem);
+		std::shared_ptr<void> instanceForUnderlineFillFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"FillFormat", *jsonForUnderlineFillFormat);
+		setUnderlineFillFormat(std::static_pointer_cast<FillFormat>(instanceForUnderlineFillFormat));
 	}
 	web::json::value* jsonForUnderlineLineFormat = ModelBase::getField(val, "UnderlineLineFormat");
 	if(jsonForUnderlineLineFormat != nullptr && !jsonForUnderlineLineFormat->is_null())
 	{
-		std::shared_ptr<LineFormat> newItem(new LineFormat());
-		newItem->fromJson(*jsonForUnderlineLineFormat);
-		setUnderlineLineFormat(newItem);
+		std::shared_ptr<void> instanceForUnderlineLineFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"LineFormat", *jsonForUnderlineLineFormat);
+		setUnderlineLineFormat(std::static_pointer_cast<LineFormat>(instanceForUnderlineLineFormat));
 	}
 	web::json::value* jsonForHyperlinkClick = ModelBase::getField(val, "HyperlinkClick");
 	if(jsonForHyperlinkClick != nullptr && !jsonForHyperlinkClick->is_null())
 	{
-		std::shared_ptr<Hyperlink> newItem(new Hyperlink());
-		newItem->fromJson(*jsonForHyperlinkClick);
-		setHyperlinkClick(newItem);
+		std::shared_ptr<void> instanceForHyperlinkClick = asposeslidescloud::api::ClassRegistry::deserialize(L"Hyperlink", *jsonForHyperlinkClick);
+		setHyperlinkClick(std::static_pointer_cast<Hyperlink>(instanceForHyperlinkClick));
 	}
 	web::json::value* jsonForHyperlinkMouseOver = ModelBase::getField(val, "HyperlinkMouseOver");
 	if(jsonForHyperlinkMouseOver != nullptr && !jsonForHyperlinkMouseOver->is_null())
 	{
-		std::shared_ptr<Hyperlink> newItem(new Hyperlink());
-		newItem->fromJson(*jsonForHyperlinkMouseOver);
-		setHyperlinkMouseOver(newItem);
+		std::shared_ptr<void> instanceForHyperlinkMouseOver = asposeslidescloud::api::ClassRegistry::deserialize(L"Hyperlink", *jsonForHyperlinkMouseOver);
+		setHyperlinkMouseOver(std::static_pointer_cast<Hyperlink>(instanceForHyperlinkMouseOver));
 	}
 	web::json::value* jsonForLatinFont = ModelBase::getField(val, "LatinFont");
 	if(jsonForLatinFont != nullptr && !jsonForLatinFont->is_null())

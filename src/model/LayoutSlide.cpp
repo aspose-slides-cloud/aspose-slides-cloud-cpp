@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "LayoutSlide.h"
 
 namespace asposeslidescloud {
@@ -97,6 +98,7 @@ web::json::value LayoutSlide::toJson() const
 	{
 		val[utility::conversions::to_string_t("MasterSlide")] = ModelBase::toJson(m_MasterSlide);
 	}
+	if (m_DependingSlides.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_DependingSlides)
@@ -124,9 +126,8 @@ void LayoutSlide::fromJson(web::json::value& val)
 	web::json::value* jsonForMasterSlide = ModelBase::getField(val, "MasterSlide");
 	if(jsonForMasterSlide != nullptr && !jsonForMasterSlide->is_null())
 	{
-		std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-		newItem->fromJson(*jsonForMasterSlide);
-		setMasterSlide(newItem);
+		std::shared_ptr<void> instanceForMasterSlide = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForMasterSlide);
+		setMasterSlide(std::static_pointer_cast<ResourceUri>(instanceForMasterSlide));
 	}
 	web::json::value* jsonForDependingSlides = ModelBase::getField(val, "DependingSlides");
 	if(jsonForDependingSlides != nullptr && !jsonForDependingSlides->is_null())
@@ -142,9 +143,8 @@ void LayoutSlide::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<ResourceUri> newItem(new ResourceUri());
-					newItem->fromJson(item);
-					m_DependingSlides.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", item);
+					m_DependingSlides.push_back(std::static_pointer_cast<ResourceUri>(newItem));
 				}
 			}
         	}

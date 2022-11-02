@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "Merge.h"
 
 namespace asposeslidescloud {
@@ -53,6 +54,7 @@ void Merge::setPresentations(std::vector<std::shared_ptr<MergingSource>> value)
 web::json::value Merge::toJson() const
 {
 	web::json::value val = this->Task::toJson();
+	if (m_Presentations.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Presentations)
@@ -81,9 +83,8 @@ void Merge::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<MergingSource> newItem(new MergingSource());
-					newItem->fromJson(item);
-					m_Presentations.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"MergingSource", item);
+					m_Presentations.push_back(std::static_pointer_cast<MergingSource>(newItem));
 				}
 			}
         	}

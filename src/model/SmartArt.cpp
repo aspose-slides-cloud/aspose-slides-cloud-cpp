@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "SmartArt.h"
 
 namespace asposeslidescloud {
@@ -109,6 +110,7 @@ web::json::value SmartArt::toJson() const
 	{
 		val[utility::conversions::to_string_t("ColorStyle")] = ModelBase::toJson(m_ColorStyle);
 	}
+	if (m_Nodes.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Nodes)
@@ -153,9 +155,8 @@ void SmartArt::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<SmartArtNode> newItem(new SmartArtNode());
-					newItem->fromJson(item);
-					m_Nodes.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"SmartArtNode", item);
+					m_Nodes.push_back(std::static_pointer_cast<SmartArtNode>(newItem));
 				}
 			}
         	}

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "CubicBezierToPathSegment.h"
 
 namespace asposeslidescloud {

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "GradientFill.h"
 
 namespace asposeslidescloud {
@@ -116,6 +117,7 @@ web::json::value GradientFill::toJson() const
 	{
 		val[utility::conversions::to_string_t("Shape")] = ModelBase::toJson(m_Shape);
 	}
+	if (m_Stops.size() > 0)
 	{
 		std::vector<web::json::value> jsonArray;
 		for (auto& item : m_Stops)
@@ -160,9 +162,8 @@ void GradientFill::fromJson(web::json::value& val)
 				}
 				else
 				{
-					std::shared_ptr<GradientFillStop> newItem(new GradientFillStop());
-					newItem->fromJson(item);
-					m_Stops.push_back( newItem );
+					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"GradientFillStop", item);
+					m_Stops.push_back(std::static_pointer_cast<GradientFillStop>(newItem));
 				}
 			}
         	}

@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ThreeDFormat.h"
 
 namespace asposeslidescloud {
@@ -232,23 +233,20 @@ void ThreeDFormat::fromJson(web::json::value& val)
 	web::json::value* jsonForBevelBottom = ModelBase::getField(val, "BevelBottom");
 	if(jsonForBevelBottom != nullptr && !jsonForBevelBottom->is_null())
 	{
-		std::shared_ptr<ShapeBevel> newItem(new ShapeBevel());
-		newItem->fromJson(*jsonForBevelBottom);
-		setBevelBottom(newItem);
+		std::shared_ptr<void> instanceForBevelBottom = asposeslidescloud::api::ClassRegistry::deserialize(L"ShapeBevel", *jsonForBevelBottom);
+		setBevelBottom(std::static_pointer_cast<ShapeBevel>(instanceForBevelBottom));
 	}
 	web::json::value* jsonForBevelTop = ModelBase::getField(val, "BevelTop");
 	if(jsonForBevelTop != nullptr && !jsonForBevelTop->is_null())
 	{
-		std::shared_ptr<ShapeBevel> newItem(new ShapeBevel());
-		newItem->fromJson(*jsonForBevelTop);
-		setBevelTop(newItem);
+		std::shared_ptr<void> instanceForBevelTop = asposeslidescloud::api::ClassRegistry::deserialize(L"ShapeBevel", *jsonForBevelTop);
+		setBevelTop(std::static_pointer_cast<ShapeBevel>(instanceForBevelTop));
 	}
 	web::json::value* jsonForCamera = ModelBase::getField(val, "Camera");
 	if(jsonForCamera != nullptr && !jsonForCamera->is_null())
 	{
-		std::shared_ptr<Camera> newItem(new Camera());
-		newItem->fromJson(*jsonForCamera);
-		setCamera(newItem);
+		std::shared_ptr<void> instanceForCamera = asposeslidescloud::api::ClassRegistry::deserialize(L"Camera", *jsonForCamera);
+		setCamera(std::static_pointer_cast<Camera>(instanceForCamera));
 	}
 	web::json::value* jsonForContourColor = ModelBase::getField(val, "ContourColor");
 	if(jsonForContourColor != nullptr && !jsonForContourColor->is_null())
@@ -278,9 +276,8 @@ void ThreeDFormat::fromJson(web::json::value& val)
 	web::json::value* jsonForLightRig = ModelBase::getField(val, "LightRig");
 	if(jsonForLightRig != nullptr && !jsonForLightRig->is_null())
 	{
-		std::shared_ptr<LightRig> newItem(new LightRig());
-		newItem->fromJson(*jsonForLightRig);
-		setLightRig(newItem);
+		std::shared_ptr<void> instanceForLightRig = asposeslidescloud::api::ClassRegistry::deserialize(L"LightRig", *jsonForLightRig);
+		setLightRig(std::static_pointer_cast<LightRig>(instanceForLightRig));
 	}
 	web::json::value* jsonForMaterial = ModelBase::getField(val, "Material");
 	if(jsonForMaterial != nullptr && !jsonForMaterial->is_null())

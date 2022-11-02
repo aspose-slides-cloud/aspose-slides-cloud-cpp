@@ -25,6 +25,7 @@
 
 
 
+#include "../ClassRegistry.h"
 #include "ChartWallType.h"
 
 namespace asposeslidescloud {
