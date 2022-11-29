@@ -84,7 +84,7 @@ void GradientFill::setLinearAngle(double value)
 	
 }
 
-bool GradientFill::getIsScaled() const
+bool GradientFill::isIsScaled() const
 {
 	return m_IsScaled;
 }

@@ -59,7 +59,7 @@ void BorderBoxElement::setBase(std::shared_ptr<MathElement> value)
 	
 }
 
-bool BorderBoxElement::getHideTop() const
+bool BorderBoxElement::isHideTop() const
 {
 	return m_HideTop;
 }
@@ -80,7 +80,7 @@ void BorderBoxElement::unsetHideTop()
 	m_HideTopIsSet = false;
 }
 
-bool BorderBoxElement::getHideBottom() const
+bool BorderBoxElement::isHideBottom() const
 {
 	return m_HideBottom;
 }
@@ -101,7 +101,7 @@ void BorderBoxElement::unsetHideBottom()
 	m_HideBottomIsSet = false;
 }
 
-bool BorderBoxElement::getHideLeft() const
+bool BorderBoxElement::isHideLeft() const
 {
 	return m_HideLeft;
 }
@@ -122,7 +122,7 @@ void BorderBoxElement::unsetHideLeft()
 	m_HideLeftIsSet = false;
 }
 
-bool BorderBoxElement::getHideRight() const
+bool BorderBoxElement::isHideRight() const
 {
 	return m_HideRight;
 }
@@ -143,7 +143,7 @@ void BorderBoxElement::unsetHideRight()
 	m_HideRightIsSet = false;
 }
 
-bool BorderBoxElement::getStrikethroughHorizontal() const
+bool BorderBoxElement::isStrikethroughHorizontal() const
 {
 	return m_StrikethroughHorizontal;
 }
@@ -164,7 +164,7 @@ void BorderBoxElement::unsetStrikethroughHorizontal()
 	m_StrikethroughHorizontalIsSet = false;
 }
 
-bool BorderBoxElement::getStrikethroughVertical() const
+bool BorderBoxElement::isStrikethroughVertical() const
 {
 	return m_StrikethroughVertical;
 }
@@ -185,7 +185,7 @@ void BorderBoxElement::unsetStrikethroughVertical()
 	m_StrikethroughVerticalIsSet = false;
 }
 
-bool BorderBoxElement::getStrikethroughBottomLeftToTopRight() const
+bool BorderBoxElement::isStrikethroughBottomLeftToTopRight() const
 {
 	return m_StrikethroughBottomLeftToTopRight;
 }
@@ -206,7 +206,7 @@ void BorderBoxElement::unsetStrikethroughBottomLeftToTopRight()
 	m_StrikethroughBottomLeftToTopRightIsSet = false;
 }
 
-bool BorderBoxElement::getStrikethroughTopLeftToBottomRight() const
+bool BorderBoxElement::isStrikethroughTopLeftToBottomRight() const
 {
 	return m_StrikethroughTopLeftToBottomRight;
 }

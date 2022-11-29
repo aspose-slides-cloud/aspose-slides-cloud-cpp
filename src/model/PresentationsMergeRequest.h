@@ -29,8 +29,8 @@
  * Request for presentations merge
  */
 
-#ifndef _PresentationsMergeRequest_H_
-#define _PresentationsMergeRequest_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_PresentationsMergeRequest_H_
+#define ASPOSESLIDESCLOUD_MODEL_PresentationsMergeRequest_H_
 
 #include "../ModelBase.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _PresentationsMergeRequest_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_PresentationsMergeRequest_H_ */

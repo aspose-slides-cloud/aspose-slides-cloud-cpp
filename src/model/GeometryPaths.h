@@ -29,8 +29,8 @@
  * Represents container for GeometryPath objects
  */
 
-#ifndef _GeometryPaths_H_
-#define _GeometryPaths_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_GeometryPaths_H_
+#define ASPOSESLIDESCLOUD_MODEL_GeometryPaths_H_
 
 #include "../ModelBase.h"
 
@@ -67,4 +67,4 @@ protected:
 }
 }
 
-#endif /* _GeometryPaths_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_GeometryPaths_H_ */

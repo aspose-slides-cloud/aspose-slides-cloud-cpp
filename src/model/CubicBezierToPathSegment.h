@@ -29,8 +29,8 @@
  * Cubic Bezier curve segment of the geometry path
  */
 
-#ifndef _CubicBezierToPathSegment_H_
-#define _CubicBezierToPathSegment_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_CubicBezierToPathSegment_H_
+#define ASPOSESLIDESCLOUD_MODEL_CubicBezierToPathSegment_H_
 
 #include "PathSegment.h"
 
@@ -97,4 +97,4 @@ protected:
 }
 }
 
-#endif /* _CubicBezierToPathSegment_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_CubicBezierToPathSegment_H_ */

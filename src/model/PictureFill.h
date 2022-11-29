@@ -29,8 +29,8 @@
  * Picture fill.
  */
 
-#ifndef _PictureFill_H_
-#define _PictureFill_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_PictureFill_H_
+#define ASPOSESLIDESCLOUD_MODEL_PictureFill_H_
 
 #include "FillFormat.h"
 
@@ -124,4 +124,4 @@ protected:
 }
 }
 
-#endif /* _PictureFill_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_PictureFill_H_ */

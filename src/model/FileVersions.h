@@ -29,8 +29,8 @@
  * File versions FileVersion.
  */
 
-#ifndef _FileVersions_H_
-#define _FileVersions_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_FileVersions_H_
+#define ASPOSESLIDESCLOUD_MODEL_FileVersions_H_
 
 #include "../ModelBase.h"
 
@@ -67,4 +67,4 @@ protected:
 }
 }
 
-#endif /* _FileVersions_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_FileVersions_H_ */

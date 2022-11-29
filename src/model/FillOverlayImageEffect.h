@@ -29,8 +29,8 @@
  * Represents a Fill Overlay effect. A fill overlay may be used to specify an additional fill for an object and blend the two fills together.
  */
 
-#ifndef _FillOverlayImageEffect_H_
-#define _FillOverlayImageEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_FillOverlayImageEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_FillOverlayImageEffect_H_
 
 #include "ImageTransformEffect.h"
 
@@ -74,4 +74,4 @@ protected:
 }
 }
 
-#endif /* _FillOverlayImageEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_FillOverlayImageEffect_H_ */

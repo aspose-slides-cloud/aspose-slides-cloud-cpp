@@ -29,8 +29,8 @@
  * Specifies the accent function, consisting of a base and a combining diacritical mark
  */
 
-#ifndef _AccentElement_H_
-#define _AccentElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_AccentElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_AccentElement_H_
 
 #include "MathElement.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _AccentElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_AccentElement_H_ */

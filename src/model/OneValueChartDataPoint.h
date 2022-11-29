@@ -29,12 +29,13 @@
  * One value chart data point.
  */
 
-#ifndef _OneValueChartDataPoint_H_
-#define _OneValueChartDataPoint_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_OneValueChartDataPoint_H_
+#define ASPOSESLIDESCLOUD_MODEL_OneValueChartDataPoint_H_
 
 #include "DataPoint.h"
 
 #include "../model/EffectFormat.h"
+#include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
 #include "../model/ThreeDFormat.h"
@@ -63,22 +64,28 @@ public:
 	ASPOSE_DLL_EXPORT double getValue() const;
 	ASPOSE_DLL_EXPORT void setValue(double value);
 	/// <summary>
+	/// Spreadsheet formula in A1-style.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getValueFormula() const;
+	ASPOSE_DLL_EXPORT void setValueFormula(utility::string_t value);
+	/// <summary>
 	/// SetAsTotal. Applied to Waterfall data points only.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSetAsTotal() const;
+	ASPOSE_DLL_EXPORT bool isSetAsTotal() const;
 	ASPOSE_DLL_EXPORT void setSetAsTotal(bool value);
 	ASPOSE_DLL_EXPORT bool setAsTotalIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetSetAsTotal();
 	/// <summary>
 	/// True if the data point shall invert its colors if the value is negative. Applies to bar, column and bubble series.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getInvertIfNegative() const;
+	ASPOSE_DLL_EXPORT bool isInvertIfNegative() const;
 	ASPOSE_DLL_EXPORT void setInvertIfNegative(bool value);
 	ASPOSE_DLL_EXPORT bool invertIfNegativeIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetInvertIfNegative();
 
 protected:
 	double m_Value;
+	utility::string_t m_ValueFormula;
 	bool m_SetAsTotal;
 	bool m_SetAsTotalIsSet;
 	bool m_InvertIfNegative;
@@ -88,4 +95,4 @@ protected:
 }
 }
 
-#endif /* _OneValueChartDataPoint_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_OneValueChartDataPoint_H_ */

@@ -29,8 +29,8 @@
  * Represents a chart axis
  */
 
-#ifndef _Axis_H_
-#define _Axis_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Axis_H_
+#define ASPOSESLIDESCLOUD_MODEL_Axis_H_
 
 #include "../ModelBase.h"
 
@@ -60,14 +60,14 @@ public:
 	/// <summary>
 	/// True if the axis is visible
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsVisible() const;
+	ASPOSE_DLL_EXPORT bool isIsVisible() const;
 	ASPOSE_DLL_EXPORT void setIsVisible(bool value);
 	ASPOSE_DLL_EXPORT bool isVisibleIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsVisible();
 	/// <summary>
 	/// True if the axis has a visible title
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHasTitle() const;
+	ASPOSE_DLL_EXPORT bool isHasTitle() const;
 	ASPOSE_DLL_EXPORT void setHasTitle(bool value);
 	ASPOSE_DLL_EXPORT bool hasTitleIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHasTitle();
@@ -89,7 +89,7 @@ public:
 	/// <summary>
 	/// True the major unit of the axis is automatically assigned
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsAutomaticMajorUnit() const;
+	ASPOSE_DLL_EXPORT bool isIsAutomaticMajorUnit() const;
 	ASPOSE_DLL_EXPORT void setIsAutomaticMajorUnit(bool value);
 	ASPOSE_DLL_EXPORT bool isAutomaticMajorUnitIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsAutomaticMajorUnit();
@@ -113,7 +113,7 @@ public:
 	/// <summary>
 	/// True the minor unit of the axis is automatically assigned
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsAutomaticMinorUnit() const;
+	ASPOSE_DLL_EXPORT bool isIsAutomaticMinorUnit() const;
 	ASPOSE_DLL_EXPORT void setIsAutomaticMinorUnit(bool value);
 	ASPOSE_DLL_EXPORT bool isAutomaticMinorUnitIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsAutomaticMinorUnit();
@@ -137,7 +137,7 @@ public:
 	/// <summary>
 	/// True if the max value is automatically assigned
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsAutomaticMaxValue() const;
+	ASPOSE_DLL_EXPORT bool isIsAutomaticMaxValue() const;
 	ASPOSE_DLL_EXPORT void setIsAutomaticMaxValue(bool value);
 	ASPOSE_DLL_EXPORT bool isAutomaticMaxValueIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsAutomaticMaxValue();
@@ -151,7 +151,7 @@ public:
 	/// <summary>
 	/// True if the min value is automatically assigned
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsAutomaticMinValue() const;
+	ASPOSE_DLL_EXPORT bool isIsAutomaticMinValue() const;
 	ASPOSE_DLL_EXPORT void setIsAutomaticMinValue(bool value);
 	ASPOSE_DLL_EXPORT bool isAutomaticMinValueIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsAutomaticMinValue();
@@ -165,7 +165,7 @@ public:
 	/// <summary>
 	/// True if the value axis scale type is logarithmic
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsLogarithmic() const;
+	ASPOSE_DLL_EXPORT bool isIsLogarithmic() const;
 	ASPOSE_DLL_EXPORT void setIsLogarithmic(bool value);
 	ASPOSE_DLL_EXPORT bool isLogarithmicIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsLogarithmic();
@@ -184,7 +184,7 @@ public:
 	/// <summary>
 	/// True if the value axis crosses the category axis between categories. This property applies only to category axes, and it doesn&#39;t apply to 3-D charts
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getAxisBetweenCategories() const;
+	ASPOSE_DLL_EXPORT bool isAxisBetweenCategories() const;
 	ASPOSE_DLL_EXPORT void setAxisBetweenCategories(bool value);
 	ASPOSE_DLL_EXPORT bool axisBetweenCategoriesIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetAxisBetweenCategories();
@@ -198,14 +198,14 @@ public:
 	/// <summary>
 	/// True if MS PowerPoint plots data points from last to first
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsPlotOrderReversed() const;
+	ASPOSE_DLL_EXPORT bool isIsPlotOrderReversed() const;
 	ASPOSE_DLL_EXPORT void setIsPlotOrderReversed(bool value);
 	ASPOSE_DLL_EXPORT bool isPlotOrderReversedIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsPlotOrderReversed();
 	/// <summary>
 	/// True if the format is linked to source data
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsNumberFormatLinkedToSource() const;
+	ASPOSE_DLL_EXPORT bool isIsNumberFormatLinkedToSource() const;
 	ASPOSE_DLL_EXPORT void setIsNumberFormatLinkedToSource(bool value);
 	ASPOSE_DLL_EXPORT bool isNumberFormatLinkedToSourceIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsNumberFormatLinkedToSource();
@@ -229,7 +229,7 @@ public:
 	/// <summary>
 	/// True for automatic tick marks spacing value
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsAutomaticTickMarksSpacing() const;
+	ASPOSE_DLL_EXPORT bool isIsAutomaticTickMarksSpacing() const;
 	ASPOSE_DLL_EXPORT void setIsAutomaticTickMarksSpacing(bool value);
 	ASPOSE_DLL_EXPORT bool isAutomaticTickMarksSpacingIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsAutomaticTickMarksSpacing();
@@ -243,7 +243,7 @@ public:
 	/// <summary>
 	/// True for automatic tick label spacing value
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsAutomaticTickLabelSpacing() const;
+	ASPOSE_DLL_EXPORT bool isIsAutomaticTickLabelSpacing() const;
 	ASPOSE_DLL_EXPORT void setIsAutomaticTickLabelSpacing(bool value);
 	ASPOSE_DLL_EXPORT bool isAutomaticTickLabelSpacingIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsAutomaticTickLabelSpacing();
@@ -358,4 +358,4 @@ protected:
 }
 }
 
-#endif /* _Axis_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Axis_H_ */

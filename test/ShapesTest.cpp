@@ -282,11 +282,17 @@ TEST_F(ShapesTest, smartArtEmpty) {
 }
 
 TEST_F(ShapesTest, chartEmpty) {
-	//See Chart tests for non-empty chart examples
 	utils->initialize("", "");
 	std::shared_ptr<Chart> dto(new Chart());
-	std::shared_ptr<ShapeBase> result = api->createShape(L"test.pptx", 1, dto, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
-	EXPECT_EQ(L"Chart", result->getType());
+	try
+	{
+		api->createShape(L"test.pptx", 1, dto, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
+		FAIL() << "Must have failed";
+	}
+	catch (ApiException ex)
+	{
+		EXPECT_EQ(500, ex.error_code().value());
+	}
 }
 
 TEST_F(ShapesTest, tableAdd) {

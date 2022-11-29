@@ -29,8 +29,8 @@
  * Represents Connector resource.
  */
 
-#ifndef _Connector_H_
-#define _Connector_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Connector_H_
+#define ASPOSESLIDESCLOUD_MODEL_Connector_H_
 
 #include "GeometryShape.h"
 
@@ -98,4 +98,4 @@ protected:
 }
 }
 
-#endif /* _Connector_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Connector_H_ */

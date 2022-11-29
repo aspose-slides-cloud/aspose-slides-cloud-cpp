@@ -29,8 +29,8 @@
  * Represents Format Scheme for slide&#39;s theme
  */
 
-#ifndef _FormatScheme_H_
-#define _FormatScheme_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_FormatScheme_H_
+#define ASPOSESLIDESCLOUD_MODEL_FormatScheme_H_
 
 #include "ResourceBase.h"
 
@@ -89,4 +89,4 @@ protected:
 }
 }
 
-#endif /* _FormatScheme_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_FormatScheme_H_ */

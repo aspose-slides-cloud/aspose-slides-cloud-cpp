@@ -86,7 +86,7 @@ TEST_F(NotesSlideTest, notesSlideGetFromStorage) {
 TEST_F(NotesSlideTest, notesSlideExistsFromStorage) {
 	utils->initialize("", "");
 	std::shared_ptr<EntityExists> result = api->notesSlideExists(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
-	EXPECT_TRUE(result->getExists());
+	EXPECT_TRUE(result->isExists());
 }
 
 TEST_F(NotesSlideTest, notesSlideDownloadFromStorage) {
@@ -108,7 +108,7 @@ TEST_F(NotesSlideTest, notesSlideExistsFromRequest) {
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
 	std::shared_ptr<EntityExists> result = api->notesSlideExistsOnline(data, 1, L"password").get();
-	EXPECT_TRUE(result->getExists());
+	EXPECT_TRUE(result->isExists());
 }
 
 TEST_F(NotesSlideTest, notesSlideDownloadFromRequest) {

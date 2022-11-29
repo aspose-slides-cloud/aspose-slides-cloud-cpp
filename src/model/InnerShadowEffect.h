@@ -29,8 +29,8 @@
  * Represents inner shadow effect 
  */
 
-#ifndef _InnerShadowEffect_H_
-#define _InnerShadowEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_InnerShadowEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_InnerShadowEffect_H_
 
 #include "../ModelBase.h"
 
@@ -84,4 +84,4 @@ protected:
 }
 }
 
-#endif /* _InnerShadowEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_InnerShadowEffect_H_ */

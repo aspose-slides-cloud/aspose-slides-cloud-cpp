@@ -61,7 +61,7 @@ Axis::~Axis()
 {
 }
 
-bool Axis::getIsVisible() const
+bool Axis::isIsVisible() const
 {
 	return m_IsVisible;
 }
@@ -82,7 +82,7 @@ void Axis::unsetIsVisible()
 	m_IsVisibleIsSet = false;
 }
 
-bool Axis::getHasTitle() const
+bool Axis::isHasTitle() const
 {
 	return m_HasTitle;
 }
@@ -136,7 +136,7 @@ void Axis::setBaseUnitScale(utility::string_t value)
 	
 }
 
-bool Axis::getIsAutomaticMajorUnit() const
+bool Axis::isIsAutomaticMajorUnit() const
 {
 	return m_IsAutomaticMajorUnit;
 }
@@ -200,7 +200,7 @@ void Axis::setMajorTickMark(utility::string_t value)
 	
 }
 
-bool Axis::getIsAutomaticMinorUnit() const
+bool Axis::isIsAutomaticMinorUnit() const
 {
 	return m_IsAutomaticMinorUnit;
 }
@@ -264,7 +264,7 @@ void Axis::setMinorTickMark(utility::string_t value)
 	
 }
 
-bool Axis::getIsAutomaticMaxValue() const
+bool Axis::isIsAutomaticMaxValue() const
 {
 	return m_IsAutomaticMaxValue;
 }
@@ -306,7 +306,7 @@ void Axis::unsetMaxValue()
 	m_MaxValueIsSet = false;
 }
 
-bool Axis::getIsAutomaticMinValue() const
+bool Axis::isIsAutomaticMinValue() const
 {
 	return m_IsAutomaticMinValue;
 }
@@ -348,7 +348,7 @@ void Axis::unsetMinValue()
 	m_MinValueIsSet = false;
 }
 
-bool Axis::getIsLogarithmic() const
+bool Axis::isIsLogarithmic() const
 {
 	return m_IsLogarithmic;
 }
@@ -401,7 +401,7 @@ void Axis::setCategoryAxisType(utility::string_t value)
 	
 }
 
-bool Axis::getAxisBetweenCategories() const
+bool Axis::isAxisBetweenCategories() const
 {
 	return m_AxisBetweenCategories;
 }
@@ -443,7 +443,7 @@ void Axis::unsetLabelOffset()
 	m_LabelOffsetIsSet = false;
 }
 
-bool Axis::getIsPlotOrderReversed() const
+bool Axis::isIsPlotOrderReversed() const
 {
 	return m_IsPlotOrderReversed;
 }
@@ -464,7 +464,7 @@ void Axis::unsetIsPlotOrderReversed()
 	m_IsPlotOrderReversedIsSet = false;
 }
 
-bool Axis::getIsNumberFormatLinkedToSource() const
+bool Axis::isIsNumberFormatLinkedToSource() const
 {
 	return m_IsNumberFormatLinkedToSource;
 }
@@ -528,7 +528,7 @@ void Axis::unsetCrossAt()
 	m_CrossAtIsSet = false;
 }
 
-bool Axis::getIsAutomaticTickMarksSpacing() const
+bool Axis::isIsAutomaticTickMarksSpacing() const
 {
 	return m_IsAutomaticTickMarksSpacing;
 }
@@ -570,7 +570,7 @@ void Axis::unsetTickMarksSpacing()
 	m_TickMarksSpacingIsSet = false;
 }
 
-bool Axis::getIsAutomaticTickLabelSpacing() const
+bool Axis::isIsAutomaticTickLabelSpacing() const
 {
 	return m_IsAutomaticTickLabelSpacing;
 }

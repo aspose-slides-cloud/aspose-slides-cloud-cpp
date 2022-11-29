@@ -29,8 +29,8 @@
  * File Version
  */
 
-#ifndef _FileVersion_H_
-#define _FileVersion_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_FileVersion_H_
+#define ASPOSESLIDESCLOUD_MODEL_FileVersion_H_
 
 #include "StorageFile.h"
 
@@ -63,7 +63,7 @@ public:
 	/// <summary>
 	/// Specifies whether the file is (true) or is not (false) the latest version of an file.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsLatest() const;
+	ASPOSE_DLL_EXPORT bool isIsLatest() const;
 	ASPOSE_DLL_EXPORT void setIsLatest(bool value);
 
 protected:
@@ -74,4 +74,4 @@ protected:
 }
 }
 
-#endif /* _FileVersion_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_FileVersion_H_ */

@@ -29,8 +29,8 @@
  * Gradient stop.
  */
 
-#ifndef _GradientFillStop_H_
-#define _GradientFillStop_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_GradientFillStop_H_
+#define ASPOSESLIDESCLOUD_MODEL_GradientFillStop_H_
 
 #include "../ModelBase.h"
 
@@ -72,4 +72,4 @@ protected:
 }
 }
 
-#endif /* _GradientFillStop_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_GradientFillStop_H_ */

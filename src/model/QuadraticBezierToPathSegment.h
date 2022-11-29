@@ -29,8 +29,8 @@
  * Quadratic Bezier curve segment of the geometry path
  */
 
-#ifndef _QuadraticBezierToPathSegment_H_
-#define _QuadraticBezierToPathSegment_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_QuadraticBezierToPathSegment_H_
+#define ASPOSESLIDESCLOUD_MODEL_QuadraticBezierToPathSegment_H_
 
 #include "PathSegment.h"
 
@@ -85,4 +85,4 @@ protected:
 }
 }
 
-#endif /* _QuadraticBezierToPathSegment_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_QuadraticBezierToPathSegment_H_ */

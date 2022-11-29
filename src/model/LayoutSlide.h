@@ -29,8 +29,8 @@
  * Layout slide.
  */
 
-#ifndef _LayoutSlide_H_
-#define _LayoutSlide_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_LayoutSlide_H_
+#define ASPOSESLIDESCLOUD_MODEL_LayoutSlide_H_
 
 #include "ResourceBase.h"
 
@@ -87,4 +87,4 @@ protected:
 }
 }
 
-#endif /* _LayoutSlide_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_LayoutSlide_H_ */

@@ -119,7 +119,7 @@ void ShapeBase::setAlternativeTextTitle(utility::string_t value)
 	
 }
 
-bool ShapeBase::getHidden() const
+bool ShapeBase::isHidden() const
 {
 	return m_Hidden;
 }

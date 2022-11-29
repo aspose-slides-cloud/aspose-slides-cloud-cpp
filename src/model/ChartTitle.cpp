@@ -50,7 +50,7 @@ void ChartTitle::setText(utility::string_t value)
 	
 }
 
-bool ChartTitle::getHasTitle() const
+bool ChartTitle::isHasTitle() const
 {
 	return m_HasTitle;
 }

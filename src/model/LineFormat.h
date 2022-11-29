@@ -29,8 +29,8 @@
  * Line format.
  */
 
-#ifndef _LineFormat_H_
-#define _LineFormat_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_LineFormat_H_
+#define ASPOSESLIDESCLOUD_MODEL_LineFormat_H_
 
 #include "../ModelBase.h"
 
@@ -141,4 +141,4 @@ protected:
 }
 }
 
-#endif /* _LineFormat_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_LineFormat_H_ */

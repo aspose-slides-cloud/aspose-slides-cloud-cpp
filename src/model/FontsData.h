@@ -29,8 +29,8 @@
  * List of fonts data
  */
 
-#ifndef _FontsData_H_
-#define _FontsData_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_FontsData_H_
+#define ASPOSESLIDESCLOUD_MODEL_FontsData_H_
 
 #include "../ModelBase.h"
 
@@ -67,4 +67,4 @@ protected:
 }
 }
 
-#endif /* _FontsData_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_FontsData_H_ */

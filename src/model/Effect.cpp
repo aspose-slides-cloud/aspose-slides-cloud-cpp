@@ -147,7 +147,7 @@ void Effect::unsetAccelerate()
 	m_AccelerateIsSet = false;
 }
 
-bool Effect::getAutoReverse() const
+bool Effect::isAutoReverse() const
 {
 	return m_AutoReverse;
 }
@@ -305,7 +305,7 @@ void Effect::unsetTriggerDelayTime()
 	m_TriggerDelayTimeIsSet = false;
 }
 
-bool Effect::getRepeatUntilEndSlide() const
+bool Effect::isRepeatUntilEndSlide() const
 {
 	return m_RepeatUntilEndSlide;
 }
@@ -326,7 +326,7 @@ void Effect::unsetRepeatUntilEndSlide()
 	m_RepeatUntilEndSlideIsSet = false;
 }
 
-bool Effect::getRepeatUntilNextClick() const
+bool Effect::isRepeatUntilNextClick() const
 {
 	return m_RepeatUntilNextClick;
 }

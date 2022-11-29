@@ -29,8 +29,8 @@
  * Represents Resource URI
  */
 
-#ifndef _ResourceUri_H_
-#define _ResourceUri_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ResourceUri_H_
+#define ASPOSESLIDESCLOUD_MODEL_ResourceUri_H_
 
 #include "../ModelBase.h"
 
@@ -102,4 +102,4 @@ protected:
 }
 }
 
-#endif /* _ResourceUri_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ResourceUri_H_ */

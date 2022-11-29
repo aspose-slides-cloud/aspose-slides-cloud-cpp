@@ -29,8 +29,8 @@
  * ThreeDFormat
  */
 
-#ifndef _ThreeDFormat_H_
-#define _ThreeDFormat_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ThreeDFormat_H_
+#define ASPOSESLIDESCLOUD_MODEL_ThreeDFormat_H_
 
 #include "../ModelBase.h"
 
@@ -132,4 +132,4 @@ protected:
 }
 }
 
-#endif /* _ThreeDFormat_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ThreeDFormat_H_ */

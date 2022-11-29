@@ -41,7 +41,7 @@ NormalViewRestoredProperties::~NormalViewRestoredProperties()
 {
 }
 
-bool NormalViewRestoredProperties::getAutoAdjust() const
+bool NormalViewRestoredProperties::isAutoAdjust() const
 {
 	return m_AutoAdjust;
 }

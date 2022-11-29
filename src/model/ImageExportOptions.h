@@ -29,8 +29,8 @@
  * Provides options that control how a presentation is saved in an image format.
  */
 
-#ifndef _ImageExportOptions_H_
-#define _ImageExportOptions_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ImageExportOptions_H_
+#define ASPOSESLIDESCLOUD_MODEL_ImageExportOptions_H_
 
 #include "ImageExportOptionsBase.h"
 
@@ -91,4 +91,4 @@ protected:
 }
 }
 
-#endif /* _ImageExportOptions_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ImageExportOptions_H_ */

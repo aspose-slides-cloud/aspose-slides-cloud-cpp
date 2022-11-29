@@ -29,8 +29,8 @@
  * Represents a format for individual shape export.
  */
 
-#ifndef _ShapeExportFormat_H_
-#define _ShapeExportFormat_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ShapeExportFormat_H_
+#define ASPOSESLIDESCLOUD_MODEL_ShapeExportFormat_H_
 
 #include "../ModelBase.h"
 
@@ -59,4 +59,4 @@ protected:
 }
 }
 
-#endif /* _ShapeExportFormat_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ShapeExportFormat_H_ */

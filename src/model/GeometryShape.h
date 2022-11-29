@@ -29,8 +29,8 @@
  * Represents GeometryShape resource.
  */
 
-#ifndef _GeometryShape_H_
-#define _GeometryShape_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_GeometryShape_H_
+#define ASPOSESLIDESCLOUD_MODEL_GeometryShape_H_
 
 #include "ShapeBase.h"
 
@@ -74,4 +74,4 @@ protected:
 }
 }
 
-#endif /* _GeometryShape_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_GeometryShape_H_ */

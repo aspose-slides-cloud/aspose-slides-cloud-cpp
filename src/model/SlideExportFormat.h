@@ -29,8 +29,8 @@
  * Slide Export Format
  */
 
-#ifndef _SlideExportFormat_H_
-#define _SlideExportFormat_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SlideExportFormat_H_
+#define ASPOSESLIDESCLOUD_MODEL_SlideExportFormat_H_
 
 #include "../ModelBase.h"
 
@@ -59,4 +59,4 @@ protected:
 }
 }
 
-#endif /* _SlideExportFormat_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SlideExportFormat_H_ */

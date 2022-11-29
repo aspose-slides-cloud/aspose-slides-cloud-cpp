@@ -29,8 +29,8 @@
  * Represents base64 inline encoded file.
  */
 
-#ifndef _Base64InputFile_H_
-#define _Base64InputFile_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Base64InputFile_H_
+#define ASPOSESLIDESCLOUD_MODEL_Base64InputFile_H_
 
 #include "InputFile.h"
 
@@ -67,4 +67,4 @@ protected:
 }
 }
 
-#endif /* _Base64InputFile_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Base64InputFile_H_ */

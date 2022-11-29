@@ -63,7 +63,7 @@ void LimitElement::setLimit(std::shared_ptr<MathElement> value)
 	
 }
 
-bool LimitElement::getUpperLimit() const
+bool LimitElement::isUpperLimit() const
 {
 	return m_UpperLimit;
 }

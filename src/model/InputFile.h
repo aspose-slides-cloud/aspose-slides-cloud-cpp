@@ -29,8 +29,8 @@
  * Represents abstract input file source for pipeline.
  */
 
-#ifndef _InputFile_H_
-#define _InputFile_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_InputFile_H_
+#define ASPOSESLIDESCLOUD_MODEL_InputFile_H_
 
 #include "../ModelBase.h"
 
@@ -72,4 +72,4 @@ protected:
 }
 }
 
-#endif /* _InputFile_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_InputFile_H_ */

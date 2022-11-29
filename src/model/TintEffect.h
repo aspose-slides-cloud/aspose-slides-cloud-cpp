@@ -29,8 +29,8 @@
  * Represents a Tint effect.
  */
 
-#ifndef _TintEffect_H_
-#define _TintEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_TintEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_TintEffect_H_
 
 #include "ImageTransformEffect.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _TintEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_TintEffect_H_ */

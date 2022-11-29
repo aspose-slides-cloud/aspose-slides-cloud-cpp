@@ -62,6 +62,17 @@ void BubbleSeries::setNumberFormatOfBubbleSizes(utility::string_t value)
 	
 }
 
+std::shared_ptr<DataSource> BubbleSeries::getDataSourceForBubbleSizeValues() const
+{
+	return m_DataSourceForBubbleSizeValues;
+}
+
+void BubbleSeries::setDataSourceForBubbleSizeValues(std::shared_ptr<DataSource> value)
+{
+	m_DataSourceForBubbleSizeValues = value;
+	
+}
+
 web::json::value BubbleSeries::toJson() const
 {
 	web::json::value val = this->XYSeries::toJson();
@@ -77,6 +88,10 @@ web::json::value BubbleSeries::toJson() const
 	if (!m_NumberFormatOfBubbleSizes.empty())
 	{
 		val[utility::conversions::to_string_t("NumberFormatOfBubbleSizes")] = ModelBase::toJson(m_NumberFormatOfBubbleSizes);
+	}
+	if (m_DataSourceForBubbleSizeValues != nullptr)
+	{
+		val[utility::conversions::to_string_t("DataSourceForBubbleSizeValues")] = ModelBase::toJson(m_DataSourceForBubbleSizeValues);
 	}
 	return val;
 }
@@ -108,6 +123,12 @@ void BubbleSeries::fromJson(web::json::value& val)
 	if(jsonForNumberFormatOfBubbleSizes != nullptr && !jsonForNumberFormatOfBubbleSizes->is_null())
 	{
 		setNumberFormatOfBubbleSizes(ModelBase::stringFromJson(*jsonForNumberFormatOfBubbleSizes));
+	}
+	web::json::value* jsonForDataSourceForBubbleSizeValues = ModelBase::getField(val, "DataSourceForBubbleSizeValues");
+	if(jsonForDataSourceForBubbleSizeValues != nullptr && !jsonForDataSourceForBubbleSizeValues->is_null())
+	{
+		std::shared_ptr<void> instanceForDataSourceForBubbleSizeValues = asposeslidescloud::api::ClassRegistry::deserialize(L"DataSource", *jsonForDataSourceForBubbleSizeValues);
+		setDataSourceForBubbleSizeValues(std::static_pointer_cast<DataSource>(instanceForDataSourceForBubbleSizeValues));
 	}
 }
 

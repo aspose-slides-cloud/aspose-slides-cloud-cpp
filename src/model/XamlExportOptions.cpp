@@ -41,7 +41,7 @@ XamlExportOptions::~XamlExportOptions()
 {
 }
 
-bool XamlExportOptions::getExportHiddenSlides() const
+bool XamlExportOptions::isExportHiddenSlides() const
 {
 	return m_ExportHiddenSlides;
 }

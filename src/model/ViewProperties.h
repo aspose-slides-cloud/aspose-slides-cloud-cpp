@@ -29,8 +29,8 @@
  * Slides document properties.
  */
 
-#ifndef _ViewProperties_H_
-#define _ViewProperties_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ViewProperties_H_
+#define ASPOSESLIDESCLOUD_MODEL_ViewProperties_H_
 
 #include "ResourceBase.h"
 
@@ -76,7 +76,7 @@ public:
 	/// <summary>
 	/// True to prefer single view.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getPreferSingleView() const;
+	ASPOSE_DLL_EXPORT bool isPreferSingleView() const;
 	ASPOSE_DLL_EXPORT void setPreferSingleView(bool value);
 	ASPOSE_DLL_EXPORT bool preferSingleViewIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetPreferSingleView();
@@ -122,4 +122,4 @@ protected:
 }
 }
 
-#endif /* _ViewProperties_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ViewProperties_H_ */

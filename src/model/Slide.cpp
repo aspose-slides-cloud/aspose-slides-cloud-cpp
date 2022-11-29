@@ -61,7 +61,7 @@ void Slide::setHeight(double value)
 	
 }
 
-bool Slide::getShowMasterShapes() const
+bool Slide::isShowMasterShapes() const
 {
 	return m_ShowMasterShapes;
 }

@@ -29,8 +29,8 @@
  * Specifies the bar function, consisting of a base argument and an overbar or underbar
  */
 
-#ifndef _BarElement_H_
-#define _BarElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_BarElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_BarElement_H_
 
 #include "MathElement.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _BarElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_BarElement_H_ */

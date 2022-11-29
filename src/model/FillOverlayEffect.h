@@ -29,8 +29,8 @@
  * Represents fill overlay effect 
  */
 
-#ifndef _FillOverlayEffect_H_
-#define _FillOverlayEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_FillOverlayEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_FillOverlayEffect_H_
 
 #include "../ModelBase.h"
 
@@ -66,4 +66,4 @@ protected:
 }
 }
 
-#endif /* _FillOverlayEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_FillOverlayEffect_H_ */

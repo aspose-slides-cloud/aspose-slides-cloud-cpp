@@ -29,8 +29,8 @@
  * Arrow head properties.
  */
 
-#ifndef _ArrowHeadProperties_H_
-#define _ArrowHeadProperties_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ArrowHeadProperties_H_
+#define ASPOSESLIDESCLOUD_MODEL_ArrowHeadProperties_H_
 
 #include "../ModelBase.h"
 
@@ -78,4 +78,4 @@ protected:
 }
 }
 
-#endif /* _ArrowHeadProperties_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ArrowHeadProperties_H_ */

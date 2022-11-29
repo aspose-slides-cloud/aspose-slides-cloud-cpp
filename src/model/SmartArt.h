@@ -29,8 +29,8 @@
  * Represents SmartArt shape resource.
  */
 
-#ifndef _SmartArt_H_
-#define _SmartArt_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SmartArt_H_
+#define ASPOSESLIDESCLOUD_MODEL_SmartArt_H_
 
 #include "ShapeBase.h"
 
@@ -85,7 +85,7 @@ public:
 	/// <summary>
 	/// The state of the SmartArt diagram with regard to (left-to-right) LTR or (right-to-left) RTL, if the diagram supports reversal.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsReversed() const;
+	ASPOSE_DLL_EXPORT bool isIsReversed() const;
 	ASPOSE_DLL_EXPORT void setIsReversed(bool value);
 
 protected:
@@ -99,4 +99,4 @@ protected:
 }
 }
 
-#endif /* _SmartArt_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SmartArt_H_ */

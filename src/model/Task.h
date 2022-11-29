@@ -29,8 +29,8 @@
  * Represents task for pipeline.
  */
 
-#ifndef _Task_H_
-#define _Task_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Task_H_
+#define ASPOSESLIDESCLOUD_MODEL_Task_H_
 
 #include "../ModelBase.h"
 
@@ -66,4 +66,4 @@ protected:
 }
 }
 
-#endif /* _Task_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Task_H_ */

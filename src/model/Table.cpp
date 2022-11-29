@@ -80,7 +80,7 @@ void Table::setColumns(std::vector<std::shared_ptr<TableColumn>> value)
 	
 }
 
-bool Table::getFirstCol() const
+bool Table::isFirstCol() const
 {
 	return m_FirstCol;
 }
@@ -101,7 +101,7 @@ void Table::unsetFirstCol()
 	m_FirstColIsSet = false;
 }
 
-bool Table::getFirstRow() const
+bool Table::isFirstRow() const
 {
 	return m_FirstRow;
 }
@@ -122,7 +122,7 @@ void Table::unsetFirstRow()
 	m_FirstRowIsSet = false;
 }
 
-bool Table::getHorizontalBanding() const
+bool Table::isHorizontalBanding() const
 {
 	return m_HorizontalBanding;
 }
@@ -143,7 +143,7 @@ void Table::unsetHorizontalBanding()
 	m_HorizontalBandingIsSet = false;
 }
 
-bool Table::getLastCol() const
+bool Table::isLastCol() const
 {
 	return m_LastCol;
 }
@@ -164,7 +164,7 @@ void Table::unsetLastCol()
 	m_LastColIsSet = false;
 }
 
-bool Table::getLastRow() const
+bool Table::isLastRow() const
 {
 	return m_LastRow;
 }
@@ -185,7 +185,7 @@ void Table::unsetLastRow()
 	m_LastRowIsSet = false;
 }
 
-bool Table::getRightToLeft() const
+bool Table::isRightToLeft() const
 {
 	return m_RightToLeft;
 }
@@ -206,7 +206,7 @@ void Table::unsetRightToLeft()
 	m_RightToLeftIsSet = false;
 }
 
-bool Table::getVerticalBanding() const
+bool Table::isVerticalBanding() const
 {
 	return m_VerticalBanding;
 }

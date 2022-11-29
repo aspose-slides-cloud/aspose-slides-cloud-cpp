@@ -56,7 +56,7 @@ void BoxElement::setBase(std::shared_ptr<MathElement> value)
 	
 }
 
-bool BoxElement::getOperatorEmulator() const
+bool BoxElement::isOperatorEmulator() const
 {
 	return m_OperatorEmulator;
 }
@@ -77,7 +77,7 @@ void BoxElement::unsetOperatorEmulator()
 	m_OperatorEmulatorIsSet = false;
 }
 
-bool BoxElement::getNoBreak() const
+bool BoxElement::isNoBreak() const
 {
 	return m_NoBreak;
 }
@@ -98,7 +98,7 @@ void BoxElement::unsetNoBreak()
 	m_NoBreakIsSet = false;
 }
 
-bool BoxElement::getDifferential() const
+bool BoxElement::isDifferential() const
 {
 	return m_Differential;
 }
@@ -119,7 +119,7 @@ void BoxElement::unsetDifferential()
 	m_DifferentialIsSet = false;
 }
 
-bool BoxElement::getAlignmentPoint() const
+bool BoxElement::isAlignmentPoint() const
 {
 	return m_AlignmentPoint;
 }

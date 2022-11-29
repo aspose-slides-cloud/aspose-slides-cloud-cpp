@@ -29,8 +29,8 @@
  * Close path segment of the geometry path
  */
 
-#ifndef _ClosePathSegment_H_
-#define _ClosePathSegment_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ClosePathSegment_H_
+#define ASPOSESLIDESCLOUD_MODEL_ClosePathSegment_H_
 
 #include "PathSegment.h"
 
@@ -61,4 +61,4 @@ protected:
 }
 }
 
-#endif /* _ClosePathSegment_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ClosePathSegment_H_ */

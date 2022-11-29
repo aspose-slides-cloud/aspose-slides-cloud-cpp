@@ -29,8 +29,8 @@
  * Represents AudioFrame resource.
  */
 
-#ifndef _AudioFrame_H_
-#define _AudioFrame_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_AudioFrame_H_
+#define ASPOSESLIDESCLOUD_MODEL_AudioFrame_H_
 
 #include "GeometryShape.h"
 
@@ -93,21 +93,21 @@ public:
 	/// <summary>
 	/// Determines whether a sound is embedded to a presentation.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getEmbedded() const;
+	ASPOSE_DLL_EXPORT bool isEmbedded() const;
 	ASPOSE_DLL_EXPORT void setEmbedded(bool value);
 	ASPOSE_DLL_EXPORT bool embeddedIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetEmbedded();
 	/// <summary>
 	/// Determines whether an AudioFrame is hidden.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHideAtShowing() const;
+	ASPOSE_DLL_EXPORT bool isHideAtShowing() const;
 	ASPOSE_DLL_EXPORT void setHideAtShowing(bool value);
 	ASPOSE_DLL_EXPORT bool hideAtShowingIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHideAtShowing();
 	/// <summary>
 	/// Determines whether an audio is looped. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getPlayLoopMode() const;
+	ASPOSE_DLL_EXPORT bool isPlayLoopMode() const;
 	ASPOSE_DLL_EXPORT void setPlayLoopMode(bool value);
 	ASPOSE_DLL_EXPORT bool playLoopModeIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetPlayLoopMode();
@@ -129,14 +129,14 @@ public:
 	/// <summary>
 	/// Determines whether an audio is playing across the slides.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getPlayAcrossSlides() const;
+	ASPOSE_DLL_EXPORT bool isPlayAcrossSlides() const;
 	ASPOSE_DLL_EXPORT void setPlayAcrossSlides(bool value);
 	ASPOSE_DLL_EXPORT bool playAcrossSlidesIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetPlayAcrossSlides();
 	/// <summary>
 	/// Determines whether audio is automatically rewound to start after playing.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getRewindAudio() const;
+	ASPOSE_DLL_EXPORT bool isRewindAudio() const;
 	ASPOSE_DLL_EXPORT void setRewindAudio(bool value);
 	ASPOSE_DLL_EXPORT bool rewindAudioIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetRewindAudio();
@@ -174,4 +174,4 @@ protected:
 }
 }
 
-#endif /* _AudioFrame_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_AudioFrame_H_ */

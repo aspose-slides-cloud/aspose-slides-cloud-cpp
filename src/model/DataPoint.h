@@ -29,8 +29,8 @@
  * Data point.
  */
 
-#ifndef _DataPoint_H_
-#define _DataPoint_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_DataPoint_H_
+#define ASPOSESLIDESCLOUD_MODEL_DataPoint_H_
 
 #include "../ModelBase.h"
 
@@ -87,4 +87,4 @@ protected:
 }
 }
 
-#endif /* _DataPoint_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_DataPoint_H_ */

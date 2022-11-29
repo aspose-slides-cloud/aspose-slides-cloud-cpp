@@ -29,8 +29,8 @@
  * Represents summary zoom section
  */
 
-#ifndef _SummaryZoomSection_H_
-#define _SummaryZoomSection_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SummaryZoomSection_H_
+#define ASPOSESLIDESCLOUD_MODEL_SummaryZoomSection_H_
 
 #include "SectionZoomFrame.h"
 
@@ -80,4 +80,4 @@ protected:
 }
 }
 
-#endif /* _SummaryZoomSection_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SummaryZoomSection_H_ */

@@ -29,8 +29,8 @@
  * Represents glow effect 
  */
 
-#ifndef _GlowEffect_H_
-#define _GlowEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_GlowEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_GlowEffect_H_
 
 #include "../ModelBase.h"
 
@@ -72,4 +72,4 @@ protected:
 }
 }
 
-#endif /* _GlowEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_GlowEffect_H_ */

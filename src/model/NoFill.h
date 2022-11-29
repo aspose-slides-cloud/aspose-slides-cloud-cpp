@@ -29,8 +29,8 @@
  * Represents empty fill
  */
 
-#ifndef _NoFill_H_
-#define _NoFill_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_NoFill_H_
+#define ASPOSESLIDESCLOUD_MODEL_NoFill_H_
 
 #include "FillFormat.h"
 
@@ -61,4 +61,4 @@ protected:
 }
 }
 
-#endif /* _NoFill_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_NoFill_H_ */

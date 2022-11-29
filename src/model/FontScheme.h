@@ -29,8 +29,8 @@
  * Represents font scheme
  */
 
-#ifndef _FontScheme_H_
-#define _FontScheme_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_FontScheme_H_
+#define ASPOSESLIDESCLOUD_MODEL_FontScheme_H_
 
 #include "ResourceBase.h"
 
@@ -82,4 +82,4 @@ protected:
 }
 }
 
-#endif /* _FontScheme_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_FontScheme_H_ */

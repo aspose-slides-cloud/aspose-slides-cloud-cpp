@@ -67,7 +67,18 @@ void OneValueSeries::setNumberFormatOfValues(utility::string_t value)
 	
 }
 
-bool OneValueSeries::getShowConnectorLines() const
+std::shared_ptr<DataSource> OneValueSeries::getDataSourceForValues() const
+{
+	return m_DataSourceForValues;
+}
+
+void OneValueSeries::setDataSourceForValues(std::shared_ptr<DataSource> value)
+{
+	m_DataSourceForValues = value;
+	
+}
+
+bool OneValueSeries::isShowConnectorLines() const
 {
 	return m_ShowConnectorLines;
 }
@@ -99,7 +110,7 @@ void OneValueSeries::setQuartileMethod(utility::string_t value)
 	
 }
 
-bool OneValueSeries::getShowInnerPoints() const
+bool OneValueSeries::isShowInnerPoints() const
 {
 	return m_ShowInnerPoints;
 }
@@ -120,7 +131,7 @@ void OneValueSeries::unsetShowInnerPoints()
 	m_ShowInnerPointsIsSet = false;
 }
 
-bool OneValueSeries::getShowMeanLine() const
+bool OneValueSeries::isShowMeanLine() const
 {
 	return m_ShowMeanLine;
 }
@@ -141,7 +152,7 @@ void OneValueSeries::unsetShowMeanLine()
 	m_ShowMeanLineIsSet = false;
 }
 
-bool OneValueSeries::getShowMeanMarkers() const
+bool OneValueSeries::isShowMeanMarkers() const
 {
 	return m_ShowMeanMarkers;
 }
@@ -162,7 +173,7 @@ void OneValueSeries::unsetShowMeanMarkers()
 	m_ShowMeanMarkersIsSet = false;
 }
 
-bool OneValueSeries::getShowOutlierPoints() const
+bool OneValueSeries::isShowOutlierPoints() const
 {
 	return m_ShowOutlierPoints;
 }
@@ -198,6 +209,10 @@ web::json::value OneValueSeries::toJson() const
 	if (!m_NumberFormatOfValues.empty())
 	{
 		val[utility::conversions::to_string_t("NumberFormatOfValues")] = ModelBase::toJson(m_NumberFormatOfValues);
+	}
+	if (m_DataSourceForValues != nullptr)
+	{
+		val[utility::conversions::to_string_t("DataSourceForValues")] = ModelBase::toJson(m_DataSourceForValues);
 	}
 	if(m_ShowConnectorLinesIsSet)
 	{
@@ -253,6 +268,12 @@ void OneValueSeries::fromJson(web::json::value& val)
 	if(jsonForNumberFormatOfValues != nullptr && !jsonForNumberFormatOfValues->is_null())
 	{
 		setNumberFormatOfValues(ModelBase::stringFromJson(*jsonForNumberFormatOfValues));
+	}
+	web::json::value* jsonForDataSourceForValues = ModelBase::getField(val, "DataSourceForValues");
+	if(jsonForDataSourceForValues != nullptr && !jsonForDataSourceForValues->is_null())
+	{
+		std::shared_ptr<void> instanceForDataSourceForValues = asposeslidescloud::api::ClassRegistry::deserialize(L"DataSource", *jsonForDataSourceForValues);
+		setDataSourceForValues(std::static_pointer_cast<DataSource>(instanceForDataSourceForValues));
 	}
 	web::json::value* jsonForShowConnectorLines = ModelBase::getField(val, "ShowConnectorLines");
 	if(jsonForShowConnectorLines != nullptr && !jsonForShowConnectorLines->is_null())

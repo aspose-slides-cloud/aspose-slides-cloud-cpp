@@ -29,8 +29,8 @@
  * Represents a Luminance effect.
  */
 
-#ifndef _LuminanceEffect_H_
-#define _LuminanceEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_LuminanceEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_LuminanceEffect_H_
 
 #include "ImageTransformEffect.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _LuminanceEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_LuminanceEffect_H_ */

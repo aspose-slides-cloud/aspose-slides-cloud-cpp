@@ -29,8 +29,8 @@
  * Represents text bounds within a paragraph or portion.
  */
 
-#ifndef _TextBounds_H_
-#define _TextBounds_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_TextBounds_H_
+#define ASPOSESLIDESCLOUD_MODEL_TextBounds_H_
 
 #include "../ModelBase.h"
 
@@ -83,4 +83,4 @@ protected:
 }
 }
 
-#endif /* _TextBounds_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_TextBounds_H_ */

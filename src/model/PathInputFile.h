@@ -29,8 +29,8 @@
  * Represents input file from filesystem.
  */
 
-#ifndef _PathInputFile_H_
-#define _PathInputFile_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_PathInputFile_H_
+#define ASPOSESLIDESCLOUD_MODEL_PathInputFile_H_
 
 #include "InputFile.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _PathInputFile_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_PathInputFile_H_ */

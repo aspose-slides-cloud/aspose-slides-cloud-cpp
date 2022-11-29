@@ -42,7 +42,7 @@ HeaderFooter::~HeaderFooter()
 {
 }
 
-bool HeaderFooter::getIsDateTimeVisible() const
+bool HeaderFooter::isIsDateTimeVisible() const
 {
 	return m_IsDateTimeVisible;
 }
@@ -74,7 +74,7 @@ void HeaderFooter::setDateTimeText(utility::string_t value)
 	
 }
 
-bool HeaderFooter::getIsFooterVisible() const
+bool HeaderFooter::isIsFooterVisible() const
 {
 	return m_IsFooterVisible;
 }
@@ -106,7 +106,7 @@ void HeaderFooter::setFooterText(utility::string_t value)
 	
 }
 
-bool HeaderFooter::getIsSlideNumberVisible() const
+bool HeaderFooter::isIsSlideNumberVisible() const
 {
 	return m_IsSlideNumberVisible;
 }

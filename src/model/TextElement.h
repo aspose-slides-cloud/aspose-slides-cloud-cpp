@@ -29,8 +29,8 @@
  * Mathematical text
  */
 
-#ifndef _TextElement_H_
-#define _TextElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_TextElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_TextElement_H_
 
 #include "MathElement.h"
 
@@ -67,4 +67,4 @@ protected:
 }
 }
 
-#endif /* _TextElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_TextElement_H_ */

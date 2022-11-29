@@ -29,14 +29,15 @@
  * A chart series.
  */
 
-#ifndef _Series_H_
-#define _Series_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Series_H_
+#define ASPOSESLIDESCLOUD_MODEL_Series_H_
 
 #include "../ModelBase.h"
 
 #include "../model/EffectFormat.h"
 #include "../model/SeriesMarker.h"
 #include <cpprest/details/basic_types.h>
+#include "../model/DataSource.h"
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
 
@@ -68,9 +69,14 @@ public:
 	ASPOSE_DLL_EXPORT utility::string_t getName() const;
 	ASPOSE_DLL_EXPORT void setName(utility::string_t value);
 	/// <summary>
+	/// Series name data source.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<DataSource> getDataSourceForSeriesName() const;
+	ASPOSE_DLL_EXPORT void setDataSourceForSeriesName(std::shared_ptr<DataSource> value);
+	/// <summary>
 	/// True if each data marker in the series has a different color.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsColorVaried() const;
+	ASPOSE_DLL_EXPORT bool isIsColorVaried() const;
 	ASPOSE_DLL_EXPORT void setIsColorVaried(bool value);
 	ASPOSE_DLL_EXPORT bool isColorVariedIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsColorVaried();
@@ -82,14 +88,14 @@ public:
 	/// <summary>
 	/// True if curve smoothing is turned on. Applies only to line and scatter connected by lines charts.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSmooth() const;
+	ASPOSE_DLL_EXPORT bool isSmooth() const;
 	ASPOSE_DLL_EXPORT void setSmooth(bool value);
 	ASPOSE_DLL_EXPORT bool smoothIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetSmooth();
 	/// <summary>
 	/// True if the series is plotted on second value axis.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getPlotOnSecondAxis() const;
+	ASPOSE_DLL_EXPORT bool isPlotOnSecondAxis() const;
 	ASPOSE_DLL_EXPORT void setPlotOnSecondAxis(bool value);
 	ASPOSE_DLL_EXPORT bool plotOnSecondAxisIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetPlotOnSecondAxis();
@@ -103,7 +109,7 @@ public:
 	/// <summary>
 	/// True if the series shall invert its colors if the value is negative. Applies to bar, column and bubble series.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getInvertIfNegative() const;
+	ASPOSE_DLL_EXPORT bool isInvertIfNegative() const;
 	ASPOSE_DLL_EXPORT void setInvertIfNegative(bool value);
 	ASPOSE_DLL_EXPORT bool invertIfNegativeIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetInvertIfNegative();
@@ -143,6 +149,7 @@ public:
 protected:
 	utility::string_t m_Type;
 	utility::string_t m_Name;
+	std::shared_ptr<DataSource> m_DataSourceForSeriesName;
 	bool m_IsColorVaried;
 	bool m_IsColorVariedIsSet;
 	utility::string_t m_InvertedSolidFillColor;
@@ -166,4 +173,4 @@ protected:
 }
 }
 
-#endif /* _Series_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Series_H_ */

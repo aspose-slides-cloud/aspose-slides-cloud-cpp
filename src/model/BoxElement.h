@@ -29,8 +29,8 @@
  * Box element.
  */
 
-#ifndef _BoxElement_H_
-#define _BoxElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_BoxElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_BoxElement_H_
 
 #include "MathElement.h"
 
@@ -62,28 +62,28 @@ public:
 	/// <summary>
 	/// Operator emulator
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getOperatorEmulator() const;
+	ASPOSE_DLL_EXPORT bool isOperatorEmulator() const;
 	ASPOSE_DLL_EXPORT void setOperatorEmulator(bool value);
 	ASPOSE_DLL_EXPORT bool operatorEmulatorIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetOperatorEmulator();
 	/// <summary>
 	/// No break
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getNoBreak() const;
+	ASPOSE_DLL_EXPORT bool isNoBreak() const;
 	ASPOSE_DLL_EXPORT void setNoBreak(bool value);
 	ASPOSE_DLL_EXPORT bool noBreakIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetNoBreak();
 	/// <summary>
 	/// Differential
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getDifferential() const;
+	ASPOSE_DLL_EXPORT bool isDifferential() const;
 	ASPOSE_DLL_EXPORT void setDifferential(bool value);
 	ASPOSE_DLL_EXPORT bool differentialIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetDifferential();
 	/// <summary>
 	/// Alignment point
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getAlignmentPoint() const;
+	ASPOSE_DLL_EXPORT bool isAlignmentPoint() const;
 	ASPOSE_DLL_EXPORT void setAlignmentPoint(bool value);
 	ASPOSE_DLL_EXPORT bool alignmentPointIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetAlignmentPoint();
@@ -112,4 +112,4 @@ protected:
 }
 }
 
-#endif /* _BoxElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_BoxElement_H_ */

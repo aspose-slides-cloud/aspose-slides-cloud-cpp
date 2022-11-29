@@ -29,8 +29,8 @@
  * Represents solid fill format 
  */
 
-#ifndef _SolidFill_H_
-#define _SolidFill_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SolidFill_H_
+#define ASPOSESLIDESCLOUD_MODEL_SolidFill_H_
 
 #include "FillFormat.h"
 
@@ -67,4 +67,4 @@ protected:
 }
 }
 
-#endif /* _SolidFill_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SolidFill_H_ */

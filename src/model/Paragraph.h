@@ -29,8 +29,8 @@
  * Represents paragraph resource
  */
 
-#ifndef _Paragraph_H_
-#define _Paragraph_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Paragraph_H_
+#define ASPOSESLIDESCLOUD_MODEL_Paragraph_H_
 
 #include "ResourceBase.h"
 
@@ -221,4 +221,4 @@ protected:
 }
 }
 
-#endif /* _Paragraph_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Paragraph_H_ */

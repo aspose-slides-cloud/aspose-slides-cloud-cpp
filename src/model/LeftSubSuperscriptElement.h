@@ -29,8 +29,8 @@
  * Specifies the Sub-Superscript object
  */
 
-#ifndef _LeftSubSuperscriptElement_H_
-#define _LeftSubSuperscriptElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_LeftSubSuperscriptElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_LeftSubSuperscriptElement_H_
 
 #include "MathElement.h"
 
@@ -79,4 +79,4 @@ protected:
 }
 }
 
-#endif /* _LeftSubSuperscriptElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_LeftSubSuperscriptElement_H_ */

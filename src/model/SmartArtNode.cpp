@@ -61,7 +61,7 @@ void SmartArtNode::setShapes(std::shared_ptr<ResourceUri> value)
 	
 }
 
-bool SmartArtNode::getIsAssistant() const
+bool SmartArtNode::isIsAssistant() const
 {
 	return m_IsAssistant;
 }

@@ -29,8 +29,8 @@
  * File upload result
  */
 
-#ifndef _FilesUploadResult_H_
-#define _FilesUploadResult_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_FilesUploadResult_H_
+#define ASPOSESLIDESCLOUD_MODEL_FilesUploadResult_H_
 
 #include "../ModelBase.h"
 
@@ -74,4 +74,4 @@ protected:
 }
 }
 
-#endif /* _FilesUploadResult_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_FilesUploadResult_H_ */

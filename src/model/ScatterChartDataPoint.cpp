@@ -61,11 +61,41 @@ void ScatterChartDataPoint::setYValue(double value)
 	
 }
 
+utility::string_t ScatterChartDataPoint::getXValueFormula() const
+{
+	return m_XValueFormula;
+}
+
+void ScatterChartDataPoint::setXValueFormula(utility::string_t value)
+{
+	m_XValueFormula = value;
+	
+}
+
+utility::string_t ScatterChartDataPoint::getYValueFormula() const
+{
+	return m_YValueFormula;
+}
+
+void ScatterChartDataPoint::setYValueFormula(utility::string_t value)
+{
+	m_YValueFormula = value;
+	
+}
+
 web::json::value ScatterChartDataPoint::toJson() const
 {
 	web::json::value val = this->DataPoint::toJson();
 	val[utility::conversions::to_string_t("XValue")] = ModelBase::toJson(m_XValue);
 	val[utility::conversions::to_string_t("YValue")] = ModelBase::toJson(m_YValue);
+	if (!m_XValueFormula.empty())
+	{
+		val[utility::conversions::to_string_t("XValueFormula")] = ModelBase::toJson(m_XValueFormula);
+	}
+	if (!m_YValueFormula.empty())
+	{
+		val[utility::conversions::to_string_t("YValueFormula")] = ModelBase::toJson(m_YValueFormula);
+	}
 	return val;
 }
 
@@ -81,6 +111,16 @@ void ScatterChartDataPoint::fromJson(web::json::value& val)
 	if(jsonForYValue != nullptr && !jsonForYValue->is_null() && jsonForYValue->is_number())
 	{
 		setYValue(ModelBase::doubleFromJson(*jsonForYValue));
+	}
+	web::json::value* jsonForXValueFormula = ModelBase::getField(val, "XValueFormula");
+	if(jsonForXValueFormula != nullptr && !jsonForXValueFormula->is_null())
+	{
+		setXValueFormula(ModelBase::stringFromJson(*jsonForXValueFormula));
+	}
+	web::json::value* jsonForYValueFormula = ModelBase::getField(val, "YValueFormula");
+	if(jsonForYValueFormula != nullptr && !jsonForYValueFormula->is_null())
+	{
+		setYValueFormula(ModelBase::stringFromJson(*jsonForYValueFormula));
 	}
 }
 

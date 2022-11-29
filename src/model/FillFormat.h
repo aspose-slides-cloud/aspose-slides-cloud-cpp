@@ -29,8 +29,8 @@
  * Base class for fill formats 
  */
 
-#ifndef _FillFormat_H_
-#define _FillFormat_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_FillFormat_H_
+#define ASPOSESLIDESCLOUD_MODEL_FillFormat_H_
 
 #include "../ModelBase.h"
 
@@ -66,4 +66,4 @@ protected:
 }
 }
 
-#endif /* _FillFormat_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_FillFormat_H_ */

@@ -29,8 +29,8 @@
  * Add master slide task.
  */
 
-#ifndef _AddMasterSlide_H_
-#define _AddMasterSlide_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_AddMasterSlide_H_
+#define ASPOSESLIDESCLOUD_MODEL_AddMasterSlide_H_
 
 #include "Task.h"
 
@@ -68,7 +68,7 @@ public:
 	/// <summary>
 	/// True if cloned master slide is applied to all slides.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getApplyToAll() const;
+	ASPOSE_DLL_EXPORT bool isApplyToAll() const;
 	ASPOSE_DLL_EXPORT void setApplyToAll(bool value);
 
 protected:
@@ -80,4 +80,4 @@ protected:
 }
 }
 
-#endif /* _AddMasterSlide_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_AddMasterSlide_H_ */

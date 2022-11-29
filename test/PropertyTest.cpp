@@ -86,20 +86,20 @@ TEST_F(PropertyTest, propertyBuiltin) {
 	utility::string_t updatedPropertyValue = L"New Value";
 	std::shared_ptr<DocumentProperty> result = api->getDocumentProperty(fileName, propertyName, password, folderName).get();
 	EXPECT_EQ(propertyName, result->getName());
-	EXPECT_TRUE(result->getBuiltIn());
+	EXPECT_TRUE(result->isBuiltIn());
 
 	std::shared_ptr<DocumentProperty> property(new DocumentProperty());
 	property->setValue(updatedPropertyValue);
 	result = api->setDocumentProperty(fileName, propertyName, property, password, folderName).get();
 	EXPECT_EQ(propertyName, result->getName());
 	EXPECT_EQ(updatedPropertyValue, result->getValue());
-	EXPECT_TRUE(result->getBuiltIn());
+	EXPECT_TRUE(result->isBuiltIn());
 	api->deleteDocumentProperty(fileName, propertyName, password, folderName).wait();
 	result = api->getDocumentProperty(fileName, propertyName, password, folderName).get();
 	// built-in property is not actually deleted
 	EXPECT_EQ(propertyName, result->getName());
 	EXPECT_NE(updatedPropertyValue, result->getValue());
-	EXPECT_TRUE(result->getBuiltIn());
+	EXPECT_TRUE(result->isBuiltIn());
 }
 
 TEST_F(PropertyTest, propertyCustom) {
@@ -115,7 +115,7 @@ TEST_F(PropertyTest, propertyCustom) {
 	std::shared_ptr<DocumentProperty> result = api->setDocumentProperty(fileName, propertyName, property, password, folderName).get();
 	EXPECT_EQ(propertyName, result->getName());
 	EXPECT_EQ(updatedPropertyValue, result->getValue());
-	EXPECT_FALSE(result->getBuiltIn());
+	EXPECT_FALSE(result->isBuiltIn());
 	api->deleteDocumentProperty(fileName, propertyName, password, folderName).wait();
 	try
 	{
@@ -197,17 +197,17 @@ TEST_F(PropertyTest, protection) {
 	std::shared_ptr<ProtectionProperties> getResult = api->getProtectionProperties(fileName, password, folderName).get();
 
 	std::shared_ptr<ProtectionProperties> dto(new ProtectionProperties());
-	dto->setReadOnlyRecommended(!getResult->getReadOnlyRecommended());
+	dto->setReadOnlyRecommended(!getResult->isReadOnlyRecommended());
 	std::shared_ptr<ProtectionProperties> putResult = api->setProtection(fileName, dto, password, folderName).get();
-	EXPECT_EQ(getResult->getEncryptDocumentProperties(), putResult->getEncryptDocumentProperties());
-	EXPECT_NE(getResult->getReadOnlyRecommended(), putResult->getReadOnlyRecommended());
+	EXPECT_EQ(getResult->isEncryptDocumentProperties(), putResult->isEncryptDocumentProperties());
+	EXPECT_NE(getResult->isReadOnlyRecommended(), putResult->isReadOnlyRecommended());
 }
 
 TEST_F(PropertyTest, protectionDelete) {
 	utils->initialize("", "");
 	std::shared_ptr<ProtectionProperties> result = api->deleteProtection(L"test.pptx", L"password", L"TempSlidesSDK").get();
-	EXPECT_FALSE(result->getIsEncrypted());
-	EXPECT_FALSE(result->getReadOnlyRecommended());
+	EXPECT_FALSE(result->isIsEncrypted());
+	EXPECT_FALSE(result->isReadOnlyRecommended());
 	EXPECT_EQ(L"", result->getReadPassword());
 }
 
@@ -270,10 +270,10 @@ TEST_F(PropertyTest, protectionCheck) {
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	std::shared_ptr<ProtectionProperties> result = api->getProtectionProperties(fileName, L"", folderName).get();
-	EXPECT_TRUE(result->getIsEncrypted());
+	EXPECT_TRUE(result->isIsEncrypted());
 	EXPECT_EQ(L"", result->getReadPassword());
 
 	result = api->getProtectionProperties(fileName, L"password", folderName).get();
-	EXPECT_TRUE(result->getIsEncrypted());
+	EXPECT_TRUE(result->isIsEncrypted());
 	EXPECT_NE(L"", result->getReadPassword());
 }

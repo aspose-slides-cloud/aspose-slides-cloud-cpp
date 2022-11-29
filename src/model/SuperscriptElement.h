@@ -29,8 +29,8 @@
  * Subscript object
  */
 
-#ifndef _SuperscriptElement_H_
-#define _SuperscriptElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SuperscriptElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_SuperscriptElement_H_
 
 #include "MathElement.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _SuperscriptElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SuperscriptElement_H_ */

@@ -29,8 +29,8 @@
  * Represents an Gray Scale effect.
  */
 
-#ifndef _GrayScaleEffect_H_
-#define _GrayScaleEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_GrayScaleEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_GrayScaleEffect_H_
 
 #include "ImageTransformEffect.h"
 
@@ -61,4 +61,4 @@ protected:
 }
 }
 
-#endif /* _GrayScaleEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_GrayScaleEffect_H_ */

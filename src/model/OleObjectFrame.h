@@ -29,8 +29,8 @@
  * Represents OleObjectFrame resource.
  */
 
-#ifndef _OleObjectFrame_H_
-#define _OleObjectFrame_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_OleObjectFrame_H_
+#define ASPOSESLIDESCLOUD_MODEL_OleObjectFrame_H_
 
 #include "ShapeBase.h"
 
@@ -65,7 +65,7 @@ public:
 	/// <summary>
 	/// True if an object is visible as icon.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsObjectIcon() const;
+	ASPOSE_DLL_EXPORT bool isIsObjectIcon() const;
 	ASPOSE_DLL_EXPORT void setIsObjectIcon(bool value);
 	/// <summary>
 	/// The title for OleObject icon.             
@@ -105,7 +105,7 @@ public:
 	/// <summary>
 	/// Determines if the linked embedded object is automatically updated when the presentation is opened or printed. Read/write Boolean.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getUpdateAutomatic() const;
+	ASPOSE_DLL_EXPORT bool isUpdateAutomatic() const;
 	ASPOSE_DLL_EXPORT void setUpdateAutomatic(bool value);
 	ASPOSE_DLL_EXPORT bool updateAutomaticIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetUpdateAutomatic();
@@ -126,4 +126,4 @@ protected:
 }
 }
 
-#endif /* _OleObjectFrame_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_OleObjectFrame_H_ */

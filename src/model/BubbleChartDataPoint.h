@@ -29,13 +29,14 @@
  * Bubble chart data point.
  */
 
-#ifndef _BubbleChartDataPoint_H_
-#define _BubbleChartDataPoint_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_BubbleChartDataPoint_H_
+#define ASPOSESLIDESCLOUD_MODEL_BubbleChartDataPoint_H_
 
 #include "ScatterChartDataPoint.h"
 
 #include "../model/EffectFormat.h"
 #include "../model/ScatterChartDataPoint.h"
+#include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
 #include "../model/ThreeDFormat.h"
@@ -62,12 +63,18 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT double getBubbleSize() const;
 	ASPOSE_DLL_EXPORT void setBubbleSize(double value);
+	/// <summary>
+	/// Spreadsheet formula in A1-style.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getBubbleSizeFormula() const;
+	ASPOSE_DLL_EXPORT void setBubbleSizeFormula(utility::string_t value);
 
 protected:
 	double m_BubbleSize;
+	utility::string_t m_BubbleSizeFormula;
 };
 
 }
 }
 
-#endif /* _BubbleChartDataPoint_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_BubbleChartDataPoint_H_ */

@@ -29,8 +29,8 @@
  * Provides options that control how a presentation is saved in Html format.
  */
 
-#ifndef _HtmlExportOptions_H_
-#define _HtmlExportOptions_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_HtmlExportOptions_H_
+#define ASPOSESLIDESCLOUD_MODEL_HtmlExportOptions_H_
 
 #include "ExportOptions.h"
 
@@ -60,7 +60,7 @@ public:
 	/// <summary>
 	/// Get or sets flag for save presentation as zip file
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSaveAsZip() const;
+	ASPOSE_DLL_EXPORT bool isSaveAsZip() const;
 	ASPOSE_DLL_EXPORT void setSaveAsZip(bool value);
 	ASPOSE_DLL_EXPORT bool saveAsZipIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetSaveAsZip();
@@ -72,14 +72,14 @@ public:
 	/// <summary>
 	/// Specifies whether the generated document should include hidden slides or not. Default is false. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowHiddenSlides() const;
+	ASPOSE_DLL_EXPORT bool isShowHiddenSlides() const;
 	ASPOSE_DLL_EXPORT void setShowHiddenSlides(bool value);
 	ASPOSE_DLL_EXPORT bool showHiddenSlidesIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowHiddenSlides();
 	/// <summary>
 	/// True to make layout responsive by excluding width and height attributes from svg container.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSvgResponsiveLayout() const;
+	ASPOSE_DLL_EXPORT bool isSvgResponsiveLayout() const;
 	ASPOSE_DLL_EXPORT void setSvgResponsiveLayout(bool value);
 	ASPOSE_DLL_EXPORT bool svgResponsiveLayoutIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetSvgResponsiveLayout();
@@ -98,7 +98,7 @@ public:
 	/// <summary>
 	/// A boolean flag indicates if the cropped parts remain as part of the document. If true the cropped  parts will removed, if false they will be serialized in the document (which can possible lead to a  larger file)
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getDeletePicturesCroppedAreas() const;
+	ASPOSE_DLL_EXPORT bool isDeletePicturesCroppedAreas() const;
 	ASPOSE_DLL_EXPORT void setDeletePicturesCroppedAreas(bool value);
 	ASPOSE_DLL_EXPORT bool deletePicturesCroppedAreasIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetDeletePicturesCroppedAreas();
@@ -127,7 +127,7 @@ public:
 	/// <summary>
 	/// True if comments that have no author are displayed. (Applies only if comments are displayed).
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowCommentsByNoAuthor() const;
+	ASPOSE_DLL_EXPORT bool isShowCommentsByNoAuthor() const;
 	ASPOSE_DLL_EXPORT void setShowCommentsByNoAuthor(bool value);
 	ASPOSE_DLL_EXPORT bool showCommentsByNoAuthorIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowCommentsByNoAuthor();
@@ -157,4 +157,4 @@ protected:
 }
 }
 
-#endif /* _HtmlExportOptions_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_HtmlExportOptions_H_ */

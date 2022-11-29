@@ -29,8 +29,8 @@
  * Represents blur effect 
  */
 
-#ifndef _BlurEffect_H_
-#define _BlurEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_BlurEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_BlurEffect_H_
 
 #include "../ModelBase.h"
 
@@ -60,7 +60,7 @@ public:
 	/// <summary>
 	/// true if the bounds are grown
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getGrow() const;
+	ASPOSE_DLL_EXPORT bool isGrow() const;
 	ASPOSE_DLL_EXPORT void setGrow(bool value);
 
 protected:
@@ -71,4 +71,4 @@ protected:
 }
 }
 
-#endif /* _BlurEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_BlurEffect_H_ */

@@ -29,8 +29,8 @@
  * Font set.
  */
 
-#ifndef _FontSet_H_
-#define _FontSet_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_FontSet_H_
+#define ASPOSESLIDESCLOUD_MODEL_FontSet_H_
 
 #include "../ModelBase.h"
 
@@ -78,4 +78,4 @@ protected:
 }
 }
 
-#endif /* _FontSet_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_FontSet_H_ */

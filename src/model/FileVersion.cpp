@@ -50,7 +50,7 @@ void FileVersion::setVersionId(utility::string_t value)
 	
 }
 
-bool FileVersion::getIsLatest() const
+bool FileVersion::isIsLatest() const
 {
 	return m_IsLatest;
 }

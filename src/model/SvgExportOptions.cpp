@@ -40,6 +40,8 @@ SvgExportOptions::SvgExportOptions()
 	m_DisableLineEndCroppingIsSet = false;
 	m_JpegQualityIsSet = false;
 	m_DeletePicturesCroppedAreasIsSet = false;
+	m_UseFrameSizeIsSet = false;
+	m_UseFrameRotationIsSet = false;
 	setFormat(L"svg");
 }
 
@@ -47,7 +49,7 @@ SvgExportOptions::~SvgExportOptions()
 {
 }
 
-bool SvgExportOptions::getVectorizeText() const
+bool SvgExportOptions::isVectorizeText() const
 {
 	return m_VectorizeText;
 }
@@ -89,7 +91,7 @@ void SvgExportOptions::unsetMetafileRasterizationDpi()
 	m_MetafileRasterizationDpiIsSet = false;
 }
 
-bool SvgExportOptions::getDisable3DText() const
+bool SvgExportOptions::isDisable3DText() const
 {
 	return m_Disable3DText;
 }
@@ -110,7 +112,7 @@ void SvgExportOptions::unsetDisable3DText()
 	m_Disable3DTextIsSet = false;
 }
 
-bool SvgExportOptions::getDisableGradientSplit() const
+bool SvgExportOptions::isDisableGradientSplit() const
 {
 	return m_DisableGradientSplit;
 }
@@ -131,7 +133,7 @@ void SvgExportOptions::unsetDisableGradientSplit()
 	m_DisableGradientSplitIsSet = false;
 }
 
-bool SvgExportOptions::getDisableLineEndCropping() const
+bool SvgExportOptions::isDisableLineEndCropping() const
 {
 	return m_DisableLineEndCropping;
 }
@@ -184,7 +186,7 @@ void SvgExportOptions::setPicturesCompression(utility::string_t value)
 	
 }
 
-bool SvgExportOptions::getDeletePicturesCroppedAreas() const
+bool SvgExportOptions::isDeletePicturesCroppedAreas() const
 {
 	return m_DeletePicturesCroppedAreas;
 }
@@ -214,6 +216,48 @@ void SvgExportOptions::setExternalFontsHandling(utility::string_t value)
 {
 	m_ExternalFontsHandling = value;
 	
+}
+
+bool SvgExportOptions::isUseFrameSize() const
+{
+	return m_UseFrameSize;
+}
+
+void SvgExportOptions::setUseFrameSize(bool value)
+{
+	m_UseFrameSize = value;
+	m_UseFrameSizeIsSet = true;
+}
+
+bool SvgExportOptions::useFrameSizeIsSet() const
+{
+	return m_UseFrameSizeIsSet;
+}
+
+void SvgExportOptions::unsetUseFrameSize()
+{
+	m_UseFrameSizeIsSet = false;
+}
+
+bool SvgExportOptions::isUseFrameRotation() const
+{
+	return m_UseFrameRotation;
+}
+
+void SvgExportOptions::setUseFrameRotation(bool value)
+{
+	m_UseFrameRotation = value;
+	m_UseFrameRotationIsSet = true;
+}
+
+bool SvgExportOptions::useFrameRotationIsSet() const
+{
+	return m_UseFrameRotationIsSet;
+}
+
+void SvgExportOptions::unsetUseFrameRotation()
+{
+	m_UseFrameRotationIsSet = false;
 }
 
 web::json::value SvgExportOptions::toJson() const
@@ -254,6 +298,14 @@ web::json::value SvgExportOptions::toJson() const
 	if (!m_ExternalFontsHandling.empty())
 	{
 		val[utility::conversions::to_string_t("ExternalFontsHandling")] = ModelBase::toJson(m_ExternalFontsHandling);
+	}
+	if(m_UseFrameSizeIsSet)
+	{
+		val[utility::conversions::to_string_t("UseFrameSize")] = ModelBase::toJson(m_UseFrameSize);
+	}
+	if(m_UseFrameRotationIsSet)
+	{
+		val[utility::conversions::to_string_t("UseFrameRotation")] = ModelBase::toJson(m_UseFrameRotation);
 	}
 	return val;
 }
@@ -305,6 +357,16 @@ void SvgExportOptions::fromJson(web::json::value& val)
 	if(jsonForExternalFontsHandling != nullptr && !jsonForExternalFontsHandling->is_null())
 	{
 		setExternalFontsHandling(ModelBase::stringFromJson(*jsonForExternalFontsHandling));
+	}
+	web::json::value* jsonForUseFrameSize = ModelBase::getField(val, "UseFrameSize");
+	if(jsonForUseFrameSize != nullptr && !jsonForUseFrameSize->is_null())
+	{
+		setUseFrameSize(ModelBase::boolFromJson(*jsonForUseFrameSize));
+	}
+	web::json::value* jsonForUseFrameRotation = ModelBase::getField(val, "UseFrameRotation");
+	if(jsonForUseFrameRotation != nullptr && !jsonForUseFrameRotation->is_null())
+	{
+		setUseFrameRotation(ModelBase::boolFromJson(*jsonForUseFrameRotation));
 	}
 }
 

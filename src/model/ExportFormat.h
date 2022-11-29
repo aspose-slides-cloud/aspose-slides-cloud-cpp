@@ -29,8 +29,8 @@
  * Available export formats
  */
 
-#ifndef _ExportFormat_H_
-#define _ExportFormat_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ExportFormat_H_
+#define ASPOSESLIDESCLOUD_MODEL_ExportFormat_H_
 
 #include "../ModelBase.h"
 
@@ -59,4 +59,4 @@ protected:
 }
 }
 
-#endif /* _ExportFormat_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ExportFormat_H_ */

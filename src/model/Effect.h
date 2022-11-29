@@ -29,8 +29,8 @@
  * Represents comment of slide
  */
 
-#ifndef _Effect_H_
-#define _Effect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Effect_H_
+#define ASPOSESLIDESCLOUD_MODEL_Effect_H_
 
 #include "../ModelBase.h"
 
@@ -95,7 +95,7 @@ public:
 	/// <summary>
 	/// True to automatically play the animation in reverse after playing it in the forward direction.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getAutoReverse() const;
+	ASPOSE_DLL_EXPORT bool isAutoReverse() const;
 	ASPOSE_DLL_EXPORT void setAutoReverse(bool value);
 	ASPOSE_DLL_EXPORT bool autoReverseIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetAutoReverse();
@@ -149,14 +149,14 @@ public:
 	/// <summary>
 	/// Specifies if the effect will repeat until the end of slide.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getRepeatUntilEndSlide() const;
+	ASPOSE_DLL_EXPORT bool isRepeatUntilEndSlide() const;
 	ASPOSE_DLL_EXPORT void setRepeatUntilEndSlide(bool value);
 	ASPOSE_DLL_EXPORT bool repeatUntilEndSlideIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetRepeatUntilEndSlide();
 	/// <summary>
 	/// Specifies if the effect will repeat until the next click.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getRepeatUntilNextClick() const;
+	ASPOSE_DLL_EXPORT bool isRepeatUntilNextClick() const;
 	ASPOSE_DLL_EXPORT void setRepeatUntilNextClick(bool value);
 	ASPOSE_DLL_EXPORT bool repeatUntilNextClickIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetRepeatUntilNextClick();
@@ -195,4 +195,4 @@ protected:
 }
 }
 
-#endif /* _Effect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Effect_H_ */

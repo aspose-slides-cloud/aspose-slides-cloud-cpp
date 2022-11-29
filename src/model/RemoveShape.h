@@ -29,8 +29,8 @@
  * Remove shape task.
  */
 
-#ifndef _RemoveShape_H_
-#define _RemoveShape_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_RemoveShape_H_
+#define ASPOSESLIDESCLOUD_MODEL_RemoveShape_H_
 
 #include "Task.h"
 
@@ -67,4 +67,4 @@ protected:
 }
 }
 
-#endif /* _RemoveShape_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_RemoveShape_H_ */

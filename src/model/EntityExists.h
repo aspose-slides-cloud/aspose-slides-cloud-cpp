@@ -29,8 +29,8 @@
  * Information about object existence.
  */
 
-#ifndef _EntityExists_H_
-#define _EntityExists_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_EntityExists_H_
+#define ASPOSESLIDESCLOUD_MODEL_EntityExists_H_
 
 #include "../ModelBase.h"
 
@@ -55,7 +55,7 @@ public:
 	/// <summary>
 	/// True if the object exists.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getExists() const;
+	ASPOSE_DLL_EXPORT bool isExists() const;
 	ASPOSE_DLL_EXPORT void setExists(bool value);
 
 protected:
@@ -65,4 +65,4 @@ protected:
 }
 }
 
-#endif /* _EntityExists_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_EntityExists_H_ */

@@ -84,7 +84,7 @@ void SmartArt::setNodes(std::vector<std::shared_ptr<SmartArtNode>> value)
 	
 }
 
-bool SmartArt::getIsReversed() const
+bool SmartArt::isIsReversed() const
 {
 	return m_IsReversed;
 }

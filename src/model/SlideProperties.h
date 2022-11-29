@@ -29,8 +29,8 @@
  * Slide properties.
  */
 
-#ifndef _SlideProperties_H_
-#define _SlideProperties_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SlideProperties_H_
+#define ASPOSESLIDESCLOUD_MODEL_SlideProperties_H_
 
 #include "ResourceBase.h"
 
@@ -108,4 +108,4 @@ protected:
 }
 }
 
-#endif /* _SlideProperties_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SlideProperties_H_ */

@@ -29,8 +29,8 @@
  * Hyperlink
  */
 
-#ifndef _Hyperlink_H_
-#define _Hyperlink_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Hyperlink_H_
+#define ASPOSESLIDESCLOUD_MODEL_Hyperlink_H_
 
 #include "../ModelBase.h"
 
@@ -56,7 +56,7 @@ public:
 	/// <summary>
 	/// If true Hypelink is not applied. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsDisabled() const;
+	ASPOSE_DLL_EXPORT bool isIsDisabled() const;
 	ASPOSE_DLL_EXPORT void setIsDisabled(bool value);
 	ASPOSE_DLL_EXPORT bool isDisabledIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsDisabled();
@@ -90,21 +90,21 @@ public:
 	/// <summary>
 	/// Makes hyperlink viewed when it is invoked.             
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHistory() const;
+	ASPOSE_DLL_EXPORT bool isHistory() const;
 	ASPOSE_DLL_EXPORT void setHistory(bool value);
 	ASPOSE_DLL_EXPORT bool historyIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHistory();
 	/// <summary>
 	/// Determines whether the hyperlink should be highlighted on click.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHighlightClick() const;
+	ASPOSE_DLL_EXPORT bool isHighlightClick() const;
 	ASPOSE_DLL_EXPORT void setHighlightClick(bool value);
 	ASPOSE_DLL_EXPORT bool highlightClickIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHighlightClick();
 	/// <summary>
 	/// Determines whether the sound should be stopped on hyperlink click
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getStopSoundOnClick() const;
+	ASPOSE_DLL_EXPORT bool isStopSoundOnClick() const;
 	ASPOSE_DLL_EXPORT void setStopSoundOnClick(bool value);
 	ASPOSE_DLL_EXPORT bool stopSoundOnClickIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetStopSoundOnClick();
@@ -135,4 +135,4 @@ protected:
 }
 }
 
-#endif /* _Hyperlink_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Hyperlink_H_ */

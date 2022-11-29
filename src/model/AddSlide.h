@@ -29,8 +29,8 @@
  * Add slide task.
  */
 
-#ifndef _AddSlide_H_
-#define _AddSlide_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_AddSlide_H_
+#define ASPOSESLIDESCLOUD_MODEL_AddSlide_H_
 
 #include "Task.h"
 
@@ -86,4 +86,4 @@ protected:
 }
 }
 
-#endif /* _AddSlide_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_AddSlide_H_ */

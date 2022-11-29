@@ -29,8 +29,8 @@
  * Represents a Duotone effect.
  */
 
-#ifndef _DuotoneEffect_H_
-#define _DuotoneEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_DuotoneEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_DuotoneEffect_H_
 
 #include "ImageTransformEffect.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _DuotoneEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_DuotoneEffect_H_ */

@@ -29,8 +29,8 @@
  * Specifies an instance of mathematical text that contained within a MathParagraph and starts on its own line.
  */
 
-#ifndef _BlockElement_H_
-#define _BlockElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_BlockElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_BlockElement_H_
 
 #include "MathElement.h"
 
@@ -68,4 +68,4 @@ protected:
 }
 }
 
-#endif /* _BlockElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_BlockElement_H_ */

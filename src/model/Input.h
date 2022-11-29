@@ -29,8 +29,8 @@
  * Represents input document for pipeline.
  */
 
-#ifndef _Input_H_
-#define _Input_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Input_H_
+#define ASPOSESLIDESCLOUD_MODEL_Input_H_
 
 #include "../ModelBase.h"
 
@@ -70,7 +70,7 @@ public:
 	ASPOSE_DLL_EXPORT void setTemplateData(std::shared_ptr<InputFile> value);
 
 protected:
-	std::shared_ptr<InputFile> m_Template;
+	std::shared_ptr<InputFile> m__Template;
 	std::shared_ptr<InputFile> m_HtmlData;
 	std::shared_ptr<InputFile> m_TemplateData;
 };
@@ -78,4 +78,4 @@ protected:
 }
 }
 
-#endif /* _Input_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Input_H_ */

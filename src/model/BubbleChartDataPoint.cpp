@@ -50,10 +50,25 @@ void BubbleChartDataPoint::setBubbleSize(double value)
 	
 }
 
+utility::string_t BubbleChartDataPoint::getBubbleSizeFormula() const
+{
+	return m_BubbleSizeFormula;
+}
+
+void BubbleChartDataPoint::setBubbleSizeFormula(utility::string_t value)
+{
+	m_BubbleSizeFormula = value;
+	
+}
+
 web::json::value BubbleChartDataPoint::toJson() const
 {
 	web::json::value val = this->ScatterChartDataPoint::toJson();
 	val[utility::conversions::to_string_t("BubbleSize")] = ModelBase::toJson(m_BubbleSize);
+	if (!m_BubbleSizeFormula.empty())
+	{
+		val[utility::conversions::to_string_t("BubbleSizeFormula")] = ModelBase::toJson(m_BubbleSizeFormula);
+	}
 	return val;
 }
 
@@ -64,6 +79,11 @@ void BubbleChartDataPoint::fromJson(web::json::value& val)
 	if(jsonForBubbleSize != nullptr && !jsonForBubbleSize->is_null() && jsonForBubbleSize->is_number())
 	{
 		setBubbleSize(ModelBase::doubleFromJson(*jsonForBubbleSize));
+	}
+	web::json::value* jsonForBubbleSizeFormula = ModelBase::getField(val, "BubbleSizeFormula");
+	if(jsonForBubbleSizeFormula != nullptr && !jsonForBubbleSizeFormula->is_null())
+	{
+		setBubbleSizeFormula(ModelBase::stringFromJson(*jsonForBubbleSizeFormula));
 	}
 }
 

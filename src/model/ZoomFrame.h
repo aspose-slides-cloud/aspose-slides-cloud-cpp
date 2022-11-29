@@ -29,8 +29,8 @@
  * Zoom frame.
  */
 
-#ifndef _ZoomFrame_H_
-#define _ZoomFrame_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ZoomFrame_H_
+#define ASPOSESLIDESCLOUD_MODEL_ZoomFrame_H_
 
 #include "ZoomObject.h"
 
@@ -77,4 +77,4 @@ protected:
 }
 }
 
-#endif /* _ZoomFrame_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ZoomFrame_H_ */

@@ -29,8 +29,8 @@
  * Provides options that control how a presentation is saved in Pdf format.
  */
 
-#ifndef _PdfExportOptions_H_
-#define _PdfExportOptions_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_PdfExportOptions_H_
+#define ASPOSESLIDESCLOUD_MODEL_PdfExportOptions_H_
 
 #include "ExportOptions.h"
 
@@ -66,7 +66,7 @@ public:
 	/// <summary>
 	/// Determines if all characters of font should be embedded or only used subset.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getEmbedFullFonts() const;
+	ASPOSE_DLL_EXPORT bool isEmbedFullFonts() const;
 	ASPOSE_DLL_EXPORT void setEmbedFullFonts(bool value);
 	ASPOSE_DLL_EXPORT bool embedFullFontsIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetEmbedFullFonts();
@@ -92,21 +92,21 @@ public:
 	/// <summary>
 	/// True to draw black frame around each slide.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getDrawSlidesFrame() const;
+	ASPOSE_DLL_EXPORT bool isDrawSlidesFrame() const;
 	ASPOSE_DLL_EXPORT void setDrawSlidesFrame(bool value);
 	ASPOSE_DLL_EXPORT bool drawSlidesFrameIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetDrawSlidesFrame();
 	/// <summary>
 	/// Specifies whether the generated document should include hidden slides or not. Default is false. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowHiddenSlides() const;
+	ASPOSE_DLL_EXPORT bool isShowHiddenSlides() const;
 	ASPOSE_DLL_EXPORT void setShowHiddenSlides(bool value);
 	ASPOSE_DLL_EXPORT bool showHiddenSlidesIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowHiddenSlides();
 	/// <summary>
 	/// True to convert all metafiles used in a presentation to the PNG images.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSaveMetafilesAsPng() const;
+	ASPOSE_DLL_EXPORT bool isSaveMetafilesAsPng() const;
 	ASPOSE_DLL_EXPORT void setSaveMetafilesAsPng(bool value);
 	ASPOSE_DLL_EXPORT bool saveMetafilesAsPngIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetSaveMetafilesAsPng();
@@ -118,7 +118,7 @@ public:
 	/// <summary>
 	/// Determines if Aspose.Slides will embed common fonts for ASCII (33..127 code range) text. Fonts for character codes greater than 127 are always embedded. Common fonts list includes PDF&#39;s base 14 fonts and additional user specified fonts.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getEmbedTrueTypeFontsForASCII() const;
+	ASPOSE_DLL_EXPORT bool isEmbedTrueTypeFontsForASCII() const;
 	ASPOSE_DLL_EXPORT void setEmbedTrueTypeFontsForASCII(bool value);
 	ASPOSE_DLL_EXPORT bool embedTrueTypeFontsForASCIIIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetEmbedTrueTypeFontsForASCII();
@@ -152,7 +152,7 @@ public:
 	/// <summary>
 	/// True if comments that have no author are displayed. (Applies only if comments are displayed).
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowCommentsByNoAuthor() const;
+	ASPOSE_DLL_EXPORT bool isShowCommentsByNoAuthor() const;
 	ASPOSE_DLL_EXPORT void setShowCommentsByNoAuthor(bool value);
 	ASPOSE_DLL_EXPORT bool showCommentsByNoAuthorIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowCommentsByNoAuthor();
@@ -164,7 +164,7 @@ public:
 	/// <summary>
 	/// True to apply specified ImageTransparentColor  to an image.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getApplyImageTransparent() const;
+	ASPOSE_DLL_EXPORT bool isApplyImageTransparent() const;
 	ASPOSE_DLL_EXPORT void setApplyImageTransparent(bool value);
 	ASPOSE_DLL_EXPORT bool applyImageTransparentIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetApplyImageTransparent();
@@ -209,4 +209,4 @@ protected:
 }
 }
 
-#endif /* _PdfExportOptions_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_PdfExportOptions_H_ */

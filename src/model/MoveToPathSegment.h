@@ -29,8 +29,8 @@
  * MoveTo segment of the geometry path
  */
 
-#ifndef _MoveToPathSegment_H_
-#define _MoveToPathSegment_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_MoveToPathSegment_H_
+#define ASPOSESLIDESCLOUD_MODEL_MoveToPathSegment_H_
 
 #include "PathSegment.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _MoveToPathSegment_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_MoveToPathSegment_H_ */

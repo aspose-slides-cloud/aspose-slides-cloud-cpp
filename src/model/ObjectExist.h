@@ -29,8 +29,8 @@
  * Object exists
  */
 
-#ifndef _ObjectExist_H_
-#define _ObjectExist_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ObjectExist_H_
+#define ASPOSESLIDESCLOUD_MODEL_ObjectExist_H_
 
 #include "../ModelBase.h"
 
@@ -55,12 +55,12 @@ public:
 	/// <summary>
 	/// Indicates that the file or folder exists.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getExists() const;
+	ASPOSE_DLL_EXPORT bool isExists() const;
 	ASPOSE_DLL_EXPORT void setExists(bool value);
 	/// <summary>
 	/// True if it is a folder, false if it is a file.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsFolder() const;
+	ASPOSE_DLL_EXPORT bool isIsFolder() const;
 	ASPOSE_DLL_EXPORT void setIsFolder(bool value);
 
 protected:
@@ -71,4 +71,4 @@ protected:
 }
 }
 
-#endif /* _ObjectExist_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ObjectExist_H_ */

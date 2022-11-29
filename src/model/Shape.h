@@ -29,8 +29,8 @@
  * Represents AutoShape resource.
  */
 
-#ifndef _Shape_H_
-#define _Shape_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Shape_H_
+#define ASPOSESLIDESCLOUD_MODEL_Shape_H_
 
 #include "GeometryShape.h"
 
@@ -87,4 +87,4 @@ protected:
 }
 }
 
-#endif /* _Shape_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Shape_H_ */

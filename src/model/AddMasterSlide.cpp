@@ -62,7 +62,7 @@ void AddMasterSlide::setCloneFromPosition(int32_t value)
 	
 }
 
-bool AddMasterSlide::getApplyToAll() const
+bool AddMasterSlide::isApplyToAll() const
 {
 	return m_ApplyToAll;
 }

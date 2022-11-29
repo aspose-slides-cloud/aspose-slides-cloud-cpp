@@ -191,5 +191,5 @@ TEST_F(MathTest, mathSave) {
 	utility::string_t outPath = L"TempSlidesSDK/mathml.xml";
 	api->savePortionAsMathMl(L"test.pptx", 2, 3, 1, 1, outPath, L"password", L"TempSlidesSDK").wait();
 	std::shared_ptr<ObjectExist> exists = api->objectExists(outPath).get();
-	EXPECT_TRUE(exists->getExists());
+	EXPECT_TRUE(exists->isExists());
 }

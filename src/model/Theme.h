@@ -29,8 +29,8 @@
  * Represents Slide&#39;s theme 
  */
 
-#ifndef _Theme_H_
-#define _Theme_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Theme_H_
+#define ASPOSESLIDESCLOUD_MODEL_Theme_H_
 
 #include "ResourceBase.h"
 
@@ -87,4 +87,4 @@ protected:
 }
 }
 
-#endif /* _Theme_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Theme_H_ */

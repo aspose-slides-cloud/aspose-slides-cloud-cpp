@@ -29,8 +29,8 @@
  * Represents chart title
  */
 
-#ifndef _ChartTitle_H_
-#define _ChartTitle_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ChartTitle_H_
+#define ASPOSESLIDESCLOUD_MODEL_ChartTitle_H_
 
 #include "../ModelBase.h"
 
@@ -61,7 +61,7 @@ public:
 	/// <summary>
 	/// Get or sets value determines visibility of title
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHasTitle() const;
+	ASPOSE_DLL_EXPORT bool isHasTitle() const;
 	ASPOSE_DLL_EXPORT void setHasTitle(bool value);
 
 protected:
@@ -72,4 +72,4 @@ protected:
 }
 }
 
-#endif /* _ChartTitle_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ChartTitle_H_ */

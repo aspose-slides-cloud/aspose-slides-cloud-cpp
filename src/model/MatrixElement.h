@@ -29,8 +29,8 @@
  * Specifies the Matrix object,
  */
 
-#ifndef _MatrixElement_H_
-#define _MatrixElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_MatrixElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_MatrixElement_H_
 
 #include "MathElement.h"
 
@@ -58,7 +58,7 @@ public:
 	/// <summary>
 	/// Hide the placeholders for empty matrix elements
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHidePlaceholders() const;
+	ASPOSE_DLL_EXPORT bool isHidePlaceholders() const;
 	ASPOSE_DLL_EXPORT void setHidePlaceholders(bool value);
 	ASPOSE_DLL_EXPORT bool hidePlaceholdersIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHidePlaceholders();
@@ -122,4 +122,4 @@ protected:
 }
 }
 
-#endif /* _MatrixElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_MatrixElement_H_ */

@@ -61,7 +61,7 @@ void PdfExportOptions::setTextCompression(utility::string_t value)
 	
 }
 
-bool PdfExportOptions::getEmbedFullFonts() const
+bool PdfExportOptions::isEmbedFullFonts() const
 {
 	return m_EmbedFullFonts;
 }
@@ -135,7 +135,7 @@ void PdfExportOptions::unsetJpegQuality()
 	m_JpegQualityIsSet = false;
 }
 
-bool PdfExportOptions::getDrawSlidesFrame() const
+bool PdfExportOptions::isDrawSlidesFrame() const
 {
 	return m_DrawSlidesFrame;
 }
@@ -156,7 +156,7 @@ void PdfExportOptions::unsetDrawSlidesFrame()
 	m_DrawSlidesFrameIsSet = false;
 }
 
-bool PdfExportOptions::getShowHiddenSlides() const
+bool PdfExportOptions::isShowHiddenSlides() const
 {
 	return m_ShowHiddenSlides;
 }
@@ -177,7 +177,7 @@ void PdfExportOptions::unsetShowHiddenSlides()
 	m_ShowHiddenSlidesIsSet = false;
 }
 
-bool PdfExportOptions::getSaveMetafilesAsPng() const
+bool PdfExportOptions::isSaveMetafilesAsPng() const
 {
 	return m_SaveMetafilesAsPng;
 }
@@ -209,7 +209,7 @@ void PdfExportOptions::setPassword(utility::string_t value)
 	
 }
 
-bool PdfExportOptions::getEmbedTrueTypeFontsForASCII() const
+bool PdfExportOptions::isEmbedTrueTypeFontsForASCII() const
 {
 	return m_EmbedTrueTypeFontsForASCII;
 }
@@ -295,7 +295,7 @@ void PdfExportOptions::setCommentsAreaColor(utility::string_t value)
 	
 }
 
-bool PdfExportOptions::getShowCommentsByNoAuthor() const
+bool PdfExportOptions::isShowCommentsByNoAuthor() const
 {
 	return m_ShowCommentsByNoAuthor;
 }
@@ -327,7 +327,7 @@ void PdfExportOptions::setImageTransparentColor(utility::string_t value)
 	
 }
 
-bool PdfExportOptions::getApplyImageTransparent() const
+bool PdfExportOptions::isApplyImageTransparent() const
 {
 	return m_ApplyImageTransparent;
 }

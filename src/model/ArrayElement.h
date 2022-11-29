@@ -29,8 +29,8 @@
  * An array of elements.
  */
 
-#ifndef _ArrayElement_H_
-#define _ArrayElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ArrayElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_ArrayElement_H_
 
 #include "MathElement.h"
 
@@ -68,14 +68,14 @@ public:
 	/// <summary>
 	/// Maximum Distribution
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getMaximumDistribution() const;
+	ASPOSE_DLL_EXPORT bool isMaximumDistribution() const;
 	ASPOSE_DLL_EXPORT void setMaximumDistribution(bool value);
 	ASPOSE_DLL_EXPORT bool maximumDistributionIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetMaximumDistribution();
 	/// <summary>
 	/// Object Distribution
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getObjectDistribution() const;
+	ASPOSE_DLL_EXPORT bool isObjectDistribution() const;
 	ASPOSE_DLL_EXPORT void setObjectDistribution(bool value);
 	ASPOSE_DLL_EXPORT bool objectDistributionIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetObjectDistribution();
@@ -107,4 +107,4 @@ protected:
 }
 }
 
-#endif /* _ArrayElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ArrayElement_H_ */

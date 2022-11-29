@@ -29,8 +29,8 @@
  * Represents fileSystem file with path.
  */
 
-#ifndef _PathOutputFile_H_
-#define _PathOutputFile_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_PathOutputFile_H_
+#define ASPOSESLIDESCLOUD_MODEL_PathOutputFile_H_
 
 #include "OutputFile.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _PathOutputFile_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_PathOutputFile_H_ */

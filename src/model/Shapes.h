@@ -29,8 +29,8 @@
  * Represents list of Links to Shapes resources
  */
 
-#ifndef _Shapes_H_
-#define _Shapes_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Shapes_H_
+#define ASPOSESLIDESCLOUD_MODEL_Shapes_H_
 
 #include "ResourceBase.h"
 
@@ -68,4 +68,4 @@ protected:
 }
 }
 
-#endif /* _Shapes_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Shapes_H_ */

@@ -29,8 +29,8 @@
  * 3D chart wall type
  */
 
-#ifndef _ChartWallType_H_
-#define _ChartWallType_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ChartWallType_H_
+#define ASPOSESLIDESCLOUD_MODEL_ChartWallType_H_
 
 #include "../ModelBase.h"
 
@@ -59,4 +59,4 @@ protected:
 }
 }
 
-#endif /* _ChartWallType_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ChartWallType_H_ */

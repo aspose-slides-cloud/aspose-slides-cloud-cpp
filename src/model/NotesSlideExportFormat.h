@@ -29,8 +29,8 @@
  * Represents a format for notes slide export.
  */
 
-#ifndef _NotesSlideExportFormat_H_
-#define _NotesSlideExportFormat_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_NotesSlideExportFormat_H_
+#define ASPOSESLIDESCLOUD_MODEL_NotesSlideExportFormat_H_
 
 #include "../ModelBase.h"
 
@@ -59,4 +59,4 @@ protected:
 }
 }
 
-#endif /* _NotesSlideExportFormat_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_NotesSlideExportFormat_H_ */

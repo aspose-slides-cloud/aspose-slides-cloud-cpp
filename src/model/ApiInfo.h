@@ -29,8 +29,8 @@
  * Represents response for ApiInfo  DTO
  */
 
-#ifndef _ApiInfo_H_
-#define _ApiInfo_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ApiInfo_H_
+#define ASPOSESLIDESCLOUD_MODEL_ApiInfo_H_
 
 #include "../ModelBase.h"
 
@@ -72,4 +72,4 @@ protected:
 }
 }
 
-#endif /* _ApiInfo_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ApiInfo_H_ */

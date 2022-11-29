@@ -29,8 +29,8 @@
  * Represents an Alpha Modulate effect.
  */
 
-#ifndef _AlphaModulateEffect_H_
-#define _AlphaModulateEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_AlphaModulateEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_AlphaModulateEffect_H_
 
 #include "ImageTransformEffect.h"
 
@@ -61,4 +61,4 @@ protected:
 }
 }
 
-#endif /* _AlphaModulateEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_AlphaModulateEffect_H_ */

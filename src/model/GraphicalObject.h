@@ -29,8 +29,8 @@
  * Represents AudioFrame resource.
  */
 
-#ifndef _GraphicalObject_H_
-#define _GraphicalObject_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_GraphicalObject_H_
+#define ASPOSESLIDESCLOUD_MODEL_GraphicalObject_H_
 
 #include "ShapeBase.h"
 
@@ -68,4 +68,4 @@ protected:
 }
 }
 
-#endif /* _GraphicalObject_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_GraphicalObject_H_ */

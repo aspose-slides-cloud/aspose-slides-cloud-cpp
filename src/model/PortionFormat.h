@@ -29,8 +29,8 @@
  * Represents portion format.
  */
 
-#ifndef _PortionFormat_H_
-#define _PortionFormat_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_PortionFormat_H_
+#define ASPOSESLIDESCLOUD_MODEL_PortionFormat_H_
 
 #include "../ModelBase.h"
 
@@ -126,7 +126,7 @@ public:
 	/// <summary>
 	/// True if smart tag should be cleaned.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSmartTagClean() const;
+	ASPOSE_DLL_EXPORT bool isSmartTagClean() const;
 	ASPOSE_DLL_EXPORT void setSmartTagClean(bool value);
 	ASPOSE_DLL_EXPORT bool smartTagCleanIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetSmartTagClean();
@@ -253,4 +253,4 @@ protected:
 }
 }
 
-#endif /* _PortionFormat_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_PortionFormat_H_ */

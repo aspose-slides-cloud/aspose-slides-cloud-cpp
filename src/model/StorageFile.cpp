@@ -50,7 +50,7 @@ void StorageFile::setName(utility::string_t value)
 	
 }
 
-bool StorageFile::getIsFolder() const
+bool StorageFile::isIsFolder() const
 {
 	return m_IsFolder;
 }

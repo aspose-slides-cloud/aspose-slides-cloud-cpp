@@ -29,8 +29,8 @@
  * Represents document DTO.
  */
 
-#ifndef _Document_H_
-#define _Document_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Document_H_
+#define ASPOSESLIDESCLOUD_MODEL_Document_H_
 
 #include "ResourceBase.h"
 
@@ -98,4 +98,4 @@ protected:
 }
 }
 
-#endif /* _Document_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Document_H_ */

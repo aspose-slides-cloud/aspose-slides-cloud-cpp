@@ -53,7 +53,7 @@ void Chart::setChartType(utility::string_t value)
 	
 }
 
-bool Chart::getShowDataLabelsOverMaximum() const
+bool Chart::isShowDataLabelsOverMaximum() const
 {
 	return m_ShowDataLabelsOverMaximum;
 }
@@ -93,6 +93,17 @@ std::vector<std::shared_ptr<ChartCategory>> Chart::getCategories() const
 void Chart::setCategories(std::vector<std::shared_ptr<ChartCategory>> value)
 {
 	m_Categories = value;
+	
+}
+
+std::shared_ptr<DataSource> Chart::getDataSourceForCategories() const
+{
+	return m_DataSourceForCategories;
+}
+
+void Chart::setDataSourceForCategories(std::shared_ptr<DataSource> value)
+{
+	m_DataSourceForCategories = value;
 	
 }
 
@@ -173,7 +184,7 @@ void Chart::setPlotArea(std::shared_ptr<PlotArea> value)
 	
 }
 
-bool Chart::getHasRoundedCorners() const
+bool Chart::isHasRoundedCorners() const
 {
 	return m_HasRoundedCorners;
 }
@@ -233,6 +244,10 @@ web::json::value Chart::toJson() const
 			jsonArray.push_back(ModelBase::toJson(item));
 		}
 		val[utility::conversions::to_string_t("Categories")] = web::json::value::array(jsonArray);
+	}
+	if (m_DataSourceForCategories != nullptr)
+	{
+		val[utility::conversions::to_string_t("DataSourceForCategories")] = ModelBase::toJson(m_DataSourceForCategories);
 	}
 	if (m_Title != nullptr)
 	{
@@ -330,6 +345,12 @@ void Chart::fromJson(web::json::value& val)
 				}
 			}
         	}
+	}
+	web::json::value* jsonForDataSourceForCategories = ModelBase::getField(val, "DataSourceForCategories");
+	if(jsonForDataSourceForCategories != nullptr && !jsonForDataSourceForCategories->is_null())
+	{
+		std::shared_ptr<void> instanceForDataSourceForCategories = asposeslidescloud::api::ClassRegistry::deserialize(L"DataSource", *jsonForDataSourceForCategories);
+		setDataSourceForCategories(std::static_pointer_cast<DataSource>(instanceForDataSourceForCategories));
 	}
 	web::json::value* jsonForTitle = ModelBase::getField(val, "Title");
 	if(jsonForTitle != nullptr && !jsonForTitle->is_null())

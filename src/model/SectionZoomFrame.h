@@ -29,8 +29,8 @@
  * Section zoom frame.             
  */
 
-#ifndef _SectionZoomFrame_H_
-#define _SectionZoomFrame_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SectionZoomFrame_H_
+#define ASPOSESLIDESCLOUD_MODEL_SectionZoomFrame_H_
 
 #include "ZoomObject.h"
 
@@ -77,4 +77,4 @@ protected:
 }
 }
 
-#endif /* _SectionZoomFrame_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SectionZoomFrame_H_ */

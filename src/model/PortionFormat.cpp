@@ -206,7 +206,7 @@ void PortionFormat::setProofDisabled(utility::string_t value)
 	
 }
 
-bool PortionFormat::getSmartTagClean() const
+bool PortionFormat::isSmartTagClean() const
 {
 	return m_SmartTagClean;
 }

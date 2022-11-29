@@ -78,12 +78,12 @@ void NaryOperatorElement::setSuperscript(std::shared_ptr<MathElement> value)
 
 utility::string_t NaryOperatorElement::getOperator() const
 {
-	return m_Operator;
+	return m__Operator;
 }
 
 void NaryOperatorElement::setOperator(utility::string_t value)
 {
-	m_Operator = value;
+	m__Operator = value;
 	
 }
 
@@ -98,7 +98,7 @@ void NaryOperatorElement::setLimitLocation(utility::string_t value)
 	
 }
 
-bool NaryOperatorElement::getGrowToMatchOperandHeight() const
+bool NaryOperatorElement::isGrowToMatchOperandHeight() const
 {
 	return m_GrowToMatchOperandHeight;
 }
@@ -119,7 +119,7 @@ void NaryOperatorElement::unsetGrowToMatchOperandHeight()
 	m_GrowToMatchOperandHeightIsSet = false;
 }
 
-bool NaryOperatorElement::getHideSubscript() const
+bool NaryOperatorElement::isHideSubscript() const
 {
 	return m_HideSubscript;
 }
@@ -140,7 +140,7 @@ void NaryOperatorElement::unsetHideSubscript()
 	m_HideSubscriptIsSet = false;
 }
 
-bool NaryOperatorElement::getHideSuperscript() const
+bool NaryOperatorElement::isHideSuperscript() const
 {
 	return m_HideSuperscript;
 }
@@ -176,9 +176,9 @@ web::json::value NaryOperatorElement::toJson() const
 	{
 		val[utility::conversions::to_string_t("Superscript")] = ModelBase::toJson(m_Superscript);
 	}
-	if (!m_Operator.empty())
+	if (!m__Operator.empty())
 	{
-		val[utility::conversions::to_string_t("Operator")] = ModelBase::toJson(m_Operator);
+		val[utility::conversions::to_string_t("Operator")] = ModelBase::toJson(m__Operator);
 	}
 	if (!m_LimitLocation.empty())
 	{
@@ -220,10 +220,10 @@ void NaryOperatorElement::fromJson(web::json::value& val)
 		std::shared_ptr<void> instanceForSuperscript = asposeslidescloud::api::ClassRegistry::deserialize(L"MathElement", *jsonForSuperscript);
 		setSuperscript(std::static_pointer_cast<MathElement>(instanceForSuperscript));
 	}
-	web::json::value* jsonForOperator = ModelBase::getField(val, "Operator");
-	if(jsonForOperator != nullptr && !jsonForOperator->is_null())
+	web::json::value* jsonFor_Operator = ModelBase::getField(val, "Operator");
+	if(jsonFor_Operator != nullptr && !jsonFor_Operator->is_null())
 	{
-		setOperator(ModelBase::stringFromJson(*jsonForOperator));
+		setOperator(ModelBase::stringFromJson(*jsonFor_Operator));
 	}
 	web::json::value* jsonForLimitLocation = ModelBase::getField(val, "LimitLocation");
 	if(jsonForLimitLocation != nullptr && !jsonForLimitLocation->is_null())

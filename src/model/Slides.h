@@ -29,8 +29,8 @@
  * Slide list.
  */
 
-#ifndef _Slides_H_
-#define _Slides_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Slides_H_
+#define ASPOSESLIDESCLOUD_MODEL_Slides_H_
 
 #include "ResourceBase.h"
 
@@ -68,4 +68,4 @@ protected:
 }
 }
 
-#endif /* _Slides_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Slides_H_ */

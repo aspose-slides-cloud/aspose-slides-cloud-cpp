@@ -29,8 +29,8 @@
  * Specifies a function of an argument.
  */
 
-#ifndef _FunctionElement_H_
-#define _FunctionElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_FunctionElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_FunctionElement_H_
 
 #include "MathElement.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _FunctionElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_FunctionElement_H_ */

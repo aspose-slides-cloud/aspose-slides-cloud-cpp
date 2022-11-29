@@ -29,8 +29,8 @@
  * Slide show properties.
  */
 
-#ifndef _SlideShowProperties_H_
-#define _SlideShowProperties_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SlideShowProperties_H_
+#define ASPOSESLIDESCLOUD_MODEL_SlideShowProperties_H_
 
 #include "ResourceBase.h"
 
@@ -59,7 +59,7 @@ public:
 	/// <summary>
 	/// Loop slide show.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getLoop() const;
+	ASPOSE_DLL_EXPORT bool isLoop() const;
 	ASPOSE_DLL_EXPORT void setLoop(bool value);
 	ASPOSE_DLL_EXPORT bool loopIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetLoop();
@@ -85,21 +85,21 @@ public:
 	/// <summary>
 	/// Show animation.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowAnimation() const;
+	ASPOSE_DLL_EXPORT bool isShowAnimation() const;
 	ASPOSE_DLL_EXPORT void setShowAnimation(bool value);
 	ASPOSE_DLL_EXPORT bool showAnimationIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowAnimation();
 	/// <summary>
 	/// Show narrration.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowNarration() const;
+	ASPOSE_DLL_EXPORT bool isShowNarration() const;
 	ASPOSE_DLL_EXPORT void setShowNarration(bool value);
 	ASPOSE_DLL_EXPORT bool showNarrationIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowNarration();
 	/// <summary>
 	/// Use timings.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getUseTimings() const;
+	ASPOSE_DLL_EXPORT bool isUseTimings() const;
 	ASPOSE_DLL_EXPORT void setUseTimings(bool value);
 	ASPOSE_DLL_EXPORT bool useTimingsIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetUseTimings();
@@ -111,7 +111,7 @@ public:
 	/// <summary>
 	/// Show scroll bar. Applied with BrowsedByIndividual slide show type.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowScrollbar() const;
+	ASPOSE_DLL_EXPORT bool isShowScrollbar() const;
 	ASPOSE_DLL_EXPORT void setShowScrollbar(bool value);
 	ASPOSE_DLL_EXPORT bool showScrollbarIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowScrollbar();
@@ -138,4 +138,4 @@ protected:
 }
 }
 
-#endif /* _SlideShowProperties_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SlideShowProperties_H_ */

@@ -29,8 +29,8 @@
  * Storage exists
  */
 
-#ifndef _StorageExist_H_
-#define _StorageExist_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_StorageExist_H_
+#define ASPOSESLIDESCLOUD_MODEL_StorageExist_H_
 
 #include "../ModelBase.h"
 
@@ -55,7 +55,7 @@ public:
 	/// <summary>
 	/// Shows that the storage exists.             
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getExists() const;
+	ASPOSE_DLL_EXPORT bool isExists() const;
 	ASPOSE_DLL_EXPORT void setExists(bool value);
 
 protected:
@@ -65,4 +65,4 @@ protected:
 }
 }
 
-#endif /* _StorageExist_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_StorageExist_H_ */

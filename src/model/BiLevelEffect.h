@@ -29,8 +29,8 @@
  * Represents an BiLevel effect.
  */
 
-#ifndef _BiLevelEffect_H_
-#define _BiLevelEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_BiLevelEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_BiLevelEffect_H_
 
 #include "ImageTransformEffect.h"
 
@@ -67,4 +67,4 @@ protected:
 }
 }
 
-#endif /* _BiLevelEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_BiLevelEffect_H_ */

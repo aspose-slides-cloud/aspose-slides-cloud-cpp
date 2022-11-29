@@ -46,7 +46,7 @@ SlideShowProperties::~SlideShowProperties()
 {
 }
 
-bool SlideShowProperties::getLoop() const
+bool SlideShowProperties::isLoop() const
 {
 	return m_Loop;
 }
@@ -120,7 +120,7 @@ void SlideShowProperties::setPenColor(utility::string_t value)
 	
 }
 
-bool SlideShowProperties::getShowAnimation() const
+bool SlideShowProperties::isShowAnimation() const
 {
 	return m_ShowAnimation;
 }
@@ -141,7 +141,7 @@ void SlideShowProperties::unsetShowAnimation()
 	m_ShowAnimationIsSet = false;
 }
 
-bool SlideShowProperties::getShowNarration() const
+bool SlideShowProperties::isShowNarration() const
 {
 	return m_ShowNarration;
 }
@@ -162,7 +162,7 @@ void SlideShowProperties::unsetShowNarration()
 	m_ShowNarrationIsSet = false;
 }
 
-bool SlideShowProperties::getUseTimings() const
+bool SlideShowProperties::isUseTimings() const
 {
 	return m_UseTimings;
 }
@@ -194,7 +194,7 @@ void SlideShowProperties::setSlideShowType(utility::string_t value)
 	
 }
 
-bool SlideShowProperties::getShowScrollbar() const
+bool SlideShowProperties::isShowScrollbar() const
 {
 	return m_ShowScrollbar;
 }

@@ -29,8 +29,8 @@
  * Presentation section.
  */
 
-#ifndef _Section_H_
-#define _Section_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Section_H_
+#define ASPOSESLIDESCLOUD_MODEL_Section_H_
 
 #include "ResourceBase.h"
 
@@ -81,4 +81,4 @@ protected:
 }
 }
 
-#endif /* _Section_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Section_H_ */

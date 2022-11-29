@@ -29,8 +29,8 @@
  * Represents output file destination in pipeline.
  */
 
-#ifndef _OutputFile_H_
-#define _OutputFile_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_OutputFile_H_
+#define ASPOSESLIDESCLOUD_MODEL_OutputFile_H_
 
 #include "../ModelBase.h"
 
@@ -66,4 +66,4 @@ protected:
 }
 }
 
-#endif /* _OutputFile_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_OutputFile_H_ */

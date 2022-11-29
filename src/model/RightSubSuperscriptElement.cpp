@@ -74,7 +74,7 @@ void RightSubSuperscriptElement::setSuperscript(std::shared_ptr<MathElement> val
 	
 }
 
-bool RightSubSuperscriptElement::getAlignScripts() const
+bool RightSubSuperscriptElement::isAlignScripts() const
 {
 	return m_AlignScripts;
 }

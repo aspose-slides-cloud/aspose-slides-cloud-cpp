@@ -29,8 +29,8 @@
  * Represents Pattern Fill
  */
 
-#ifndef _PatternFill_H_
-#define _PatternFill_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_PatternFill_H_
+#define ASPOSESLIDESCLOUD_MODEL_PatternFill_H_
 
 #include "FillFormat.h"
 
@@ -79,4 +79,4 @@ protected:
 }
 }
 
-#endif /* _PatternFill_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_PatternFill_H_ */

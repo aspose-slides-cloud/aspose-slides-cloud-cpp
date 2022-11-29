@@ -29,8 +29,8 @@
  * Line segment of the geometry path
  */
 
-#ifndef _LineToPathSegment_H_
-#define _LineToPathSegment_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_LineToPathSegment_H_
+#define ASPOSESLIDESCLOUD_MODEL_LineToPathSegment_H_
 
 #include "PathSegment.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _LineToPathSegment_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_LineToPathSegment_H_ */

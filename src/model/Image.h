@@ -29,8 +29,8 @@
  * Represents image DTO.
  */
 
-#ifndef _Image_H_
-#define _Image_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Image_H_
+#define ASPOSESLIDESCLOUD_MODEL_Image_H_
 
 #include "ResourceBase.h"
 
@@ -81,4 +81,4 @@ protected:
 }
 }
 
-#endif /* _Image_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Image_H_ */

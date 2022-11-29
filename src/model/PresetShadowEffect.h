@@ -29,8 +29,8 @@
  * Represents preset shadow effect 
  */
 
-#ifndef _PresetShadowEffect_H_
-#define _PresetShadowEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_PresetShadowEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_PresetShadowEffect_H_
 
 #include "../ModelBase.h"
 
@@ -84,4 +84,4 @@ protected:
 }
 }
 
-#endif /* _PresetShadowEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_PresetShadowEffect_H_ */

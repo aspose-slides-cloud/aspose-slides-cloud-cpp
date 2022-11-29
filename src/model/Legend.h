@@ -29,8 +29,8 @@
  * Represents a chart legend
  */
 
-#ifndef _Legend_H_
-#define _Legend_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Legend_H_
+#define ASPOSESLIDESCLOUD_MODEL_Legend_H_
 
 #include "../ModelBase.h"
 
@@ -92,7 +92,7 @@ public:
 	/// <summary>
 	/// true if other elements are allowed to overlay the legend
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getOverlay() const;
+	ASPOSE_DLL_EXPORT bool isOverlay() const;
 	ASPOSE_DLL_EXPORT void setOverlay(bool value);
 	ASPOSE_DLL_EXPORT bool overlayIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetOverlay();
@@ -114,7 +114,7 @@ public:
 	/// <summary>
 	/// Get or sets value determines the visibility of legend
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHasLegend() const;
+	ASPOSE_DLL_EXPORT bool isHasLegend() const;
 	ASPOSE_DLL_EXPORT void setHasLegend(bool value);
 	ASPOSE_DLL_EXPORT bool hasLegendIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHasLegend();
@@ -141,4 +141,4 @@ protected:
 }
 }
 
-#endif /* _Legend_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Legend_H_ */

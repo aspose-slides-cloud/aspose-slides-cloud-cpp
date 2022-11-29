@@ -29,8 +29,8 @@
  * Represents a Hue/Saturation/Luminance effect.
  */
 
-#ifndef _HslEffect_H_
-#define _HslEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_HslEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_HslEffect_H_
 
 #include "ImageTransformEffect.h"
 
@@ -79,4 +79,4 @@ protected:
 }
 }
 
-#endif /* _HslEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_HslEffect_H_ */

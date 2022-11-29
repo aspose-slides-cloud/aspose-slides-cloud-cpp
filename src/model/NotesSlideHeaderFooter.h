@@ -29,8 +29,8 @@
  * Represents header/footer info of notes slide
  */
 
-#ifndef _NotesSlideHeaderFooter_H_
-#define _NotesSlideHeaderFooter_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_NotesSlideHeaderFooter_H_
+#define ASPOSESLIDESCLOUD_MODEL_NotesSlideHeaderFooter_H_
 
 #include "ResourceBase.h"
 
@@ -59,7 +59,7 @@ public:
 	/// <summary>
 	/// True if date is displayed in the footer
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsDateTimeVisible() const;
+	ASPOSE_DLL_EXPORT bool isIsDateTimeVisible() const;
 	ASPOSE_DLL_EXPORT void setIsDateTimeVisible(bool value);
 	ASPOSE_DLL_EXPORT bool isDateTimeVisibleIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsDateTimeVisible();
@@ -71,7 +71,7 @@ public:
 	/// <summary>
 	/// True if footer is displayed
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsFooterVisible() const;
+	ASPOSE_DLL_EXPORT bool isIsFooterVisible() const;
 	ASPOSE_DLL_EXPORT void setIsFooterVisible(bool value);
 	ASPOSE_DLL_EXPORT bool isFooterVisibleIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsFooterVisible();
@@ -83,7 +83,7 @@ public:
 	/// <summary>
 	/// True if header is displayed
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsHeaderVisible() const;
+	ASPOSE_DLL_EXPORT bool isIsHeaderVisible() const;
 	ASPOSE_DLL_EXPORT void setIsHeaderVisible(bool value);
 	ASPOSE_DLL_EXPORT bool isHeaderVisibleIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsHeaderVisible();
@@ -95,7 +95,7 @@ public:
 	/// <summary>
 	/// True if slide number is displayed in the footer
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsSlideNumberVisible() const;
+	ASPOSE_DLL_EXPORT bool isIsSlideNumberVisible() const;
 	ASPOSE_DLL_EXPORT void setIsSlideNumberVisible(bool value);
 	ASPOSE_DLL_EXPORT bool isSlideNumberVisibleIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsSlideNumberVisible();
@@ -117,4 +117,4 @@ protected:
 }
 }
 
-#endif /* _NotesSlideHeaderFooter_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_NotesSlideHeaderFooter_H_ */

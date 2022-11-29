@@ -29,8 +29,8 @@
  * Represents a Color Change effect.
  */
 
-#ifndef _ColorChangeEffect_H_
-#define _ColorChangeEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ColorChangeEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_ColorChangeEffect_H_
 
 #include "ImageTransformEffect.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _ColorChangeEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ColorChangeEffect_H_ */

@@ -29,8 +29,8 @@
  * Provides options that control how a presentation is saved in an video format.
  */
 
-#ifndef _VideoExportOptions_H_
-#define _VideoExportOptions_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_VideoExportOptions_H_
+#define ASPOSESLIDESCLOUD_MODEL_VideoExportOptions_H_
 
 #include "ExportOptions.h"
 
@@ -94,4 +94,4 @@ protected:
 }
 }
 
-#endif /* _VideoExportOptions_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_VideoExportOptions_H_ */

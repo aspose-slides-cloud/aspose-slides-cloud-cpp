@@ -29,12 +29,13 @@
  * Scatter chart (two-dimensional) data point
  */
 
-#ifndef _ScatterChartDataPoint_H_
-#define _ScatterChartDataPoint_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ScatterChartDataPoint_H_
+#define ASPOSESLIDESCLOUD_MODEL_ScatterChartDataPoint_H_
 
 #include "DataPoint.h"
 
 #include "../model/EffectFormat.h"
+#include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
 #include "../model/ThreeDFormat.h"
@@ -67,13 +68,25 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT double getYValue() const;
 	ASPOSE_DLL_EXPORT void setYValue(double value);
+	/// <summary>
+	/// Spreadsheet formula in A1-style.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getXValueFormula() const;
+	ASPOSE_DLL_EXPORT void setXValueFormula(utility::string_t value);
+	/// <summary>
+	/// Spreadsheet formula in A1-style.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getYValueFormula() const;
+	ASPOSE_DLL_EXPORT void setYValueFormula(utility::string_t value);
 
 protected:
 	double m_XValue;
 	double m_YValue;
+	utility::string_t m_XValueFormula;
+	utility::string_t m_YValueFormula;
 };
 
 }
 }
 
-#endif /* _ScatterChartDataPoint_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ScatterChartDataPoint_H_ */

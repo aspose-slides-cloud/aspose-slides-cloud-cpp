@@ -89,8 +89,8 @@ TEST_F(HeaderFooterTest, headerFooterAllSlides) {
 	dto->setIsDateTimeVisible(false);
 	api->setPresentationHeaderFooter(fileName, dto, password, folderName).get();
 	std::shared_ptr<HeaderFooter> headerFooter = api->getSlideHeaderFooter(fileName, 1, password, folderName).get();
-	EXPECT_TRUE(headerFooter->getIsFooterVisible());
-	EXPECT_FALSE(headerFooter->getIsDateTimeVisible());
+	EXPECT_TRUE(headerFooter->isIsFooterVisible());
+	EXPECT_FALSE(headerFooter->isIsDateTimeVisible());
 }
 
 TEST_F(HeaderFooterTest, headerFooterSlide) {
@@ -105,11 +105,11 @@ TEST_F(HeaderFooterTest, headerFooterSlide) {
 	dto->setFooterText(L"footer");
 	dto->setIsDateTimeVisible(false);
 	std::shared_ptr<HeaderFooter> headerFooter = api->setSlideHeaderFooter(fileName, slideIndex, dto, password, folderName).get();
-	EXPECT_TRUE(headerFooter->getIsFooterVisible());
-	EXPECT_FALSE(headerFooter->getIsDateTimeVisible());
+	EXPECT_TRUE(headerFooter->isIsFooterVisible());
+	EXPECT_FALSE(headerFooter->isIsDateTimeVisible());
 	headerFooter = api->getSlideHeaderFooter(fileName, 1, password, folderName).get();
-	EXPECT_TRUE(headerFooter->getIsFooterVisible());
-	EXPECT_FALSE(headerFooter->getIsDateTimeVisible());
+	EXPECT_TRUE(headerFooter->isIsFooterVisible());
+	EXPECT_FALSE(headerFooter->isIsDateTimeVisible());
 }
 
 TEST_F(HeaderFooterTest, headerFooterNotesSlide) {
@@ -124,9 +124,9 @@ TEST_F(HeaderFooterTest, headerFooterNotesSlide) {
 	dto->setFooterText(L"footer");
 	dto->setIsDateTimeVisible(false);
 	std::shared_ptr<NotesSlideHeaderFooter> headerFooter = api->setNotesSlideHeaderFooter(fileName, slideIndex, dto, password, folderName).get();
-	EXPECT_TRUE(headerFooter->getIsHeaderVisible());
-	EXPECT_FALSE(headerFooter->getIsDateTimeVisible());
+	EXPECT_TRUE(headerFooter->isIsHeaderVisible());
+	EXPECT_FALSE(headerFooter->isIsDateTimeVisible());
 	headerFooter = api->getNotesSlideHeaderFooter(fileName, 1, password, folderName).get();
-	EXPECT_TRUE(headerFooter->getIsHeaderVisible());
-	EXPECT_FALSE(headerFooter->getIsDateTimeVisible());
+	EXPECT_TRUE(headerFooter->isIsHeaderVisible());
+	EXPECT_FALSE(headerFooter->isIsDateTimeVisible());
 }

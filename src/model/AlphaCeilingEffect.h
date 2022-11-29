@@ -29,8 +29,8 @@
  * Represents an Alpha Ceiling effect.
  */
 
-#ifndef _AlphaCeilingEffect_H_
-#define _AlphaCeilingEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_AlphaCeilingEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_AlphaCeilingEffect_H_
 
 #include "ImageTransformEffect.h"
 
@@ -61,4 +61,4 @@ protected:
 }
 }
 
-#endif /* _AlphaCeilingEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_AlphaCeilingEffect_H_ */

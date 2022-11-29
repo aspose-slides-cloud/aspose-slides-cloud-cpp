@@ -62,7 +62,7 @@ void FontSubstRule::setTargetFont(utility::string_t value)
 	
 }
 
-bool FontSubstRule::getNotFoundOnly() const
+bool FontSubstRule::isNotFoundOnly() const
 {
 	return m_NotFoundOnly;
 }

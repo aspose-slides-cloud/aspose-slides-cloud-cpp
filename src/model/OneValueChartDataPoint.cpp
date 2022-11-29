@@ -52,7 +52,18 @@ void OneValueChartDataPoint::setValue(double value)
 	
 }
 
-bool OneValueChartDataPoint::getSetAsTotal() const
+utility::string_t OneValueChartDataPoint::getValueFormula() const
+{
+	return m_ValueFormula;
+}
+
+void OneValueChartDataPoint::setValueFormula(utility::string_t value)
+{
+	m_ValueFormula = value;
+	
+}
+
+bool OneValueChartDataPoint::isSetAsTotal() const
 {
 	return m_SetAsTotal;
 }
@@ -73,7 +84,7 @@ void OneValueChartDataPoint::unsetSetAsTotal()
 	m_SetAsTotalIsSet = false;
 }
 
-bool OneValueChartDataPoint::getInvertIfNegative() const
+bool OneValueChartDataPoint::isInvertIfNegative() const
 {
 	return m_InvertIfNegative;
 }
@@ -98,6 +109,10 @@ web::json::value OneValueChartDataPoint::toJson() const
 {
 	web::json::value val = this->DataPoint::toJson();
 	val[utility::conversions::to_string_t("Value")] = ModelBase::toJson(m_Value);
+	if (!m_ValueFormula.empty())
+	{
+		val[utility::conversions::to_string_t("ValueFormula")] = ModelBase::toJson(m_ValueFormula);
+	}
 	if(m_SetAsTotalIsSet)
 	{
 		val[utility::conversions::to_string_t("SetAsTotal")] = ModelBase::toJson(m_SetAsTotal);
@@ -116,6 +131,11 @@ void OneValueChartDataPoint::fromJson(web::json::value& val)
 	if(jsonForValue != nullptr && !jsonForValue->is_null() && jsonForValue->is_number())
 	{
 		setValue(ModelBase::doubleFromJson(*jsonForValue));
+	}
+	web::json::value* jsonForValueFormula = ModelBase::getField(val, "ValueFormula");
+	if(jsonForValueFormula != nullptr && !jsonForValueFormula->is_null())
+	{
+		setValueFormula(ModelBase::stringFromJson(*jsonForValueFormula));
 	}
 	web::json::value* jsonForSetAsTotal = ModelBase::getField(val, "SetAsTotal");
 	if(jsonForSetAsTotal != nullptr && !jsonForSetAsTotal->is_null())

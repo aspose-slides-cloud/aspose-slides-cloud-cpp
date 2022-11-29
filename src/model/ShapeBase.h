@@ -29,8 +29,8 @@
  * Slide shape.
  */
 
-#ifndef _ShapeBase_H_
-#define _ShapeBase_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ShapeBase_H_
+#define ASPOSESLIDESCLOUD_MODEL_ShapeBase_H_
 
 #include "ResourceBase.h"
 
@@ -93,7 +93,7 @@ public:
 	/// <summary>
 	/// Gets or sets a value indicating whether this ShapeBase is hidden.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHidden() const;
+	ASPOSE_DLL_EXPORT bool isHidden() const;
 	ASPOSE_DLL_EXPORT void setHidden(bool value);
 	ASPOSE_DLL_EXPORT bool hiddenIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHidden();
@@ -179,4 +179,4 @@ protected:
 }
 }
 
-#endif /* _ShapeBase_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ShapeBase_H_ */

@@ -29,8 +29,8 @@
  * Zoom object.
  */
 
-#ifndef _ZoomObject_H_
-#define _ZoomObject_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ZoomObject_H_
+#define ASPOSESLIDESCLOUD_MODEL_ZoomObject_H_
 
 #include "ShapeBase.h"
 
@@ -69,14 +69,14 @@ public:
 	/// <summary>
 	/// Navigation behavior in slideshow. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getReturnToParent() const;
+	ASPOSE_DLL_EXPORT bool isReturnToParent() const;
 	ASPOSE_DLL_EXPORT void setReturnToParent(bool value);
 	ASPOSE_DLL_EXPORT bool returnToParentIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetReturnToParent();
 	/// <summary>
 	/// Specifies whether the Zoom will use the background of the destination slide.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowBackground() const;
+	ASPOSE_DLL_EXPORT bool isShowBackground() const;
 	ASPOSE_DLL_EXPORT void setShowBackground(bool value);
 	ASPOSE_DLL_EXPORT bool showBackgroundIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowBackground();
@@ -107,4 +107,4 @@ protected:
 }
 }
 
-#endif /* _ZoomObject_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ZoomObject_H_ */

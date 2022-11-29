@@ -29,8 +29,8 @@
  * Represents chart category resource
  */
 
-#ifndef _ChartCategory_H_
-#define _ChartCategory_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ChartCategory_H_
+#define ASPOSESLIDESCLOUD_MODEL_ChartCategory_H_
 
 #include "../ModelBase.h"
 
@@ -110,4 +110,4 @@ protected:
 }
 }
 
-#endif /* _ChartCategory_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ChartCategory_H_ */

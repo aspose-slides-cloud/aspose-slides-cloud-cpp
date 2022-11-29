@@ -29,8 +29,8 @@
  * Represents a Blur effect that is applied to the entire shape, including its fill. All color channels, including alpha, are affected.
  */
 
-#ifndef _BlurImageEffect_H_
-#define _BlurImageEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_BlurImageEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_BlurImageEffect_H_
 
 #include "ImageTransformEffect.h"
 
@@ -62,7 +62,7 @@ public:
 	/// <summary>
 	/// Determines whether the bounds of the object should be grown as a result of the blurring. True indicates the bounds are grown while false indicates that they are not.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getGrow() const;
+	ASPOSE_DLL_EXPORT bool isGrow() const;
 	ASPOSE_DLL_EXPORT void setGrow(bool value);
 
 protected:
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _BlurImageEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_BlurImageEffect_H_ */

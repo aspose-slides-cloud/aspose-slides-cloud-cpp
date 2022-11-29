@@ -29,8 +29,8 @@
  * Merging source.
  */
 
-#ifndef _MergingSource_H_
-#define _MergingSource_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_MergingSource_H_
+#define ASPOSESLIDESCLOUD_MODEL_MergingSource_H_
 
 #include "../ModelBase.h"
 
@@ -76,4 +76,4 @@ protected:
 }
 }
 
-#endif /* _MergingSource_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_MergingSource_H_ */

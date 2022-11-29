@@ -29,8 +29,8 @@
  * List of images.
  */
 
-#ifndef _Images_H_
-#define _Images_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Images_H_
+#define ASPOSESLIDESCLOUD_MODEL_Images_H_
 
 #include "ResourceBase.h"
 
@@ -69,4 +69,4 @@ protected:
 }
 }
 
-#endif /* _Images_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Images_H_ */

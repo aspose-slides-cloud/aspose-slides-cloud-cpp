@@ -29,8 +29,8 @@
  * The class provides shared options for image formats.
  */
 
-#ifndef _ImageExportOptionsBase_H_
-#define _ImageExportOptionsBase_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ImageExportOptionsBase_H_
+#define ASPOSESLIDESCLOUD_MODEL_ImageExportOptionsBase_H_
 
 #include "ExportOptions.h"
 
@@ -82,4 +82,4 @@ protected:
 }
 }
 
-#endif /* _ImageExportOptionsBase_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ImageExportOptionsBase_H_ */

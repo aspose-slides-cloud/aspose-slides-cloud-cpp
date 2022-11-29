@@ -29,8 +29,8 @@
  * Represents the plot area
  */
 
-#ifndef _PlotArea_H_
-#define _PlotArea_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_PlotArea_H_
+#define ASPOSESLIDESCLOUD_MODEL_PlotArea_H_
 
 #include "../ModelBase.h"
 
@@ -123,4 +123,4 @@ protected:
 }
 }
 
-#endif /* _PlotArea_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_PlotArea_H_ */

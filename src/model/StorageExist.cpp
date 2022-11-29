@@ -39,7 +39,7 @@ StorageExist::~StorageExist()
 {
 }
 
-bool StorageExist::getExists() const
+bool StorageExist::isExists() const
 {
 	return m_Exists;
 }

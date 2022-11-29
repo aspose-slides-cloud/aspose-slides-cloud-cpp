@@ -29,8 +29,8 @@
  * Specifies the Limit object
  */
 
-#ifndef _LimitElement_H_
-#define _LimitElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_LimitElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_LimitElement_H_
 
 #include "MathElement.h"
 
@@ -67,7 +67,7 @@ public:
 	/// <summary>
 	/// Specifies upper or lower limit
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getUpperLimit() const;
+	ASPOSE_DLL_EXPORT bool isUpperLimit() const;
 	ASPOSE_DLL_EXPORT void setUpperLimit(bool value);
 	ASPOSE_DLL_EXPORT bool upperLimitIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetUpperLimit();
@@ -82,4 +82,4 @@ protected:
 }
 }
 
-#endif /* _LimitElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_LimitElement_H_ */

@@ -29,8 +29,8 @@
  * Represents document replace result DTO.
  */
 
-#ifndef _DocumentReplaceResult_H_
-#define _DocumentReplaceResult_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_DocumentReplaceResult_H_
+#define ASPOSESLIDESCLOUD_MODEL_DocumentReplaceResult_H_
 
 #include "Document.h"
 
@@ -68,4 +68,4 @@ protected:
 }
 }
 
-#endif /* _DocumentReplaceResult_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_DocumentReplaceResult_H_ */

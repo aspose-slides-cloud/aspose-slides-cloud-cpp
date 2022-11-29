@@ -29,8 +29,8 @@
  * Protection properties.
  */
 
-#ifndef _ProtectionProperties_H_
-#define _ProtectionProperties_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ProtectionProperties_H_
+#define ASPOSESLIDESCLOUD_MODEL_ProtectionProperties_H_
 
 #include "ResourceBase.h"
 
@@ -59,14 +59,14 @@ public:
 	/// <summary>
 	/// True if document properties are encrypted. Has effect only for password protected presentations.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getEncryptDocumentProperties() const;
+	ASPOSE_DLL_EXPORT bool isEncryptDocumentProperties() const;
 	ASPOSE_DLL_EXPORT void setEncryptDocumentProperties(bool value);
 	ASPOSE_DLL_EXPORT bool encryptDocumentPropertiesIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetEncryptDocumentProperties();
 	/// <summary>
 	/// True if the document should be opened as read-only.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getReadOnlyRecommended() const;
+	ASPOSE_DLL_EXPORT bool isReadOnlyRecommended() const;
 	ASPOSE_DLL_EXPORT void setReadOnlyRecommended(bool value);
 	ASPOSE_DLL_EXPORT bool readOnlyRecommendedIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetReadOnlyRecommended();
@@ -83,12 +83,12 @@ public:
 	/// <summary>
 	/// Returns true if the presentation protected for editing. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsWriteProtected() const;
+	ASPOSE_DLL_EXPORT bool isIsWriteProtected() const;
 	ASPOSE_DLL_EXPORT void setIsWriteProtected(bool value);
 	/// <summary>
 	/// Returns true if the presentation protected for reading. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsEncrypted() const;
+	ASPOSE_DLL_EXPORT bool isIsEncrypted() const;
 	ASPOSE_DLL_EXPORT void setIsEncrypted(bool value);
 
 protected:
@@ -105,4 +105,4 @@ protected:
 }
 }
 
-#endif /* _ProtectionProperties_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ProtectionProperties_H_ */

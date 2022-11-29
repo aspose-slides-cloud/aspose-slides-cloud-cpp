@@ -29,8 +29,8 @@
  * Placeholder list.
  */
 
-#ifndef _Placeholders_H_
-#define _Placeholders_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Placeholders_H_
+#define ASPOSESLIDESCLOUD_MODEL_Placeholders_H_
 
 #include "ResourceBase.h"
 
@@ -68,4 +68,4 @@ protected:
 }
 }
 
-#endif /* _Placeholders_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Placeholders_H_ */

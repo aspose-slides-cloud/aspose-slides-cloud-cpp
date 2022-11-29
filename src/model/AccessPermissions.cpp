@@ -39,7 +39,7 @@ AccessPermissions::~AccessPermissions()
 {
 }
 
-bool AccessPermissions::getPrintDocument() const
+bool AccessPermissions::isPrintDocument() const
 {
 	return m_PrintDocument;
 }
@@ -50,7 +50,7 @@ void AccessPermissions::setPrintDocument(bool value)
 	
 }
 
-bool AccessPermissions::getModifyContent() const
+bool AccessPermissions::isModifyContent() const
 {
 	return m_ModifyContent;
 }
@@ -61,7 +61,7 @@ void AccessPermissions::setModifyContent(bool value)
 	
 }
 
-bool AccessPermissions::getCopyTextAndGraphics() const
+bool AccessPermissions::isCopyTextAndGraphics() const
 {
 	return m_CopyTextAndGraphics;
 }
@@ -72,7 +72,7 @@ void AccessPermissions::setCopyTextAndGraphics(bool value)
 	
 }
 
-bool AccessPermissions::getAddOrModifyFields() const
+bool AccessPermissions::isAddOrModifyFields() const
 {
 	return m_AddOrModifyFields;
 }
@@ -83,7 +83,7 @@ void AccessPermissions::setAddOrModifyFields(bool value)
 	
 }
 
-bool AccessPermissions::getFillExistingFields() const
+bool AccessPermissions::isFillExistingFields() const
 {
 	return m_FillExistingFields;
 }
@@ -94,7 +94,7 @@ void AccessPermissions::setFillExistingFields(bool value)
 	
 }
 
-bool AccessPermissions::getExtractTextAndGraphics() const
+bool AccessPermissions::isExtractTextAndGraphics() const
 {
 	return m_ExtractTextAndGraphics;
 }
@@ -105,7 +105,7 @@ void AccessPermissions::setExtractTextAndGraphics(bool value)
 	
 }
 
-bool AccessPermissions::getAssembleDocument() const
+bool AccessPermissions::isAssembleDocument() const
 {
 	return m_AssembleDocument;
 }
@@ -116,7 +116,7 @@ void AccessPermissions::setAssembleDocument(bool value)
 	
 }
 
-bool AccessPermissions::getHighQualityPrint() const
+bool AccessPermissions::isHighQualityPrint() const
 {
 	return m_HighQualityPrint;
 }

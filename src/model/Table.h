@@ -29,8 +29,8 @@
  * Represents Table shape resource.
  */
 
-#ifndef _Table_H_
-#define _Table_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Table_H_
+#define ASPOSESLIDESCLOUD_MODEL_Table_H_
 
 #include "ShapeBase.h"
 
@@ -81,49 +81,49 @@ public:
 	/// <summary>
 	/// Determines whether the first column of a table has to be drawn with a special formatting.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getFirstCol() const;
+	ASPOSE_DLL_EXPORT bool isFirstCol() const;
 	ASPOSE_DLL_EXPORT void setFirstCol(bool value);
 	ASPOSE_DLL_EXPORT bool firstColIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetFirstCol();
 	/// <summary>
 	/// Determines whether the first row of a table has to be drawn with a special formatting.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getFirstRow() const;
+	ASPOSE_DLL_EXPORT bool isFirstRow() const;
 	ASPOSE_DLL_EXPORT void setFirstRow(bool value);
 	ASPOSE_DLL_EXPORT bool firstRowIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetFirstRow();
 	/// <summary>
 	/// Determines whether the even rows has to be drawn with a different formatting.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHorizontalBanding() const;
+	ASPOSE_DLL_EXPORT bool isHorizontalBanding() const;
 	ASPOSE_DLL_EXPORT void setHorizontalBanding(bool value);
 	ASPOSE_DLL_EXPORT bool horizontalBandingIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHorizontalBanding();
 	/// <summary>
 	/// Determines whether the last column of a table has to be drawn with a special formatting.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getLastCol() const;
+	ASPOSE_DLL_EXPORT bool isLastCol() const;
 	ASPOSE_DLL_EXPORT void setLastCol(bool value);
 	ASPOSE_DLL_EXPORT bool lastColIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetLastCol();
 	/// <summary>
 	/// Determines whether the last row of a table has to be drawn with a special formatting.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getLastRow() const;
+	ASPOSE_DLL_EXPORT bool isLastRow() const;
 	ASPOSE_DLL_EXPORT void setLastRow(bool value);
 	ASPOSE_DLL_EXPORT bool lastRowIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetLastRow();
 	/// <summary>
 	/// Determines whether the table has right to left reading order.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getRightToLeft() const;
+	ASPOSE_DLL_EXPORT bool isRightToLeft() const;
 	ASPOSE_DLL_EXPORT void setRightToLeft(bool value);
 	ASPOSE_DLL_EXPORT bool rightToLeftIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetRightToLeft();
 	/// <summary>
 	/// Determines whether the even columns has to be drawn with a different formatting.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getVerticalBanding() const;
+	ASPOSE_DLL_EXPORT bool isVerticalBanding() const;
 	ASPOSE_DLL_EXPORT void setVerticalBanding(bool value);
 	ASPOSE_DLL_EXPORT bool verticalBandingIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetVerticalBanding();
@@ -151,4 +151,4 @@ protected:
 }
 }
 
-#endif /* _Table_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Table_H_ */

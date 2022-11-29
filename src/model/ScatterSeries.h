@@ -29,8 +29,8 @@
  * A scatter series
  */
 
-#ifndef _ScatterSeries_H_
-#define _ScatterSeries_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ScatterSeries_H_
+#define ASPOSESLIDESCLOUD_MODEL_ScatterSeries_H_
 
 #include "XYSeries.h"
 
@@ -38,6 +38,7 @@
 #include "../model/SeriesMarker.h"
 #include "../model/ScatterChartDataPoint.h"
 #include <cpprest/details/basic_types.h>
+#include "../model/DataSource.h"
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
 #include <vector>
@@ -73,4 +74,4 @@ protected:
 }
 }
 
-#endif /* _ScatterSeries_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ScatterSeries_H_ */

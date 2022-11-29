@@ -29,8 +29,8 @@
  * Represents list of Links to Paragraphs resources
  */
 
-#ifndef _Paragraphs_H_
-#define _Paragraphs_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Paragraphs_H_
+#define ASPOSESLIDESCLOUD_MODEL_Paragraphs_H_
 
 #include "ResourceBase.h"
 
@@ -68,4 +68,4 @@ protected:
 }
 }
 
-#endif /* _Paragraphs_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Paragraphs_H_ */

@@ -29,8 +29,8 @@
  * Save slide task.
  */
 
-#ifndef _SaveSlide_H_
-#define _SaveSlide_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SaveSlide_H_
+#define ASPOSESLIDESCLOUD_MODEL_SaveSlide_H_
 
 #include "Task.h"
 
@@ -105,4 +105,4 @@ protected:
 }
 }
 
-#endif /* _SaveSlide_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SaveSlide_H_ */

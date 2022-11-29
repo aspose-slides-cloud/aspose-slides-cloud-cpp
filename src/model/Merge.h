@@ -29,8 +29,8 @@
  * Merge presentations task.
  */
 
-#ifndef _Merge_H_
-#define _Merge_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Merge_H_
+#define ASPOSESLIDESCLOUD_MODEL_Merge_H_
 
 #include "Task.h"
 
@@ -69,4 +69,4 @@ protected:
 }
 }
 
-#endif /* _Merge_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Merge_H_ */

@@ -29,14 +29,15 @@
  * A bubble series.
  */
 
-#ifndef _BubbleSeries_H_
-#define _BubbleSeries_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_BubbleSeries_H_
+#define ASPOSESLIDESCLOUD_MODEL_BubbleSeries_H_
 
 #include "XYSeries.h"
 
 #include "../model/EffectFormat.h"
 #include "../model/SeriesMarker.h"
 #include <cpprest/details/basic_types.h>
+#include "../model/DataSource.h"
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
 #include <vector>
@@ -70,13 +71,19 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getNumberFormatOfBubbleSizes() const;
 	ASPOSE_DLL_EXPORT void setNumberFormatOfBubbleSizes(utility::string_t value);
+	/// <summary>
+	/// Data source type for Bubble size values.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<DataSource> getDataSourceForBubbleSizeValues() const;
+	ASPOSE_DLL_EXPORT void setDataSourceForBubbleSizeValues(std::shared_ptr<DataSource> value);
 
 protected:
 	std::vector<std::shared_ptr<BubbleChartDataPoint>> m_DataPoints;
 	utility::string_t m_NumberFormatOfBubbleSizes;
+	std::shared_ptr<DataSource> m_DataSourceForBubbleSizeValues;
 };
 
 }
 }
 
-#endif /* _BubbleSeries_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_BubbleSeries_H_ */

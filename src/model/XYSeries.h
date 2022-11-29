@@ -29,14 +29,15 @@
  * Common properties for Bubble and Scatter series. 
  */
 
-#ifndef _XYSeries_H_
-#define _XYSeries_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_XYSeries_H_
+#define ASPOSESLIDESCLOUD_MODEL_XYSeries_H_
 
 #include "Series.h"
 
 #include "../model/EffectFormat.h"
 #include "../model/SeriesMarker.h"
 #include <cpprest/details/basic_types.h>
+#include "../model/DataSource.h"
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
 #include "../model/Series.h"
@@ -68,13 +69,25 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getNumberFormatOfXValues() const;
 	ASPOSE_DLL_EXPORT void setNumberFormatOfXValues(utility::string_t value);
+	/// <summary>
+	/// Data source type for X Values.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<DataSource> getDataSourceForXValues() const;
+	ASPOSE_DLL_EXPORT void setDataSourceForXValues(std::shared_ptr<DataSource> value);
+	/// <summary>
+	/// Data source type for Y Values.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<DataSource> getDataSourceForYValues() const;
+	ASPOSE_DLL_EXPORT void setDataSourceForYValues(std::shared_ptr<DataSource> value);
 
 protected:
 	utility::string_t m_NumberFormatOfYValues;
 	utility::string_t m_NumberFormatOfXValues;
+	std::shared_ptr<DataSource> m_DataSourceForXValues;
+	std::shared_ptr<DataSource> m_DataSourceForYValues;
 };
 
 }
 }
 
-#endif /* _XYSeries_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_XYSeries_H_ */

@@ -62,7 +62,7 @@ void ReplaceText::setNewText(utility::string_t value)
 	
 }
 
-bool ReplaceText::getIgnoreCase() const
+bool ReplaceText::isIgnoreCase() const
 {
 	return m_IgnoreCase;
 }

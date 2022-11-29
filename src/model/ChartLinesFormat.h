@@ -29,8 +29,8 @@
  * Represents the lines format of chart elements. 
  */
 
-#ifndef _ChartLinesFormat_H_
-#define _ChartLinesFormat_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ChartLinesFormat_H_
+#define ASPOSESLIDESCLOUD_MODEL_ChartLinesFormat_H_
 
 #include "../ModelBase.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _ChartLinesFormat_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ChartLinesFormat_H_ */

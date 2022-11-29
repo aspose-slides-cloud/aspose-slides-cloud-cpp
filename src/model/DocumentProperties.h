@@ -29,8 +29,8 @@
  * Slides document properties.
  */
 
-#ifndef _DocumentProperties_H_
-#define _DocumentProperties_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_DocumentProperties_H_
+#define ASPOSESLIDESCLOUD_MODEL_DocumentProperties_H_
 
 #include "ResourceBase.h"
 
@@ -69,4 +69,4 @@ protected:
 }
 }
 
-#endif /* _DocumentProperties_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_DocumentProperties_H_ */

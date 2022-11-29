@@ -29,8 +29,8 @@
  * Represents placeholder
  */
 
-#ifndef _Placeholder_H_
-#define _Placeholder_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Placeholder_H_
+#define ASPOSESLIDESCLOUD_MODEL_Placeholder_H_
 
 #include "ResourceBase.h"
 
@@ -93,4 +93,4 @@ protected:
 }
 }
 
-#endif /* _Placeholder_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Placeholder_H_ */

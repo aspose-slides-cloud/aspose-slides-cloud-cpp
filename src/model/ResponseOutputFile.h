@@ -29,8 +29,8 @@
  * Represents output file that will be sent to response.
  */
 
-#ifndef _ResponseOutputFile_H_
-#define _ResponseOutputFile_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ResponseOutputFile_H_
+#define ASPOSESLIDESCLOUD_MODEL_ResponseOutputFile_H_
 
 #include "OutputFile.h"
 
@@ -61,4 +61,4 @@ protected:
 }
 }
 
-#endif /* _ResponseOutputFile_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ResponseOutputFile_H_ */

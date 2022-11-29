@@ -29,8 +29,8 @@
  * Delimiter element
  */
 
-#ifndef _DelimiterElement_H_
-#define _DelimiterElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_DelimiterElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_DelimiterElement_H_
 
 #include "MathElement.h"
 
@@ -78,7 +78,7 @@ public:
 	/// <summary>
 	/// Grow to match operand height
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getGrowToMatchOperandHeight() const;
+	ASPOSE_DLL_EXPORT bool isGrowToMatchOperandHeight() const;
 	ASPOSE_DLL_EXPORT void setGrowToMatchOperandHeight(bool value);
 	ASPOSE_DLL_EXPORT bool growToMatchOperandHeightIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetGrowToMatchOperandHeight();
@@ -101,4 +101,4 @@ protected:
 }
 }
 
-#endif /* _DelimiterElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_DelimiterElement_H_ */

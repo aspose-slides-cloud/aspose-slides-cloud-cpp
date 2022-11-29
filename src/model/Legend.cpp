@@ -140,7 +140,7 @@ void Legend::unsetHeight()
 	m_HeightIsSet = false;
 }
 
-bool Legend::getOverlay() const
+bool Legend::isOverlay() const
 {
 	return m_Overlay;
 }
@@ -194,7 +194,7 @@ void Legend::setLineFormat(std::shared_ptr<LineFormat> value)
 	
 }
 
-bool Legend::getHasLegend() const
+bool Legend::isHasLegend() const
 {
 	return m_HasLegend;
 }

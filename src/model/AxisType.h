@@ -29,8 +29,8 @@
  * Defines axis type.
  */
 
-#ifndef _AxisType_H_
-#define _AxisType_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_AxisType_H_
+#define ASPOSESLIDESCLOUD_MODEL_AxisType_H_
 
 #include "../ModelBase.h"
 
@@ -59,4 +59,4 @@ protected:
 }
 }
 
-#endif /* _AxisType_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_AxisType_H_ */

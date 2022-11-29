@@ -29,8 +29,8 @@
  * Remove slide task.
  */
 
-#ifndef _RemoveSlide_H_
-#define _RemoveSlide_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_RemoveSlide_H_
+#define ASPOSESLIDESCLOUD_MODEL_RemoveSlide_H_
 
 #include "Task.h"
 
@@ -67,4 +67,4 @@ protected:
 }
 }
 
-#endif /* _RemoveSlide_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_RemoveSlide_H_ */

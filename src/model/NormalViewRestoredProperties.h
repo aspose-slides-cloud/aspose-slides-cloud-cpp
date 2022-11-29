@@ -29,8 +29,8 @@
  * The sizing of the slide region.
  */
 
-#ifndef _NormalViewRestoredProperties_H_
-#define _NormalViewRestoredProperties_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_NormalViewRestoredProperties_H_
+#define ASPOSESLIDESCLOUD_MODEL_NormalViewRestoredProperties_H_
 
 #include "../ModelBase.h"
 
@@ -55,7 +55,7 @@ public:
 	/// <summary>
 	/// True if the size of the side content region should compensate for the new size when resizing the window containing the view within the application.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getAutoAdjust() const;
+	ASPOSE_DLL_EXPORT bool isAutoAdjust() const;
 	ASPOSE_DLL_EXPORT void setAutoAdjust(bool value);
 	ASPOSE_DLL_EXPORT bool autoAdjustIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetAutoAdjust();
@@ -77,4 +77,4 @@ protected:
 }
 }
 
-#endif /* _NormalViewRestoredProperties_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_NormalViewRestoredProperties_H_ */

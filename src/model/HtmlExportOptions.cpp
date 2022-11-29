@@ -47,7 +47,7 @@ HtmlExportOptions::~HtmlExportOptions()
 {
 }
 
-bool HtmlExportOptions::getSaveAsZip() const
+bool HtmlExportOptions::isSaveAsZip() const
 {
 	return m_SaveAsZip;
 }
@@ -79,7 +79,7 @@ void HtmlExportOptions::setSubDirectoryName(utility::string_t value)
 	
 }
 
-bool HtmlExportOptions::getShowHiddenSlides() const
+bool HtmlExportOptions::isShowHiddenSlides() const
 {
 	return m_ShowHiddenSlides;
 }
@@ -100,7 +100,7 @@ void HtmlExportOptions::unsetShowHiddenSlides()
 	m_ShowHiddenSlidesIsSet = false;
 }
 
-bool HtmlExportOptions::getSvgResponsiveLayout() const
+bool HtmlExportOptions::isSvgResponsiveLayout() const
 {
 	return m_SvgResponsiveLayout;
 }
@@ -153,7 +153,7 @@ void HtmlExportOptions::setPicturesCompression(utility::string_t value)
 	
 }
 
-bool HtmlExportOptions::getDeletePicturesCroppedAreas() const
+bool HtmlExportOptions::isDeletePicturesCroppedAreas() const
 {
 	return m_DeletePicturesCroppedAreas;
 }
@@ -228,7 +228,7 @@ void HtmlExportOptions::setCommentsAreaColor(utility::string_t value)
 	
 }
 
-bool HtmlExportOptions::getShowCommentsByNoAuthor() const
+bool HtmlExportOptions::isShowCommentsByNoAuthor() const
 {
 	return m_ShowCommentsByNoAuthor;
 }

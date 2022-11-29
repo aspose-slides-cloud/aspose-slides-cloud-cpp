@@ -29,8 +29,8 @@
  * Represents one cell of table.
  */
 
-#ifndef _TableCell_H_
-#define _TableCell_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_TableCell_H_
+#define ASPOSESLIDESCLOUD_MODEL_TableCell_H_
 
 #include "../ModelBase.h"
 
@@ -194,4 +194,4 @@ protected:
 }
 }
 
-#endif /* _TableCell_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_TableCell_H_ */

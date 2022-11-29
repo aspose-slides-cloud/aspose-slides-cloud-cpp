@@ -29,8 +29,8 @@
  * Represents an Alpha Replace Effect effect.
  */
 
-#ifndef _AlphaReplaceEffect_H_
-#define _AlphaReplaceEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_AlphaReplaceEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_AlphaReplaceEffect_H_
 
 #include "ImageTransformEffect.h"
 
@@ -67,4 +67,4 @@ protected:
 }
 }
 
-#endif /* _AlphaReplaceEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_AlphaReplaceEffect_H_ */

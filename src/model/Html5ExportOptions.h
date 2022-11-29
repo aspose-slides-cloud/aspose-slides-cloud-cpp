@@ -29,8 +29,8 @@
  * Provides options that control how a presentation is saved in Html5 format.
  */
 
-#ifndef _Html5ExportOptions_H_
-#define _Html5ExportOptions_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Html5ExportOptions_H_
+#define ASPOSESLIDESCLOUD_MODEL_Html5ExportOptions_H_
 
 #include "ExportOptions.h"
 
@@ -60,14 +60,14 @@ public:
 	/// <summary>
 	/// Gets or sets transitions animation option.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getAnimateTransitions() const;
+	ASPOSE_DLL_EXPORT bool isAnimateTransitions() const;
 	ASPOSE_DLL_EXPORT void setAnimateTransitions(bool value);
 	ASPOSE_DLL_EXPORT bool animateTransitionsIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetAnimateTransitions();
 	/// <summary>
 	/// Gets or sets shapes animation option.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getAnimateShapes() const;
+	ASPOSE_DLL_EXPORT bool isAnimateShapes() const;
 	ASPOSE_DLL_EXPORT void setAnimateShapes(bool value);
 	ASPOSE_DLL_EXPORT bool animateShapesIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetAnimateShapes();
@@ -82,4 +82,4 @@ protected:
 }
 }
 
-#endif /* _Html5ExportOptions_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Html5ExportOptions_H_ */

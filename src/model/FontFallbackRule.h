@@ -29,8 +29,8 @@
  * Represents font fallback rule.             
  */
 
-#ifndef _FontFallbackRule_H_
-#define _FontFallbackRule_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_FontFallbackRule_H_
+#define ASPOSESLIDESCLOUD_MODEL_FontFallbackRule_H_
 
 #include "../ModelBase.h"
 
@@ -79,4 +79,4 @@ protected:
 }
 }
 
-#endif /* _FontFallbackRule_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_FontFallbackRule_H_ */

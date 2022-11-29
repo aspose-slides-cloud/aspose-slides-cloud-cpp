@@ -29,8 +29,8 @@
  * Add shape task.
  */
 
-#ifndef _AddShape_H_
-#define _AddShape_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_AddShape_H_
+#define ASPOSESLIDESCLOUD_MODEL_AddShape_H_
 
 #include "Task.h"
 
@@ -74,4 +74,4 @@ protected:
 }
 }
 
-#endif /* _AddShape_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_AddShape_H_ */

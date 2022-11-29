@@ -29,8 +29,8 @@
  * 
  */
 
-#ifndef _SlidesApi_H_
-#define _SlidesApi_H_
+#ifndef ASPOSESLIDESCLOUD_API_SlidesApi_H_
+#define ASPOSESLIDESCLOUD_API_SlidesApi_H_
 
 #include <boost/optional.hpp>
 
@@ -75,6 +75,7 @@
 #include "../model/MasterSlides.h"
 #include "../model/NotesSlide.h"
 #include "../model/NotesSlideHeaderFooter.h"
+
 #include "../model/ObjectExist.h"
 #include "../model/OrderedMergeRequest.h"
 #include "../model/Paragraph.h"
@@ -933,7 +934,7 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Theme>> getTheme(utility::string_t name, int32_t slideIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
-	/// Read presentation document properties.
+	/// Read presentation view properties.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ViewProperties>> getViewProperties(utility::string_t name, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
@@ -1208,7 +1209,7 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideAnimation>> setSpecialSlideAnimation(utility::string_t name, int32_t slideIndex, utility::string_t slideType, std::shared_ptr<SlideAnimation> animation, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
-	/// Update presentation document properties.
+	/// Update presentation view properties.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ViewProperties>> setViewProperties(utility::string_t name, std::shared_ptr<ViewProperties> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
@@ -1329,4 +1330,4 @@ protected:
 }
 }
 
-#endif /* _SlidesApi_H_ */
+#endif /* ASPOSESLIDESCLOUD_API_SlidesApi_H_ */

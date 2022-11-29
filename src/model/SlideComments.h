@@ -29,8 +29,8 @@
  * Represents comments collection of slide
  */
 
-#ifndef _SlideComments_H_
-#define _SlideComments_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SlideComments_H_
+#define ASPOSESLIDESCLOUD_MODEL_SlideComments_H_
 
 #include "ResourceBase.h"
 
@@ -69,4 +69,4 @@ protected:
 }
 }
 
-#endif /* _SlideComments_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SlideComments_H_ */

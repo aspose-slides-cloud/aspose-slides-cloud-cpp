@@ -29,8 +29,8 @@
  * Table Row.
  */
 
-#ifndef _TableRow_H_
-#define _TableRow_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_TableRow_H_
+#define ASPOSESLIDESCLOUD_MODEL_TableRow_H_
 
 #include "../ModelBase.h"
 
@@ -79,4 +79,4 @@ protected:
 }
 }
 
-#endif /* _TableRow_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_TableRow_H_ */

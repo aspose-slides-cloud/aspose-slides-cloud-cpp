@@ -29,8 +29,8 @@
  * Table column.
  */
 
-#ifndef _TableColumn_H_
-#define _TableColumn_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_TableColumn_H_
+#define ASPOSESLIDESCLOUD_MODEL_TableColumn_H_
 
 #include "../ModelBase.h"
 
@@ -65,4 +65,4 @@ protected:
 }
 }
 
-#endif /* _TableColumn_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_TableColumn_H_ */

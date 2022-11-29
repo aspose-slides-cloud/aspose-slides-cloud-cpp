@@ -67,7 +67,18 @@ void Series::setName(utility::string_t value)
 	
 }
 
-bool Series::getIsColorVaried() const
+std::shared_ptr<DataSource> Series::getDataSourceForSeriesName() const
+{
+	return m_DataSourceForSeriesName;
+}
+
+void Series::setDataSourceForSeriesName(std::shared_ptr<DataSource> value)
+{
+	m_DataSourceForSeriesName = value;
+	
+}
+
+bool Series::isIsColorVaried() const
 {
 	return m_IsColorVaried;
 }
@@ -99,7 +110,7 @@ void Series::setInvertedSolidFillColor(utility::string_t value)
 	
 }
 
-bool Series::getSmooth() const
+bool Series::isSmooth() const
 {
 	return m_Smooth;
 }
@@ -120,7 +131,7 @@ void Series::unsetSmooth()
 	m_SmoothIsSet = false;
 }
 
-bool Series::getPlotOnSecondAxis() const
+bool Series::isPlotOnSecondAxis() const
 {
 	return m_PlotOnSecondAxis;
 }
@@ -162,7 +173,7 @@ void Series::unsetOrder()
 	m_OrderIsSet = false;
 }
 
-bool Series::getInvertIfNegative() const
+bool Series::isInvertIfNegative() const
 {
 	return m_InvertIfNegative;
 }
@@ -270,6 +281,10 @@ web::json::value Series::toJson() const
 	{
 		val[utility::conversions::to_string_t("Name")] = ModelBase::toJson(m_Name);
 	}
+	if (m_DataSourceForSeriesName != nullptr)
+	{
+		val[utility::conversions::to_string_t("DataSourceForSeriesName")] = ModelBase::toJson(m_DataSourceForSeriesName);
+	}
 	if(m_IsColorVariedIsSet)
 	{
 		val[utility::conversions::to_string_t("IsColorVaried")] = ModelBase::toJson(m_IsColorVaried);
@@ -332,6 +347,12 @@ void Series::fromJson(web::json::value& val)
 	if(jsonForName != nullptr && !jsonForName->is_null())
 	{
 		setName(ModelBase::stringFromJson(*jsonForName));
+	}
+	web::json::value* jsonForDataSourceForSeriesName = ModelBase::getField(val, "DataSourceForSeriesName");
+	if(jsonForDataSourceForSeriesName != nullptr && !jsonForDataSourceForSeriesName->is_null())
+	{
+		std::shared_ptr<void> instanceForDataSourceForSeriesName = asposeslidescloud::api::ClassRegistry::deserialize(L"DataSource", *jsonForDataSourceForSeriesName);
+		setDataSourceForSeriesName(std::static_pointer_cast<DataSource>(instanceForDataSourceForSeriesName));
 	}
 	web::json::value* jsonForIsColorVaried = ModelBase::getField(val, "IsColorVaried");
 	if(jsonForIsColorVaried != nullptr && !jsonForIsColorVaried->is_null())

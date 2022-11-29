@@ -53,7 +53,7 @@ void ZoomObject::setImageType(utility::string_t value)
 	
 }
 
-bool ZoomObject::getReturnToParent() const
+bool ZoomObject::isReturnToParent() const
 {
 	return m_ReturnToParent;
 }
@@ -74,7 +74,7 @@ void ZoomObject::unsetReturnToParent()
 	m_ReturnToParentIsSet = false;
 }
 
-bool ZoomObject::getShowBackground() const
+bool ZoomObject::isShowBackground() const
 {
 	return m_ShowBackground;
 }

@@ -29,8 +29,8 @@
  * Reorder slide task.
  */
 
-#ifndef _ReorderSlide_H_
-#define _ReorderSlide_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ReorderSlide_H_
+#define ASPOSESLIDESCLOUD_MODEL_ReorderSlide_H_
 
 #include "Task.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _ReorderSlide_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ReorderSlide_H_ */

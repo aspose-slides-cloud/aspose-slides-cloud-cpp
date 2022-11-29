@@ -29,8 +29,8 @@
  * Represents GroupShape resource.
  */
 
-#ifndef _GroupShape_H_
-#define _GroupShape_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_GroupShape_H_
+#define ASPOSESLIDESCLOUD_MODEL_GroupShape_H_
 
 #include "ShapeBase.h"
 
@@ -74,4 +74,4 @@ protected:
 }
 }
 
-#endif /* _GroupShape_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_GroupShape_H_ */

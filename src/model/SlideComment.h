@@ -29,8 +29,8 @@
  * Represents comment of slide
  */
 
-#ifndef _SlideComment_H_
-#define _SlideComment_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SlideComment_H_
+#define ASPOSESLIDESCLOUD_MODEL_SlideComment_H_
 
 #include "SlideCommentBase.h"
 
@@ -62,4 +62,4 @@ protected:
 }
 }
 
-#endif /* _SlideComment_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SlideComment_H_ */

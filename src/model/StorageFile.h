@@ -29,8 +29,8 @@
  * File or folder information
  */
 
-#ifndef _StorageFile_H_
-#define _StorageFile_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_StorageFile_H_
+#define ASPOSESLIDESCLOUD_MODEL_StorageFile_H_
 
 #include "../ModelBase.h"
 
@@ -62,7 +62,7 @@ public:
 	/// <summary>
 	/// True if it is a folder.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsFolder() const;
+	ASPOSE_DLL_EXPORT bool isIsFolder() const;
 	ASPOSE_DLL_EXPORT void setIsFolder(bool value);
 	/// <summary>
 	/// File or folder last modified DateTime.
@@ -91,4 +91,4 @@ protected:
 }
 }
 
-#endif /* _StorageFile_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_StorageFile_H_ */

@@ -29,8 +29,8 @@
  * Represents font info.
  */
 
-#ifndef _FontData_H_
-#define _FontData_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_FontData_H_
+#define ASPOSESLIDESCLOUD_MODEL_FontData_H_
 
 #include "../ModelBase.h"
 
@@ -61,7 +61,7 @@ public:
 	/// <summary>
 	/// Returns true if font is embedded.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsEmbedded() const;
+	ASPOSE_DLL_EXPORT bool isIsEmbedded() const;
 	ASPOSE_DLL_EXPORT void setIsEmbedded(bool value);
 	ASPOSE_DLL_EXPORT bool isEmbeddedIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsEmbedded();
@@ -75,4 +75,4 @@ protected:
 }
 }
 
-#endif /* _FontData_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_FontData_H_ */

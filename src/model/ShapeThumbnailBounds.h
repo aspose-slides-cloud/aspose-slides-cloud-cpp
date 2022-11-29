@@ -29,8 +29,8 @@
  * Represents thumnail bounds settings.
  */
 
-#ifndef _ShapeThumbnailBounds_H_
-#define _ShapeThumbnailBounds_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ShapeThumbnailBounds_H_
+#define ASPOSESLIDESCLOUD_MODEL_ShapeThumbnailBounds_H_
 
 #include "../ModelBase.h"
 
@@ -59,4 +59,4 @@ protected:
 }
 }
 
-#endif /* _ShapeThumbnailBounds_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ShapeThumbnailBounds_H_ */

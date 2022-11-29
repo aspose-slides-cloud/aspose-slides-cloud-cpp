@@ -29,8 +29,8 @@
  * Specifies a grouping symbol above or below an expression, usually to highlight the relationship between elements 
  */
 
-#ifndef _GroupingCharacterElement_H_
-#define _GroupingCharacterElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_GroupingCharacterElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_GroupingCharacterElement_H_
 
 #include "MathElement.h"
 
@@ -85,4 +85,4 @@ protected:
 }
 }
 
-#endif /* _GroupingCharacterElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_GroupingCharacterElement_H_ */

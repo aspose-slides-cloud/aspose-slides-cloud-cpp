@@ -29,8 +29,8 @@
  * Smart art node.
  */
 
-#ifndef _SmartArtNode_H_
-#define _SmartArtNode_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SmartArtNode_H_
+#define ASPOSESLIDESCLOUD_MODEL_SmartArtNode_H_
 
 #include "../ModelBase.h"
 
@@ -69,7 +69,7 @@ public:
 	/// <summary>
 	/// True for and assistant node.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsAssistant() const;
+	ASPOSE_DLL_EXPORT bool isIsAssistant() const;
 	ASPOSE_DLL_EXPORT void setIsAssistant(bool value);
 	/// <summary>
 	/// Node text.
@@ -99,4 +99,4 @@ protected:
 }
 }
 
-#endif /* _SmartArtNode_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SmartArtNode_H_ */

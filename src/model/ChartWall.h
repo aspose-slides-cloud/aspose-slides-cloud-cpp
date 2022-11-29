@@ -29,8 +29,8 @@
  * Represents a chart wall
  */
 
-#ifndef _ChartWall_H_
-#define _ChartWall_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ChartWall_H_
+#define ASPOSESLIDESCLOUD_MODEL_ChartWall_H_
 
 #include "../ModelBase.h"
 
@@ -96,4 +96,4 @@ protected:
 }
 }
 
-#endif /* _ChartWall_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ChartWall_H_ */

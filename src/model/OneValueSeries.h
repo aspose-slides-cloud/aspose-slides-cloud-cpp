@@ -29,8 +29,8 @@
  * One value series.
  */
 
-#ifndef _OneValueSeries_H_
-#define _OneValueSeries_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_OneValueSeries_H_
+#define ASPOSESLIDESCLOUD_MODEL_OneValueSeries_H_
 
 #include "Series.h"
 
@@ -38,6 +38,7 @@
 #include "../model/SeriesMarker.h"
 #include "../model/OneValueChartDataPoint.h"
 #include <cpprest/details/basic_types.h>
+#include "../model/DataSource.h"
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
 #include <vector>
@@ -71,9 +72,14 @@ public:
 	ASPOSE_DLL_EXPORT utility::string_t getNumberFormatOfValues() const;
 	ASPOSE_DLL_EXPORT void setNumberFormatOfValues(utility::string_t value);
 	/// <summary>
+	/// Data source type for values.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<DataSource> getDataSourceForValues() const;
+	ASPOSE_DLL_EXPORT void setDataSourceForValues(std::shared_ptr<DataSource> value);
+	/// <summary>
 	/// True if inner points are shown. Applied to Waterfall series only.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowConnectorLines() const;
+	ASPOSE_DLL_EXPORT bool isShowConnectorLines() const;
 	ASPOSE_DLL_EXPORT void setShowConnectorLines(bool value);
 	ASPOSE_DLL_EXPORT bool showConnectorLinesIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowConnectorLines();
@@ -85,28 +91,28 @@ public:
 	/// <summary>
 	/// True if inner points are shown. Applied to BoxAndWhisker series only.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowInnerPoints() const;
+	ASPOSE_DLL_EXPORT bool isShowInnerPoints() const;
 	ASPOSE_DLL_EXPORT void setShowInnerPoints(bool value);
 	ASPOSE_DLL_EXPORT bool showInnerPointsIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowInnerPoints();
 	/// <summary>
 	/// True if mean line is shown. Applied to BoxAndWhisker series only.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowMeanLine() const;
+	ASPOSE_DLL_EXPORT bool isShowMeanLine() const;
 	ASPOSE_DLL_EXPORT void setShowMeanLine(bool value);
 	ASPOSE_DLL_EXPORT bool showMeanLineIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowMeanLine();
 	/// <summary>
 	/// True if mean markers are shown. Applied to BoxAndWhisker series only.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowMeanMarkers() const;
+	ASPOSE_DLL_EXPORT bool isShowMeanMarkers() const;
 	ASPOSE_DLL_EXPORT void setShowMeanMarkers(bool value);
 	ASPOSE_DLL_EXPORT bool showMeanMarkersIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowMeanMarkers();
 	/// <summary>
 	/// True if outlier points are shown. Applied to BoxAndWhisker series only.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowOutlierPoints() const;
+	ASPOSE_DLL_EXPORT bool isShowOutlierPoints() const;
 	ASPOSE_DLL_EXPORT void setShowOutlierPoints(bool value);
 	ASPOSE_DLL_EXPORT bool showOutlierPointsIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowOutlierPoints();
@@ -114,6 +120,7 @@ public:
 protected:
 	std::vector<std::shared_ptr<OneValueChartDataPoint>> m_DataPoints;
 	utility::string_t m_NumberFormatOfValues;
+	std::shared_ptr<DataSource> m_DataSourceForValues;
 	bool m_ShowConnectorLines;
 	bool m_ShowConnectorLinesIsSet;
 	utility::string_t m_QuartileMethod;
@@ -130,4 +137,4 @@ protected:
 }
 }
 
-#endif /* _OneValueSeries_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_OneValueSeries_H_ */

@@ -29,8 +29,8 @@
  * Represents export options for whole presentation.
  */
 
-#ifndef _ExportOptions_H_
-#define _ExportOptions_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ExportOptions_H_
+#define ASPOSESLIDESCLOUD_MODEL_ExportOptions_H_
 
 #include "../ModelBase.h"
 
@@ -87,4 +87,4 @@ protected:
 }
 }
 
-#endif /* _ExportOptions_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ExportOptions_H_ */

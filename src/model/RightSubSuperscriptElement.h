@@ -29,8 +29,8 @@
  * Specifies the Sub-Superscript object
  */
 
-#ifndef _RightSubSuperscriptElement_H_
-#define _RightSubSuperscriptElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_RightSubSuperscriptElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_RightSubSuperscriptElement_H_
 
 #include "MathElement.h"
 
@@ -72,7 +72,7 @@ public:
 	/// <summary>
 	/// Alignment of subscript/superscript.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getAlignScripts() const;
+	ASPOSE_DLL_EXPORT bool isAlignScripts() const;
 	ASPOSE_DLL_EXPORT void setAlignScripts(bool value);
 	ASPOSE_DLL_EXPORT bool alignScriptsIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetAlignScripts();
@@ -88,4 +88,4 @@ protected:
 }
 }
 
-#endif /* _RightSubSuperscriptElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_RightSubSuperscriptElement_H_ */

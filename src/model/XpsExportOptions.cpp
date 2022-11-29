@@ -43,7 +43,7 @@ XpsExportOptions::~XpsExportOptions()
 {
 }
 
-bool XpsExportOptions::getShowHiddenSlides() const
+bool XpsExportOptions::isShowHiddenSlides() const
 {
 	return m_ShowHiddenSlides;
 }
@@ -64,7 +64,7 @@ void XpsExportOptions::unsetShowHiddenSlides()
 	m_ShowHiddenSlidesIsSet = false;
 }
 
-bool XpsExportOptions::getSaveMetafilesAsPng() const
+bool XpsExportOptions::isSaveMetafilesAsPng() const
 {
 	return m_SaveMetafilesAsPng;
 }
@@ -85,7 +85,7 @@ void XpsExportOptions::unsetSaveMetafilesAsPng()
 	m_SaveMetafilesAsPngIsSet = false;
 }
 
-bool XpsExportOptions::getDrawSlidesFrame() const
+bool XpsExportOptions::isDrawSlidesFrame() const
 {
 	return m_DrawSlidesFrame;
 }

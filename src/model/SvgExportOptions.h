@@ -29,8 +29,8 @@
  * Provides options that control how a presentation is saved in SVG format.
  */
 
-#ifndef _SvgExportOptions_H_
-#define _SvgExportOptions_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SvgExportOptions_H_
+#define ASPOSESLIDESCLOUD_MODEL_SvgExportOptions_H_
 
 #include "ExportOptions.h"
 
@@ -60,7 +60,7 @@ public:
 	/// <summary>
 	/// Determines whether the text on a slide will be saved as graphics.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getVectorizeText() const;
+	ASPOSE_DLL_EXPORT bool isVectorizeText() const;
 	ASPOSE_DLL_EXPORT void setVectorizeText(bool value);
 	ASPOSE_DLL_EXPORT bool vectorizeTextIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetVectorizeText();
@@ -74,21 +74,21 @@ public:
 	/// <summary>
 	/// Determines whether the 3D text is disabled in SVG.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getDisable3DText() const;
+	ASPOSE_DLL_EXPORT bool isDisable3DText() const;
 	ASPOSE_DLL_EXPORT void setDisable3DText(bool value);
 	ASPOSE_DLL_EXPORT bool disable3DTextIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetDisable3DText();
 	/// <summary>
 	/// Disables splitting FromCornerX and FromCenter gradients.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getDisableGradientSplit() const;
+	ASPOSE_DLL_EXPORT bool isDisableGradientSplit() const;
 	ASPOSE_DLL_EXPORT void setDisableGradientSplit(bool value);
 	ASPOSE_DLL_EXPORT bool disableGradientSplitIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetDisableGradientSplit();
 	/// <summary>
 	/// SVG 1.1 lacks ability to define insets for markers. Aspose.Slides SVG writing engine has workaround for that problem: it crops end of line with arrow, so, line doesn&#39;t overlap markers. This option switches off such behavior.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getDisableLineEndCropping() const;
+	ASPOSE_DLL_EXPORT bool isDisableLineEndCropping() const;
 	ASPOSE_DLL_EXPORT void setDisableLineEndCropping(bool value);
 	ASPOSE_DLL_EXPORT bool disableLineEndCroppingIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetDisableLineEndCropping();
@@ -107,7 +107,7 @@ public:
 	/// <summary>
 	/// A boolean flag indicates if the cropped parts remain as part of the document. If true the cropped  parts will removed, if false they will be serialized in the document (which can possible lead to a  larger file)
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getDeletePicturesCroppedAreas() const;
+	ASPOSE_DLL_EXPORT bool isDeletePicturesCroppedAreas() const;
 	ASPOSE_DLL_EXPORT void setDeletePicturesCroppedAreas(bool value);
 	ASPOSE_DLL_EXPORT bool deletePicturesCroppedAreasIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetDeletePicturesCroppedAreas();
@@ -116,6 +116,20 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getExternalFontsHandling() const;
 	ASPOSE_DLL_EXPORT void setExternalFontsHandling(utility::string_t value);
+	/// <summary>
+	/// Determines whether the text frame will be included in a rendering area or not.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool isUseFrameSize() const;
+	ASPOSE_DLL_EXPORT void setUseFrameSize(bool value);
+	ASPOSE_DLL_EXPORT bool useFrameSizeIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetUseFrameSize();
+	/// <summary>
+	/// Determines whether to perform the specified rotation of the shape when rendering or not.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool isUseFrameRotation() const;
+	ASPOSE_DLL_EXPORT void setUseFrameRotation(bool value);
+	ASPOSE_DLL_EXPORT bool useFrameRotationIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetUseFrameRotation();
 
 protected:
 	bool m_VectorizeText;
@@ -134,9 +148,13 @@ protected:
 	bool m_DeletePicturesCroppedAreas;
 	bool m_DeletePicturesCroppedAreasIsSet;
 	utility::string_t m_ExternalFontsHandling;
+	bool m_UseFrameSize;
+	bool m_UseFrameSizeIsSet;
+	bool m_UseFrameRotation;
+	bool m_UseFrameRotationIsSet;
 };
 
 }
 }
 
-#endif /* _SvgExportOptions_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SvgExportOptions_H_ */

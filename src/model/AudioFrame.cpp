@@ -133,7 +133,7 @@ void AudioFrame::unsetAudioCdStartTrackTime()
 	m_AudioCdStartTrackTimeIsSet = false;
 }
 
-bool AudioFrame::getEmbedded() const
+bool AudioFrame::isEmbedded() const
 {
 	return m_Embedded;
 }
@@ -154,7 +154,7 @@ void AudioFrame::unsetEmbedded()
 	m_EmbeddedIsSet = false;
 }
 
-bool AudioFrame::getHideAtShowing() const
+bool AudioFrame::isHideAtShowing() const
 {
 	return m_HideAtShowing;
 }
@@ -175,7 +175,7 @@ void AudioFrame::unsetHideAtShowing()
 	m_HideAtShowingIsSet = false;
 }
 
-bool AudioFrame::getPlayLoopMode() const
+bool AudioFrame::isPlayLoopMode() const
 {
 	return m_PlayLoopMode;
 }
@@ -229,7 +229,7 @@ void AudioFrame::setBase64Data(utility::string_t value)
 	
 }
 
-bool AudioFrame::getPlayAcrossSlides() const
+bool AudioFrame::isPlayAcrossSlides() const
 {
 	return m_PlayAcrossSlides;
 }
@@ -250,7 +250,7 @@ void AudioFrame::unsetPlayAcrossSlides()
 	m_PlayAcrossSlidesIsSet = false;
 }
 
-bool AudioFrame::getRewindAudio() const
+bool AudioFrame::isRewindAudio() const
 {
 	return m_RewindAudio;
 }

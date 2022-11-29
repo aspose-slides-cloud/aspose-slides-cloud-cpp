@@ -98,7 +98,7 @@ void TiffExportOptions::unsetDpiY()
 	m_DpiYIsSet = false;
 }
 
-bool TiffExportOptions::getShowHiddenSlides() const
+bool TiffExportOptions::isShowHiddenSlides() const
 {
 	return m_ShowHiddenSlides;
 }
@@ -184,7 +184,7 @@ void TiffExportOptions::setCommentsAreaColor(utility::string_t value)
 	
 }
 
-bool TiffExportOptions::getShowCommentsByNoAuthor() const
+bool TiffExportOptions::isShowCommentsByNoAuthor() const
 {
 	return m_ShowCommentsByNoAuthor;
 }

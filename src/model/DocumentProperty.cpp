@@ -61,7 +61,7 @@ void DocumentProperty::setValue(utility::string_t value)
 	
 }
 
-bool DocumentProperty::getBuiltIn() const
+bool DocumentProperty::isBuiltIn() const
 {
 	return m_BuiltIn;
 }

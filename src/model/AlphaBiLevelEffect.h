@@ -29,8 +29,8 @@
  * Represents an Alpha Bi-Level effect.
  */
 
-#ifndef _AlphaBiLevelEffect_H_
-#define _AlphaBiLevelEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_AlphaBiLevelEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_AlphaBiLevelEffect_H_
 
 #include "ImageTransformEffect.h"
 
@@ -67,4 +67,4 @@ protected:
 }
 }
 
-#endif /* _AlphaBiLevelEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_AlphaBiLevelEffect_H_ */

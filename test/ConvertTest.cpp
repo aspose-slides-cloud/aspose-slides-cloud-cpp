@@ -105,7 +105,7 @@ TEST_F(ConvertTest, convertPutFromRequest) {
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
 	api->convertAndSave(data, L"pdf", outPath, L"password").wait();
 	std::shared_ptr<ObjectExist> exists = api->objectExists(outPath).get();
-	EXPECT_TRUE(exists->getExists());
+	EXPECT_TRUE(exists->isExists());
 }
 
 TEST_F(ConvertTest, convertPostFromStorage) {
@@ -119,7 +119,7 @@ TEST_F(ConvertTest, convertPutFromStorage) {
 	utility::string_t outPath = L"TempSlidesSDK/test.pptx";
 	api->savePresentation(L"test.pptx", L"pdf", outPath, nullptr, L"password", L"TempSlidesSDK").wait();
 	std::shared_ptr<ObjectExist> exists = api->objectExists(outPath).get();
-	EXPECT_TRUE(exists->getExists());
+	EXPECT_TRUE(exists->isExists());
 }
 
 TEST_F(ConvertTest, convertWithOptionsFromRequest) {
@@ -180,7 +180,7 @@ TEST_F(ConvertTest, convertSlidePutFromRequest) {
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
 	api->saveSlideOnline(data, 1, L"pdf", outPath, boost::none, boost::none, L"password").wait();
 	std::shared_ptr<ObjectExist> exists = api->objectExists(outPath).get();
-	EXPECT_TRUE(exists->getExists());
+	EXPECT_TRUE(exists->isExists());
 }
 
 TEST_F(ConvertTest, convertSlidePostFromStorage) {
@@ -194,7 +194,7 @@ TEST_F(ConvertTest, convertSlidePutFromStorage) {
 	utility::string_t outPath = L"TempSlidesSDK/test.pptx";
 	api->saveSlide(L"test.pptx", 1, L"pdf", outPath, nullptr, boost::none, boost::none, L"password", L"TempSlidesSDK").wait();
 	std::shared_ptr<ObjectExist> exists = api->objectExists(outPath).get();
-	EXPECT_TRUE(exists->getExists());
+	EXPECT_TRUE(exists->isExists());
 }
 
 TEST_F(ConvertTest, convertSlideWithOptionsFromRequest) {
@@ -256,7 +256,7 @@ TEST_F(ConvertTest, convertShapePutFromRequest) {
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
 	api->saveShapeOnline(data, 1, 1, L"png", outPath, boost::none, boost::none, L"", L"password").wait();
 	std::shared_ptr<ObjectExist> exists = api->objectExists(outPath).get();
-	EXPECT_TRUE(exists->getExists());
+	EXPECT_TRUE(exists->isExists());
 }
 
 TEST_F(ConvertTest, convertShapePostFromStorage) {
@@ -276,7 +276,7 @@ TEST_F(ConvertTest, convertShapePutFromStorage) {
 	utility::string_t outPath = L"TempSlidesSDK/test.png";
 	api->saveShape(L"test.pptx", 1, 1, L"png", outPath, nullptr, boost::none, boost::none, L"", L"password", L"TempSlidesSDK").wait();
 	std::shared_ptr<ObjectExist> exists = api->objectExists(outPath).get();
-	EXPECT_TRUE(exists->getExists());
+	EXPECT_TRUE(exists->isExists());
 }
 
 TEST_F(ConvertTest, convertSubshapePutFromStorage) {
@@ -284,7 +284,7 @@ TEST_F(ConvertTest, convertSubshapePutFromStorage) {
 	utility::string_t outPath = L"TempSlidesSDK/test.png";
 	api->saveShape(L"test.pptx", 1, 4, L"png", outPath, nullptr, boost::none, boost::none, L"", L"password", L"TempSlidesSDK", L"", L"1").wait();
 	std::shared_ptr<ObjectExist> exists = api->objectExists(outPath).get();
-	EXPECT_TRUE(exists->getExists());
+	EXPECT_TRUE(exists->isExists());
 }
 
 TEST_F(ConvertTest, convertWithFallbackRules) {
@@ -307,5 +307,5 @@ TEST_F(ConvertTest, convertWithFallbackRules) {
 	options->setFontFallbackRules({ fontRule1, fontRule2 });
 	api->savePresentation(L"test.pptx", L"pdf", outPath, nullptr, L"password", L"TempSlidesSDK").wait();
 	std::shared_ptr<ObjectExist> exists = api->objectExists(outPath).get();
-	EXPECT_TRUE(exists->getExists());
+	EXPECT_TRUE(exists->isExists());
 }

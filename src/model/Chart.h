@@ -29,8 +29,8 @@
  * Represents chart resource
  */
 
-#ifndef _Chart_H_
-#define _Chart_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Chart_H_
+#define ASPOSESLIDESCLOUD_MODEL_Chart_H_
 
 #include "ShapeBase.h"
 
@@ -38,6 +38,7 @@
 #include "../model/EffectFormat.h"
 #include "../model/PlotArea.h"
 #include "../model/ChartCategory.h"
+#include "../model/DataSource.h"
 #include "../model/Axes.h"
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
@@ -77,7 +78,7 @@ public:
 	/// <summary>
 	/// True if data labels over the maximum of the chart shall be shown.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowDataLabelsOverMaximum() const;
+	ASPOSE_DLL_EXPORT bool isShowDataLabelsOverMaximum() const;
 	ASPOSE_DLL_EXPORT void setShowDataLabelsOverMaximum(bool value);
 	ASPOSE_DLL_EXPORT bool showDataLabelsOverMaximumIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowDataLabelsOverMaximum();
@@ -91,6 +92,11 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<ChartCategory>> getCategories() const;
 	ASPOSE_DLL_EXPORT void setCategories(std::vector<std::shared_ptr<ChartCategory>> value);
+	/// <summary>
+	/// Data source type for categories.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<DataSource> getDataSourceForCategories() const;
+	ASPOSE_DLL_EXPORT void setDataSourceForCategories(std::shared_ptr<DataSource> value);
 	/// <summary>
 	/// Gets or sets the title.
 	/// </summary>
@@ -129,7 +135,7 @@ public:
 	/// <summary>
 	/// Specifies the chart area shall have rounded corners.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHasRoundedCorners() const;
+	ASPOSE_DLL_EXPORT bool isHasRoundedCorners() const;
 	ASPOSE_DLL_EXPORT void setHasRoundedCorners(bool value);
 	ASPOSE_DLL_EXPORT bool hasRoundedCornersIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHasRoundedCorners();
@@ -145,6 +151,7 @@ protected:
 	bool m_ShowDataLabelsOverMaximumIsSet;
 	std::vector<std::shared_ptr<Series>> m_Series;
 	std::vector<std::shared_ptr<ChartCategory>> m_Categories;
+	std::shared_ptr<DataSource> m_DataSourceForCategories;
 	std::shared_ptr<ChartTitle> m_Title;
 	std::shared_ptr<ChartWall> m_BackWall;
 	std::shared_ptr<ChartWall> m_SideWall;
@@ -160,4 +167,4 @@ protected:
 }
 }
 
-#endif /* _Chart_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Chart_H_ */

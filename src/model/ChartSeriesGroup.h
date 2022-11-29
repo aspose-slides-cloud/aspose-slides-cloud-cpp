@@ -29,8 +29,8 @@
  * Chart series group. Defines common properties for a group of series.
  */
 
-#ifndef _ChartSeriesGroup_H_
-#define _ChartSeriesGroup_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ChartSeriesGroup_H_
+#define ASPOSESLIDESCLOUD_MODEL_ChartSeriesGroup_H_
 
 #include "../ModelBase.h"
 
@@ -83,14 +83,14 @@ public:
 	/// <summary>
 	/// Specifies that each data marker in the series has a different color.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIsColorVaried() const;
+	ASPOSE_DLL_EXPORT bool isIsColorVaried() const;
 	ASPOSE_DLL_EXPORT void setIsColorVaried(bool value);
 	ASPOSE_DLL_EXPORT bool isColorVariedIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsColorVaried();
 	/// <summary>
 	/// True if chart has series lines. Applied to stacked bar and OfPie charts.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHasSeriesLines() const;
+	ASPOSE_DLL_EXPORT bool isHasSeriesLines() const;
 	ASPOSE_DLL_EXPORT void setHasSeriesLines(bool value);
 	ASPOSE_DLL_EXPORT bool hasSeriesLinesIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHasSeriesLines();
@@ -175,4 +175,4 @@ protected:
 }
 }
 
-#endif /* _ChartSeriesGroup_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ChartSeriesGroup_H_ */

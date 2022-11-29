@@ -29,8 +29,8 @@
  * Class for disc space information.
  */
 
-#ifndef _DiscUsage_H_
-#define _DiscUsage_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_DiscUsage_H_
+#define ASPOSESLIDESCLOUD_MODEL_DiscUsage_H_
 
 #include "../ModelBase.h"
 
@@ -71,4 +71,4 @@ protected:
 }
 }
 
-#endif /* _DiscUsage_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_DiscUsage_H_ */

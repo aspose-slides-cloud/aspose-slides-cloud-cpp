@@ -43,7 +43,7 @@ GifExportOptions::~GifExportOptions()
 {
 }
 
-bool GifExportOptions::getExportHiddenSlides() const
+bool GifExportOptions::isExportHiddenSlides() const
 {
 	return m_ExportHiddenSlides;
 }

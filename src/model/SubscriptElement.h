@@ -29,8 +29,8 @@
  * Subscript object
  */
 
-#ifndef _SubscriptElement_H_
-#define _SubscriptElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SubscriptElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_SubscriptElement_H_
 
 #include "MathElement.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _SubscriptElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SubscriptElement_H_ */

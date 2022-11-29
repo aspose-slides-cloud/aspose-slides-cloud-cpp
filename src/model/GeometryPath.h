@@ -29,8 +29,8 @@
  * Represents GeometryPath of the shape
  */
 
-#ifndef _GeometryPath_H_
-#define _GeometryPath_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_GeometryPath_H_
+#define ASPOSESLIDESCLOUD_MODEL_GeometryPath_H_
 
 #include "../ModelBase.h"
 
@@ -63,7 +63,7 @@ public:
 	/// <summary>
 	/// Stroke
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getStroke() const;
+	ASPOSE_DLL_EXPORT bool isStroke() const;
 	ASPOSE_DLL_EXPORT void setStroke(bool value);
 	ASPOSE_DLL_EXPORT bool strokeIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetStroke();
@@ -83,4 +83,4 @@ protected:
 }
 }
 
-#endif /* _GeometryPath_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_GeometryPath_H_ */

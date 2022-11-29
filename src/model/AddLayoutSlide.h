@@ -29,8 +29,8 @@
  * Add layout slide task.
  */
 
-#ifndef _AddLayoutSlide_H_
-#define _AddLayoutSlide_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_AddLayoutSlide_H_
+#define ASPOSESLIDESCLOUD_MODEL_AddLayoutSlide_H_
 
 #include "Task.h"
 
@@ -74,4 +74,4 @@ protected:
 }
 }
 
-#endif /* _AddLayoutSlide_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_AddLayoutSlide_H_ */

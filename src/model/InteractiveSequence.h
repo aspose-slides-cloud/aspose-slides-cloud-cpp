@@ -29,8 +29,8 @@
  * Represents comments collection of slide
  */
 
-#ifndef _InteractiveSequence_H_
-#define _InteractiveSequence_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_InteractiveSequence_H_
+#define ASPOSESLIDESCLOUD_MODEL_InteractiveSequence_H_
 
 #include "../ModelBase.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _InteractiveSequence_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_InteractiveSequence_H_ */

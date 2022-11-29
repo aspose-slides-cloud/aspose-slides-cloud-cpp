@@ -29,8 +29,8 @@
  * Represents presentation to merge
  */
 
-#ifndef _PresentationToMerge_H_
-#define _PresentationToMerge_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_PresentationToMerge_H_
+#define ASPOSESLIDESCLOUD_MODEL_PresentationToMerge_H_
 
 #include "../ModelBase.h"
 
@@ -88,4 +88,4 @@ protected:
 }
 }
 
-#endif /* _PresentationToMerge_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_PresentationToMerge_H_ */

@@ -29,8 +29,8 @@
  * Summary zoom frame.
  */
 
-#ifndef _SummaryZoomFrame_H_
-#define _SummaryZoomFrame_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SummaryZoomFrame_H_
+#define ASPOSESLIDESCLOUD_MODEL_SummaryZoomFrame_H_
 
 #include "ShapeBase.h"
 
@@ -81,4 +81,4 @@ protected:
 }
 }
 
-#endif /* _SummaryZoomFrame_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SummaryZoomFrame_H_ */

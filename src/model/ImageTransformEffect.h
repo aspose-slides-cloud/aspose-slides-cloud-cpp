@@ -29,8 +29,8 @@
  * Image transform effect
  */
 
-#ifndef _ImageTransformEffect_H_
-#define _ImageTransformEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ImageTransformEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_ImageTransformEffect_H_
 
 #include "../ModelBase.h"
 
@@ -66,4 +66,4 @@ protected:
 }
 }
 
-#endif /* _ImageTransformEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ImageTransformEffect_H_ */

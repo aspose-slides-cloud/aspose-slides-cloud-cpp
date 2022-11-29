@@ -29,8 +29,8 @@
  * Math element.
  */
 
-#ifndef _MathElement_H_
-#define _MathElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_MathElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_MathElement_H_
 
 #include "../ModelBase.h"
 
@@ -66,4 +66,4 @@ protected:
 }
 }
 
-#endif /* _MathElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_MathElement_H_ */

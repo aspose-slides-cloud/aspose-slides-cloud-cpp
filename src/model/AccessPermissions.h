@@ -29,8 +29,8 @@
  * A set of properties specifying which access permissions should be granted when the document is opened with user access.
  */
 
-#ifndef _AccessPermissions_H_
-#define _AccessPermissions_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_AccessPermissions_H_
+#define ASPOSESLIDESCLOUD_MODEL_AccessPermissions_H_
 
 #include "../ModelBase.h"
 
@@ -55,42 +55,42 @@ public:
 	/// <summary>
 	/// The user may print the document (possibly not at the highest quality level, depending on whether bit HighQualityPrint is also set).
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getPrintDocument() const;
+	ASPOSE_DLL_EXPORT bool isPrintDocument() const;
 	ASPOSE_DLL_EXPORT void setPrintDocument(bool value);
 	/// <summary>
 	/// The user may modify the contents of the document by operations other than those controlled by bits AddOrModifyFields, FillExistingFields, AssembleDocument.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getModifyContent() const;
+	ASPOSE_DLL_EXPORT bool isModifyContent() const;
 	ASPOSE_DLL_EXPORT void setModifyContent(bool value);
 	/// <summary>
 	/// The user may copy or otherwise extract text and graphics from the document by operations other than that controlled by bit ExtractTextAndGraphics.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getCopyTextAndGraphics() const;
+	ASPOSE_DLL_EXPORT bool isCopyTextAndGraphics() const;
 	ASPOSE_DLL_EXPORT void setCopyTextAndGraphics(bool value);
 	/// <summary>
 	/// The user may add or modify text annotations, fill in interactive form fields, and, if bit ModifyContent is also set, create or modify interactive form fields (including signature fields).
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getAddOrModifyFields() const;
+	ASPOSE_DLL_EXPORT bool isAddOrModifyFields() const;
 	ASPOSE_DLL_EXPORT void setAddOrModifyFields(bool value);
 	/// <summary>
 	/// The user may fill in existing interactive form fields (including signature fields), even if bit AddOrModifyFields is clear.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getFillExistingFields() const;
+	ASPOSE_DLL_EXPORT bool isFillExistingFields() const;
 	ASPOSE_DLL_EXPORT void setFillExistingFields(bool value);
 	/// <summary>
 	/// The user may extract text and graphics in support of accessibility to users with disabilities or for other purposes.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getExtractTextAndGraphics() const;
+	ASPOSE_DLL_EXPORT bool isExtractTextAndGraphics() const;
 	ASPOSE_DLL_EXPORT void setExtractTextAndGraphics(bool value);
 	/// <summary>
 	/// The user may assemble the document (insert, rotate, or delete pages and create bookmarks or thumbnail images), even if bit ModifyContent is clear.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getAssembleDocument() const;
+	ASPOSE_DLL_EXPORT bool isAssembleDocument() const;
 	ASPOSE_DLL_EXPORT void setAssembleDocument(bool value);
 	/// <summary>
 	/// The user may print the document to a representation from which a faithful digital copy of the PDF content could be generated. When this bit is clear (and bit PrintDocument is set), printing is limited to a low-level representation of the appearance, possibly of degraded quality.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHighQualityPrint() const;
+	ASPOSE_DLL_EXPORT bool isHighQualityPrint() const;
 	ASPOSE_DLL_EXPORT void setHighQualityPrint(bool value);
 
 protected:
@@ -107,4 +107,4 @@ protected:
 }
 }
 
-#endif /* _AccessPermissions_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_AccessPermissions_H_ */

@@ -29,8 +29,8 @@
  * Section list.
  */
 
-#ifndef _Sections_H_
-#define _Sections_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Sections_H_
+#define ASPOSESLIDESCLOUD_MODEL_Sections_H_
 
 #include "ResourceBase.h"
 
@@ -69,4 +69,4 @@ protected:
 }
 }
 
-#endif /* _Sections_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Sections_H_ */

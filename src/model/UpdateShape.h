@@ -29,8 +29,8 @@
  * Update shape task.
  */
 
-#ifndef _UpdateShape_H_
-#define _UpdateShape_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_UpdateShape_H_
+#define ASPOSESLIDESCLOUD_MODEL_UpdateShape_H_
 
 #include "Task.h"
 
@@ -74,4 +74,4 @@ protected:
 }
 }
 
-#endif /* _UpdateShape_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_UpdateShape_H_ */

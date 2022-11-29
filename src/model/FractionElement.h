@@ -29,8 +29,8 @@
  * Specifies the fraction object, consisting of a numerator and denominator separated by a fraction bar.
  */
 
-#ifndef _FractionElement_H_
-#define _FractionElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_FractionElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_FractionElement_H_
 
 #include "MathElement.h"
 
@@ -79,4 +79,4 @@ protected:
 }
 }
 
-#endif /* _FractionElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_FractionElement_H_ */

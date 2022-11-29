@@ -29,8 +29,8 @@
  * Represents text of resource
  */
 
-#ifndef _TextItems_H_
-#define _TextItems_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_TextItems_H_
+#define ASPOSESLIDESCLOUD_MODEL_TextItems_H_
 
 #include "ResourceBase.h"
 
@@ -69,4 +69,4 @@ protected:
 }
 }
 
-#endif /* _TextItems_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_TextItems_H_ */

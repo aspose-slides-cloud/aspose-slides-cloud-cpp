@@ -73,7 +73,7 @@ void ViewProperties::setVerticalBarState(utility::string_t value)
 	
 }
 
-bool ViewProperties::getPreferSingleView() const
+bool ViewProperties::isPreferSingleView() const
 {
 	return m_PreferSingleView;
 }

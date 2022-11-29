@@ -29,8 +29,8 @@
  * ShapeBevel
  */
 
-#ifndef _ShapeBevel_H_
-#define _ShapeBevel_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ShapeBevel_H_
+#define ASPOSESLIDESCLOUD_MODEL_ShapeBevel_H_
 
 #include "../ModelBase.h"
 
@@ -84,4 +84,4 @@ protected:
 }
 }
 
-#endif /* _ShapeBevel_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ShapeBevel_H_ */

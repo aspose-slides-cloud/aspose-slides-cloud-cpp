@@ -29,8 +29,8 @@
  * Document property.
  */
 
-#ifndef _DocumentProperty_H_
-#define _DocumentProperty_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_DocumentProperty_H_
+#define ASPOSESLIDESCLOUD_MODEL_DocumentProperty_H_
 
 #include "ResourceBase.h"
 
@@ -69,7 +69,7 @@ public:
 	/// <summary>
 	/// True for builtin property.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getBuiltIn() const;
+	ASPOSE_DLL_EXPORT bool isBuiltIn() const;
 	ASPOSE_DLL_EXPORT void setBuiltIn(bool value);
 
 protected:
@@ -81,4 +81,4 @@ protected:
 }
 }
 
-#endif /* _DocumentProperty_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_DocumentProperty_H_ */

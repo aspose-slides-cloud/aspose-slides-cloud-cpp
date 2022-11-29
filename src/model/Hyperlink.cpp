@@ -44,7 +44,7 @@ Hyperlink::~Hyperlink()
 {
 }
 
-bool Hyperlink::getIsDisabled() const
+bool Hyperlink::isIsDisabled() const
 {
 	return m_IsDisabled;
 }
@@ -130,7 +130,7 @@ void Hyperlink::setTooltip(utility::string_t value)
 	
 }
 
-bool Hyperlink::getHistory() const
+bool Hyperlink::isHistory() const
 {
 	return m_History;
 }
@@ -151,7 +151,7 @@ void Hyperlink::unsetHistory()
 	m_HistoryIsSet = false;
 }
 
-bool Hyperlink::getHighlightClick() const
+bool Hyperlink::isHighlightClick() const
 {
 	return m_HighlightClick;
 }
@@ -172,7 +172,7 @@ void Hyperlink::unsetHighlightClick()
 	m_HighlightClickIsSet = false;
 }
 
-bool Hyperlink::getStopSoundOnClick() const
+bool Hyperlink::isStopSoundOnClick() const
 {
 	return m_StopSoundOnClick;
 }

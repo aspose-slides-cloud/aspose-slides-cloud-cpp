@@ -29,8 +29,8 @@
  * Files list
  */
 
-#ifndef _FilesList_H_
-#define _FilesList_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_FilesList_H_
+#define ASPOSESLIDESCLOUD_MODEL_FilesList_H_
 
 #include "../ModelBase.h"
 
@@ -67,4 +67,4 @@ protected:
 }
 }
 
-#endif /* _FilesList_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_FilesList_H_ */

@@ -29,8 +29,8 @@
  * Update background task.
  */
 
-#ifndef _UpdateBackground_H_
-#define _UpdateBackground_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_UpdateBackground_H_
+#define ASPOSESLIDESCLOUD_MODEL_UpdateBackground_H_
 
 #include "Task.h"
 
@@ -78,4 +78,4 @@ protected:
 }
 }
 
-#endif /* _UpdateBackground_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_UpdateBackground_H_ */

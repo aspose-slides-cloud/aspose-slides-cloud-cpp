@@ -29,8 +29,8 @@
  * Represents an Alpha Modulate Fixed effect.
  */
 
-#ifndef _AlphaModulateFixedEffect_H_
-#define _AlphaModulateFixedEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_AlphaModulateFixedEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_AlphaModulateFixedEffect_H_
 
 #include "ImageTransformEffect.h"
 
@@ -67,4 +67,4 @@ protected:
 }
 }
 
-#endif /* _AlphaModulateFixedEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_AlphaModulateFixedEffect_H_ */

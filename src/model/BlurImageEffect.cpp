@@ -51,7 +51,7 @@ void BlurImageEffect::setRadius(double value)
 	
 }
 
-bool BlurImageEffect::getGrow() const
+bool BlurImageEffect::isGrow() const
 {
 	return m_Grow;
 }

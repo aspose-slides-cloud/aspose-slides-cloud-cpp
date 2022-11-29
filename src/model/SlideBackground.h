@@ -29,8 +29,8 @@
  * Represents background of slide
  */
 
-#ifndef _SlideBackground_H_
-#define _SlideBackground_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SlideBackground_H_
+#define ASPOSESLIDESCLOUD_MODEL_SlideBackground_H_
 
 #include "ResourceBase.h"
 
@@ -83,4 +83,4 @@ protected:
 }
 }
 
-#endif /* _SlideBackground_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SlideBackground_H_ */

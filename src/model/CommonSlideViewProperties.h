@@ -29,8 +29,8 @@
  * Slide view properties.
  */
 
-#ifndef _CommonSlideViewProperties_H_
-#define _CommonSlideViewProperties_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_CommonSlideViewProperties_H_
+#define ASPOSESLIDESCLOUD_MODEL_CommonSlideViewProperties_H_
 
 #include "../ModelBase.h"
 
@@ -62,7 +62,7 @@ public:
 	/// <summary>
 	/// True if the view content should automatically scale to best fit the current window size.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getVariableScale() const;
+	ASPOSE_DLL_EXPORT bool isVariableScale() const;
 	ASPOSE_DLL_EXPORT void setVariableScale(bool value);
 	ASPOSE_DLL_EXPORT bool variableScaleIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetVariableScale();
@@ -77,4 +77,4 @@ protected:
 }
 }
 
-#endif /* _CommonSlideViewProperties_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_CommonSlideViewProperties_H_ */

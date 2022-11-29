@@ -41,12 +41,12 @@ Input::~Input()
 
 std::shared_ptr<InputFile> Input::getTemplate() const
 {
-	return m_Template;
+	return m__Template;
 }
 
 void Input::setTemplate(std::shared_ptr<InputFile> value)
 {
-	m_Template = value;
+	m__Template = value;
 	
 }
 
@@ -75,9 +75,9 @@ void Input::setTemplateData(std::shared_ptr<InputFile> value)
 web::json::value Input::toJson() const
 {
 	web::json::value val = web::json::value::object();
-	if (m_Template != nullptr)
+	if (m__Template != nullptr)
 	{
-		val[utility::conversions::to_string_t("Template")] = ModelBase::toJson(m_Template);
+		val[utility::conversions::to_string_t("Template")] = ModelBase::toJson(m__Template);
 	}
 	if (m_HtmlData != nullptr)
 	{
@@ -92,11 +92,11 @@ web::json::value Input::toJson() const
 
 void Input::fromJson(web::json::value& val)
 {
-	web::json::value* jsonForTemplate = ModelBase::getField(val, "Template");
-	if(jsonForTemplate != nullptr && !jsonForTemplate->is_null())
+	web::json::value* jsonFor_Template = ModelBase::getField(val, "Template");
+	if(jsonFor_Template != nullptr && !jsonFor_Template->is_null())
 	{
-		std::shared_ptr<void> instanceForTemplate = asposeslidescloud::api::ClassRegistry::deserialize(L"InputFile", *jsonForTemplate);
-		setTemplate(std::static_pointer_cast<InputFile>(instanceForTemplate));
+		std::shared_ptr<void> instanceFor_Template = asposeslidescloud::api::ClassRegistry::deserialize(L"InputFile", *jsonFor_Template);
+		setTemplate(std::static_pointer_cast<InputFile>(instanceFor_Template));
 	}
 	web::json::value* jsonForHtmlData = ModelBase::getField(val, "HtmlData");
 	if(jsonForHtmlData != nullptr && !jsonForHtmlData->is_null())

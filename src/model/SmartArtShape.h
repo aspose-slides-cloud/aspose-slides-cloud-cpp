@@ -29,8 +29,8 @@
  * Represents SmartArt resource.
  */
 
-#ifndef _SmartArtShape_H_
-#define _SmartArtShape_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SmartArtShape_H_
+#define ASPOSESLIDESCLOUD_MODEL_SmartArtShape_H_
 
 #include "GeometryShape.h"
 
@@ -68,4 +68,4 @@ protected:
 }
 }
 
-#endif /* _SmartArtShape_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SmartArtShape_H_ */

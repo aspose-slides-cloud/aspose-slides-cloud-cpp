@@ -29,8 +29,8 @@
  * Error
  */
 
-#ifndef _Error_H_
-#define _Error_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Error_H_
+#define ASPOSESLIDESCLOUD_MODEL_Error_H_
 
 #include "../ModelBase.h"
 
@@ -85,4 +85,4 @@ protected:
 }
 }
 
-#endif /* _Error_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Error_H_ */

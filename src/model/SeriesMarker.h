@@ -29,8 +29,8 @@
  * Represents a series marker
  */
 
-#ifndef _SeriesMarker_H_
-#define _SeriesMarker_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SeriesMarker_H_
+#define ASPOSESLIDESCLOUD_MODEL_SeriesMarker_H_
 
 #include "../ModelBase.h"
 
@@ -96,4 +96,4 @@ protected:
 }
 }
 
-#endif /* _SeriesMarker_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SeriesMarker_H_ */

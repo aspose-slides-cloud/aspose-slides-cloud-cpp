@@ -29,8 +29,8 @@
  * Replace text task.
  */
 
-#ifndef _ReplaceText_H_
-#define _ReplaceText_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ReplaceText_H_
+#define ASPOSESLIDESCLOUD_MODEL_ReplaceText_H_
 
 #include "Task.h"
 
@@ -67,7 +67,7 @@ public:
 	/// <summary>
 	/// True to ignore case in replace pattern search.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getIgnoreCase() const;
+	ASPOSE_DLL_EXPORT bool isIgnoreCase() const;
 	ASPOSE_DLL_EXPORT void setIgnoreCase(bool value);
 	/// <summary>
 	/// One-based position of the slide to perform the replace in. 0 to make the replace throughout the presentation.
@@ -85,4 +85,4 @@ protected:
 }
 }
 
-#endif /* _ReplaceText_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ReplaceText_H_ */

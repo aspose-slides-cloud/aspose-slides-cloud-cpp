@@ -29,8 +29,8 @@
  * Arc segment of the geometry path
  */
 
-#ifndef _ArcToPathSegment_H_
-#define _ArcToPathSegment_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ArcToPathSegment_H_
+#define ASPOSESLIDESCLOUD_MODEL_ArcToPathSegment_H_
 
 #include "PathSegment.h"
 
@@ -85,4 +85,4 @@ protected:
 }
 }
 
-#endif /* _ArcToPathSegment_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ArcToPathSegment_H_ */

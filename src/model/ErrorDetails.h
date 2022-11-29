@@ -29,8 +29,8 @@
  * The error details
  */
 
-#ifndef _ErrorDetails_H_
-#define _ErrorDetails_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ErrorDetails_H_
+#define ASPOSESLIDESCLOUD_MODEL_ErrorDetails_H_
 
 #include "../ModelBase.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _ErrorDetails_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ErrorDetails_H_ */

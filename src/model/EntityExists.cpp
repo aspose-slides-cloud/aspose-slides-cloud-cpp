@@ -39,7 +39,7 @@ EntityExists::~EntityExists()
 {
 }
 
-bool EntityExists::getExists() const
+bool EntityExists::isExists() const
 {
 	return m_Exists;
 }

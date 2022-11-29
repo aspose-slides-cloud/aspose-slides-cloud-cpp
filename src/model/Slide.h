@@ -29,8 +29,8 @@
  * Presentation slide.
  */
 
-#ifndef _Slide_H_
-#define _Slide_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Slide_H_
+#define ASPOSESLIDESCLOUD_MODEL_Slide_H_
 
 #include "ResourceBase.h"
 
@@ -68,7 +68,7 @@ public:
 	/// <summary>
 	/// Specifies if shapes of the master slide should be shown on the slide. True by default.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowMasterShapes() const;
+	ASPOSE_DLL_EXPORT bool isShowMasterShapes() const;
 	ASPOSE_DLL_EXPORT void setShowMasterShapes(bool value);
 	/// <summary>
 	/// Gets or sets the  link to the layout slide.
@@ -128,4 +128,4 @@ protected:
 }
 }
 
-#endif /* _Slide_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Slide_H_ */

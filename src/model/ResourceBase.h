@@ -29,8 +29,8 @@
  * Base class for all Slide&#39;s DTO objects 
  */
 
-#ifndef _ResourceBase_H_
-#define _ResourceBase_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ResourceBase_H_
+#define ASPOSESLIDESCLOUD_MODEL_ResourceBase_H_
 
 #include "../ModelBase.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _ResourceBase_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ResourceBase_H_ */

@@ -130,7 +130,7 @@ TEST_F(MergeTest, mergeAndSaveRequest) {
 	data2->setData(std::make_shared<std::ifstream>(L"TestData/test-unprotected.pptx", std::ios::binary));
 	api->mergeAndSaveOnline(outPath, { data1, data2 }).wait();
 	std::shared_ptr<ObjectExist> exists = api->objectExists(outPath).get();
-	EXPECT_TRUE(exists->getExists());
+	EXPECT_TRUE(exists->isExists());
 }
 
 TEST_F(MergeTest, mergeOrderedRequest) {

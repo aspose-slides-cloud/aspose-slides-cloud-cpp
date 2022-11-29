@@ -29,8 +29,8 @@
  * Master slide list.
  */
 
-#ifndef _MasterSlides_H_
-#define _MasterSlides_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_MasterSlides_H_
+#define ASPOSESLIDESCLOUD_MODEL_MasterSlides_H_
 
 #include "ResourceBase.h"
 
@@ -68,4 +68,4 @@ protected:
 }
 }
 
-#endif /* _MasterSlides_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_MasterSlides_H_ */

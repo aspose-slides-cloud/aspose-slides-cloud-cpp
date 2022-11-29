@@ -44,7 +44,7 @@ MatrixElement::~MatrixElement()
 {
 }
 
-bool MatrixElement::getHidePlaceholders() const
+bool MatrixElement::isHidePlaceholders() const
 {
 	return m_HidePlaceholders;
 }

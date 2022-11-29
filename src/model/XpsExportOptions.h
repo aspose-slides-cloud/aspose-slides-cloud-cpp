@@ -29,8 +29,8 @@
  * Provides options that control how a presentation is saved in XPS format.
  */
 
-#ifndef _XpsExportOptions_H_
-#define _XpsExportOptions_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_XpsExportOptions_H_
+#define ASPOSESLIDESCLOUD_MODEL_XpsExportOptions_H_
 
 #include "ExportOptions.h"
 
@@ -60,21 +60,21 @@ public:
 	/// <summary>
 	/// Specifies whether the generated document should include hidden slides or not. Default is false. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowHiddenSlides() const;
+	ASPOSE_DLL_EXPORT bool isShowHiddenSlides() const;
 	ASPOSE_DLL_EXPORT void setShowHiddenSlides(bool value);
 	ASPOSE_DLL_EXPORT bool showHiddenSlidesIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowHiddenSlides();
 	/// <summary>
 	/// True to convert all metafiles used in a presentation to the PNG images.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSaveMetafilesAsPng() const;
+	ASPOSE_DLL_EXPORT bool isSaveMetafilesAsPng() const;
 	ASPOSE_DLL_EXPORT void setSaveMetafilesAsPng(bool value);
 	ASPOSE_DLL_EXPORT bool saveMetafilesAsPngIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetSaveMetafilesAsPng();
 	/// <summary>
 	/// True to draw black frame around each slide.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getDrawSlidesFrame() const;
+	ASPOSE_DLL_EXPORT bool isDrawSlidesFrame() const;
 	ASPOSE_DLL_EXPORT void setDrawSlidesFrame(bool value);
 	ASPOSE_DLL_EXPORT bool drawSlidesFrameIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetDrawSlidesFrame();
@@ -91,4 +91,4 @@ protected:
 }
 }
 
-#endif /* _XpsExportOptions_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_XpsExportOptions_H_ */

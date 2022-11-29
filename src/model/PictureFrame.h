@@ -29,8 +29,8 @@
  * Represents PictureFrame resource.
  */
 
-#ifndef _PictureFrame_H_
-#define _PictureFrame_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_PictureFrame_H_
+#define ASPOSESLIDESCLOUD_MODEL_PictureFrame_H_
 
 #include "GeometryShape.h"
 
@@ -75,4 +75,4 @@ protected:
 }
 }
 
-#endif /* _PictureFrame_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_PictureFrame_H_ */

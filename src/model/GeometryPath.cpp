@@ -51,7 +51,7 @@ void GeometryPath::setFillMode(utility::string_t value)
 	
 }
 
-bool GeometryPath::getStroke() const
+bool GeometryPath::isStroke() const
 {
 	return m_Stroke;
 }

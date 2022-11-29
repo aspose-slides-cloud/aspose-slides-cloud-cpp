@@ -41,7 +41,7 @@ OleObjectFrame::~OleObjectFrame()
 {
 }
 
-bool OleObjectFrame::getIsObjectIcon() const
+bool OleObjectFrame::isIsObjectIcon() const
 {
 	return m_IsObjectIcon;
 }
@@ -129,7 +129,7 @@ void OleObjectFrame::setLinkPath(utility::string_t value)
 	
 }
 
-bool OleObjectFrame::getUpdateAutomatic() const
+bool OleObjectFrame::isUpdateAutomatic() const
 {
 	return m_UpdateAutomatic;
 }

@@ -29,8 +29,8 @@
  * Represents an Alpha Inverse effect.
  */
 
-#ifndef _AlphaInverseEffect_H_
-#define _AlphaInverseEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_AlphaInverseEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_AlphaInverseEffect_H_
 
 #include "ImageTransformEffect.h"
 
@@ -61,4 +61,4 @@ protected:
 }
 }
 
-#endif /* _AlphaInverseEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_AlphaInverseEffect_H_ */

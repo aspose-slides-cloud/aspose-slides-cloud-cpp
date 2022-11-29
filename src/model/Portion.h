@@ -29,8 +29,8 @@
  * Represents portion resource
  */
 
-#ifndef _Portion_H_
-#define _Portion_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Portion_H_
+#define ASPOSESLIDESCLOUD_MODEL_Portion_H_
 
 #include "ResourceBase.h"
 
@@ -140,7 +140,7 @@ public:
 	/// <summary>
 	/// True if smart tag should be cleaned.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getSmartTagClean() const;
+	ASPOSE_DLL_EXPORT bool isSmartTagClean() const;
 	ASPOSE_DLL_EXPORT void setSmartTagClean(bool value);
 	ASPOSE_DLL_EXPORT bool smartTagCleanIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetSmartTagClean();
@@ -269,4 +269,4 @@ protected:
 }
 }
 
-#endif /* _Portion_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Portion_H_ */

@@ -29,8 +29,8 @@
  * Represents segment of geometry path
  */
 
-#ifndef _PathSegment_H_
-#define _PathSegment_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_PathSegment_H_
+#define ASPOSESLIDESCLOUD_MODEL_PathSegment_H_
 
 #include "../ModelBase.h"
 
@@ -66,4 +66,4 @@ protected:
 }
 }
 
-#endif /* _PathSegment_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_PathSegment_H_ */

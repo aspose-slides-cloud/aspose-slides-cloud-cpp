@@ -44,7 +44,7 @@ VideoFrame::~VideoFrame()
 {
 }
 
-bool VideoFrame::getFullScreenMode() const
+bool VideoFrame::isFullScreenMode() const
 {
 	return m_FullScreenMode;
 }
@@ -65,7 +65,7 @@ void VideoFrame::unsetFullScreenMode()
 	m_FullScreenModeIsSet = false;
 }
 
-bool VideoFrame::getHideAtShowing() const
+bool VideoFrame::isHideAtShowing() const
 {
 	return m_HideAtShowing;
 }
@@ -86,7 +86,7 @@ void VideoFrame::unsetHideAtShowing()
 	m_HideAtShowingIsSet = false;
 }
 
-bool VideoFrame::getPlayLoopMode() const
+bool VideoFrame::isPlayLoopMode() const
 {
 	return m_PlayLoopMode;
 }
@@ -118,7 +118,7 @@ void VideoFrame::setPlayMode(utility::string_t value)
 	
 }
 
-bool VideoFrame::getRewindVideo() const
+bool VideoFrame::isRewindVideo() const
 {
 	return m_RewindVideo;
 }

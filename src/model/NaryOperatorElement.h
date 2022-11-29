@@ -29,8 +29,8 @@
  * Specifies an N-ary mathematical object, such as Summation and Integral.
  */
 
-#ifndef _NaryOperatorElement_H_
-#define _NaryOperatorElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_NaryOperatorElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_NaryOperatorElement_H_
 
 #include "MathElement.h"
 
@@ -82,21 +82,21 @@ public:
 	/// <summary>
 	/// Operator Character grows vertically to match its operand height
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getGrowToMatchOperandHeight() const;
+	ASPOSE_DLL_EXPORT bool isGrowToMatchOperandHeight() const;
 	ASPOSE_DLL_EXPORT void setGrowToMatchOperandHeight(bool value);
 	ASPOSE_DLL_EXPORT bool growToMatchOperandHeightIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetGrowToMatchOperandHeight();
 	/// <summary>
 	/// Hide Subscript
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHideSubscript() const;
+	ASPOSE_DLL_EXPORT bool isHideSubscript() const;
 	ASPOSE_DLL_EXPORT void setHideSubscript(bool value);
 	ASPOSE_DLL_EXPORT bool hideSubscriptIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHideSubscript();
 	/// <summary>
 	/// Hide Superscript
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHideSuperscript() const;
+	ASPOSE_DLL_EXPORT bool isHideSuperscript() const;
 	ASPOSE_DLL_EXPORT void setHideSuperscript(bool value);
 	ASPOSE_DLL_EXPORT bool hideSuperscriptIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHideSuperscript();
@@ -105,7 +105,7 @@ protected:
 	std::shared_ptr<MathElement> m_Base;
 	std::shared_ptr<MathElement> m_Subscript;
 	std::shared_ptr<MathElement> m_Superscript;
-	utility::string_t m_Operator;
+	utility::string_t m__Operator;
 	utility::string_t m_LimitLocation;
 	bool m_GrowToMatchOperandHeight;
 	bool m_GrowToMatchOperandHeightIsSet;
@@ -118,4 +118,4 @@ protected:
 }
 }
 
-#endif /* _NaryOperatorElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_NaryOperatorElement_H_ */

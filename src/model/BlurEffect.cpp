@@ -50,7 +50,7 @@ void BlurEffect::setRadius(double value)
 	
 }
 
-bool BlurEffect::getGrow() const
+bool BlurEffect::isGrow() const
 {
 	return m_Grow;
 }

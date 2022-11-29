@@ -29,8 +29,8 @@
  * Represents slide replace result DTO.
  */
 
-#ifndef _SlideReplaceResult_H_
-#define _SlideReplaceResult_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SlideReplaceResult_H_
+#define ASPOSESLIDESCLOUD_MODEL_SlideReplaceResult_H_
 
 #include "Slide.h"
 
@@ -68,4 +68,4 @@ protected:
 }
 }
 
-#endif /* _SlideReplaceResult_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SlideReplaceResult_H_ */

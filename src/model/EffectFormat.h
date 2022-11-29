@@ -29,8 +29,8 @@
  * Effect format
  */
 
-#ifndef _EffectFormat_H_
-#define _EffectFormat_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_EffectFormat_H_
+#define ASPOSESLIDESCLOUD_MODEL_EffectFormat_H_
 
 #include "../ModelBase.h"
 
@@ -115,4 +115,4 @@ protected:
 }
 }
 
-#endif /* _EffectFormat_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_EffectFormat_H_ */

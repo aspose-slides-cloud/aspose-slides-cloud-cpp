@@ -95,7 +95,7 @@ TEST_F(SplitTest, splitStorage) {
 	EXPECT_NE(utility::string_t::npos, storageIndex);
 	utility::string_t path = url.substr(storageIndex + storagePart.size());
 	std::shared_ptr<ObjectExist> exists = api->objectExists(path).get();
-	EXPECT_TRUE(exists->getExists());
+	EXPECT_TRUE(exists->isExists());
 }
 
 TEST_F(SplitTest, splitRequest) {
@@ -131,7 +131,7 @@ TEST_F(SplitTest, splitRequestToStorage) {
 	EXPECT_NE(utility::string_t::npos, storageIndex);
 	utility::string_t path = url.substr(storageIndex + storagePart.size());
 	std::shared_ptr<ObjectExist> exists = api->objectExists(path).get();
-	EXPECT_TRUE(exists->getExists());
+	EXPECT_TRUE(exists->isExists());
 }
 
 TEST_F(SplitTest, splitWithOptions) {
@@ -148,7 +148,7 @@ TEST_F(SplitTest, splitWithOptions) {
 	EXPECT_NE(utility::string_t::npos, storageIndex);
 	utility::string_t path = url.substr(storageIndex + storagePart.size());
 	std::shared_ptr<ObjectExist> exists = api->objectExists(path).get();
-	EXPECT_TRUE(exists->getExists());
+	EXPECT_TRUE(exists->isExists());
 }
 
 

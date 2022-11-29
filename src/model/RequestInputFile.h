@@ -29,8 +29,8 @@
  * Represents input file from multipart request.
  */
 
-#ifndef _RequestInputFile_H_
-#define _RequestInputFile_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_RequestInputFile_H_
+#define ASPOSESLIDESCLOUD_MODEL_RequestInputFile_H_
 
 #include "InputFile.h"
 
@@ -67,4 +67,4 @@ protected:
 }
 }
 
-#endif /* _RequestInputFile_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_RequestInputFile_H_ */

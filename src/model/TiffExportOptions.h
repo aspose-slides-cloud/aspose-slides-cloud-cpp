@@ -29,8 +29,8 @@
  * Provides options that control how a presentation is saved in TIFF format.
  */
 
-#ifndef _TiffExportOptions_H_
-#define _TiffExportOptions_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_TiffExportOptions_H_
+#define ASPOSESLIDESCLOUD_MODEL_TiffExportOptions_H_
 
 #include "ImageExportOptionsBase.h"
 
@@ -79,7 +79,7 @@ public:
 	/// <summary>
 	/// Specifies whether the generated document should include hidden slides or not. Default is false. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowHiddenSlides() const;
+	ASPOSE_DLL_EXPORT bool isShowHiddenSlides() const;
 	ASPOSE_DLL_EXPORT void setShowHiddenSlides(bool value);
 	ASPOSE_DLL_EXPORT bool showHiddenSlidesIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowHiddenSlides();
@@ -113,7 +113,7 @@ public:
 	/// <summary>
 	/// True if comments that have no author are displayed. (Applies only if comments are displayed).
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getShowCommentsByNoAuthor() const;
+	ASPOSE_DLL_EXPORT bool isShowCommentsByNoAuthor() const;
 	ASPOSE_DLL_EXPORT void setShowCommentsByNoAuthor(bool value);
 	ASPOSE_DLL_EXPORT bool showCommentsByNoAuthorIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowCommentsByNoAuthor();
@@ -139,4 +139,4 @@ protected:
 }
 }
 
-#endif /* _TiffExportOptions_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_TiffExportOptions_H_ */

@@ -85,7 +85,7 @@ void DelimiterElement::setEndingCharacter(utility::string_t value)
 	
 }
 
-bool DelimiterElement::getGrowToMatchOperandHeight() const
+bool DelimiterElement::isGrowToMatchOperandHeight() const
 {
 	return m_GrowToMatchOperandHeight;
 }

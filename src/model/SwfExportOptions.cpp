@@ -55,7 +55,7 @@ SwfExportOptions::~SwfExportOptions()
 {
 }
 
-bool SwfExportOptions::getShowHiddenSlides() const
+bool SwfExportOptions::isShowHiddenSlides() const
 {
 	return m_ShowHiddenSlides;
 }
@@ -76,7 +76,7 @@ void SwfExportOptions::unsetShowHiddenSlides()
 	m_ShowHiddenSlidesIsSet = false;
 }
 
-bool SwfExportOptions::getCompressed() const
+bool SwfExportOptions::isCompressed() const
 {
 	return m_Compressed;
 }
@@ -97,7 +97,7 @@ void SwfExportOptions::unsetCompressed()
 	m_CompressedIsSet = false;
 }
 
-bool SwfExportOptions::getViewerIncluded() const
+bool SwfExportOptions::isViewerIncluded() const
 {
 	return m_ViewerIncluded;
 }
@@ -118,7 +118,7 @@ void SwfExportOptions::unsetViewerIncluded()
 	m_ViewerIncludedIsSet = false;
 }
 
-bool SwfExportOptions::getShowPageBorder() const
+bool SwfExportOptions::isShowPageBorder() const
 {
 	return m_ShowPageBorder;
 }
@@ -139,7 +139,7 @@ void SwfExportOptions::unsetShowPageBorder()
 	m_ShowPageBorderIsSet = false;
 }
 
-bool SwfExportOptions::getShowFullScreen() const
+bool SwfExportOptions::isShowFullScreen() const
 {
 	return m_ShowFullScreen;
 }
@@ -160,7 +160,7 @@ void SwfExportOptions::unsetShowFullScreen()
 	m_ShowFullScreenIsSet = false;
 }
 
-bool SwfExportOptions::getShowPageStepper() const
+bool SwfExportOptions::isShowPageStepper() const
 {
 	return m_ShowPageStepper;
 }
@@ -181,7 +181,7 @@ void SwfExportOptions::unsetShowPageStepper()
 	m_ShowPageStepperIsSet = false;
 }
 
-bool SwfExportOptions::getShowSearch() const
+bool SwfExportOptions::isShowSearch() const
 {
 	return m_ShowSearch;
 }
@@ -202,7 +202,7 @@ void SwfExportOptions::unsetShowSearch()
 	m_ShowSearchIsSet = false;
 }
 
-bool SwfExportOptions::getShowTopPane() const
+bool SwfExportOptions::isShowTopPane() const
 {
 	return m_ShowTopPane;
 }
@@ -223,7 +223,7 @@ void SwfExportOptions::unsetShowTopPane()
 	m_ShowTopPaneIsSet = false;
 }
 
-bool SwfExportOptions::getShowBottomPane() const
+bool SwfExportOptions::isShowBottomPane() const
 {
 	return m_ShowBottomPane;
 }
@@ -244,7 +244,7 @@ void SwfExportOptions::unsetShowBottomPane()
 	m_ShowBottomPaneIsSet = false;
 }
 
-bool SwfExportOptions::getShowLeftPane() const
+bool SwfExportOptions::isShowLeftPane() const
 {
 	return m_ShowLeftPane;
 }
@@ -265,7 +265,7 @@ void SwfExportOptions::unsetShowLeftPane()
 	m_ShowLeftPaneIsSet = false;
 }
 
-bool SwfExportOptions::getStartOpenLeftPane() const
+bool SwfExportOptions::isStartOpenLeftPane() const
 {
 	return m_StartOpenLeftPane;
 }
@@ -286,7 +286,7 @@ void SwfExportOptions::unsetStartOpenLeftPane()
 	m_StartOpenLeftPaneIsSet = false;
 }
 
-bool SwfExportOptions::getEnableContextMenu() const
+bool SwfExportOptions::isEnableContextMenu() const
 {
 	return m_EnableContextMenu;
 }
@@ -404,7 +404,7 @@ void SwfExportOptions::setCommentsAreaColor(utility::string_t value)
 	
 }
 
-bool SwfExportOptions::getShowCommentsByNoAuthor() const
+bool SwfExportOptions::isShowCommentsByNoAuthor() const
 {
 	return m_ShowCommentsByNoAuthor;
 }

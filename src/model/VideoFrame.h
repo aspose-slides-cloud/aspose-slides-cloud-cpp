@@ -29,8 +29,8 @@
  * Represents VideoFrame resource.
  */
 
-#ifndef _VideoFrame_H_
-#define _VideoFrame_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_VideoFrame_H_
+#define ASPOSESLIDESCLOUD_MODEL_VideoFrame_H_
 
 #include "GeometryShape.h"
 
@@ -65,21 +65,21 @@ public:
 	/// <summary>
 	/// Determines whether a video is shown in full screen mode.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getFullScreenMode() const;
+	ASPOSE_DLL_EXPORT bool isFullScreenMode() const;
 	ASPOSE_DLL_EXPORT void setFullScreenMode(bool value);
 	ASPOSE_DLL_EXPORT bool fullScreenModeIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetFullScreenMode();
 	/// <summary>
 	/// Determines whether a VideoFrame is hidden. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHideAtShowing() const;
+	ASPOSE_DLL_EXPORT bool isHideAtShowing() const;
 	ASPOSE_DLL_EXPORT void setHideAtShowing(bool value);
 	ASPOSE_DLL_EXPORT bool hideAtShowingIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHideAtShowing();
 	/// <summary>
 	/// Determines whether a video is looped.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getPlayLoopMode() const;
+	ASPOSE_DLL_EXPORT bool isPlayLoopMode() const;
 	ASPOSE_DLL_EXPORT void setPlayLoopMode(bool value);
 	ASPOSE_DLL_EXPORT bool playLoopModeIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetPlayLoopMode();
@@ -91,7 +91,7 @@ public:
 	/// <summary>
 	/// Determines whether a video is automatically rewinded to start as soon as the movie has finished playing
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getRewindVideo() const;
+	ASPOSE_DLL_EXPORT bool isRewindVideo() const;
 	ASPOSE_DLL_EXPORT void setRewindVideo(bool value);
 	ASPOSE_DLL_EXPORT bool rewindVideoIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetRewindVideo();
@@ -129,4 +129,4 @@ protected:
 }
 }
 
-#endif /* _VideoFrame_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_VideoFrame_H_ */

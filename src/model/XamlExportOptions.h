@@ -29,8 +29,8 @@
  * Provides options that control how a presentation is saved in XAML format.
  */
 
-#ifndef _XamlExportOptions_H_
-#define _XamlExportOptions_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_XamlExportOptions_H_
+#define ASPOSESLIDESCLOUD_MODEL_XamlExportOptions_H_
 
 #include "ExportOptions.h"
 
@@ -60,7 +60,7 @@ public:
 	/// <summary>
 	/// Export hidden slides
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getExportHiddenSlides() const;
+	ASPOSE_DLL_EXPORT bool isExportHiddenSlides() const;
 	ASPOSE_DLL_EXPORT void setExportHiddenSlides(bool value);
 	ASPOSE_DLL_EXPORT bool exportHiddenSlidesIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetExportHiddenSlides();
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _XamlExportOptions_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_XamlExportOptions_H_ */

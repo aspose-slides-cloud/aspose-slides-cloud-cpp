@@ -41,7 +41,7 @@ ProtectionProperties::~ProtectionProperties()
 {
 }
 
-bool ProtectionProperties::getEncryptDocumentProperties() const
+bool ProtectionProperties::isEncryptDocumentProperties() const
 {
 	return m_EncryptDocumentProperties;
 }
@@ -62,7 +62,7 @@ void ProtectionProperties::unsetEncryptDocumentProperties()
 	m_EncryptDocumentPropertiesIsSet = false;
 }
 
-bool ProtectionProperties::getReadOnlyRecommended() const
+bool ProtectionProperties::isReadOnlyRecommended() const
 {
 	return m_ReadOnlyRecommended;
 }
@@ -105,7 +105,7 @@ void ProtectionProperties::setWritePassword(utility::string_t value)
 	
 }
 
-bool ProtectionProperties::getIsWriteProtected() const
+bool ProtectionProperties::isIsWriteProtected() const
 {
 	return m_IsWriteProtected;
 }
@@ -116,7 +116,7 @@ void ProtectionProperties::setIsWriteProtected(bool value)
 	
 }
 
-bool ProtectionProperties::getIsEncrypted() const
+bool ProtectionProperties::isIsEncrypted() const
 {
 	return m_IsEncrypted;
 }

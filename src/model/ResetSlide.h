@@ -29,8 +29,8 @@
  * Reset slide task.
  */
 
-#ifndef _ResetSlide_H_
-#define _ResetSlide_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ResetSlide_H_
+#define ASPOSESLIDESCLOUD_MODEL_ResetSlide_H_
 
 #include "Task.h"
 
@@ -67,4 +67,4 @@ protected:
 }
 }
 
-#endif /* _ResetSlide_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ResetSlide_H_ */

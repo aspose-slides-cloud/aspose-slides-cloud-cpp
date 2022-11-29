@@ -228,7 +228,7 @@ void Portion::setProofDisabled(utility::string_t value)
 	
 }
 
-bool Portion::getSmartTagClean() const
+bool Portion::isSmartTagClean() const
 {
 	return m_SmartTagClean;
 }

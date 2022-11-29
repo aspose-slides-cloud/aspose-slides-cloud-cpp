@@ -42,7 +42,7 @@ Html5ExportOptions::~Html5ExportOptions()
 {
 }
 
-bool Html5ExportOptions::getAnimateTransitions() const
+bool Html5ExportOptions::isAnimateTransitions() const
 {
 	return m_AnimateTransitions;
 }
@@ -63,7 +63,7 @@ void Html5ExportOptions::unsetAnimateTransitions()
 	m_AnimateTransitionsIsSet = false;
 }
 
-bool Html5ExportOptions::getAnimateShapes() const
+bool Html5ExportOptions::isAnimateShapes() const
 {
 	return m_AnimateShapes;
 }

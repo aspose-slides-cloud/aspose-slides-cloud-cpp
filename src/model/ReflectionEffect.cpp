@@ -182,7 +182,7 @@ void ReflectionEffect::setRectangleAlign(utility::string_t value)
 	
 }
 
-bool ReflectionEffect::getRotateShadowWithShape() const
+bool ReflectionEffect::isRotateShadowWithShape() const
 {
 	return m_RotateShadowWithShape;
 }

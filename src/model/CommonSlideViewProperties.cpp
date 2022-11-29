@@ -62,7 +62,7 @@ void CommonSlideViewProperties::unsetScale()
 	m_ScaleIsSet = false;
 }
 
-bool CommonSlideViewProperties::getVariableScale() const
+bool CommonSlideViewProperties::isVariableScale() const
 {
 	return m_VariableScale;
 }

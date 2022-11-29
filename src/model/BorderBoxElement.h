@@ -29,8 +29,8 @@
  * Rectangular or some other border around the MathElement. 
  */
 
-#ifndef _BorderBoxElement_H_
-#define _BorderBoxElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_BorderBoxElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_BorderBoxElement_H_
 
 #include "MathElement.h"
 
@@ -62,56 +62,56 @@ public:
 	/// <summary>
 	/// Hide Top Edge
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHideTop() const;
+	ASPOSE_DLL_EXPORT bool isHideTop() const;
 	ASPOSE_DLL_EXPORT void setHideTop(bool value);
 	ASPOSE_DLL_EXPORT bool hideTopIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHideTop();
 	/// <summary>
 	/// Hide Bottom Edge
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHideBottom() const;
+	ASPOSE_DLL_EXPORT bool isHideBottom() const;
 	ASPOSE_DLL_EXPORT void setHideBottom(bool value);
 	ASPOSE_DLL_EXPORT bool hideBottomIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHideBottom();
 	/// <summary>
 	/// Hide Left Edge
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHideLeft() const;
+	ASPOSE_DLL_EXPORT bool isHideLeft() const;
 	ASPOSE_DLL_EXPORT void setHideLeft(bool value);
 	ASPOSE_DLL_EXPORT bool hideLeftIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHideLeft();
 	/// <summary>
 	/// Hide Right Edge
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHideRight() const;
+	ASPOSE_DLL_EXPORT bool isHideRight() const;
 	ASPOSE_DLL_EXPORT void setHideRight(bool value);
 	ASPOSE_DLL_EXPORT bool hideRightIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHideRight();
 	/// <summary>
 	/// Strikethrough Horizontal
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getStrikethroughHorizontal() const;
+	ASPOSE_DLL_EXPORT bool isStrikethroughHorizontal() const;
 	ASPOSE_DLL_EXPORT void setStrikethroughHorizontal(bool value);
 	ASPOSE_DLL_EXPORT bool strikethroughHorizontalIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetStrikethroughHorizontal();
 	/// <summary>
 	/// Strikethrough Vertical
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getStrikethroughVertical() const;
+	ASPOSE_DLL_EXPORT bool isStrikethroughVertical() const;
 	ASPOSE_DLL_EXPORT void setStrikethroughVertical(bool value);
 	ASPOSE_DLL_EXPORT bool strikethroughVerticalIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetStrikethroughVertical();
 	/// <summary>
 	/// Strikethrough Bottom-Left to Top-Right
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getStrikethroughBottomLeftToTopRight() const;
+	ASPOSE_DLL_EXPORT bool isStrikethroughBottomLeftToTopRight() const;
 	ASPOSE_DLL_EXPORT void setStrikethroughBottomLeftToTopRight(bool value);
 	ASPOSE_DLL_EXPORT bool strikethroughBottomLeftToTopRightIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetStrikethroughBottomLeftToTopRight();
 	/// <summary>
 	/// Strikethrough Top-Left to Bottom-Right.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getStrikethroughTopLeftToBottomRight() const;
+	ASPOSE_DLL_EXPORT bool isStrikethroughTopLeftToBottomRight() const;
 	ASPOSE_DLL_EXPORT void setStrikethroughTopLeftToBottomRight(bool value);
 	ASPOSE_DLL_EXPORT bool strikethroughTopLeftToBottomRightIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetStrikethroughTopLeftToBottomRight();
@@ -139,4 +139,4 @@ protected:
 }
 }
 
-#endif /* _BorderBoxElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_BorderBoxElement_H_ */

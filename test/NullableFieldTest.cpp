@@ -102,6 +102,13 @@ TEST_F(NullableFieldTest, nullableProperties) {
 	series->setType(L"ClusteredColumn");
 	series->setDataPointType(L"OneValue");
 	series->setName(L"Series1");
+
+	std::shared_ptr<ChartCategory> category1(new ChartCategory());
+	category1->setValue(L"Category1");
+	std::shared_ptr<ChartCategory> category2(new ChartCategory());
+	category2->setValue(L"Category2");
+	dto->setCategories({ category1, category2 });
+
 	std::shared_ptr<OneValueChartDataPoint> point1(new OneValueChartDataPoint());
 	point1->setValue(40);
 	std::shared_ptr<OneValueChartDataPoint> point2(new OneValueChartDataPoint());

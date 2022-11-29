@@ -29,8 +29,8 @@
  * 
  */
 
-#ifndef _ShapesAlignmentType_H_
-#define _ShapesAlignmentType_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ShapesAlignmentType_H_
+#define ASPOSESLIDESCLOUD_MODEL_ShapesAlignmentType_H_
 
 #include "../ModelBase.h"
 
@@ -59,4 +59,4 @@ protected:
 }
 }
 
-#endif /* _ShapesAlignmentType_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ShapesAlignmentType_H_ */

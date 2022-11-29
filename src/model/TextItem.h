@@ -29,8 +29,8 @@
  * Represents text item, referenced by TextItems
  */
 
-#ifndef _TextItem_H_
-#define _TextItem_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_TextItem_H_
+#define ASPOSESLIDESCLOUD_MODEL_TextItem_H_
 
 #include "../ModelBase.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _TextItem_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_TextItem_H_ */

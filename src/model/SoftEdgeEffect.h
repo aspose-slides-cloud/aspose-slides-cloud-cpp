@@ -29,8 +29,8 @@
  * Represents soft edge effect 
  */
 
-#ifndef _SoftEdgeEffect_H_
-#define _SoftEdgeEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SoftEdgeEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_SoftEdgeEffect_H_
 
 #include "../ModelBase.h"
 
@@ -65,4 +65,4 @@ protected:
 }
 }
 
-#endif /* _SoftEdgeEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SoftEdgeEffect_H_ */

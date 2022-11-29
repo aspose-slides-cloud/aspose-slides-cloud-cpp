@@ -29,8 +29,8 @@
  * Represents font substitution rule.
  */
 
-#ifndef _FontSubstRule_H_
-#define _FontSubstRule_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_FontSubstRule_H_
+#define ASPOSESLIDESCLOUD_MODEL_FontSubstRule_H_
 
 #include "../ModelBase.h"
 
@@ -66,7 +66,7 @@ public:
 	/// <summary>
 	/// Substitute when font is not found. Default: true.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getNotFoundOnly() const;
+	ASPOSE_DLL_EXPORT bool isNotFoundOnly() const;
 	ASPOSE_DLL_EXPORT void setNotFoundOnly(bool value);
 	ASPOSE_DLL_EXPORT bool notFoundOnlyIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetNotFoundOnly();
@@ -81,4 +81,4 @@ protected:
 }
 }
 
-#endif /* _FontSubstRule_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_FontSubstRule_H_ */

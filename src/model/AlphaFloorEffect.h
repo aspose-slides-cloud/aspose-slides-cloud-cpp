@@ -29,8 +29,8 @@
  * /// Represents an Alpha Floor effect.
  */
 
-#ifndef _AlphaFloorEffect_H_
-#define _AlphaFloorEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_AlphaFloorEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_AlphaFloorEffect_H_
 
 #include "ImageTransformEffect.h"
 
@@ -61,4 +61,4 @@ protected:
 }
 }
 
-#endif /* _AlphaFloorEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_AlphaFloorEffect_H_ */

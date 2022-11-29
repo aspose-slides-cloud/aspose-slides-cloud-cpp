@@ -29,8 +29,8 @@
  * 
  */
 
-#ifndef _SpecialSlideType_H_
-#define _SpecialSlideType_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SpecialSlideType_H_
+#define ASPOSESLIDESCLOUD_MODEL_SpecialSlideType_H_
 
 #include "../ModelBase.h"
 
@@ -59,4 +59,4 @@ protected:
 }
 }
 
-#endif /* _SpecialSlideType_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SpecialSlideType_H_ */

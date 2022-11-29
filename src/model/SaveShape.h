@@ -29,8 +29,8 @@
  * Save shape task.
  */
 
-#ifndef _SaveShape_H_
-#define _SaveShape_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SaveShape_H_
+#define ASPOSESLIDESCLOUD_MODEL_SaveShape_H_
 
 #include "Task.h"
 
@@ -87,4 +87,4 @@ protected:
 }
 }
 
-#endif /* _SaveShape_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SaveShape_H_ */

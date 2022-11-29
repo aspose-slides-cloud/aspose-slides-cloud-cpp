@@ -65,7 +65,7 @@ void ArrayElement::setBaseJustification(utility::string_t value)
 	
 }
 
-bool ArrayElement::getMaximumDistribution() const
+bool ArrayElement::isMaximumDistribution() const
 {
 	return m_MaximumDistribution;
 }
@@ -86,7 +86,7 @@ void ArrayElement::unsetMaximumDistribution()
 	m_MaximumDistributionIsSet = false;
 }
 
-bool ArrayElement::getObjectDistribution() const
+bool ArrayElement::isObjectDistribution() const
 {
 	return m_ObjectDistribution;
 }

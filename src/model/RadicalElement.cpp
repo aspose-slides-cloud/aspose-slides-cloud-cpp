@@ -63,7 +63,7 @@ void RadicalElement::setDegree(std::shared_ptr<MathElement> value)
 	
 }
 
-bool RadicalElement::getHideDegree() const
+bool RadicalElement::isHideDegree() const
 {
 	return m_HideDegree;
 }

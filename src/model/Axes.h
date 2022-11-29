@@ -29,8 +29,8 @@
  * Represents chart axes
  */
 
-#ifndef _Axes_H_
-#define _Axes_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Axes_H_
+#define ASPOSESLIDESCLOUD_MODEL_Axes_H_
 
 #include "../ModelBase.h"
 
@@ -84,4 +84,4 @@ protected:
 }
 }
 
-#endif /* _Axes_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Axes_H_ */

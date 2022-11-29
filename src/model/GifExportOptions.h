@@ -29,8 +29,8 @@
  * Provides options that control how a presentation is saved in Gif format.
  */
 
-#ifndef _GifExportOptions_H_
-#define _GifExportOptions_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_GifExportOptions_H_
+#define ASPOSESLIDESCLOUD_MODEL_GifExportOptions_H_
 
 #include "ImageExportOptionsBase.h"
 
@@ -60,7 +60,7 @@ public:
 	/// <summary>
 	/// Determines whether hidden slides will be exported.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getExportHiddenSlides() const;
+	ASPOSE_DLL_EXPORT bool isExportHiddenSlides() const;
 	ASPOSE_DLL_EXPORT void setExportHiddenSlides(bool value);
 	ASPOSE_DLL_EXPORT bool exportHiddenSlidesIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetExportHiddenSlides();
@@ -91,4 +91,4 @@ protected:
 }
 }
 
-#endif /* _GifExportOptions_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_GifExportOptions_H_ */

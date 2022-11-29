@@ -61,6 +61,28 @@ void XYSeries::setNumberFormatOfXValues(utility::string_t value)
 	
 }
 
+std::shared_ptr<DataSource> XYSeries::getDataSourceForXValues() const
+{
+	return m_DataSourceForXValues;
+}
+
+void XYSeries::setDataSourceForXValues(std::shared_ptr<DataSource> value)
+{
+	m_DataSourceForXValues = value;
+	
+}
+
+std::shared_ptr<DataSource> XYSeries::getDataSourceForYValues() const
+{
+	return m_DataSourceForYValues;
+}
+
+void XYSeries::setDataSourceForYValues(std::shared_ptr<DataSource> value)
+{
+	m_DataSourceForYValues = value;
+	
+}
+
 web::json::value XYSeries::toJson() const
 {
 	web::json::value val = this->Series::toJson();
@@ -71,6 +93,14 @@ web::json::value XYSeries::toJson() const
 	if (!m_NumberFormatOfXValues.empty())
 	{
 		val[utility::conversions::to_string_t("NumberFormatOfXValues")] = ModelBase::toJson(m_NumberFormatOfXValues);
+	}
+	if (m_DataSourceForXValues != nullptr)
+	{
+		val[utility::conversions::to_string_t("DataSourceForXValues")] = ModelBase::toJson(m_DataSourceForXValues);
+	}
+	if (m_DataSourceForYValues != nullptr)
+	{
+		val[utility::conversions::to_string_t("DataSourceForYValues")] = ModelBase::toJson(m_DataSourceForYValues);
 	}
 	return val;
 }
@@ -87,6 +117,18 @@ void XYSeries::fromJson(web::json::value& val)
 	if(jsonForNumberFormatOfXValues != nullptr && !jsonForNumberFormatOfXValues->is_null())
 	{
 		setNumberFormatOfXValues(ModelBase::stringFromJson(*jsonForNumberFormatOfXValues));
+	}
+	web::json::value* jsonForDataSourceForXValues = ModelBase::getField(val, "DataSourceForXValues");
+	if(jsonForDataSourceForXValues != nullptr && !jsonForDataSourceForXValues->is_null())
+	{
+		std::shared_ptr<void> instanceForDataSourceForXValues = asposeslidescloud::api::ClassRegistry::deserialize(L"DataSource", *jsonForDataSourceForXValues);
+		setDataSourceForXValues(std::static_pointer_cast<DataSource>(instanceForDataSourceForXValues));
+	}
+	web::json::value* jsonForDataSourceForYValues = ModelBase::getField(val, "DataSourceForYValues");
+	if(jsonForDataSourceForYValues != nullptr && !jsonForDataSourceForYValues->is_null())
+	{
+		std::shared_ptr<void> instanceForDataSourceForYValues = asposeslidescloud::api::ClassRegistry::deserialize(L"DataSource", *jsonForDataSourceForYValues);
+		setDataSourceForYValues(std::static_pointer_cast<DataSource>(instanceForDataSourceForYValues));
 	}
 }
 

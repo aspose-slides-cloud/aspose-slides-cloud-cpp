@@ -29,8 +29,8 @@
  * Split document result.
  */
 
-#ifndef _SplitDocumentResult_H_
-#define _SplitDocumentResult_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_SplitDocumentResult_H_
+#define ASPOSESLIDESCLOUD_MODEL_SplitDocumentResult_H_
 
 #include "ResourceBase.h"
 
@@ -68,4 +68,4 @@ protected:
 }
 }
 
-#endif /* _SplitDocumentResult_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_SplitDocumentResult_H_ */

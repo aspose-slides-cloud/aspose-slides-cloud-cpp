@@ -29,8 +29,8 @@
  * Represents notes slide DTO.
  */
 
-#ifndef _NotesSlide_H_
-#define _NotesSlide_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_NotesSlide_H_
+#define ASPOSESLIDESCLOUD_MODEL_NotesSlide_H_
 
 #include "ResourceBase.h"
 
@@ -75,4 +75,4 @@ protected:
 }
 }
 
-#endif /* _NotesSlide_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_NotesSlide_H_ */

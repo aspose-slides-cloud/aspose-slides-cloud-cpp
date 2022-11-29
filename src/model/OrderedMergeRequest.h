@@ -29,8 +29,8 @@
  * Request for presentations merge with optional order of slides
  */
 
-#ifndef _OrderedMergeRequest_H_
-#define _OrderedMergeRequest_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_OrderedMergeRequest_H_
+#define ASPOSESLIDESCLOUD_MODEL_OrderedMergeRequest_H_
 
 #include "../ModelBase.h"
 
@@ -67,4 +67,4 @@ protected:
 }
 }
 
-#endif /* _OrderedMergeRequest_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_OrderedMergeRequest_H_ */

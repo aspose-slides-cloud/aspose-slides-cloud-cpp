@@ -29,8 +29,8 @@
  * Provides options that control how a shape is saved in thumbnail.
  */
 
-#ifndef _ShapeImageExportOptions_H_
-#define _ShapeImageExportOptions_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ShapeImageExportOptions_H_
+#define ASPOSESLIDESCLOUD_MODEL_ShapeImageExportOptions_H_
 
 #include "../ModelBase.h"
 
@@ -90,4 +90,4 @@ protected:
 }
 }
 
-#endif /* _ShapeImageExportOptions_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ShapeImageExportOptions_H_ */

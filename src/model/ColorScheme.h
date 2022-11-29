@@ -29,8 +29,8 @@
  * Slide&#39;s color scheme DTO
  */
 
-#ifndef _ColorScheme_H_
-#define _ColorScheme_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ColorScheme_H_
+#define ASPOSESLIDESCLOUD_MODEL_ColorScheme_H_
 
 #include "ResourceBase.h"
 
@@ -135,4 +135,4 @@ protected:
 }
 }
 
-#endif /* _ColorScheme_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ColorScheme_H_ */

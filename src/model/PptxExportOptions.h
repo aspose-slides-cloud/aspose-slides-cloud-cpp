@@ -29,8 +29,8 @@
  * Provides options that control how a presentation is saved in PPTX format.
  */
 
-#ifndef _PptxExportOptions_H_
-#define _PptxExportOptions_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_PptxExportOptions_H_
+#define ASPOSESLIDESCLOUD_MODEL_PptxExportOptions_H_
 
 #include "ExportOptions.h"
 
@@ -70,4 +70,4 @@ protected:
 }
 }
 
-#endif /* _PptxExportOptions_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_PptxExportOptions_H_ */

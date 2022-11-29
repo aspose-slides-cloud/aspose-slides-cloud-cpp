@@ -51,7 +51,7 @@ void FontData::setFontName(utility::string_t value)
 	
 }
 
-bool FontData::getIsEmbedded() const
+bool FontData::isIsEmbedded() const
 {
 	return m_IsEmbedded;
 }

@@ -29,8 +29,8 @@
  * Radical function
  */
 
-#ifndef _RadicalElement_H_
-#define _RadicalElement_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_RadicalElement_H_
+#define ASPOSESLIDESCLOUD_MODEL_RadicalElement_H_
 
 #include "MathElement.h"
 
@@ -67,7 +67,7 @@ public:
 	/// <summary>
 	/// Hide degree
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getHideDegree() const;
+	ASPOSE_DLL_EXPORT bool isHideDegree() const;
 	ASPOSE_DLL_EXPORT void setHideDegree(bool value);
 	ASPOSE_DLL_EXPORT bool hideDegreeIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHideDegree();
@@ -82,4 +82,4 @@ protected:
 }
 }
 
-#endif /* _RadicalElement_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_RadicalElement_H_ */

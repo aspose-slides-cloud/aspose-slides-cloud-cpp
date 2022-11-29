@@ -29,8 +29,8 @@
  * Represents outer shadow effect 
  */
 
-#ifndef _OuterShadowEffect_H_
-#define _OuterShadowEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_OuterShadowEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_OuterShadowEffect_H_
 
 #include "../ModelBase.h"
 
@@ -84,4 +84,4 @@ protected:
 }
 }
 
-#endif /* _OuterShadowEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_OuterShadowEffect_H_ */

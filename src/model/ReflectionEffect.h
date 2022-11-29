@@ -29,8 +29,8 @@
  * Represents reflection effect 
  */
 
-#ifndef _ReflectionEffect_H_
-#define _ReflectionEffect_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ReflectionEffect_H_
+#define ASPOSESLIDESCLOUD_MODEL_ReflectionEffect_H_
 
 #include "../ModelBase.h"
 
@@ -121,7 +121,7 @@ public:
 	/// <summary>
 	/// true if the reflection should rotate with the shape when the shape is rotated
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool getRotateShadowWithShape() const;
+	ASPOSE_DLL_EXPORT bool isRotateShadowWithShape() const;
 	ASPOSE_DLL_EXPORT void setRotateShadowWithShape(bool value);
 
 protected:
@@ -144,4 +144,4 @@ protected:
 }
 }
 
-#endif /* _ReflectionEffect_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ReflectionEffect_H_ */

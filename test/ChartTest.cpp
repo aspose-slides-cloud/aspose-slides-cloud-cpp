@@ -434,7 +434,7 @@ TEST_F(ChartTest, chartHideChartLegend) {
 	chart->getLegend()->setHasLegend(false);
 	shape = api->updateShape(fileName, slideIndex, shapeIndex, chart, password, folderName).get();
 	chart = std::static_pointer_cast<Chart>(shape);
-	EXPECT_EQ(false, chart->getLegend()->getHasLegend());
+	EXPECT_EQ(false, chart->getLegend()->isHasLegend());
 }
 
 TEST_F(ChartTest, chartGridLinesFormat) {

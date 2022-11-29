@@ -29,8 +29,8 @@
  * Camera
  */
 
-#ifndef _Camera_H_
-#define _Camera_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_Camera_H_
+#define ASPOSESLIDESCLOUD_MODEL_Camera_H_
 
 #include "../ModelBase.h"
 
@@ -111,4 +111,4 @@ protected:
 }
 }
 
-#endif /* _Camera_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_Camera_H_ */

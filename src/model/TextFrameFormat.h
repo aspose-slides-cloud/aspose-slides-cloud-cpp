@@ -29,8 +29,8 @@
  * Contains the TextFrame&#39;s formatting properties.
  */
 
-#ifndef _TextFrameFormat_H_
-#define _TextFrameFormat_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_TextFrameFormat_H_
+#define ASPOSESLIDESCLOUD_MODEL_TextFrameFormat_H_
 
 #include "../ModelBase.h"
 
@@ -73,4 +73,4 @@ protected:
 }
 }
 
-#endif /* _TextFrameFormat_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_TextFrameFormat_H_ */
