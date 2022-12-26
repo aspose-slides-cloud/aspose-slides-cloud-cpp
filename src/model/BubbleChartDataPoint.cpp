@@ -33,6 +33,7 @@ namespace model {
 
 BubbleChartDataPoint::BubbleChartDataPoint()
 {
+	setType(L"Bubble");
 }
 
 BubbleChartDataPoint::~BubbleChartDataPoint()

@@ -83,6 +83,17 @@ void DataPoint::setLineFormat(std::shared_ptr<LineFormat> value)
 	
 }
 
+utility::string_t DataPoint::getType() const
+{
+	return m_Type;
+}
+
+void DataPoint::setType(utility::string_t value)
+{
+	m_Type = value;
+	
+}
+
 web::json::value DataPoint::toJson() const
 {
 	web::json::value val = web::json::value::object();
@@ -101,6 +112,10 @@ web::json::value DataPoint::toJson() const
 	if (m_LineFormat != nullptr)
 	{
 		val[utility::conversions::to_string_t("LineFormat")] = ModelBase::toJson(m_LineFormat);
+	}
+	if (!m_Type.empty())
+	{
+		val[utility::conversions::to_string_t("Type")] = ModelBase::toJson(m_Type);
 	}
 	return val;
 }
@@ -130,6 +145,11 @@ void DataPoint::fromJson(web::json::value& val)
 	{
 		std::shared_ptr<void> instanceForLineFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"LineFormat", *jsonForLineFormat);
 		setLineFormat(std::static_pointer_cast<LineFormat>(instanceForLineFormat));
+	}
+	web::json::value* jsonForType = ModelBase::getField(val, "Type");
+	if(jsonForType != nullptr && !jsonForType->is_null())
+	{
+		setType(ModelBase::stringFromJson(*jsonForType));
 	}
 }
 

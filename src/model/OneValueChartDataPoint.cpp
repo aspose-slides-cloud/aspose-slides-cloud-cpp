@@ -35,6 +35,7 @@ OneValueChartDataPoint::OneValueChartDataPoint()
 {
 	m_SetAsTotalIsSet = false;
 	m_InvertIfNegativeIsSet = false;
+	setType(L"OneValue");
 }
 
 OneValueChartDataPoint::~OneValueChartDataPoint()

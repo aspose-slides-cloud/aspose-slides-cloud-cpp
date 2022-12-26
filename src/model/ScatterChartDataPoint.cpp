@@ -33,6 +33,7 @@ namespace model {
 
 ScatterChartDataPoint::ScatterChartDataPoint()
 {
+	setType(L"Scatter");
 }
 
 ScatterChartDataPoint::~ScatterChartDataPoint()
