@@ -63,11 +63,15 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT double getXValue() const;
 	ASPOSE_DLL_EXPORT void setXValue(double value);
+	ASPOSE_DLL_EXPORT bool xValueIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetXValue();
 	/// <summary>
 	/// Y-value
 	/// </summary>
 	ASPOSE_DLL_EXPORT double getYValue() const;
 	ASPOSE_DLL_EXPORT void setYValue(double value);
+	ASPOSE_DLL_EXPORT bool yValueIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetYValue();
 	/// <summary>
 	/// Spreadsheet formula in A1-style.
 	/// </summary>
@@ -81,7 +85,9 @@ public:
 
 protected:
 	double m_XValue;
+	bool m_XValueIsSet;
 	double m_YValue;
+	bool m_YValueIsSet;
 	utility::string_t m_XValueFormula;
 	utility::string_t m_YValueFormula;
 };

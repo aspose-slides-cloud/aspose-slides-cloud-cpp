@@ -63,6 +63,8 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT double getBubbleSize() const;
 	ASPOSE_DLL_EXPORT void setBubbleSize(double value);
+	ASPOSE_DLL_EXPORT bool bubbleSizeIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetBubbleSize();
 	/// <summary>
 	/// Spreadsheet formula in A1-style.
 	/// </summary>
@@ -71,6 +73,7 @@ public:
 
 protected:
 	double m_BubbleSize;
+	bool m_BubbleSizeIsSet;
 	utility::string_t m_BubbleSizeFormula;
 };
 

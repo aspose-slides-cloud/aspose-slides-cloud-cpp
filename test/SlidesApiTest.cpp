@@ -954,6 +954,253 @@ TEST_F(SlidesApiTest, alignSpecialSlideShapesInvalidSubShape) {
 	}
 }
 
+TEST_F(SlidesApiTest, compressEmbeddedFonts) {
+	utility::string_t paramName = utils->getTestValue("compressEmbeddedFonts", "name");
+	utility::string_t paramPassword = utils->getTestValue("compressEmbeddedFonts", "password");
+	utility::string_t paramFolder = utils->getTestValue("compressEmbeddedFonts", "folder");
+	utility::string_t paramStorage = utils->getTestValue("compressEmbeddedFonts", "storage");
+	utils->initialize("compressEmbeddedFonts", "");
+	api->compressEmbeddedFonts(paramName, paramPassword, paramFolder, paramStorage).wait();
+}
+
+TEST_F(SlidesApiTest, compressEmbeddedFontsInvalidName) {
+	utility::string_t paramName = utils->getTestValue("compressEmbeddedFonts", "name");
+	utility::string_t paramPassword = utils->getTestValue("compressEmbeddedFonts", "password");
+	utility::string_t paramFolder = utils->getTestValue("compressEmbeddedFonts", "folder");
+	utility::string_t paramStorage = utils->getTestValue("compressEmbeddedFonts", "storage");
+	paramName = utils->getInvalidTestValue("compressEmbeddedFonts", "name", paramName);
+	utils->initialize("compressEmbeddedFonts", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->compressEmbeddedFonts(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("compressEmbeddedFonts", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("compressEmbeddedFonts", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("compressEmbeddedFonts", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("compressEmbeddedFonts", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("compressEmbeddedFonts", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, compressEmbeddedFontsInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("compressEmbeddedFonts", "name");
+	utility::string_t paramPassword = utils->getTestValue("compressEmbeddedFonts", "password");
+	utility::string_t paramFolder = utils->getTestValue("compressEmbeddedFonts", "folder");
+	utility::string_t paramStorage = utils->getTestValue("compressEmbeddedFonts", "storage");
+	paramPassword = utils->getInvalidTestValue("compressEmbeddedFonts", "password", paramPassword);
+	utils->initialize("compressEmbeddedFonts", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->compressEmbeddedFonts(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("compressEmbeddedFonts", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("compressEmbeddedFonts", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("compressEmbeddedFonts", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("compressEmbeddedFonts", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("compressEmbeddedFonts", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, compressEmbeddedFontsInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("compressEmbeddedFonts", "name");
+	utility::string_t paramPassword = utils->getTestValue("compressEmbeddedFonts", "password");
+	utility::string_t paramFolder = utils->getTestValue("compressEmbeddedFonts", "folder");
+	utility::string_t paramStorage = utils->getTestValue("compressEmbeddedFonts", "storage");
+	paramFolder = utils->getInvalidTestValue("compressEmbeddedFonts", "folder", paramFolder);
+	utils->initialize("compressEmbeddedFonts", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->compressEmbeddedFonts(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("compressEmbeddedFonts", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("compressEmbeddedFonts", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("compressEmbeddedFonts", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("compressEmbeddedFonts", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("compressEmbeddedFonts", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, compressEmbeddedFontsInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("compressEmbeddedFonts", "name");
+	utility::string_t paramPassword = utils->getTestValue("compressEmbeddedFonts", "password");
+	utility::string_t paramFolder = utils->getTestValue("compressEmbeddedFonts", "folder");
+	utility::string_t paramStorage = utils->getTestValue("compressEmbeddedFonts", "storage");
+	paramStorage = utils->getInvalidTestValue("compressEmbeddedFonts", "storage", paramStorage);
+	utils->initialize("compressEmbeddedFonts", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->compressEmbeddedFonts(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("compressEmbeddedFonts", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("compressEmbeddedFonts", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("compressEmbeddedFonts", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("compressEmbeddedFonts", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("compressEmbeddedFonts", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, compressEmbeddedFontsOnline) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("compressEmbeddedFontsOnline", "document");
+	utility::string_t paramPassword = utils->getTestValue("compressEmbeddedFontsOnline", "password");
+	utils->initialize("compressEmbeddedFontsOnline", "");
+	HttpContent result = api->compressEmbeddedFontsOnline(paramDocument, paramPassword).get();
+	EXPECT_FALSE(result.getData()->eof());
+}
+
+TEST_F(SlidesApiTest, compressEmbeddedFontsOnlineInvalidDocument) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("compressEmbeddedFontsOnline", "document");
+	utility::string_t paramPassword = utils->getTestValue("compressEmbeddedFontsOnline", "password");
+	paramDocument = utils->getInvalidBinaryTestValue("compressEmbeddedFontsOnline", "document", paramDocument);
+	utils->initialize("compressEmbeddedFontsOnline", "document", paramDocument);
+
+	bool failed = true;
+	try
+	{
+		api->compressEmbeddedFontsOnline(paramDocument, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("compressEmbeddedFontsOnline", "document");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("compressEmbeddedFontsOnline", "document", paramDocument);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("compressEmbeddedFontsOnline", "document");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("compressEmbeddedFontsOnline", "document", paramDocument);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("compressEmbeddedFontsOnline", "document"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, compressEmbeddedFontsOnlineInvalidPassword) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("compressEmbeddedFontsOnline", "document");
+	utility::string_t paramPassword = utils->getTestValue("compressEmbeddedFontsOnline", "password");
+	paramPassword = utils->getInvalidTestValue("compressEmbeddedFontsOnline", "password", paramPassword);
+	utils->initialize("compressEmbeddedFontsOnline", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->compressEmbeddedFontsOnline(paramDocument, paramPassword).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("compressEmbeddedFontsOnline", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("compressEmbeddedFontsOnline", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("compressEmbeddedFontsOnline", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("compressEmbeddedFontsOnline", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("compressEmbeddedFontsOnline", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, convert) {
 	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("convert", "document");
 	utility::string_t paramFormat = utils->getTestValue("convert", "format");

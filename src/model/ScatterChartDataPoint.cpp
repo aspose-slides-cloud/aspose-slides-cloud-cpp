@@ -33,6 +33,8 @@ namespace model {
 
 ScatterChartDataPoint::ScatterChartDataPoint()
 {
+	m_XValueIsSet = false;
+	m_YValueIsSet = false;
 	setType(L"Scatter");
 }
 
@@ -48,7 +50,17 @@ double ScatterChartDataPoint::getXValue() const
 void ScatterChartDataPoint::setXValue(double value)
 {
 	m_XValue = value;
-	
+	m_XValueIsSet = true;
+}
+
+bool ScatterChartDataPoint::xValueIsSet() const
+{
+	return m_XValueIsSet;
+}
+
+void ScatterChartDataPoint::unsetXValue()
+{
+	m_XValueIsSet = false;
 }
 
 double ScatterChartDataPoint::getYValue() const
@@ -59,7 +71,17 @@ double ScatterChartDataPoint::getYValue() const
 void ScatterChartDataPoint::setYValue(double value)
 {
 	m_YValue = value;
-	
+	m_YValueIsSet = true;
+}
+
+bool ScatterChartDataPoint::yValueIsSet() const
+{
+	return m_YValueIsSet;
+}
+
+void ScatterChartDataPoint::unsetYValue()
+{
+	m_YValueIsSet = false;
 }
 
 utility::string_t ScatterChartDataPoint::getXValueFormula() const
@@ -87,8 +109,14 @@ void ScatterChartDataPoint::setYValueFormula(utility::string_t value)
 web::json::value ScatterChartDataPoint::toJson() const
 {
 	web::json::value val = this->DataPoint::toJson();
-	val[utility::conversions::to_string_t("XValue")] = ModelBase::toJson(m_XValue);
-	val[utility::conversions::to_string_t("YValue")] = ModelBase::toJson(m_YValue);
+	if(m_XValueIsSet)
+	{
+		val[utility::conversions::to_string_t("XValue")] = ModelBase::toJson(m_XValue);
+	}
+	if(m_YValueIsSet)
+	{
+		val[utility::conversions::to_string_t("YValue")] = ModelBase::toJson(m_YValue);
+	}
 	if (!m_XValueFormula.empty())
 	{
 		val[utility::conversions::to_string_t("XValueFormula")] = ModelBase::toJson(m_XValueFormula);

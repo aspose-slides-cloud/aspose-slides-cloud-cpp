@@ -33,6 +33,7 @@ namespace model {
 
 BubbleChartDataPoint::BubbleChartDataPoint()
 {
+	m_BubbleSizeIsSet = false;
 	setType(L"Bubble");
 }
 
@@ -48,7 +49,17 @@ double BubbleChartDataPoint::getBubbleSize() const
 void BubbleChartDataPoint::setBubbleSize(double value)
 {
 	m_BubbleSize = value;
-	
+	m_BubbleSizeIsSet = true;
+}
+
+bool BubbleChartDataPoint::bubbleSizeIsSet() const
+{
+	return m_BubbleSizeIsSet;
+}
+
+void BubbleChartDataPoint::unsetBubbleSize()
+{
+	m_BubbleSizeIsSet = false;
 }
 
 utility::string_t BubbleChartDataPoint::getBubbleSizeFormula() const
@@ -65,7 +76,10 @@ void BubbleChartDataPoint::setBubbleSizeFormula(utility::string_t value)
 web::json::value BubbleChartDataPoint::toJson() const
 {
 	web::json::value val = this->ScatterChartDataPoint::toJson();
-	val[utility::conversions::to_string_t("BubbleSize")] = ModelBase::toJson(m_BubbleSize);
+	if(m_BubbleSizeIsSet)
+	{
+		val[utility::conversions::to_string_t("BubbleSize")] = ModelBase::toJson(m_BubbleSize);
+	}
 	if (!m_BubbleSizeFormula.empty())
 	{
 		val[utility::conversions::to_string_t("BubbleSizeFormula")] = ModelBase::toJson(m_BubbleSizeFormula);

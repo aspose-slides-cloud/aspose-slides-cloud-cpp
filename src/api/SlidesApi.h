@@ -134,6 +134,16 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> alignSpecialSlideShapes(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t alignmentType, boost::optional<bool> alignToSlide = bool(), std::vector<int32_t> shapes = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t subShape = utility::string_t());
 
 	/// <summary>
+	/// Compresses embedded fonts by removing unused characters.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<void> compressEmbeddedFonts(utility::string_t name, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Compresses embedded fonts by removing unused characters.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> compressEmbeddedFontsOnline(std::shared_ptr<HttpContent> document, utility::string_t password = utility::string_t());
+
+	/// <summary>
 	/// Convert presentation from request content to format specified.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> convert(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::vector<int32_t> slides = std::vector<int32_t>(), std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>());

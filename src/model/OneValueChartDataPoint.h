@@ -63,6 +63,8 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT double getValue() const;
 	ASPOSE_DLL_EXPORT void setValue(double value);
+	ASPOSE_DLL_EXPORT bool valueIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetValue();
 	/// <summary>
 	/// Spreadsheet formula in A1-style.
 	/// </summary>
@@ -85,6 +87,7 @@ public:
 
 protected:
 	double m_Value;
+	bool m_ValueIsSet;
 	utility::string_t m_ValueFormula;
 	bool m_SetAsTotal;
 	bool m_SetAsTotalIsSet;

@@ -33,6 +33,7 @@ namespace model {
 
 OneValueChartDataPoint::OneValueChartDataPoint()
 {
+	m_ValueIsSet = false;
 	m_SetAsTotalIsSet = false;
 	m_InvertIfNegativeIsSet = false;
 	setType(L"OneValue");
@@ -50,7 +51,17 @@ double OneValueChartDataPoint::getValue() const
 void OneValueChartDataPoint::setValue(double value)
 {
 	m_Value = value;
-	
+	m_ValueIsSet = true;
+}
+
+bool OneValueChartDataPoint::valueIsSet() const
+{
+	return m_ValueIsSet;
+}
+
+void OneValueChartDataPoint::unsetValue()
+{
+	m_ValueIsSet = false;
 }
 
 utility::string_t OneValueChartDataPoint::getValueFormula() const
@@ -109,7 +120,10 @@ void OneValueChartDataPoint::unsetInvertIfNegative()
 web::json::value OneValueChartDataPoint::toJson() const
 {
 	web::json::value val = this->DataPoint::toJson();
-	val[utility::conversions::to_string_t("Value")] = ModelBase::toJson(m_Value);
+	if(m_ValueIsSet)
+	{
+		val[utility::conversions::to_string_t("Value")] = ModelBase::toJson(m_Value);
+	}
 	if (!m_ValueFormula.empty())
 	{
 		val[utility::conversions::to_string_t("ValueFormula")] = ModelBase::toJson(m_ValueFormula);
