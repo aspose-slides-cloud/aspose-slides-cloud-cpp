@@ -113,6 +113,11 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getColorSource() const;
 	ASPOSE_DLL_EXPORT void setColorSource(utility::string_t value);
+	/// <summary>
+	/// Audio data encoded in base64. Represents the playing sound of the hyperlink. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getSoundBase64() const;
+	ASPOSE_DLL_EXPORT void setSoundBase64(utility::string_t value);
 
 protected:
 	bool m_IsDisabled;
@@ -130,6 +135,7 @@ protected:
 	bool m_StopSoundOnClick;
 	bool m_StopSoundOnClickIsSet;
 	utility::string_t m_ColorSource;
+	utility::string_t m_SoundBase64;
 };
 
 }

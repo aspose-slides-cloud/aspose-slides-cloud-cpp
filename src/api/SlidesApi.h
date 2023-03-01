@@ -654,6 +654,11 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadShape(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, std::shared_ptr<IShapeExportOptions> options = std::shared_ptr<IShapeExportOptions>(), boost::optional<double> scaleX = double(), boost::optional<double> scaleY = double(), utility::string_t bounds = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), utility::string_t subShape = utility::string_t());
 
 	/// <summary>
+	/// Creates the shape from the DTO and returns the result in the specified format.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadShapeFromDto(utility::string_t format, std::shared_ptr<ShapeBase> dto);
+
+	/// <summary>
 	/// Render shape to specified picture format.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadShapeOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, boost::optional<double> scaleX = double(), boost::optional<double> scaleY = double(), utility::string_t bounds = utility::string_t(), utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::shared_ptr<IShapeExportOptions> options = std::shared_ptr<IShapeExportOptions>());

@@ -264,6 +264,7 @@
     <ClCompile Include="model\OuterShadowEffect.cpp" />
     <ClCompile Include="model\OutputFile.cpp" />
     <ClCompile Include="model\Paragraph.cpp" />
+    <ClCompile Include="model\ParagraphFormat.cpp" />
     <ClCompile Include="model\Paragraphs.cpp" />
     <ClCompile Include="model\PathInputFile.cpp" />
     <ClCompile Include="model\PathOutputFile.cpp" />
@@ -520,6 +521,7 @@
     <ClInclude Include="model\OuterShadowEffect.h" />
     <ClInclude Include="model\OutputFile.h" />
     <ClInclude Include="model\Paragraph.h" />
+    <ClInclude Include="model\ParagraphFormat.h" />
     <ClInclude Include="model\Paragraphs.h" />
     <ClInclude Include="model\PathInputFile.h" />
     <ClInclude Include="model\PathOutputFile.h" />

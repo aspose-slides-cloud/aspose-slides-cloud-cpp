@@ -160,6 +160,13 @@ public:
 	ASPOSE_DLL_EXPORT void setRepeatUntilNextClick(bool value);
 	ASPOSE_DLL_EXPORT bool repeatUntilNextClickIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetRepeatUntilNextClick();
+	/// <summary>
+	/// This attribute specifies if the animation effect stops the previous sound.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool isStopPreviousSound() const;
+	ASPOSE_DLL_EXPORT void setStopPreviousSound(bool value);
+	ASPOSE_DLL_EXPORT bool stopPreviousSoundIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetStopPreviousSound();
 
 protected:
 	utility::string_t m_Type;
@@ -190,6 +197,8 @@ protected:
 	bool m_RepeatUntilEndSlideIsSet;
 	bool m_RepeatUntilNextClick;
 	bool m_RepeatUntilNextClickIsSet;
+	bool m_StopPreviousSound;
+	bool m_StopPreviousSoundIsSet;
 };
 
 }

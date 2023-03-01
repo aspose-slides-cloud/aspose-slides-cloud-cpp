@@ -4869,6 +4869,56 @@ pplx::task<HttpContent> SlidesApi::downloadShape(utility::string_t name, int32_t
 		});
 }
 
+pplx::task<HttpContent> SlidesApi::downloadShapeFromDto(utility::string_t format, std::shared_ptr<ShapeBase> dto)
+{
+	// verify the required parameter 'format' is set
+	if (format.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// verify the required parameter 'format' is set
+	if (format.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Svg"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Svg.");
+	}
+	if (dto == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.dto");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/shape/{format}");
+	ApiClient::setPathParameter(methodPath, "format", format);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (dto != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "downloadShapeFromDto");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			HttpContent result;
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
+			result.setData(stream);
+			return result;
+		});
+}
+
 pplx::task<HttpContent> SlidesApi::downloadShapeOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, int32_t shapeIndex, utility::string_t format, boost::optional<double> scaleX, boost::optional<double> scaleY, utility::string_t bounds, utility::string_t password, utility::string_t storage, utility::string_t fontsFolder, std::shared_ptr<IShapeExportOptions> options)
 {
 	if (document == nullptr)

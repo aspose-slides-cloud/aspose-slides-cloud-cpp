@@ -29759,6 +29759,88 @@ TEST_F(SlidesApiTest, downloadShapeInvalidSubShape) {
 	}
 }
 
+TEST_F(SlidesApiTest, downloadShapeFromDto) {
+	utility::string_t paramFormat = utils->getTestValue("downloadShapeFromDto", "format");
+	std::shared_ptr<ShapeBase> paramDto = utils->getTestValueForClass<ShapeBase>("downloadShapeFromDto", "dto");
+	utils->initialize("downloadShapeFromDto", "");
+	HttpContent result = api->downloadShapeFromDto(paramFormat, paramDto).get();
+	EXPECT_FALSE(result.getData()->eof());
+}
+
+TEST_F(SlidesApiTest, downloadShapeFromDtoInvalidFormat) {
+	utility::string_t paramFormat = utils->getTestValue("downloadShapeFromDto", "format");
+	std::shared_ptr<ShapeBase> paramDto = utils->getTestValueForClass<ShapeBase>("downloadShapeFromDto", "dto");
+	paramFormat = utils->getInvalidTestValue("downloadShapeFromDto", "format", paramFormat);
+	utils->initialize("downloadShapeFromDto", "format", paramFormat);
+
+	bool failed = true;
+	try
+	{
+		api->downloadShapeFromDto(paramFormat, paramDto).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("downloadShapeFromDto", "format");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("downloadShapeFromDto", "format", paramFormat);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("downloadShapeFromDto", "format");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("downloadShapeFromDto", "format", paramFormat);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("downloadShapeFromDto", "format"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, downloadShapeFromDtoInvalidDto) {
+	utility::string_t paramFormat = utils->getTestValue("downloadShapeFromDto", "format");
+	std::shared_ptr<ShapeBase> paramDto = utils->getTestValueForClass<ShapeBase>("downloadShapeFromDto", "dto");
+	paramDto = utils->getInvalidTestValueForClass<>("downloadShapeFromDto", "dto", paramDto);
+	utils->initialize("downloadShapeFromDto", "dto", paramDto);
+
+	bool failed = true;
+	try
+	{
+		api->downloadShapeFromDto(paramFormat, paramDto).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("downloadShapeFromDto", "dto");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("downloadShapeFromDto", "dto", paramDto);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("downloadShapeFromDto", "dto");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("downloadShapeFromDto", "dto", paramDto);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("downloadShapeFromDto", "dto"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, downloadShapeOnline) {
 	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("downloadShapeOnline", "document");
 	int32_t paramSlideIndex = utils->getIntTestValue("downloadShapeOnline", "slideIndex");

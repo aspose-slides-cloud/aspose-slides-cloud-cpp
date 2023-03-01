@@ -26,13 +26,14 @@
 
 
 #include "../ClassRegistry.h"
-#include "Paragraph.h"
+#include "ParagraphFormat.h"
 
 namespace asposeslidescloud {
 namespace model {
 
-Paragraph::Paragraph()
+ParagraphFormat::ParagraphFormat()
 {
+	m_DepthIsSet = false;
 	m_MarginLeftIsSet = false;
 	m_MarginRightIsSet = false;
 	m_SpaceBeforeIsSet = false;
@@ -40,360 +41,356 @@ Paragraph::Paragraph()
 	m_SpaceWithinIsSet = false;
 	m_IndentIsSet = false;
 	m_DefaultTabSizeIsSet = false;
-	m_DepthIsSet = false;
 	m_BulletHeightIsSet = false;
 	m_NumberedBulletStartWithIsSet = false;
 }
 
-Paragraph::~Paragraph()
+ParagraphFormat::~ParagraphFormat()
 {
 }
 
-double Paragraph::getMarginLeft() const
-{
-	return m_MarginLeft;
-}
-
-void Paragraph::setMarginLeft(double value)
-{
-	m_MarginLeft = value;
-	m_MarginLeftIsSet = true;
-}
-
-bool Paragraph::marginLeftIsSet() const
-{
-	return m_MarginLeftIsSet;
-}
-
-void Paragraph::unsetMarginLeft()
-{
-	m_MarginLeftIsSet = false;
-}
-
-double Paragraph::getMarginRight() const
-{
-	return m_MarginRight;
-}
-
-void Paragraph::setMarginRight(double value)
-{
-	m_MarginRight = value;
-	m_MarginRightIsSet = true;
-}
-
-bool Paragraph::marginRightIsSet() const
-{
-	return m_MarginRightIsSet;
-}
-
-void Paragraph::unsetMarginRight()
-{
-	m_MarginRightIsSet = false;
-}
-
-double Paragraph::getSpaceBefore() const
-{
-	return m_SpaceBefore;
-}
-
-void Paragraph::setSpaceBefore(double value)
-{
-	m_SpaceBefore = value;
-	m_SpaceBeforeIsSet = true;
-}
-
-bool Paragraph::spaceBeforeIsSet() const
-{
-	return m_SpaceBeforeIsSet;
-}
-
-void Paragraph::unsetSpaceBefore()
-{
-	m_SpaceBeforeIsSet = false;
-}
-
-double Paragraph::getSpaceAfter() const
-{
-	return m_SpaceAfter;
-}
-
-void Paragraph::setSpaceAfter(double value)
-{
-	m_SpaceAfter = value;
-	m_SpaceAfterIsSet = true;
-}
-
-bool Paragraph::spaceAfterIsSet() const
-{
-	return m_SpaceAfterIsSet;
-}
-
-void Paragraph::unsetSpaceAfter()
-{
-	m_SpaceAfterIsSet = false;
-}
-
-double Paragraph::getSpaceWithin() const
-{
-	return m_SpaceWithin;
-}
-
-void Paragraph::setSpaceWithin(double value)
-{
-	m_SpaceWithin = value;
-	m_SpaceWithinIsSet = true;
-}
-
-bool Paragraph::spaceWithinIsSet() const
-{
-	return m_SpaceWithinIsSet;
-}
-
-void Paragraph::unsetSpaceWithin()
-{
-	m_SpaceWithinIsSet = false;
-}
-
-double Paragraph::getIndent() const
-{
-	return m_Indent;
-}
-
-void Paragraph::setIndent(double value)
-{
-	m_Indent = value;
-	m_IndentIsSet = true;
-}
-
-bool Paragraph::indentIsSet() const
-{
-	return m_IndentIsSet;
-}
-
-void Paragraph::unsetIndent()
-{
-	m_IndentIsSet = false;
-}
-
-utility::string_t Paragraph::getAlignment() const
-{
-	return m_Alignment;
-}
-
-void Paragraph::setAlignment(utility::string_t value)
-{
-	m_Alignment = value;
-	
-}
-
-utility::string_t Paragraph::getFontAlignment() const
-{
-	return m_FontAlignment;
-}
-
-void Paragraph::setFontAlignment(utility::string_t value)
-{
-	m_FontAlignment = value;
-	
-}
-
-double Paragraph::getDefaultTabSize() const
-{
-	return m_DefaultTabSize;
-}
-
-void Paragraph::setDefaultTabSize(double value)
-{
-	m_DefaultTabSize = value;
-	m_DefaultTabSizeIsSet = true;
-}
-
-bool Paragraph::defaultTabSizeIsSet() const
-{
-	return m_DefaultTabSizeIsSet;
-}
-
-void Paragraph::unsetDefaultTabSize()
-{
-	m_DefaultTabSizeIsSet = false;
-}
-
-int32_t Paragraph::getDepth() const
+int32_t ParagraphFormat::getDepth() const
 {
 	return m_Depth;
 }
 
-void Paragraph::setDepth(int32_t value)
+void ParagraphFormat::setDepth(int32_t value)
 {
 	m_Depth = value;
 	m_DepthIsSet = true;
 }
 
-bool Paragraph::depthIsSet() const
+bool ParagraphFormat::depthIsSet() const
 {
 	return m_DepthIsSet;
 }
 
-void Paragraph::unsetDepth()
+void ParagraphFormat::unsetDepth()
 {
 	m_DepthIsSet = false;
 }
 
-utility::string_t Paragraph::getHangingPunctuation() const
+utility::string_t ParagraphFormat::getAlignment() const
 {
-	return m_HangingPunctuation;
+	return m_Alignment;
 }
 
-void Paragraph::setHangingPunctuation(utility::string_t value)
+void ParagraphFormat::setAlignment(utility::string_t value)
 {
-	m_HangingPunctuation = value;
+	m_Alignment = value;
 	
 }
 
-utility::string_t Paragraph::getEastAsianLineBreak() const
+double ParagraphFormat::getMarginLeft() const
 {
-	return m_EastAsianLineBreak;
+	return m_MarginLeft;
 }
 
-void Paragraph::setEastAsianLineBreak(utility::string_t value)
+void ParagraphFormat::setMarginLeft(double value)
 {
-	m_EastAsianLineBreak = value;
+	m_MarginLeft = value;
+	m_MarginLeftIsSet = true;
+}
+
+bool ParagraphFormat::marginLeftIsSet() const
+{
+	return m_MarginLeftIsSet;
+}
+
+void ParagraphFormat::unsetMarginLeft()
+{
+	m_MarginLeftIsSet = false;
+}
+
+double ParagraphFormat::getMarginRight() const
+{
+	return m_MarginRight;
+}
+
+void ParagraphFormat::setMarginRight(double value)
+{
+	m_MarginRight = value;
+	m_MarginRightIsSet = true;
+}
+
+bool ParagraphFormat::marginRightIsSet() const
+{
+	return m_MarginRightIsSet;
+}
+
+void ParagraphFormat::unsetMarginRight()
+{
+	m_MarginRightIsSet = false;
+}
+
+double ParagraphFormat::getSpaceBefore() const
+{
+	return m_SpaceBefore;
+}
+
+void ParagraphFormat::setSpaceBefore(double value)
+{
+	m_SpaceBefore = value;
+	m_SpaceBeforeIsSet = true;
+}
+
+bool ParagraphFormat::spaceBeforeIsSet() const
+{
+	return m_SpaceBeforeIsSet;
+}
+
+void ParagraphFormat::unsetSpaceBefore()
+{
+	m_SpaceBeforeIsSet = false;
+}
+
+double ParagraphFormat::getSpaceAfter() const
+{
+	return m_SpaceAfter;
+}
+
+void ParagraphFormat::setSpaceAfter(double value)
+{
+	m_SpaceAfter = value;
+	m_SpaceAfterIsSet = true;
+}
+
+bool ParagraphFormat::spaceAfterIsSet() const
+{
+	return m_SpaceAfterIsSet;
+}
+
+void ParagraphFormat::unsetSpaceAfter()
+{
+	m_SpaceAfterIsSet = false;
+}
+
+double ParagraphFormat::getSpaceWithin() const
+{
+	return m_SpaceWithin;
+}
+
+void ParagraphFormat::setSpaceWithin(double value)
+{
+	m_SpaceWithin = value;
+	m_SpaceWithinIsSet = true;
+}
+
+bool ParagraphFormat::spaceWithinIsSet() const
+{
+	return m_SpaceWithinIsSet;
+}
+
+void ParagraphFormat::unsetSpaceWithin()
+{
+	m_SpaceWithinIsSet = false;
+}
+
+utility::string_t ParagraphFormat::getFontAlignment() const
+{
+	return m_FontAlignment;
+}
+
+void ParagraphFormat::setFontAlignment(utility::string_t value)
+{
+	m_FontAlignment = value;
 	
 }
 
-utility::string_t Paragraph::getLatinLineBreak() const
+double ParagraphFormat::getIndent() const
 {
-	return m_LatinLineBreak;
+	return m_Indent;
 }
 
-void Paragraph::setLatinLineBreak(utility::string_t value)
+void ParagraphFormat::setIndent(double value)
 {
-	m_LatinLineBreak = value;
-	
+	m_Indent = value;
+	m_IndentIsSet = true;
 }
 
-utility::string_t Paragraph::getRightToLeft() const
+bool ParagraphFormat::indentIsSet() const
+{
+	return m_IndentIsSet;
+}
+
+void ParagraphFormat::unsetIndent()
+{
+	m_IndentIsSet = false;
+}
+
+utility::string_t ParagraphFormat::getRightToLeft() const
 {
 	return m_RightToLeft;
 }
 
-void Paragraph::setRightToLeft(utility::string_t value)
+void ParagraphFormat::setRightToLeft(utility::string_t value)
 {
 	m_RightToLeft = value;
 	
 }
 
-std::vector<std::shared_ptr<Portion>> Paragraph::getPortionList() const
+utility::string_t ParagraphFormat::getEastAsianLineBreak() const
 {
-	return m_PortionList;
+	return m_EastAsianLineBreak;
 }
 
-void Paragraph::setPortionList(std::vector<std::shared_ptr<Portion>> value)
+void ParagraphFormat::setEastAsianLineBreak(utility::string_t value)
 {
-	m_PortionList = value;
+	m_EastAsianLineBreak = value;
 	
 }
 
-std::shared_ptr<PortionFormat> Paragraph::getDefaultPortionFormat() const
+utility::string_t ParagraphFormat::getLatinLineBreak() const
+{
+	return m_LatinLineBreak;
+}
+
+void ParagraphFormat::setLatinLineBreak(utility::string_t value)
+{
+	m_LatinLineBreak = value;
+	
+}
+
+utility::string_t ParagraphFormat::getHangingPunctuation() const
+{
+	return m_HangingPunctuation;
+}
+
+void ParagraphFormat::setHangingPunctuation(utility::string_t value)
+{
+	m_HangingPunctuation = value;
+	
+}
+
+double ParagraphFormat::getDefaultTabSize() const
+{
+	return m_DefaultTabSize;
+}
+
+void ParagraphFormat::setDefaultTabSize(double value)
+{
+	m_DefaultTabSize = value;
+	m_DefaultTabSizeIsSet = true;
+}
+
+bool ParagraphFormat::defaultTabSizeIsSet() const
+{
+	return m_DefaultTabSizeIsSet;
+}
+
+void ParagraphFormat::unsetDefaultTabSize()
+{
+	m_DefaultTabSizeIsSet = false;
+}
+
+std::shared_ptr<PortionFormat> ParagraphFormat::getDefaultPortionFormat() const
 {
 	return m_DefaultPortionFormat;
 }
 
-void Paragraph::setDefaultPortionFormat(std::shared_ptr<PortionFormat> value)
+void ParagraphFormat::setDefaultPortionFormat(std::shared_ptr<PortionFormat> value)
 {
 	m_DefaultPortionFormat = value;
 	
 }
 
-utility::string_t Paragraph::getBulletChar() const
+utility::string_t ParagraphFormat::getBulletChar() const
 {
 	return m_BulletChar;
 }
 
-void Paragraph::setBulletChar(utility::string_t value)
+void ParagraphFormat::setBulletChar(utility::string_t value)
 {
 	m_BulletChar = value;
 	
 }
 
-double Paragraph::getBulletHeight() const
+double ParagraphFormat::getBulletHeight() const
 {
 	return m_BulletHeight;
 }
 
-void Paragraph::setBulletHeight(double value)
+void ParagraphFormat::setBulletHeight(double value)
 {
 	m_BulletHeight = value;
 	m_BulletHeightIsSet = true;
 }
 
-bool Paragraph::bulletHeightIsSet() const
+bool ParagraphFormat::bulletHeightIsSet() const
 {
 	return m_BulletHeightIsSet;
 }
 
-void Paragraph::unsetBulletHeight()
+void ParagraphFormat::unsetBulletHeight()
 {
 	m_BulletHeightIsSet = false;
 }
 
-utility::string_t Paragraph::getBulletType() const
+utility::string_t ParagraphFormat::getBulletType() const
 {
 	return m_BulletType;
 }
 
-void Paragraph::setBulletType(utility::string_t value)
+void ParagraphFormat::setBulletType(utility::string_t value)
 {
 	m_BulletType = value;
 	
 }
 
-int32_t Paragraph::getNumberedBulletStartWith() const
+int32_t ParagraphFormat::getNumberedBulletStartWith() const
 {
 	return m_NumberedBulletStartWith;
 }
 
-void Paragraph::setNumberedBulletStartWith(int32_t value)
+void ParagraphFormat::setNumberedBulletStartWith(int32_t value)
 {
 	m_NumberedBulletStartWith = value;
 	m_NumberedBulletStartWithIsSet = true;
 }
 
-bool Paragraph::numberedBulletStartWithIsSet() const
+bool ParagraphFormat::numberedBulletStartWithIsSet() const
 {
 	return m_NumberedBulletStartWithIsSet;
 }
 
-void Paragraph::unsetNumberedBulletStartWith()
+void ParagraphFormat::unsetNumberedBulletStartWith()
 {
 	m_NumberedBulletStartWithIsSet = false;
 }
 
-utility::string_t Paragraph::getNumberedBulletStyle() const
+utility::string_t ParagraphFormat::getNumberedBulletStyle() const
 {
 	return m_NumberedBulletStyle;
 }
 
-void Paragraph::setNumberedBulletStyle(utility::string_t value)
+void ParagraphFormat::setNumberedBulletStyle(utility::string_t value)
 {
 	m_NumberedBulletStyle = value;
 	
 }
 
-std::shared_ptr<FillFormat> Paragraph::getBulletFillFormat() const
+std::shared_ptr<FillFormat> ParagraphFormat::getBulletFillFormat() const
 {
 	return m_BulletFillFormat;
 }
 
-void Paragraph::setBulletFillFormat(std::shared_ptr<FillFormat> value)
+void ParagraphFormat::setBulletFillFormat(std::shared_ptr<FillFormat> value)
 {
 	m_BulletFillFormat = value;
 	
 }
 
-web::json::value Paragraph::toJson() const
+web::json::value ParagraphFormat::toJson() const
 {
-	web::json::value val = this->ResourceBase::toJson();
+	web::json::value val = web::json::value::object();
+	if(m_DepthIsSet)
+	{
+		val[utility::conversions::to_string_t("Depth")] = ModelBase::toJson(m_Depth);
+	}
+	if (!m_Alignment.empty())
+	{
+		val[utility::conversions::to_string_t("Alignment")] = ModelBase::toJson(m_Alignment);
+	}
 	if(m_MarginLeftIsSet)
 	{
 		val[utility::conversions::to_string_t("MarginLeft")] = ModelBase::toJson(m_MarginLeft);
@@ -414,29 +411,17 @@ web::json::value Paragraph::toJson() const
 	{
 		val[utility::conversions::to_string_t("SpaceWithin")] = ModelBase::toJson(m_SpaceWithin);
 	}
-	if(m_IndentIsSet)
-	{
-		val[utility::conversions::to_string_t("Indent")] = ModelBase::toJson(m_Indent);
-	}
-	if (!m_Alignment.empty())
-	{
-		val[utility::conversions::to_string_t("Alignment")] = ModelBase::toJson(m_Alignment);
-	}
 	if (!m_FontAlignment.empty())
 	{
 		val[utility::conversions::to_string_t("FontAlignment")] = ModelBase::toJson(m_FontAlignment);
 	}
-	if(m_DefaultTabSizeIsSet)
+	if(m_IndentIsSet)
 	{
-		val[utility::conversions::to_string_t("DefaultTabSize")] = ModelBase::toJson(m_DefaultTabSize);
+		val[utility::conversions::to_string_t("Indent")] = ModelBase::toJson(m_Indent);
 	}
-	if(m_DepthIsSet)
+	if (!m_RightToLeft.empty())
 	{
-		val[utility::conversions::to_string_t("Depth")] = ModelBase::toJson(m_Depth);
-	}
-	if (!m_HangingPunctuation.empty())
-	{
-		val[utility::conversions::to_string_t("HangingPunctuation")] = ModelBase::toJson(m_HangingPunctuation);
+		val[utility::conversions::to_string_t("RightToLeft")] = ModelBase::toJson(m_RightToLeft);
 	}
 	if (!m_EastAsianLineBreak.empty())
 	{
@@ -446,18 +431,13 @@ web::json::value Paragraph::toJson() const
 	{
 		val[utility::conversions::to_string_t("LatinLineBreak")] = ModelBase::toJson(m_LatinLineBreak);
 	}
-	if (!m_RightToLeft.empty())
+	if (!m_HangingPunctuation.empty())
 	{
-		val[utility::conversions::to_string_t("RightToLeft")] = ModelBase::toJson(m_RightToLeft);
+		val[utility::conversions::to_string_t("HangingPunctuation")] = ModelBase::toJson(m_HangingPunctuation);
 	}
-	if (m_PortionList.size() > 0)
+	if(m_DefaultTabSizeIsSet)
 	{
-		std::vector<web::json::value> jsonArray;
-		for (auto& item : m_PortionList)
-		{
-			jsonArray.push_back(ModelBase::toJson(item));
-		}
-		val[utility::conversions::to_string_t("PortionList")] = web::json::value::array(jsonArray);
+		val[utility::conversions::to_string_t("DefaultTabSize")] = ModelBase::toJson(m_DefaultTabSize);
 	}
 	if (m_DefaultPortionFormat != nullptr)
 	{
@@ -490,9 +470,18 @@ web::json::value Paragraph::toJson() const
 	return val;
 }
 
-void Paragraph::fromJson(web::json::value& val)
+void ParagraphFormat::fromJson(web::json::value& val)
 {
-	this->ResourceBase::fromJson(val);
+	web::json::value* jsonForDepth = ModelBase::getField(val, "Depth");
+	if(jsonForDepth != nullptr && !jsonForDepth->is_null() && jsonForDepth->is_number())
+	{
+		setDepth(ModelBase::int32_tFromJson(*jsonForDepth));
+	}
+	web::json::value* jsonForAlignment = ModelBase::getField(val, "Alignment");
+	if(jsonForAlignment != nullptr && !jsonForAlignment->is_null())
+	{
+		setAlignment(ModelBase::stringFromJson(*jsonForAlignment));
+	}
 	web::json::value* jsonForMarginLeft = ModelBase::getField(val, "MarginLeft");
 	if(jsonForMarginLeft != nullptr && !jsonForMarginLeft->is_null() && jsonForMarginLeft->is_number())
 	{
@@ -518,35 +507,20 @@ void Paragraph::fromJson(web::json::value& val)
 	{
 		setSpaceWithin(ModelBase::doubleFromJson(*jsonForSpaceWithin));
 	}
-	web::json::value* jsonForIndent = ModelBase::getField(val, "Indent");
-	if(jsonForIndent != nullptr && !jsonForIndent->is_null() && jsonForIndent->is_number())
-	{
-		setIndent(ModelBase::doubleFromJson(*jsonForIndent));
-	}
-	web::json::value* jsonForAlignment = ModelBase::getField(val, "Alignment");
-	if(jsonForAlignment != nullptr && !jsonForAlignment->is_null())
-	{
-		setAlignment(ModelBase::stringFromJson(*jsonForAlignment));
-	}
 	web::json::value* jsonForFontAlignment = ModelBase::getField(val, "FontAlignment");
 	if(jsonForFontAlignment != nullptr && !jsonForFontAlignment->is_null())
 	{
 		setFontAlignment(ModelBase::stringFromJson(*jsonForFontAlignment));
 	}
-	web::json::value* jsonForDefaultTabSize = ModelBase::getField(val, "DefaultTabSize");
-	if(jsonForDefaultTabSize != nullptr && !jsonForDefaultTabSize->is_null() && jsonForDefaultTabSize->is_number())
+	web::json::value* jsonForIndent = ModelBase::getField(val, "Indent");
+	if(jsonForIndent != nullptr && !jsonForIndent->is_null() && jsonForIndent->is_number())
 	{
-		setDefaultTabSize(ModelBase::doubleFromJson(*jsonForDefaultTabSize));
+		setIndent(ModelBase::doubleFromJson(*jsonForIndent));
 	}
-	web::json::value* jsonForDepth = ModelBase::getField(val, "Depth");
-	if(jsonForDepth != nullptr && !jsonForDepth->is_null() && jsonForDepth->is_number())
+	web::json::value* jsonForRightToLeft = ModelBase::getField(val, "RightToLeft");
+	if(jsonForRightToLeft != nullptr && !jsonForRightToLeft->is_null())
 	{
-		setDepth(ModelBase::int32_tFromJson(*jsonForDepth));
-	}
-	web::json::value* jsonForHangingPunctuation = ModelBase::getField(val, "HangingPunctuation");
-	if(jsonForHangingPunctuation != nullptr && !jsonForHangingPunctuation->is_null())
-	{
-		setHangingPunctuation(ModelBase::stringFromJson(*jsonForHangingPunctuation));
+		setRightToLeft(ModelBase::stringFromJson(*jsonForRightToLeft));
 	}
 	web::json::value* jsonForEastAsianLineBreak = ModelBase::getField(val, "EastAsianLineBreak");
 	if(jsonForEastAsianLineBreak != nullptr && !jsonForEastAsianLineBreak->is_null())
@@ -558,30 +532,15 @@ void Paragraph::fromJson(web::json::value& val)
 	{
 		setLatinLineBreak(ModelBase::stringFromJson(*jsonForLatinLineBreak));
 	}
-	web::json::value* jsonForRightToLeft = ModelBase::getField(val, "RightToLeft");
-	if(jsonForRightToLeft != nullptr && !jsonForRightToLeft->is_null())
+	web::json::value* jsonForHangingPunctuation = ModelBase::getField(val, "HangingPunctuation");
+	if(jsonForHangingPunctuation != nullptr && !jsonForHangingPunctuation->is_null())
 	{
-		setRightToLeft(ModelBase::stringFromJson(*jsonForRightToLeft));
+		setHangingPunctuation(ModelBase::stringFromJson(*jsonForHangingPunctuation));
 	}
-	web::json::value* jsonForPortionList = ModelBase::getField(val, "PortionList");
-	if(jsonForPortionList != nullptr && !jsonForPortionList->is_null())
+	web::json::value* jsonForDefaultTabSize = ModelBase::getField(val, "DefaultTabSize");
+	if(jsonForDefaultTabSize != nullptr && !jsonForDefaultTabSize->is_null() && jsonForDefaultTabSize->is_number())
 	{
-		{
-			m_PortionList.clear();
-			std::vector<web::json::value> jsonArray;
-			for(auto& item : jsonForPortionList->as_array())
-			{
-				if(item.is_null())
-				{
-					m_PortionList.push_back(std::shared_ptr<Portion>(nullptr));
-				}
-				else
-				{
-					std::shared_ptr<void> newItem = asposeslidescloud::api::ClassRegistry::deserialize(L"Portion", item);
-					m_PortionList.push_back(std::static_pointer_cast<Portion>(newItem));
-				}
-			}
-        	}
+		setDefaultTabSize(ModelBase::doubleFromJson(*jsonForDefaultTabSize));
 	}
 	web::json::value* jsonForDefaultPortionFormat = ModelBase::getField(val, "DefaultPortionFormat");
 	if(jsonForDefaultPortionFormat != nullptr && !jsonForDefaultPortionFormat->is_null())

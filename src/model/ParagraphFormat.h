@@ -24,23 +24,19 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * Paragraph.h
+ * ParagraphFormat.h
  *
- * Represents paragraph resource
+ * Paragraph formatting properties.
  */
 
-#ifndef ASPOSESLIDESCLOUD_MODEL_Paragraph_H_
-#define ASPOSESLIDESCLOUD_MODEL_Paragraph_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_ParagraphFormat_H_
+#define ASPOSESLIDESCLOUD_MODEL_ParagraphFormat_H_
 
-#include "ResourceBase.h"
+#include "../ModelBase.h"
 
 #include "../model/PortionFormat.h"
-#include "../model/Portion.h"
 #include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"
-#include "../model/ResourceBase.h"
-#include "../model/ResourceUri.h"
-#include <vector>
 
 #include "../ClassRegistry.h"
 
@@ -48,17 +44,29 @@ namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// Represents paragraph resource
+/// Paragraph formatting properties.
 /// </summary>
-class  Paragraph : public ResourceBase
+class  ParagraphFormat : public ModelBase
 {
 public:
-	ASPOSE_DLL_EXPORT Paragraph();
-	ASPOSE_DLL_EXPORT virtual ~Paragraph();
+	ASPOSE_DLL_EXPORT ParagraphFormat();
+	ASPOSE_DLL_EXPORT virtual ~ParagraphFormat();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
+	/// <summary>
+	/// Depth.
+	/// </summary>
+	ASPOSE_DLL_EXPORT int32_t getDepth() const;
+	ASPOSE_DLL_EXPORT void setDepth(int32_t value);
+	ASPOSE_DLL_EXPORT bool depthIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetDepth();
+	/// <summary>
+	/// Text alignment.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getAlignment() const;
+	ASPOSE_DLL_EXPORT void setAlignment(utility::string_t value);
 	/// <summary>
 	/// Left margin.
 	/// </summary>
@@ -95,6 +103,11 @@ public:
 	ASPOSE_DLL_EXPORT bool spaceWithinIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetSpaceWithin();
 	/// <summary>
+	/// Font alignment.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getFontAlignment() const;
+	ASPOSE_DLL_EXPORT void setFontAlignment(utility::string_t value);
+	/// <summary>
 	/// First line indent.
 	/// </summary>
 	ASPOSE_DLL_EXPORT double getIndent() const;
@@ -102,54 +115,32 @@ public:
 	ASPOSE_DLL_EXPORT bool indentIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIndent();
 	/// <summary>
-	/// Text alignment.
+	/// Determines whether the Right to Left writing is used in a paragraph. No inheritance applied.
 	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getAlignment() const;
-	ASPOSE_DLL_EXPORT void setAlignment(utility::string_t value);
+	ASPOSE_DLL_EXPORT utility::string_t getRightToLeft() const;
+	ASPOSE_DLL_EXPORT void setRightToLeft(utility::string_t value);
 	/// <summary>
-	/// Font alignment.
+	/// Determines whether the East Asian line break is used in a paragraph. No inheritance applied.
 	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getFontAlignment() const;
-	ASPOSE_DLL_EXPORT void setFontAlignment(utility::string_t value);
+	ASPOSE_DLL_EXPORT utility::string_t getEastAsianLineBreak() const;
+	ASPOSE_DLL_EXPORT void setEastAsianLineBreak(utility::string_t value);
 	/// <summary>
-	/// Default tabulation size.
+	/// Determines whether the Latin line break is used in a paragraph. No inheritance applied.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getLatinLineBreak() const;
+	ASPOSE_DLL_EXPORT void setLatinLineBreak(utility::string_t value);
+	/// <summary>
+	/// Determines whether the hanging punctuation is used in a paragraph. No inheritance applied.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getHangingPunctuation() const;
+	ASPOSE_DLL_EXPORT void setHangingPunctuation(utility::string_t value);
+	/// <summary>
+	/// Returns or sets default tabulation size with no inheritance.
 	/// </summary>
 	ASPOSE_DLL_EXPORT double getDefaultTabSize() const;
 	ASPOSE_DLL_EXPORT void setDefaultTabSize(double value);
 	ASPOSE_DLL_EXPORT bool defaultTabSizeIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetDefaultTabSize();
-	/// <summary>
-	/// Depth.
-	/// </summary>
-	ASPOSE_DLL_EXPORT int32_t getDepth() const;
-	ASPOSE_DLL_EXPORT void setDepth(int32_t value);
-	ASPOSE_DLL_EXPORT bool depthIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetDepth();
-	/// <summary>
-	/// True if hanging punctuation is used with the paragraph.
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getHangingPunctuation() const;
-	ASPOSE_DLL_EXPORT void setHangingPunctuation(utility::string_t value);
-	/// <summary>
-	/// True if East Asian line break is used with the paragraph.
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getEastAsianLineBreak() const;
-	ASPOSE_DLL_EXPORT void setEastAsianLineBreak(utility::string_t value);
-	/// <summary>
-	/// True if Latin line break is used with the paragraph.
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getLatinLineBreak() const;
-	ASPOSE_DLL_EXPORT void setLatinLineBreak(utility::string_t value);
-	/// <summary>
-	/// True if right to left direction is used with the paragraph.
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getRightToLeft() const;
-	ASPOSE_DLL_EXPORT void setRightToLeft(utility::string_t value);
-	/// <summary>
-	/// List of portion links.
-	/// </summary>
-	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<Portion>> getPortionList() const;
-	ASPOSE_DLL_EXPORT void setPortionList(std::vector<std::shared_ptr<Portion>> value);
 	/// <summary>
 	/// Default portion format.
 	/// </summary>
@@ -191,6 +182,9 @@ public:
 	ASPOSE_DLL_EXPORT void setBulletFillFormat(std::shared_ptr<FillFormat> value);
 
 protected:
+	int32_t m_Depth;
+	bool m_DepthIsSet;
+	utility::string_t m_Alignment;
 	double m_MarginLeft;
 	bool m_MarginLeftIsSet;
 	double m_MarginRight;
@@ -201,19 +195,15 @@ protected:
 	bool m_SpaceAfterIsSet;
 	double m_SpaceWithin;
 	bool m_SpaceWithinIsSet;
+	utility::string_t m_FontAlignment;
 	double m_Indent;
 	bool m_IndentIsSet;
-	utility::string_t m_Alignment;
-	utility::string_t m_FontAlignment;
-	double m_DefaultTabSize;
-	bool m_DefaultTabSizeIsSet;
-	int32_t m_Depth;
-	bool m_DepthIsSet;
-	utility::string_t m_HangingPunctuation;
+	utility::string_t m_RightToLeft;
 	utility::string_t m_EastAsianLineBreak;
 	utility::string_t m_LatinLineBreak;
-	utility::string_t m_RightToLeft;
-	std::vector<std::shared_ptr<Portion>> m_PortionList;
+	utility::string_t m_HangingPunctuation;
+	double m_DefaultTabSize;
+	bool m_DefaultTabSizeIsSet;
 	std::shared_ptr<PortionFormat> m_DefaultPortionFormat;
 	utility::string_t m_BulletChar;
 	double m_BulletHeight;
@@ -228,4 +218,4 @@ protected:
 }
 }
 
-#endif /* ASPOSESLIDESCLOUD_MODEL_Paragraph_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_ParagraphFormat_H_ */

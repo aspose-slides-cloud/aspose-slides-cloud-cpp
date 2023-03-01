@@ -204,6 +204,17 @@ void Hyperlink::setColorSource(utility::string_t value)
 	
 }
 
+utility::string_t Hyperlink::getSoundBase64() const
+{
+	return m_SoundBase64;
+}
+
+void Hyperlink::setSoundBase64(utility::string_t value)
+{
+	m_SoundBase64 = value;
+	
+}
+
 web::json::value Hyperlink::toJson() const
 {
 	web::json::value val = web::json::value::object();
@@ -246,6 +257,10 @@ web::json::value Hyperlink::toJson() const
 	if (!m_ColorSource.empty())
 	{
 		val[utility::conversions::to_string_t("ColorSource")] = ModelBase::toJson(m_ColorSource);
+	}
+	if (!m_SoundBase64.empty())
+	{
+		val[utility::conversions::to_string_t("SoundBase64")] = ModelBase::toJson(m_SoundBase64);
 	}
 	return val;
 }
@@ -301,6 +316,11 @@ void Hyperlink::fromJson(web::json::value& val)
 	if(jsonForColorSource != nullptr && !jsonForColorSource->is_null())
 	{
 		setColorSource(ModelBase::stringFromJson(*jsonForColorSource));
+	}
+	web::json::value* jsonForSoundBase64 = ModelBase::getField(val, "SoundBase64");
+	if(jsonForSoundBase64 != nullptr && !jsonForSoundBase64->is_null())
+	{
+		setSoundBase64(ModelBase::stringFromJson(*jsonForSoundBase64));
 	}
 }
 

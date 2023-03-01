@@ -256,6 +256,7 @@
 		{ "Value": "png", "Parameter": "Format", "Method": "SaveSpecialSlideShape" },
 		{ "Value": "png", "Parameter": "Format", "Method": "DownloadSpecialSlideSubshape" },
 		{ "Value": "png", "Parameter": "Format", "Method": "SaveSpecialSlideSubshape" },
+		{ "Value": "png", "Parameter": "Format", "Method": "DownloadShapeFromDto" },
 		{ "Value": "png", "Parameter": "Format", "Method": "DownloadImage" },
 		{ "Value": "png", "Parameter": "Format", "Method": "DownloadImageOnline" },
 		{ "Value": "png", "Parameter": "Format", "Method": "DownloadImages" },

@@ -164,6 +164,7 @@
 #include "model/OuterShadowEffect.h"
 #include "model/OutputFile.h"
 #include "model/Paragraph.h"
+#include "model/ParagraphFormat.h"
 #include "model/Paragraphs.h"
 #include "model/PathInputFile.h"
 #include "model/PathOutputFile.h"
@@ -1151,6 +1152,12 @@ std::shared_ptr<void> ClassRegistry::deserializeSubclass(utility::string_t class
 		result->fromJson(json);
 		return result;
 	}
+	if (className == L"ParagraphFormat")
+	{
+		std::shared_ptr<ParagraphFormat> result(new ParagraphFormat());
+		result->fromJson(json);
+		return result;
+	}
 	if (className == L"Paragraphs")
 	{
 		std::shared_ptr<Paragraphs> result(new Paragraphs());
@@ -2071,6 +2078,7 @@ std::map<utility::string_t, std::map<utility::string_t, utility::string_t>> Clas
 	{ L"OuterShadowEffect", { } },
 	{ L"OutputFile", { } },
 	{ L"Paragraph", { } },
+	{ L"ParagraphFormat", { } },
 	{ L"Paragraphs", { } },
 	{ L"PathInputFile", { { L"Type", L"Path" }, } },
 	{ L"PathOutputFile", { { L"Type", L"Path" }, } },

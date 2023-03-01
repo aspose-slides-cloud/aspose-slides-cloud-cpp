@@ -44,6 +44,7 @@ Effect::Effect()
 	m_TriggerDelayTimeIsSet = false;
 	m_RepeatUntilEndSlideIsSet = false;
 	m_RepeatUntilNextClickIsSet = false;
+	m_StopPreviousSoundIsSet = false;
 }
 
 Effect::~Effect()
@@ -347,6 +348,27 @@ void Effect::unsetRepeatUntilNextClick()
 	m_RepeatUntilNextClickIsSet = false;
 }
 
+bool Effect::isStopPreviousSound() const
+{
+	return m_StopPreviousSound;
+}
+
+void Effect::setStopPreviousSound(bool value)
+{
+	m_StopPreviousSound = value;
+	m_StopPreviousSoundIsSet = true;
+}
+
+bool Effect::stopPreviousSoundIsSet() const
+{
+	return m_StopPreviousSoundIsSet;
+}
+
+void Effect::unsetStopPreviousSound()
+{
+	m_StopPreviousSoundIsSet = false;
+}
+
 web::json::value Effect::toJson() const
 {
 	web::json::value val = web::json::value::object();
@@ -414,6 +436,10 @@ web::json::value Effect::toJson() const
 	if(m_RepeatUntilNextClickIsSet)
 	{
 		val[utility::conversions::to_string_t("RepeatUntilNextClick")] = ModelBase::toJson(m_RepeatUntilNextClick);
+	}
+	if(m_StopPreviousSoundIsSet)
+	{
+		val[utility::conversions::to_string_t("StopPreviousSound")] = ModelBase::toJson(m_StopPreviousSound);
 	}
 	return val;
 }
@@ -504,6 +530,11 @@ void Effect::fromJson(web::json::value& val)
 	if(jsonForRepeatUntilNextClick != nullptr && !jsonForRepeatUntilNextClick->is_null())
 	{
 		setRepeatUntilNextClick(ModelBase::boolFromJson(*jsonForRepeatUntilNextClick));
+	}
+	web::json::value* jsonForStopPreviousSound = ModelBase::getField(val, "StopPreviousSound");
+	if(jsonForStopPreviousSound != nullptr && !jsonForStopPreviousSound->is_null())
+	{
+		setStopPreviousSound(ModelBase::boolFromJson(*jsonForStopPreviousSound));
 	}
 }
 
