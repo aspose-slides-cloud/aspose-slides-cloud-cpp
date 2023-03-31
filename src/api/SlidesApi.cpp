@@ -10165,7 +10165,7 @@ pplx::task<std::shared_ptr<SplitDocumentResult>> SlidesApi::split(utility::strin
 		});
 }
 
-pplx::task<std::shared_ptr<SplitDocumentResult>> SlidesApi::splitAndSaveOnline(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t destFolder, boost::optional<int32_t> width, boost::optional<int32_t> height, boost::optional<int32_t> from, boost::optional<int32_t> to, utility::string_t password, utility::string_t storage, utility::string_t fontsFolder)
+pplx::task<std::shared_ptr<SplitDocumentResult>> SlidesApi::splitAndSaveOnline(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t destFolder, boost::optional<int32_t> width, boost::optional<int32_t> height, boost::optional<int32_t> from, boost::optional<int32_t> to, utility::string_t password, utility::string_t storage, utility::string_t fontsFolder, std::shared_ptr<ExportOptions> options)
 {
 	if (document == nullptr)
 	{
@@ -10219,6 +10219,10 @@ pplx::task<std::shared_ptr<SplitDocumentResult>> SlidesApi::splitAndSaveOnline(s
 	{
 		requestFiles.push_back(document);
 	}
+	if (options != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(options->toJson()));
+	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
 		.then([=](web::http::http_response response)
@@ -10236,7 +10240,7 @@ pplx::task<std::shared_ptr<SplitDocumentResult>> SlidesApi::splitAndSaveOnline(s
 		});
 }
 
-pplx::task<HttpContent> SlidesApi::splitOnline(std::shared_ptr<HttpContent> document, utility::string_t format, boost::optional<int32_t> width, boost::optional<int32_t> height, boost::optional<int32_t> from, boost::optional<int32_t> to, utility::string_t password, utility::string_t storage, utility::string_t fontsFolder)
+pplx::task<HttpContent> SlidesApi::splitOnline(std::shared_ptr<HttpContent> document, utility::string_t format, boost::optional<int32_t> width, boost::optional<int32_t> height, boost::optional<int32_t> from, boost::optional<int32_t> to, utility::string_t password, utility::string_t storage, utility::string_t fontsFolder, std::shared_ptr<ExportOptions> options)
 {
 	if (document == nullptr)
 	{
@@ -10288,6 +10292,10 @@ pplx::task<HttpContent> SlidesApi::splitOnline(std::shared_ptr<HttpContent> docu
 	if (document != nullptr)
 	{
 		requestFiles.push_back(document);
+	}
+	if (options != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(options->toJson()));
 	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)

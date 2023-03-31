@@ -61590,8 +61590,9 @@ TEST_F(SlidesApiTest, splitAndSaveOnline) {
 	utility::string_t paramPassword = utils->getTestValue("splitAndSaveOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitAndSaveOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitAndSaveOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitAndSaveOnline", "options");
 	utils->initialize("splitAndSaveOnline", "");
-	std::shared_ptr<SplitDocumentResult> result = api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).get();
+	std::shared_ptr<SplitDocumentResult> result = api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).get();
 	EXPECT_NE(nullptr, result);
 }
 
@@ -61606,13 +61607,14 @@ TEST_F(SlidesApiTest, splitAndSaveOnlineInvalidDocument) {
 	utility::string_t paramPassword = utils->getTestValue("splitAndSaveOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitAndSaveOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitAndSaveOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitAndSaveOnline", "options");
 	paramDocument = utils->getInvalidBinaryTestValue("splitAndSaveOnline", "document", paramDocument);
 	utils->initialize("splitAndSaveOnline", "document", paramDocument);
 
 	bool failed = true;
 	try
 	{
-		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -61651,13 +61653,14 @@ TEST_F(SlidesApiTest, splitAndSaveOnlineInvalidFormat) {
 	utility::string_t paramPassword = utils->getTestValue("splitAndSaveOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitAndSaveOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitAndSaveOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitAndSaveOnline", "options");
 	paramFormat = utils->getInvalidTestValue("splitAndSaveOnline", "format", paramFormat);
 	utils->initialize("splitAndSaveOnline", "format", paramFormat);
 
 	bool failed = true;
 	try
 	{
-		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -61696,13 +61699,14 @@ TEST_F(SlidesApiTest, splitAndSaveOnlineInvalidDestFolder) {
 	utility::string_t paramPassword = utils->getTestValue("splitAndSaveOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitAndSaveOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitAndSaveOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitAndSaveOnline", "options");
 	paramDestFolder = utils->getInvalidTestValue("splitAndSaveOnline", "destFolder", paramDestFolder);
 	utils->initialize("splitAndSaveOnline", "destFolder", paramDestFolder);
 
 	bool failed = true;
 	try
 	{
-		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -61741,13 +61745,14 @@ TEST_F(SlidesApiTest, splitAndSaveOnlineInvalidWidth) {
 	utility::string_t paramPassword = utils->getTestValue("splitAndSaveOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitAndSaveOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitAndSaveOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitAndSaveOnline", "options");
 	paramWidth = utils->getInvalidIntTestValue("splitAndSaveOnline", "width", paramWidth).value();
 	utils->initialize("splitAndSaveOnline", "width", paramWidth);
 
 	bool failed = true;
 	try
 	{
-		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -61786,13 +61791,14 @@ TEST_F(SlidesApiTest, splitAndSaveOnlineInvalidHeight) {
 	utility::string_t paramPassword = utils->getTestValue("splitAndSaveOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitAndSaveOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitAndSaveOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitAndSaveOnline", "options");
 	paramHeight = utils->getInvalidIntTestValue("splitAndSaveOnline", "height", paramHeight).value();
 	utils->initialize("splitAndSaveOnline", "height", paramHeight);
 
 	bool failed = true;
 	try
 	{
-		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -61831,13 +61837,14 @@ TEST_F(SlidesApiTest, splitAndSaveOnlineInvalidFrom) {
 	utility::string_t paramPassword = utils->getTestValue("splitAndSaveOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitAndSaveOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitAndSaveOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitAndSaveOnline", "options");
 	paramFrom = utils->getInvalidIntTestValue("splitAndSaveOnline", "from", paramFrom).value();
 	utils->initialize("splitAndSaveOnline", "from", paramFrom);
 
 	bool failed = true;
 	try
 	{
-		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -61876,13 +61883,14 @@ TEST_F(SlidesApiTest, splitAndSaveOnlineInvalidTo) {
 	utility::string_t paramPassword = utils->getTestValue("splitAndSaveOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitAndSaveOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitAndSaveOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitAndSaveOnline", "options");
 	paramTo = utils->getInvalidIntTestValue("splitAndSaveOnline", "to", paramTo).value();
 	utils->initialize("splitAndSaveOnline", "to", paramTo);
 
 	bool failed = true;
 	try
 	{
-		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -61921,13 +61929,14 @@ TEST_F(SlidesApiTest, splitAndSaveOnlineInvalidPassword) {
 	utility::string_t paramPassword = utils->getTestValue("splitAndSaveOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitAndSaveOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitAndSaveOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitAndSaveOnline", "options");
 	paramPassword = utils->getInvalidTestValue("splitAndSaveOnline", "password", paramPassword);
 	utils->initialize("splitAndSaveOnline", "password", paramPassword);
 
 	bool failed = true;
 	try
 	{
-		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -61966,13 +61975,14 @@ TEST_F(SlidesApiTest, splitAndSaveOnlineInvalidStorage) {
 	utility::string_t paramPassword = utils->getTestValue("splitAndSaveOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitAndSaveOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitAndSaveOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitAndSaveOnline", "options");
 	paramStorage = utils->getInvalidTestValue("splitAndSaveOnline", "storage", paramStorage);
 	utils->initialize("splitAndSaveOnline", "storage", paramStorage);
 
 	bool failed = true;
 	try
 	{
-		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -62011,13 +62021,14 @@ TEST_F(SlidesApiTest, splitAndSaveOnlineInvalidFontsFolder) {
 	utility::string_t paramPassword = utils->getTestValue("splitAndSaveOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitAndSaveOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitAndSaveOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitAndSaveOnline", "options");
 	paramFontsFolder = utils->getInvalidTestValue("splitAndSaveOnline", "fontsFolder", paramFontsFolder);
 	utils->initialize("splitAndSaveOnline", "fontsFolder", paramFontsFolder);
 
 	bool failed = true;
 	try
 	{
-		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -62045,6 +62056,52 @@ TEST_F(SlidesApiTest, splitAndSaveOnlineInvalidFontsFolder) {
 	}
 }
 
+TEST_F(SlidesApiTest, splitAndSaveOnlineInvalidOptions) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("splitAndSaveOnline", "document");
+	utility::string_t paramFormat = utils->getTestValue("splitAndSaveOnline", "format");
+	utility::string_t paramDestFolder = utils->getTestValue("splitAndSaveOnline", "destFolder");
+	auto paramWidth = utils->getOptionalIntTestValue("splitAndSaveOnline", "width");
+	auto paramHeight = utils->getOptionalIntTestValue("splitAndSaveOnline", "height");
+	auto paramFrom = utils->getOptionalIntTestValue("splitAndSaveOnline", "from");
+	auto paramTo = utils->getOptionalIntTestValue("splitAndSaveOnline", "to");
+	utility::string_t paramPassword = utils->getTestValue("splitAndSaveOnline", "password");
+	utility::string_t paramStorage = utils->getTestValue("splitAndSaveOnline", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("splitAndSaveOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitAndSaveOnline", "options");
+	paramOptions = utils->getInvalidTestValueForClass<>("splitAndSaveOnline", "options", paramOptions);
+	utils->initialize("splitAndSaveOnline", "options", paramOptions);
+
+	bool failed = true;
+	try
+	{
+		api->splitAndSaveOnline(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("splitAndSaveOnline", "options");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("splitAndSaveOnline", "options", paramOptions);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("splitAndSaveOnline", "options");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("splitAndSaveOnline", "options", paramOptions);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("splitAndSaveOnline", "options"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, splitOnline) {
 	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("splitOnline", "document");
 	utility::string_t paramFormat = utils->getTestValue("splitOnline", "format");
@@ -62055,8 +62112,9 @@ TEST_F(SlidesApiTest, splitOnline) {
 	utility::string_t paramPassword = utils->getTestValue("splitOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitOnline", "options");
 	utils->initialize("splitOnline", "");
-	HttpContent result = api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).get();
+	HttpContent result = api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).get();
 	EXPECT_FALSE(result.getData()->eof());
 }
 
@@ -62070,13 +62128,14 @@ TEST_F(SlidesApiTest, splitOnlineInvalidDocument) {
 	utility::string_t paramPassword = utils->getTestValue("splitOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitOnline", "options");
 	paramDocument = utils->getInvalidBinaryTestValue("splitOnline", "document", paramDocument);
 	utils->initialize("splitOnline", "document", paramDocument);
 
 	bool failed = true;
 	try
 	{
-		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -62114,13 +62173,14 @@ TEST_F(SlidesApiTest, splitOnlineInvalidFormat) {
 	utility::string_t paramPassword = utils->getTestValue("splitOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitOnline", "options");
 	paramFormat = utils->getInvalidTestValue("splitOnline", "format", paramFormat);
 	utils->initialize("splitOnline", "format", paramFormat);
 
 	bool failed = true;
 	try
 	{
-		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -62158,13 +62218,14 @@ TEST_F(SlidesApiTest, splitOnlineInvalidWidth) {
 	utility::string_t paramPassword = utils->getTestValue("splitOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitOnline", "options");
 	paramWidth = utils->getInvalidIntTestValue("splitOnline", "width", paramWidth).value();
 	utils->initialize("splitOnline", "width", paramWidth);
 
 	bool failed = true;
 	try
 	{
-		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -62202,13 +62263,14 @@ TEST_F(SlidesApiTest, splitOnlineInvalidHeight) {
 	utility::string_t paramPassword = utils->getTestValue("splitOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitOnline", "options");
 	paramHeight = utils->getInvalidIntTestValue("splitOnline", "height", paramHeight).value();
 	utils->initialize("splitOnline", "height", paramHeight);
 
 	bool failed = true;
 	try
 	{
-		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -62246,13 +62308,14 @@ TEST_F(SlidesApiTest, splitOnlineInvalidFrom) {
 	utility::string_t paramPassword = utils->getTestValue("splitOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitOnline", "options");
 	paramFrom = utils->getInvalidIntTestValue("splitOnline", "from", paramFrom).value();
 	utils->initialize("splitOnline", "from", paramFrom);
 
 	bool failed = true;
 	try
 	{
-		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -62290,13 +62353,14 @@ TEST_F(SlidesApiTest, splitOnlineInvalidTo) {
 	utility::string_t paramPassword = utils->getTestValue("splitOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitOnline", "options");
 	paramTo = utils->getInvalidIntTestValue("splitOnline", "to", paramTo).value();
 	utils->initialize("splitOnline", "to", paramTo);
 
 	bool failed = true;
 	try
 	{
-		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -62334,13 +62398,14 @@ TEST_F(SlidesApiTest, splitOnlineInvalidPassword) {
 	utility::string_t paramPassword = utils->getTestValue("splitOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitOnline", "options");
 	paramPassword = utils->getInvalidTestValue("splitOnline", "password", paramPassword);
 	utils->initialize("splitOnline", "password", paramPassword);
 
 	bool failed = true;
 	try
 	{
-		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -62378,13 +62443,14 @@ TEST_F(SlidesApiTest, splitOnlineInvalidStorage) {
 	utility::string_t paramPassword = utils->getTestValue("splitOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitOnline", "options");
 	paramStorage = utils->getInvalidTestValue("splitOnline", "storage", paramStorage);
 	utils->initialize("splitOnline", "storage", paramStorage);
 
 	bool failed = true;
 	try
 	{
-		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -62422,13 +62488,14 @@ TEST_F(SlidesApiTest, splitOnlineInvalidFontsFolder) {
 	utility::string_t paramPassword = utils->getTestValue("splitOnline", "password");
 	utility::string_t paramStorage = utils->getTestValue("splitOnline", "storage");
 	utility::string_t paramFontsFolder = utils->getTestValue("splitOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitOnline", "options");
 	paramFontsFolder = utils->getInvalidTestValue("splitOnline", "fontsFolder", paramFontsFolder);
 	utils->initialize("splitOnline", "fontsFolder", paramFontsFolder);
 
 	bool failed = true;
 	try
 	{
-		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder).wait();
+		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
 		failed = false;
 	}
 	catch (ApiException ex)
@@ -62451,6 +62518,51 @@ TEST_F(SlidesApiTest, splitOnlineInvalidFontsFolder) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("splitOnline", "fontsFolder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, splitOnlineInvalidOptions) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("splitOnline", "document");
+	utility::string_t paramFormat = utils->getTestValue("splitOnline", "format");
+	auto paramWidth = utils->getOptionalIntTestValue("splitOnline", "width");
+	auto paramHeight = utils->getOptionalIntTestValue("splitOnline", "height");
+	auto paramFrom = utils->getOptionalIntTestValue("splitOnline", "from");
+	auto paramTo = utils->getOptionalIntTestValue("splitOnline", "to");
+	utility::string_t paramPassword = utils->getTestValue("splitOnline", "password");
+	utility::string_t paramStorage = utils->getTestValue("splitOnline", "storage");
+	utility::string_t paramFontsFolder = utils->getTestValue("splitOnline", "fontsFolder");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("splitOnline", "options");
+	paramOptions = utils->getInvalidTestValueForClass<>("splitOnline", "options", paramOptions);
+	utils->initialize("splitOnline", "options", paramOptions);
+
+	bool failed = true;
+	try
+	{
+		api->splitOnline(paramDocument, paramFormat, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("splitOnline", "options");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("splitOnline", "options", paramOptions);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("splitOnline", "options");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("splitOnline", "options", paramOptions);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("splitOnline", "options"))
 	{
 		FAIL() << "Must have failed";
 	}

@@ -79,6 +79,13 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getCommentsAreaColor() const;
 	ASPOSE_DLL_EXPORT void setCommentsAreaColor(utility::string_t value);
+	/// <summary>
+	/// Show hidden slides. If true, hidden are exported.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool isShowHiddenSlides() const;
+	ASPOSE_DLL_EXPORT void setShowHiddenSlides(bool value);
+	ASPOSE_DLL_EXPORT bool showHiddenSlidesIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetShowHiddenSlides();
 
 protected:
 	utility::string_t m_NotesPosition;
@@ -86,6 +93,8 @@ protected:
 	int32_t m_CommentsAreaWidth;
 	bool m_CommentsAreaWidthIsSet;
 	utility::string_t m_CommentsAreaColor;
+	bool m_ShowHiddenSlides;
+	bool m_ShowHiddenSlidesIsSet;
 };
 
 }

@@ -1236,12 +1236,12 @@ public:
 	/// <summary>
 	/// Splits PowerPoint presentation slides from the specified range into separate files and exports them in the specified file format. If the range is not provided all slides will be processed. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SplitDocumentResult>> splitAndSaveOnline(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t destFolder = utility::string_t(), boost::optional<int32_t> width = int32_t(), boost::optional<int32_t> height = int32_t(), boost::optional<int32_t> from = int32_t(), boost::optional<int32_t> to = int32_t(), utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SplitDocumentResult>> splitAndSaveOnline(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t destFolder = utility::string_t(), boost::optional<int32_t> width = int32_t(), boost::optional<int32_t> height = int32_t(), boost::optional<int32_t> from = int32_t(), boost::optional<int32_t> to = int32_t(), utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>());
 
 	/// <summary>
 	/// Splits PowerPoint presentation slides from the specified range into separate files and exports them in the specified file format. If the range is not provided all slides will be processed. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<HttpContent> splitOnline(std::shared_ptr<HttpContent> document, utility::string_t format, boost::optional<int32_t> width = int32_t(), boost::optional<int32_t> height = int32_t(), boost::optional<int32_t> from = int32_t(), boost::optional<int32_t> to = int32_t(), utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> splitOnline(std::shared_ptr<HttpContent> document, utility::string_t format, boost::optional<int32_t> width = int32_t(), boost::optional<int32_t> height = int32_t(), boost::optional<int32_t> from = int32_t(), boost::optional<int32_t> to = int32_t(), utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>());
 
 	/// <summary>
 	/// Check if storage exists

@@ -34,6 +34,7 @@ namespace model {
 ImageExportOptions::ImageExportOptions()
 {
 	m_CommentsAreaWidthIsSet = false;
+	m_ShowHiddenSlidesIsSet = false;
 	setFormat(L"image");
 }
 
@@ -95,6 +96,27 @@ void ImageExportOptions::setCommentsAreaColor(utility::string_t value)
 	
 }
 
+bool ImageExportOptions::isShowHiddenSlides() const
+{
+	return m_ShowHiddenSlides;
+}
+
+void ImageExportOptions::setShowHiddenSlides(bool value)
+{
+	m_ShowHiddenSlides = value;
+	m_ShowHiddenSlidesIsSet = true;
+}
+
+bool ImageExportOptions::showHiddenSlidesIsSet() const
+{
+	return m_ShowHiddenSlidesIsSet;
+}
+
+void ImageExportOptions::unsetShowHiddenSlides()
+{
+	m_ShowHiddenSlidesIsSet = false;
+}
+
 web::json::value ImageExportOptions::toJson() const
 {
 	web::json::value val = this->ImageExportOptionsBase::toJson();
@@ -113,6 +135,10 @@ web::json::value ImageExportOptions::toJson() const
 	if (!m_CommentsAreaColor.empty())
 	{
 		val[utility::conversions::to_string_t("CommentsAreaColor")] = ModelBase::toJson(m_CommentsAreaColor);
+	}
+	if(m_ShowHiddenSlidesIsSet)
+	{
+		val[utility::conversions::to_string_t("ShowHiddenSlides")] = ModelBase::toJson(m_ShowHiddenSlides);
 	}
 	return val;
 }
@@ -139,6 +165,11 @@ void ImageExportOptions::fromJson(web::json::value& val)
 	if(jsonForCommentsAreaColor != nullptr && !jsonForCommentsAreaColor->is_null())
 	{
 		setCommentsAreaColor(ModelBase::stringFromJson(*jsonForCommentsAreaColor));
+	}
+	web::json::value* jsonForShowHiddenSlides = ModelBase::getField(val, "ShowHiddenSlides");
+	if(jsonForShowHiddenSlides != nullptr && !jsonForShowHiddenSlides->is_null())
+	{
+		setShowHiddenSlides(ModelBase::boolFromJson(*jsonForShowHiddenSlides));
 	}
 }
 
