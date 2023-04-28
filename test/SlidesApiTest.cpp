@@ -12113,6 +12113,1241 @@ TEST_F(SlidesApiTest, createSpecialSlideShapeInvalidSubShape) {
 	}
 }
 
+TEST_F(SlidesApiTest, createTableCellParagraph) {
+	utility::string_t paramName = utils->getTestValue("createTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellParagraph", "cellIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("createTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellParagraph", "storage");
+	utils->initialize("createTableCellParagraph", "");
+	std::shared_ptr<Paragraph> result = api->createTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, createTableCellParagraphInvalidName) {
+	utility::string_t paramName = utils->getTestValue("createTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellParagraph", "cellIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("createTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellParagraph", "storage");
+	paramName = utils->getInvalidTestValue("createTableCellParagraph", "name", paramName);
+	utils->initialize("createTableCellParagraph", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellParagraph", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellParagraphInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("createTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellParagraph", "cellIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("createTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellParagraph", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("createTableCellParagraph", "slideIndex", paramSlideIndex).value();
+	utils->initialize("createTableCellParagraph", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellParagraph", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellParagraphInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("createTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellParagraph", "cellIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("createTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellParagraph", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("createTableCellParagraph", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("createTableCellParagraph", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellParagraph", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellParagraphInvalidRowIndex) {
+	utility::string_t paramName = utils->getTestValue("createTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellParagraph", "cellIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("createTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellParagraph", "storage");
+	paramRowIndex = utils->getInvalidIntTestValue("createTableCellParagraph", "rowIndex", paramRowIndex).value();
+	utils->initialize("createTableCellParagraph", "rowIndex", paramRowIndex);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "rowIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "rowIndex", paramRowIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "rowIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "rowIndex", paramRowIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellParagraph", "rowIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellParagraphInvalidCellIndex) {
+	utility::string_t paramName = utils->getTestValue("createTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellParagraph", "cellIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("createTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellParagraph", "storage");
+	paramCellIndex = utils->getInvalidIntTestValue("createTableCellParagraph", "cellIndex", paramCellIndex).value();
+	utils->initialize("createTableCellParagraph", "cellIndex", paramCellIndex);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "cellIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "cellIndex", paramCellIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "cellIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "cellIndex", paramCellIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellParagraph", "cellIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellParagraphInvalidDto) {
+	utility::string_t paramName = utils->getTestValue("createTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellParagraph", "cellIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("createTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellParagraph", "storage");
+	paramDto = utils->getInvalidTestValueForClass<>("createTableCellParagraph", "dto", paramDto);
+	utils->initialize("createTableCellParagraph", "dto", paramDto);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "dto");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "dto", paramDto);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "dto");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "dto", paramDto);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellParagraph", "dto"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellParagraphInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("createTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellParagraph", "cellIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("createTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellParagraph", "storage");
+	paramPassword = utils->getInvalidTestValue("createTableCellParagraph", "password", paramPassword);
+	utils->initialize("createTableCellParagraph", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellParagraph", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellParagraphInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("createTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellParagraph", "cellIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("createTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellParagraph", "storage");
+	paramFolder = utils->getInvalidTestValue("createTableCellParagraph", "folder", paramFolder);
+	utils->initialize("createTableCellParagraph", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellParagraph", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellParagraphInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("createTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellParagraph", "cellIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("createTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellParagraph", "storage");
+	paramStorage = utils->getInvalidTestValue("createTableCellParagraph", "storage", paramStorage);
+	utils->initialize("createTableCellParagraph", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellParagraph", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellParagraph", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellParagraph", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellPortion) {
+	utility::string_t paramName = utils->getTestValue("createTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("createTableCellPortion", "paragraphIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("createTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellPortion", "storage");
+	utils->initialize("createTableCellPortion", "");
+	std::shared_ptr<Portion> result = api->createTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, createTableCellPortionInvalidName) {
+	utility::string_t paramName = utils->getTestValue("createTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("createTableCellPortion", "paragraphIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("createTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellPortion", "storage");
+	paramName = utils->getInvalidTestValue("createTableCellPortion", "name", paramName);
+	utils->initialize("createTableCellPortion", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellPortion", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellPortionInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("createTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("createTableCellPortion", "paragraphIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("createTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellPortion", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("createTableCellPortion", "slideIndex", paramSlideIndex).value();
+	utils->initialize("createTableCellPortion", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellPortion", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellPortionInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("createTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("createTableCellPortion", "paragraphIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("createTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellPortion", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("createTableCellPortion", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("createTableCellPortion", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellPortion", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellPortionInvalidRowIndex) {
+	utility::string_t paramName = utils->getTestValue("createTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("createTableCellPortion", "paragraphIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("createTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellPortion", "storage");
+	paramRowIndex = utils->getInvalidIntTestValue("createTableCellPortion", "rowIndex", paramRowIndex).value();
+	utils->initialize("createTableCellPortion", "rowIndex", paramRowIndex);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "rowIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "rowIndex", paramRowIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "rowIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "rowIndex", paramRowIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellPortion", "rowIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellPortionInvalidCellIndex) {
+	utility::string_t paramName = utils->getTestValue("createTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("createTableCellPortion", "paragraphIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("createTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellPortion", "storage");
+	paramCellIndex = utils->getInvalidIntTestValue("createTableCellPortion", "cellIndex", paramCellIndex).value();
+	utils->initialize("createTableCellPortion", "cellIndex", paramCellIndex);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "cellIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "cellIndex", paramCellIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "cellIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "cellIndex", paramCellIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellPortion", "cellIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellPortionInvalidParagraphIndex) {
+	utility::string_t paramName = utils->getTestValue("createTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("createTableCellPortion", "paragraphIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("createTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellPortion", "storage");
+	paramParagraphIndex = utils->getInvalidIntTestValue("createTableCellPortion", "paragraphIndex", paramParagraphIndex).value();
+	utils->initialize("createTableCellPortion", "paragraphIndex", paramParagraphIndex);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "paragraphIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "paragraphIndex", paramParagraphIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "paragraphIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "paragraphIndex", paramParagraphIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellPortion", "paragraphIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellPortionInvalidDto) {
+	utility::string_t paramName = utils->getTestValue("createTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("createTableCellPortion", "paragraphIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("createTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellPortion", "storage");
+	paramDto = utils->getInvalidTestValueForClass<>("createTableCellPortion", "dto", paramDto);
+	utils->initialize("createTableCellPortion", "dto", paramDto);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "dto");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "dto", paramDto);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "dto");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "dto", paramDto);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellPortion", "dto"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellPortionInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("createTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("createTableCellPortion", "paragraphIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("createTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellPortion", "storage");
+	paramPassword = utils->getInvalidTestValue("createTableCellPortion", "password", paramPassword);
+	utils->initialize("createTableCellPortion", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellPortion", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellPortionInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("createTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("createTableCellPortion", "paragraphIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("createTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellPortion", "storage");
+	paramFolder = utils->getInvalidTestValue("createTableCellPortion", "folder", paramFolder);
+	utils->initialize("createTableCellPortion", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellPortion", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableCellPortionInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("createTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("createTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("createTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("createTableCellPortion", "paragraphIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("createTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("createTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableCellPortion", "storage");
+	paramStorage = utils->getInvalidTestValue("createTableCellPortion", "storage", paramStorage);
+	utils->initialize("createTableCellPortion", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->createTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableCellPortion", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableCellPortion", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableCellPortion", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableRow) {
+	utility::string_t paramName = utils->getTestValue("createTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableRow", "shapeIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("createTableRow", "dto");
+	auto paramPosition = utils->getOptionalIntTestValue("createTableRow", "position");
+	utility::string_t paramPassword = utils->getTestValue("createTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableRow", "storage");
+	utils->initialize("createTableRow", "");
+	std::shared_ptr<TableRow> result = api->createTableRow(paramName, paramSlideIndex, paramShapeIndex, paramDto, paramPosition, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, createTableRowInvalidName) {
+	utility::string_t paramName = utils->getTestValue("createTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableRow", "shapeIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("createTableRow", "dto");
+	auto paramPosition = utils->getOptionalIntTestValue("createTableRow", "position");
+	utility::string_t paramPassword = utils->getTestValue("createTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableRow", "storage");
+	paramName = utils->getInvalidTestValue("createTableRow", "name", paramName);
+	utils->initialize("createTableRow", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->createTableRow(paramName, paramSlideIndex, paramShapeIndex, paramDto, paramPosition, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableRow", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableRow", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableRow", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableRow", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableRow", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableRowInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("createTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableRow", "shapeIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("createTableRow", "dto");
+	auto paramPosition = utils->getOptionalIntTestValue("createTableRow", "position");
+	utility::string_t paramPassword = utils->getTestValue("createTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableRow", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("createTableRow", "slideIndex", paramSlideIndex).value();
+	utils->initialize("createTableRow", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->createTableRow(paramName, paramSlideIndex, paramShapeIndex, paramDto, paramPosition, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableRow", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableRow", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableRow", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableRow", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableRow", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableRowInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("createTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableRow", "shapeIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("createTableRow", "dto");
+	auto paramPosition = utils->getOptionalIntTestValue("createTableRow", "position");
+	utility::string_t paramPassword = utils->getTestValue("createTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableRow", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("createTableRow", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("createTableRow", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->createTableRow(paramName, paramSlideIndex, paramShapeIndex, paramDto, paramPosition, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableRow", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableRow", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableRow", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableRow", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableRow", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableRowInvalidDto) {
+	utility::string_t paramName = utils->getTestValue("createTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableRow", "shapeIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("createTableRow", "dto");
+	auto paramPosition = utils->getOptionalIntTestValue("createTableRow", "position");
+	utility::string_t paramPassword = utils->getTestValue("createTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableRow", "storage");
+	paramDto = utils->getInvalidTestValueForClass<>("createTableRow", "dto", paramDto);
+	utils->initialize("createTableRow", "dto", paramDto);
+
+	bool failed = true;
+	try
+	{
+		api->createTableRow(paramName, paramSlideIndex, paramShapeIndex, paramDto, paramPosition, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableRow", "dto");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableRow", "dto", paramDto);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableRow", "dto");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableRow", "dto", paramDto);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableRow", "dto"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableRowInvalidPosition) {
+	utility::string_t paramName = utils->getTestValue("createTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableRow", "shapeIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("createTableRow", "dto");
+	auto paramPosition = utils->getOptionalIntTestValue("createTableRow", "position");
+	utility::string_t paramPassword = utils->getTestValue("createTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableRow", "storage");
+	paramPosition = utils->getInvalidIntTestValue("createTableRow", "position", paramPosition).value();
+	utils->initialize("createTableRow", "position", paramPosition);
+
+	bool failed = true;
+	try
+	{
+		api->createTableRow(paramName, paramSlideIndex, paramShapeIndex, paramDto, paramPosition, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableRow", "position");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableRow", "position", paramPosition);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableRow", "position");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableRow", "position", paramPosition);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableRow", "position"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableRowInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("createTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableRow", "shapeIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("createTableRow", "dto");
+	auto paramPosition = utils->getOptionalIntTestValue("createTableRow", "position");
+	utility::string_t paramPassword = utils->getTestValue("createTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableRow", "storage");
+	paramPassword = utils->getInvalidTestValue("createTableRow", "password", paramPassword);
+	utils->initialize("createTableRow", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->createTableRow(paramName, paramSlideIndex, paramShapeIndex, paramDto, paramPosition, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableRow", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableRow", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableRow", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableRow", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableRow", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableRowInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("createTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableRow", "shapeIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("createTableRow", "dto");
+	auto paramPosition = utils->getOptionalIntTestValue("createTableRow", "position");
+	utility::string_t paramPassword = utils->getTestValue("createTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableRow", "storage");
+	paramFolder = utils->getInvalidTestValue("createTableRow", "folder", paramFolder);
+	utils->initialize("createTableRow", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->createTableRow(paramName, paramSlideIndex, paramShapeIndex, paramDto, paramPosition, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableRow", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableRow", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableRow", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableRow", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableRow", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createTableRowInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("createTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("createTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("createTableRow", "shapeIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("createTableRow", "dto");
+	auto paramPosition = utils->getOptionalIntTestValue("createTableRow", "position");
+	utility::string_t paramPassword = utils->getTestValue("createTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("createTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createTableRow", "storage");
+	paramStorage = utils->getInvalidTestValue("createTableRow", "storage", paramStorage);
+	utils->initialize("createTableRow", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->createTableRow(paramName, paramSlideIndex, paramShapeIndex, paramDto, paramPosition, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createTableRow", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createTableRow", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createTableRow", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createTableRow", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createTableRow", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, createWatermark) {
 	utility::string_t paramName = utils->getTestValue("createWatermark", "name");
 	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("createWatermark", "shape");
@@ -25299,6 +26534,1241 @@ TEST_F(SlidesApiTest, deleteSpecialSlideShapesInvalidSubShape) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("deleteSpecialSlideShapes", "subShape"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellParagraph) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellParagraph", "storage");
+	utils->initialize("deleteTableCellParagraph", "");
+	std::shared_ptr<Paragraphs> result = api->deleteTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, deleteTableCellParagraphInvalidName) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellParagraph", "storage");
+	paramName = utils->getInvalidTestValue("deleteTableCellParagraph", "name", paramName);
+	utils->initialize("deleteTableCellParagraph", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellParagraph", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellParagraphInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellParagraph", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("deleteTableCellParagraph", "slideIndex", paramSlideIndex).value();
+	utils->initialize("deleteTableCellParagraph", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellParagraph", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellParagraphInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellParagraph", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("deleteTableCellParagraph", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("deleteTableCellParagraph", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellParagraph", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellParagraphInvalidRowIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellParagraph", "storage");
+	paramRowIndex = utils->getInvalidIntTestValue("deleteTableCellParagraph", "rowIndex", paramRowIndex).value();
+	utils->initialize("deleteTableCellParagraph", "rowIndex", paramRowIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "rowIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "rowIndex", paramRowIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "rowIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "rowIndex", paramRowIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellParagraph", "rowIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellParagraphInvalidCellIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellParagraph", "storage");
+	paramCellIndex = utils->getInvalidIntTestValue("deleteTableCellParagraph", "cellIndex", paramCellIndex).value();
+	utils->initialize("deleteTableCellParagraph", "cellIndex", paramCellIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "cellIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "cellIndex", paramCellIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "cellIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "cellIndex", paramCellIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellParagraph", "cellIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellParagraphInvalidParagraphIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellParagraph", "storage");
+	paramParagraphIndex = utils->getInvalidIntTestValue("deleteTableCellParagraph", "paragraphIndex", paramParagraphIndex).value();
+	utils->initialize("deleteTableCellParagraph", "paragraphIndex", paramParagraphIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "paragraphIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "paragraphIndex", paramParagraphIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "paragraphIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "paragraphIndex", paramParagraphIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellParagraph", "paragraphIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellParagraphInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellParagraph", "storage");
+	paramPassword = utils->getInvalidTestValue("deleteTableCellParagraph", "password", paramPassword);
+	utils->initialize("deleteTableCellParagraph", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellParagraph", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellParagraphInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellParagraph", "storage");
+	paramFolder = utils->getInvalidTestValue("deleteTableCellParagraph", "folder", paramFolder);
+	utils->initialize("deleteTableCellParagraph", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellParagraph", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellParagraphInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellParagraph", "storage");
+	paramStorage = utils->getInvalidTestValue("deleteTableCellParagraph", "storage", paramStorage);
+	utils->initialize("deleteTableCellParagraph", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellParagraph", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellParagraph", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellParagraph", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellPortion) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("deleteTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellPortion", "storage");
+	utils->initialize("deleteTableCellPortion", "");
+	std::shared_ptr<Portions> result = api->deleteTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, deleteTableCellPortionInvalidName) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("deleteTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellPortion", "storage");
+	paramName = utils->getInvalidTestValue("deleteTableCellPortion", "name", paramName);
+	utils->initialize("deleteTableCellPortion", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellPortion", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellPortionInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("deleteTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellPortion", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("deleteTableCellPortion", "slideIndex", paramSlideIndex).value();
+	utils->initialize("deleteTableCellPortion", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellPortion", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellPortionInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("deleteTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellPortion", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("deleteTableCellPortion", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("deleteTableCellPortion", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellPortion", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellPortionInvalidRowIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("deleteTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellPortion", "storage");
+	paramRowIndex = utils->getInvalidIntTestValue("deleteTableCellPortion", "rowIndex", paramRowIndex).value();
+	utils->initialize("deleteTableCellPortion", "rowIndex", paramRowIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "rowIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "rowIndex", paramRowIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "rowIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "rowIndex", paramRowIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellPortion", "rowIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellPortionInvalidCellIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("deleteTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellPortion", "storage");
+	paramCellIndex = utils->getInvalidIntTestValue("deleteTableCellPortion", "cellIndex", paramCellIndex).value();
+	utils->initialize("deleteTableCellPortion", "cellIndex", paramCellIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "cellIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "cellIndex", paramCellIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "cellIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "cellIndex", paramCellIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellPortion", "cellIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellPortionInvalidParagraphIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("deleteTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellPortion", "storage");
+	paramParagraphIndex = utils->getInvalidIntTestValue("deleteTableCellPortion", "paragraphIndex", paramParagraphIndex).value();
+	utils->initialize("deleteTableCellPortion", "paragraphIndex", paramParagraphIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "paragraphIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "paragraphIndex", paramParagraphIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "paragraphIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "paragraphIndex", paramParagraphIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellPortion", "paragraphIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellPortionInvalidPortionIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("deleteTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellPortion", "storage");
+	paramPortionIndex = utils->getInvalidIntTestValue("deleteTableCellPortion", "portionIndex", paramPortionIndex).value();
+	utils->initialize("deleteTableCellPortion", "portionIndex", paramPortionIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "portionIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "portionIndex", paramPortionIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "portionIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "portionIndex", paramPortionIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellPortion", "portionIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellPortionInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("deleteTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellPortion", "storage");
+	paramPassword = utils->getInvalidTestValue("deleteTableCellPortion", "password", paramPassword);
+	utils->initialize("deleteTableCellPortion", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellPortion", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellPortionInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("deleteTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellPortion", "storage");
+	paramFolder = utils->getInvalidTestValue("deleteTableCellPortion", "folder", paramFolder);
+	utils->initialize("deleteTableCellPortion", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellPortion", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableCellPortionInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("deleteTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("deleteTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("deleteTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("deleteTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableCellPortion", "storage");
+	paramStorage = utils->getInvalidTestValue("deleteTableCellPortion", "storage", paramStorage);
+	utils->initialize("deleteTableCellPortion", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableCellPortion", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableCellPortion", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableCellPortion", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableRow) {
+	utility::string_t paramName = utils->getTestValue("deleteTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableRow", "rowIndex");
+	auto paramWithAttachedRows = utils->getOptionalBoolTestValue("deleteTableRow", "withAttachedRows");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableRow", "storage");
+	utils->initialize("deleteTableRow", "");
+	std::shared_ptr<Table> result = api->deleteTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramWithAttachedRows, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, deleteTableRowInvalidName) {
+	utility::string_t paramName = utils->getTestValue("deleteTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableRow", "rowIndex");
+	auto paramWithAttachedRows = utils->getOptionalBoolTestValue("deleteTableRow", "withAttachedRows");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableRow", "storage");
+	paramName = utils->getInvalidTestValue("deleteTableRow", "name", paramName);
+	utils->initialize("deleteTableRow", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramWithAttachedRows, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableRow", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableRow", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableRow", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableRow", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableRow", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableRowInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableRow", "rowIndex");
+	auto paramWithAttachedRows = utils->getOptionalBoolTestValue("deleteTableRow", "withAttachedRows");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableRow", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("deleteTableRow", "slideIndex", paramSlideIndex).value();
+	utils->initialize("deleteTableRow", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramWithAttachedRows, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableRow", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableRow", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableRow", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableRow", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableRow", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableRowInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableRow", "rowIndex");
+	auto paramWithAttachedRows = utils->getOptionalBoolTestValue("deleteTableRow", "withAttachedRows");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableRow", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("deleteTableRow", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("deleteTableRow", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramWithAttachedRows, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableRow", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableRow", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableRow", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableRow", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableRow", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableRowInvalidRowIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableRow", "rowIndex");
+	auto paramWithAttachedRows = utils->getOptionalBoolTestValue("deleteTableRow", "withAttachedRows");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableRow", "storage");
+	paramRowIndex = utils->getInvalidIntTestValue("deleteTableRow", "rowIndex", paramRowIndex).value();
+	utils->initialize("deleteTableRow", "rowIndex", paramRowIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramWithAttachedRows, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableRow", "rowIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableRow", "rowIndex", paramRowIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableRow", "rowIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableRow", "rowIndex", paramRowIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableRow", "rowIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableRowInvalidWithAttachedRows) {
+	utility::string_t paramName = utils->getTestValue("deleteTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableRow", "rowIndex");
+	auto paramWithAttachedRows = utils->getOptionalBoolTestValue("deleteTableRow", "withAttachedRows");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableRow", "storage");
+	paramWithAttachedRows = utils->getInvalidBoolTestValue("deleteTableRow", "withAttachedRows", paramWithAttachedRows).value();
+	utils->initialize("deleteTableRow", "withAttachedRows", paramWithAttachedRows);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramWithAttachedRows, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableRow", "withAttachedRows");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableRow", "withAttachedRows", paramWithAttachedRows);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableRow", "withAttachedRows");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableRow", "withAttachedRows", paramWithAttachedRows);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableRow", "withAttachedRows"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableRowInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("deleteTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableRow", "rowIndex");
+	auto paramWithAttachedRows = utils->getOptionalBoolTestValue("deleteTableRow", "withAttachedRows");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableRow", "storage");
+	paramPassword = utils->getInvalidTestValue("deleteTableRow", "password", paramPassword);
+	utils->initialize("deleteTableRow", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramWithAttachedRows, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableRow", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableRow", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableRow", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableRow", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableRow", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableRowInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("deleteTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableRow", "rowIndex");
+	auto paramWithAttachedRows = utils->getOptionalBoolTestValue("deleteTableRow", "withAttachedRows");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableRow", "storage");
+	paramFolder = utils->getInvalidTestValue("deleteTableRow", "folder", paramFolder);
+	utils->initialize("deleteTableRow", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramWithAttachedRows, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableRow", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableRow", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableRow", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableRow", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableRow", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteTableRowInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("deleteTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("deleteTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("deleteTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("deleteTableRow", "rowIndex");
+	auto paramWithAttachedRows = utils->getOptionalBoolTestValue("deleteTableRow", "withAttachedRows");
+	utility::string_t paramPassword = utils->getTestValue("deleteTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteTableRow", "storage");
+	paramStorage = utils->getInvalidTestValue("deleteTableRow", "storage", paramStorage);
+	utils->initialize("deleteTableRow", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->deleteTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramWithAttachedRows, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteTableRow", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableRow", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteTableRow", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteTableRow", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteTableRow", "storage"))
 	{
 		FAIL() << "Must have failed";
 	}
@@ -44588,6 +47058,1652 @@ TEST_F(SlidesApiTest, getSpecialSlideShapesInvalidSubShape) {
 	}
 }
 
+TEST_F(SlidesApiTest, getTableCellParagraph) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraph", "storage");
+	utils->initialize("getTableCellParagraph", "");
+	std::shared_ptr<Paragraph> result = api->getTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphInvalidName) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraph", "storage");
+	paramName = utils->getInvalidTestValue("getTableCellParagraph", "name", paramName);
+	utils->initialize("getTableCellParagraph", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellParagraph", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraph", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("getTableCellParagraph", "slideIndex", paramSlideIndex).value();
+	utils->initialize("getTableCellParagraph", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellParagraph", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraph", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("getTableCellParagraph", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("getTableCellParagraph", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellParagraph", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphInvalidRowIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraph", "storage");
+	paramRowIndex = utils->getInvalidIntTestValue("getTableCellParagraph", "rowIndex", paramRowIndex).value();
+	utils->initialize("getTableCellParagraph", "rowIndex", paramRowIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "rowIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "rowIndex", paramRowIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "rowIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "rowIndex", paramRowIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellParagraph", "rowIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphInvalidCellIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraph", "storage");
+	paramCellIndex = utils->getInvalidIntTestValue("getTableCellParagraph", "cellIndex", paramCellIndex).value();
+	utils->initialize("getTableCellParagraph", "cellIndex", paramCellIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "cellIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "cellIndex", paramCellIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "cellIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "cellIndex", paramCellIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellParagraph", "cellIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphInvalidParagraphIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraph", "storage");
+	paramParagraphIndex = utils->getInvalidIntTestValue("getTableCellParagraph", "paragraphIndex", paramParagraphIndex).value();
+	utils->initialize("getTableCellParagraph", "paragraphIndex", paramParagraphIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "paragraphIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "paragraphIndex", paramParagraphIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "paragraphIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "paragraphIndex", paramParagraphIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellParagraph", "paragraphIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraph", "storage");
+	paramPassword = utils->getInvalidTestValue("getTableCellParagraph", "password", paramPassword);
+	utils->initialize("getTableCellParagraph", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellParagraph", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraph", "storage");
+	paramFolder = utils->getInvalidTestValue("getTableCellParagraph", "folder", paramFolder);
+	utils->initialize("getTableCellParagraph", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellParagraph", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellParagraph", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraph", "storage");
+	paramStorage = utils->getInvalidTestValue("getTableCellParagraph", "storage", paramStorage);
+	utils->initialize("getTableCellParagraph", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraph", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraph", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellParagraph", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphs) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraphs", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraphs", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraphs", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraphs", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraphs", "cellIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraphs", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraphs", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraphs", "storage");
+	utils->initialize("getTableCellParagraphs", "");
+	std::shared_ptr<Paragraphs> result = api->getTableCellParagraphs(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphsInvalidName) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraphs", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraphs", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraphs", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraphs", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraphs", "cellIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraphs", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraphs", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraphs", "storage");
+	paramName = utils->getInvalidTestValue("getTableCellParagraphs", "name", paramName);
+	utils->initialize("getTableCellParagraphs", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellParagraphs(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraphs", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraphs", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraphs", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraphs", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellParagraphs", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphsInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraphs", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraphs", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraphs", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraphs", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraphs", "cellIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraphs", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraphs", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraphs", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("getTableCellParagraphs", "slideIndex", paramSlideIndex).value();
+	utils->initialize("getTableCellParagraphs", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellParagraphs(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraphs", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraphs", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraphs", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraphs", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellParagraphs", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphsInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraphs", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraphs", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraphs", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraphs", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraphs", "cellIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraphs", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraphs", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraphs", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("getTableCellParagraphs", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("getTableCellParagraphs", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellParagraphs(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraphs", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraphs", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraphs", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraphs", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellParagraphs", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphsInvalidRowIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraphs", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraphs", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraphs", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraphs", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraphs", "cellIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraphs", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraphs", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraphs", "storage");
+	paramRowIndex = utils->getInvalidIntTestValue("getTableCellParagraphs", "rowIndex", paramRowIndex).value();
+	utils->initialize("getTableCellParagraphs", "rowIndex", paramRowIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellParagraphs(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraphs", "rowIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraphs", "rowIndex", paramRowIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraphs", "rowIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraphs", "rowIndex", paramRowIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellParagraphs", "rowIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphsInvalidCellIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraphs", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraphs", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraphs", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraphs", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraphs", "cellIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraphs", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraphs", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraphs", "storage");
+	paramCellIndex = utils->getInvalidIntTestValue("getTableCellParagraphs", "cellIndex", paramCellIndex).value();
+	utils->initialize("getTableCellParagraphs", "cellIndex", paramCellIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellParagraphs(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraphs", "cellIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraphs", "cellIndex", paramCellIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraphs", "cellIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraphs", "cellIndex", paramCellIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellParagraphs", "cellIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphsInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraphs", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraphs", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraphs", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraphs", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraphs", "cellIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraphs", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraphs", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraphs", "storage");
+	paramPassword = utils->getInvalidTestValue("getTableCellParagraphs", "password", paramPassword);
+	utils->initialize("getTableCellParagraphs", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellParagraphs(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraphs", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraphs", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraphs", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraphs", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellParagraphs", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphsInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraphs", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraphs", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraphs", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraphs", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraphs", "cellIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraphs", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraphs", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraphs", "storage");
+	paramFolder = utils->getInvalidTestValue("getTableCellParagraphs", "folder", paramFolder);
+	utils->initialize("getTableCellParagraphs", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellParagraphs(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraphs", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraphs", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraphs", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraphs", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellParagraphs", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellParagraphsInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("getTableCellParagraphs", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellParagraphs", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellParagraphs", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellParagraphs", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellParagraphs", "cellIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellParagraphs", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellParagraphs", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellParagraphs", "storage");
+	paramStorage = utils->getInvalidTestValue("getTableCellParagraphs", "storage", paramStorage);
+	utils->initialize("getTableCellParagraphs", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellParagraphs(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraphs", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraphs", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellParagraphs", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellParagraphs", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellParagraphs", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortion) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortion", "storage");
+	utils->initialize("getTableCellPortion", "");
+	std::shared_ptr<Portion> result = api->getTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionInvalidName) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortion", "storage");
+	paramName = utils->getInvalidTestValue("getTableCellPortion", "name", paramName);
+	utils->initialize("getTableCellPortion", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortion", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortion", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("getTableCellPortion", "slideIndex", paramSlideIndex).value();
+	utils->initialize("getTableCellPortion", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortion", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortion", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("getTableCellPortion", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("getTableCellPortion", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortion", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionInvalidRowIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortion", "storage");
+	paramRowIndex = utils->getInvalidIntTestValue("getTableCellPortion", "rowIndex", paramRowIndex).value();
+	utils->initialize("getTableCellPortion", "rowIndex", paramRowIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "rowIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "rowIndex", paramRowIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "rowIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "rowIndex", paramRowIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortion", "rowIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionInvalidCellIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortion", "storage");
+	paramCellIndex = utils->getInvalidIntTestValue("getTableCellPortion", "cellIndex", paramCellIndex).value();
+	utils->initialize("getTableCellPortion", "cellIndex", paramCellIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "cellIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "cellIndex", paramCellIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "cellIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "cellIndex", paramCellIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortion", "cellIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionInvalidParagraphIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortion", "storage");
+	paramParagraphIndex = utils->getInvalidIntTestValue("getTableCellPortion", "paragraphIndex", paramParagraphIndex).value();
+	utils->initialize("getTableCellPortion", "paragraphIndex", paramParagraphIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "paragraphIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "paragraphIndex", paramParagraphIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "paragraphIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "paragraphIndex", paramParagraphIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortion", "paragraphIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionInvalidPortionIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortion", "storage");
+	paramPortionIndex = utils->getInvalidIntTestValue("getTableCellPortion", "portionIndex", paramPortionIndex).value();
+	utils->initialize("getTableCellPortion", "portionIndex", paramPortionIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "portionIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "portionIndex", paramPortionIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "portionIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "portionIndex", paramPortionIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortion", "portionIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortion", "storage");
+	paramPassword = utils->getInvalidTestValue("getTableCellPortion", "password", paramPassword);
+	utils->initialize("getTableCellPortion", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortion", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortion", "storage");
+	paramFolder = utils->getInvalidTestValue("getTableCellPortion", "folder", paramFolder);
+	utils->initialize("getTableCellPortion", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortion", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("getTableCellPortion", "portionIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortion", "storage");
+	paramStorage = utils->getInvalidTestValue("getTableCellPortion", "storage", paramStorage);
+	utils->initialize("getTableCellPortion", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortion", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortion", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortion", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortions) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortions", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortions", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortions", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortions", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortions", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortions", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortions", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortions", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortions", "storage");
+	utils->initialize("getTableCellPortions", "");
+	std::shared_ptr<Portions> result = api->getTableCellPortions(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionsInvalidName) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortions", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortions", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortions", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortions", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortions", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortions", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortions", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortions", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortions", "storage");
+	paramName = utils->getInvalidTestValue("getTableCellPortions", "name", paramName);
+	utils->initialize("getTableCellPortions", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortions(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortions", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionsInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortions", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortions", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortions", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortions", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortions", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortions", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortions", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortions", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortions", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("getTableCellPortions", "slideIndex", paramSlideIndex).value();
+	utils->initialize("getTableCellPortions", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortions(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortions", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionsInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortions", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortions", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortions", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortions", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortions", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortions", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortions", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortions", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortions", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("getTableCellPortions", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("getTableCellPortions", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortions(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortions", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionsInvalidRowIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortions", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortions", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortions", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortions", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortions", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortions", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortions", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortions", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortions", "storage");
+	paramRowIndex = utils->getInvalidIntTestValue("getTableCellPortions", "rowIndex", paramRowIndex).value();
+	utils->initialize("getTableCellPortions", "rowIndex", paramRowIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortions(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "rowIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "rowIndex", paramRowIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "rowIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "rowIndex", paramRowIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortions", "rowIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionsInvalidCellIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortions", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortions", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortions", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortions", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortions", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortions", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortions", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortions", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortions", "storage");
+	paramCellIndex = utils->getInvalidIntTestValue("getTableCellPortions", "cellIndex", paramCellIndex).value();
+	utils->initialize("getTableCellPortions", "cellIndex", paramCellIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortions(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "cellIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "cellIndex", paramCellIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "cellIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "cellIndex", paramCellIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortions", "cellIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionsInvalidParagraphIndex) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortions", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortions", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortions", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortions", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortions", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortions", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortions", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortions", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortions", "storage");
+	paramParagraphIndex = utils->getInvalidIntTestValue("getTableCellPortions", "paragraphIndex", paramParagraphIndex).value();
+	utils->initialize("getTableCellPortions", "paragraphIndex", paramParagraphIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortions(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "paragraphIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "paragraphIndex", paramParagraphIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "paragraphIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "paragraphIndex", paramParagraphIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortions", "paragraphIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionsInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortions", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortions", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortions", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortions", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortions", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortions", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortions", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortions", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortions", "storage");
+	paramPassword = utils->getInvalidTestValue("getTableCellPortions", "password", paramPassword);
+	utils->initialize("getTableCellPortions", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortions(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortions", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionsInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortions", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortions", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortions", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortions", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortions", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortions", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortions", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortions", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortions", "storage");
+	paramFolder = utils->getInvalidTestValue("getTableCellPortions", "folder", paramFolder);
+	utils->initialize("getTableCellPortions", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortions(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortions", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getTableCellPortionsInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("getTableCellPortions", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("getTableCellPortions", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("getTableCellPortions", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("getTableCellPortions", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("getTableCellPortions", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("getTableCellPortions", "paragraphIndex");
+	utility::string_t paramPassword = utils->getTestValue("getTableCellPortions", "password");
+	utility::string_t paramFolder = utils->getTestValue("getTableCellPortions", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getTableCellPortions", "storage");
+	paramStorage = utils->getInvalidTestValue("getTableCellPortions", "storage", paramStorage);
+	utils->initialize("getTableCellPortions", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->getTableCellPortions(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getTableCellPortions", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getTableCellPortions", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getTableCellPortions", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, getTheme) {
 	utility::string_t paramName = utils->getTestValue("getTheme", "name");
 	int32_t paramSlideIndex = utils->getIntTestValue("getTheme", "slideIndex");
@@ -47395,6 +51511,313 @@ TEST_F(SlidesApiTest, mergeOnlineInvalidStorage) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("mergeOnline", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, mergeTableCells) {
+	utility::string_t paramName = utils->getTestValue("mergeTableCells", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("mergeTableCells", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("mergeTableCells", "shapeIndex");
+	std::shared_ptr<TableCellMergeOptions> paramTableCellMergeOptions = utils->getTestValueForClass<TableCellMergeOptions>("mergeTableCells", "tableCellMergeOptions");
+	utility::string_t paramPassword = utils->getTestValue("mergeTableCells", "password");
+	utility::string_t paramFolder = utils->getTestValue("mergeTableCells", "folder");
+	utility::string_t paramStorage = utils->getTestValue("mergeTableCells", "storage");
+	utils->initialize("mergeTableCells", "");
+	std::shared_ptr<Table> result = api->mergeTableCells(paramName, paramSlideIndex, paramShapeIndex, paramTableCellMergeOptions, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, mergeTableCellsInvalidName) {
+	utility::string_t paramName = utils->getTestValue("mergeTableCells", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("mergeTableCells", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("mergeTableCells", "shapeIndex");
+	std::shared_ptr<TableCellMergeOptions> paramTableCellMergeOptions = utils->getTestValueForClass<TableCellMergeOptions>("mergeTableCells", "tableCellMergeOptions");
+	utility::string_t paramPassword = utils->getTestValue("mergeTableCells", "password");
+	utility::string_t paramFolder = utils->getTestValue("mergeTableCells", "folder");
+	utility::string_t paramStorage = utils->getTestValue("mergeTableCells", "storage");
+	paramName = utils->getInvalidTestValue("mergeTableCells", "name", paramName);
+	utils->initialize("mergeTableCells", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->mergeTableCells(paramName, paramSlideIndex, paramShapeIndex, paramTableCellMergeOptions, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("mergeTableCells", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("mergeTableCells", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("mergeTableCells", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("mergeTableCells", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("mergeTableCells", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, mergeTableCellsInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("mergeTableCells", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("mergeTableCells", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("mergeTableCells", "shapeIndex");
+	std::shared_ptr<TableCellMergeOptions> paramTableCellMergeOptions = utils->getTestValueForClass<TableCellMergeOptions>("mergeTableCells", "tableCellMergeOptions");
+	utility::string_t paramPassword = utils->getTestValue("mergeTableCells", "password");
+	utility::string_t paramFolder = utils->getTestValue("mergeTableCells", "folder");
+	utility::string_t paramStorage = utils->getTestValue("mergeTableCells", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("mergeTableCells", "slideIndex", paramSlideIndex).value();
+	utils->initialize("mergeTableCells", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->mergeTableCells(paramName, paramSlideIndex, paramShapeIndex, paramTableCellMergeOptions, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("mergeTableCells", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("mergeTableCells", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("mergeTableCells", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("mergeTableCells", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("mergeTableCells", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, mergeTableCellsInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("mergeTableCells", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("mergeTableCells", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("mergeTableCells", "shapeIndex");
+	std::shared_ptr<TableCellMergeOptions> paramTableCellMergeOptions = utils->getTestValueForClass<TableCellMergeOptions>("mergeTableCells", "tableCellMergeOptions");
+	utility::string_t paramPassword = utils->getTestValue("mergeTableCells", "password");
+	utility::string_t paramFolder = utils->getTestValue("mergeTableCells", "folder");
+	utility::string_t paramStorage = utils->getTestValue("mergeTableCells", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("mergeTableCells", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("mergeTableCells", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->mergeTableCells(paramName, paramSlideIndex, paramShapeIndex, paramTableCellMergeOptions, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("mergeTableCells", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("mergeTableCells", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("mergeTableCells", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("mergeTableCells", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("mergeTableCells", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, mergeTableCellsInvalidTableCellMergeOptions) {
+	utility::string_t paramName = utils->getTestValue("mergeTableCells", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("mergeTableCells", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("mergeTableCells", "shapeIndex");
+	std::shared_ptr<TableCellMergeOptions> paramTableCellMergeOptions = utils->getTestValueForClass<TableCellMergeOptions>("mergeTableCells", "tableCellMergeOptions");
+	utility::string_t paramPassword = utils->getTestValue("mergeTableCells", "password");
+	utility::string_t paramFolder = utils->getTestValue("mergeTableCells", "folder");
+	utility::string_t paramStorage = utils->getTestValue("mergeTableCells", "storage");
+	paramTableCellMergeOptions = utils->getInvalidTestValueForClass<>("mergeTableCells", "tableCellMergeOptions", paramTableCellMergeOptions);
+	utils->initialize("mergeTableCells", "tableCellMergeOptions", paramTableCellMergeOptions);
+
+	bool failed = true;
+	try
+	{
+		api->mergeTableCells(paramName, paramSlideIndex, paramShapeIndex, paramTableCellMergeOptions, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("mergeTableCells", "tableCellMergeOptions");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("mergeTableCells", "tableCellMergeOptions", paramTableCellMergeOptions);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("mergeTableCells", "tableCellMergeOptions");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("mergeTableCells", "tableCellMergeOptions", paramTableCellMergeOptions);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("mergeTableCells", "tableCellMergeOptions"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, mergeTableCellsInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("mergeTableCells", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("mergeTableCells", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("mergeTableCells", "shapeIndex");
+	std::shared_ptr<TableCellMergeOptions> paramTableCellMergeOptions = utils->getTestValueForClass<TableCellMergeOptions>("mergeTableCells", "tableCellMergeOptions");
+	utility::string_t paramPassword = utils->getTestValue("mergeTableCells", "password");
+	utility::string_t paramFolder = utils->getTestValue("mergeTableCells", "folder");
+	utility::string_t paramStorage = utils->getTestValue("mergeTableCells", "storage");
+	paramPassword = utils->getInvalidTestValue("mergeTableCells", "password", paramPassword);
+	utils->initialize("mergeTableCells", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->mergeTableCells(paramName, paramSlideIndex, paramShapeIndex, paramTableCellMergeOptions, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("mergeTableCells", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("mergeTableCells", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("mergeTableCells", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("mergeTableCells", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("mergeTableCells", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, mergeTableCellsInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("mergeTableCells", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("mergeTableCells", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("mergeTableCells", "shapeIndex");
+	std::shared_ptr<TableCellMergeOptions> paramTableCellMergeOptions = utils->getTestValueForClass<TableCellMergeOptions>("mergeTableCells", "tableCellMergeOptions");
+	utility::string_t paramPassword = utils->getTestValue("mergeTableCells", "password");
+	utility::string_t paramFolder = utils->getTestValue("mergeTableCells", "folder");
+	utility::string_t paramStorage = utils->getTestValue("mergeTableCells", "storage");
+	paramFolder = utils->getInvalidTestValue("mergeTableCells", "folder", paramFolder);
+	utils->initialize("mergeTableCells", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->mergeTableCells(paramName, paramSlideIndex, paramShapeIndex, paramTableCellMergeOptions, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("mergeTableCells", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("mergeTableCells", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("mergeTableCells", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("mergeTableCells", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("mergeTableCells", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, mergeTableCellsInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("mergeTableCells", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("mergeTableCells", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("mergeTableCells", "shapeIndex");
+	std::shared_ptr<TableCellMergeOptions> paramTableCellMergeOptions = utils->getTestValueForClass<TableCellMergeOptions>("mergeTableCells", "tableCellMergeOptions");
+	utility::string_t paramPassword = utils->getTestValue("mergeTableCells", "password");
+	utility::string_t paramFolder = utils->getTestValue("mergeTableCells", "folder");
+	utility::string_t paramStorage = utils->getTestValue("mergeTableCells", "storage");
+	paramStorage = utils->getInvalidTestValue("mergeTableCells", "storage", paramStorage);
+	utils->initialize("mergeTableCells", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->mergeTableCells(paramName, paramSlideIndex, paramShapeIndex, paramTableCellMergeOptions, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("mergeTableCells", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("mergeTableCells", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("mergeTableCells", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("mergeTableCells", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("mergeTableCells", "storage"))
 	{
 		FAIL() << "Must have failed";
 	}
@@ -62568,6 +66991,472 @@ TEST_F(SlidesApiTest, splitOnlineInvalidOptions) {
 	}
 }
 
+TEST_F(SlidesApiTest, splitTableCell) {
+	utility::string_t paramName = utils->getTestValue("splitTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("splitTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("splitTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("splitTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("splitTableCell", "cellIndex");
+	utility::string_t paramSplitType = utils->getTestValue("splitTableCell", "splitType");
+	double paramValue = utils->getDoubleTestValue("splitTableCell", "value");
+	utility::string_t paramPassword = utils->getTestValue("splitTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("splitTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("splitTableCell", "storage");
+	utils->initialize("splitTableCell", "");
+	std::shared_ptr<Table> result = api->splitTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramSplitType, paramValue, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, splitTableCellInvalidName) {
+	utility::string_t paramName = utils->getTestValue("splitTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("splitTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("splitTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("splitTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("splitTableCell", "cellIndex");
+	utility::string_t paramSplitType = utils->getTestValue("splitTableCell", "splitType");
+	double paramValue = utils->getDoubleTestValue("splitTableCell", "value");
+	utility::string_t paramPassword = utils->getTestValue("splitTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("splitTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("splitTableCell", "storage");
+	paramName = utils->getInvalidTestValue("splitTableCell", "name", paramName);
+	utils->initialize("splitTableCell", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->splitTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramSplitType, paramValue, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("splitTableCell", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, splitTableCellInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("splitTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("splitTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("splitTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("splitTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("splitTableCell", "cellIndex");
+	utility::string_t paramSplitType = utils->getTestValue("splitTableCell", "splitType");
+	double paramValue = utils->getDoubleTestValue("splitTableCell", "value");
+	utility::string_t paramPassword = utils->getTestValue("splitTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("splitTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("splitTableCell", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("splitTableCell", "slideIndex", paramSlideIndex).value();
+	utils->initialize("splitTableCell", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->splitTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramSplitType, paramValue, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("splitTableCell", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, splitTableCellInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("splitTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("splitTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("splitTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("splitTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("splitTableCell", "cellIndex");
+	utility::string_t paramSplitType = utils->getTestValue("splitTableCell", "splitType");
+	double paramValue = utils->getDoubleTestValue("splitTableCell", "value");
+	utility::string_t paramPassword = utils->getTestValue("splitTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("splitTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("splitTableCell", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("splitTableCell", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("splitTableCell", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->splitTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramSplitType, paramValue, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("splitTableCell", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, splitTableCellInvalidRowIndex) {
+	utility::string_t paramName = utils->getTestValue("splitTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("splitTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("splitTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("splitTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("splitTableCell", "cellIndex");
+	utility::string_t paramSplitType = utils->getTestValue("splitTableCell", "splitType");
+	double paramValue = utils->getDoubleTestValue("splitTableCell", "value");
+	utility::string_t paramPassword = utils->getTestValue("splitTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("splitTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("splitTableCell", "storage");
+	paramRowIndex = utils->getInvalidIntTestValue("splitTableCell", "rowIndex", paramRowIndex).value();
+	utils->initialize("splitTableCell", "rowIndex", paramRowIndex);
+
+	bool failed = true;
+	try
+	{
+		api->splitTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramSplitType, paramValue, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "rowIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "rowIndex", paramRowIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "rowIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "rowIndex", paramRowIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("splitTableCell", "rowIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, splitTableCellInvalidCellIndex) {
+	utility::string_t paramName = utils->getTestValue("splitTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("splitTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("splitTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("splitTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("splitTableCell", "cellIndex");
+	utility::string_t paramSplitType = utils->getTestValue("splitTableCell", "splitType");
+	double paramValue = utils->getDoubleTestValue("splitTableCell", "value");
+	utility::string_t paramPassword = utils->getTestValue("splitTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("splitTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("splitTableCell", "storage");
+	paramCellIndex = utils->getInvalidIntTestValue("splitTableCell", "cellIndex", paramCellIndex).value();
+	utils->initialize("splitTableCell", "cellIndex", paramCellIndex);
+
+	bool failed = true;
+	try
+	{
+		api->splitTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramSplitType, paramValue, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "cellIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "cellIndex", paramCellIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "cellIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "cellIndex", paramCellIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("splitTableCell", "cellIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, splitTableCellInvalidSplitType) {
+	utility::string_t paramName = utils->getTestValue("splitTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("splitTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("splitTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("splitTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("splitTableCell", "cellIndex");
+	utility::string_t paramSplitType = utils->getTestValue("splitTableCell", "splitType");
+	double paramValue = utils->getDoubleTestValue("splitTableCell", "value");
+	utility::string_t paramPassword = utils->getTestValue("splitTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("splitTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("splitTableCell", "storage");
+	paramSplitType = utils->getInvalidTestValue("splitTableCell", "splitType", paramSplitType);
+	utils->initialize("splitTableCell", "splitType", paramSplitType);
+
+	bool failed = true;
+	try
+	{
+		api->splitTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramSplitType, paramValue, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "splitType");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "splitType", paramSplitType);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "splitType");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "splitType", paramSplitType);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("splitTableCell", "splitType"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, splitTableCellInvalidValue) {
+	utility::string_t paramName = utils->getTestValue("splitTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("splitTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("splitTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("splitTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("splitTableCell", "cellIndex");
+	utility::string_t paramSplitType = utils->getTestValue("splitTableCell", "splitType");
+	double paramValue = utils->getDoubleTestValue("splitTableCell", "value");
+	utility::string_t paramPassword = utils->getTestValue("splitTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("splitTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("splitTableCell", "storage");
+	paramValue = utils->getInvalidDoubleTestValue("splitTableCell", "value", paramValue).value();
+	utils->initialize("splitTableCell", "value", paramValue);
+
+	bool failed = true;
+	try
+	{
+		api->splitTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramSplitType, paramValue, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "value");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "value", paramValue);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "value");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "value", paramValue);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("splitTableCell", "value"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, splitTableCellInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("splitTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("splitTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("splitTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("splitTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("splitTableCell", "cellIndex");
+	utility::string_t paramSplitType = utils->getTestValue("splitTableCell", "splitType");
+	double paramValue = utils->getDoubleTestValue("splitTableCell", "value");
+	utility::string_t paramPassword = utils->getTestValue("splitTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("splitTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("splitTableCell", "storage");
+	paramPassword = utils->getInvalidTestValue("splitTableCell", "password", paramPassword);
+	utils->initialize("splitTableCell", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->splitTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramSplitType, paramValue, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("splitTableCell", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, splitTableCellInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("splitTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("splitTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("splitTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("splitTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("splitTableCell", "cellIndex");
+	utility::string_t paramSplitType = utils->getTestValue("splitTableCell", "splitType");
+	double paramValue = utils->getDoubleTestValue("splitTableCell", "value");
+	utility::string_t paramPassword = utils->getTestValue("splitTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("splitTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("splitTableCell", "storage");
+	paramFolder = utils->getInvalidTestValue("splitTableCell", "folder", paramFolder);
+	utils->initialize("splitTableCell", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->splitTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramSplitType, paramValue, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("splitTableCell", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, splitTableCellInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("splitTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("splitTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("splitTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("splitTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("splitTableCell", "cellIndex");
+	utility::string_t paramSplitType = utils->getTestValue("splitTableCell", "splitType");
+	double paramValue = utils->getDoubleTestValue("splitTableCell", "value");
+	utility::string_t paramPassword = utils->getTestValue("splitTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("splitTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("splitTableCell", "storage");
+	paramStorage = utils->getInvalidTestValue("splitTableCell", "storage", paramStorage);
+	utils->initialize("splitTableCell", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->splitTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramSplitType, paramValue, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("splitTableCell", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("splitTableCell", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("splitTableCell", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, storageExists) {
 	utility::string_t paramStorageName = utils->getTestValue("storageExists", "storageName");
 	utils->initialize("storageExists", "");
@@ -68834,6 +73723,1764 @@ TEST_F(SlidesApiTest, updateSpecialSlideShapeInvalidSubShape) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("updateSpecialSlideShape", "subShape"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCell) {
+	utility::string_t paramName = utils->getTestValue("updateTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCell", "cellIndex");
+	std::shared_ptr<TableCell> paramDto = utils->getTestValueForClass<TableCell>("updateTableCell", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCell", "storage");
+	utils->initialize("updateTableCell", "");
+	std::shared_ptr<TableCell> result = api->updateTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, updateTableCellInvalidName) {
+	utility::string_t paramName = utils->getTestValue("updateTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCell", "cellIndex");
+	std::shared_ptr<TableCell> paramDto = utils->getTestValueForClass<TableCell>("updateTableCell", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCell", "storage");
+	paramName = utils->getInvalidTestValue("updateTableCell", "name", paramName);
+	utils->initialize("updateTableCell", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCell", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCell", "cellIndex");
+	std::shared_ptr<TableCell> paramDto = utils->getTestValueForClass<TableCell>("updateTableCell", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCell", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("updateTableCell", "slideIndex", paramSlideIndex).value();
+	utils->initialize("updateTableCell", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCell", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCell", "cellIndex");
+	std::shared_ptr<TableCell> paramDto = utils->getTestValueForClass<TableCell>("updateTableCell", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCell", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("updateTableCell", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("updateTableCell", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCell", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellInvalidRowIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCell", "cellIndex");
+	std::shared_ptr<TableCell> paramDto = utils->getTestValueForClass<TableCell>("updateTableCell", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCell", "storage");
+	paramRowIndex = utils->getInvalidIntTestValue("updateTableCell", "rowIndex", paramRowIndex).value();
+	utils->initialize("updateTableCell", "rowIndex", paramRowIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "rowIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "rowIndex", paramRowIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "rowIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "rowIndex", paramRowIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCell", "rowIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellInvalidCellIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCell", "cellIndex");
+	std::shared_ptr<TableCell> paramDto = utils->getTestValueForClass<TableCell>("updateTableCell", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCell", "storage");
+	paramCellIndex = utils->getInvalidIntTestValue("updateTableCell", "cellIndex", paramCellIndex).value();
+	utils->initialize("updateTableCell", "cellIndex", paramCellIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "cellIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "cellIndex", paramCellIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "cellIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "cellIndex", paramCellIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCell", "cellIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellInvalidDto) {
+	utility::string_t paramName = utils->getTestValue("updateTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCell", "cellIndex");
+	std::shared_ptr<TableCell> paramDto = utils->getTestValueForClass<TableCell>("updateTableCell", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCell", "storage");
+	paramDto = utils->getInvalidTestValueForClass<>("updateTableCell", "dto", paramDto);
+	utils->initialize("updateTableCell", "dto", paramDto);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "dto");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "dto", paramDto);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "dto");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "dto", paramDto);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCell", "dto"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("updateTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCell", "cellIndex");
+	std::shared_ptr<TableCell> paramDto = utils->getTestValueForClass<TableCell>("updateTableCell", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCell", "storage");
+	paramPassword = utils->getInvalidTestValue("updateTableCell", "password", paramPassword);
+	utils->initialize("updateTableCell", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCell", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("updateTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCell", "cellIndex");
+	std::shared_ptr<TableCell> paramDto = utils->getTestValueForClass<TableCell>("updateTableCell", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCell", "storage");
+	paramFolder = utils->getInvalidTestValue("updateTableCell", "folder", paramFolder);
+	utils->initialize("updateTableCell", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCell", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("updateTableCell", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCell", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCell", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCell", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCell", "cellIndex");
+	std::shared_ptr<TableCell> paramDto = utils->getTestValueForClass<TableCell>("updateTableCell", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCell", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCell", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCell", "storage");
+	paramStorage = utils->getInvalidTestValue("updateTableCell", "storage", paramStorage);
+	utils->initialize("updateTableCell", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCell(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCell", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCell", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCell", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellParagraph) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellParagraph", "paragraphIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("updateTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellParagraph", "storage");
+	utils->initialize("updateTableCellParagraph", "");
+	std::shared_ptr<Paragraph> result = api->updateTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, updateTableCellParagraphInvalidName) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellParagraph", "paragraphIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("updateTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellParagraph", "storage");
+	paramName = utils->getInvalidTestValue("updateTableCellParagraph", "name", paramName);
+	utils->initialize("updateTableCellParagraph", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellParagraph", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellParagraphInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellParagraph", "paragraphIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("updateTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellParagraph", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("updateTableCellParagraph", "slideIndex", paramSlideIndex).value();
+	utils->initialize("updateTableCellParagraph", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellParagraph", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellParagraphInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellParagraph", "paragraphIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("updateTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellParagraph", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("updateTableCellParagraph", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("updateTableCellParagraph", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellParagraph", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellParagraphInvalidRowIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellParagraph", "paragraphIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("updateTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellParagraph", "storage");
+	paramRowIndex = utils->getInvalidIntTestValue("updateTableCellParagraph", "rowIndex", paramRowIndex).value();
+	utils->initialize("updateTableCellParagraph", "rowIndex", paramRowIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "rowIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "rowIndex", paramRowIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "rowIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "rowIndex", paramRowIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellParagraph", "rowIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellParagraphInvalidCellIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellParagraph", "paragraphIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("updateTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellParagraph", "storage");
+	paramCellIndex = utils->getInvalidIntTestValue("updateTableCellParagraph", "cellIndex", paramCellIndex).value();
+	utils->initialize("updateTableCellParagraph", "cellIndex", paramCellIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "cellIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "cellIndex", paramCellIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "cellIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "cellIndex", paramCellIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellParagraph", "cellIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellParagraphInvalidParagraphIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellParagraph", "paragraphIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("updateTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellParagraph", "storage");
+	paramParagraphIndex = utils->getInvalidIntTestValue("updateTableCellParagraph", "paragraphIndex", paramParagraphIndex).value();
+	utils->initialize("updateTableCellParagraph", "paragraphIndex", paramParagraphIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "paragraphIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "paragraphIndex", paramParagraphIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "paragraphIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "paragraphIndex", paramParagraphIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellParagraph", "paragraphIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellParagraphInvalidDto) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellParagraph", "paragraphIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("updateTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellParagraph", "storage");
+	paramDto = utils->getInvalidTestValueForClass<>("updateTableCellParagraph", "dto", paramDto);
+	utils->initialize("updateTableCellParagraph", "dto", paramDto);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "dto");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "dto", paramDto);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "dto");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "dto", paramDto);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellParagraph", "dto"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellParagraphInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellParagraph", "paragraphIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("updateTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellParagraph", "storage");
+	paramPassword = utils->getInvalidTestValue("updateTableCellParagraph", "password", paramPassword);
+	utils->initialize("updateTableCellParagraph", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellParagraph", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellParagraphInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellParagraph", "paragraphIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("updateTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellParagraph", "storage");
+	paramFolder = utils->getInvalidTestValue("updateTableCellParagraph", "folder", paramFolder);
+	utils->initialize("updateTableCellParagraph", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellParagraph", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellParagraphInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellParagraph", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellParagraph", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellParagraph", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellParagraph", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellParagraph", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellParagraph", "paragraphIndex");
+	std::shared_ptr<Paragraph> paramDto = utils->getTestValueForClass<Paragraph>("updateTableCellParagraph", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellParagraph", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellParagraph", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellParagraph", "storage");
+	paramStorage = utils->getInvalidTestValue("updateTableCellParagraph", "storage", paramStorage);
+	utils->initialize("updateTableCellParagraph", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellParagraph(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellParagraph", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellParagraph", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellParagraph", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellPortion) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("updateTableCellPortion", "portionIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("updateTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellPortion", "storage");
+	utils->initialize("updateTableCellPortion", "");
+	std::shared_ptr<Portion> result = api->updateTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramDto, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, updateTableCellPortionInvalidName) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("updateTableCellPortion", "portionIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("updateTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellPortion", "storage");
+	paramName = utils->getInvalidTestValue("updateTableCellPortion", "name", paramName);
+	utils->initialize("updateTableCellPortion", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellPortion", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellPortionInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("updateTableCellPortion", "portionIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("updateTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellPortion", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("updateTableCellPortion", "slideIndex", paramSlideIndex).value();
+	utils->initialize("updateTableCellPortion", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellPortion", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellPortionInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("updateTableCellPortion", "portionIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("updateTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellPortion", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("updateTableCellPortion", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("updateTableCellPortion", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellPortion", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellPortionInvalidRowIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("updateTableCellPortion", "portionIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("updateTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellPortion", "storage");
+	paramRowIndex = utils->getInvalidIntTestValue("updateTableCellPortion", "rowIndex", paramRowIndex).value();
+	utils->initialize("updateTableCellPortion", "rowIndex", paramRowIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "rowIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "rowIndex", paramRowIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "rowIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "rowIndex", paramRowIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellPortion", "rowIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellPortionInvalidCellIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("updateTableCellPortion", "portionIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("updateTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellPortion", "storage");
+	paramCellIndex = utils->getInvalidIntTestValue("updateTableCellPortion", "cellIndex", paramCellIndex).value();
+	utils->initialize("updateTableCellPortion", "cellIndex", paramCellIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "cellIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "cellIndex", paramCellIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "cellIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "cellIndex", paramCellIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellPortion", "cellIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellPortionInvalidParagraphIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("updateTableCellPortion", "portionIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("updateTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellPortion", "storage");
+	paramParagraphIndex = utils->getInvalidIntTestValue("updateTableCellPortion", "paragraphIndex", paramParagraphIndex).value();
+	utils->initialize("updateTableCellPortion", "paragraphIndex", paramParagraphIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "paragraphIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "paragraphIndex", paramParagraphIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "paragraphIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "paragraphIndex", paramParagraphIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellPortion", "paragraphIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellPortionInvalidPortionIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("updateTableCellPortion", "portionIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("updateTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellPortion", "storage");
+	paramPortionIndex = utils->getInvalidIntTestValue("updateTableCellPortion", "portionIndex", paramPortionIndex).value();
+	utils->initialize("updateTableCellPortion", "portionIndex", paramPortionIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "portionIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "portionIndex", paramPortionIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "portionIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "portionIndex", paramPortionIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellPortion", "portionIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellPortionInvalidDto) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("updateTableCellPortion", "portionIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("updateTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellPortion", "storage");
+	paramDto = utils->getInvalidTestValueForClass<>("updateTableCellPortion", "dto", paramDto);
+	utils->initialize("updateTableCellPortion", "dto", paramDto);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "dto");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "dto", paramDto);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "dto");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "dto", paramDto);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellPortion", "dto"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellPortionInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("updateTableCellPortion", "portionIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("updateTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellPortion", "storage");
+	paramPassword = utils->getInvalidTestValue("updateTableCellPortion", "password", paramPassword);
+	utils->initialize("updateTableCellPortion", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellPortion", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellPortionInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("updateTableCellPortion", "portionIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("updateTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellPortion", "storage");
+	paramFolder = utils->getInvalidTestValue("updateTableCellPortion", "folder", paramFolder);
+	utils->initialize("updateTableCellPortion", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellPortion", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableCellPortionInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("updateTableCellPortion", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableCellPortion", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableCellPortion", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableCellPortion", "rowIndex");
+	int32_t paramCellIndex = utils->getIntTestValue("updateTableCellPortion", "cellIndex");
+	int32_t paramParagraphIndex = utils->getIntTestValue("updateTableCellPortion", "paragraphIndex");
+	int32_t paramPortionIndex = utils->getIntTestValue("updateTableCellPortion", "portionIndex");
+	std::shared_ptr<Portion> paramDto = utils->getTestValueForClass<Portion>("updateTableCellPortion", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableCellPortion", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableCellPortion", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableCellPortion", "storage");
+	paramStorage = utils->getInvalidTestValue("updateTableCellPortion", "storage", paramStorage);
+	utils->initialize("updateTableCellPortion", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableCellPortion(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramCellIndex, paramParagraphIndex, paramPortionIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableCellPortion", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableCellPortion", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableCellPortion", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableRow) {
+	utility::string_t paramName = utils->getTestValue("updateTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableRow", "rowIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("updateTableRow", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableRow", "storage");
+	utils->initialize("updateTableRow", "");
+	std::shared_ptr<TableRow> result = api->updateTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramDto, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, updateTableRowInvalidName) {
+	utility::string_t paramName = utils->getTestValue("updateTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableRow", "rowIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("updateTableRow", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableRow", "storage");
+	paramName = utils->getInvalidTestValue("updateTableRow", "name", paramName);
+	utils->initialize("updateTableRow", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableRow", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableRow", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableRow", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableRow", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableRow", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableRowInvalidSlideIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableRow", "rowIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("updateTableRow", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableRow", "storage");
+	paramSlideIndex = utils->getInvalidIntTestValue("updateTableRow", "slideIndex", paramSlideIndex).value();
+	utils->initialize("updateTableRow", "slideIndex", paramSlideIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableRow", "slideIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableRow", "slideIndex", paramSlideIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableRow", "slideIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableRow", "slideIndex", paramSlideIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableRow", "slideIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableRowInvalidShapeIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableRow", "rowIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("updateTableRow", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableRow", "storage");
+	paramShapeIndex = utils->getInvalidIntTestValue("updateTableRow", "shapeIndex", paramShapeIndex).value();
+	utils->initialize("updateTableRow", "shapeIndex", paramShapeIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableRow", "shapeIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableRow", "shapeIndex", paramShapeIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableRow", "shapeIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableRow", "shapeIndex", paramShapeIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableRow", "shapeIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableRowInvalidRowIndex) {
+	utility::string_t paramName = utils->getTestValue("updateTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableRow", "rowIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("updateTableRow", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableRow", "storage");
+	paramRowIndex = utils->getInvalidIntTestValue("updateTableRow", "rowIndex", paramRowIndex).value();
+	utils->initialize("updateTableRow", "rowIndex", paramRowIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableRow", "rowIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableRow", "rowIndex", paramRowIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableRow", "rowIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableRow", "rowIndex", paramRowIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableRow", "rowIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableRowInvalidDto) {
+	utility::string_t paramName = utils->getTestValue("updateTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableRow", "rowIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("updateTableRow", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableRow", "storage");
+	paramDto = utils->getInvalidTestValueForClass<>("updateTableRow", "dto", paramDto);
+	utils->initialize("updateTableRow", "dto", paramDto);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableRow", "dto");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableRow", "dto", paramDto);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableRow", "dto");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableRow", "dto", paramDto);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableRow", "dto"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableRowInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("updateTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableRow", "rowIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("updateTableRow", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableRow", "storage");
+	paramPassword = utils->getInvalidTestValue("updateTableRow", "password", paramPassword);
+	utils->initialize("updateTableRow", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableRow", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableRow", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableRow", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableRow", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableRow", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableRowInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("updateTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableRow", "rowIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("updateTableRow", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableRow", "storage");
+	paramFolder = utils->getInvalidTestValue("updateTableRow", "folder", paramFolder);
+	utils->initialize("updateTableRow", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableRow", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableRow", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableRow", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableRow", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableRow", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateTableRowInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("updateTableRow", "name");
+	int32_t paramSlideIndex = utils->getIntTestValue("updateTableRow", "slideIndex");
+	int32_t paramShapeIndex = utils->getIntTestValue("updateTableRow", "shapeIndex");
+	int32_t paramRowIndex = utils->getIntTestValue("updateTableRow", "rowIndex");
+	std::shared_ptr<TableRow> paramDto = utils->getTestValueForClass<TableRow>("updateTableRow", "dto");
+	utility::string_t paramPassword = utils->getTestValue("updateTableRow", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateTableRow", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateTableRow", "storage");
+	paramStorage = utils->getInvalidTestValue("updateTableRow", "storage", paramStorage);
+	utils->initialize("updateTableRow", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->updateTableRow(paramName, paramSlideIndex, paramShapeIndex, paramRowIndex, paramDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateTableRow", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateTableRow", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateTableRow", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateTableRow", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateTableRow", "storage"))
 	{
 		FAIL() << "Must have failed";
 	}

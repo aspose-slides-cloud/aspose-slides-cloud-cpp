@@ -346,6 +346,8 @@
     <ClCompile Include="model\SwfExportOptions.cpp" />
     <ClCompile Include="model\Table.cpp" />
     <ClCompile Include="model\TableCell.cpp" />
+    <ClCompile Include="model\TableCellMergeOptions.cpp" />
+    <ClCompile Include="model\TableCellSplitType.cpp" />
     <ClCompile Include="model\TableColumn.cpp" />
     <ClCompile Include="model\TableRow.cpp" />
     <ClCompile Include="model\Task.cpp" />
@@ -603,6 +605,8 @@
     <ClInclude Include="model\SwfExportOptions.h" />
     <ClInclude Include="model\Table.h" />
     <ClInclude Include="model\TableCell.h" />
+    <ClInclude Include="model\TableCellMergeOptions.h" />
+    <ClInclude Include="model\TableCellSplitType.h" />
     <ClInclude Include="model\TableColumn.h" />
     <ClInclude Include="model\TableRow.h" />
     <ClInclude Include="model\Task.h" />

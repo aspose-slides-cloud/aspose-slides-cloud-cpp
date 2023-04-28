@@ -325,6 +325,28 @@ void TableCell::unsetRowIndex()
 	m_RowIndexIsSet = false;
 }
 
+std::shared_ptr<TextFrameFormat> TableCell::getTextFrameFormat() const
+{
+	return m_TextFrameFormat;
+}
+
+void TableCell::setTextFrameFormat(std::shared_ptr<TextFrameFormat> value)
+{
+	m_TextFrameFormat = value;
+	
+}
+
+std::shared_ptr<ResourceUri> TableCell::getParagraphs() const
+{
+	return m_Paragraphs;
+}
+
+void TableCell::setParagraphs(std::shared_ptr<ResourceUri> value)
+{
+	m_Paragraphs = value;
+	
+}
+
 web::json::value TableCell::toJson() const
 {
 	web::json::value val = web::json::value::object();
@@ -399,6 +421,14 @@ web::json::value TableCell::toJson() const
 	if(m_RowIndexIsSet)
 	{
 		val[utility::conversions::to_string_t("RowIndex")] = ModelBase::toJson(m_RowIndex);
+	}
+	if (m_TextFrameFormat != nullptr)
+	{
+		val[utility::conversions::to_string_t("TextFrameFormat")] = ModelBase::toJson(m_TextFrameFormat);
+	}
+	if (m_Paragraphs != nullptr)
+	{
+		val[utility::conversions::to_string_t("Paragraphs")] = ModelBase::toJson(m_Paragraphs);
 	}
 	return val;
 }
@@ -501,6 +531,18 @@ void TableCell::fromJson(web::json::value& val)
 	if(jsonForRowIndex != nullptr && !jsonForRowIndex->is_null() && jsonForRowIndex->is_number())
 	{
 		setRowIndex(ModelBase::int32_tFromJson(*jsonForRowIndex));
+	}
+	web::json::value* jsonForTextFrameFormat = ModelBase::getField(val, "TextFrameFormat");
+	if(jsonForTextFrameFormat != nullptr && !jsonForTextFrameFormat->is_null())
+	{
+		std::shared_ptr<void> instanceForTextFrameFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"TextFrameFormat", *jsonForTextFrameFormat);
+		setTextFrameFormat(std::static_pointer_cast<TextFrameFormat>(instanceForTextFrameFormat));
+	}
+	web::json::value* jsonForParagraphs = ModelBase::getField(val, "Paragraphs");
+	if(jsonForParagraphs != nullptr && !jsonForParagraphs->is_null())
+	{
+		std::shared_ptr<void> instanceForParagraphs = asposeslidescloud::api::ClassRegistry::deserialize(L"ResourceUri", *jsonForParagraphs);
+		setParagraphs(std::static_pointer_cast<ResourceUri>(instanceForParagraphs));
 	}
 }
 

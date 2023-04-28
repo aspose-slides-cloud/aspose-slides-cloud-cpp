@@ -246,6 +246,8 @@
 #include "model/SwfExportOptions.h"
 #include "model/Table.h"
 #include "model/TableCell.h"
+#include "model/TableCellMergeOptions.h"
+#include "model/TableCellSplitType.h"
 #include "model/TableColumn.h"
 #include "model/TableRow.h"
 #include "model/Task.h"
@@ -1644,6 +1646,18 @@ std::shared_ptr<void> ClassRegistry::deserializeSubclass(utility::string_t class
 		result->fromJson(json);
 		return result;
 	}
+	if (className == L"TableCellMergeOptions")
+	{
+		std::shared_ptr<TableCellMergeOptions> result(new TableCellMergeOptions());
+		result->fromJson(json);
+		return result;
+	}
+	if (className == L"TableCellSplitType")
+	{
+		std::shared_ptr<TableCellSplitType> result(new TableCellSplitType());
+		result->fromJson(json);
+		return result;
+	}
 	if (className == L"TableColumn")
 	{
 		std::shared_ptr<TableColumn> result(new TableColumn());
@@ -2160,6 +2174,8 @@ std::map<utility::string_t, std::map<utility::string_t, utility::string_t>> Clas
 	{ L"SwfExportOptions", { { L"Format", L"swf" }, } },
 	{ L"Table", { { L"Type", L"Table" }, } },
 	{ L"TableCell", { } },
+	{ L"TableCellMergeOptions", { } },
+	{ L"TableCellSplitType", { } },
 	{ L"TableColumn", { } },
 	{ L"TableRow", { } },
 	{ L"Task", { } },

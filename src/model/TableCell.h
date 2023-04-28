@@ -34,9 +34,11 @@
 
 #include "../ModelBase.h"
 
+#include "../model/TextFrameFormat.h"
 #include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
+#include "../model/ResourceUri.h"
 
 #include "../ClassRegistry.h"
 
@@ -161,6 +163,16 @@ public:
 	ASPOSE_DLL_EXPORT void setRowIndex(int32_t value);
 	ASPOSE_DLL_EXPORT bool rowIndexIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetRowIndex();
+	/// <summary>
+	/// Returns TextFrame&#39;s formatting properties.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<TextFrameFormat> getTextFrameFormat() const;
+	ASPOSE_DLL_EXPORT void setTextFrameFormat(std::shared_ptr<TextFrameFormat> value);
+	/// <summary>
+	/// Get or sets list to paragraphs list
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<ResourceUri> getParagraphs() const;
+	ASPOSE_DLL_EXPORT void setParagraphs(std::shared_ptr<ResourceUri> value);
 
 protected:
 	utility::string_t m_Text;
@@ -189,6 +201,8 @@ protected:
 	bool m_ColumnIndexIsSet;
 	int32_t m_RowIndex;
 	bool m_RowIndexIsSet;
+	std::shared_ptr<TextFrameFormat> m_TextFrameFormat;
+	std::shared_ptr<ResourceUri> m_Paragraphs;
 };
 
 }

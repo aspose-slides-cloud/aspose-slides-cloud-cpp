@@ -1920,6 +1920,153 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createSpecialSlideShape(utilit
 		});
 }
 
+pplx::task<std::shared_ptr<Paragraph>> SlidesApi::createTableCellParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, std::shared_ptr<Paragraph> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	if (dto == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.dto");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}/cells/{cellIndex}/paragraphs");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "rowIndex", rowIndex);
+	ApiClient::setPathParameter(methodPath, "cellIndex", cellIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (dto != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "createTableCellParagraph");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
+			return std::static_pointer_cast<Paragraph>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<Portion>> SlidesApi::createTableCellPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, int32_t paragraphIndex, std::shared_ptr<Portion> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	if (dto == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.dto");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}/cells/{cellIndex}/paragraphs/{paragraphIndex}/portions");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "rowIndex", rowIndex);
+	ApiClient::setPathParameter(methodPath, "cellIndex", cellIndex);
+	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (dto != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "createTableCellPortion");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
+			return std::static_pointer_cast<Portion>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<TableRow>> SlidesApi::createTableRow(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::shared_ptr<TableRow> dto, boost::optional<int32_t> position, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	if (dto == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.dto");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	if (position.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("position"), position.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (dto != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "createTableRow");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"TableRow", json);
+			return std::static_pointer_cast<TableRow>(instance);
+		});
+}
+
 pplx::task<void> SlidesApi::createWatermark(utility::string_t name, std::shared_ptr<Shape> shape, boost::optional<double> fontHeight, utility::string_t text, utility::string_t fontName, utility::string_t fontColor, utility::string_t password, utility::string_t folder, utility::string_t storage)
 {
 	// verify the required parameter 'name' is set
@@ -3972,6 +4119,132 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::deleteSpecialSlideShapes(utility:
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Shapes", json);
 			return std::static_pointer_cast<Shapes>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::deleteTableCellParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}/cells/{cellIndex}/paragraphs/{paragraphIndex}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "rowIndex", rowIndex);
+	ApiClient::setPathParameter(methodPath, "cellIndex", cellIndex);
+	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "deleteTableCellParagraph");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
+			return std::static_pointer_cast<Paragraphs>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<Portions>> SlidesApi::deleteTableCellPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}/cells/{cellIndex}/paragraphs/{paragraphIndex}/portions/{portionIndex}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "rowIndex", rowIndex);
+	ApiClient::setPathParameter(methodPath, "cellIndex", cellIndex);
+	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
+	ApiClient::setPathParameter(methodPath, "portionIndex", portionIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "deleteTableCellPortion");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
+			return std::static_pointer_cast<Portions>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<Table>> SlidesApi::deleteTableRow(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, boost::optional<bool> withAttachedRows, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "rowIndex", rowIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	if (withAttachedRows.has_value())
+	{
+		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("withAttachedRows"), withAttachedRows.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "deleteTableRow");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Table", json);
+			return std::static_pointer_cast<Table>(instance);
 		});
 }
 
@@ -7326,6 +7599,170 @@ pplx::task<std::shared_ptr<Shapes>> SlidesApi::getSpecialSlideShapes(utility::st
 		});
 }
 
+pplx::task<std::shared_ptr<Paragraph>> SlidesApi::getTableCellParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}/cells/{cellIndex}/paragraphs/{paragraphIndex}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "rowIndex", rowIndex);
+	ApiClient::setPathParameter(methodPath, "cellIndex", cellIndex);
+	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "getTableCellParagraph");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
+			return std::static_pointer_cast<Paragraph>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<Paragraphs>> SlidesApi::getTableCellParagraphs(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}/cells/{cellIndex}/paragraphs");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "rowIndex", rowIndex);
+	ApiClient::setPathParameter(methodPath, "cellIndex", cellIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "getTableCellParagraphs");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraphs", json);
+			return std::static_pointer_cast<Paragraphs>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<Portion>> SlidesApi::getTableCellPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}/cells/{cellIndex}/paragraphs/{paragraphIndex}/portions/{portionIndex}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "rowIndex", rowIndex);
+	ApiClient::setPathParameter(methodPath, "cellIndex", cellIndex);
+	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
+	ApiClient::setPathParameter(methodPath, "portionIndex", portionIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "getTableCellPortion");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
+			return std::static_pointer_cast<Portion>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<Portions>> SlidesApi::getTableCellPortions(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, int32_t paragraphIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}/cells/{cellIndex}/paragraphs/{paragraphIndex}/portions");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "rowIndex", rowIndex);
+	ApiClient::setPathParameter(methodPath, "cellIndex", cellIndex);
+	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "getTableCellPortions");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portions", json);
+			return std::static_pointer_cast<Portions>(instance);
+		});
+}
+
 pplx::task<std::shared_ptr<Theme>> SlidesApi::getTheme(utility::string_t name, int32_t slideIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
 {
 	// verify the required parameter 'name' is set
@@ -7771,6 +8208,52 @@ pplx::task<HttpContent> SlidesApi::mergeOnline(std::vector<std::shared_ptr<HttpC
 			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
+		});
+}
+
+pplx::task<std::shared_ptr<Table>> SlidesApi::mergeTableCells(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::shared_ptr<TableCellMergeOptions> tableCellMergeOptions, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	if (tableCellMergeOptions == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.tableCellMergeOptions");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/mergeCells");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (tableCellMergeOptions != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(tableCellMergeOptions->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "mergeTableCells");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Table", json);
+			return std::static_pointer_cast<Table>(instance);
 		});
 }
 
@@ -10313,6 +10796,63 @@ pplx::task<HttpContent> SlidesApi::splitOnline(std::shared_ptr<HttpContent> docu
 		});
 }
 
+pplx::task<std::shared_ptr<Table>> SlidesApi::splitTableCell(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, utility::string_t splitType, double value, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	// verify the required parameter 'splitType' is set
+	if (splitType.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: splitType");
+	}
+	// verify the required parameter 'splitType' is set
+	if (splitType.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: splitType");
+	}
+	// validate the parameter 'splitType'
+	if (!boost::iequals(splitType, "SplitByWidth") && !boost::iequals(splitType, "SplitByHeight") && !boost::iequals(splitType, "SplitByColSpan") && !boost::iequals(splitType, "SplitByRowSpan"))
+	{
+		throw std::invalid_argument("Invalid value for splitType. Must be one of SplitByWidth, SplitByHeight, SplitByColSpan, SplitByRowSpan.");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}/cells/{cellIndex}/{splitType}/{value}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "rowIndex", rowIndex);
+	ApiClient::setPathParameter(methodPath, "cellIndex", cellIndex);
+	ApiClient::setPathParameter(methodPath, "splitType", splitType);
+	ApiClient::setPathParameter(methodPath, "value", value);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "splitTableCell");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Table", json);
+			return std::static_pointer_cast<Table>(instance);
+		});
+}
+
 pplx::task<std::shared_ptr<StorageExist>> SlidesApi::storageExists(utility::string_t storageName)
 {
 	// verify the required parameter 'storageName' is set
@@ -11217,6 +11757,200 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::updateSpecialSlideShape(utilit
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"ShapeBase", json);
 			return std::static_pointer_cast<ShapeBase>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<TableCell>> SlidesApi::updateTableCell(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, std::shared_ptr<TableCell> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	if (dto == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.dto");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}/cells/{cellIndex}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "rowIndex", rowIndex);
+	ApiClient::setPathParameter(methodPath, "cellIndex", cellIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (dto != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "updateTableCell");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"TableCell", json);
+			return std::static_pointer_cast<TableCell>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<Paragraph>> SlidesApi::updateTableCellParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, int32_t paragraphIndex, std::shared_ptr<Paragraph> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	if (dto == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.dto");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}/cells/{cellIndex}/paragraphs/{paragraphIndex}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "rowIndex", rowIndex);
+	ApiClient::setPathParameter(methodPath, "cellIndex", cellIndex);
+	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (dto != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "updateTableCellParagraph");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Paragraph", json);
+			return std::static_pointer_cast<Paragraph>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<Portion>> SlidesApi::updateTableCellPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, int32_t paragraphIndex, int32_t portionIndex, std::shared_ptr<Portion> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	if (dto == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.dto");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}/cells/{cellIndex}/paragraphs/{paragraphIndex}/portions/{portionIndex}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "rowIndex", rowIndex);
+	ApiClient::setPathParameter(methodPath, "cellIndex", cellIndex);
+	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
+	ApiClient::setPathParameter(methodPath, "portionIndex", portionIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (dto != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "updateTableCellPortion");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Portion", json);
+			return std::static_pointer_cast<Portion>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<TableRow>> SlidesApi::updateTableRow(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, std::shared_ptr<TableRow> dto, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	if (dto == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.dto");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/rows/{rowIndex}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "rowIndex", rowIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (dto != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(dto->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "updateTableRow");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"TableRow", json);
+			return std::static_pointer_cast<TableRow>(instance);
 		});
 }
 

@@ -80,7 +80,7 @@ TestUtils* SlidesTest::utils = nullptr;
 TEST_F(SlidesTest, slidesGet) {
 	utils->initialize("", "");
 	std::shared_ptr<Slides> result = api->getSlides(L"test.pptx", L"password", L"TempSlidesSDK").get();
-	EXPECT_EQ(8, result->getSlideList().size());
+	EXPECT_EQ(9, result->getSlideList().size());
 }
 
 TEST_F(SlidesTest, slideGet) {
@@ -96,17 +96,17 @@ TEST_F(SlidesTest, slideCreate) {
 	utility::string_t password = L"password";
 	api->createSlide(fileName, L"layoutSlides/3", 1, password, folderName).get();
 	std::shared_ptr<Slides> result = api->getSlides(fileName, password, folderName).get();
-	EXPECT_EQ(9, result->getSlideList().size());
+	EXPECT_EQ(10, result->getSlideList().size());
 
 	api->createSlide(fileName, L"", boost::none, password, folderName).get();
 	result = api->getSlides(fileName, password, folderName).get();
-	EXPECT_EQ(10, result->getSlideList().size());
+	EXPECT_EQ(11, result->getSlideList().size());
 }
 
 TEST_F(SlidesTest, slideCopy) {
 	utils->initialize("", "");
 	std::shared_ptr<Slides> result = api->copySlide(L"test.pptx", 3, boost::none, L"", L"", L"", L"password", L"TempSlidesSDK").get();
-	EXPECT_EQ(9, result->getSlideList().size());
+	EXPECT_EQ(10, result->getSlideList().size());
 }
 
 TEST_F(SlidesTest, slideCopyFromSource) {
@@ -116,19 +116,19 @@ TEST_F(SlidesTest, slideCopyFromSource) {
 	utility::string_t sourcePath = folderName + L"/" + sourceFileName;
 	api->copyFile(L"TempTests/" + sourceFileName, sourcePath).get();
 	std::shared_ptr<Slides> result = api->copySlide(L"test.pptx", 1, 1, sourcePath, L"", L"", L"password", L"TempSlidesSDK").get();
-	EXPECT_EQ(9, result->getSlideList().size());
+	EXPECT_EQ(10, result->getSlideList().size());
 }
 
 TEST_F(SlidesTest, slideMove) {
 	utils->initialize("", "");
 	std::shared_ptr<Slides> result = api->moveSlide(L"test.pptx", 1, 2, L"password", L"TempSlidesSDK").get();
-	EXPECT_EQ(8, result->getSlideList().size());
+	EXPECT_EQ(9, result->getSlideList().size());
 }
 
 TEST_F(SlidesTest, slidesReorder) {
 	utils->initialize("", "");
 	std::shared_ptr<Slides> result = api->reorderSlides(L"test.pptx", { 1, 2, 3, 4, 5, 6 }, { 6, 5, 4, 3, 2, 1 }, L"password", L"TempSlidesSDK").get();
-	EXPECT_EQ(8, result->getSlideList().size());
+	EXPECT_EQ(9, result->getSlideList().size());
 }
 
 TEST_F(SlidesTest, slideUpdate) {
@@ -151,13 +151,13 @@ TEST_F(SlidesTest, slidesDelete) {
 TEST_F(SlidesTest, slidesDeleteByIndices) {
 	utils->initialize("", "");
 	std::shared_ptr<Slides> result = api->deleteSlides(L"test.pptx", { 1, 3, 5 }, L"password", L"TempSlidesSDK").get();
-	EXPECT_EQ(5, result->getSlideList().size());
+	EXPECT_EQ(6, result->getSlideList().size());
 }
 
 TEST_F(SlidesTest, slideDelete) {
 	utils->initialize("", "");
 	std::shared_ptr<Slides> result = api->deleteSlide(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
-	EXPECT_EQ(7, result->getSlideList().size());
+	EXPECT_EQ(8, result->getSlideList().size());
 }
 
 TEST_F(SlidesTest, backgroundGet) {

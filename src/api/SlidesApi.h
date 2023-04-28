@@ -105,6 +105,10 @@
 #include "../model/SmartArt.h"
 #include "../model/SplitDocumentResult.h"
 #include "../model/StorageExist.h"
+#include "../model/Table.h"
+#include "../model/TableCell.h"
+#include "../model/TableCellMergeOptions.h"
+#include "../model/TableRow.h"
 #include "../model/TextBounds.h"
 #include "../model/TextItems.h"
 #include "../model/Theme.h"
@@ -312,6 +316,21 @@ public:
 	/// Create new shape.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ShapeBase>> createSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, std::shared_ptr<ShapeBase> dto = std::shared_ptr<ShapeBase>(), boost::optional<int32_t> shapeToClone = int32_t(), boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t subShape = utility::string_t());
+
+	/// <summary>
+	/// Creates table cell paragraph.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> createTableCellParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, std::shared_ptr<Paragraph> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Creates table cell portion.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portion>> createTableCellPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, int32_t paragraphIndex, std::shared_ptr<Portion> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Inserts the table row in the specified position. If position is not specified, the row add to the end of the table.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<TableRow>> createTableRow(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::shared_ptr<TableRow> dto, boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Adds a text watermark to each slide of the presentation. Text watermark can be setup via method arguments or withing Shape DTO for detailed customization. Both options are applicable simultaneously. 
@@ -552,6 +571,21 @@ public:
 	/// Remove a range of shapes.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> deleteSpecialSlideShapes(utility::string_t name, int32_t slideIndex, utility::string_t slideType, std::vector<int32_t> shapes = std::vector<int32_t>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t subShape = utility::string_t());
+
+	/// <summary>
+	/// Delete cell paragraph.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraphs>> deleteTableCellParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Delete table ell portion.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portions>> deleteTableCellPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Deletes the table row.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Table>> deleteTableRow(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, boost::optional<bool> withAttachedRows = bool(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Removes unused layout slides.
@@ -944,6 +978,26 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shapes>> getSpecialSlideShapes(utility::string_t name, int32_t slideIndex, utility::string_t slideType, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t subShape = utility::string_t());
 
 	/// <summary>
+	/// Returns paragraph info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> getTableCellParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Returns table cell paragraphs.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraphs>> getTableCellParagraphs(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Returns table cell portion.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portion>> getTableCellPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Returns table cell portions.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portions>> getTableCellPortions(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, int32_t paragraphIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
 	/// Read slide theme info.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Theme>> getTheme(utility::string_t name, int32_t slideIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
@@ -992,6 +1046,11 @@ public:
 	/// Merges presentations or some of their slides specified in the request parameter. Returns result file in the response. 
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> mergeOnline(std::vector<std::shared_ptr<HttpContent>> files = std::vector<std::shared_ptr<HttpContent>>(), std::shared_ptr<OrderedMergeRequest> request = std::shared_ptr<OrderedMergeRequest>(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Merge table cells.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Table>> mergeTableCells(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::shared_ptr<TableCellMergeOptions> tableCellMergeOptions, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Move file
@@ -1244,6 +1303,11 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> splitOnline(std::shared_ptr<HttpContent> document, utility::string_t format, boost::optional<int32_t> width = int32_t(), boost::optional<int32_t> height = int32_t(), boost::optional<int32_t> from = int32_t(), boost::optional<int32_t> to = int32_t(), utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>());
 
 	/// <summary>
+	/// Split table cell.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Table>> splitTableCell(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, utility::string_t splitType, double value, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
 	/// Check if storage exists
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<StorageExist>> storageExists(utility::string_t storageName);
@@ -1332,6 +1396,26 @@ public:
 	/// Update shape properties.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ShapeBase>> updateSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, int32_t shapeIndex, std::shared_ptr<ShapeBase> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t subShape = utility::string_t());
+
+	/// <summary>
+	/// Update the table cell.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<TableCell>> updateTableCell(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, std::shared_ptr<TableCell> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Updates table cell paragraph.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraph>> updateTableCellParagraph(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, int32_t paragraphIndex, std::shared_ptr<Paragraph> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Updates table cell portion.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portion>> updateTableCellPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, int32_t cellIndex, int32_t paragraphIndex, int32_t portionIndex, std::shared_ptr<Portion> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Update the table row.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<TableRow>> updateTableRow(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, std::shared_ptr<TableRow> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Upload file
