@@ -13348,6 +13348,217 @@ TEST_F(SlidesApiTest, createTableRowInvalidStorage) {
 	}
 }
 
+TEST_F(SlidesApiTest, createVbaModule) {
+	utility::string_t paramName = utils->getTestValue("createVbaModule", "name");
+	std::shared_ptr<VbaModule> paramModuleDto = utils->getTestValueForClass<VbaModule>("createVbaModule", "moduleDto");
+	utility::string_t paramPassword = utils->getTestValue("createVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("createVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createVbaModule", "storage");
+	utils->initialize("createVbaModule", "");
+	std::shared_ptr<VbaModule> result = api->createVbaModule(paramName, paramModuleDto, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, createVbaModuleInvalidName) {
+	utility::string_t paramName = utils->getTestValue("createVbaModule", "name");
+	std::shared_ptr<VbaModule> paramModuleDto = utils->getTestValueForClass<VbaModule>("createVbaModule", "moduleDto");
+	utility::string_t paramPassword = utils->getTestValue("createVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("createVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createVbaModule", "storage");
+	paramName = utils->getInvalidTestValue("createVbaModule", "name", paramName);
+	utils->initialize("createVbaModule", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->createVbaModule(paramName, paramModuleDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createVbaModule", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createVbaModule", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createVbaModule", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createVbaModule", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createVbaModule", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createVbaModuleInvalidModuleDto) {
+	utility::string_t paramName = utils->getTestValue("createVbaModule", "name");
+	std::shared_ptr<VbaModule> paramModuleDto = utils->getTestValueForClass<VbaModule>("createVbaModule", "moduleDto");
+	utility::string_t paramPassword = utils->getTestValue("createVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("createVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createVbaModule", "storage");
+	paramModuleDto = utils->getInvalidTestValueForClass<>("createVbaModule", "moduleDto", paramModuleDto);
+	utils->initialize("createVbaModule", "moduleDto", paramModuleDto);
+
+	bool failed = true;
+	try
+	{
+		api->createVbaModule(paramName, paramModuleDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createVbaModule", "moduleDto");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createVbaModule", "moduleDto", paramModuleDto);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createVbaModule", "moduleDto");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createVbaModule", "moduleDto", paramModuleDto);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createVbaModule", "moduleDto"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createVbaModuleInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("createVbaModule", "name");
+	std::shared_ptr<VbaModule> paramModuleDto = utils->getTestValueForClass<VbaModule>("createVbaModule", "moduleDto");
+	utility::string_t paramPassword = utils->getTestValue("createVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("createVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createVbaModule", "storage");
+	paramPassword = utils->getInvalidTestValue("createVbaModule", "password", paramPassword);
+	utils->initialize("createVbaModule", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->createVbaModule(paramName, paramModuleDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createVbaModule", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createVbaModule", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createVbaModule", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createVbaModule", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createVbaModule", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createVbaModuleInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("createVbaModule", "name");
+	std::shared_ptr<VbaModule> paramModuleDto = utils->getTestValueForClass<VbaModule>("createVbaModule", "moduleDto");
+	utility::string_t paramPassword = utils->getTestValue("createVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("createVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createVbaModule", "storage");
+	paramFolder = utils->getInvalidTestValue("createVbaModule", "folder", paramFolder);
+	utils->initialize("createVbaModule", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->createVbaModule(paramName, paramModuleDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createVbaModule", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createVbaModule", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createVbaModule", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createVbaModule", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createVbaModule", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, createVbaModuleInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("createVbaModule", "name");
+	std::shared_ptr<VbaModule> paramModuleDto = utils->getTestValueForClass<VbaModule>("createVbaModule", "moduleDto");
+	utility::string_t paramPassword = utils->getTestValue("createVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("createVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("createVbaModule", "storage");
+	paramStorage = utils->getInvalidTestValue("createVbaModule", "storage", paramStorage);
+	utils->initialize("createVbaModule", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->createVbaModule(paramName, paramModuleDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("createVbaModule", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("createVbaModule", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("createVbaModule", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("createVbaModule", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("createVbaModule", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, createWatermark) {
 	utility::string_t paramName = utils->getTestValue("createWatermark", "name");
 	std::shared_ptr<Shape> paramShape = utils->getTestValueForClass<Shape>("createWatermark", "shape");
@@ -28351,6 +28562,217 @@ TEST_F(SlidesApiTest, deleteUnusedMasterSlidesOnlineInvalidPassword) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("deleteUnusedMasterSlidesOnline", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteVbaModule) {
+	utility::string_t paramName = utils->getTestValue("deleteVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("deleteVbaModule", "moduleIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteVbaModule", "storage");
+	utils->initialize("deleteVbaModule", "");
+	std::shared_ptr<VbaProject> result = api->deleteVbaModule(paramName, paramModuleIndex, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, deleteVbaModuleInvalidName) {
+	utility::string_t paramName = utils->getTestValue("deleteVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("deleteVbaModule", "moduleIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteVbaModule", "storage");
+	paramName = utils->getInvalidTestValue("deleteVbaModule", "name", paramName);
+	utils->initialize("deleteVbaModule", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->deleteVbaModule(paramName, paramModuleIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteVbaModule", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteVbaModule", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteVbaModule", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteVbaModule", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteVbaModule", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteVbaModuleInvalidModuleIndex) {
+	utility::string_t paramName = utils->getTestValue("deleteVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("deleteVbaModule", "moduleIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteVbaModule", "storage");
+	paramModuleIndex = utils->getInvalidIntTestValue("deleteVbaModule", "moduleIndex", paramModuleIndex).value();
+	utils->initialize("deleteVbaModule", "moduleIndex", paramModuleIndex);
+
+	bool failed = true;
+	try
+	{
+		api->deleteVbaModule(paramName, paramModuleIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteVbaModule", "moduleIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteVbaModule", "moduleIndex", paramModuleIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteVbaModule", "moduleIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteVbaModule", "moduleIndex", paramModuleIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteVbaModule", "moduleIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteVbaModuleInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("deleteVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("deleteVbaModule", "moduleIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteVbaModule", "storage");
+	paramPassword = utils->getInvalidTestValue("deleteVbaModule", "password", paramPassword);
+	utils->initialize("deleteVbaModule", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->deleteVbaModule(paramName, paramModuleIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteVbaModule", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteVbaModule", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteVbaModule", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteVbaModule", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteVbaModule", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteVbaModuleInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("deleteVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("deleteVbaModule", "moduleIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteVbaModule", "storage");
+	paramFolder = utils->getInvalidTestValue("deleteVbaModule", "folder", paramFolder);
+	utils->initialize("deleteVbaModule", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->deleteVbaModule(paramName, paramModuleIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteVbaModule", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteVbaModule", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteVbaModule", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteVbaModule", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteVbaModule", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, deleteVbaModuleInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("deleteVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("deleteVbaModule", "moduleIndex");
+	utility::string_t paramPassword = utils->getTestValue("deleteVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("deleteVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("deleteVbaModule", "storage");
+	paramStorage = utils->getInvalidTestValue("deleteVbaModule", "storage", paramStorage);
+	utils->initialize("deleteVbaModule", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->deleteVbaModule(paramName, paramModuleIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("deleteVbaModule", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("deleteVbaModule", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("deleteVbaModule", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("deleteVbaModule", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("deleteVbaModule", "storage"))
 	{
 		FAIL() << "Must have failed";
 	}
@@ -48910,6 +49332,383 @@ TEST_F(SlidesApiTest, getThemeInvalidStorage) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("getTheme", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getVbaModule) {
+	utility::string_t paramName = utils->getTestValue("getVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("getVbaModule", "moduleIndex");
+	utility::string_t paramPassword = utils->getTestValue("getVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("getVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getVbaModule", "storage");
+	utils->initialize("getVbaModule", "");
+	std::shared_ptr<VbaModule> result = api->getVbaModule(paramName, paramModuleIndex, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, getVbaModuleInvalidName) {
+	utility::string_t paramName = utils->getTestValue("getVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("getVbaModule", "moduleIndex");
+	utility::string_t paramPassword = utils->getTestValue("getVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("getVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getVbaModule", "storage");
+	paramName = utils->getInvalidTestValue("getVbaModule", "name", paramName);
+	utils->initialize("getVbaModule", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->getVbaModule(paramName, paramModuleIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getVbaModule", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getVbaModule", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getVbaModule", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getVbaModule", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getVbaModule", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getVbaModuleInvalidModuleIndex) {
+	utility::string_t paramName = utils->getTestValue("getVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("getVbaModule", "moduleIndex");
+	utility::string_t paramPassword = utils->getTestValue("getVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("getVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getVbaModule", "storage");
+	paramModuleIndex = utils->getInvalidIntTestValue("getVbaModule", "moduleIndex", paramModuleIndex).value();
+	utils->initialize("getVbaModule", "moduleIndex", paramModuleIndex);
+
+	bool failed = true;
+	try
+	{
+		api->getVbaModule(paramName, paramModuleIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getVbaModule", "moduleIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getVbaModule", "moduleIndex", paramModuleIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getVbaModule", "moduleIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getVbaModule", "moduleIndex", paramModuleIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getVbaModule", "moduleIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getVbaModuleInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("getVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("getVbaModule", "moduleIndex");
+	utility::string_t paramPassword = utils->getTestValue("getVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("getVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getVbaModule", "storage");
+	paramPassword = utils->getInvalidTestValue("getVbaModule", "password", paramPassword);
+	utils->initialize("getVbaModule", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->getVbaModule(paramName, paramModuleIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getVbaModule", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getVbaModule", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getVbaModule", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getVbaModule", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getVbaModule", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getVbaModuleInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("getVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("getVbaModule", "moduleIndex");
+	utility::string_t paramPassword = utils->getTestValue("getVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("getVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getVbaModule", "storage");
+	paramFolder = utils->getInvalidTestValue("getVbaModule", "folder", paramFolder);
+	utils->initialize("getVbaModule", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->getVbaModule(paramName, paramModuleIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getVbaModule", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getVbaModule", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getVbaModule", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getVbaModule", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getVbaModule", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getVbaModuleInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("getVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("getVbaModule", "moduleIndex");
+	utility::string_t paramPassword = utils->getTestValue("getVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("getVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getVbaModule", "storage");
+	paramStorage = utils->getInvalidTestValue("getVbaModule", "storage", paramStorage);
+	utils->initialize("getVbaModule", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->getVbaModule(paramName, paramModuleIndex, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getVbaModule", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getVbaModule", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getVbaModule", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getVbaModule", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getVbaModule", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getVbaProject) {
+	utility::string_t paramName = utils->getTestValue("getVbaProject", "name");
+	utility::string_t paramPassword = utils->getTestValue("getVbaProject", "password");
+	utility::string_t paramFolder = utils->getTestValue("getVbaProject", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getVbaProject", "storage");
+	utils->initialize("getVbaProject", "");
+	std::shared_ptr<VbaProject> result = api->getVbaProject(paramName, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, getVbaProjectInvalidName) {
+	utility::string_t paramName = utils->getTestValue("getVbaProject", "name");
+	utility::string_t paramPassword = utils->getTestValue("getVbaProject", "password");
+	utility::string_t paramFolder = utils->getTestValue("getVbaProject", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getVbaProject", "storage");
+	paramName = utils->getInvalidTestValue("getVbaProject", "name", paramName);
+	utils->initialize("getVbaProject", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->getVbaProject(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getVbaProject", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getVbaProject", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getVbaProject", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getVbaProject", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getVbaProject", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getVbaProjectInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("getVbaProject", "name");
+	utility::string_t paramPassword = utils->getTestValue("getVbaProject", "password");
+	utility::string_t paramFolder = utils->getTestValue("getVbaProject", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getVbaProject", "storage");
+	paramPassword = utils->getInvalidTestValue("getVbaProject", "password", paramPassword);
+	utils->initialize("getVbaProject", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->getVbaProject(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getVbaProject", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getVbaProject", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getVbaProject", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getVbaProject", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getVbaProject", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getVbaProjectInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("getVbaProject", "name");
+	utility::string_t paramPassword = utils->getTestValue("getVbaProject", "password");
+	utility::string_t paramFolder = utils->getTestValue("getVbaProject", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getVbaProject", "storage");
+	paramFolder = utils->getInvalidTestValue("getVbaProject", "folder", paramFolder);
+	utils->initialize("getVbaProject", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->getVbaProject(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getVbaProject", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getVbaProject", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getVbaProject", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getVbaProject", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getVbaProject", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getVbaProjectInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("getVbaProject", "name");
+	utility::string_t paramPassword = utils->getTestValue("getVbaProject", "password");
+	utility::string_t paramFolder = utils->getTestValue("getVbaProject", "folder");
+	utility::string_t paramStorage = utils->getTestValue("getVbaProject", "storage");
+	paramStorage = utils->getInvalidTestValue("getVbaProject", "storage", paramStorage);
+	utils->initialize("getVbaProject", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->getVbaProject(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getVbaProject", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getVbaProject", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getVbaProject", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getVbaProject", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getVbaProject", "storage"))
 	{
 		FAIL() << "Must have failed";
 	}
@@ -75481,6 +76280,264 @@ TEST_F(SlidesApiTest, updateTableRowInvalidStorage) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("updateTableRow", "storage"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateVbaModule) {
+	utility::string_t paramName = utils->getTestValue("updateVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("updateVbaModule", "moduleIndex");
+	std::shared_ptr<VbaModule> paramModuleDto = utils->getTestValueForClass<VbaModule>("updateVbaModule", "moduleDto");
+	utility::string_t paramPassword = utils->getTestValue("updateVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateVbaModule", "storage");
+	utils->initialize("updateVbaModule", "");
+	std::shared_ptr<VbaModule> result = api->updateVbaModule(paramName, paramModuleIndex, paramModuleDto, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, updateVbaModuleInvalidName) {
+	utility::string_t paramName = utils->getTestValue("updateVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("updateVbaModule", "moduleIndex");
+	std::shared_ptr<VbaModule> paramModuleDto = utils->getTestValueForClass<VbaModule>("updateVbaModule", "moduleDto");
+	utility::string_t paramPassword = utils->getTestValue("updateVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateVbaModule", "storage");
+	paramName = utils->getInvalidTestValue("updateVbaModule", "name", paramName);
+	utils->initialize("updateVbaModule", "name", paramName);
+
+	bool failed = true;
+	try
+	{
+		api->updateVbaModule(paramName, paramModuleIndex, paramModuleDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateVbaModule", "name");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateVbaModule", "name", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateVbaModule", "name");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateVbaModule", "name", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateVbaModule", "name"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateVbaModuleInvalidModuleIndex) {
+	utility::string_t paramName = utils->getTestValue("updateVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("updateVbaModule", "moduleIndex");
+	std::shared_ptr<VbaModule> paramModuleDto = utils->getTestValueForClass<VbaModule>("updateVbaModule", "moduleDto");
+	utility::string_t paramPassword = utils->getTestValue("updateVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateVbaModule", "storage");
+	paramModuleIndex = utils->getInvalidIntTestValue("updateVbaModule", "moduleIndex", paramModuleIndex).value();
+	utils->initialize("updateVbaModule", "moduleIndex", paramModuleIndex);
+
+	bool failed = true;
+	try
+	{
+		api->updateVbaModule(paramName, paramModuleIndex, paramModuleDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateVbaModule", "moduleIndex");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateVbaModule", "moduleIndex", paramModuleIndex);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateVbaModule", "moduleIndex");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateVbaModule", "moduleIndex", paramModuleIndex);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateVbaModule", "moduleIndex"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateVbaModuleInvalidModuleDto) {
+	utility::string_t paramName = utils->getTestValue("updateVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("updateVbaModule", "moduleIndex");
+	std::shared_ptr<VbaModule> paramModuleDto = utils->getTestValueForClass<VbaModule>("updateVbaModule", "moduleDto");
+	utility::string_t paramPassword = utils->getTestValue("updateVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateVbaModule", "storage");
+	paramModuleDto = utils->getInvalidTestValueForClass<>("updateVbaModule", "moduleDto", paramModuleDto);
+	utils->initialize("updateVbaModule", "moduleDto", paramModuleDto);
+
+	bool failed = true;
+	try
+	{
+		api->updateVbaModule(paramName, paramModuleIndex, paramModuleDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateVbaModule", "moduleDto");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateVbaModule", "moduleDto", paramModuleDto);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateVbaModule", "moduleDto");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateVbaModule", "moduleDto", paramModuleDto);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateVbaModule", "moduleDto"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateVbaModuleInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("updateVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("updateVbaModule", "moduleIndex");
+	std::shared_ptr<VbaModule> paramModuleDto = utils->getTestValueForClass<VbaModule>("updateVbaModule", "moduleDto");
+	utility::string_t paramPassword = utils->getTestValue("updateVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateVbaModule", "storage");
+	paramPassword = utils->getInvalidTestValue("updateVbaModule", "password", paramPassword);
+	utils->initialize("updateVbaModule", "password", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		api->updateVbaModule(paramName, paramModuleIndex, paramModuleDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateVbaModule", "password");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateVbaModule", "password", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateVbaModule", "password");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateVbaModule", "password", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateVbaModule", "password"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateVbaModuleInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("updateVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("updateVbaModule", "moduleIndex");
+	std::shared_ptr<VbaModule> paramModuleDto = utils->getTestValueForClass<VbaModule>("updateVbaModule", "moduleDto");
+	utility::string_t paramPassword = utils->getTestValue("updateVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateVbaModule", "storage");
+	paramFolder = utils->getInvalidTestValue("updateVbaModule", "folder", paramFolder);
+	utils->initialize("updateVbaModule", "folder", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		api->updateVbaModule(paramName, paramModuleIndex, paramModuleDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateVbaModule", "folder");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateVbaModule", "folder", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateVbaModule", "folder");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateVbaModule", "folder", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateVbaModule", "folder"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, updateVbaModuleInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("updateVbaModule", "name");
+	int32_t paramModuleIndex = utils->getIntTestValue("updateVbaModule", "moduleIndex");
+	std::shared_ptr<VbaModule> paramModuleDto = utils->getTestValueForClass<VbaModule>("updateVbaModule", "moduleDto");
+	utility::string_t paramPassword = utils->getTestValue("updateVbaModule", "password");
+	utility::string_t paramFolder = utils->getTestValue("updateVbaModule", "folder");
+	utility::string_t paramStorage = utils->getTestValue("updateVbaModule", "storage");
+	paramStorage = utils->getInvalidTestValue("updateVbaModule", "storage", paramStorage);
+	utils->initialize("updateVbaModule", "storage", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		api->updateVbaModule(paramName, paramModuleIndex, paramModuleDto, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("updateVbaModule", "storage");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("updateVbaModule", "storage", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("updateVbaModule", "storage");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("updateVbaModule", "storage", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("updateVbaModule", "storage"))
 	{
 		FAIL() << "Must have failed";
 	}

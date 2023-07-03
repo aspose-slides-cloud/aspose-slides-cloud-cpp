@@ -362,6 +362,9 @@
     <ClCompile Include="model\TintEffect.cpp" />
     <ClCompile Include="model\UpdateBackground.cpp" />
     <ClCompile Include="model\UpdateShape.cpp" />
+    <ClCompile Include="model\VbaModule.cpp" />
+    <ClCompile Include="model\VbaProject.cpp" />
+    <ClCompile Include="model\VbaReference.cpp" />
     <ClCompile Include="model\VideoExportOptions.cpp" />
     <ClCompile Include="model\VideoFrame.cpp" />
     <ClCompile Include="model\ViewProperties.cpp" />
@@ -621,6 +624,9 @@
     <ClInclude Include="model\TintEffect.h" />
     <ClInclude Include="model\UpdateBackground.h" />
     <ClInclude Include="model\UpdateShape.h" />
+    <ClInclude Include="model\VbaModule.h" />
+    <ClInclude Include="model\VbaProject.h" />
+    <ClInclude Include="model\VbaReference.h" />
     <ClInclude Include="model\VideoExportOptions.h" />
     <ClInclude Include="model\VideoFrame.h" />
     <ClInclude Include="model\ViewProperties.h" />

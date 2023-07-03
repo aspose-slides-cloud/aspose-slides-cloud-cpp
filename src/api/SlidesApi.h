@@ -112,6 +112,8 @@
 #include "../model/TextBounds.h"
 #include "../model/TextItems.h"
 #include "../model/Theme.h"
+#include "../model/VbaModule.h"
+#include "../model/VbaProject.h"
 #include "../model/ViewProperties.h"
 #include <cpprest/details/basic_types.h>
 
@@ -331,6 +333,11 @@ public:
 	/// Inserts the table row in the specified position. If position is not specified, the row add to the end of the table.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<TableRow>> createTableRow(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::shared_ptr<TableRow> dto, boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Append module to VBA project             
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<VbaModule>> createVbaModule(utility::string_t name, std::shared_ptr<VbaModule> moduleDto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Adds a text watermark to each slide of the presentation. Text watermark can be setup via method arguments or withing Shape DTO for detailed customization. Both options are applicable simultaneously. 
@@ -606,6 +613,11 @@ public:
 	/// Removes unused master slides.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> deleteUnusedMasterSlidesOnline(std::shared_ptr<HttpContent> document, boost::optional<bool> ignorePreserveField = bool(), utility::string_t password = utility::string_t());
+
+	/// <summary>
+	/// Delete module from VBA project.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<VbaProject>> deleteVbaModule(utility::string_t name, int32_t moduleIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Removes shapes with name \&quot;watermark\&quot; from the presentation.
@@ -1001,6 +1013,16 @@ public:
 	/// Read slide theme info.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Theme>> getTheme(utility::string_t name, int32_t slideIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Get VBA module info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<VbaModule>> getVbaModule(utility::string_t name, int32_t moduleIndex, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Get VBA project info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<VbaProject>> getVbaProject(utility::string_t name, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Read presentation view properties.
@@ -1416,6 +1438,11 @@ public:
 	/// Update the table row.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<TableRow>> updateTableRow(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t rowIndex, std::shared_ptr<TableRow> dto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Update VBA module.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<VbaModule>> updateVbaModule(utility::string_t name, int32_t moduleIndex, std::shared_ptr<VbaModule> moduleDto = std::shared_ptr<VbaModule>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Upload file

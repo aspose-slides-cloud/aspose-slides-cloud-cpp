@@ -262,6 +262,9 @@
 #include "model/TintEffect.h"
 #include "model/UpdateBackground.h"
 #include "model/UpdateShape.h"
+#include "model/VbaModule.h"
+#include "model/VbaProject.h"
+#include "model/VbaReference.h"
 #include "model/VideoExportOptions.h"
 #include "model/VideoFrame.h"
 #include "model/ViewProperties.h"
@@ -1742,6 +1745,24 @@ std::shared_ptr<void> ClassRegistry::deserializeSubclass(utility::string_t class
 		result->fromJson(json);
 		return result;
 	}
+	if (className == L"VbaModule")
+	{
+		std::shared_ptr<VbaModule> result(new VbaModule());
+		result->fromJson(json);
+		return result;
+	}
+	if (className == L"VbaProject")
+	{
+		std::shared_ptr<VbaProject> result(new VbaProject());
+		result->fromJson(json);
+		return result;
+	}
+	if (className == L"VbaReference")
+	{
+		std::shared_ptr<VbaReference> result(new VbaReference());
+		result->fromJson(json);
+		return result;
+	}
 	if (className == L"VideoExportOptions")
 	{
 		std::shared_ptr<VideoExportOptions> result(new VideoExportOptions());
@@ -1941,6 +1962,8 @@ std::map<utility::string_t, utility::string_t> ClassRegistry::s_hierarchy =
 	{ L"TintEffect", L"ImageTransformEffect" },
 	{ L"UpdateBackground", L"Task" },
 	{ L"UpdateShape", L"Task" },
+	{ L"VbaModule", L"ResourceBase" },
+	{ L"VbaProject", L"ResourceBase" },
 	{ L"VideoExportOptions", L"ExportOptions" },
 	{ L"VideoFrame", L"GeometryShape" },
 	{ L"ViewProperties", L"ResourceBase" },
@@ -2190,6 +2213,9 @@ std::map<utility::string_t, std::map<utility::string_t, utility::string_t>> Clas
 	{ L"TintEffect", { { L"Type", L"Tint" }, } },
 	{ L"UpdateBackground", { { L"Type", L"UpdateBackground" }, } },
 	{ L"UpdateShape", { { L"Type", L"UpdateShape" }, } },
+	{ L"VbaModule", { } },
+	{ L"VbaProject", { } },
+	{ L"VbaReference", { } },
 	{ L"VideoExportOptions", { { L"Format", L"mpeg4" }, } },
 	{ L"VideoFrame", { { L"Type", L"VideoFrame" }, } },
 	{ L"ViewProperties", { } },

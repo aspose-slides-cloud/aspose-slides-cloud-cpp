@@ -2067,6 +2067,50 @@ pplx::task<std::shared_ptr<TableRow>> SlidesApi::createTableRow(utility::string_
 		});
 }
 
+pplx::task<std::shared_ptr<VbaModule>> SlidesApi::createVbaModule(utility::string_t name, std::shared_ptr<VbaModule> moduleDto, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	if (moduleDto == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.moduleDto");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/vbaProject/modules");
+	ApiClient::setPathParameter(methodPath, "name", name);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (moduleDto != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(moduleDto->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "createVbaModule");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"VbaModule", json);
+			return std::static_pointer_cast<VbaModule>(instance);
+		});
+}
+
 pplx::task<void> SlidesApi::createWatermark(utility::string_t name, std::shared_ptr<Shape> shape, boost::optional<double> fontHeight, utility::string_t text, utility::string_t fontName, utility::string_t fontColor, utility::string_t password, utility::string_t folder, utility::string_t storage)
 {
 	// verify the required parameter 'name' is set
@@ -4395,6 +4439,43 @@ pplx::task<HttpContent> SlidesApi::deleteUnusedMasterSlidesOnline(std::shared_pt
 			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
+		});
+}
+
+pplx::task<std::shared_ptr<VbaProject>> SlidesApi::deleteVbaModule(utility::string_t name, int32_t moduleIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/vbaProject/modules/{moduleIndex}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "moduleIndex", moduleIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("DELETE"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "deleteVbaModule");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"VbaProject", json);
+			return std::static_pointer_cast<VbaProject>(instance);
 		});
 }
 
@@ -7797,6 +7878,79 @@ pplx::task<std::shared_ptr<Theme>> SlidesApi::getTheme(utility::string_t name, i
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Theme", json);
 			return std::static_pointer_cast<Theme>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<VbaModule>> SlidesApi::getVbaModule(utility::string_t name, int32_t moduleIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/vbaProject/modules/{moduleIndex}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "moduleIndex", moduleIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "getVbaModule");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"VbaModule", json);
+			return std::static_pointer_cast<VbaModule>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<VbaProject>> SlidesApi::getVbaProject(utility::string_t name, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/vbaProject");
+	ApiClient::setPathParameter(methodPath, "name", name);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "getVbaProject");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"VbaProject", json);
+			return std::static_pointer_cast<VbaProject>(instance);
 		});
 }
 
@@ -11951,6 +12105,47 @@ pplx::task<std::shared_ptr<TableRow>> SlidesApi::updateTableRow(utility::string_
 			web::json::value json = web::json::value::parse(response);
 			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"TableRow", json);
 			return std::static_pointer_cast<TableRow>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<VbaModule>> SlidesApi::updateVbaModule(utility::string_t name, int32_t moduleIndex, std::shared_ptr<VbaModule> moduleDto, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/vbaProject/modules/{moduleIndex}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "moduleIndex", moduleIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (moduleDto != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(moduleDto->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "updateVbaModule");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"VbaModule", json);
+			return std::static_pointer_cast<VbaModule>(instance);
 		});
 }
 
