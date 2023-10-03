@@ -78,21 +78,21 @@ SlidesApi* HyperlinkTest::api = nullptr;
 TestUtils* HyperlinkTest::utils = nullptr;
 
 TEST_F(HyperlinkTest, hyperlinkGetShape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<ShapeBase> shape = api->getShape(L"test.pptx", 2, 2, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(L"Hyperlink", shape->getHyperlinkClick()->getActionType());
 	EXPECT_EQ(nullptr, shape->getHyperlinkMouseOver());
 }
 
 TEST_F(HyperlinkTest, hyperlinkGetPortion) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portion> shape = api->getPortion(L"test.pptx", 2, 1, 1, 2, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(nullptr, shape->getHyperlinkClick());
 	EXPECT_EQ(L"JumpLastSlide", shape->getHyperlinkMouseOver()->getActionType());
 }
 
 TEST_F(HyperlinkTest, hyperlinkCreateShape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<ShapeBase> shape(new Shape());
 	std::shared_ptr<Hyperlink> hyperlink(new Hyperlink());
 	hyperlink->setActionType(L"Hyperlink");
@@ -103,7 +103,7 @@ TEST_F(HyperlinkTest, hyperlinkCreateShape) {
 }
 
 TEST_F(HyperlinkTest, hyperlinkCreatePortion) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portion> dto(new Portion());
 	std::shared_ptr<Hyperlink> hyperlink(new Hyperlink());
 	hyperlink->setActionType(L"JumpLastSlide");
@@ -114,7 +114,7 @@ TEST_F(HyperlinkTest, hyperlinkCreatePortion) {
 }
 
 TEST_F(HyperlinkTest, hyperlinkDelete) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<ShapeBase> shape(new PictureFrame());
 	std::shared_ptr<Hyperlink> hyperlink(new Hyperlink());
 	hyperlink->setIsDisabled(true);

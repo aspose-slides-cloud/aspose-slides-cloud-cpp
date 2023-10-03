@@ -25,6 +25,7 @@
 
 #include "TestUtils.h"
 #include <boost/filesystem.hpp>
+#include <boost/regex.hpp>
 
 using namespace asposeslidescloud::api;
 
@@ -39,32 +40,32 @@ TestUtils::~TestUtils()
 {
 }
 
-void TestUtils::initialize(std::string functionName, std::string parameterName)
+void TestUtils::initialize(std::string functionName, std::string parameterName, std::string parameterType)
 {
-	initialize(functionName, parameterName, utility::conversions::to_string_t(""));
+	initialize(functionName, parameterName, parameterType, L"");
 }
 
-void TestUtils::initialize(std::string functionName, std::string parameterName, int32_t parameterValue)
+void TestUtils::initialize(std::string functionName, std::string parameterName, std::string parameterType, int32_t parameterValue)
 {
-	initialize(functionName, parameterName, utility::conversions::to_string_t(""));
+	initialize(functionName, parameterName, parameterType, L"");
 }
 
-void TestUtils::initialize(std::string functionName, std::string parameterName, std::vector<int32_t> parameterValue)
+void TestUtils::initialize(std::string functionName, std::string parameterName, std::string parameterType, std::vector<int32_t> parameterValue)
 {
-	initialize(functionName, parameterName, utility::conversions::to_string_t(""));
+	initialize(functionName, parameterName, parameterType, L"");
 }
 
-void TestUtils::initialize(std::string functionName, std::string parameterName, std::vector<std::shared_ptr<HttpContent>> parameterValue)
+void TestUtils::initialize(std::string functionName, std::string parameterName, std::string parameterType, std::vector<std::shared_ptr<HttpContent>> parameterValue)
 {
-	initialize(functionName, parameterName, utility::conversions::to_string_t(""));
+	initialize(functionName, parameterName, parameterType, L"");
 }
 
-void TestUtils::initialize(std::string functionName, std::string parameterName, utility::string_t parameterValue)
+void TestUtils::initialize(std::string functionName, std::string parameterName, std::string parameterType, utility::string_t parameterValue)
 {
 	std::map<utility::string_t, web::json::value> files;
 	for (web::json::value rule : m_rules[utility::conversions::to_string_t("Files")].as_array())
 	{
-		if (isGoodRule(rule, functionName, parameterName))
+		if (isGoodRule(rule, functionName, parameterName, parameterType))
 		{
 			utility::string_t actualName = rule[utility::conversions::to_string_t("File")].as_string();
 			boost::replace_all(actualName, "%v", parameterValue);
@@ -93,11 +94,11 @@ void TestUtils::initialize(std::string functionName, std::string parameterName, 
 	}
 }
 
-bool TestUtils::mustFail(std::string functionName, std::string parameterName)
+bool TestUtils::mustFail(std::string functionName, std::string parameterName, std::string parameterType)
 {
 	for (web::json::value rule : m_rules[utility::conversions::to_string_t("OKToNotFail")].as_array())
 	{
-		if (isGoodRule(rule, functionName, parameterName))
+		if (isGoodRule(rule, functionName, parameterName, parameterType))
 		{
 			return false;
 		}
@@ -105,9 +106,9 @@ bool TestUtils::mustFail(std::string functionName, std::string parameterName)
 	return true;
 }
 
-bool TestUtils::getBoolTestValue(std::string functionName, std::string parameterName)
+bool TestUtils::getBoolTestValue(std::string functionName, std::string parameterName, std::string parameterType)
 {
-	web::json::value* value = getTestJsonValue(functionName, parameterName);
+	web::json::value* value = getTestJsonValue(functionName, parameterName, parameterType);
 	if (value == nullptr || value->is_null())
 	{
 		return true;
@@ -115,9 +116,9 @@ bool TestUtils::getBoolTestValue(std::string functionName, std::string parameter
 	return value->as_bool();
 }
 
-boost::optional<bool> TestUtils::getOptionalBoolTestValue(std::string functionName, std::string parameterName)
+boost::optional<bool> TestUtils::getOptionalBoolTestValue(std::string functionName, std::string parameterName, std::string parameterType)
 {
-	web::json::value* value = getTestJsonValue(functionName, parameterName);
+	web::json::value* value = getTestJsonValue(functionName, parameterName, parameterType);
 	boost::optional<bool> boolValue = boost::optional<bool>();
 	if (value != nullptr && !value->is_null())
 	{
@@ -126,14 +127,14 @@ boost::optional<bool> TestUtils::getOptionalBoolTestValue(std::string functionNa
 	return boolValue;
 }
 
-int32_t TestUtils::getIntTestValue(std::string functionName, std::string parameterName)
+int32_t TestUtils::getIntTestValue(std::string functionName, std::string parameterName, std::string parameterType)
 {
-	return std::stoi(getTestValue(functionName, parameterName));
+	return std::stoi(getTestValue(functionName, parameterName, parameterType));
 }
 
-boost::optional<int32_t> TestUtils::getOptionalIntTestValue(std::string functionName, std::string parameterName)
+boost::optional<int32_t> TestUtils::getOptionalIntTestValue(std::string functionName, std::string parameterName, std::string parameterType)
 {
-	web::json::value* value = getTestJsonValue(functionName, parameterName);
+	web::json::value* value = getTestJsonValue(functionName, parameterName, parameterType);
 	boost::optional<int32_t> intValue = boost::optional<int32_t>();
 	if (value != nullptr && !value->is_null())
 	{
@@ -142,10 +143,10 @@ boost::optional<int32_t> TestUtils::getOptionalIntTestValue(std::string function
 	return intValue;
 }
 
-std::vector<int32_t> TestUtils::getIntVectorTestValue(std::string functionName, std::string parameterName)
+std::vector<int32_t> TestUtils::getIntVectorTestValue(std::string functionName, std::string parameterName, std::string parameterType)
 {
 	std::vector<int> value;
-	web::json::value* jsonValue = getTestJsonValue(functionName, parameterName);
+	web::json::value* jsonValue = getTestJsonValue(functionName, parameterName, parameterType);
 	if (jsonValue != nullptr && jsonValue->is_array())
 	{
 		web::json::array jsonArray = jsonValue->as_array();
@@ -157,55 +158,46 @@ std::vector<int32_t> TestUtils::getIntVectorTestValue(std::string functionName, 
 	return value;
 }
 
-double TestUtils::getDoubleTestValue(std::string functionName, std::string parameterName)
+double TestUtils::getDoubleTestValue(std::string functionName, std::string parameterName, std::string parameterType)
 {
 	return 1;
 }
 
-boost::optional<double> TestUtils::getOptionalDoubleTestValue(std::string functionName, std::string parameterName)
+boost::optional<double> TestUtils::getOptionalDoubleTestValue(std::string functionName, std::string parameterName, std::string parameterType)
 {
 	return boost::optional<double>();
 }
 
-std::shared_ptr<HttpContent> TestUtils::getBinaryTestValue(std::string functionName, std::string parameterName)
+std::shared_ptr<HttpContent> TestUtils::getBinaryTestValue(std::string functionName, std::string parameterName, std::string parameterType)
 {
 	std::shared_ptr<HttpContent> uploadContent = std::make_shared<HttpContent>();
-	utility::string_t path = utility::conversions::to_string_t("TestData/test.pptx");
-	if (boost::iequals(utility::conversions::to_string_t("ImportFromPdf"), functionName)) {
-		path = utility::conversions::to_string_t("TestData/test.pdf");
-	} else if (boost::iequals(utility::conversions::to_string_t("ImportShapesFromSvg"), functionName)) {
-		path = utility::conversions::to_string_t("TestData/shapes.svg");
-	}
-	else if (boost::iequals(utility::conversions::to_string_t("image"), parameterName)) {
-		path = utility::conversions::to_string_t("TestData/watermark.png");
-	}
-	else if (boost::iequals(utility::conversions::to_string_t("font"), parameterName)) {
-		path = utility::conversions::to_string_t("TestData/calibri.ttf");
-	}
+	utility::string_t path = L"TestData/" + getTestValue(functionName, parameterName, parameterType);
 	uploadContent->setData(std::make_shared<std::ifstream>(path, std::ios::binary));
 	return uploadContent;
 }
 
-std::vector<std::shared_ptr<HttpContent>> TestUtils::getBinArrayTestValue(std::string functionName, std::string parameterName)
+std::vector<std::shared_ptr<HttpContent>> TestUtils::getBinArrayTestValue(std::string functionName, std::string parameterName, std::string parameterType)
 {
 	std::vector<std::shared_ptr<HttpContent>> value;
-	std::shared_ptr<HttpContent> file1 = std::make_shared<HttpContent>();
-	utility::string_t path = utility::conversions::to_string_t("TestData/test.pptx");
-	file1->setData(std::make_shared<std::ifstream>(path, std::ios::binary));
-	value.push_back(file1);
-	std::shared_ptr<HttpContent> file2 = std::make_shared<HttpContent>();
-	path = utility::conversions::to_string_t("TestData/test-unprotected.pptx");
-	file2->setData(std::make_shared<std::ifstream>(path, std::ios::binary));
-	value.push_back(file2);
+	utility::string_t testValue = getTestValue(functionName, parameterName, parameterType);
+	std::vector<utility::string_t> paths;
+	boost::split(paths, testValue, boost::is_any_of(","));
+	for (std::vector<utility::string_t>::iterator it = paths.begin(); it != paths.end(); ++it)
+	{
+		std::shared_ptr<HttpContent> uploadContent = std::make_shared<HttpContent>();
+		utility::string_t path = L"TestData/" + *it;
+		uploadContent->setData(std::make_shared<std::ifstream>(path, std::ios::binary));
+		value.push_back(uploadContent);
+	}
 	return value;
 }
 
-utility::string_t TestUtils::getTestValue(std::string functionName, std::string parameterName)
+utility::string_t TestUtils::getTestValue(std::string functionName, std::string parameterName, std::string parameterType)
 {
-	utility::string_t value = utility::conversions::to_string_t("testValue");
+	utility::string_t value = L"";
 	for (web::json::value rule : m_rules[utility::conversions::to_string_t("Values")].as_array())
 	{
-		if (isGoodRule(rule, functionName, parameterName) && rule.has_field(utility::conversions::to_string_t("Value")))
+		if (isGoodRule(rule, functionName, parameterName, parameterType) && rule.has_field(L"Value"))
 		{
 			web::json::value jsonValue = rule[utility::conversions::to_string_t("Value")];
 			if (jsonValue.is_null())
@@ -215,6 +207,14 @@ utility::string_t TestUtils::getTestValue(std::string functionName, std::string 
 			else if (jsonValue.is_string())
 			{
 				value = jsonValue.as_string();
+				if (boost::algorithm::starts_with(value, L"@"))
+				{
+					value = value.substr(1, value.length() - 1);
+					if (boost::algorithm::starts_with(value, L"("))
+					{
+						value = value.substr(1, value.length() - 2);
+					}
+				}
 			}
 			else
 			{
@@ -222,41 +222,31 @@ utility::string_t TestUtils::getTestValue(std::string functionName, std::string 
 			}
 		}
 	}
+	boost::replace_all(value, "%n", parameterName);
 	return value;
 }
 
-web::json::value* TestUtils::getTestJsonValue(std::string functionName, std::string parameterName)
+web::json::value* TestUtils::getTestJsonValue(std::string functionName, std::string parameterName, std::string parameterType)
 {
 	web::json::value* value = nullptr;
-	for (web::json::value& rule : m_rules[utility::conversions::to_string_t("Values")].as_array())
+	for (web::json::value& rule : m_rules[L"Values"].as_array())
 	{
-		if (isGoodRule(rule, functionName, parameterName) && rule.has_field(utility::conversions::to_string_t("Value")))
+		if (isGoodRule(rule, functionName, parameterName, parameterType) && rule.has_field(L"Value"))
 		{
-			//TODO: add TypeHierarchy util class & remove this workaround
-			if (functionName == "setShapeGeometryPath" && parameterName == "dto")
-			{
-				if (rule.has_field(utility::conversions::to_string_t("Type")) && rule[utility::conversions::to_string_t("Type")].as_string() == utility::conversions::to_string_t("GeometryPaths"))
-				{
-					value = &rule[utility::conversions::to_string_t("Value")];
-				}
-			}
-			else
-			{
-				value = &rule[utility::conversions::to_string_t("Value")];
-			}
+			value = &rule[L"Value"];
 		}
 	}
 	return value;
 }
 
-boost::optional<bool> TestUtils::getInvalidBoolTestValue(std::string functionName, std::string parameterName, boost::optional<bool> value)
+boost::optional<bool> TestUtils::getInvalidBoolTestValue(std::string functionName, std::string parameterName, std::string parameterType, boost::optional<bool> value)
 {
-	return true;
+	return false;
 }
 
-boost::optional<int32_t> TestUtils::getInvalidIntTestValue(std::string functionName, std::string parameterName, boost::optional<int32_t> value)
+boost::optional<int32_t> TestUtils::getInvalidIntTestValue(std::string functionName, std::string parameterName, std::string parameterType, boost::optional<int32_t> value)
 {
-	web::json::value* ivalueJson = getInvalidTestValue(functionName, parameterName);
+	web::json::value* ivalueJson = getInvalidTestValue(functionName, parameterName, parameterType);
 	if (ivalueJson == nullptr)
 	{
 		return value;
@@ -268,19 +258,19 @@ boost::optional<int32_t> TestUtils::getInvalidIntTestValue(std::string functionN
 	return ivalueJson->as_integer();
 }
 
-std::shared_ptr<HttpContent> TestUtils::getInvalidBinaryTestValue(std::string functionName, std::string parameterName, std::shared_ptr<HttpContent> value)
+std::shared_ptr<HttpContent> TestUtils::getInvalidBinaryTestValue(std::string functionName, std::string parameterName, std::string parameterType, std::shared_ptr<HttpContent> value)
 {
 	return nullptr;
 }
 
-std::vector<std::shared_ptr<HttpContent>> TestUtils::getInvalidBinArrayTestValue(std::string functionName, std::string parameterName, std::vector<std::shared_ptr<HttpContent>> value)
+std::vector<std::shared_ptr<HttpContent>> TestUtils::getInvalidBinArrayTestValue(std::string functionName, std::string parameterName, std::string parameterType, std::vector<std::shared_ptr<HttpContent>> value)
 {
 	return value;
 }
 
-std::vector<int32_t> TestUtils::getInvalidIntVectorTestValue(std::string functionName, std::string parameterName, std::vector<int32_t> value)
+std::vector<int32_t> TestUtils::getInvalidIntVectorTestValue(std::string functionName, std::string parameterName, std::string parameterType, std::vector<int32_t> value)
 {
-	web::json::value* jsonValue = getInvalidTestValue(functionName, parameterName);
+	web::json::value* jsonValue = getInvalidTestValue(functionName, parameterName, parameterType);
 	if (jsonValue != nullptr)
 	{
 		std::vector<int> ivalue;
@@ -297,14 +287,27 @@ std::vector<int32_t> TestUtils::getInvalidIntVectorTestValue(std::string functio
 	return value;
 }
 
-boost::optional<double> TestUtils::getInvalidDoubleTestValue(std::string functionName, std::string parameterName, boost::optional<double> value)
+boost::optional<double> TestUtils::getInvalidDoubleTestValue(std::string functionName, std::string parameterName, std::string parameterType, boost::optional<double> value)
 {
-	return 1;
+	web::json::value* ivalueJson = getInvalidTestValue(functionName, parameterName, parameterType);
+	if (ivalueJson == nullptr)
+	{
+		return value;
+	}
+	else if (ivalueJson->is_null())
+	{
+		return 0;
+	}
+	else if (ivalueJson->is_double())
+	{
+		return ivalueJson->as_double();
+	}
+	return ivalueJson->as_integer();
 }
 
-utility::string_t TestUtils::getInvalidTestValue(std::string functionName, std::string parameterName, utility::string_t value)
+utility::string_t TestUtils::getInvalidTestValue(std::string functionName, std::string parameterName, std::string parameterType, utility::string_t value)
 {
-	web::json::value* ivalueJson = getInvalidTestValue(functionName, parameterName);
+	web::json::value* ivalueJson = getInvalidTestValue(functionName, parameterName, parameterType);
 	if (ivalueJson == nullptr)
 	{
 		return value;
@@ -327,57 +330,57 @@ utility::string_t TestUtils::getInvalidTestValue(std::string functionName, std::
 	}
 }
 
-web::json::value* TestUtils::getInvalidTestValue(std::string functionName, std::string parameterName)
+web::json::value* TestUtils::getInvalidTestValue(std::string functionName, std::string parameterName, std::string parameterType)
 {
 	web::json::value* ivalue = nullptr;
-	for (web::json::value& rule : m_rules[utility::conversions::to_string_t("Values")].as_array())
+	for (web::json::value& rule : m_rules[L"Values"].as_array())
 	{
-		if (isGoodRule(rule, functionName, parameterName) && rule.has_field(utility::conversions::to_string_t("InvalidValue")))
+		if (isGoodRule(rule, functionName, parameterName, parameterType) && rule.has_field(L"InvalidValue"))
 		{
-			ivalue = &rule[utility::conversions::to_string_t("InvalidValue")];
+			ivalue = &rule[L"InvalidValue"];
 		}
 	}
 	return ivalue;
 }
 
-int TestUtils::getExpectedCode(std::string functionName, std::string parameterName)
+int TestUtils::getExpectedCode(std::string functionName, std::string parameterName, std::string parameterType)
 {
 	int code = 0;
-	for (web::json::value rule : m_rules[utility::conversions::to_string_t("Results")].as_array())
+	for (web::json::value rule : m_rules[L"Results"].as_array())
 	{
-		if (isGoodRule(rule, functionName, parameterName) && rule.has_field(utility::conversions::to_string_t("Code")))
+		if (isGoodRule(rule, functionName, parameterName, parameterType) && rule.has_field(L"Code"))
 		{
-			code = rule[utility::conversions::to_string_t("Code")].as_integer();
+			code = rule[L"Code"].as_integer();
 		}
 	}
 	return code;
 }
 
-utility::string_t TestUtils::getExpectedMessage(std::string functionName, std::string parameterName, int32_t value)
+utility::string_t TestUtils::getExpectedMessage(std::string functionName, std::string parameterName, std::string parameterType, int32_t value)
 {
 	std::stringstream valueAsStringStream;
 	valueAsStringStream << value;
-	return getExpectedMessage(functionName, parameterName, utility::conversions::to_string_t(valueAsStringStream.str()));
+	return getExpectedMessage(functionName, parameterName, parameterType, utility::conversions::to_string_t(valueAsStringStream.str()));
 }
 
-utility::string_t TestUtils::getExpectedMessage(std::string functionName, std::string parameterName, std::vector<int32_t> value)
+utility::string_t TestUtils::getExpectedMessage(std::string functionName, std::string parameterName, std::string parameterType, std::vector<int32_t> value)
 {
-	return getExpectedMessage(functionName, parameterName, utility::conversions::to_string_t(""));
+	return getExpectedMessage(functionName, parameterName, parameterType, L"");
 }
 
-utility::string_t TestUtils::getExpectedMessage(std::string functionName, std::string parameterName, std::vector<std::shared_ptr<HttpContent>> value)
+utility::string_t TestUtils::getExpectedMessage(std::string functionName, std::string parameterName, std::string parameterType, std::vector<std::shared_ptr<HttpContent>> value)
 {
-	return getExpectedMessage(functionName, parameterName, utility::conversions::to_string_t(""));
+	return getExpectedMessage(functionName, parameterName, parameterType, L"");
 }
 
-utility::string_t TestUtils::getExpectedMessage(std::string functionName, std::string parameterName, utility::string_t value)
+utility::string_t TestUtils::getExpectedMessage(std::string functionName, std::string parameterName, std::string parameterType, utility::string_t value)
 {
-	utility::string_t message = utility::conversions::to_string_t("Unexpected message");
-	for (web::json::value rule : m_rules[utility::conversions::to_string_t("Results")].as_array())
+	utility::string_t message = L"Unexpected message";
+	for (web::json::value rule : m_rules[L"Results"].as_array())
 	{
-		if (isGoodRule(rule, functionName, parameterName) && rule.has_field(utility::conversions::to_string_t("Message")))
+		if (isGoodRule(rule, functionName, parameterName, parameterType) && rule.has_field(L"Message"))
 		{
-			message = rule[utility::conversions::to_string_t("Message")].as_string();
+			message = rule[L"Message"].as_string();
 		}
 	}
 	boost::replace_all(message, "%v", value);
@@ -421,16 +424,42 @@ void TestUtils::initTestFiles()
 	}
 }
 
-bool TestUtils::isGoodRule(web::json::value rule, std::string functionName, std::string parameterName)
+bool TestUtils::isGoodRule(web::json::value rule, std::string functionName, std::string parameterName, std::string parameterType)
 {
-	return (!rule.has_field(utility::conversions::to_string_t("Parameter"))
-			|| boost::iequals(rule[utility::conversions::to_string_t("Parameter")].as_string(), parameterName))
+	return isGoodRuleKey(rule, L"Parameter", parameterName)
 		&& (!rule.has_field(utility::conversions::to_string_t("Invalid"))
 			|| (rule[utility::conversions::to_string_t("Invalid")].as_bool() != parameterName.empty()))
-		&& (!rule.has_field(utility::conversions::to_string_t("Method"))
-			|| boost::iequals(rule[utility::conversions::to_string_t("Method")].as_string(), functionName))
-		&& (!rule.has_field(utility::conversions::to_string_t("Language"))
-			|| boost::iequals(rule[utility::conversions::to_string_t("Language")].as_string(), "CPP"));
+		&& isGoodRuleKey(rule, L"Method", functionName)
+		&& isGoodRuleKey(rule, L"Language", "C++")
+		&& isGoodRuleType(rule, parameterType);
+}
+
+bool TestUtils::isGoodRuleKey(web::json::value rule, utility::string_t key, std::string parameterValue)
+{
+	if (!rule.has_field(key)) return true;
+	utility::string_t value = rule[key].as_string();
+	if (boost::algorithm::starts_with(value, L"/") && boost::algorithm::ends_with(value, L"/"))
+	{
+		value = value.substr(1, value.length() - 2);
+		boost::regex expression(utility::conversions::to_utf8string(value), boost::regex::icase);
+		return boost::regex_search(parameterValue, expression);
+	}
+	return boost::iequals(value, parameterValue);
+}
+
+bool TestUtils::isGoodRuleType(web::json::value rule, std::string parameterType)
+{
+	if (!rule.has_field(L"Type")) return true;
+	utility::string_t ruleType = rule[L"Type"].as_string();
+	if (boost::iequals(ruleType, "number")) return boost::iequals(parameterType, "int32_t") || boost::iequals(parameterType, "double");
+	if (boost::iequals(ruleType, "int")) return boost::iequals(parameterType, "int32_t");
+	if (boost::iequals(ruleType, "bool")) return boost::iequals(parameterType, "bool");
+	if (boost::iequals(ruleType, "int[]")) return boost::iequals(parameterType, "std::vector<int32_t>");
+	if (boost::iequals(ruleType, "stream")) return boost::iequals(parameterType, "std::shared_ptr<HttpContent>");
+	if (boost::iequals(ruleType, "stream[]")) return boost::iequals(parameterType, "std::vector<std::shared_ptr<HttpContent>>");
+	if (boost::iequals(ruleType, "model")) return boost::algorithm::starts_with(parameterType, L"std::shared_ptr") && !boost::iequals(parameterType, "std::shared_ptr<HttpContent>");
+	if (ClassRegistry::isClass(ruleType)) return boost::algorithm::starts_with(parameterType, L"std::shared_ptr") && ClassRegistry::isSubclass(ruleType, utility::conversions::to_string_t(parameterType.substr(16, parameterType.length() - 17)));
+	return false;
 }
 
 utility::string_t TestUtils::getFileDataAsBase64(utility::string_t path)

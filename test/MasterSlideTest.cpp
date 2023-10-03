@@ -78,7 +78,7 @@ SlidesApi* MasterSlideTest::api = nullptr;
 TestUtils* MasterSlideTest::utils = nullptr;
 
 TEST_F(MasterSlideTest, masterSlides) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -100,7 +100,7 @@ TEST_F(MasterSlideTest, masterSlides) {
 }
 
 TEST_F(MasterSlideTest, masterSlideShapes) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -137,7 +137,7 @@ TEST_F(MasterSlideTest, masterSlideShapes) {
 }
 
 TEST_F(MasterSlideTest, masterSlideParagraphs) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -173,7 +173,7 @@ TEST_F(MasterSlideTest, masterSlideParagraphs) {
 }
 
 TEST_F(MasterSlideTest, masterSlidePortions) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -212,7 +212,7 @@ TEST_F(MasterSlideTest, masterSlidePortions) {
 }
 
 TEST_F(MasterSlideTest, masterSlideAnimation) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -248,7 +248,7 @@ TEST_F(MasterSlideTest, masterSlideAnimation) {
 }
 
 TEST_F(MasterSlideTest, masterSlidesDeleteUnused) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -261,7 +261,7 @@ TEST_F(MasterSlideTest, masterSlidesDeleteUnused) {
 }
 
 TEST_F(MasterSlideTest, masterSlidesDeleteUnusedOnline) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
 	HttpContent result = api->deleteUnusedMasterSlidesOnline(data, boost::none, L"password").get();

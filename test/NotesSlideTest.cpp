@@ -78,25 +78,25 @@ SlidesApi* NotesSlideTest::api = nullptr;
 TestUtils* NotesSlideTest::utils = nullptr;
 
 TEST_F(NotesSlideTest, notesSlideGetFromStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<NotesSlide> notesSlide = api->getNotesSlide(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_GT(notesSlide->getText().size(), 0);
 }
 
 TEST_F(NotesSlideTest, notesSlideExistsFromStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<EntityExists> result = api->notesSlideExists(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_TRUE(result->isExists());
 }
 
 TEST_F(NotesSlideTest, notesSlideDownloadFromStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	HttpContent result = api->downloadNotesSlide(L"test.pptx", 1, L"png", boost::none, boost::none, L"password", L"TempSlidesSDK").get();
 	EXPECT_NE(nullptr, result.getData());
 }
 
 TEST_F(NotesSlideTest, notesSlideGetFromRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
 	std::shared_ptr<NotesSlide> notesSlide = api->getNotesSlideOnline(data, 1, L"password").get();
@@ -104,7 +104,7 @@ TEST_F(NotesSlideTest, notesSlideGetFromRequest) {
 }
 
 TEST_F(NotesSlideTest, notesSlideExistsFromRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
 	std::shared_ptr<EntityExists> result = api->notesSlideExistsOnline(data, 1, L"password").get();
@@ -112,7 +112,7 @@ TEST_F(NotesSlideTest, notesSlideExistsFromRequest) {
 }
 
 TEST_F(NotesSlideTest, notesSlideDownloadFromRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
 	HttpContent result = api->downloadNotesSlideOnline(data, 1, L"png", boost::none, boost::none, L"password").get();
@@ -120,7 +120,7 @@ TEST_F(NotesSlideTest, notesSlideDownloadFromRequest) {
 }
 
 TEST_F(NotesSlideTest, notesSlideShapes) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -157,7 +157,7 @@ TEST_F(NotesSlideTest, notesSlideShapes) {
 }
 
 TEST_F(NotesSlideTest, notesSlideParagraphs) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -193,7 +193,7 @@ TEST_F(NotesSlideTest, notesSlideParagraphs) {
 }
 
 TEST_F(NotesSlideTest, notesSlidePortions) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -232,7 +232,7 @@ TEST_F(NotesSlideTest, notesSlidePortions) {
 }
 
 TEST_F(NotesSlideTest, notesSlideCreate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<NotesSlide> dto(new NotesSlide());
 	dto->setText(L"Note text");
 	std::shared_ptr<NotesSlide> notesSlide = api->createNotesSlide(L"test.pptx", 1, dto, L"password", L"TempSlidesSDK").get();
@@ -240,7 +240,7 @@ TEST_F(NotesSlideTest, notesSlideCreate) {
 }
 
 TEST_F(NotesSlideTest, notesSlideUpdate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<NotesSlide> dto(new NotesSlide());
 	dto->setText(L"Updated note text");
 	std::shared_ptr<NotesSlide> notesSlide = api->updateNotesSlide(L"test.pptx", 1, dto, L"password", L"TempSlidesSDK").get();
@@ -248,7 +248,7 @@ TEST_F(NotesSlideTest, notesSlideUpdate) {
 }
 
 TEST_F(NotesSlideTest, notesSlideDelete) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Slide> slide = api->deleteNotesSlide(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(nullptr, slide->getNotesSlide());
 }

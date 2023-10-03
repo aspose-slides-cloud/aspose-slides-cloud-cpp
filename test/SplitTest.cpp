@@ -79,7 +79,7 @@ SlidesApi* SplitTest::api = nullptr;
 TestUtils* SplitTest::utils = nullptr;
 
 TEST_F(SplitTest, splitStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t password = L"password";
@@ -99,7 +99,7 @@ TEST_F(SplitTest, splitStorage) {
 }
 
 TEST_F(SplitTest, splitRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t password = L"password";
 
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
@@ -114,7 +114,7 @@ TEST_F(SplitTest, splitRequest) {
 }
 
 TEST_F(SplitTest, splitRequestToStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t password = L"password";
 
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
@@ -135,7 +135,7 @@ TEST_F(SplitTest, splitRequestToStorage) {
 }
 
 TEST_F(SplitTest, splitWithOptions) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t password = L"password";

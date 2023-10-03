@@ -167,6 +167,23 @@ public:
 	ASPOSE_DLL_EXPORT void setStopPreviousSound(bool value);
 	ASPOSE_DLL_EXPORT bool stopPreviousSoundIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetStopPreviousSound();
+	/// <summary>
+	/// This attribute specifies if the effect will rewind when done playing.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool isRewind() const;
+	ASPOSE_DLL_EXPORT void setRewind(bool value);
+	ASPOSE_DLL_EXPORT bool rewindIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetRewind();
+	/// <summary>
+	/// Defined an after animation color for effect.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getAfterAnimationType() const;
+	ASPOSE_DLL_EXPORT void setAfterAnimationType(utility::string_t value);
+	/// <summary>
+	/// Defined an after animation color for effect. Applied when the AfterAnimationType property is set to Color.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getAfterAnimationColor() const;
+	ASPOSE_DLL_EXPORT void setAfterAnimationColor(utility::string_t value);
 
 protected:
 	utility::string_t m_Type;
@@ -199,6 +216,10 @@ protected:
 	bool m_RepeatUntilNextClickIsSet;
 	bool m_StopPreviousSound;
 	bool m_StopPreviousSoundIsSet;
+	bool m_Rewind;
+	bool m_RewindIsSet;
+	utility::string_t m_AfterAnimationType;
+	utility::string_t m_AfterAnimationColor;
 };
 
 }

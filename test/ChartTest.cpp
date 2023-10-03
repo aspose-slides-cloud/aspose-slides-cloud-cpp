@@ -87,7 +87,7 @@ TEST_F(ChartTest, chartInit) {
 }
 
 TEST_F(ChartTest, chartGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<ShapeBase> result = api->getShape(L"test.pptx", 3, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(L"Chart", result->getType());
 	std::shared_ptr<Chart> chart = std::dynamic_pointer_cast<Chart>(result);
@@ -96,7 +96,7 @@ TEST_F(ChartTest, chartGet) {
 }
 
 TEST_F(ChartTest, chartCreate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Chart> chart(new Chart());
 	chart->setChartType(L"ClusteredColumn");
@@ -138,7 +138,7 @@ TEST_F(ChartTest, chartCreate) {
 }
 
 TEST_F(ChartTest, chartUpdate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Chart> chart(new Chart());
 	chart->setChartType(L"ClusteredColumn");
@@ -180,7 +180,7 @@ TEST_F(ChartTest, chartUpdate) {
 }
 
 TEST_F(ChartTest, chartSeriesCreate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<OneValueSeries> series(new OneValueSeries());
 	series->setName(L"Series3");
@@ -201,7 +201,7 @@ TEST_F(ChartTest, chartSeriesCreate) {
 }
 
 TEST_F(ChartTest, chartSeriesUpdate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<OneValueSeries> series(new OneValueSeries());
 	series->setName(L"Series3");
@@ -222,7 +222,7 @@ TEST_F(ChartTest, chartSeriesUpdate) {
 }
 
 TEST_F(ChartTest, chartSeriesDelete) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<ShapeBase> shape = api->deleteChartSeries(L"test.pptx", 3, 1, 2, L"password", L"TempSlidesSDK").get();
 	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(2, resultChart->getSeries().size());
@@ -230,7 +230,7 @@ TEST_F(ChartTest, chartSeriesDelete) {
 }
 
 TEST_F(ChartTest, chartCategoryCreate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<ChartCategory> category(new ChartCategory());
 	category->setValue(L"NewCategory");
@@ -251,7 +251,7 @@ TEST_F(ChartTest, chartCategoryCreate) {
 }
 
 TEST_F(ChartTest, chartCategoryUpdate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<ChartCategory> category(new ChartCategory());
 	category->setValue(L"NewCategory");
@@ -272,7 +272,7 @@ TEST_F(ChartTest, chartCategoryUpdate) {
 }
 
 TEST_F(ChartTest, chartCategoryDelete) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<ShapeBase> shape = api->deleteChartCategory(L"test.pptx", 3, 1, 2, L"password", L"TempSlidesSDK").get();
 	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(3, resultChart->getSeries().size());
@@ -282,7 +282,7 @@ TEST_F(ChartTest, chartCategoryDelete) {
 }
 
 TEST_F(ChartTest, chartDataPointCreate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<OneValueChartDataPoint> point(new OneValueChartDataPoint());
 	point->setValue(40);
@@ -298,7 +298,7 @@ TEST_F(ChartTest, chartDataPointCreate) {
 }
 
 TEST_F(ChartTest, chartDataPointUpdate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<OneValueChartDataPoint> point(new OneValueChartDataPoint());
 	point->setValue(40);
@@ -312,7 +312,7 @@ TEST_F(ChartTest, chartDataPointUpdate) {
 }
 
 TEST_F(ChartTest, chartDataPointDelete) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<ShapeBase> shape = api->deleteChartDataPoint(L"test.pptx", 3, 1, 2, 2, L"password", L"TempSlidesSDK").get();
 	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
@@ -324,7 +324,7 @@ TEST_F(ChartTest, chartDataPointDelete) {
 }
 
 TEST_F(ChartTest, chartSunburst) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Chart> chart(new Chart());
 	chart->setChartType(L"Sunburst");
@@ -363,7 +363,7 @@ TEST_F(ChartTest, chartSunburst) {
 }
 
 TEST_F(ChartTest, chartMultilevelCategoryAxis) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Chart> chart(new Chart());
 	chart->setChartType(L"ClusteredColumn");
@@ -421,7 +421,7 @@ TEST_F(ChartTest, chartMultilevelCategoryAxis) {
 }
 
 TEST_F(ChartTest, chartHideChartLegend) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
@@ -438,7 +438,7 @@ TEST_F(ChartTest, chartHideChartLegend) {
 }
 
 TEST_F(ChartTest, chartGridLinesFormat) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";

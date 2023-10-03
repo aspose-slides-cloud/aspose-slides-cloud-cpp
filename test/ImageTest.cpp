@@ -78,7 +78,7 @@ SlidesApi* ImageTest::api = nullptr;
 TestUtils* ImageTest::utils = nullptr;
 
 TEST_F(ImageTest, imageGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -89,7 +89,7 @@ TEST_F(ImageTest, imageGet) {
 }
 
 TEST_F(ImageTest, imageDownloadAllStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -101,7 +101,7 @@ TEST_F(ImageTest, imageDownloadAllStorage) {
 }
 
 TEST_F(ImageTest, imageDownloadAllRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t password = L"password";
 
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
@@ -114,7 +114,7 @@ TEST_F(ImageTest, imageDownloadAllRequest) {
 }
 
 TEST_F(ImageTest, imageDownloadStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -135,7 +135,7 @@ TEST_F(ImageTest, imageDownloadStorage) {
 }
 
 TEST_F(ImageTest, imageDownloadRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t password = L"password";
 	int index = 1;
 

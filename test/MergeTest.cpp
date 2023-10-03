@@ -78,7 +78,7 @@ SlidesApi* MergeTest::api = nullptr;
 TestUtils* MergeTest::utils = nullptr;
 
 TEST_F(MergeTest, mergeStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t fileName2 = L"test-unprotected.pptx";
 	api->copyFile(L"TempTests/" + fileName2, folderName + L"/" + fileName2).get();
@@ -93,7 +93,7 @@ TEST_F(MergeTest, mergeStorage) {
 }
 
 TEST_F(MergeTest, mergeOrderedStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t fileName2 = L"test-unprotected.pptx";
 	api->copyFile(L"TempTests/" + fileName2, folderName + L"/" + fileName2).get();
@@ -111,7 +111,7 @@ TEST_F(MergeTest, mergeOrderedStorage) {
 }
 
 TEST_F(MergeTest, mergeRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<HttpContent> data1 = std::make_shared<HttpContent>();
 	data1->setData(std::make_shared<std::ifstream>(L"TestData/TemplateCV.pptx", std::ios::binary));
@@ -122,7 +122,7 @@ TEST_F(MergeTest, mergeRequest) {
 }
 
 TEST_F(MergeTest, mergeAndSaveRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t outPath = L"TestData/out.pptx";
 	std::shared_ptr<HttpContent> data1 = std::make_shared<HttpContent>();
 	data1->setData(std::make_shared<std::ifstream>(L"TestData/TemplateCV.pptx", std::ios::binary));
@@ -134,7 +134,7 @@ TEST_F(MergeTest, mergeAndSaveRequest) {
 }
 
 TEST_F(MergeTest, mergeOrderedRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<HttpContent> data1 = std::make_shared<HttpContent>();
 	data1->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
@@ -154,7 +154,7 @@ TEST_F(MergeTest, mergeOrderedRequest) {
 }
 
 TEST_F(MergeTest, mergeOrderedCombined) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test-unprotected.pptx", std::ios::binary));
@@ -173,7 +173,7 @@ TEST_F(MergeTest, mergeOrderedCombined) {
 }
 
 TEST_F(MergeTest, mergeOrderedUrl) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<OrderedMergeRequest> request(new OrderedMergeRequest());
 	std::shared_ptr<PresentationToMerge> presentation1(new PresentationToMerge());

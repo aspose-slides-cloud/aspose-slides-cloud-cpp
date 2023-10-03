@@ -45,6 +45,7 @@ Effect::Effect()
 	m_RepeatUntilEndSlideIsSet = false;
 	m_RepeatUntilNextClickIsSet = false;
 	m_StopPreviousSoundIsSet = false;
+	m_RewindIsSet = false;
 }
 
 Effect::~Effect()
@@ -369,6 +370,49 @@ void Effect::unsetStopPreviousSound()
 	m_StopPreviousSoundIsSet = false;
 }
 
+bool Effect::isRewind() const
+{
+	return m_Rewind;
+}
+
+void Effect::setRewind(bool value)
+{
+	m_Rewind = value;
+	m_RewindIsSet = true;
+}
+
+bool Effect::rewindIsSet() const
+{
+	return m_RewindIsSet;
+}
+
+void Effect::unsetRewind()
+{
+	m_RewindIsSet = false;
+}
+
+utility::string_t Effect::getAfterAnimationType() const
+{
+	return m_AfterAnimationType;
+}
+
+void Effect::setAfterAnimationType(utility::string_t value)
+{
+	m_AfterAnimationType = value;
+	
+}
+
+utility::string_t Effect::getAfterAnimationColor() const
+{
+	return m_AfterAnimationColor;
+}
+
+void Effect::setAfterAnimationColor(utility::string_t value)
+{
+	m_AfterAnimationColor = value;
+	
+}
+
 web::json::value Effect::toJson() const
 {
 	web::json::value val = web::json::value::object();
@@ -440,6 +484,18 @@ web::json::value Effect::toJson() const
 	if(m_StopPreviousSoundIsSet)
 	{
 		val[utility::conversions::to_string_t("StopPreviousSound")] = ModelBase::toJson(m_StopPreviousSound);
+	}
+	if(m_RewindIsSet)
+	{
+		val[utility::conversions::to_string_t("Rewind")] = ModelBase::toJson(m_Rewind);
+	}
+	if (!m_AfterAnimationType.empty())
+	{
+		val[utility::conversions::to_string_t("AfterAnimationType")] = ModelBase::toJson(m_AfterAnimationType);
+	}
+	if (!m_AfterAnimationColor.empty())
+	{
+		val[utility::conversions::to_string_t("AfterAnimationColor")] = ModelBase::toJson(m_AfterAnimationColor);
 	}
 	return val;
 }
@@ -535,6 +591,21 @@ void Effect::fromJson(web::json::value& val)
 	if(jsonForStopPreviousSound != nullptr && !jsonForStopPreviousSound->is_null())
 	{
 		setStopPreviousSound(ModelBase::boolFromJson(*jsonForStopPreviousSound));
+	}
+	web::json::value* jsonForRewind = ModelBase::getField(val, "Rewind");
+	if(jsonForRewind != nullptr && !jsonForRewind->is_null())
+	{
+		setRewind(ModelBase::boolFromJson(*jsonForRewind));
+	}
+	web::json::value* jsonForAfterAnimationType = ModelBase::getField(val, "AfterAnimationType");
+	if(jsonForAfterAnimationType != nullptr && !jsonForAfterAnimationType->is_null())
+	{
+		setAfterAnimationType(ModelBase::stringFromJson(*jsonForAfterAnimationType));
+	}
+	web::json::value* jsonForAfterAnimationColor = ModelBase::getField(val, "AfterAnimationColor");
+	if(jsonForAfterAnimationColor != nullptr && !jsonForAfterAnimationColor->is_null())
+	{
+		setAfterAnimationColor(ModelBase::stringFromJson(*jsonForAfterAnimationColor));
 	}
 }
 

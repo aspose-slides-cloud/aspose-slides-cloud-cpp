@@ -80,7 +80,7 @@ SlidesApi* ConvertTest::api = nullptr;
 TestUtils* ConvertTest::utils = nullptr;
 
 TEST_F(ConvertTest, convertPostFromRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t password = L"password";
 
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
@@ -99,7 +99,7 @@ TEST_F(ConvertTest, convertPostFromRequest) {
 }
 
 TEST_F(ConvertTest, convertPutFromRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t outPath = L"TempSlidesSDK/test.pptx";
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
@@ -109,13 +109,13 @@ TEST_F(ConvertTest, convertPutFromRequest) {
 }
 
 TEST_F(ConvertTest, convertPostFromStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	HttpContent result = api->downloadPresentation(L"test.pptx", L"html5", nullptr, L"password", L"TempSlidesSDK").get();
 	EXPECT_NE(nullptr, result.getData());
 }
 
 TEST_F(ConvertTest, convertPutFromStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t outPath = L"TempSlidesSDK/test.pptx";
 	api->savePresentation(L"test.pptx", L"pdf", outPath, nullptr, L"password", L"TempSlidesSDK").wait();
 	std::shared_ptr<ObjectExist> exists = api->objectExists(outPath).get();
@@ -123,7 +123,7 @@ TEST_F(ConvertTest, convertPutFromStorage) {
 }
 
 TEST_F(ConvertTest, convertWithOptionsFromRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t password = L"password";
 
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
@@ -144,7 +144,7 @@ TEST_F(ConvertTest, convertWithOptionsFromRequest) {
 }
 
 TEST_F(ConvertTest, convertWithOptionsFromStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -166,7 +166,7 @@ TEST_F(ConvertTest, convertWithOptionsFromStorage) {
 }
 
 TEST_F(ConvertTest, convertSlidePostFromRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
 	HttpContent result = api->downloadSlideOnline(data, 1, L"pdf", boost::none, boost::none, L"password").get();
@@ -174,7 +174,7 @@ TEST_F(ConvertTest, convertSlidePostFromRequest) {
 }
 
 TEST_F(ConvertTest, convertSlidePutFromRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t outPath = L"TempSlidesSDK/test.pptx";
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
@@ -184,13 +184,13 @@ TEST_F(ConvertTest, convertSlidePutFromRequest) {
 }
 
 TEST_F(ConvertTest, convertSlidePostFromStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	HttpContent result = api->downloadSlide(L"test.pptx", 1, L"pdf", nullptr, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
 	EXPECT_NE(nullptr, result.getData());
 }
 
 TEST_F(ConvertTest, convertSlidePutFromStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t outPath = L"TempSlidesSDK/test.pptx";
 	api->saveSlide(L"test.pptx", 1, L"pdf", outPath, nullptr, boost::none, boost::none, L"password", L"TempSlidesSDK").wait();
 	std::shared_ptr<ObjectExist> exists = api->objectExists(outPath).get();
@@ -198,7 +198,7 @@ TEST_F(ConvertTest, convertSlidePutFromStorage) {
 }
 
 TEST_F(ConvertTest, convertSlideWithOptionsFromRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t password = L"password";
 	int slideIndex = 1;
 
@@ -220,7 +220,7 @@ TEST_F(ConvertTest, convertSlideWithOptionsFromRequest) {
 }
 
 TEST_F(ConvertTest, convertSlideWithOptionsFromStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -242,7 +242,7 @@ TEST_F(ConvertTest, convertSlideWithOptionsFromStorage) {
 }
 
 TEST_F(ConvertTest, convertShapePostFromRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
 	HttpContent result = api->downloadShapeOnline(data, 1, 3, L"png", boost::none, boost::none, L"", L"password").get();
@@ -250,7 +250,7 @@ TEST_F(ConvertTest, convertShapePostFromRequest) {
 }
 
 TEST_F(ConvertTest, convertShapePutFromRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t outPath = L"TempSlidesSDK/test.pptx";
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
@@ -260,19 +260,19 @@ TEST_F(ConvertTest, convertShapePutFromRequest) {
 }
 
 TEST_F(ConvertTest, convertShapePostFromStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	HttpContent result = api->downloadShape(L"test.pptx", 1, 1, L"png", nullptr, boost::none, boost::none, L"", L"password", L"TempSlidesSDK").get();
 	EXPECT_NE(nullptr, result.getData());
 }
 
 TEST_F(ConvertTest, convertSubshapePostFromStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	HttpContent result = api->downloadShape(L"test.pptx", 1, 4, L"png", nullptr, boost::none, boost::none, L"", L"password", L"TempSlidesSDK", L"", L"1").get();
 	EXPECT_NE(nullptr, result.getData());
 }
 
 TEST_F(ConvertTest, convertShapePutFromStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t outPath = L"TempSlidesSDK/test.png";
 	api->saveShape(L"test.pptx", 1, 1, L"png", outPath, nullptr, boost::none, boost::none, L"", L"password", L"TempSlidesSDK").wait();
 	std::shared_ptr<ObjectExist> exists = api->objectExists(outPath).get();
@@ -280,7 +280,7 @@ TEST_F(ConvertTest, convertShapePutFromStorage) {
 }
 
 TEST_F(ConvertTest, convertSubshapePutFromStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t outPath = L"TempSlidesSDK/test.png";
 	api->saveShape(L"test.pptx", 1, 4, L"png", outPath, nullptr, boost::none, boost::none, L"", L"password", L"TempSlidesSDK", L"", L"1").wait();
 	std::shared_ptr<ObjectExist> exists = api->objectExists(outPath).get();
@@ -288,7 +288,7 @@ TEST_F(ConvertTest, convertSubshapePutFromStorage) {
 }
 
 TEST_F(ConvertTest, convertWithFallbackRules) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t outPath = L"TempSlidesSDK/test.pptx";
 	int startUnicodeIndex = 0x0B80;
 	int endUnicodeIndex = 0x0BFF;

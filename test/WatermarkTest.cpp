@@ -78,7 +78,7 @@ SlidesApi* WatermarkTest::api = nullptr;
 TestUtils* WatermarkTest::utils = nullptr;
 
 TEST_F(WatermarkTest, watermarkTextStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -103,7 +103,7 @@ TEST_F(WatermarkTest, watermarkTextStorage) {
 }
 
 TEST_F(WatermarkTest, watermarkDtoStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -130,7 +130,7 @@ TEST_F(WatermarkTest, watermarkDtoStorage) {
 }
 
 TEST_F(WatermarkTest, watermarkImageStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -155,7 +155,7 @@ TEST_F(WatermarkTest, watermarkImageStorage) {
 }
 
 TEST_F(WatermarkTest, watermarkImageDtoStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -184,7 +184,7 @@ TEST_F(WatermarkTest, watermarkImageDtoStorage) {
 }
 
 TEST_F(WatermarkTest, watermarkTextRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t password = L"password";
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
@@ -211,7 +211,7 @@ TEST_F(WatermarkTest, watermarkTextRequest) {
 }
 
 TEST_F(WatermarkTest, watermarkTextDtoRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t password = L"password";
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
@@ -240,7 +240,7 @@ TEST_F(WatermarkTest, watermarkTextDtoRequest) {
 }
 
 TEST_F(WatermarkTest, watermarkImageRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t password = L"password";
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
@@ -269,7 +269,7 @@ TEST_F(WatermarkTest, watermarkImageRequest) {
 }
 
 TEST_F(WatermarkTest, watermarkImageDtoRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t password = L"password";
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));

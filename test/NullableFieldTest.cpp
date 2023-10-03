@@ -79,7 +79,7 @@ SlidesApi* NullableFieldTest::api = nullptr;
 TestUtils* NullableFieldTest::utils = nullptr;
 
 TEST_F(NullableFieldTest, nullableProperties) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";

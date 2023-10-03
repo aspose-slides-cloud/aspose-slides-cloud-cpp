@@ -77,7 +77,7 @@ SlidesApi* TextFormatTest::api = nullptr;
 TestUtils* TextFormatTest::utils = nullptr;
 
 TEST_F(TextFormatTest, textFormat3D) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Shape> dto(new Shape());
 	dto->setShapeType(L"Rectangle");
 	dto->setX(100);

@@ -78,31 +78,31 @@ SlidesApi* PortionTest::api = nullptr;
 TestUtils* PortionTest::utils = nullptr;
 
 TEST_F(PortionTest, portionsGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portions> portions = api->getPortions(L"test.pptx", 6, 2, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(2, portions->getItems().size());
 }
 
 TEST_F(PortionTest, portionsGetForSubshape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portions> portions = api->getPortions(L"test.pptx", 6, 3, 1, L"password", L"TempSlidesSDK", L"", L"1").get();
 	EXPECT_EQ(2, portions->getItems().size());
 }
 
 TEST_F(PortionTest, portionGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portion> portion = api->getPortion(L"test.pptx", 6, 2, 1, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(L"Paragraph 1 portion 1 ", portion->getText());
 }
 
 TEST_F(PortionTest, portionGetForSubshape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portion> portion = api->getPortion(L"test.pptx", 6, 3, 1, 1, L"password", L"TempSlidesSDK", L"", L"1").get();
 	EXPECT_EQ(L"Subshape Paragraph 1 portion 1 ", portion->getText());
 }
 
 TEST_F(PortionTest, portionCreate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Portion> dto(new Portion());
 	dto->setText(L"portion 1");
@@ -121,7 +121,7 @@ TEST_F(PortionTest, portionCreate) {
 }
 
 TEST_F(PortionTest, portionCreateForSubshape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Portion> dto(new Portion());
 	dto->setText(L"portion 1");
@@ -140,7 +140,7 @@ TEST_F(PortionTest, portionCreateForSubshape) {
 }
 
 TEST_F(PortionTest, portionUpdate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Portion> dto(new Portion());
 	dto->setText(L"portion 1");
@@ -159,7 +159,7 @@ TEST_F(PortionTest, portionUpdate) {
 }
 
 TEST_F(PortionTest, portionUpdateForSubshape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Portion> dto(new Portion());
 	dto->setText(L"portion 1");
@@ -178,43 +178,43 @@ TEST_F(PortionTest, portionUpdateForSubshape) {
 }
 
 TEST_F(PortionTest, portionsDelete) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portions> portions = api->deletePortions(L"test.pptx", 6, 2, 1, {}, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(0, portions->getItems().size());
 }
 
 TEST_F(PortionTest, portionsDeleteByIndices) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portions> portions = api->deletePortions(L"test.pptx", 6, 2, 1, { 1 }, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, portions->getItems().size());
 }
 
 TEST_F(PortionTest, portionsDeleteForSubshape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portions> portions = api->deletePortions(L"test.pptx", 6, 3, 1, {}, L"password", L"TempSlidesSDK", L"", L"1").get();
 	EXPECT_EQ(0, portions->getItems().size());
 }
 
 TEST_F(PortionTest, portionsDeleteByIndicesForSubshape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portions> portions = api->deletePortions(L"test.pptx", 6, 3, 1, { 1 }, L"password", L"TempSlidesSDK", L"", L"1").get();
 	EXPECT_EQ(1, portions->getItems().size());
 }
 
 TEST_F(PortionTest, portionDelete) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portions> portions = api->deletePortion(L"test.pptx", 6, 2, 1, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, portions->getItems().size());
 }
 
 TEST_F(PortionTest, portionDeleteForSubshape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portions> portions = api->deletePortion(L"test.pptx", 6, 3, 1, 1, L"password", L"TempSlidesSDK", L"", L"1").get();
 	EXPECT_EQ(1, portions->getItems().size());
 }
 
 TEST_F(PortionTest, portionGetRect) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<TextBounds> textBounds = api->getPortionRectangle(L"test.pptx", 6, 2, 1, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_GT(textBounds->getX(), 0);
 	EXPECT_GT(textBounds->getY(), 0);
@@ -223,13 +223,13 @@ TEST_F(PortionTest, portionGetRect) {
 }
 
 TEST_F(PortionTest, portionGetEffective) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portion> portion = api->getPortionEffective(L"test.pptx", 6, 2, 1, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(18, portion->getFontHeight());
 }
 
 TEST_F(PortionTest, portionGetEffectiveForSubshape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portion> portion = api->getPortionEffective(L"test.pptx", 6, 3, 1, 1, L"password", L"TempSlidesSDK", L"", L"1").get();
 	EXPECT_EQ(18, portion->getFontHeight());
 }

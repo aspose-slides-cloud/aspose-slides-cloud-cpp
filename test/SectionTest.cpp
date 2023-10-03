@@ -77,13 +77,13 @@ SlidesApi* SectionTest::api = nullptr;
 TestUtils* SectionTest::utils = nullptr;
 
 TEST_F(SectionTest, sectionsGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Sections> result = api->getSections(L"test.pptx", L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(3, result->getSectionList().size());
 }
 
 TEST_F(SectionTest, sectionsReplace) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Sections> dto(new Sections());
 	std::shared_ptr<Section> section1(new Section());
@@ -99,13 +99,13 @@ TEST_F(SectionTest, sectionsReplace) {
 }
 
 TEST_F(SectionTest, sectionsPost) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Sections> result = api->createSection(L"test.pptx", L"NewSection", 5, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(4, result->getSectionList().size());
 }
 
 TEST_F(SectionTest, sectionsPut) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	int sectionIndex = 2;
 	utility::string_t sectionName = L"UpdatedSection";
 	std::shared_ptr<Sections> result = api->updateSection(L"test.pptx", sectionIndex, sectionName, L"password", L"TempSlidesSDK").get();
@@ -114,25 +114,25 @@ TEST_F(SectionTest, sectionsPut) {
 }
 
 TEST_F(SectionTest, sectionsMove) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Sections> result = api->moveSection(L"test.pptx", 1, 2, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(3, result->getSectionList().size());
 }
 
 TEST_F(SectionTest, sectionsClear) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Sections> result = api->deleteSections(L"test.pptx", {}, boost::none, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(0, result->getSectionList().size());
 }
 
 TEST_F(SectionTest, sectionsDeleteMany) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Sections> result = api->deleteSections(L"test.pptx", { 2, 3 }, boost::none, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, result->getSectionList().size());
 }
 
 TEST_F(SectionTest, sectionsDelete) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Sections> result = api->deleteSection(L"test.pptx", 2, boost::none, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(2, result->getSectionList().size());
 }

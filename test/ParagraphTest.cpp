@@ -78,31 +78,31 @@ SlidesApi* ParagraphTest::api = nullptr;
 TestUtils* ParagraphTest::utils = nullptr;
 
 TEST_F(ParagraphTest, paragraphGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Paragraph> paragraph = api->getParagraph(L"test.pptx", 6, 2, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(2, paragraph->getPortionList().size());
 }
 
 TEST_F(ParagraphTest, paragraphsGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Paragraphs> paragraphs = api->getParagraphs(L"test.pptx", 6, 2, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(2, paragraphs->getParagraphLinks().size());
 }
 
 TEST_F(ParagraphTest, paragraphGetForSubshape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Paragraph> paragraph = api->getParagraph(L"test.pptx", 6, 3, 1, L"password", L"TempSlidesSDK", L"", L"1").get();
 	EXPECT_EQ(2, paragraph->getPortionList().size());
 }
 
 TEST_F(ParagraphTest, paragraphsGetForSubshape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Paragraphs> paragraphs = api->getParagraphs(L"test.pptx", 6, 3, L"password", L"TempSlidesSDK", L"", L"1").get();
 	EXPECT_EQ(2, paragraphs->getParagraphLinks().size());
 }
 
 TEST_F(ParagraphTest, paragraphCreate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Paragraph> dto(new Paragraph());
 	dto->setMarginLeft(2);
@@ -115,7 +115,7 @@ TEST_F(ParagraphTest, paragraphCreate) {
 }
 
 TEST_F(ParagraphTest, paragraphCreateWithPortions) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Portion> portion1(new Portion());
 	portion1->setText(L"Portion1");
@@ -128,7 +128,7 @@ TEST_F(ParagraphTest, paragraphCreateWithPortions) {
 }
 
 TEST_F(ParagraphTest, paragraphCreateForSubshape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Paragraph> dto(new Paragraph());
 	dto->setMarginLeft(2);
@@ -141,7 +141,7 @@ TEST_F(ParagraphTest, paragraphCreateForSubshape) {
 }
 
 TEST_F(ParagraphTest, paragraphUpdate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Paragraph> dto(new Paragraph());
 	dto->setMarginLeft(2);
@@ -154,7 +154,7 @@ TEST_F(ParagraphTest, paragraphUpdate) {
 }
 
 TEST_F(ParagraphTest, paragraphUpdateForSubshape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Paragraph> dto(new Paragraph());
 	dto->setMarginLeft(2);
@@ -167,43 +167,43 @@ TEST_F(ParagraphTest, paragraphUpdateForSubshape) {
 }
 
 TEST_F(ParagraphTest, paragraphsDelete) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Paragraphs> paragraphs = api->deleteParagraphs(L"test.pptx", 6, 2, {}, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(0, paragraphs->getParagraphLinks().size());
 }
 
 TEST_F(ParagraphTest, paragraphsDeleteByIndices) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Paragraphs> paragraphs = api->deleteParagraphs(L"test.pptx", 6, 2, { 2 }, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, paragraphs->getParagraphLinks().size());
 }
 
 TEST_F(ParagraphTest, paragraphsDeleteForSubshape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Paragraphs> paragraphs = api->deleteParagraphs(L"test.pptx", 6, 3, {}, L"password", L"TempSlidesSDK", L"", L"1").get();
 	EXPECT_EQ(0, paragraphs->getParagraphLinks().size());
 }
 
 TEST_F(ParagraphTest, paragraphsDeleteByIndicesForSubshape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Paragraphs> paragraphs = api->deleteParagraphs(L"test.pptx", 6, 3, { 1 }, L"password", L"TempSlidesSDK", L"", L"1").get();
 	EXPECT_EQ(1, paragraphs->getParagraphLinks().size());
 }
 
 TEST_F(ParagraphTest, paragraphDelete) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Paragraphs> paragraphs = api->deleteParagraph(L"test.pptx", 6, 2, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, paragraphs->getParagraphLinks().size());
 }
 
 TEST_F(ParagraphTest, paragraphDeleteForSubshape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Paragraphs> paragraphs = api->deleteParagraph(L"test.pptx", 6, 3, 1, L"password", L"TempSlidesSDK", L"", L"1").get();
 	EXPECT_EQ(1, paragraphs->getParagraphLinks().size());
 }
 
 TEST_F(ParagraphTest, paragraphGetRect) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<TextBounds> textBounds = api->getParagraphRectangle(L"test.pptx", 6, 2, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_GT(textBounds->getX(), 0);
 	EXPECT_GT(textBounds->getY(), 0);
@@ -212,7 +212,7 @@ TEST_F(ParagraphTest, paragraphGetRect) {
 }
 
 TEST_F(ParagraphTest, paragraphDefaultPortionFormat) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Paragraph> dto(new Paragraph());
 	std::shared_ptr<PortionFormat> portionFormat(new PortionFormat());
@@ -231,13 +231,13 @@ TEST_F(ParagraphTest, paragraphDefaultPortionFormat) {
 }
 
 TEST_F(ParagraphTest, paragraphGetEffective) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Paragraph> paragraph = api->getParagraphEffective(L"test.pptx", 6, 2, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(72, paragraph->getDefaultTabSize());
 }
 
 TEST_F(ParagraphTest, paragraphGetEffectiveForSubshape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Paragraph> paragraph = api->getParagraphEffective(L"test.pptx", 6, 3, 1, L"password", L"TempSlidesSDK", L"", L"1").get();
 	EXPECT_EQ(72, paragraph->getDefaultTabSize());
 }

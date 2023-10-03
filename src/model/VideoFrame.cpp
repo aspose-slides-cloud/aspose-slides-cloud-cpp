@@ -37,6 +37,8 @@ VideoFrame::VideoFrame()
 	m_HideAtShowingIsSet = false;
 	m_PlayLoopModeIsSet = false;
 	m_RewindVideoIsSet = false;
+	m_TrimFromStartIsSet = false;
+	m_TrimFromEndIsSet = false;
 	setType(L"VideoFrame");
 }
 
@@ -172,6 +174,48 @@ void VideoFrame::setPictureFillFormat(std::shared_ptr<PictureFill> value)
 	
 }
 
+double VideoFrame::getTrimFromStart() const
+{
+	return m_TrimFromStart;
+}
+
+void VideoFrame::setTrimFromStart(double value)
+{
+	m_TrimFromStart = value;
+	m_TrimFromStartIsSet = true;
+}
+
+bool VideoFrame::trimFromStartIsSet() const
+{
+	return m_TrimFromStartIsSet;
+}
+
+void VideoFrame::unsetTrimFromStart()
+{
+	m_TrimFromStartIsSet = false;
+}
+
+double VideoFrame::getTrimFromEnd() const
+{
+	return m_TrimFromEnd;
+}
+
+void VideoFrame::setTrimFromEnd(double value)
+{
+	m_TrimFromEnd = value;
+	m_TrimFromEndIsSet = true;
+}
+
+bool VideoFrame::trimFromEndIsSet() const
+{
+	return m_TrimFromEndIsSet;
+}
+
+void VideoFrame::unsetTrimFromEnd()
+{
+	m_TrimFromEndIsSet = false;
+}
+
 web::json::value VideoFrame::toJson() const
 {
 	web::json::value val = this->GeometryShape::toJson();
@@ -206,6 +250,14 @@ web::json::value VideoFrame::toJson() const
 	if (m_PictureFillFormat != nullptr)
 	{
 		val[utility::conversions::to_string_t("PictureFillFormat")] = ModelBase::toJson(m_PictureFillFormat);
+	}
+	if(m_TrimFromStartIsSet)
+	{
+		val[utility::conversions::to_string_t("TrimFromStart")] = ModelBase::toJson(m_TrimFromStart);
+	}
+	if(m_TrimFromEndIsSet)
+	{
+		val[utility::conversions::to_string_t("TrimFromEnd")] = ModelBase::toJson(m_TrimFromEnd);
 	}
 	return val;
 }
@@ -253,6 +305,16 @@ void VideoFrame::fromJson(web::json::value& val)
 	{
 		std::shared_ptr<void> instanceForPictureFillFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"PictureFill", *jsonForPictureFillFormat);
 		setPictureFillFormat(std::static_pointer_cast<PictureFill>(instanceForPictureFillFormat));
+	}
+	web::json::value* jsonForTrimFromStart = ModelBase::getField(val, "TrimFromStart");
+	if(jsonForTrimFromStart != nullptr && !jsonForTrimFromStart->is_null() && jsonForTrimFromStart->is_number())
+	{
+		setTrimFromStart(ModelBase::doubleFromJson(*jsonForTrimFromStart));
+	}
+	web::json::value* jsonForTrimFromEnd = ModelBase::getField(val, "TrimFromEnd");
+	if(jsonForTrimFromEnd != nullptr && !jsonForTrimFromEnd->is_null() && jsonForTrimFromEnd->is_number())
+	{
+		setTrimFromEnd(ModelBase::doubleFromJson(*jsonForTrimFromEnd));
 	}
 }
 

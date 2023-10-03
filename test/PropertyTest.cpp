@@ -78,7 +78,7 @@ SlidesApi* PropertyTest::api = nullptr;
 TestUtils* PropertyTest::utils = nullptr;
 
 TEST_F(PropertyTest, propertyBuiltin) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -103,7 +103,7 @@ TEST_F(PropertyTest, propertyBuiltin) {
 }
 
 TEST_F(PropertyTest, propertyCustom) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -129,7 +129,7 @@ TEST_F(PropertyTest, propertyCustom) {
 }
 
 TEST_F(PropertyTest, propertyBulkUpdate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -155,7 +155,7 @@ TEST_F(PropertyTest, propertyBulkUpdate) {
 }
 
 TEST_F(PropertyTest, propertySlideProperties) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -169,7 +169,7 @@ TEST_F(PropertyTest, propertySlideProperties) {
 }
 
 TEST_F(PropertyTest, propertySlideSizePreset) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<SlideProperties> dto(new SlideProperties());
 	dto->setSizeType(L"B4IsoPaper");
 	std::shared_ptr<SlideProperties> result = api->setSlideProperties(L"test.pptx", dto, L"password", L"TempSlidesSDK").get();
@@ -179,7 +179,7 @@ TEST_F(PropertyTest, propertySlideSizePreset) {
 }
 
 TEST_F(PropertyTest, propertySlideSizeCustom) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<SlideProperties> dto(new SlideProperties());
 	dto->setWidth(800);
 	dto->setHeight(500);
@@ -190,7 +190,7 @@ TEST_F(PropertyTest, propertySlideSizeCustom) {
 }
 
 TEST_F(PropertyTest, protection) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -204,7 +204,7 @@ TEST_F(PropertyTest, protection) {
 }
 
 TEST_F(PropertyTest, protectionDelete) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<ProtectionProperties> result = api->deleteProtection(L"test.pptx", L"password", L"TempSlidesSDK").get();
 	EXPECT_FALSE(result->isIsEncrypted());
 	EXPECT_FALSE(result->isReadOnlyRecommended());
@@ -212,7 +212,7 @@ TEST_F(PropertyTest, protectionDelete) {
 }
 
 TEST_F(PropertyTest, protectionOnline) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
@@ -231,7 +231,7 @@ TEST_F(PropertyTest, protectionOnline) {
 }
 
 TEST_F(PropertyTest, protectionDeleteOnline) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
@@ -248,13 +248,13 @@ TEST_F(PropertyTest, protectionDeleteOnline) {
 }
 
 TEST_F(PropertyTest, viewPropertiesGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<ViewProperties> result = api->getViewProperties(L"test.pptx", L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(L"True", result->getShowComments());
 }
 
 TEST_F(PropertyTest, viewPropertiesSet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<ViewProperties> dto(new ViewProperties());
 	dto->setShowComments(L"False");
 	std::shared_ptr<CommonSlideViewProperties> slideDto(new CommonSlideViewProperties());
@@ -266,7 +266,7 @@ TEST_F(PropertyTest, viewPropertiesSet) {
 }
 
 TEST_F(PropertyTest, protectionCheck) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	std::shared_ptr<ProtectionProperties> result = api->getProtectionProperties(fileName, L"", folderName).get();

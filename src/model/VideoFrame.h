@@ -110,6 +110,20 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::shared_ptr<PictureFill> getPictureFillFormat() const;
 	ASPOSE_DLL_EXPORT void setPictureFillFormat(std::shared_ptr<PictureFill> value);
+	/// <summary>
+	/// Trim start [ms]
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getTrimFromStart() const;
+	ASPOSE_DLL_EXPORT void setTrimFromStart(double value);
+	ASPOSE_DLL_EXPORT bool trimFromStartIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetTrimFromStart();
+	/// <summary>
+	/// Trim end [ms]
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getTrimFromEnd() const;
+	ASPOSE_DLL_EXPORT void setTrimFromEnd(double value);
+	ASPOSE_DLL_EXPORT bool trimFromEndIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetTrimFromEnd();
 
 protected:
 	bool m_FullScreenMode;
@@ -124,6 +138,10 @@ protected:
 	utility::string_t m_Volume;
 	utility::string_t m_Base64Data;
 	std::shared_ptr<PictureFill> m_PictureFillFormat;
+	double m_TrimFromStart;
+	bool m_TrimFromStartIsSet;
+	double m_TrimFromEnd;
+	bool m_TrimFromEndIsSet;
 };
 
 }

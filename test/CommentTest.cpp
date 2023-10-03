@@ -80,7 +80,7 @@ SlidesApi* CommentTest::api = nullptr;
 TestUtils* CommentTest::utils = nullptr;
 
 TEST_F(CommentTest, commentCreate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<SlideComment> dto(new SlideComment());
 	dto->setText(L"Comment text");
@@ -98,7 +98,7 @@ TEST_F(CommentTest, commentCreate) {
 }
 
 TEST_F(CommentTest, commentCreateOnline) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<SlideComment> dto(new SlideComment());
 	dto->setText(L"Comment text");
@@ -115,7 +115,7 @@ TEST_F(CommentTest, commentCreateOnline) {
 }
 
 TEST_F(CommentTest, commentsGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<SlideComments> comments = api->getSlideComments(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(2, comments->getList().size());
@@ -123,7 +123,7 @@ TEST_F(CommentTest, commentsGet) {
 }
 
 TEST_F(CommentTest, commentsDelete) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -134,7 +134,7 @@ TEST_F(CommentTest, commentsDelete) {
 }
 
 TEST_F(CommentTest, commentsDeleteOnline) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
@@ -143,7 +143,7 @@ TEST_F(CommentTest, commentsDeleteOnline) {
 }
 
 TEST_F(CommentTest, commentsDeleteForSlide) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -155,7 +155,7 @@ TEST_F(CommentTest, commentsDeleteForSlide) {
 }
 
 TEST_F(CommentTest, commentsDeleteForSlideOnline) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
@@ -164,7 +164,7 @@ TEST_F(CommentTest, commentsDeleteForSlideOnline) {
 }
 
 TEST_F(CommentTest, commentCreateModern) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<SlideModernComment> dto(new SlideModernComment());
 	dto->setText(L"Comment text");
@@ -184,7 +184,7 @@ TEST_F(CommentTest, commentCreateModern) {
 }
 
 TEST_F(CommentTest, commentCreateModernForShape) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<SlideModernComment> dto(new SlideModernComment());
 	dto->setText(L"Comment text");

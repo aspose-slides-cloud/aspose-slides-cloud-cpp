@@ -78,7 +78,7 @@ SlidesApi* ShapeFormatTest::api = nullptr;
 TestUtils* ShapeFormatTest::utils = nullptr;
 
 TEST_F(ShapeFormatTest, shapeFormatLine) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -96,7 +96,7 @@ TEST_F(ShapeFormatTest, shapeFormatLine) {
 }
 
 TEST_F(ShapeFormatTest, shapeFormatFill) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -112,7 +112,7 @@ TEST_F(ShapeFormatTest, shapeFormatFill) {
 }
 
 TEST_F(ShapeFormatTest, shapeFormatEffect) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -133,7 +133,7 @@ TEST_F(ShapeFormatTest, shapeFormatEffect) {
 }
 
 TEST_F(ShapeFormatTest, shapeFormat3D) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";

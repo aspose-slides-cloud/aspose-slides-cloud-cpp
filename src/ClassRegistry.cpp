@@ -290,6 +290,28 @@ std::shared_ptr<void> ClassRegistry::deserialize(utility::string_t className, we
 	return deserializeSubclass(subclassName, json);
 }
 
+bool ClassRegistry::isClass(utility::string_t className)
+{
+	return s_determiners.count(className);
+}
+
+bool ClassRegistry::isSubclass(utility::string_t subclassName, utility::string_t className)
+{
+	if (subclassName == className)
+	{
+		return true;
+	}
+	std::map<utility::string_t, utility::string_t>::iterator itHierarchy;
+	for (itHierarchy = s_hierarchy.begin(); itHierarchy != s_hierarchy.end(); itHierarchy++)
+	{
+		if (itHierarchy->second == className && isSubclass(subclassName, itHierarchy->first))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 utility::string_t ClassRegistry::getSubclass(utility::string_t className, web::json::value json)
 {
 	std::map<utility::string_t, utility::string_t>::iterator itHierarchy;

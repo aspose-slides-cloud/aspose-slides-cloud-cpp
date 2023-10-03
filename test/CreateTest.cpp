@@ -78,7 +78,7 @@ SlidesApi* CreateTest::api = nullptr;
 TestUtils* CreateTest::utils = nullptr;
 
 TEST_F(CreateTest, createEmpty) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 
@@ -88,7 +88,7 @@ TEST_F(CreateTest, createEmpty) {
 }
 
 TEST_F(CreateTest, createFromRequest) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 
@@ -102,7 +102,7 @@ TEST_F(CreateTest, createFromRequest) {
 }
 
 TEST_F(CreateTest, createFromStorage) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t newFileName = L"test2.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
@@ -114,7 +114,7 @@ TEST_F(CreateTest, createFromStorage) {
 }
 
 TEST_F(CreateTest, createFromTemplate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t templateFileName = L"TemplateCV.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
@@ -130,7 +130,7 @@ TEST_F(CreateTest, createFromTemplate) {
 }
 
 TEST_F(CreateTest, createFromHtml) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 
@@ -141,7 +141,7 @@ TEST_F(CreateTest, createFromHtml) {
 }
 
 TEST_F(CreateTest, appendFromHtml) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -154,7 +154,7 @@ TEST_F(CreateTest, appendFromHtml) {
 }
 
 TEST_F(CreateTest, createFromPdf) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 
@@ -167,7 +167,7 @@ TEST_F(CreateTest, createFromPdf) {
 }
 
 TEST_F(CreateTest, appendFromPdf) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";

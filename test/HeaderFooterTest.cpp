@@ -78,7 +78,7 @@ SlidesApi* HeaderFooterTest::api = nullptr;
 TestUtils* HeaderFooterTest::utils = nullptr;
 
 TEST_F(HeaderFooterTest, headerFooterAllSlides) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -94,7 +94,7 @@ TEST_F(HeaderFooterTest, headerFooterAllSlides) {
 }
 
 TEST_F(HeaderFooterTest, headerFooterSlide) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -113,7 +113,7 @@ TEST_F(HeaderFooterTest, headerFooterSlide) {
 }
 
 TEST_F(HeaderFooterTest, headerFooterNotesSlide) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";

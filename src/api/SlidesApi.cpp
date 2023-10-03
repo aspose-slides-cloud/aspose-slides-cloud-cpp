@@ -1876,6 +1876,10 @@ pplx::task<std::shared_ptr<ShapeBase>> SlidesApi::createSpecialSlideShape(utilit
 	{
 		throw std::invalid_argument("Invalid value for slideType. Must be one of MasterSlide, LayoutSlide, NotesSlide.");
 	}
+	if (dto == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.dto");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/{slideType}/shapes");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -3124,11 +3128,6 @@ pplx::task<HttpContent> SlidesApi::deleteProtectionOnline(std::shared_ptr<HttpCo
 	if (document == nullptr)
 	{
 		throw std::invalid_argument("Missing required parameter: request.document");
-	}
-	// verify the required parameter 'password' is set
-	if (password.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: password");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/protection/delete");
 
@@ -8897,6 +8896,85 @@ pplx::task<HttpContent> SlidesApi::replaceFontOnline(std::shared_ptr<HttpContent
 		});
 }
 
+pplx::task<void> SlidesApi::replaceImage(utility::string_t name, int32_t imageIndex, std::shared_ptr<HttpContent> image, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/images/{imageIndex}/replace");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "imageIndex", imageIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (image != nullptr)
+	{
+		requestFiles.push_back(image);
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "replaceImage");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			return void();
+		});
+}
+
+pplx::task<HttpContent> SlidesApi::replaceImageOnline(std::shared_ptr<HttpContent> document, int32_t imageIndex, std::shared_ptr<HttpContent> image, utility::string_t password)
+{
+	if (document == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.document");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/images/{imageIndex}/replace");
+	ApiClient::setPathParameter(methodPath, "imageIndex", imageIndex);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
+	if (image != nullptr)
+	{
+		requestFiles.push_back(image);
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "replaceImageOnline");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			HttpContent result;
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
+			result.setData(stream);
+			return result;
+		});
+}
+
 pplx::task<std::shared_ptr<DocumentReplaceResult>> SlidesApi::replacePresentationText(utility::string_t name, utility::string_t oldValue, utility::string_t newValue, boost::optional<bool> ignoreCase, utility::string_t password, utility::string_t folder, utility::string_t storage)
 {
 	// verify the required parameter 'name' is set
@@ -9094,6 +9172,117 @@ pplx::task<HttpContent> SlidesApi::replaceSlideTextOnline(std::shared_ptr<HttpCo
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "replaceSlideTextOnline");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			HttpContent result;
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
+			result.setData(stream);
+			return result;
+		});
+}
+
+pplx::task<std::shared_ptr<Document>> SlidesApi::replaceTextFormatting(utility::string_t name, utility::string_t oldValue, utility::string_t newValue, std::shared_ptr<PortionFormat> portionFormat, boost::optional<bool> withMasters, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	// verify the required parameter 'oldValue' is set
+	if (oldValue.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: oldValue");
+	}
+	// verify the required parameter 'newValue' is set
+	if (newValue.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: newValue");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/replaceTextFormatting");
+	ApiClient::setPathParameter(methodPath, "name", name);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("oldValue"), oldValue);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("newValue"), newValue);
+	if (withMasters.has_value())
+	{
+		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("withMasters"), withMasters.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (portionFormat != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(portionFormat->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "replaceTextFormatting");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"Document", json);
+			return std::static_pointer_cast<Document>(instance);
+		});
+}
+
+pplx::task<HttpContent> SlidesApi::replaceTextFormattingOnline(std::shared_ptr<HttpContent> document, utility::string_t oldValue, utility::string_t newValue, std::shared_ptr<PortionFormat> portionFormat, boost::optional<bool> withMasters, utility::string_t password)
+{
+	if (document == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.document");
+	}
+	// verify the required parameter 'oldValue' is set
+	if (oldValue.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: oldValue");
+	}
+	// verify the required parameter 'newValue' is set
+	if (newValue.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: newValue");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/replaceTextFormatting");
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("oldValue"), oldValue);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("newValue"), newValue);
+	if (withMasters.has_value())
+	{
+		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("withMasters"), withMasters.value());
+	}
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
+	if (portionFormat != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(portionFormat->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "replaceTextFormattingOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> responseVector)
@@ -12114,6 +12303,10 @@ pplx::task<std::shared_ptr<VbaModule>> SlidesApi::updateVbaModule(utility::strin
 	if (name.empty())
 	{
 		throw std::invalid_argument("Missing required parameter: name");
+	}
+	if (moduleDto == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.moduleDto");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/vbaProject/modules/{moduleIndex}");
 	ApiClient::setPathParameter(methodPath, "name", name);

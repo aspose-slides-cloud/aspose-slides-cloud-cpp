@@ -85,6 +85,7 @@
 #include "../model/Placeholder.h"
 #include "../model/Placeholders.h"
 #include "../model/Portion.h"
+#include "../model/PortionFormat.h"
 #include "../model/Portions.h"
 #include "../model/PresentationsMergeRequest.h"
 #include "../model/ProtectionProperties.h"
@@ -317,7 +318,7 @@ public:
 	/// <summary>
 	/// Create new shape.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ShapeBase>> createSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, std::shared_ptr<ShapeBase> dto = std::shared_ptr<ShapeBase>(), boost::optional<int32_t> shapeToClone = int32_t(), boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t subShape = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ShapeBase>> createSpecialSlideShape(utility::string_t name, int32_t slideIndex, utility::string_t slideType, std::shared_ptr<ShapeBase> dto, boost::optional<int32_t> shapeToClone = int32_t(), boost::optional<int32_t> position = int32_t(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t subShape = utility::string_t());
 
 	/// <summary>
 	/// Creates table cell paragraph.
@@ -472,7 +473,7 @@ public:
 	/// <summary>
 	/// Resets all presentation protection settings. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<HttpContent> deleteProtectionOnline(std::shared_ptr<HttpContent> document, utility::string_t password);
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> deleteProtectionOnline(std::shared_ptr<HttpContent> document, utility::string_t password = utility::string_t());
 
 	/// <summary>
 	/// Delete a presentation section.
@@ -1135,6 +1136,16 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> replaceFontOnline(std::shared_ptr<HttpContent> document, utility::string_t sourceFont, utility::string_t targetFont, boost::optional<bool> embed = bool(), utility::string_t password = utility::string_t(), utility::string_t fontsFolder = utility::string_t());
 
 	/// <summary>
+	/// Replaces image by the specified index.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<void> replaceImage(utility::string_t name, int32_t imageIndex, std::shared_ptr<HttpContent> image = std::shared_ptr<HttpContent>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Replaces image by the specified index and returns updated document. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> replaceImageOnline(std::shared_ptr<HttpContent> document, int32_t imageIndex, std::shared_ptr<HttpContent> image = std::shared_ptr<HttpContent>(), utility::string_t password = utility::string_t());
+
+	/// <summary>
 	/// Replace text with a new value.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<DocumentReplaceResult>> replacePresentationText(utility::string_t name, utility::string_t oldValue, utility::string_t newValue, boost::optional<bool> ignoreCase = bool(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
@@ -1153,6 +1164,16 @@ public:
 	/// Replace slide text with a new value.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> replaceSlideTextOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, utility::string_t oldValue, utility::string_t newValue, boost::optional<bool> ignoreCase = bool(), utility::string_t password = utility::string_t());
+
+	/// <summary>
+	/// Finds and replaces text in presentation with given format.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Document>> replaceTextFormatting(utility::string_t name, utility::string_t oldValue, utility::string_t newValue, std::shared_ptr<PortionFormat> portionFormat = std::shared_ptr<PortionFormat>(), boost::optional<bool> withMasters = bool(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// Finds and replaces text in presentation with given format.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> replaceTextFormattingOnline(std::shared_ptr<HttpContent> document, utility::string_t oldValue, utility::string_t newValue, std::shared_ptr<PortionFormat> portionFormat = std::shared_ptr<PortionFormat>(), boost::optional<bool> withMasters = bool(), utility::string_t password = utility::string_t());
 
 	/// <summary>
 	/// Convert Mathematical Text to MathML Format and saves result to the storage
@@ -1442,7 +1463,7 @@ public:
 	/// <summary>
 	/// Update VBA module.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<VbaModule>> updateVbaModule(utility::string_t name, int32_t moduleIndex, std::shared_ptr<VbaModule> moduleDto = std::shared_ptr<VbaModule>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<VbaModule>> updateVbaModule(utility::string_t name, int32_t moduleIndex, std::shared_ptr<VbaModule> moduleDto, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Upload file

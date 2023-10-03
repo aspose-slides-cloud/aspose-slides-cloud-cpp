@@ -33,13 +33,17 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/replace.hpp>
 
+#include "defines.h"
+
 namespace asposeslidescloud {
 namespace api {
 
 class ClassRegistry
 {
 public:
-	static std::shared_ptr<void> deserialize(utility::string_t className, web::json::value json);
+	ASPOSE_DLL_EXPORT static std::shared_ptr<void> deserialize(utility::string_t className, web::json::value json);
+	ASPOSE_DLL_EXPORT static bool isClass(utility::string_t className);
+	ASPOSE_DLL_EXPORT static bool isSubclass(utility::string_t subclassName, utility::string_t className);
 private:
 	static utility::string_t getSubclass(utility::string_t className, web::json::value json);
 	static std::shared_ptr<void> deserializeSubclass(utility::string_t className, web::json::value json);

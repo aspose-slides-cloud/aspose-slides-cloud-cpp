@@ -82,7 +82,7 @@ SlidesApi* MathTest::api = nullptr;
 TestUtils* MathTest::utils = nullptr;
 
 TEST_F(MathTest, mathGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portion> portion = api->getPortion(L"test.pptx", 2, 3, 1, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, portion->getMathParagraph()->getMathBlockList().size());
 	EXPECT_EQ(3, portion->getMathParagraph()->getMathBlockList()[0]->getMathElementList().size());
@@ -90,13 +90,13 @@ TEST_F(MathTest, mathGet) {
 }
 
 TEST_F(MathTest, mathGetNull) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portion> portion = api->getPortion(L"test.pptx", 2, 1, 1, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(nullptr, portion->getMathParagraph());
 }
 
 TEST_F(MathTest, mathCreate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portion> dto(new Portion());
 	std::shared_ptr<MathParagraph> mathParagraph(new MathParagraph());
 	std::shared_ptr<BlockElement> mathBlock(new BlockElement());
@@ -132,7 +132,7 @@ TEST_F(MathTest, mathCreate) {
 }
 
 TEST_F(MathTest, mathUpdate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portion> dto(new Portion());
 	std::shared_ptr<MathParagraph> mathParagraph(new MathParagraph());
 	std::shared_ptr<BlockElement> mathBlock(new BlockElement());
@@ -168,13 +168,13 @@ TEST_F(MathTest, mathUpdate) {
 }
 
 TEST_F(MathTest, mathDownload) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	HttpContent result = api->downloadPortionAsMathMl(L"test.pptx", 2, 3, 1, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_NE(nullptr, result.getData());
 }
 
 TEST_F(MathTest, mathDownloadNull) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	try
 	{
 		api->downloadPortionAsMathMl(L"test.pptx", 2, 1, 1, 1, L"password", L"TempSlidesSDK").get();
@@ -187,7 +187,7 @@ TEST_F(MathTest, mathDownloadNull) {
 }
 
 TEST_F(MathTest, mathSave) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t outPath = L"TempSlidesSDK/mathml.xml";
 	api->savePortionAsMathMl(L"test.pptx", 2, 3, 1, 1, outPath, L"password", L"TempSlidesSDK").wait();
 	std::shared_ptr<ObjectExist> exists = api->objectExists(outPath).get();

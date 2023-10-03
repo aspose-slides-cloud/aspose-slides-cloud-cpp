@@ -78,7 +78,7 @@ SlidesApi* LayoutSlideTest::api = nullptr;
 TestUtils* LayoutSlideTest::utils = nullptr;
 
 TEST_F(LayoutSlideTest, layoutSlides) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -100,7 +100,7 @@ TEST_F(LayoutSlideTest, layoutSlides) {
 }
 
 TEST_F(LayoutSlideTest, layoutSlideShapes) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -137,7 +137,7 @@ TEST_F(LayoutSlideTest, layoutSlideShapes) {
 }
 
 TEST_F(LayoutSlideTest, layoutSlideParagraphs) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -173,7 +173,7 @@ TEST_F(LayoutSlideTest, layoutSlideParagraphs) {
 }
 
 TEST_F(LayoutSlideTest, layoutSlidePortions) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -212,7 +212,7 @@ TEST_F(LayoutSlideTest, layoutSlidePortions) {
 }
 
 TEST_F(LayoutSlideTest, layoutSlideAnimation) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -248,7 +248,7 @@ TEST_F(LayoutSlideTest, layoutSlideAnimation) {
 }
 
 TEST_F(LayoutSlideTest, layoutSlidesDeleteUnused) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -261,7 +261,7 @@ TEST_F(LayoutSlideTest, layoutSlidesDeleteUnused) {
 }
 
 TEST_F(LayoutSlideTest, layoutSlidesDeleteUnusedOnline) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
 	HttpContent result = api->deleteUnusedLayoutSlidesOnline(data, L"password").get();

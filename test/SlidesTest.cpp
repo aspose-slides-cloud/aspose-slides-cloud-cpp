@@ -78,19 +78,19 @@ SlidesApi* SlidesTest::api = nullptr;
 TestUtils* SlidesTest::utils = nullptr;
 
 TEST_F(SlidesTest, slidesGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Slides> result = api->getSlides(L"test.pptx", L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(9, result->getSlideList().size());
 }
 
 TEST_F(SlidesTest, slideGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Slide> result = api->getSlide(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_NE(nullptr, result->getSelfUri());
 }
 
 TEST_F(SlidesTest, slideCreate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -104,13 +104,13 @@ TEST_F(SlidesTest, slideCreate) {
 }
 
 TEST_F(SlidesTest, slideCopy) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Slides> result = api->copySlide(L"test.pptx", 3, boost::none, L"", L"", L"", L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(10, result->getSlideList().size());
 }
 
 TEST_F(SlidesTest, slideCopyFromSource) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t sourceFileName = L"TemplateCV.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t sourcePath = folderName + L"/" + sourceFileName;
@@ -120,19 +120,19 @@ TEST_F(SlidesTest, slideCopyFromSource) {
 }
 
 TEST_F(SlidesTest, slideMove) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Slides> result = api->moveSlide(L"test.pptx", 1, 2, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(9, result->getSlideList().size());
 }
 
 TEST_F(SlidesTest, slidesReorder) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Slides> result = api->reorderSlides(L"test.pptx", { 1, 2, 3, 4, 5, 6 }, { 6, 5, 4, 3, 2, 1 }, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(9, result->getSlideList().size());
 }
 
 TEST_F(SlidesTest, slideUpdate) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Slide> dto(new Slide());
 	utility::string_t layoutSlidePath = L"layoutSlides/3";
 	std::shared_ptr<ResourceUri> layoutSlide(new ResourceUri());
@@ -143,31 +143,31 @@ TEST_F(SlidesTest, slideUpdate) {
 }
 
 TEST_F(SlidesTest, slidesDelete) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Slides> result = api->deleteSlides(L"test.pptx", {}, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, result->getSlideList().size());
 }
 
 TEST_F(SlidesTest, slidesDeleteByIndices) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Slides> result = api->deleteSlides(L"test.pptx", { 1, 3, 5 }, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(6, result->getSlideList().size());
 }
 
 TEST_F(SlidesTest, slideDelete) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Slides> result = api->deleteSlide(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(8, result->getSlideList().size());
 }
 
 TEST_F(SlidesTest, backgroundGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<SlideBackground> result = api->getBackground(L"test.pptx", 5, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(L"Solid", result->getFillFormat()->getType());
 }
 
 TEST_F(SlidesTest, backgroundSet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<SlideBackground> dto(new SlideBackground());
 	std::shared_ptr<SolidFill> fillFormat(new SolidFill());
 	utility::string_t color = L"#FFF5FF8A";
@@ -178,14 +178,14 @@ TEST_F(SlidesTest, backgroundSet) {
 }
 
 TEST_F(SlidesTest, backgroundSetColor) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t color = L"#FFF5FF8A";
 	std::shared_ptr<SlideBackground> result = api->setBackgroundColor(L"test.pptx", 1, color, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(color, std::static_pointer_cast<SolidFill>(result->getFillFormat())->getColor());
 }
 
 TEST_F(SlidesTest, backgroundDelete) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<SlideBackground> result = api->deleteBackground(L"test.pptx", 5, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(L"NoFill", result->getFillFormat()->getType());
 }

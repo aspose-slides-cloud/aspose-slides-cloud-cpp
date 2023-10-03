@@ -91,44 +91,44 @@ SlidesApi* ShapesTest::api = nullptr;
 TestUtils* ShapesTest::utils = nullptr;
 
 TEST_F(ShapesTest, shapeBase) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<ShapeBase> result = api->getShape(L"test.pptx", 1, 1, L"password", L"TempSlidesSDK").get();
 	std::shared_ptr<Shape> resultShape = std::static_pointer_cast<Shape>(result);
 	EXPECT_EQ(L"1", resultShape->getText());
 }
 
 TEST_F(ShapesTest, shapesGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Shapes> result = api->getShapes(L"test.pptx", 3, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(2, result->getShapesLinks().size());
 }
 
 TEST_F(ShapesTest, shapesGetByType) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Shapes> result = api->getShapes(L"test.pptx", 3, L"password", L"TempSlidesSDK", L"", L"Chart").get();
 	EXPECT_EQ(2, result->getShapesLinks().size());
 }
 
 TEST_F(ShapesTest, subshapesGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Shapes> result = api->getShapes(L"test.pptx", 1, L"password", L"TempSlidesSDK", L"", L"", L"4").get();
 	EXPECT_EQ(2, result->getShapesLinks().size());
 }
 
 TEST_F(ShapesTest, shapeGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<ShapeBase> result = api->getShape(L"test.pptx", 3, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(L"Chart", result->getType());
 }
 
 TEST_F(ShapesTest, subshapeGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<ShapeBase> result = api->getShape(L"test.pptx", 1, 4, L"password", L"TempSlidesSDK", L"", L"1").get();
 	EXPECT_EQ(L"Shape", result->getType());
 }
 
 TEST_F(ShapesTest, shapeAdd) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Shape> dto(new Shape());
 	dto->setShapeType(L"Callout1");
 	std::shared_ptr<ShapeBase> result = api->createShape(L"test.pptx", 1, dto, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
@@ -136,7 +136,7 @@ TEST_F(ShapesTest, shapeAdd) {
 }
 
 TEST_F(ShapesTest, shapeEmpty) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Shape> dto(new Shape());
 	try
 	{
@@ -150,7 +150,7 @@ TEST_F(ShapesTest, shapeEmpty) {
 }
 
 TEST_F(ShapesTest, graphicalObjectEmpty) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Shape> dto(new Shape());
 	try
 	{
@@ -164,7 +164,7 @@ TEST_F(ShapesTest, graphicalObjectEmpty) {
 }
 
 TEST_F(ShapesTest, pictureFrameAdd) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<PictureFrame> dto(new PictureFrame());
 	std::shared_ptr<PictureFill> fill(new PictureFill());
 	fill->setBase64Data(L"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXY5g+ffp/AAZTAsWGL27gAAAAAElFTkSuQmCC");
@@ -174,7 +174,7 @@ TEST_F(ShapesTest, pictureFrameAdd) {
 }
 
 TEST_F(ShapesTest, pictureFrameEmpty) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<PictureFrame> dto(new PictureFrame());
 	try
 	{
@@ -188,7 +188,7 @@ TEST_F(ShapesTest, pictureFrameEmpty) {
 }
 
 TEST_F(ShapesTest, audioFrameAdd) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<AudioFrame> dto(new AudioFrame());
 	dto->setBase64Data(L"bXAzc2FtcGxl");
 	std::shared_ptr<ShapeBase> result = api->createShape(L"test.pptx", 1, dto, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
@@ -196,7 +196,7 @@ TEST_F(ShapesTest, audioFrameAdd) {
 }
 
 TEST_F(ShapesTest, audioFrameEmpty) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<AudioFrame> dto(new AudioFrame());
 	try
 	{
@@ -210,7 +210,7 @@ TEST_F(ShapesTest, audioFrameEmpty) {
 }
 
 TEST_F(ShapesTest, videoFrameAdd) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<VideoFrame> dto(new VideoFrame());
 	dto->setBase64Data(L"bXAzc2FtcGxl");
 	std::shared_ptr<ShapeBase> result = api->createShape(L"test.pptx", 1, dto, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
@@ -218,7 +218,7 @@ TEST_F(ShapesTest, videoFrameAdd) {
 }
 
 TEST_F(ShapesTest, videoFrameEmpty) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<VideoFrame> dto(new VideoFrame());
 	try
 	{
@@ -232,7 +232,7 @@ TEST_F(ShapesTest, videoFrameEmpty) {
 }
 
 TEST_F(ShapesTest, smartArtAdd) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<SmartArt> dto(new SmartArt());
 	dto->setX(0);
 	dto->setY(0);
@@ -257,7 +257,7 @@ TEST_F(ShapesTest, smartArtAdd) {
 }
 
 TEST_F(ShapesTest, smartArtTextFormatting) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Portion> dto(new Portion());
 	dto->setText(L"New text");
 	dto->setFontHeight(24);
@@ -275,14 +275,14 @@ TEST_F(ShapesTest, smartArtTextFormatting) {
 }
 
 TEST_F(ShapesTest, smartArtEmpty) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<SmartArt> dto(new SmartArt());
 	std::shared_ptr<ShapeBase> result = api->createShape(L"test.pptx", 1, dto, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(L"SmartArt", result->getType());
 }
 
 TEST_F(ShapesTest, chartEmpty) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Chart> dto(new Chart());
 	try
 	{
@@ -296,7 +296,7 @@ TEST_F(ShapesTest, chartEmpty) {
 }
 
 TEST_F(ShapesTest, tableAdd) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Table> dto(new Table());
 	dto->setX(30);
 	dto->setY(20);
@@ -364,7 +364,7 @@ TEST_F(ShapesTest, tableAdd) {
 }
 
 TEST_F(ShapesTest, tableEmpty) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Table> dto(new Table());
 	try
 	{
@@ -378,14 +378,14 @@ TEST_F(ShapesTest, tableEmpty) {
 }
 
 TEST_F(ShapesTest, groupShapeEmpty) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<GroupShape> dto(new GroupShape());
 	std::shared_ptr<ShapeBase> result = api->createShape(L"test.pptx", 1, dto, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(L"GroupShape", result->getType());
 }
 
 TEST_F(ShapesTest, connectorAdd) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Connector> dto(new Connector());
 	dto->setShapeType(L"BentConnector3");
 	std::shared_ptr<ResourceUri> start(new ResourceUri());
@@ -399,14 +399,14 @@ TEST_F(ShapesTest, connectorAdd) {
 }
 
 TEST_F(ShapesTest, connectorEmpty) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<Connector> dto(new Connector());
 	std::shared_ptr<ShapeBase> result = api->createShape(L"test.pptx", 1, dto, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(L"Connector", result->getType());
 }
 
 TEST_F(ShapesTest, shapesAlign) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -434,7 +434,7 @@ TEST_F(ShapesTest, shapesAlign) {
 }
 
 TEST_F(ShapesTest, shapesAlignGroup) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -464,13 +464,13 @@ TEST_F(ShapesTest, shapesAlignGroup) {
 }
 
 TEST_F(ShapesTest, shapeGeometryGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<GeometryPaths> paths = api->getShapeGeometryPath(L"test.pptx", 4, 2, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, paths->getPaths().size());
 }
 
 TEST_F(ShapesTest, shapeGeometrySet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<GeometryPaths> dto(new GeometryPaths());
 	std::shared_ptr<GeometryPath> path(new GeometryPath());
 	std::shared_ptr<MoveToPathSegment> start(new MoveToPathSegment());
@@ -496,7 +496,7 @@ TEST_F(ShapesTest, shapeGeometrySet) {
 }
 
 TEST_F(ShapesTest, zoomFrameAdd) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<ZoomFrame> dto(new ZoomFrame());
 	dto->setX(0);
 	dto->setY(0);
@@ -509,7 +509,7 @@ TEST_F(ShapesTest, zoomFrameAdd) {
 }
 
 TEST_F(ShapesTest, zoomFrameAddForSection) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<SectionZoomFrame> dto(new SectionZoomFrame());
 	dto->setX(0);
 	dto->setY(0);
@@ -522,7 +522,7 @@ TEST_F(ShapesTest, zoomFrameAddForSection) {
 }
 
 TEST_F(ShapesTest, oleObjectFrameAddByLink) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<OleObjectFrame> dto(new OleObjectFrame());
 	dto->setX(100);
 	dto->setY(100);
@@ -536,7 +536,7 @@ TEST_F(ShapesTest, oleObjectFrameAddByLink) {
 }
 
 TEST_F(ShapesTest, oleObjectFrameAddEmbedded) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<OleObjectFrame> dto(new OleObjectFrame());
 	dto->setX(100);
 	dto->setY(100);
@@ -554,7 +554,7 @@ TEST_F(ShapesTest, oleObjectFrameAddEmbedded) {
 }
 
 TEST_F(ShapesTest, groupShapeAdd) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";

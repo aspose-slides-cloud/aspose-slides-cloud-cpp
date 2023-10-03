@@ -78,7 +78,7 @@ SlidesApi* AnimationTest::api = nullptr;
 TestUtils* AnimationTest::utils = nullptr;
 
 TEST_F(AnimationTest, animationGet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
@@ -98,7 +98,7 @@ TEST_F(AnimationTest, animationGet) {
 }
 
 TEST_F(AnimationTest, animationSet) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Effect> effect1(new Effect());
 	effect1->setType(L"Blink");
@@ -122,7 +122,7 @@ TEST_F(AnimationTest, animationSet) {
 }
 
 TEST_F(AnimationTest, animationCreateEffect) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Effect> effect(new Effect());
 	effect->setType(L"Blast");
@@ -134,7 +134,7 @@ TEST_F(AnimationTest, animationCreateEffect) {
 }
 
 TEST_F(AnimationTest, animationCreateInteractiveSequence) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Effect> effect(new Effect());
 	effect->setType(L"Blast");
@@ -149,7 +149,7 @@ TEST_F(AnimationTest, animationCreateInteractiveSequence) {
 }
 
 TEST_F(AnimationTest, animationCreateInteractiveSequenceEffect) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Effect> effect(new Effect());
 	effect->setType(L"Blast");
@@ -161,7 +161,7 @@ TEST_F(AnimationTest, animationCreateInteractiveSequenceEffect) {
 }
 
 TEST_F(AnimationTest, animationUpdateEffect) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Effect> effect(new Effect());
 	effect->setType(L"Blast");
@@ -173,7 +173,7 @@ TEST_F(AnimationTest, animationUpdateEffect) {
 }
 
 TEST_F(AnimationTest, animationUpdateInteractiveSequenceEffect) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 
 	std::shared_ptr<Effect> effect(new Effect());
 	effect->setType(L"Blast");
@@ -185,42 +185,42 @@ TEST_F(AnimationTest, animationUpdateInteractiveSequenceEffect) {
 }
 
 TEST_F(AnimationTest, animationDelete) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<SlideAnimation> result = api->deleteAnimation(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(0, result->getMainSequence().size());
 	EXPECT_EQ(0, result->getInteractiveSequences().size());
 }
 
 TEST_F(AnimationTest, animationDeleteMainSequence) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<SlideAnimation> result = api->deleteAnimationMainSequence(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(0, result->getMainSequence().size());
 	EXPECT_EQ(1, result->getInteractiveSequences().size());
 }
 
 TEST_F(AnimationTest, animationDeleteMainSequenceEffect) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<SlideAnimation> result = api->deleteAnimationEffect(L"test.pptx", 1, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(0, result->getMainSequence().size());
 	EXPECT_EQ(1, result->getInteractiveSequences().size());
 }
 
 TEST_F(AnimationTest, animationDeleteInteracriveSequences) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<SlideAnimation> result = api->deleteAnimationInteractiveSequences(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, result->getMainSequence().size());
 	EXPECT_EQ(0, result->getInteractiveSequences().size());
 }
 
 TEST_F(AnimationTest, animationDeleteInteracriveSequence) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<SlideAnimation> result = api->deleteAnimationInteractiveSequence(L"test.pptx", 1, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, result->getMainSequence().size());
 	EXPECT_EQ(0, result->getInteractiveSequences().size());
 }
 
 TEST_F(AnimationTest, animationDeleteInteracriveSequenceEffect) {
-	utils->initialize("", "");
+	utils->initialize("", "", "");
 	std::shared_ptr<SlideAnimation> result = api->deleteAnimationInteractiveSequenceEffect(L"test.pptx", 1, 1, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, result->getMainSequence().size());
 	EXPECT_EQ(1, result->getInteractiveSequences().size());
