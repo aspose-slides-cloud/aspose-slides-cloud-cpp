@@ -30,53 +30,21 @@
 #include "model/SlideComment.h"
 #include "model/SlideModernComment.h"
 
-using namespace asposeslidescloud::api;
-
 class CommentTest : public ::testing::Test
 {
 public:
-	static SlidesApi* api;
 	static TestUtils* utils;
 
 protected:
 	void SetUp()
 	{
-		if (api == nullptr)
+		if (utils == nullptr)
 		{
-			std::ifstream rulesFile("testConfig.json");
-			std::string rulesString;
-			std::ostringstream rulesStream;
-			rulesStream << rulesFile.rdbuf();
-			rulesString = rulesStream.str();
-			web::json::value config = web::json::value::parse(utility::conversions::to_string_t(rulesString));
-			std::shared_ptr<ApiConfiguration> configuration = std::make_shared<ApiConfiguration>();
-			if (config.has_field(L"ClientId"))
-			{
-				configuration->setAppSid(config[L"ClientId"].as_string());
-			}
-			if (config.has_field(L"ClientSecret"))
-			{
-				configuration->setAppKey(config[L"ClientSecret"].as_string());
-			}
-			if (config.has_field(L"BaseUrl"))
-			{
-				configuration->setBaseUrl(config[L"BaseUrl"].as_string());
-			}
-			if (config.has_field(L"AuthBaseUrl"))
-			{
-				configuration->setBaseAuthUrl(config[L"AuthBaseUrl"].as_string());
-			}
-			if (config.has_field(L"Debug"))
-			{
-				configuration->setDebug(config[L"Debug"].as_bool());
-			}
-			api = new SlidesApi(configuration);
-			utils = new TestUtils(api);
+			utils = new TestUtils();
 		}
 	}
 };
 
-SlidesApi* CommentTest::api = nullptr;
 TestUtils* CommentTest::utils = nullptr;
 
 TEST_F(CommentTest, commentCreate) {
@@ -90,7 +58,7 @@ TEST_F(CommentTest, commentCreate) {
 	childComment->setAuthor(L"Test author");
 	dto->setChildComments({ childComment });
 		
-	std::shared_ptr<SlideComments> comments = api->createComment(L"test.pptx", 3, dto, boost::none, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<SlideComments> comments = utils->getSlidesApi()->createComment(L"test.pptx", 3, dto, boost::none, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(L"Test author", comments->getList()[0]->getAuthor());
 	EXPECT_EQ(L"Comment text", comments->getList()[0]->getText());
 	EXPECT_EQ(L"Test author", comments->getList()[0]->getChildComments()[0]->getAuthor());
@@ -110,14 +78,14 @@ TEST_F(CommentTest, commentCreateOnline) {
 
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
-	HttpContent result = api->createCommentOnline(data, 3, dto, boost::none, L"password").get();
+	HttpContent result = utils->getSlidesApi()->createCommentOnline(data, 3, dto, boost::none, L"password").get();
 	EXPECT_NE(nullptr, result.getData());
 }
 
 TEST_F(CommentTest, commentsGet) {
 	utils->initialize("", "", "");
 
-	std::shared_ptr<SlideComments> comments = api->getSlideComments(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<SlideComments> comments = utils->getSlidesApi()->getSlideComments(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(2, comments->getList().size());
 	EXPECT_EQ(1, comments->getList()[0]->getChildComments().size());
 }
@@ -128,8 +96,8 @@ TEST_F(CommentTest, commentsDelete) {
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
 
-	api->deleteComments(fileName, L"", password, folderName).wait();
-	std::shared_ptr<SlideComments> comments = api->getSlideComments(fileName, 1, password, folderName).get();
+	utils->getSlidesApi()->deleteComments(fileName, L"", password, folderName).wait();
+	std::shared_ptr<SlideComments> comments = utils->getSlidesApi()->getSlideComments(fileName, 1, password, folderName).get();
 	EXPECT_EQ(0, comments->getList().size());
 }
 
@@ -138,7 +106,7 @@ TEST_F(CommentTest, commentsDeleteOnline) {
 
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
-	HttpContent result = api->deleteCommentsOnline(data, L"", L"password").get();
+	HttpContent result = utils->getSlidesApi()->deleteCommentsOnline(data, L"", L"password").get();
 	EXPECT_NE(nullptr, result.getData());
 }
 
@@ -149,8 +117,8 @@ TEST_F(CommentTest, commentsDeleteForSlide) {
 	utility::string_t password = L"password";
 	int slideIndex = 1;
 
-	api->deleteSlideComments(fileName, slideIndex, L"", password, folderName).wait();
-	std::shared_ptr<SlideComments> comments = api->getSlideComments(fileName, 1, password, folderName).get();
+	utils->getSlidesApi()->deleteSlideComments(fileName, slideIndex, L"", password, folderName).wait();
+	std::shared_ptr<SlideComments> comments = utils->getSlidesApi()->getSlideComments(fileName, 1, password, folderName).get();
 	EXPECT_EQ(0, comments->getList().size());
 }
 
@@ -159,7 +127,7 @@ TEST_F(CommentTest, commentsDeleteForSlideOnline) {
 
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
-	HttpContent result = api->deleteSlideCommentsOnline(data, 1, L"", L"password").get();
+	HttpContent result = utils->getSlidesApi()->deleteSlideCommentsOnline(data, 1, L"", L"password").get();
 	EXPECT_NE(nullptr, result.getData());
 }
 
@@ -178,7 +146,7 @@ TEST_F(CommentTest, commentCreateModern) {
 	dto->setStatus(L"Resolved");
 	dto->setChildComments({ childComment });
 
-	std::shared_ptr<SlideComments> comments = api->createComment(L"test.pptx", 3, dto, boost::none, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<SlideComments> comments = utils->getSlidesApi()->createComment(L"test.pptx", 3, dto, boost::none, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, comments->getList().size());
 	EXPECT_EQ(L"Modern", comments->getList()[0]->getType());
 }
@@ -198,7 +166,7 @@ TEST_F(CommentTest, commentCreateModernForShape) {
 	dto->setStatus(L"Resolved");
 	dto->setChildComments({ childComment });
 
-	std::shared_ptr<SlideComments> comments = api->createComment(L"test.pptx", 3, dto, 1, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<SlideComments> comments = utils->getSlidesApi()->createComment(L"test.pptx", 3, dto, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, comments->getList().size());
 	EXPECT_EQ(L"Modern", comments->getList()[0]->getType());
 }

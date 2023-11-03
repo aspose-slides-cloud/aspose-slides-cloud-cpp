@@ -28,53 +28,21 @@
 
 #include "TestUtils.h"
 
-using namespace asposeslidescloud::api;
-
 class ImageTest : public ::testing::Test
 {
 public:
-	static SlidesApi* api;
 	static TestUtils* utils;
 
 protected:
 	void SetUp()
 	{
-		if (api == nullptr)
+		if (utils == nullptr)
 		{
-			std::ifstream rulesFile("testConfig.json");
-			std::string rulesString;
-			std::ostringstream rulesStream;
-			rulesStream << rulesFile.rdbuf();
-			rulesString = rulesStream.str();
-			web::json::value config = web::json::value::parse(utility::conversions::to_string_t(rulesString));
-			std::shared_ptr<ApiConfiguration> configuration = std::make_shared<ApiConfiguration>();
-			if (config.has_field(L"ClientId"))
-			{
-				configuration->setAppSid(config[L"ClientId"].as_string());
-			}
-			if (config.has_field(L"ClientSecret"))
-			{
-				configuration->setAppKey(config[L"ClientSecret"].as_string());
-			}
-			if (config.has_field(L"BaseUrl"))
-			{
-				configuration->setBaseUrl(config[L"BaseUrl"].as_string());
-			}
-			if (config.has_field(L"AuthBaseUrl"))
-			{
-				configuration->setBaseAuthUrl(config[L"AuthBaseUrl"].as_string());
-			}
-			if (config.has_field(L"Debug"))
-			{
-				configuration->setDebug(config[L"Debug"].as_bool());
-			}
-			api = new SlidesApi(configuration);
-			utils = new TestUtils(api);
+			utils = new TestUtils();
 		}
 	}
 };
 
-SlidesApi* ImageTest::api = nullptr;
 TestUtils* ImageTest::utils = nullptr;
 
 TEST_F(ImageTest, imageGet) {
@@ -83,8 +51,8 @@ TEST_F(ImageTest, imageGet) {
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
 
-	std::shared_ptr<Images> presentationResult = api->getPresentationImages(fileName, password, folderName).get();
-	std::shared_ptr<Images> slideResult = api->getSlideImages(fileName, 1, password, folderName).get();
+	std::shared_ptr<Images> presentationResult = utils->getSlidesApi()->getPresentationImages(fileName, password, folderName).get();
+	std::shared_ptr<Images> slideResult = utils->getSlidesApi()->getSlideImages(fileName, 1, password, folderName).get();
 	EXPECT_LT(slideResult->getList().size(), presentationResult->getList().size());
 }
 
@@ -94,8 +62,8 @@ TEST_F(ImageTest, imageDownloadAllStorage) {
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t password = L"password";
 
-	HttpContent defaultResult = api->downloadImagesDefaultFormat(fileName, password, folderName).get();
-	HttpContent pngResult = api->downloadImages(fileName, L"png", password, folderName).get();
+	HttpContent defaultResult = utils->getSlidesApi()->downloadImagesDefaultFormat(fileName, password, folderName).get();
+	HttpContent pngResult = utils->getSlidesApi()->downloadImages(fileName, L"png", password, folderName).get();
 	//TODO: assert that zip archives contain equal amout of elements
 	//EXPECT_NE(defaultResult->getList().size(), pngResult->getList().size());
 }
@@ -107,8 +75,8 @@ TEST_F(ImageTest, imageDownloadAllRequest) {
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
 
-	HttpContent defaultResult = api->downloadImagesDefaultFormatOnline(data, password).get();
-	HttpContent pngResult = api->downloadImagesOnline(data, L"png", password).get();
+	HttpContent defaultResult = utils->getSlidesApi()->downloadImagesDefaultFormatOnline(data, password).get();
+	HttpContent pngResult = utils->getSlidesApi()->downloadImagesOnline(data, L"png", password).get();
 	//TODO: assert that zip archives contain equal amout of elements
 	//EXPECT_NE(defaultResult->getList().size(), pngResult->getList().size());
 }
@@ -120,12 +88,12 @@ TEST_F(ImageTest, imageDownloadStorage) {
 	utility::string_t password = L"password";
 	int index = 1;
 
-	HttpContent defaultResult = api->downloadImageDefaultFormat(fileName, index, password, folderName).get();
+	HttpContent defaultResult = utils->getSlidesApi()->downloadImageDefaultFormat(fileName, index, password, folderName).get();
 	int defaultResultSize = 0;
 	do {
 		defaultResultSize++;
 	} while (defaultResult.getData()->get() != EOF);
-	HttpContent pngResult = api->downloadImage(fileName, index, L"png", password, folderName).get();
+	HttpContent pngResult = utils->getSlidesApi()->downloadImage(fileName, index, L"png", password, folderName).get();
 	int pngResultSize = 0;
 	do {
 		pngResultSize++;
@@ -142,12 +110,12 @@ TEST_F(ImageTest, imageDownloadRequest) {
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
 
-	HttpContent defaultResult = api->downloadImageDefaultFormatOnline(data, index, password).get();
+	HttpContent defaultResult = utils->getSlidesApi()->downloadImageDefaultFormatOnline(data, index, password).get();
 	int defaultResultSize = 0;
 	do {
 		defaultResultSize++;
 	} while (defaultResult.getData()->get() != EOF);
-	HttpContent pngResult = api->downloadImageOnline(data, index, L"png", password).get();
+	HttpContent pngResult = utils->getSlidesApi()->downloadImageOnline(data, index, L"png", password).get();
 	int pngResultSize = 0;
 	do {
 		pngResultSize++;

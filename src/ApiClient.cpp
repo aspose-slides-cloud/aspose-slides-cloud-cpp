@@ -61,7 +61,7 @@ pplx::task<web::http::http_response> ApiClient::callApi(
 	setRequestHeaders(request, headerParams);
 	logRequest(request);
 	int parts = (postBody != nullptr ? 1 : 0) + files.size();
-	if (parts > 1)
+	if (files.size() > 0)
 	{
 		std::stringstream data;
 		const std::string boundary = "d7ddb511-6a48-4686-b6a1-10301783b2bc";
@@ -98,23 +98,6 @@ pplx::task<web::http::http_response> ApiClient::callApi(
 			concurrency::streams::bytestream::open_istream(std::move(bodyString)),
 			length,
 			utility::conversions::to_string_t("multipart/form-data;boundary=" + boundary));
-	}
-	else if (files.size() > 0)
-	{
-		std::stringstream data;
-		files[0]->writeTo(data);
-		auto bodyString = data.str();
-		auto length = bodyString.size();
-		try {
-			logString(utility::conversions::to_string_t(bodyString));
-		}
-		catch (...) {
-			logString(utility::conversions::to_string_t("length: " + std::to_string(length)));
-		}
-		request.set_body(
-			concurrency::streams::bytestream::open_istream(std::move(bodyString)),
-			length,
-			utility::conversions::to_string_t("application/octet-stream"));
 	}
 	else if (postBody != nullptr)
 	{

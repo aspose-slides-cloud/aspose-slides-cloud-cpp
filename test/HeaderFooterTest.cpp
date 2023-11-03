@@ -28,53 +28,21 @@
 
 #include "TestUtils.h"
 
-using namespace asposeslidescloud::api;
-
 class HeaderFooterTest : public ::testing::Test
 {
 public:
-	static SlidesApi* api;
 	static TestUtils* utils;
 
 protected:
 	void SetUp()
 	{
-		if (api == nullptr)
+		if (utils == nullptr)
 		{
-			std::ifstream rulesFile("testConfig.json");
-			std::string rulesString;
-			std::ostringstream rulesStream;
-			rulesStream << rulesFile.rdbuf();
-			rulesString = rulesStream.str();
-			web::json::value config = web::json::value::parse(utility::conversions::to_string_t(rulesString));
-			std::shared_ptr<ApiConfiguration> configuration = std::make_shared<ApiConfiguration>();
-			if (config.has_field(L"ClientId"))
-			{
-				configuration->setAppSid(config[L"ClientId"].as_string());
-			}
-			if (config.has_field(L"ClientSecret"))
-			{
-				configuration->setAppKey(config[L"ClientSecret"].as_string());
-			}
-			if (config.has_field(L"BaseUrl"))
-			{
-				configuration->setBaseUrl(config[L"BaseUrl"].as_string());
-			}
-			if (config.has_field(L"AuthBaseUrl"))
-			{
-				configuration->setBaseAuthUrl(config[L"AuthBaseUrl"].as_string());
-			}
-			if (config.has_field(L"Debug"))
-			{
-				configuration->setDebug(config[L"Debug"].as_bool());
-			}
-			api = new SlidesApi(configuration);
-			utils = new TestUtils(api);
+			utils = new TestUtils();
 		}
 	}
 };
 
-SlidesApi* HeaderFooterTest::api = nullptr;
 TestUtils* HeaderFooterTest::utils = nullptr;
 
 TEST_F(HeaderFooterTest, headerFooterAllSlides) {
@@ -87,8 +55,8 @@ TEST_F(HeaderFooterTest, headerFooterAllSlides) {
 	dto->setIsFooterVisible(true);
 	dto->setFooterText(L"footer");
 	dto->setIsDateTimeVisible(false);
-	api->setPresentationHeaderFooter(fileName, dto, password, folderName).get();
-	std::shared_ptr<HeaderFooter> headerFooter = api->getSlideHeaderFooter(fileName, 1, password, folderName).get();
+	utils->getSlidesApi()->setPresentationHeaderFooter(fileName, dto, password, folderName).get();
+	std::shared_ptr<HeaderFooter> headerFooter = utils->getSlidesApi()->getSlideHeaderFooter(fileName, 1, password, folderName).get();
 	EXPECT_TRUE(headerFooter->isIsFooterVisible());
 	EXPECT_FALSE(headerFooter->isIsDateTimeVisible());
 }
@@ -104,10 +72,10 @@ TEST_F(HeaderFooterTest, headerFooterSlide) {
 	dto->setIsFooterVisible(true);
 	dto->setFooterText(L"footer");
 	dto->setIsDateTimeVisible(false);
-	std::shared_ptr<HeaderFooter> headerFooter = api->setSlideHeaderFooter(fileName, slideIndex, dto, password, folderName).get();
+	std::shared_ptr<HeaderFooter> headerFooter = utils->getSlidesApi()->setSlideHeaderFooter(fileName, slideIndex, dto, password, folderName).get();
 	EXPECT_TRUE(headerFooter->isIsFooterVisible());
 	EXPECT_FALSE(headerFooter->isIsDateTimeVisible());
-	headerFooter = api->getSlideHeaderFooter(fileName, 1, password, folderName).get();
+	headerFooter = utils->getSlidesApi()->getSlideHeaderFooter(fileName, 1, password, folderName).get();
 	EXPECT_TRUE(headerFooter->isIsFooterVisible());
 	EXPECT_FALSE(headerFooter->isIsDateTimeVisible());
 }
@@ -123,10 +91,10 @@ TEST_F(HeaderFooterTest, headerFooterNotesSlide) {
 	dto->setIsHeaderVisible(true);
 	dto->setFooterText(L"footer");
 	dto->setIsDateTimeVisible(false);
-	std::shared_ptr<NotesSlideHeaderFooter> headerFooter = api->setNotesSlideHeaderFooter(fileName, slideIndex, dto, password, folderName).get();
+	std::shared_ptr<NotesSlideHeaderFooter> headerFooter = utils->getSlidesApi()->setNotesSlideHeaderFooter(fileName, slideIndex, dto, password, folderName).get();
 	EXPECT_TRUE(headerFooter->isIsHeaderVisible());
 	EXPECT_FALSE(headerFooter->isIsDateTimeVisible());
-	headerFooter = api->getNotesSlideHeaderFooter(fileName, 1, password, folderName).get();
+	headerFooter = utils->getSlidesApi()->getNotesSlideHeaderFooter(fileName, 1, password, folderName).get();
 	EXPECT_TRUE(headerFooter->isIsHeaderVisible());
 	EXPECT_FALSE(headerFooter->isIsDateTimeVisible());
 }

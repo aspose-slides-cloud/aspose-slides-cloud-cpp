@@ -28,53 +28,21 @@
 #include "TestUtils.h"
 #include "model/SolidFill.h"
 
-using namespace asposeslidescloud::api;
-
 class ShapeFormatTest : public ::testing::Test
 {
 public:
-	static SlidesApi* api;
 	static TestUtils* utils;
 
 protected:
 	void SetUp()
 	{
-		if (api == nullptr)
+		if (utils == nullptr)
 		{
-			std::ifstream rulesFile("testConfig.json");
-			std::string rulesString;
-			std::ostringstream rulesStream;
-			rulesStream << rulesFile.rdbuf();
-			rulesString = rulesStream.str();
-			web::json::value config = web::json::value::parse(utility::conversions::to_string_t(rulesString));
-			std::shared_ptr<ApiConfiguration> configuration = std::make_shared<ApiConfiguration>();
-			if (config.has_field(L"ClientId"))
-			{
-				configuration->setAppSid(config[L"ClientId"].as_string());
-			}
-			if (config.has_field(L"ClientSecret"))
-			{
-				configuration->setAppKey(config[L"ClientSecret"].as_string());
-			}
-			if (config.has_field(L"BaseUrl"))
-			{
-				configuration->setBaseUrl(config[L"BaseUrl"].as_string());
-			}
-			if (config.has_field(L"AuthBaseUrl"))
-			{
-				configuration->setBaseAuthUrl(config[L"AuthBaseUrl"].as_string());
-			}
-			if (config.has_field(L"Debug"))
-			{
-				configuration->setDebug(config[L"Debug"].as_bool());
-			}
-			api = new SlidesApi(configuration);
-			utils = new TestUtils(api);
+			utils = new TestUtils();
 		}
 	}
 };
 
-SlidesApi* ShapeFormatTest::api = nullptr;
 TestUtils* ShapeFormatTest::utils = nullptr;
 
 TEST_F(ShapeFormatTest, shapeFormatLine) {
@@ -90,8 +58,8 @@ TEST_F(ShapeFormatTest, shapeFormatLine) {
 	lineFormat->setWidth(7);
 	lineFormat->setDashStyle(L"Dash");
 	dto->setLineFormat(lineFormat);
-	api->updateShape(fileName, slideIndex, shapeIndex, dto, password, folderName).wait();
-	std::shared_ptr<ShapeBase> result = api->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
+	utils->getSlidesApi()->updateShape(fileName, slideIndex, shapeIndex, dto, password, folderName).wait();
+	std::shared_ptr<ShapeBase> result = utils->getSlidesApi()->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
 	EXPECT_EQ(dto->getLineFormat()->getWidth(), result->getLineFormat()->getWidth());
 }
 
@@ -106,8 +74,8 @@ TEST_F(ShapeFormatTest, shapeFormatFill) {
 	std::shared_ptr<SolidFill> fillFormat(new SolidFill());
 	fillFormat->setColor(L"#FFFFFF00");
 	dto->setFillFormat(fillFormat);
-	api->updateShape(fileName, slideIndex, shapeIndex, dto, password, folderName).wait();
-	std::shared_ptr<ShapeBase> result = api->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
+	utils->getSlidesApi()->updateShape(fileName, slideIndex, shapeIndex, dto, password, folderName).wait();
+	std::shared_ptr<ShapeBase> result = utils->getSlidesApi()->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
 	EXPECT_EQ(std::static_pointer_cast<SolidFill>(dto->getFillFormat())->getColor(), std::static_pointer_cast<SolidFill>(result->getFillFormat())->getColor());
 }
 
@@ -127,8 +95,8 @@ TEST_F(ShapeFormatTest, shapeFormatEffect) {
 	innerShadow->setShadowColor(L"#FFFFFF00");
 	effectFormat->setInnerShadow(innerShadow);
 	dto->setEffectFormat(effectFormat);
-	api->updateShape(fileName, slideIndex, shapeIndex, dto, password, folderName).wait();
-	std::shared_ptr<ShapeBase> result = api->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
+	utils->getSlidesApi()->updateShape(fileName, slideIndex, shapeIndex, dto, password, folderName).wait();
+	std::shared_ptr<ShapeBase> result = utils->getSlidesApi()->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
 	EXPECT_EQ(dto->getEffectFormat()->getInnerShadow()->getDirection(), result->getEffectFormat()->getInnerShadow()->getDirection());
 }
 
@@ -155,7 +123,7 @@ TEST_F(ShapeFormatTest, shapeFormat3D) {
 	lightRig->setDirection(L"Top");
 	threeDFormat->setLightRig(lightRig);
 	dto->setThreeDFormat(threeDFormat);
-	api->updateShape(fileName, slideIndex, shapeIndex, dto, password, folderName).wait();
-	std::shared_ptr<ShapeBase> result = api->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
+	utils->getSlidesApi()->updateShape(fileName, slideIndex, shapeIndex, dto, password, folderName).wait();
+	std::shared_ptr<ShapeBase> result = utils->getSlidesApi()->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
 	EXPECT_EQ(dto->getThreeDFormat()->getDepth(), result->getThreeDFormat()->getDepth());
 }

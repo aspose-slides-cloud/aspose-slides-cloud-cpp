@@ -28,67 +28,35 @@
 
 #include "TestUtils.h"
 
-using namespace asposeslidescloud::api;
-
 class MergeTest : public ::testing::Test
 {
 public:
-	static SlidesApi* api;
 	static TestUtils* utils;
 
 protected:
 	void SetUp()
 	{
-		if (api == nullptr)
+		if (utils == nullptr)
 		{
-			std::ifstream rulesFile("testConfig.json");
-			std::string rulesString;
-			std::ostringstream rulesStream;
-			rulesStream << rulesFile.rdbuf();
-			rulesString = rulesStream.str();
-			web::json::value config = web::json::value::parse(utility::conversions::to_string_t(rulesString));
-			std::shared_ptr<ApiConfiguration> configuration = std::make_shared<ApiConfiguration>();
-			if (config.has_field(L"ClientId"))
-			{
-				configuration->setAppSid(config[L"ClientId"].as_string());
-			}
-			if (config.has_field(L"ClientSecret"))
-			{
-				configuration->setAppKey(config[L"ClientSecret"].as_string());
-			}
-			if (config.has_field(L"BaseUrl"))
-			{
-				configuration->setBaseUrl(config[L"BaseUrl"].as_string());
-			}
-			if (config.has_field(L"AuthBaseUrl"))
-			{
-				configuration->setBaseAuthUrl(config[L"AuthBaseUrl"].as_string());
-			}
-			if (config.has_field(L"Debug"))
-			{
-				configuration->setDebug(config[L"Debug"].as_bool());
-			}
-			api = new SlidesApi(configuration);
-			utils = new TestUtils(api);
+			utils = new TestUtils();
 		}
 	}
 };
 
-SlidesApi* MergeTest::api = nullptr;
 TestUtils* MergeTest::utils = nullptr;
 
 TEST_F(MergeTest, mergeStorage) {
 	utils->initialize("", "", "");
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t fileName2 = L"test-unprotected.pptx";
-	api->copyFile(L"TempTests/" + fileName2, folderName + L"/" + fileName2).get();
+	utils->getSlidesApi()->copyFile(L"TempTests/" + fileName2, folderName + L"/" + fileName2).get();
 
 	utility::string_t fileNamePdf = L"test.pdf";
-	api->copyFile(L"TempTests/" + fileNamePdf, folderName + L"/" + fileNamePdf).get();
+	utils->getSlidesApi()->copyFile(L"TempTests/" + fileNamePdf, folderName + L"/" + fileNamePdf).get();
 
 	std::shared_ptr<PresentationsMergeRequest> request(new PresentationsMergeRequest());
 	request->setPresentationPaths({ folderName + L"/" + fileName2, folderName + L"/" + fileNamePdf });
-	std::shared_ptr<Document> result = api->merge(L"test.pptx", request, L"password", folderName).get();
+	std::shared_ptr<Document> result = utils->getSlidesApi()->merge(L"test.pptx", request, L"password", folderName).get();
 	EXPECT_NE(nullptr, result);
 }
 
@@ -96,17 +64,17 @@ TEST_F(MergeTest, mergeOrderedStorage) {
 	utils->initialize("", "", "");
 	utility::string_t folderName = L"TempSlidesSDK";
 	utility::string_t fileName2 = L"test-unprotected.pptx";
-	api->copyFile(L"TempTests/" + fileName2, folderName + L"/" + fileName2).get();
+	utils->getSlidesApi()->copyFile(L"TempTests/" + fileName2, folderName + L"/" + fileName2).get();
 
 	utility::string_t fileNamePdf = L"test.pdf";
-	api->copyFile(L"TempTests/" + fileNamePdf, folderName + L"/" + fileNamePdf).get();
+	utils->getSlidesApi()->copyFile(L"TempTests/" + fileNamePdf, folderName + L"/" + fileNamePdf).get();
 
 	std::shared_ptr<OrderedMergeRequest> request(new OrderedMergeRequest());
 	std::shared_ptr<PresentationToMerge> presentation(new PresentationToMerge());
 	presentation->setPath(folderName + L"/" + fileName2);
 	presentation->setSlides({ 2, 1 });
 	request->setPresentations({ presentation });
-	std::shared_ptr<Document> result = api->orderedMerge(L"test.pptx", request, L"password", folderName).get();
+	std::shared_ptr<Document> result = utils->getSlidesApi()->orderedMerge(L"test.pptx", request, L"password", folderName).get();
 	EXPECT_NE(nullptr, result);
 }
 
@@ -117,7 +85,7 @@ TEST_F(MergeTest, mergeRequest) {
 	data1->setData(std::make_shared<std::ifstream>(L"TestData/TemplateCV.pptx", std::ios::binary));
 	std::shared_ptr<HttpContent> data2 = std::make_shared<HttpContent>();
 	data2->setData(std::make_shared<std::ifstream>(L"TestData/test-unprotected.pptx", std::ios::binary));
-	HttpContent result = api->mergeOnline({ data1, data2 }).get();
+	HttpContent result = utils->getSlidesApi()->mergeOnline({ data1, data2 }).get();
 	EXPECT_NE(nullptr, result.getData());
 }
 
@@ -128,8 +96,8 @@ TEST_F(MergeTest, mergeAndSaveRequest) {
 	data1->setData(std::make_shared<std::ifstream>(L"TestData/TemplateCV.pptx", std::ios::binary));
 	std::shared_ptr<HttpContent> data2 = std::make_shared<HttpContent>();
 	data2->setData(std::make_shared<std::ifstream>(L"TestData/test-unprotected.pptx", std::ios::binary));
-	api->mergeAndSaveOnline(outPath, { data1, data2 }).wait();
-	std::shared_ptr<ObjectExist> exists = api->objectExists(outPath).get();
+	utils->getSlidesApi()->mergeAndSaveOnline(outPath, { data1, data2 }).wait();
+	std::shared_ptr<ObjectExist> exists = utils->getSlidesApi()->objectExists(outPath).get();
 	EXPECT_TRUE(exists->isExists());
 }
 
@@ -149,7 +117,7 @@ TEST_F(MergeTest, mergeOrderedRequest) {
 	presentation2->setPath(L"file2");
 	presentation2->setSlides({ 1, 2 });
 	request->setPresentations({ presentation1, presentation2 });
-	HttpContent result = api->mergeOnline({ data1, data2 }, request).get();
+	HttpContent result = utils->getSlidesApi()->mergeOnline({ data1, data2 }, request).get();
 	EXPECT_NE(nullptr, result.getData());
 }
 
@@ -168,7 +136,7 @@ TEST_F(MergeTest, mergeOrderedCombined) {
 	presentation2->setPath(L"file1");
 	presentation2->setSlides({ 1, 2 });
 	request->setPresentations({ presentation1, presentation2 });
-	HttpContent result = api->mergeOnline({ data }, request).get();
+	HttpContent result = utils->getSlidesApi()->mergeOnline({ data }, request).get();
 	EXPECT_NE(nullptr, result.getData());
 }
 
@@ -185,6 +153,6 @@ TEST_F(MergeTest, mergeOrderedUrl) {
 	presentation2->setSource(L"Url");
 	presentation2->setSlides({ 1 });
 	request->setPresentations({ presentation1, presentation2 });
-	HttpContent result = api->mergeOnline({}, request).get();
+	HttpContent result = utils->getSlidesApi()->mergeOnline({}, request).get();
 	EXPECT_NE(nullptr, result.getData());
 }

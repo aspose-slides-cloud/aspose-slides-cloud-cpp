@@ -28,53 +28,21 @@
 
 #include "TestUtils.h"
 
-using namespace asposeslidescloud::api;
-
 class AnimationTest : public ::testing::Test
 {
 public:
-	static SlidesApi* api;
 	static TestUtils* utils;
 
 protected:
 	void SetUp()
 	{
-		if (api == nullptr)
+		if (utils == nullptr)
 		{
-			std::ifstream rulesFile("testConfig.json");
-			std::string rulesString;
-			std::ostringstream rulesStream;
-			rulesStream << rulesFile.rdbuf();
-			rulesString = rulesStream.str();
-			web::json::value config = web::json::value::parse(utility::conversions::to_string_t(rulesString));
-			std::shared_ptr<ApiConfiguration> configuration = std::make_shared<ApiConfiguration>();
-			if (config.has_field(utility::conversions::to_string_t("ClientId")))
-			{
-				configuration->setAppSid(config[utility::conversions::to_string_t("ClientId")].as_string());
-			}
-			if (config.has_field(utility::conversions::to_string_t("ClientSecret")))
-			{
-				configuration->setAppKey(config[utility::conversions::to_string_t("ClientSecret")].as_string());
-			}
-			if (config.has_field(utility::conversions::to_string_t("BaseUrl")))
-			{
-				configuration->setBaseUrl(config[utility::conversions::to_string_t("BaseUrl")].as_string());
-			}
-			if (config.has_field(utility::conversions::to_string_t("AuthBaseUrl")))
-			{
-				configuration->setBaseAuthUrl(config[utility::conversions::to_string_t("AuthBaseUrl")].as_string());
-			}
-			if (config.has_field(utility::conversions::to_string_t("Debug")))
-			{
-				configuration->setDebug(config[utility::conversions::to_string_t("Debug")].as_bool());
-			}
-			api = new SlidesApi(configuration);
-			utils = new TestUtils(api);
+			utils = new TestUtils();
 		}
 	}
 };
 
-SlidesApi* AnimationTest::api = nullptr;
 TestUtils* AnimationTest::utils = nullptr;
 
 TEST_F(AnimationTest, animationGet) {
@@ -84,15 +52,15 @@ TEST_F(AnimationTest, animationGet) {
 	utility::string_t password = L"password";
 	int32_t slideIndex = 1;
 
-	std::shared_ptr<SlideAnimation> result = api->getAnimation(fileName, slideIndex, boost::none, boost::none, password, folderName).get();
+	std::shared_ptr<SlideAnimation> result = utils->getSlidesApi()->getAnimation(fileName, slideIndex, boost::none, boost::none, password, folderName).get();
 	EXPECT_EQ(1, result->getMainSequence().size());
 	EXPECT_EQ(1, result->getInteractiveSequences().size());
 
-	result = api->getAnimation(fileName, slideIndex, 3, boost::none, password, folderName).get();
+	result = utils->getSlidesApi()->getAnimation(fileName, slideIndex, 3, boost::none, password, folderName).get();
 	EXPECT_EQ(1, result->getMainSequence().size());
 	EXPECT_EQ(0, result->getInteractiveSequences().size());
 
-	result = api->getAnimation(fileName, slideIndex, 3, 1, password, folderName).get();
+	result = utils->getSlidesApi()->getAnimation(fileName, slideIndex, 3, 1, password, folderName).get();
 	EXPECT_EQ(0, result->getMainSequence().size());
 	EXPECT_EQ(0, result->getInteractiveSequences().size());
 }
@@ -116,7 +84,7 @@ TEST_F(AnimationTest, animationSet) {
 	std::vector<std::shared_ptr<InteractiveSequence>> interactiveSequences = {};
 	dto->setMainSequence(mainSequence);
 	dto->setInteractiveSequences(interactiveSequences);
-	std::shared_ptr<SlideAnimation> result = api->setAnimation(L"test.pptx", 1, dto, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<SlideAnimation> result = utils->getSlidesApi()->setAnimation(L"test.pptx", 1, dto, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(dto->getMainSequence().size(), result->getMainSequence().size());
 	EXPECT_EQ(1, result->getInteractiveSequences().size());
 }
@@ -128,7 +96,7 @@ TEST_F(AnimationTest, animationCreateEffect) {
 	effect->setType(L"Blast");
 	effect->setShapeIndex(3);
 
-	std::shared_ptr<SlideAnimation> result = api->createAnimationEffect(L"test.pptx", 1, effect, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<SlideAnimation> result = utils->getSlidesApi()->createAnimationEffect(L"test.pptx", 1, effect, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(2, result->getMainSequence().size());
 	EXPECT_EQ(1, result->getInteractiveSequences().size());
 }
@@ -143,7 +111,7 @@ TEST_F(AnimationTest, animationCreateInteractiveSequence) {
 	interactiveSequence->setTriggerShapeIndex(2);
 	interactiveSequence->setEffects({ effect });
 
-	std::shared_ptr<SlideAnimation> result = api->createAnimationInteractiveSequence(L"test.pptx", 1, interactiveSequence, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<SlideAnimation> result = utils->getSlidesApi()->createAnimationInteractiveSequence(L"test.pptx", 1, interactiveSequence, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, result->getMainSequence().size());
 	EXPECT_EQ(2, result->getInteractiveSequences().size());
 }
@@ -155,7 +123,7 @@ TEST_F(AnimationTest, animationCreateInteractiveSequenceEffect) {
 	effect->setType(L"Blast");
 	effect->setShapeIndex(3);
 
-	std::shared_ptr<SlideAnimation> result = api->createAnimationInteractiveSequenceEffect(L"test.pptx", 1, 1, effect, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<SlideAnimation> result = utils->getSlidesApi()->createAnimationInteractiveSequenceEffect(L"test.pptx", 1, 1, effect, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, result->getMainSequence().size());
 	EXPECT_EQ(1, result->getInteractiveSequences().size());
 }
@@ -167,7 +135,7 @@ TEST_F(AnimationTest, animationUpdateEffect) {
 	effect->setType(L"Blast");
 	effect->setShapeIndex(3);
 
-	std::shared_ptr<SlideAnimation> result = api->updateAnimationEffect(L"test.pptx", 1, 1, effect, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<SlideAnimation> result = utils->getSlidesApi()->updateAnimationEffect(L"test.pptx", 1, 1, effect, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, result->getMainSequence().size());
 	EXPECT_EQ(1, result->getInteractiveSequences().size());
 }
@@ -179,49 +147,49 @@ TEST_F(AnimationTest, animationUpdateInteractiveSequenceEffect) {
 	effect->setType(L"Blast");
 	effect->setShapeIndex(3);
 
-	std::shared_ptr<SlideAnimation> result = api->updateAnimationInteractiveSequenceEffect(L"test.pptx", 1, 1, 1, effect, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<SlideAnimation> result = utils->getSlidesApi()->updateAnimationInteractiveSequenceEffect(L"test.pptx", 1, 1, 1, effect, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, result->getMainSequence().size());
 	EXPECT_EQ(1, result->getInteractiveSequences().size());
 }
 
 TEST_F(AnimationTest, animationDelete) {
 	utils->initialize("", "", "");
-	std::shared_ptr<SlideAnimation> result = api->deleteAnimation(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<SlideAnimation> result = utils->getSlidesApi()->deleteAnimation(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(0, result->getMainSequence().size());
 	EXPECT_EQ(0, result->getInteractiveSequences().size());
 }
 
 TEST_F(AnimationTest, animationDeleteMainSequence) {
 	utils->initialize("", "", "");
-	std::shared_ptr<SlideAnimation> result = api->deleteAnimationMainSequence(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<SlideAnimation> result = utils->getSlidesApi()->deleteAnimationMainSequence(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(0, result->getMainSequence().size());
 	EXPECT_EQ(1, result->getInteractiveSequences().size());
 }
 
 TEST_F(AnimationTest, animationDeleteMainSequenceEffect) {
 	utils->initialize("", "", "");
-	std::shared_ptr<SlideAnimation> result = api->deleteAnimationEffect(L"test.pptx", 1, 1, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<SlideAnimation> result = utils->getSlidesApi()->deleteAnimationEffect(L"test.pptx", 1, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(0, result->getMainSequence().size());
 	EXPECT_EQ(1, result->getInteractiveSequences().size());
 }
 
 TEST_F(AnimationTest, animationDeleteInteracriveSequences) {
 	utils->initialize("", "", "");
-	std::shared_ptr<SlideAnimation> result = api->deleteAnimationInteractiveSequences(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<SlideAnimation> result = utils->getSlidesApi()->deleteAnimationInteractiveSequences(L"test.pptx", 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, result->getMainSequence().size());
 	EXPECT_EQ(0, result->getInteractiveSequences().size());
 }
 
 TEST_F(AnimationTest, animationDeleteInteracriveSequence) {
 	utils->initialize("", "", "");
-	std::shared_ptr<SlideAnimation> result = api->deleteAnimationInteractiveSequence(L"test.pptx", 1, 1, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<SlideAnimation> result = utils->getSlidesApi()->deleteAnimationInteractiveSequence(L"test.pptx", 1, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, result->getMainSequence().size());
 	EXPECT_EQ(0, result->getInteractiveSequences().size());
 }
 
 TEST_F(AnimationTest, animationDeleteInteracriveSequenceEffect) {
 	utils->initialize("", "", "");
-	std::shared_ptr<SlideAnimation> result = api->deleteAnimationInteractiveSequenceEffect(L"test.pptx", 1, 1, 1, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<SlideAnimation> result = utils->getSlidesApi()->deleteAnimationInteractiveSequenceEffect(L"test.pptx", 1, 1, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, result->getMainSequence().size());
 	EXPECT_EQ(1, result->getInteractiveSequences().size());
 }

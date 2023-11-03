@@ -160,6 +160,7 @@
 #include "model/OleObjectFrame.h"
 #include "model/OneValueChartDataPoint.h"
 #include "model/OneValueSeries.h"
+#include "model/Operation.h"
 #include "model/OrderedMergeRequest.h"
 #include "model/OuterShadowEffect.h"
 #include "model/OutputFile.h"
@@ -1155,6 +1156,12 @@ std::shared_ptr<void> ClassRegistry::deserializeSubclass(utility::string_t class
 		result->fromJson(json);
 		return result;
 	}
+	if (className == L"Operation")
+	{
+		std::shared_ptr<Operation> result(new Operation());
+		result->fromJson(json);
+		return result;
+	}
 	if (className == L"OrderedMergeRequest")
 	{
 		std::shared_ptr<OrderedMergeRequest> result(new OrderedMergeRequest());
@@ -2133,6 +2140,7 @@ std::map<utility::string_t, std::map<utility::string_t, utility::string_t>> Clas
 	{ L"OleObjectFrame", { { L"Type", L"OleObjectFrame" }, } },
 	{ L"OneValueChartDataPoint", { { L"Type", L"OneValue" }, } },
 	{ L"OneValueSeries", { { L"DataPointType", L"OneValue" }, } },
+	{ L"Operation", { } },
 	{ L"OrderedMergeRequest", { } },
 	{ L"OuterShadowEffect", { } },
 	{ L"OutputFile", { } },

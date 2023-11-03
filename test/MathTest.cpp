@@ -32,58 +32,26 @@
 #include "model/LimitElement.h"
 #include "model/TextElement.h"
 
-using namespace asposeslidescloud::api;
-
 class MathTest : public ::testing::Test
 {
 public:
-	static SlidesApi* api;
 	static TestUtils* utils;
 
 protected:
 	void SetUp()
 	{
-		if (api == nullptr)
+		if (utils == nullptr)
 		{
-			std::ifstream rulesFile("testConfig.json");
-			std::string rulesString;
-			std::ostringstream rulesStream;
-			rulesStream << rulesFile.rdbuf();
-			rulesString = rulesStream.str();
-			web::json::value config = web::json::value::parse(utility::conversions::to_string_t(rulesString));
-			std::shared_ptr<ApiConfiguration> configuration = std::make_shared<ApiConfiguration>();
-			if (config.has_field(utility::conversions::to_string_t("ClientId")))
-			{
-				configuration->setAppSid(config[utility::conversions::to_string_t("ClientId")].as_string());
-			}
-			if (config.has_field(utility::conversions::to_string_t("ClientSecret")))
-			{
-				configuration->setAppKey(config[utility::conversions::to_string_t("ClientSecret")].as_string());
-			}
-			if (config.has_field(utility::conversions::to_string_t("BaseUrl")))
-			{
-				configuration->setBaseUrl(config[utility::conversions::to_string_t("BaseUrl")].as_string());
-			}
-			if (config.has_field(utility::conversions::to_string_t("AuthBaseUrl")))
-			{
-				configuration->setBaseAuthUrl(config[utility::conversions::to_string_t("AuthBaseUrl")].as_string());
-			}
-			if (config.has_field(utility::conversions::to_string_t("Debug")))
-			{
-				configuration->setDebug(config[utility::conversions::to_string_t("Debug")].as_bool());
-			}
-			api = new SlidesApi(configuration);
-			utils = new TestUtils(api);
+			utils = new TestUtils();
 		}
 	}
 };
 
-SlidesApi* MathTest::api = nullptr;
 TestUtils* MathTest::utils = nullptr;
 
 TEST_F(MathTest, mathGet) {
 	utils->initialize("", "", "");
-	std::shared_ptr<Portion> portion = api->getPortion(L"test.pptx", 2, 3, 1, 1, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<Portion> portion = utils->getSlidesApi()->getPortion(L"test.pptx", 2, 3, 1, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, portion->getMathParagraph()->getMathBlockList().size());
 	EXPECT_EQ(3, portion->getMathParagraph()->getMathBlockList()[0]->getMathElementList().size());
 	EXPECT_EQ(L"Fraction", portion->getMathParagraph()->getMathBlockList()[0]->getMathElementList()[2]->getType());
@@ -91,7 +59,7 @@ TEST_F(MathTest, mathGet) {
 
 TEST_F(MathTest, mathGetNull) {
 	utils->initialize("", "", "");
-	std::shared_ptr<Portion> portion = api->getPortion(L"test.pptx", 2, 1, 1, 1, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<Portion> portion = utils->getSlidesApi()->getPortion(L"test.pptx", 2, 1, 1, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(nullptr, portion->getMathParagraph());
 }
 
@@ -125,7 +93,7 @@ TEST_F(MathTest, mathCreate) {
 	mathBlock->setMathElementList({ functionElement });
 	mathParagraph->setMathBlockList({ mathBlock });
 	dto->setMathParagraph(mathParagraph);
-	std::shared_ptr<Portion> portion = api->createPortion(L"test.pptx", 1, 1, 1, dto, boost::none, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<Portion> portion = utils->getSlidesApi()->createPortion(L"test.pptx", 1, 1, 1, dto, boost::none, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, portion->getMathParagraph()->getMathBlockList().size());
 	EXPECT_EQ(1, portion->getMathParagraph()->getMathBlockList()[0]->getMathElementList().size());
 	EXPECT_EQ(L"Function", portion->getMathParagraph()->getMathBlockList()[0]->getMathElementList()[0]->getType());
@@ -161,7 +129,7 @@ TEST_F(MathTest, mathUpdate) {
 	mathBlock->setMathElementList({ functionElement });
 	mathParagraph->setMathBlockList({ mathBlock });
 	dto->setMathParagraph(mathParagraph);
-	std::shared_ptr<Portion> portion = api->updatePortion(L"test.pptx", 2, 3, 1, 1, dto, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<Portion> portion = utils->getSlidesApi()->updatePortion(L"test.pptx", 2, 3, 1, 1, dto, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(1, portion->getMathParagraph()->getMathBlockList().size());
 	EXPECT_EQ(1, portion->getMathParagraph()->getMathBlockList()[0]->getMathElementList().size());
 	EXPECT_EQ(L"Function", portion->getMathParagraph()->getMathBlockList()[0]->getMathElementList()[0]->getType());
@@ -169,7 +137,7 @@ TEST_F(MathTest, mathUpdate) {
 
 TEST_F(MathTest, mathDownload) {
 	utils->initialize("", "", "");
-	HttpContent result = api->downloadPortionAsMathMl(L"test.pptx", 2, 3, 1, 1, L"password", L"TempSlidesSDK").get();
+	HttpContent result = utils->getSlidesApi()->downloadPortionAsMathMl(L"test.pptx", 2, 3, 1, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_NE(nullptr, result.getData());
 }
 
@@ -177,7 +145,7 @@ TEST_F(MathTest, mathDownloadNull) {
 	utils->initialize("", "", "");
 	try
 	{
-		api->downloadPortionAsMathMl(L"test.pptx", 2, 1, 1, 1, L"password", L"TempSlidesSDK").get();
+		utils->getSlidesApi()->downloadPortionAsMathMl(L"test.pptx", 2, 1, 1, 1, L"password", L"TempSlidesSDK").get();
 		FAIL() << "Must have failed";
 	}
 	catch (ApiException ex)
@@ -189,7 +157,7 @@ TEST_F(MathTest, mathDownloadNull) {
 TEST_F(MathTest, mathSave) {
 	utils->initialize("", "", "");
 	utility::string_t outPath = L"TempSlidesSDK/mathml.xml";
-	api->savePortionAsMathMl(L"test.pptx", 2, 3, 1, 1, outPath, L"password", L"TempSlidesSDK").wait();
-	std::shared_ptr<ObjectExist> exists = api->objectExists(outPath).get();
+	utils->getSlidesApi()->savePortionAsMathMl(L"test.pptx", 2, 3, 1, 1, outPath, L"password", L"TempSlidesSDK").wait();
+	std::shared_ptr<ObjectExist> exists = utils->getSlidesApi()->objectExists(outPath).get();
 	EXPECT_TRUE(exists->isExists());
 }

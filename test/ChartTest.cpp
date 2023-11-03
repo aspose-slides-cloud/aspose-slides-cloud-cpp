@@ -32,53 +32,21 @@
 #include "model/SolidFill.h"
 #include "model/GradientFill.h"
 
-using namespace asposeslidescloud::api;
-
 class ChartTest : public ::testing::Test
 {
 public:
-	static SlidesApi* api;
 	static TestUtils* utils;
 
 protected:
 	void SetUp()
 	{
-		if (api == nullptr)
+		if (utils == nullptr)
 		{
-			std::ifstream rulesFile("testConfig.json");
-			std::string rulesString;
-			std::ostringstream rulesStream;
-			rulesStream << rulesFile.rdbuf();
-			rulesString = rulesStream.str();
-			web::json::value config = web::json::value::parse(utility::conversions::to_string_t(rulesString));
-			std::shared_ptr<ApiConfiguration> configuration = std::make_shared<ApiConfiguration>();
-			if (config.has_field(L"ClientId"))
-			{
-				configuration->setAppSid(config[L"ClientId"].as_string());
-			}
-			if (config.has_field(L"ClientSecret"))
-			{
-				configuration->setAppKey(config[L"ClientSecret"].as_string());
-			}
-			if (config.has_field(L"BaseUrl"))
-			{
-				configuration->setBaseUrl(config[L"BaseUrl"].as_string());
-			}
-			if (config.has_field(L"AuthBaseUrl"))
-			{
-				configuration->setBaseAuthUrl(config[L"AuthBaseUrl"].as_string());
-			}
-			if (config.has_field(L"Debug"))
-			{
-				configuration->setDebug(config[L"Debug"].as_bool());
-			}
-			api = new SlidesApi(configuration);
-			utils = new TestUtils(api);
+			utils = new TestUtils();
 		}
 	}
 };
 
-SlidesApi* ChartTest::api = nullptr;
 TestUtils* ChartTest::utils = nullptr;
 
 TEST_F(ChartTest, chartInit) {
@@ -88,7 +56,7 @@ TEST_F(ChartTest, chartInit) {
 
 TEST_F(ChartTest, chartGet) {
 	utils->initialize("", "", "");
-	std::shared_ptr<ShapeBase> result = api->getShape(L"test.pptx", 3, 1, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<ShapeBase> result = utils->getSlidesApi()->getShape(L"test.pptx", 3, 1, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(L"Chart", result->getType());
 	std::shared_ptr<Chart> chart = std::dynamic_pointer_cast<Chart>(result);
 	EXPECT_EQ(3, chart->getSeries().size());
@@ -131,7 +99,7 @@ TEST_F(ChartTest, chartCreate) {
 	std::shared_ptr<ChartCategory> category3(new ChartCategory());
 	category3->setValue(L"Category3");
 	chart->setCategories({ category1, category2, category3 });
-	std::shared_ptr<ShapeBase> shape = api->createShape(L"test.pptx", 3, chart, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<ShapeBase> shape = utils->getSlidesApi()->createShape(L"test.pptx", 3, chart, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
 	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(2, resultChart->getSeries().size());
 	EXPECT_EQ(3, resultChart->getCategories().size());
@@ -173,7 +141,7 @@ TEST_F(ChartTest, chartUpdate) {
 	std::shared_ptr<ChartCategory> category3(new ChartCategory());
 	category3->setValue(L"Category3");
 	chart->setCategories({ category1, category2, category3 });
-	std::shared_ptr<ShapeBase> shape = api->updateShape(L"test.pptx", 3, 1, chart, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<ShapeBase> shape = utils->getSlidesApi()->updateShape(L"test.pptx", 3, 1, chart, L"password", L"TempSlidesSDK").get();
 	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(2, resultChart->getSeries().size());
 	EXPECT_EQ(3, resultChart->getCategories().size());
@@ -194,7 +162,7 @@ TEST_F(ChartTest, chartSeriesCreate) {
 	point4->setValue(70);
 	series->setDataPoints({ point1, point2, point3, point4 });
 
-	std::shared_ptr<ShapeBase> shape = api->createChartSeries(L"test.pptx", 3, 1, series, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<ShapeBase> shape = utils->getSlidesApi()->createChartSeries(L"test.pptx", 3, 1, series, L"password", L"TempSlidesSDK").get();
 	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(4, resultChart->getSeries().size());
 	EXPECT_EQ(4, resultChart->getCategories().size());
@@ -215,7 +183,7 @@ TEST_F(ChartTest, chartSeriesUpdate) {
 	point4->setValue(70);
 	series->setDataPoints({ point1, point2, point3, point4 });
 
-	std::shared_ptr<ShapeBase> shape = api->updateChartSeries(L"test.pptx", 3, 1, 2, series, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<ShapeBase> shape = utils->getSlidesApi()->updateChartSeries(L"test.pptx", 3, 1, 2, series, L"password", L"TempSlidesSDK").get();
 	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(3, resultChart->getSeries().size());
 	EXPECT_EQ(4, resultChart->getCategories().size());
@@ -223,7 +191,7 @@ TEST_F(ChartTest, chartSeriesUpdate) {
 
 TEST_F(ChartTest, chartSeriesDelete) {
 	utils->initialize("", "", "");
-	std::shared_ptr<ShapeBase> shape = api->deleteChartSeries(L"test.pptx", 3, 1, 2, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<ShapeBase> shape = utils->getSlidesApi()->deleteChartSeries(L"test.pptx", 3, 1, 2, L"password", L"TempSlidesSDK").get();
 	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(2, resultChart->getSeries().size());
 	EXPECT_EQ(4, resultChart->getCategories().size());
@@ -241,7 +209,7 @@ TEST_F(ChartTest, chartCategoryCreate) {
 	std::shared_ptr<OneValueChartDataPoint> point3(new OneValueChartDataPoint());
 	point3->setValue(14);
 	category->setDataPoints({ point1, point2, point3 });
-	std::shared_ptr<ShapeBase> shape = api->createChartCategory(L"test.pptx", 3, 1, category, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<ShapeBase> shape = utils->getSlidesApi()->createChartCategory(L"test.pptx", 3, 1, category, L"password", L"TempSlidesSDK").get();
 	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(3, resultChart->getSeries().size());
 	EXPECT_EQ(5, resultChart->getCategories().size());
@@ -262,7 +230,7 @@ TEST_F(ChartTest, chartCategoryUpdate) {
 	std::shared_ptr<OneValueChartDataPoint> point3(new OneValueChartDataPoint());
 	point3->setValue(14);
 	category->setDataPoints({ point1, point2, point3 });
-	std::shared_ptr<ShapeBase> shape = api->updateChartCategory(L"test.pptx", 3, 1, 2, category, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<ShapeBase> shape = utils->getSlidesApi()->updateChartCategory(L"test.pptx", 3, 1, 2, category, L"password", L"TempSlidesSDK").get();
 	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(3, resultChart->getSeries().size());
 	EXPECT_EQ(4, resultChart->getCategories().size());
@@ -273,7 +241,7 @@ TEST_F(ChartTest, chartCategoryUpdate) {
 
 TEST_F(ChartTest, chartCategoryDelete) {
 	utils->initialize("", "", "");
-	std::shared_ptr<ShapeBase> shape = api->deleteChartCategory(L"test.pptx", 3, 1, 2, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<ShapeBase> shape = utils->getSlidesApi()->deleteChartCategory(L"test.pptx", 3, 1, 2, L"password", L"TempSlidesSDK").get();
 	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(3, resultChart->getSeries().size());
 	EXPECT_EQ(3, resultChart->getCategories().size());
@@ -288,7 +256,7 @@ TEST_F(ChartTest, chartDataPointCreate) {
 	point->setValue(40);
 	try
 	{
-		api->createChartDataPoint(L"test.pptx", 3, 1, 2, point, L"password", L"TempSlidesSDK").wait();
+		utils->getSlidesApi()->createChartDataPoint(L"test.pptx", 3, 1, 2, point, L"password", L"TempSlidesSDK").wait();
 		FAIL() << "Must have failed";
 	}
 	catch (ApiException ex)
@@ -302,7 +270,7 @@ TEST_F(ChartTest, chartDataPointUpdate) {
 
 	std::shared_ptr<OneValueChartDataPoint> point(new OneValueChartDataPoint());
 	point->setValue(40);
-	std::shared_ptr<ShapeBase> shape = api->updateChartDataPoint(L"test.pptx", 3, 1, 2, 2, point, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<ShapeBase> shape = utils->getSlidesApi()->updateChartDataPoint(L"test.pptx", 3, 1, 2, 2, point, L"password", L"TempSlidesSDK").get();
 	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(3, resultChart->getSeries().size());
 	EXPECT_EQ(4, resultChart->getCategories().size());
@@ -314,7 +282,7 @@ TEST_F(ChartTest, chartDataPointUpdate) {
 TEST_F(ChartTest, chartDataPointDelete) {
 	utils->initialize("", "", "");
 
-	std::shared_ptr<ShapeBase> shape = api->deleteChartDataPoint(L"test.pptx", 3, 1, 2, 2, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<ShapeBase> shape = utils->getSlidesApi()->deleteChartDataPoint(L"test.pptx", 3, 1, 2, 2, L"password", L"TempSlidesSDK").get();
 	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(3, resultChart->getSeries().size());
 	EXPECT_EQ(4, resultChart->getCategories().size());
@@ -356,7 +324,7 @@ TEST_F(ChartTest, chartSunburst) {
 	std::shared_ptr<ChartCategory> category4(new ChartCategory());
 	category4->setValue(L"Stem2");
 	chart->setCategories({ category1, category2, category3, category4 });
-	std::shared_ptr<ShapeBase> shape = api->createShape(L"test.pptx", 3, chart, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<ShapeBase> shape = utils->getSlidesApi()->createShape(L"test.pptx", 3, chart, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
 	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(1, resultChart->getSeries().size());
 	EXPECT_EQ(4, resultChart->getCategories().size());
@@ -414,7 +382,7 @@ TEST_F(ChartTest, chartMultilevelCategoryAxis) {
 	std::shared_ptr<ChartCategory> category8(new ChartCategory());
 	category8->setValue(L"Category8");
 	chart->setCategories({ category1, category2, category3, category4, category5, category6, category7, category8 });
-	std::shared_ptr<ShapeBase> shape = api->createShape(L"test.pptx", 3, chart, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<ShapeBase> shape = utils->getSlidesApi()->createShape(L"test.pptx", 3, chart, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
 	std::shared_ptr<Chart> resultChart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(1, resultChart->getSeries().size());
 	EXPECT_EQ(8, resultChart->getCategories().size());
@@ -429,10 +397,10 @@ TEST_F(ChartTest, chartHideChartLegend) {
 	int slideIndex = 3;
 	int shapeIndex = 1;
 
-	std::shared_ptr<ShapeBase> shape = api->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
+	std::shared_ptr<ShapeBase> shape = utils->getSlidesApi()->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
 	std::shared_ptr<Chart> chart = std::static_pointer_cast<Chart>(shape);
 	chart->getLegend()->setHasLegend(false);
-	shape = api->updateShape(fileName, slideIndex, shapeIndex, chart, password, folderName).get();
+	shape = utils->getSlidesApi()->updateShape(fileName, slideIndex, shapeIndex, chart, password, folderName).get();
 	chart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(false, chart->getLegend()->isHasLegend());
 }
@@ -446,7 +414,7 @@ TEST_F(ChartTest, chartGridLinesFormat) {
 	int slideIndex = 3;
 	int shapeIndex = 1;
 
-	std::shared_ptr<ShapeBase> shape = api->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
+	std::shared_ptr<ShapeBase> shape = utils->getSlidesApi()->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
 	std::shared_ptr<Chart> chart = std::static_pointer_cast<Chart>(shape);
 
 	std::shared_ptr<Axis> horizontalAxis(new Axis());
@@ -491,7 +459,7 @@ TEST_F(ChartTest, chartGridLinesFormat) {
 	axes->setHorizontalAxis(horizontalAxis);
 	axes->setVerticalAxis(verticalAxis);
 	chart->setAxes(axes);
-	shape = api->updateShape(fileName, slideIndex, shapeIndex, chart, password, folderName).get();
+	shape = utils->getSlidesApi()->updateShape(fileName, slideIndex, shapeIndex, chart, password, folderName).get();
 	chart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(L"NoFill", chart->getAxes()->getHorizontalAxis()->getMajorGridLinesFormat()->getLineFormat()->getFillFormat()->getType());
 	EXPECT_EQ(L"Solid", chart->getAxes()->getHorizontalAxis()->getMinorGridLinesFormat()->getLineFormat()->getFillFormat()->getType());

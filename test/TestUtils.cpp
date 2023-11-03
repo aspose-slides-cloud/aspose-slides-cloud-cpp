@@ -26,13 +26,67 @@
 #include "TestUtils.h"
 #include <boost/filesystem.hpp>
 #include <boost/regex.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/thread/thread.hpp>
 
 using namespace asposeslidescloud::api;
 
-TestUtils::TestUtils(SlidesApi* api)
+TestUtils::TestUtils()
 {
 	initRules();
-	m_api = api;
+
+	std::ifstream rulesFile("testConfig.json");
+	std::string rulesString;
+	std::ostringstream rulesStream;
+	rulesStream << rulesFile.rdbuf();
+	rulesString = rulesStream.str();
+	web::json::value config = web::json::value::parse(utility::conversions::to_string_t(rulesString));
+	std::shared_ptr<ApiConfiguration> configuration = std::make_shared<ApiConfiguration>();
+	if (config.has_field(utility::conversions::to_string_t("ClientId")))
+	{
+		configuration->setAppSid(config[utility::conversions::to_string_t("ClientId")].as_string());
+	}
+	if (config.has_field(utility::conversions::to_string_t("ClientSecret")))
+	{
+		configuration->setAppKey(config[utility::conversions::to_string_t("ClientSecret")].as_string());
+	}
+	if (config.has_field(utility::conversions::to_string_t("BaseUrl")))
+	{
+		configuration->setBaseUrl(config[utility::conversions::to_string_t("BaseUrl")].as_string());
+	}
+	if (config.has_field(utility::conversions::to_string_t("AuthBaseUrl")))
+	{
+		configuration->setBaseAuthUrl(config[utility::conversions::to_string_t("AuthBaseUrl")].as_string());
+	}
+	if (config.has_field(utility::conversions::to_string_t("Debug")))
+	{
+		configuration->setDebug(config[utility::conversions::to_string_t("Debug")].as_bool());
+	}
+	m_SlidesApi = new SlidesApi(configuration);
+
+	std::shared_ptr<ApiConfiguration> asyncConfiguration = std::make_shared<ApiConfiguration>();
+	if (config.has_field(utility::conversions::to_string_t("ClientId")))
+	{
+		asyncConfiguration->setAppSid(config[utility::conversions::to_string_t("ClientId")].as_string());
+	}
+	if (config.has_field(utility::conversions::to_string_t("ClientSecret")))
+	{
+		asyncConfiguration->setAppKey(config[utility::conversions::to_string_t("ClientSecret")].as_string());
+	}
+	if (config.has_field(utility::conversions::to_string_t("AsyncBaseUrl")))
+	{
+		asyncConfiguration->setBaseUrl(config[utility::conversions::to_string_t("AsyncBaseUrl")].as_string());
+	}
+	if (config.has_field(utility::conversions::to_string_t("AuthBaseUrl")))
+	{
+		asyncConfiguration->setBaseAuthUrl(config[utility::conversions::to_string_t("AuthBaseUrl")].as_string());
+	}
+	if (config.has_field(utility::conversions::to_string_t("Debug")))
+	{
+		asyncConfiguration->setDebug(config[utility::conversions::to_string_t("Debug")].as_bool());
+	}
+	m_SlidesAsyncApi = new SlidesAsyncApi(asyncConfiguration);
+
 	initTestFiles();
 }
 
@@ -85,13 +139,34 @@ void TestUtils::initialize(std::string functionName, std::string parameterName, 
 		utility::string_t action = kvp.second[utility::conversions::to_string_t("Action")].as_string();
 		if (boost::iequals(action, "Put"))
 		{
-			m_api->copyFile(utility::conversions::to_string_t("TempTests/") + kvp.second[utility::conversions::to_string_t("ActualName")].as_string(), kvp.first).wait();
+			m_SlidesApi->copyFile(utility::conversions::to_string_t("TempTests/") + kvp.second[utility::conversions::to_string_t("ActualName")].as_string(), kvp.first).wait();
 		}
 		else if (boost::iequals(action, "Delete"))
 		{
-			m_api->deleteFile(kvp.first).wait();
+			m_SlidesApi->deleteFile(kvp.first).wait();
 		}
 	}
+}
+
+void TestUtils::ensureOperationId()
+{
+	if (s_operationId.empty())
+	{
+		std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
+		data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
+		s_operationId = m_SlidesAsyncApi->startConvert(data, L"pdf", L"password").get();
+		boost::this_thread::sleep(boost::posix_time::seconds(10));
+	}
+}
+
+SlidesApi* TestUtils::getSlidesApi()
+{
+	return m_SlidesApi;
+}
+
+SlidesAsyncApi* TestUtils::getSlidesAsyncApi()
+{
+	return m_SlidesAsyncApi;
 }
 
 bool TestUtils::mustFail(std::string functionName, std::string parameterName, std::string parameterType)
@@ -207,6 +282,11 @@ utility::string_t TestUtils::getTestValue(std::string functionName, std::string 
 			else if (jsonValue.is_string())
 			{
 				value = jsonValue.as_string();
+				if (value == L"#OperationId")
+				{
+					ensureOperationId();
+					return s_operationId;
+				}
 				if (boost::algorithm::starts_with(value, L"@"))
 				{
 					value = value.substr(1, value.length() - 1);
@@ -319,6 +399,10 @@ utility::string_t TestUtils::getInvalidTestValue(std::string functionName, std::
 	else if (ivalueJson->is_string())
 	{
 		utility::string_t ivalue = ivalueJson->as_string();
+		if (ivalue == L"#NewId")
+		{
+			return L"e1613f6e-3cf0-4a40-a7b4-2575eb6529b0";
+		}
 		boost::replace_all(ivalue, "%v", value);
 		return ivalue;
 	}
@@ -402,7 +486,7 @@ void TestUtils::initTestFiles()
 	std::string version = "";
 	std::ostringstream versionStream;
 	try {
-		m_api->downloadFile(utility::conversions::to_string_t("TempTests/version.txt")).get().writeTo(versionStream);
+		m_SlidesApi->downloadFile(utility::conversions::to_string_t("TempTests/version.txt")).get().writeTo(versionStream);
 		version = versionStream.str();
 	}
 	catch (...) {
@@ -416,11 +500,11 @@ void TestUtils::initTestFiles()
 		{
 			std::shared_ptr<HttpContent> uploadContent = std::make_shared<HttpContent>();
 			uploadContent->setData(std::make_shared<std::ifstream>(itr->path().string(), std::ios::binary));
-			m_api->uploadFile(utility::conversions::to_string_t("TempTests/" + itr->path().filename().string()), uploadContent).wait();
+			m_SlidesApi->uploadFile(utility::conversions::to_string_t("TempTests/" + itr->path().filename().string()), uploadContent).wait();
 		}
 		std::shared_ptr<HttpContent> uploadContent = std::make_shared<HttpContent>();
 		uploadContent->setData(std::make_shared<std::stringstream>(TEST_DATA_VERSION));
-		m_api->uploadFile(utility::conversions::to_string_t("TempTests/version.txt"), uploadContent).wait();
+		m_SlidesApi->uploadFile(utility::conversions::to_string_t("TempTests/version.txt"), uploadContent).wait();
 	}
 }
 
@@ -476,4 +560,5 @@ utility::string_t TestUtils::getFileDataAsBase64(utility::string_t path)
 	return utility::conversions::to_base64(udata);
 }
 
+utility::string_t TestUtils::s_operationId;
 const std::string TestUtils::TEST_DATA_VERSION = "1";

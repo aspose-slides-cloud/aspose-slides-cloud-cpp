@@ -29,53 +29,21 @@
 #include "TestUtils.h"
 #include "model/OneValueSeries.h"
 
-using namespace asposeslidescloud::api;
-
 class NullableFieldTest : public ::testing::Test
 {
 public:
-	static SlidesApi* api;
 	static TestUtils* utils;
 
 protected:
 	void SetUp()
 	{
-		if (api == nullptr)
+		if (utils == nullptr)
 		{
-			std::ifstream rulesFile("testConfig.json");
-			std::string rulesString;
-			std::ostringstream rulesStream;
-			rulesStream << rulesFile.rdbuf();
-			rulesString = rulesStream.str();
-			web::json::value config = web::json::value::parse(utility::conversions::to_string_t(rulesString));
-			std::shared_ptr<ApiConfiguration> configuration = std::make_shared<ApiConfiguration>();
-			if (config.has_field(L"ClientId"))
-			{
-				configuration->setAppSid(config[L"ClientId"].as_string());
-			}
-			if (config.has_field(L"ClientSecret"))
-			{
-				configuration->setAppKey(config[L"ClientSecret"].as_string());
-			}
-			if (config.has_field(L"BaseUrl"))
-			{
-				configuration->setBaseUrl(config[L"BaseUrl"].as_string());
-			}
-			if (config.has_field(L"AuthBaseUrl"))
-			{
-				configuration->setBaseAuthUrl(config[L"AuthBaseUrl"].as_string());
-			}
-			if (config.has_field(L"Debug"))
-			{
-				configuration->setDebug(config[L"Debug"].as_bool());
-			}
-			api = new SlidesApi(configuration);
-			utils = new TestUtils(api);
+			utils = new TestUtils();
 		}
 	}
 };
 
-SlidesApi* NullableFieldTest::api = nullptr;
 TestUtils* NullableFieldTest::utils = nullptr;
 
 TEST_F(NullableFieldTest, nullableProperties) {
@@ -123,8 +91,8 @@ TEST_F(NullableFieldTest, nullableProperties) {
 	axis->setMaxValue(max1);
 	axes->setHorizontalAxis(axis);
 	dto->setAxes(axes);
-	api->createShape(fileName, slideIndex, dto, boost::none, boost::none, password, folderName).wait();
-	std::shared_ptr<ShapeBase> shape = api->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
+	utils->getSlidesApi()->createShape(fileName, slideIndex, dto, boost::none, boost::none, password, folderName).wait();
+	std::shared_ptr<ShapeBase> shape = utils->getSlidesApi()->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
 	std::shared_ptr<Chart> chart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(min1, chart->getAxes()->getHorizontalAxis()->getMinValue());
 	EXPECT_EQ(max1, chart->getAxes()->getHorizontalAxis()->getMaxValue());
@@ -135,8 +103,8 @@ TEST_F(NullableFieldTest, nullableProperties) {
 	axis2->setMinValue(min2);
 	axes2->setHorizontalAxis(axis2);
 	dto2->setAxes(axes2);
-	api->updateShape(fileName, slideIndex, shapeIndex, dto2, password, folderName).wait();
-	shape = api->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
+	utils->getSlidesApi()->updateShape(fileName, slideIndex, shapeIndex, dto2, password, folderName).wait();
+	shape = utils->getSlidesApi()->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
 	chart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(min2, chart->getAxes()->getHorizontalAxis()->getMinValue());
 	EXPECT_EQ(max1, chart->getAxes()->getHorizontalAxis()->getMaxValue());
@@ -147,8 +115,8 @@ TEST_F(NullableFieldTest, nullableProperties) {
 	axis3->setMaxValue(max2);
 	axes3->setHorizontalAxis(axis3);
 	dto3->setAxes(axes3);
-	api->updateShape(fileName, slideIndex, shapeIndex, dto3, password, folderName).wait();
-	shape = api->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
+	utils->getSlidesApi()->updateShape(fileName, slideIndex, shapeIndex, dto3, password, folderName).wait();
+	shape = utils->getSlidesApi()->getShape(fileName, slideIndex, shapeIndex, password, folderName).get();
 	chart = std::static_pointer_cast<Chart>(shape);
 	EXPECT_EQ(min2, chart->getAxes()->getHorizontalAxis()->getMinValue());
 	EXPECT_EQ(max2, chart->getAxes()->getHorizontalAxis()->getMaxValue());

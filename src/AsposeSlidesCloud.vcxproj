@@ -126,6 +126,7 @@
     <ClCompile Include="MultipartFormData.cpp" />
     <ClCompile Include="ApiException.cpp" />
     <ClCompile Include="api\SlidesApi.cpp" />
+    <ClCompile Include="api\SlidesAsyncApi.cpp" />
     <ClCompile Include="model\AccentElement.cpp" />
     <ClCompile Include="model\AccessPermissions.cpp" />
     <ClCompile Include="model\AddLayoutSlide.cpp" />
@@ -260,6 +261,7 @@
     <ClCompile Include="model\OleObjectFrame.cpp" />
     <ClCompile Include="model\OneValueChartDataPoint.cpp" />
     <ClCompile Include="model\OneValueSeries.cpp" />
+    <ClCompile Include="model\Operation.cpp" />
     <ClCompile Include="model\OrderedMergeRequest.cpp" />
     <ClCompile Include="model\OuterShadowEffect.cpp" />
     <ClCompile Include="model\OutputFile.cpp" />
@@ -388,6 +390,7 @@
     <ClInclude Include="MultipartFormData.h" />
     <ClInclude Include="ApiException.h" />
     <ClInclude Include="api\SlidesApi.h" />
+    <ClInclude Include="api\SlidesAsyncApi.h" />
     <ClInclude Include="model\AccentElement.h" />
     <ClInclude Include="model\AccessPermissions.h" />
     <ClInclude Include="model\AddLayoutSlide.h" />
@@ -522,6 +525,7 @@
     <ClInclude Include="model\OleObjectFrame.h" />
     <ClInclude Include="model\OneValueChartDataPoint.h" />
     <ClInclude Include="model\OneValueSeries.h" />
+    <ClInclude Include="model\Operation.h" />
     <ClInclude Include="model\OrderedMergeRequest.h" />
     <ClInclude Include="model\OuterShadowEffect.h" />
     <ClInclude Include="model\OutputFile.h" />

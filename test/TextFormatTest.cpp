@@ -27,53 +27,21 @@
 
 #include "TestUtils.h"
 
-using namespace asposeslidescloud::api;
-
 class TextFormatTest : public ::testing::Test
 {
 public:
-	static SlidesApi* api;
 	static TestUtils* utils;
 
 protected:
 	void SetUp()
 	{
-		if (api == nullptr)
+		if (utils == nullptr)
 		{
-			std::ifstream rulesFile("testConfig.json");
-			std::string rulesString;
-			std::ostringstream rulesStream;
-			rulesStream << rulesFile.rdbuf();
-			rulesString = rulesStream.str();
-			web::json::value config = web::json::value::parse(utility::conversions::to_string_t(rulesString));
-			std::shared_ptr<ApiConfiguration> configuration = std::make_shared<ApiConfiguration>();
-			if (config.has_field(L"ClientId"))
-			{
-				configuration->setAppSid(config[L"ClientId"].as_string());
-			}
-			if (config.has_field(L"ClientSecret"))
-			{
-				configuration->setAppKey(config[L"ClientSecret"].as_string());
-			}
-			if (config.has_field(L"BaseUrl"))
-			{
-				configuration->setBaseUrl(config[L"BaseUrl"].as_string());
-			}
-			if (config.has_field(L"AuthBaseUrl"))
-			{
-				configuration->setBaseAuthUrl(config[L"AuthBaseUrl"].as_string());
-			}
-			if (config.has_field(L"Debug"))
-			{
-				configuration->setDebug(config[L"Debug"].as_bool());
-			}
-			api = new SlidesApi(configuration);
-			utils = new TestUtils(api);
+			utils = new TestUtils();
 		}
 	}
 };
 
-SlidesApi* TextFormatTest::api = nullptr;
 TestUtils* TextFormatTest::utils = nullptr;
 
 TEST_F(TextFormatTest, textFormat3D) {
@@ -116,6 +84,6 @@ TEST_F(TextFormatTest, textFormat3D) {
 	threeDFormat->setLightRig(lightRig);
 	textFrameFormat->setThreeDFormat(threeDFormat);
 	dto->setTextFrameFormat(textFrameFormat);
-	std::shared_ptr<ShapeBase> result = api->createShape(L"test.pptx", 1, dto, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<ShapeBase> result = utils->getSlidesApi()->createShape(L"test.pptx", 1, dto, boost::none, boost::none, L"password", L"TempSlidesSDK").get();
 	EXPECT_EQ(dto->getTextFrameFormat()->getThreeDFormat()->getDepth(), (std::static_pointer_cast<Shape>(result))->getTextFrameFormat()->getThreeDFormat()->getDepth());
 }

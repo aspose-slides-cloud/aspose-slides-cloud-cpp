@@ -27,8 +27,6 @@
 
 #include "TestUtils.h"
 
-using namespace asposeslidescloud::api;
-
 class TimeoutTest : public ::testing::Test
 {
 public:
@@ -69,7 +67,7 @@ protected:
 			}
 			configuration->setTimeout(1);
 			api = new SlidesApi(configuration);
-			utils = new TestUtils(api);
+			utils = new TestUtils();
 		}
 	}
 };

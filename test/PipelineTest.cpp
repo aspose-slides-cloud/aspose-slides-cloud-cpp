@@ -31,53 +31,21 @@
 #include "model/RequestInputFile.h"
 #include "model/Save.h"
 
-using namespace asposeslidescloud::api;
-
 class PipelineTest : public ::testing::Test
 {
 public:
-	static SlidesApi* api;
 	static TestUtils* utils;
 
 protected:
 	void SetUp()
 	{
-		if (api == nullptr)
+		if (utils == nullptr)
 		{
-			std::ifstream rulesFile("testConfig.json");
-			std::string rulesString;
-			std::ostringstream rulesStream;
-			rulesStream << rulesFile.rdbuf();
-			rulesString = rulesStream.str();
-			web::json::value config = web::json::value::parse(utility::conversions::to_string_t(rulesString));
-			std::shared_ptr<ApiConfiguration> configuration = std::make_shared<ApiConfiguration>();
-			if (config.has_field(L"ClientId"))
-			{
-				configuration->setAppSid(config[L"ClientId"].as_string());
-			}
-			if (config.has_field(L"ClientSecret"))
-			{
-				configuration->setAppKey(config[L"ClientSecret"].as_string());
-			}
-			if (config.has_field(L"BaseUrl"))
-			{
-				configuration->setBaseUrl(config[L"BaseUrl"].as_string());
-			}
-			if (config.has_field(L"AuthBaseUrl"))
-			{
-				configuration->setBaseAuthUrl(config[L"AuthBaseUrl"].as_string());
-			}
-			if (config.has_field(L"Debug"))
-			{
-				configuration->setDebug(config[L"Debug"].as_bool());
-			}
-			api = new SlidesApi(configuration);
-			utils = new TestUtils(api);
+			utils = new TestUtils();
 		}
 	}
 };
 
-SlidesApi* PipelineTest::api = nullptr;
 TestUtils* PipelineTest::utils = nullptr;
 
 TEST_F(PipelineTest, nullableProperties) {
@@ -116,6 +84,6 @@ TEST_F(PipelineTest, nullableProperties) {
 	std::shared_ptr<HttpContent> doc2 = std::make_shared<HttpContent>();
 	doc2->setData(std::make_shared<std::ifstream>(L"TestData/TemplateCV.pptx", std::ios::binary));
 
-	HttpContent result = api->pipeline(pipeline, { doc1, doc2 }).get();
+	HttpContent result = utils->getSlidesApi()->pipeline(pipeline, { doc1, doc2 }).get();
 	EXPECT_NE(nullptr, result.getData());
 }

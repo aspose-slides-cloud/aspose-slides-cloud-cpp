@@ -33,6 +33,7 @@
 #include <boost/optional/optional_io.hpp>
 
 #include "api/SlidesApi.h"
+#include "api/SlidesAsyncApi.h"
 #include "model/ScatterChartDataPoint.h"
 
 using namespace asposeslidescloud::api;
@@ -40,7 +41,7 @@ using namespace asposeslidescloud::api;
 class TestUtils
 {
 public:
-	TestUtils(SlidesApi* api);
+	TestUtils();
 	virtual ~TestUtils();
 
 	void initialize(std::string functionName, std::string parameterName, std::string parameterType);
@@ -54,6 +55,9 @@ public:
 
 	template<typename T>
 	void initialize(std::string functionName, std::string parameterName, std::string parameterType, std::shared_ptr<T> parameterValue);
+
+	SlidesApi* getSlidesApi();
+	SlidesAsyncApi* getSlidesAsyncApi();
 
 	bool mustFail(std::string functionName, std::string parameterName, std::string parameterType);
 
@@ -100,15 +104,18 @@ public:
 	utility::string_t getFileDataAsBase64(utility::string_t path);
 
 private:
+	void ensureOperationId();
 	void initRules();
 	void initTestFiles();
 	bool isGoodRule(web::json::value rule, std::string functionName, std::string parameterName, std::string parameterType);
 	bool isGoodRuleKey(web::json::value rule, utility::string_t key, std::string parameterValue);
 	bool isGoodRuleType(web::json::value rule, std::string parameterType);
-
+	
 	web::json::value m_rules;
-	SlidesApi* m_api;
+	SlidesApi* m_SlidesApi;
+	SlidesAsyncApi* m_SlidesAsyncApi;
 
+	static utility::string_t s_operationId;
 	static const std::string TEST_DATA_VERSION;
 };
 
