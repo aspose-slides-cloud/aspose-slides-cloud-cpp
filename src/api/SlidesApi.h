@@ -1138,12 +1138,12 @@ public:
 	/// <summary>
 	/// Replaces image by the specified index.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<void> replaceImage(utility::string_t name, int32_t imageIndex, std::shared_ptr<HttpContent> image = std::shared_ptr<HttpContent>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<void> replaceImage(utility::string_t name, int32_t imageIndex, std::shared_ptr<HttpContent> image, utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t());
 
 	/// <summary>
 	/// Replaces image by the specified index and returns updated document. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<HttpContent> replaceImageOnline(std::shared_ptr<HttpContent> document, int32_t imageIndex, std::shared_ptr<HttpContent> image = std::shared_ptr<HttpContent>(), utility::string_t password = utility::string_t());
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> replaceImageOnline(std::shared_ptr<HttpContent> document, int32_t imageIndex, std::shared_ptr<HttpContent> image, utility::string_t password = utility::string_t());
 
 	/// <summary>
 	/// Replace text with a new value.

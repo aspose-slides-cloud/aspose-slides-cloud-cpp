@@ -24,20 +24,17 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 /*
- * SlideReplaceResult.h
+ * OperationProgress.h
  *
- * Represents slide replace result DTO.
+ * Operation progress.
  */
 
-#ifndef ASPOSESLIDESCLOUD_MODEL_SlideReplaceResult_H_
-#define ASPOSESLIDESCLOUD_MODEL_SlideReplaceResult_H_
+#ifndef ASPOSESLIDESCLOUD_MODEL_OperationProgress_H_
+#define ASPOSESLIDESCLOUD_MODEL_OperationProgress_H_
 
-#include "Slide.h"
+#include "../ModelBase.h"
 
-#include "../model/Slide.h"
-#include "../model/SlideShowTransition.h"
-#include "../model/ResourceUri.h"
-#include <vector>
+#include <cpprest/details/basic_types.h>
 
 #include "../ClassRegistry.h"
 
@@ -45,28 +42,40 @@ namespace asposeslidescloud {
 namespace model {
 
 /// <summary>
-/// Represents slide replace result DTO.
+/// Operation progress.
 /// </summary>
-class  SlideReplaceResult : public Slide
+class  OperationProgress : public ModelBase
 {
 public:
-	ASPOSE_DLL_EXPORT SlideReplaceResult();
-	ASPOSE_DLL_EXPORT virtual ~SlideReplaceResult();
+	ASPOSE_DLL_EXPORT OperationProgress();
+	ASPOSE_DLL_EXPORT virtual ~OperationProgress();
 
 	ASPOSE_DLL_EXPORT web::json::value toJson() const override;
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
 	/// <summary>
-	/// Gets or sets the number of matches 
+	/// Description.
 	/// </summary>
-	ASPOSE_DLL_EXPORT int32_t getMatches() const;
-	ASPOSE_DLL_EXPORT void setMatches(int32_t value);
+	ASPOSE_DLL_EXPORT utility::string_t getDescription() const;
+	ASPOSE_DLL_EXPORT void setDescription(utility::string_t value);
+	/// <summary>
+	/// Current Step Index.
+	/// </summary>
+	ASPOSE_DLL_EXPORT int32_t getStepIndex() const;
+	ASPOSE_DLL_EXPORT void setStepIndex(int32_t value);
+	/// <summary>
+	/// Current Step Index.
+	/// </summary>
+	ASPOSE_DLL_EXPORT int32_t getStepCount() const;
+	ASPOSE_DLL_EXPORT void setStepCount(int32_t value);
 
 protected:
-	int32_t m_Matches;
+	utility::string_t m_Description;
+	int32_t m_StepIndex;
+	int32_t m_StepCount;
 };
 
 }
 }
 
-#endif /* ASPOSESLIDESCLOUD_MODEL_SlideReplaceResult_H_ */
+#endif /* ASPOSESLIDESCLOUD_MODEL_OperationProgress_H_ */

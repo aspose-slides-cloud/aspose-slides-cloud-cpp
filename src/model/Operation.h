@@ -34,6 +34,7 @@
 
 #include "../ModelBase.h"
 
+#include "../model/OperationProgress.h"
 #include <cpprest/details/basic_types.h>
 #include <cpprest/asyncrt_utils.h>
 
@@ -69,6 +70,11 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getStatus() const;
 	ASPOSE_DLL_EXPORT void setStatus(utility::string_t value);
+	/// <summary>
+	/// 
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<OperationProgress> getProgress() const;
+	ASPOSE_DLL_EXPORT void setProgress(std::shared_ptr<OperationProgress> value);
 	/// <summary>
 	/// 
 	/// </summary>
@@ -109,6 +115,7 @@ protected:
 	utility::string_t m_Id;
 	utility::string_t m_Method;
 	utility::string_t m_Status;
+	std::shared_ptr<OperationProgress> m_Progress;
 	utility::datetime m_Created;
 	utility::datetime m_Enqueued;
 	utility::datetime m_Started;

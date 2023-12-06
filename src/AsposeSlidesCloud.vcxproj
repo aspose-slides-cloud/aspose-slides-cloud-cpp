@@ -262,6 +262,7 @@
     <ClCompile Include="model\OneValueChartDataPoint.cpp" />
     <ClCompile Include="model\OneValueSeries.cpp" />
     <ClCompile Include="model\Operation.cpp" />
+    <ClCompile Include="model\OperationProgress.cpp" />
     <ClCompile Include="model\OrderedMergeRequest.cpp" />
     <ClCompile Include="model\OuterShadowEffect.cpp" />
     <ClCompile Include="model\OutputFile.cpp" />
@@ -330,6 +331,7 @@
     <ClCompile Include="model\SlideProperties.cpp" />
     <ClCompile Include="model\SlideReplaceResult.cpp" />
     <ClCompile Include="model\SlideShowProperties.cpp" />
+    <ClCompile Include="model\SlideShowTransition.cpp" />
     <ClCompile Include="model\Slides.cpp" />
     <ClCompile Include="model\SmartArt.cpp" />
     <ClCompile Include="model\SmartArtNode.cpp" />
@@ -526,6 +528,7 @@
     <ClInclude Include="model\OneValueChartDataPoint.h" />
     <ClInclude Include="model\OneValueSeries.h" />
     <ClInclude Include="model\Operation.h" />
+    <ClInclude Include="model\OperationProgress.h" />
     <ClInclude Include="model\OrderedMergeRequest.h" />
     <ClInclude Include="model\OuterShadowEffect.h" />
     <ClInclude Include="model\OutputFile.h" />
@@ -594,6 +597,7 @@
     <ClInclude Include="model\SlideProperties.h" />
     <ClInclude Include="model\SlideReplaceResult.h" />
     <ClInclude Include="model\SlideShowProperties.h" />
+    <ClInclude Include="model\SlideShowTransition.h" />
     <ClInclude Include="model\Slides.h" />
     <ClInclude Include="model\SmartArt.h" />
     <ClInclude Include="model\SmartArtNode.h" />

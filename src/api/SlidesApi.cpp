@@ -8903,6 +8903,10 @@ pplx::task<void> SlidesApi::replaceImage(utility::string_t name, int32_t imageIn
 	{
 		throw std::invalid_argument("Missing required parameter: name");
 	}
+	if (image == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.image");
+	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/images/{imageIndex}/replace");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "imageIndex", imageIndex);
@@ -8940,6 +8944,10 @@ pplx::task<HttpContent> SlidesApi::replaceImageOnline(std::shared_ptr<HttpConten
 	if (document == nullptr)
 	{
 		throw std::invalid_argument("Missing required parameter: request.document");
+	}
+	if (image == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.image");
 	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/images/{imageIndex}/replace");
 	ApiClient::setPathParameter(methodPath, "imageIndex", imageIndex);

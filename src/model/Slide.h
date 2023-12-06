@@ -34,6 +34,7 @@
 
 #include "ResourceBase.h"
 
+#include "../model/SlideShowTransition.h"
 #include "../model/ResourceBase.h"
 #include "../model/ResourceUri.h"
 #include <vector>
@@ -70,6 +71,11 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool isShowMasterShapes() const;
 	ASPOSE_DLL_EXPORT void setShowMasterShapes(bool value);
+	/// <summary>
+	/// Specifies if shapes of the master slide should be shown on the slide. True by default.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<SlideShowTransition> getSlideShowTransition() const;
+	ASPOSE_DLL_EXPORT void setSlideShowTransition(std::shared_ptr<SlideShowTransition> value);
 	/// <summary>
 	/// Gets or sets the  link to the layout slide.
 	/// </summary>
@@ -115,6 +121,7 @@ protected:
 	double m_Width;
 	double m_Height;
 	bool m_ShowMasterShapes;
+	std::shared_ptr<SlideShowTransition> m_SlideShowTransition;
 	std::shared_ptr<ResourceUri> m_LayoutSlide;
 	std::shared_ptr<ResourceUri> m_Shapes;
 	std::shared_ptr<ResourceUri> m_Theme;

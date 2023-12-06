@@ -110,6 +110,18 @@ TEST_F(SlidesTest, slideUpdate) {
 	EXPECT_NE(utility::string_t::npos, result->getLayoutSlide()->getHref().find(layoutSlidePath));
 }
 
+TEST_F(SlidesTest, slideSetTransition) {
+	utils->initialize("", "", "");
+	std::shared_ptr<Slide> dto(new Slide());
+	utility::string_t layoutSlidePath = L"layoutSlides/3";
+	std::shared_ptr<SlideShowTransition> transition(new SlideShowTransition());
+	transition->setType(L"Circle");
+	transition->setSpeed(L"Medium");
+	dto->setSlideShowTransition(transition);
+	std::shared_ptr<Slide> result = utils->getSlidesApi()->updateSlide(L"test.pptx", 1, dto, L"password", L"TempSlidesSDK").get();
+	EXPECT_EQ(dto->getSlideShowTransition()->getType(), result->getSlideShowTransition()->getType());
+}
+
 TEST_F(SlidesTest, slidesDelete) {
 	utils->initialize("", "", "");
 	std::shared_ptr<Slides> result = utils->getSlidesApi()->deleteSlides(L"test.pptx", {}, L"password", L"TempSlidesSDK").get();

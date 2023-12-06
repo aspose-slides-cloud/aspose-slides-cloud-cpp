@@ -44,6 +44,7 @@
 #include "../HttpContent.h"
 
 #include "../model/Operation.h"
+#include "../model/OrderedMergeRequest.h"
 #include <cpprest/details/basic_types.h>
 
 namespace asposeslidescloud {
@@ -76,7 +77,27 @@ public:
 	/// <summary>
 	/// 
 	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<utility::string_t> startConvertAndSave(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t outPath, utility::string_t password = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::vector<int32_t> slides = std::vector<int32_t>(), std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>());
+
+	/// <summary>
+	/// 
+	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<utility::string_t> startDownloadPresentation(utility::string_t name, utility::string_t format, std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::vector<int32_t> slides = std::vector<int32_t>());
+
+	/// <summary>
+	/// 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<utility::string_t> startMerge(std::vector<std::shared_ptr<HttpContent>> files = std::vector<std::shared_ptr<HttpContent>>(), std::shared_ptr<OrderedMergeRequest> request = std::shared_ptr<OrderedMergeRequest>(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<utility::string_t> startMergeAndSave(utility::string_t outPath, std::vector<std::shared_ptr<HttpContent>> files = std::vector<std::shared_ptr<HttpContent>>(), std::shared_ptr<OrderedMergeRequest> request = std::shared_ptr<OrderedMergeRequest>(), utility::string_t storage = utility::string_t());
+
+	/// <summary>
+	/// 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<utility::string_t> startSavePresentation(utility::string_t name, utility::string_t format, utility::string_t outPath, std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>(), utility::string_t password = utility::string_t(), utility::string_t folder = utility::string_t(), utility::string_t storage = utility::string_t(), utility::string_t fontsFolder = utility::string_t(), std::vector<int32_t> slides = std::vector<int32_t>());
 
 protected:
 	ApiClient* m_ApiClient;

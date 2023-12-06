@@ -72,6 +72,17 @@ void Operation::setStatus(utility::string_t value)
 	
 }
 
+std::shared_ptr<OperationProgress> Operation::getProgress() const
+{
+	return m_Progress;
+}
+
+void Operation::setProgress(std::shared_ptr<OperationProgress> value)
+{
+	m_Progress = value;
+	
+}
+
 utility::datetime Operation::getCreated() const
 {
 	return m_Created;
@@ -164,6 +175,10 @@ web::json::value Operation::toJson() const
 	{
 		val[utility::conversions::to_string_t("Status")] = ModelBase::toJson(m_Status);
 	}
+	if (m_Progress != nullptr)
+	{
+		val[utility::conversions::to_string_t("Progress")] = ModelBase::toJson(m_Progress);
+	}
 	if (m_Created.is_initialized())
 	{
 		val[utility::conversions::to_string_t("Created")] = ModelBase::toJson(m_Created);
@@ -211,6 +226,12 @@ void Operation::fromJson(web::json::value& val)
 	if(jsonForStatus != nullptr && !jsonForStatus->is_null())
 	{
 		setStatus(ModelBase::stringFromJson(*jsonForStatus));
+	}
+	web::json::value* jsonForProgress = ModelBase::getField(val, "Progress");
+	if(jsonForProgress != nullptr && !jsonForProgress->is_null())
+	{
+		std::shared_ptr<void> instanceForProgress = asposeslidescloud::api::ClassRegistry::deserialize(L"OperationProgress", *jsonForProgress);
+		setProgress(std::static_pointer_cast<OperationProgress>(instanceForProgress));
 	}
 	web::json::value* jsonForCreated = ModelBase::getField(val, "Created");
 	if(jsonForCreated != nullptr && !jsonForCreated->is_null())

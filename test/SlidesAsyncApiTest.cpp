@@ -438,6 +438,364 @@ TEST_F(SlidesAsyncApiTest, startConvertInvalidOptions) {
 	}
 }
 
+TEST_F(SlidesAsyncApiTest, startConvertAndSave) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startConvertAndSave", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startConvertAndSave", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startConvertAndSave", "outPath", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startConvertAndSave", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startConvertAndSave", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startConvertAndSave", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startConvertAndSave", "slides", "std::vector<int32_t>");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startConvertAndSave", "options", "std::shared_ptr<ExportOptions>");
+	utils->initialize("startConvertAndSave", "", "");
+	utility::string_t result = utils->getSlidesAsyncApi()->startConvertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder, paramSlides, paramOptions).get();
+	EXPECT_NE(L"", result);
+}
+
+TEST_F(SlidesAsyncApiTest, startConvertAndSaveInvalidDocument) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startConvertAndSave", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startConvertAndSave", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startConvertAndSave", "outPath", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startConvertAndSave", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startConvertAndSave", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startConvertAndSave", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startConvertAndSave", "slides", "std::vector<int32_t>");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startConvertAndSave", "options", "std::shared_ptr<ExportOptions>");
+	paramDocument = utils->getInvalidBinaryTestValue("startConvertAndSave", "document", "std::shared_ptr<HttpContent>", paramDocument);
+	utils->initialize("startConvertAndSave", "document", "std::shared_ptr<HttpContent>", paramDocument);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startConvertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder, paramSlides, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startConvertAndSave", "document", "std::shared_ptr<HttpContent>");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startConvertAndSave", "document", "std::shared_ptr<HttpContent>", paramDocument);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startConvertAndSave", "document", "std::shared_ptr<HttpContent>");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startConvertAndSave", "document", "std::shared_ptr<HttpContent>", paramDocument);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startConvertAndSave", "document", "std::shared_ptr<HttpContent>"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startConvertAndSaveInvalidFormat) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startConvertAndSave", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startConvertAndSave", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startConvertAndSave", "outPath", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startConvertAndSave", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startConvertAndSave", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startConvertAndSave", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startConvertAndSave", "slides", "std::vector<int32_t>");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startConvertAndSave", "options", "std::shared_ptr<ExportOptions>");
+	paramFormat = utils->getInvalidTestValue("startConvertAndSave", "format", "utility::string_t", paramFormat);
+	utils->initialize("startConvertAndSave", "format", "utility::string_t", paramFormat);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startConvertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder, paramSlides, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startConvertAndSave", "format", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startConvertAndSave", "format", "utility::string_t", paramFormat);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startConvertAndSave", "format", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startConvertAndSave", "format", "utility::string_t", paramFormat);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startConvertAndSave", "format", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startConvertAndSaveInvalidOutPath) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startConvertAndSave", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startConvertAndSave", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startConvertAndSave", "outPath", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startConvertAndSave", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startConvertAndSave", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startConvertAndSave", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startConvertAndSave", "slides", "std::vector<int32_t>");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startConvertAndSave", "options", "std::shared_ptr<ExportOptions>");
+	paramOutPath = utils->getInvalidTestValue("startConvertAndSave", "outPath", "utility::string_t", paramOutPath);
+	utils->initialize("startConvertAndSave", "outPath", "utility::string_t", paramOutPath);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startConvertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder, paramSlides, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startConvertAndSave", "outPath", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startConvertAndSave", "outPath", "utility::string_t", paramOutPath);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startConvertAndSave", "outPath", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startConvertAndSave", "outPath", "utility::string_t", paramOutPath);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startConvertAndSave", "outPath", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startConvertAndSaveInvalidPassword) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startConvertAndSave", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startConvertAndSave", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startConvertAndSave", "outPath", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startConvertAndSave", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startConvertAndSave", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startConvertAndSave", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startConvertAndSave", "slides", "std::vector<int32_t>");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startConvertAndSave", "options", "std::shared_ptr<ExportOptions>");
+	paramPassword = utils->getInvalidTestValue("startConvertAndSave", "password", "utility::string_t", paramPassword);
+	utils->initialize("startConvertAndSave", "password", "utility::string_t", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startConvertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder, paramSlides, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startConvertAndSave", "password", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startConvertAndSave", "password", "utility::string_t", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startConvertAndSave", "password", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startConvertAndSave", "password", "utility::string_t", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startConvertAndSave", "password", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startConvertAndSaveInvalidStorage) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startConvertAndSave", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startConvertAndSave", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startConvertAndSave", "outPath", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startConvertAndSave", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startConvertAndSave", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startConvertAndSave", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startConvertAndSave", "slides", "std::vector<int32_t>");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startConvertAndSave", "options", "std::shared_ptr<ExportOptions>");
+	paramStorage = utils->getInvalidTestValue("startConvertAndSave", "storage", "utility::string_t", paramStorage);
+	utils->initialize("startConvertAndSave", "storage", "utility::string_t", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startConvertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder, paramSlides, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startConvertAndSave", "storage", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startConvertAndSave", "storage", "utility::string_t", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startConvertAndSave", "storage", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startConvertAndSave", "storage", "utility::string_t", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startConvertAndSave", "storage", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startConvertAndSaveInvalidFontsFolder) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startConvertAndSave", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startConvertAndSave", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startConvertAndSave", "outPath", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startConvertAndSave", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startConvertAndSave", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startConvertAndSave", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startConvertAndSave", "slides", "std::vector<int32_t>");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startConvertAndSave", "options", "std::shared_ptr<ExportOptions>");
+	paramFontsFolder = utils->getInvalidTestValue("startConvertAndSave", "fontsFolder", "utility::string_t", paramFontsFolder);
+	utils->initialize("startConvertAndSave", "fontsFolder", "utility::string_t", paramFontsFolder);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startConvertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder, paramSlides, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startConvertAndSave", "fontsFolder", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startConvertAndSave", "fontsFolder", "utility::string_t", paramFontsFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startConvertAndSave", "fontsFolder", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startConvertAndSave", "fontsFolder", "utility::string_t", paramFontsFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startConvertAndSave", "fontsFolder", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startConvertAndSaveInvalidSlides) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startConvertAndSave", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startConvertAndSave", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startConvertAndSave", "outPath", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startConvertAndSave", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startConvertAndSave", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startConvertAndSave", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startConvertAndSave", "slides", "std::vector<int32_t>");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startConvertAndSave", "options", "std::shared_ptr<ExportOptions>");
+	paramSlides = utils->getInvalidIntVectorTestValue("startConvertAndSave", "slides", "std::vector<int32_t>", paramSlides);
+	utils->initialize("startConvertAndSave", "slides", "std::vector<int32_t>", paramSlides);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startConvertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder, paramSlides, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startConvertAndSave", "slides", "std::vector<int32_t>");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startConvertAndSave", "slides", "std::vector<int32_t>", paramSlides);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startConvertAndSave", "slides", "std::vector<int32_t>");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startConvertAndSave", "slides", "std::vector<int32_t>", paramSlides);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startConvertAndSave", "slides", "std::vector<int32_t>"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startConvertAndSaveInvalidOptions) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startConvertAndSave", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startConvertAndSave", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startConvertAndSave", "outPath", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startConvertAndSave", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startConvertAndSave", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startConvertAndSave", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startConvertAndSave", "slides", "std::vector<int32_t>");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startConvertAndSave", "options", "std::shared_ptr<ExportOptions>");
+	paramOptions = utils->getInvalidTestValueForClass<>("startConvertAndSave", "options", "std::shared_ptr<ExportOptions>", paramOptions);
+	utils->initialize("startConvertAndSave", "options", "std::shared_ptr<ExportOptions>", paramOptions);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startConvertAndSave(paramDocument, paramFormat, paramOutPath, paramPassword, paramStorage, paramFontsFolder, paramSlides, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startConvertAndSave", "options", "std::shared_ptr<ExportOptions>");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startConvertAndSave", "options", "std::shared_ptr<ExportOptions>", paramOptions);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startConvertAndSave", "options", "std::shared_ptr<ExportOptions>");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startConvertAndSave", "options", "std::shared_ptr<ExportOptions>", paramOptions);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startConvertAndSave", "options", "std::shared_ptr<ExportOptions>"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesAsyncApiTest, startDownloadPresentation) {
 	utility::string_t paramName = utils->getTestValue("startDownloadPresentation", "name", "utility::string_t");
 	utility::string_t paramFormat = utils->getTestValue("startDownloadPresentation", "format", "utility::string_t");
@@ -791,6 +1149,706 @@ TEST_F(SlidesAsyncApiTest, startDownloadPresentationInvalidSlides) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("startDownloadPresentation", "slides", "std::vector<int32_t>"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startMerge) {
+	std::vector<std::shared_ptr<HttpContent>> paramFiles = utils->getBinArrayTestValue("startMerge", "files", "std::vector<std::shared_ptr<HttpContent>>");
+	std::shared_ptr<OrderedMergeRequest> paramRequest = utils->getTestValueForClass<OrderedMergeRequest>("startMerge", "request", "std::shared_ptr<OrderedMergeRequest>");
+	utility::string_t paramStorage = utils->getTestValue("startMerge", "storage", "utility::string_t");
+	utils->initialize("startMerge", "", "");
+	utility::string_t result = utils->getSlidesAsyncApi()->startMerge(paramFiles, paramRequest, paramStorage).get();
+	EXPECT_NE(L"", result);
+}
+
+TEST_F(SlidesAsyncApiTest, startMergeInvalidFiles) {
+	std::vector<std::shared_ptr<HttpContent>> paramFiles = utils->getBinArrayTestValue("startMerge", "files", "std::vector<std::shared_ptr<HttpContent>>");
+	std::shared_ptr<OrderedMergeRequest> paramRequest = utils->getTestValueForClass<OrderedMergeRequest>("startMerge", "request", "std::shared_ptr<OrderedMergeRequest>");
+	utility::string_t paramStorage = utils->getTestValue("startMerge", "storage", "utility::string_t");
+	paramFiles = utils->getInvalidBinArrayTestValue("startMerge", "files", "std::vector<std::shared_ptr<HttpContent>>", paramFiles);
+	utils->initialize("startMerge", "files", "std::vector<std::shared_ptr<HttpContent>>", paramFiles);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startMerge(paramFiles, paramRequest, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startMerge", "files", "std::vector<std::shared_ptr<HttpContent>>");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startMerge", "files", "std::vector<std::shared_ptr<HttpContent>>", paramFiles);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startMerge", "files", "std::vector<std::shared_ptr<HttpContent>>");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startMerge", "files", "std::vector<std::shared_ptr<HttpContent>>", paramFiles);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startMerge", "files", "std::vector<std::shared_ptr<HttpContent>>"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startMergeInvalidRequest) {
+	std::vector<std::shared_ptr<HttpContent>> paramFiles = utils->getBinArrayTestValue("startMerge", "files", "std::vector<std::shared_ptr<HttpContent>>");
+	std::shared_ptr<OrderedMergeRequest> paramRequest = utils->getTestValueForClass<OrderedMergeRequest>("startMerge", "request", "std::shared_ptr<OrderedMergeRequest>");
+	utility::string_t paramStorage = utils->getTestValue("startMerge", "storage", "utility::string_t");
+	paramRequest = utils->getInvalidTestValueForClass<>("startMerge", "request", "std::shared_ptr<OrderedMergeRequest>", paramRequest);
+	utils->initialize("startMerge", "request", "std::shared_ptr<OrderedMergeRequest>", paramRequest);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startMerge(paramFiles, paramRequest, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startMerge", "request", "std::shared_ptr<OrderedMergeRequest>");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startMerge", "request", "std::shared_ptr<OrderedMergeRequest>", paramRequest);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startMerge", "request", "std::shared_ptr<OrderedMergeRequest>");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startMerge", "request", "std::shared_ptr<OrderedMergeRequest>", paramRequest);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startMerge", "request", "std::shared_ptr<OrderedMergeRequest>"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startMergeInvalidStorage) {
+	std::vector<std::shared_ptr<HttpContent>> paramFiles = utils->getBinArrayTestValue("startMerge", "files", "std::vector<std::shared_ptr<HttpContent>>");
+	std::shared_ptr<OrderedMergeRequest> paramRequest = utils->getTestValueForClass<OrderedMergeRequest>("startMerge", "request", "std::shared_ptr<OrderedMergeRequest>");
+	utility::string_t paramStorage = utils->getTestValue("startMerge", "storage", "utility::string_t");
+	paramStorage = utils->getInvalidTestValue("startMerge", "storage", "utility::string_t", paramStorage);
+	utils->initialize("startMerge", "storage", "utility::string_t", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startMerge(paramFiles, paramRequest, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startMerge", "storage", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startMerge", "storage", "utility::string_t", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startMerge", "storage", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startMerge", "storage", "utility::string_t", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startMerge", "storage", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startMergeAndSave) {
+	utility::string_t paramOutPath = utils->getTestValue("startMergeAndSave", "outPath", "utility::string_t");
+	std::vector<std::shared_ptr<HttpContent>> paramFiles = utils->getBinArrayTestValue("startMergeAndSave", "files", "std::vector<std::shared_ptr<HttpContent>>");
+	std::shared_ptr<OrderedMergeRequest> paramRequest = utils->getTestValueForClass<OrderedMergeRequest>("startMergeAndSave", "request", "std::shared_ptr<OrderedMergeRequest>");
+	utility::string_t paramStorage = utils->getTestValue("startMergeAndSave", "storage", "utility::string_t");
+	utils->initialize("startMergeAndSave", "", "");
+	utility::string_t result = utils->getSlidesAsyncApi()->startMergeAndSave(paramOutPath, paramFiles, paramRequest, paramStorage).get();
+	EXPECT_NE(L"", result);
+}
+
+TEST_F(SlidesAsyncApiTest, startMergeAndSaveInvalidOutPath) {
+	utility::string_t paramOutPath = utils->getTestValue("startMergeAndSave", "outPath", "utility::string_t");
+	std::vector<std::shared_ptr<HttpContent>> paramFiles = utils->getBinArrayTestValue("startMergeAndSave", "files", "std::vector<std::shared_ptr<HttpContent>>");
+	std::shared_ptr<OrderedMergeRequest> paramRequest = utils->getTestValueForClass<OrderedMergeRequest>("startMergeAndSave", "request", "std::shared_ptr<OrderedMergeRequest>");
+	utility::string_t paramStorage = utils->getTestValue("startMergeAndSave", "storage", "utility::string_t");
+	paramOutPath = utils->getInvalidTestValue("startMergeAndSave", "outPath", "utility::string_t", paramOutPath);
+	utils->initialize("startMergeAndSave", "outPath", "utility::string_t", paramOutPath);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startMergeAndSave(paramOutPath, paramFiles, paramRequest, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startMergeAndSave", "outPath", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startMergeAndSave", "outPath", "utility::string_t", paramOutPath);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startMergeAndSave", "outPath", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startMergeAndSave", "outPath", "utility::string_t", paramOutPath);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startMergeAndSave", "outPath", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startMergeAndSaveInvalidFiles) {
+	utility::string_t paramOutPath = utils->getTestValue("startMergeAndSave", "outPath", "utility::string_t");
+	std::vector<std::shared_ptr<HttpContent>> paramFiles = utils->getBinArrayTestValue("startMergeAndSave", "files", "std::vector<std::shared_ptr<HttpContent>>");
+	std::shared_ptr<OrderedMergeRequest> paramRequest = utils->getTestValueForClass<OrderedMergeRequest>("startMergeAndSave", "request", "std::shared_ptr<OrderedMergeRequest>");
+	utility::string_t paramStorage = utils->getTestValue("startMergeAndSave", "storage", "utility::string_t");
+	paramFiles = utils->getInvalidBinArrayTestValue("startMergeAndSave", "files", "std::vector<std::shared_ptr<HttpContent>>", paramFiles);
+	utils->initialize("startMergeAndSave", "files", "std::vector<std::shared_ptr<HttpContent>>", paramFiles);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startMergeAndSave(paramOutPath, paramFiles, paramRequest, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startMergeAndSave", "files", "std::vector<std::shared_ptr<HttpContent>>");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startMergeAndSave", "files", "std::vector<std::shared_ptr<HttpContent>>", paramFiles);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startMergeAndSave", "files", "std::vector<std::shared_ptr<HttpContent>>");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startMergeAndSave", "files", "std::vector<std::shared_ptr<HttpContent>>", paramFiles);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startMergeAndSave", "files", "std::vector<std::shared_ptr<HttpContent>>"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startMergeAndSaveInvalidRequest) {
+	utility::string_t paramOutPath = utils->getTestValue("startMergeAndSave", "outPath", "utility::string_t");
+	std::vector<std::shared_ptr<HttpContent>> paramFiles = utils->getBinArrayTestValue("startMergeAndSave", "files", "std::vector<std::shared_ptr<HttpContent>>");
+	std::shared_ptr<OrderedMergeRequest> paramRequest = utils->getTestValueForClass<OrderedMergeRequest>("startMergeAndSave", "request", "std::shared_ptr<OrderedMergeRequest>");
+	utility::string_t paramStorage = utils->getTestValue("startMergeAndSave", "storage", "utility::string_t");
+	paramRequest = utils->getInvalidTestValueForClass<>("startMergeAndSave", "request", "std::shared_ptr<OrderedMergeRequest>", paramRequest);
+	utils->initialize("startMergeAndSave", "request", "std::shared_ptr<OrderedMergeRequest>", paramRequest);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startMergeAndSave(paramOutPath, paramFiles, paramRequest, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startMergeAndSave", "request", "std::shared_ptr<OrderedMergeRequest>");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startMergeAndSave", "request", "std::shared_ptr<OrderedMergeRequest>", paramRequest);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startMergeAndSave", "request", "std::shared_ptr<OrderedMergeRequest>");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startMergeAndSave", "request", "std::shared_ptr<OrderedMergeRequest>", paramRequest);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startMergeAndSave", "request", "std::shared_ptr<OrderedMergeRequest>"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startMergeAndSaveInvalidStorage) {
+	utility::string_t paramOutPath = utils->getTestValue("startMergeAndSave", "outPath", "utility::string_t");
+	std::vector<std::shared_ptr<HttpContent>> paramFiles = utils->getBinArrayTestValue("startMergeAndSave", "files", "std::vector<std::shared_ptr<HttpContent>>");
+	std::shared_ptr<OrderedMergeRequest> paramRequest = utils->getTestValueForClass<OrderedMergeRequest>("startMergeAndSave", "request", "std::shared_ptr<OrderedMergeRequest>");
+	utility::string_t paramStorage = utils->getTestValue("startMergeAndSave", "storage", "utility::string_t");
+	paramStorage = utils->getInvalidTestValue("startMergeAndSave", "storage", "utility::string_t", paramStorage);
+	utils->initialize("startMergeAndSave", "storage", "utility::string_t", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startMergeAndSave(paramOutPath, paramFiles, paramRequest, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startMergeAndSave", "storage", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startMergeAndSave", "storage", "utility::string_t", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startMergeAndSave", "storage", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startMergeAndSave", "storage", "utility::string_t", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startMergeAndSave", "storage", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSavePresentation) {
+	utility::string_t paramName = utils->getTestValue("startSavePresentation", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSavePresentation", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startSavePresentation", "outPath", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSavePresentation", "options", "std::shared_ptr<ExportOptions>");
+	utility::string_t paramPassword = utils->getTestValue("startSavePresentation", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSavePresentation", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSavePresentation", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSavePresentation", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startSavePresentation", "slides", "std::vector<int32_t>");
+	utils->initialize("startSavePresentation", "", "");
+	utility::string_t result = utils->getSlidesAsyncApi()->startSavePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).get();
+	EXPECT_NE(L"", result);
+}
+
+TEST_F(SlidesAsyncApiTest, startSavePresentationInvalidName) {
+	utility::string_t paramName = utils->getTestValue("startSavePresentation", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSavePresentation", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startSavePresentation", "outPath", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSavePresentation", "options", "std::shared_ptr<ExportOptions>");
+	utility::string_t paramPassword = utils->getTestValue("startSavePresentation", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSavePresentation", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSavePresentation", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSavePresentation", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startSavePresentation", "slides", "std::vector<int32_t>");
+	paramName = utils->getInvalidTestValue("startSavePresentation", "name", "utility::string_t", paramName);
+	utils->initialize("startSavePresentation", "name", "utility::string_t", paramName);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSavePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "name", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "name", "utility::string_t", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "name", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "name", "utility::string_t", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSavePresentation", "name", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSavePresentationInvalidFormat) {
+	utility::string_t paramName = utils->getTestValue("startSavePresentation", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSavePresentation", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startSavePresentation", "outPath", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSavePresentation", "options", "std::shared_ptr<ExportOptions>");
+	utility::string_t paramPassword = utils->getTestValue("startSavePresentation", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSavePresentation", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSavePresentation", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSavePresentation", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startSavePresentation", "slides", "std::vector<int32_t>");
+	paramFormat = utils->getInvalidTestValue("startSavePresentation", "format", "utility::string_t", paramFormat);
+	utils->initialize("startSavePresentation", "format", "utility::string_t", paramFormat);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSavePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "format", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "format", "utility::string_t", paramFormat);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "format", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "format", "utility::string_t", paramFormat);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSavePresentation", "format", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSavePresentationInvalidOutPath) {
+	utility::string_t paramName = utils->getTestValue("startSavePresentation", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSavePresentation", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startSavePresentation", "outPath", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSavePresentation", "options", "std::shared_ptr<ExportOptions>");
+	utility::string_t paramPassword = utils->getTestValue("startSavePresentation", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSavePresentation", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSavePresentation", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSavePresentation", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startSavePresentation", "slides", "std::vector<int32_t>");
+	paramOutPath = utils->getInvalidTestValue("startSavePresentation", "outPath", "utility::string_t", paramOutPath);
+	utils->initialize("startSavePresentation", "outPath", "utility::string_t", paramOutPath);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSavePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "outPath", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "outPath", "utility::string_t", paramOutPath);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "outPath", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "outPath", "utility::string_t", paramOutPath);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSavePresentation", "outPath", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSavePresentationInvalidOptions) {
+	utility::string_t paramName = utils->getTestValue("startSavePresentation", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSavePresentation", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startSavePresentation", "outPath", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSavePresentation", "options", "std::shared_ptr<ExportOptions>");
+	utility::string_t paramPassword = utils->getTestValue("startSavePresentation", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSavePresentation", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSavePresentation", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSavePresentation", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startSavePresentation", "slides", "std::vector<int32_t>");
+	paramOptions = utils->getInvalidTestValueForClass<>("startSavePresentation", "options", "std::shared_ptr<ExportOptions>", paramOptions);
+	utils->initialize("startSavePresentation", "options", "std::shared_ptr<ExportOptions>", paramOptions);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSavePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "options", "std::shared_ptr<ExportOptions>");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "options", "std::shared_ptr<ExportOptions>", paramOptions);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "options", "std::shared_ptr<ExportOptions>");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "options", "std::shared_ptr<ExportOptions>", paramOptions);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSavePresentation", "options", "std::shared_ptr<ExportOptions>"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSavePresentationInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("startSavePresentation", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSavePresentation", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startSavePresentation", "outPath", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSavePresentation", "options", "std::shared_ptr<ExportOptions>");
+	utility::string_t paramPassword = utils->getTestValue("startSavePresentation", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSavePresentation", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSavePresentation", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSavePresentation", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startSavePresentation", "slides", "std::vector<int32_t>");
+	paramPassword = utils->getInvalidTestValue("startSavePresentation", "password", "utility::string_t", paramPassword);
+	utils->initialize("startSavePresentation", "password", "utility::string_t", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSavePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "password", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "password", "utility::string_t", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "password", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "password", "utility::string_t", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSavePresentation", "password", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSavePresentationInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("startSavePresentation", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSavePresentation", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startSavePresentation", "outPath", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSavePresentation", "options", "std::shared_ptr<ExportOptions>");
+	utility::string_t paramPassword = utils->getTestValue("startSavePresentation", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSavePresentation", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSavePresentation", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSavePresentation", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startSavePresentation", "slides", "std::vector<int32_t>");
+	paramFolder = utils->getInvalidTestValue("startSavePresentation", "folder", "utility::string_t", paramFolder);
+	utils->initialize("startSavePresentation", "folder", "utility::string_t", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSavePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "folder", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "folder", "utility::string_t", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "folder", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "folder", "utility::string_t", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSavePresentation", "folder", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSavePresentationInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("startSavePresentation", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSavePresentation", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startSavePresentation", "outPath", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSavePresentation", "options", "std::shared_ptr<ExportOptions>");
+	utility::string_t paramPassword = utils->getTestValue("startSavePresentation", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSavePresentation", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSavePresentation", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSavePresentation", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startSavePresentation", "slides", "std::vector<int32_t>");
+	paramStorage = utils->getInvalidTestValue("startSavePresentation", "storage", "utility::string_t", paramStorage);
+	utils->initialize("startSavePresentation", "storage", "utility::string_t", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSavePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "storage", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "storage", "utility::string_t", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "storage", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "storage", "utility::string_t", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSavePresentation", "storage", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSavePresentationInvalidFontsFolder) {
+	utility::string_t paramName = utils->getTestValue("startSavePresentation", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSavePresentation", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startSavePresentation", "outPath", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSavePresentation", "options", "std::shared_ptr<ExportOptions>");
+	utility::string_t paramPassword = utils->getTestValue("startSavePresentation", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSavePresentation", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSavePresentation", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSavePresentation", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startSavePresentation", "slides", "std::vector<int32_t>");
+	paramFontsFolder = utils->getInvalidTestValue("startSavePresentation", "fontsFolder", "utility::string_t", paramFontsFolder);
+	utils->initialize("startSavePresentation", "fontsFolder", "utility::string_t", paramFontsFolder);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSavePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "fontsFolder", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "fontsFolder", "utility::string_t", paramFontsFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "fontsFolder", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "fontsFolder", "utility::string_t", paramFontsFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSavePresentation", "fontsFolder", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSavePresentationInvalidSlides) {
+	utility::string_t paramName = utils->getTestValue("startSavePresentation", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSavePresentation", "format", "utility::string_t");
+	utility::string_t paramOutPath = utils->getTestValue("startSavePresentation", "outPath", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSavePresentation", "options", "std::shared_ptr<ExportOptions>");
+	utility::string_t paramPassword = utils->getTestValue("startSavePresentation", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSavePresentation", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSavePresentation", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSavePresentation", "fontsFolder", "utility::string_t");
+	std::vector<int32_t> paramSlides = utils->getIntVectorTestValue("startSavePresentation", "slides", "std::vector<int32_t>");
+	paramSlides = utils->getInvalidIntVectorTestValue("startSavePresentation", "slides", "std::vector<int32_t>", paramSlides);
+	utils->initialize("startSavePresentation", "slides", "std::vector<int32_t>", paramSlides);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSavePresentation(paramName, paramFormat, paramOutPath, paramOptions, paramPassword, paramFolder, paramStorage, paramFontsFolder, paramSlides).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "slides", "std::vector<int32_t>");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "slides", "std::vector<int32_t>", paramSlides);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSavePresentation", "slides", "std::vector<int32_t>");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSavePresentation", "slides", "std::vector<int32_t>", paramSlides);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSavePresentation", "slides", "std::vector<int32_t>"))
 	{
 		FAIL() << "Must have failed";
 	}

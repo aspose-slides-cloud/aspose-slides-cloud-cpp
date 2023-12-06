@@ -72,6 +72,17 @@ void Slide::setShowMasterShapes(bool value)
 	
 }
 
+std::shared_ptr<SlideShowTransition> Slide::getSlideShowTransition() const
+{
+	return m_SlideShowTransition;
+}
+
+void Slide::setSlideShowTransition(std::shared_ptr<SlideShowTransition> value)
+{
+	m_SlideShowTransition = value;
+	
+}
+
 std::shared_ptr<ResourceUri> Slide::getLayoutSlide() const
 {
 	return m_LayoutSlide;
@@ -166,6 +177,10 @@ web::json::value Slide::toJson() const
 	val[utility::conversions::to_string_t("Width")] = ModelBase::toJson(m_Width);
 	val[utility::conversions::to_string_t("Height")] = ModelBase::toJson(m_Height);
 	val[utility::conversions::to_string_t("ShowMasterShapes")] = ModelBase::toJson(m_ShowMasterShapes);
+	if (m_SlideShowTransition != nullptr)
+	{
+		val[utility::conversions::to_string_t("SlideShowTransition")] = ModelBase::toJson(m_SlideShowTransition);
+	}
 	if (m_LayoutSlide != nullptr)
 	{
 		val[utility::conversions::to_string_t("LayoutSlide")] = ModelBase::toJson(m_LayoutSlide);
@@ -218,6 +233,12 @@ void Slide::fromJson(web::json::value& val)
 	if(jsonForShowMasterShapes != nullptr && !jsonForShowMasterShapes->is_null())
 	{
 		setShowMasterShapes(ModelBase::boolFromJson(*jsonForShowMasterShapes));
+	}
+	web::json::value* jsonForSlideShowTransition = ModelBase::getField(val, "SlideShowTransition");
+	if(jsonForSlideShowTransition != nullptr && !jsonForSlideShowTransition->is_null())
+	{
+		std::shared_ptr<void> instanceForSlideShowTransition = asposeslidescloud::api::ClassRegistry::deserialize(L"SlideShowTransition", *jsonForSlideShowTransition);
+		setSlideShowTransition(std::static_pointer_cast<SlideShowTransition>(instanceForSlideShowTransition));
 	}
 	web::json::value* jsonForLayoutSlide = ModelBase::getField(val, "LayoutSlide");
 	if(jsonForLayoutSlide != nullptr && !jsonForLayoutSlide->is_null())

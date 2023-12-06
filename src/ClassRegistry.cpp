@@ -161,6 +161,7 @@
 #include "model/OneValueChartDataPoint.h"
 #include "model/OneValueSeries.h"
 #include "model/Operation.h"
+#include "model/OperationProgress.h"
 #include "model/OrderedMergeRequest.h"
 #include "model/OuterShadowEffect.h"
 #include "model/OutputFile.h"
@@ -229,6 +230,7 @@
 #include "model/SlideProperties.h"
 #include "model/SlideReplaceResult.h"
 #include "model/SlideShowProperties.h"
+#include "model/SlideShowTransition.h"
 #include "model/Slides.h"
 #include "model/SmartArt.h"
 #include "model/SmartArtNode.h"
@@ -1162,6 +1164,12 @@ std::shared_ptr<void> ClassRegistry::deserializeSubclass(utility::string_t class
 		result->fromJson(json);
 		return result;
 	}
+	if (className == L"OperationProgress")
+	{
+		std::shared_ptr<OperationProgress> result(new OperationProgress());
+		result->fromJson(json);
+		return result;
+	}
 	if (className == L"OrderedMergeRequest")
 	{
 		std::shared_ptr<OrderedMergeRequest> result(new OrderedMergeRequest());
@@ -1567,6 +1575,12 @@ std::shared_ptr<void> ClassRegistry::deserializeSubclass(utility::string_t class
 	if (className == L"SlideShowProperties")
 	{
 		std::shared_ptr<SlideShowProperties> result(new SlideShowProperties());
+		result->fromJson(json);
+		return result;
+	}
+	if (className == L"SlideShowTransition")
+	{
+		std::shared_ptr<SlideShowTransition> result(new SlideShowTransition());
 		result->fromJson(json);
 		return result;
 	}
@@ -2141,6 +2155,7 @@ std::map<utility::string_t, std::map<utility::string_t, utility::string_t>> Clas
 	{ L"OneValueChartDataPoint", { { L"Type", L"OneValue" }, } },
 	{ L"OneValueSeries", { { L"DataPointType", L"OneValue" }, } },
 	{ L"Operation", { } },
+	{ L"OperationProgress", { } },
 	{ L"OrderedMergeRequest", { } },
 	{ L"OuterShadowEffect", { } },
 	{ L"OutputFile", { } },
@@ -2209,6 +2224,7 @@ std::map<utility::string_t, std::map<utility::string_t, utility::string_t>> Clas
 	{ L"SlideProperties", { } },
 	{ L"SlideReplaceResult", { } },
 	{ L"SlideShowProperties", { } },
+	{ L"SlideShowTransition", { } },
 	{ L"Slides", { } },
 	{ L"SmartArt", { { L"Type", L"SmartArt" }, } },
 	{ L"SmartArtNode", { } },

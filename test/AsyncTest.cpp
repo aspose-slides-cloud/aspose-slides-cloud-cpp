@@ -105,6 +105,131 @@ TEST_F(AsyncTest, asyncDownloadPresentation) {
 	EXPECT_GT(convertedSize, 0);
 }
 
+TEST_F(AsyncTest, asyncConvertAndSave) {
+	const int maxTries = 10;
+	const int sleepTimeout = 3;
+	utility::string_t outPath = L"TempSlidesSDK/converted.pptx";
+	utils->getSlidesApi()->deleteFile(outPath).get();
+
+	utils->initialize("", "", "");
+	utility::string_t password = L"password";
+
+	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
+	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
+	utility::string_t operationId = utils->getSlidesAsyncApi()->startConvertAndSave(data, L"pdf", outPath, password).get();
+
+	std::shared_ptr<Operation> operation = nullptr;
+	for (int i = 0; i < maxTries; i++)
+	{
+		boost::this_thread::sleep(boost::posix_time::seconds(sleepTimeout));
+		operation = utils->getSlidesAsyncApi()->getOperationStatus(operationId).get();
+		if (operation->getStatus() != L"Created" && operation->getStatus() != L"Enqueued" && operation->getStatus() != L"Started")
+		{
+			break;
+		}
+	}
+	EXPECT_EQ(L"Finished", operation->getStatus());
+	EXPECT_EQ(L"", operation->getError());
+
+	std::shared_ptr<ObjectExist> exists = utils->getSlidesApi()->objectExists(outPath).get();
+	EXPECT_TRUE(exists->isExists());
+}
+
+TEST_F(AsyncTest, asyncSavePresentation) {
+	const int maxTries = 10;
+	const int sleepTimeout = 3;
+	utility::string_t outPath = L"TempSlidesSDK/converted.pptx";
+	utils->getSlidesApi()->deleteFile(outPath).get();
+
+	utils->initialize("", "", "");
+	utility::string_t operationId = utils->getSlidesAsyncApi()->startSavePresentation(L"test.pptx", L"pdf", outPath, nullptr, L"password", L"TempSlidesSDK").get();
+
+	std::shared_ptr<Operation> operation = nullptr;
+	for (int i = 0; i < maxTries; i++)
+	{
+		boost::this_thread::sleep(boost::posix_time::seconds(sleepTimeout));
+		operation = utils->getSlidesAsyncApi()->getOperationStatus(operationId).get();
+		if (operation->getStatus() != L"Created" && operation->getStatus() != L"Enqueued" && operation->getStatus() != L"Started")
+		{
+			break;
+		}
+	}
+	EXPECT_EQ(L"Finished", operation->getStatus());
+	EXPECT_EQ(L"", operation->getError());
+
+	std::shared_ptr<ObjectExist> exists = utils->getSlidesApi()->objectExists(outPath).get();
+	EXPECT_TRUE(exists->isExists());
+}
+
+TEST_F(AsyncTest, asyncMerge) {
+	const int maxTries = 10;
+	const int sleepTimeout = 3;
+	utils->initialize("", "", "");
+	utility::string_t password = L"password";
+
+	std::shared_ptr<HttpContent> data1 = std::make_shared<HttpContent>();
+	data1->setData(std::make_shared<std::ifstream>(L"TestData/TemplateCV.pptx", std::ios::binary));
+	std::shared_ptr<HttpContent> data2 = std::make_shared<HttpContent>();
+	data2->setData(std::make_shared<std::ifstream>(L"TestData/test-unprotected.pptx", std::ios::binary));
+	utility::string_t operationId = utils->getSlidesAsyncApi()->startMerge({ data1, data2 }).get();
+
+	std::shared_ptr<Operation> operation = nullptr;
+	for (int i = 0; i < maxTries; i++)
+	{
+		boost::this_thread::sleep(boost::posix_time::seconds(sleepTimeout));
+		operation = utils->getSlidesAsyncApi()->getOperationStatus(operationId).get();
+		if (operation->getStatus() != L"Created" && operation->getStatus() != L"Enqueued" && operation->getStatus() != L"Started")
+		{
+			break;
+		}
+	}
+	EXPECT_EQ(L"Finished", operation->getStatus());
+	EXPECT_NE(nullptr, operation->getProgress());
+	EXPECT_EQ(2, operation->getProgress()->getStepCount());
+	EXPECT_EQ(operation->getProgress()->getStepCount(), operation->getProgress()->getStepIndex());
+	EXPECT_EQ(L"", operation->getError());
+
+	HttpContent merged = utils->getSlidesAsyncApi()->getOperationResult(operationId).get();
+	int mergedSize = 0;
+	do {
+		mergedSize++;
+	} while (merged.getData()->get() != EOF);
+	EXPECT_GT(mergedSize, 0);
+}
+
+TEST_F(AsyncTest, asyncMergeAndSave) {
+	const int maxTries = 10;
+	const int sleepTimeout = 3;
+	utils->initialize("", "", "");
+	utility::string_t outPath = L"TempSlidesSDK/merged.pptx";
+	utils->getSlidesApi()->deleteFile(outPath).get();
+
+	std::shared_ptr<HttpContent> data1 = std::make_shared<HttpContent>();
+	data1->setData(std::make_shared<std::ifstream>(L"TestData/TemplateCV.pptx", std::ios::binary));
+	std::shared_ptr<HttpContent> data2 = std::make_shared<HttpContent>();
+	data2->setData(std::make_shared<std::ifstream>(L"TestData/test-unprotected.pptx", std::ios::binary));
+	utility::string_t operationId = utils->getSlidesAsyncApi()->startMergeAndSave(outPath, { data1, data2 }).get();
+
+	std::shared_ptr<Operation> operation = nullptr;
+	for (int i = 0; i < maxTries; i++)
+	{
+		boost::this_thread::sleep(boost::posix_time::seconds(sleepTimeout));
+		operation = utils->getSlidesAsyncApi()->getOperationStatus(operationId).get();
+		if (operation->getStatus() != L"Created" && operation->getStatus() != L"Enqueued" && operation->getStatus() != L"Started")
+		{
+			break;
+		}
+	}
+	EXPECT_EQ(L"Finished", operation->getStatus());
+	EXPECT_NE(nullptr, operation->getProgress());
+	EXPECT_EQ(2, operation->getProgress()->getStepCount());
+	EXPECT_EQ(operation->getProgress()->getStepCount(), operation->getProgress()->getStepIndex());
+	EXPECT_EQ(L"", operation->getError());
+
+	std::shared_ptr<ObjectExist> exists = utils->getSlidesApi()->objectExists(outPath).get();
+	EXPECT_TRUE(exists->isExists());
+}
+
 TEST_F(AsyncTest, asyncBadOperation) {
 	const int maxTries = 10;
 	const int sleepTimeout = 3;
