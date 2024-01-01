@@ -207,7 +207,7 @@ void ApiClient::setQueryParameter(
 {
 	if (!value.empty())
 	{
-		queryParams[name] = web::uri::encode_uri(value);
+		queryParams[name] = value;
 	}
 }
 

@@ -95,6 +95,13 @@ TEST_F(ShapesTest, subshapeGet) {
 	EXPECT_EQ(L"Shape", result->getType());
 }
 
+TEST_F(ShapesTest, shapeLoadAndSave) {
+	utils->initialize("", "", "");
+	std::shared_ptr<ShapeBase> dto = utils->getSlidesApi()->getShape(L"test.pptx", 3, 1, L"password", L"TempSlidesSDK").get();
+	std::shared_ptr<ShapeBase> shape = utils->getSlidesApi()->updateShape(L"test.pptx", 3, 1, dto, L"password", L"TempSlidesSDK").get();
+	EXPECT_EQ(L"Chart", shape->getType());
+}
+
 TEST_F(ShapesTest, shapeAdd) {
 	utils->initialize("", "", "");
 	std::shared_ptr<Shape> dto(new Shape());
