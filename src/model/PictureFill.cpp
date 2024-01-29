@@ -34,6 +34,11 @@ namespace model {
 PictureFill::PictureFill()
 {
 	setType(L"Picture");
+	setCropBottom(0.0);
+	setCropLeft(0.0);
+	setCropRight(0.0);
+	setCropTop(0.0);
+	setDpi(0);
 }
 
 PictureFill::~PictureFill()

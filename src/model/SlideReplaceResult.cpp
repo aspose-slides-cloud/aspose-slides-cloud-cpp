@@ -33,6 +33,9 @@ namespace model {
 
 SlideReplaceResult::SlideReplaceResult()
 {
+	setWidth(0.0);
+	setHeight(0.0);
+	setMatches(0);
 }
 
 SlideReplaceResult::~SlideReplaceResult()

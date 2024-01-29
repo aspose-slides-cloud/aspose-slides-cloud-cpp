@@ -63,7 +63,7 @@ public:
 	/// <summary>
 	/// Specifies whether the file is (true) or is not (false) the latest version of an file.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool isIsLatest() const;
+	ASPOSE_DLL_EXPORT bool getIsLatest() const;
 	ASPOSE_DLL_EXPORT void setIsLatest(bool value);
 
 protected:

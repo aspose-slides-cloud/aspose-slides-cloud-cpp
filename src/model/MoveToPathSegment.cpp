@@ -34,6 +34,8 @@ namespace model {
 MoveToPathSegment::MoveToPathSegment()
 {
 	setType(L"MoveTo");
+	setX(0.0);
+	setY(0.0);
 }
 
 MoveToPathSegment::~MoveToPathSegment()

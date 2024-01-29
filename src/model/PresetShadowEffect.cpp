@@ -33,6 +33,8 @@ namespace model {
 
 PresetShadowEffect::PresetShadowEffect()
 {
+	setDirection(0.0);
+	setDistance(0.0);
 }
 
 PresetShadowEffect::~PresetShadowEffect()

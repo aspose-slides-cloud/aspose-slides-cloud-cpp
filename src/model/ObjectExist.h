@@ -60,7 +60,7 @@ public:
 	/// <summary>
 	/// True if it is a folder, false if it is a file.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool isIsFolder() const;
+	ASPOSE_DLL_EXPORT bool getIsFolder() const;
 	ASPOSE_DLL_EXPORT void setIsFolder(bool value);
 
 protected:

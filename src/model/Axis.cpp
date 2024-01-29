@@ -61,7 +61,7 @@ Axis::~Axis()
 {
 }
 
-bool Axis::isIsVisible() const
+bool Axis::getIsVisible() const
 {
 	return m_IsVisible;
 }
@@ -136,7 +136,7 @@ void Axis::setBaseUnitScale(utility::string_t value)
 	
 }
 
-bool Axis::isIsAutomaticMajorUnit() const
+bool Axis::getIsAutomaticMajorUnit() const
 {
 	return m_IsAutomaticMajorUnit;
 }
@@ -200,7 +200,7 @@ void Axis::setMajorTickMark(utility::string_t value)
 	
 }
 
-bool Axis::isIsAutomaticMinorUnit() const
+bool Axis::getIsAutomaticMinorUnit() const
 {
 	return m_IsAutomaticMinorUnit;
 }
@@ -264,7 +264,7 @@ void Axis::setMinorTickMark(utility::string_t value)
 	
 }
 
-bool Axis::isIsAutomaticMaxValue() const
+bool Axis::getIsAutomaticMaxValue() const
 {
 	return m_IsAutomaticMaxValue;
 }
@@ -306,7 +306,7 @@ void Axis::unsetMaxValue()
 	m_MaxValueIsSet = false;
 }
 
-bool Axis::isIsAutomaticMinValue() const
+bool Axis::getIsAutomaticMinValue() const
 {
 	return m_IsAutomaticMinValue;
 }
@@ -348,7 +348,7 @@ void Axis::unsetMinValue()
 	m_MinValueIsSet = false;
 }
 
-bool Axis::isIsLogarithmic() const
+bool Axis::getIsLogarithmic() const
 {
 	return m_IsLogarithmic;
 }
@@ -443,7 +443,7 @@ void Axis::unsetLabelOffset()
 	m_LabelOffsetIsSet = false;
 }
 
-bool Axis::isIsPlotOrderReversed() const
+bool Axis::getIsPlotOrderReversed() const
 {
 	return m_IsPlotOrderReversed;
 }
@@ -464,7 +464,7 @@ void Axis::unsetIsPlotOrderReversed()
 	m_IsPlotOrderReversedIsSet = false;
 }
 
-bool Axis::isIsNumberFormatLinkedToSource() const
+bool Axis::getIsNumberFormatLinkedToSource() const
 {
 	return m_IsNumberFormatLinkedToSource;
 }
@@ -528,7 +528,7 @@ void Axis::unsetCrossAt()
 	m_CrossAtIsSet = false;
 }
 
-bool Axis::isIsAutomaticTickMarksSpacing() const
+bool Axis::getIsAutomaticTickMarksSpacing() const
 {
 	return m_IsAutomaticTickMarksSpacing;
 }
@@ -570,7 +570,7 @@ void Axis::unsetTickMarksSpacing()
 	m_TickMarksSpacingIsSet = false;
 }
 
-bool Axis::isIsAutomaticTickLabelSpacing() const
+bool Axis::getIsAutomaticTickLabelSpacing() const
 {
 	return m_IsAutomaticTickLabelSpacing;
 }

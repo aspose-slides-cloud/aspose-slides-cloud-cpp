@@ -33,6 +33,7 @@ namespace model {
 
 GlowEffect::GlowEffect()
 {
+	setRadius(0.0);
 }
 
 GlowEffect::~GlowEffect()

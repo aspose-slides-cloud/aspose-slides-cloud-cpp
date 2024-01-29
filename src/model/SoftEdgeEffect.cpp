@@ -33,6 +33,7 @@ namespace model {
 
 SoftEdgeEffect::SoftEdgeEffect()
 {
+	setRadius(0.0);
 }
 
 SoftEdgeEffect::~SoftEdgeEffect()

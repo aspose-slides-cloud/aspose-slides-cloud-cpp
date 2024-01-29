@@ -34,6 +34,9 @@ namespace model {
 HslEffect::HslEffect()
 {
 	setType(L"Hsl");
+	setHue(0.0);
+	setSaturation(0.0);
+	setLuminance(0.0);
 }
 
 HslEffect::~HslEffect()

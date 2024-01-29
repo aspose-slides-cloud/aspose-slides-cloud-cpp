@@ -34,6 +34,8 @@ namespace model {
 ReorderSlide::ReorderSlide()
 {
 	setType(L"ReoderSlide");
+	setOldPosition(0);
+	setNewPosition(0);
 }
 
 ReorderSlide::~ReorderSlide()

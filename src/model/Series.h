@@ -76,7 +76,7 @@ public:
 	/// <summary>
 	/// True if each data marker in the series has a different color.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool isIsColorVaried() const;
+	ASPOSE_DLL_EXPORT bool getIsColorVaried() const;
 	ASPOSE_DLL_EXPORT void setIsColorVaried(bool value);
 	ASPOSE_DLL_EXPORT bool isColorVariedIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsColorVaried();

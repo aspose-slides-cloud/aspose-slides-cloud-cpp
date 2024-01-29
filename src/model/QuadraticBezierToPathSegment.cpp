@@ -34,6 +34,10 @@ namespace model {
 QuadraticBezierToPathSegment::QuadraticBezierToPathSegment()
 {
 	setType(L"QuadBezierTo");
+	setX1(0.0);
+	setY1(0.0);
+	setX2(0.0);
+	setY2(0.0);
 }
 
 QuadraticBezierToPathSegment::~QuadraticBezierToPathSegment()

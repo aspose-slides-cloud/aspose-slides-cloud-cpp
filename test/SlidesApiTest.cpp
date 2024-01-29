@@ -35120,6 +35120,88 @@ TEST_F(SlidesApiTest, getApiInfo) {
 	EXPECT_NE(nullptr, result);
 }
 
+TEST_F(SlidesApiTest, getAvailableFonts) {
+	utility::string_t paramFontsFolder = utils->getTestValue("getAvailableFonts", "fontsFolder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("getAvailableFonts", "storage", "utility::string_t");
+	utils->initialize("getAvailableFonts", "", "");
+	std::shared_ptr<FontsData> result = utils->getSlidesApi()->getAvailableFonts(paramFontsFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, getAvailableFontsInvalidFontsFolder) {
+	utility::string_t paramFontsFolder = utils->getTestValue("getAvailableFonts", "fontsFolder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("getAvailableFonts", "storage", "utility::string_t");
+	paramFontsFolder = utils->getInvalidTestValue("getAvailableFonts", "fontsFolder", "utility::string_t", paramFontsFolder);
+	utils->initialize("getAvailableFonts", "fontsFolder", "utility::string_t", paramFontsFolder);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesApi()->getAvailableFonts(paramFontsFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getAvailableFonts", "fontsFolder", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getAvailableFonts", "fontsFolder", "utility::string_t", paramFontsFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getAvailableFonts", "fontsFolder", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getAvailableFonts", "fontsFolder", "utility::string_t", paramFontsFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getAvailableFonts", "fontsFolder", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getAvailableFontsInvalidStorage) {
+	utility::string_t paramFontsFolder = utils->getTestValue("getAvailableFonts", "fontsFolder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("getAvailableFonts", "storage", "utility::string_t");
+	paramStorage = utils->getInvalidTestValue("getAvailableFonts", "storage", "utility::string_t", paramStorage);
+	utils->initialize("getAvailableFonts", "storage", "utility::string_t", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesApi()->getAvailableFonts(paramFontsFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getAvailableFonts", "storage", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getAvailableFonts", "storage", "utility::string_t", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getAvailableFonts", "storage", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getAvailableFonts", "storage", "utility::string_t", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getAvailableFonts", "storage", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, getBackground) {
 	utility::string_t paramName = utils->getTestValue("getBackground", "name", "utility::string_t");
 	int32_t paramSlideIndex = utils->getIntTestValue("getBackground", "slideIndex", "int32_t");

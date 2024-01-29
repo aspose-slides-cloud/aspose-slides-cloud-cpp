@@ -33,6 +33,7 @@ namespace model {
 
 Shape::Shape()
 {
+	setZOrderPosition(0);
 	setType(L"Shape");
 }
 

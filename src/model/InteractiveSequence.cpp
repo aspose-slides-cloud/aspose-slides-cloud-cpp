@@ -33,6 +33,7 @@ namespace model {
 
 InteractiveSequence::InteractiveSequence()
 {
+	setTriggerShapeIndex(0);
 }
 
 InteractiveSequence::~InteractiveSequence()

@@ -105,7 +105,7 @@ void ProtectionProperties::setWritePassword(utility::string_t value)
 	
 }
 
-bool ProtectionProperties::isIsWriteProtected() const
+bool ProtectionProperties::getIsWriteProtected() const
 {
 	return m_IsWriteProtected;
 }
@@ -116,7 +116,7 @@ void ProtectionProperties::setIsWriteProtected(bool value)
 	
 }
 
-bool ProtectionProperties::isIsEncrypted() const
+bool ProtectionProperties::getIsEncrypted() const
 {
 	return m_IsEncrypted;
 }

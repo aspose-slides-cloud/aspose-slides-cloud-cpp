@@ -57,8 +57,8 @@ TEST_F(HeaderFooterTest, headerFooterAllSlides) {
 	dto->setIsDateTimeVisible(false);
 	utils->getSlidesApi()->setPresentationHeaderFooter(fileName, dto, password, folderName).get();
 	std::shared_ptr<HeaderFooter> headerFooter = utils->getSlidesApi()->getSlideHeaderFooter(fileName, 1, password, folderName).get();
-	EXPECT_TRUE(headerFooter->isIsFooterVisible());
-	EXPECT_FALSE(headerFooter->isIsDateTimeVisible());
+	EXPECT_TRUE(headerFooter->getIsFooterVisible());
+	EXPECT_FALSE(headerFooter->getIsDateTimeVisible());
 }
 
 TEST_F(HeaderFooterTest, headerFooterSlide) {
@@ -73,11 +73,11 @@ TEST_F(HeaderFooterTest, headerFooterSlide) {
 	dto->setFooterText(L"footer");
 	dto->setIsDateTimeVisible(false);
 	std::shared_ptr<HeaderFooter> headerFooter = utils->getSlidesApi()->setSlideHeaderFooter(fileName, slideIndex, dto, password, folderName).get();
-	EXPECT_TRUE(headerFooter->isIsFooterVisible());
-	EXPECT_FALSE(headerFooter->isIsDateTimeVisible());
+	EXPECT_TRUE(headerFooter->getIsFooterVisible());
+	EXPECT_FALSE(headerFooter->getIsDateTimeVisible());
 	headerFooter = utils->getSlidesApi()->getSlideHeaderFooter(fileName, 1, password, folderName).get();
-	EXPECT_TRUE(headerFooter->isIsFooterVisible());
-	EXPECT_FALSE(headerFooter->isIsDateTimeVisible());
+	EXPECT_TRUE(headerFooter->getIsFooterVisible());
+	EXPECT_FALSE(headerFooter->getIsDateTimeVisible());
 }
 
 TEST_F(HeaderFooterTest, headerFooterNotesSlide) {
@@ -92,9 +92,9 @@ TEST_F(HeaderFooterTest, headerFooterNotesSlide) {
 	dto->setFooterText(L"footer");
 	dto->setIsDateTimeVisible(false);
 	std::shared_ptr<NotesSlideHeaderFooter> headerFooter = utils->getSlidesApi()->setNotesSlideHeaderFooter(fileName, slideIndex, dto, password, folderName).get();
-	EXPECT_TRUE(headerFooter->isIsHeaderVisible());
-	EXPECT_FALSE(headerFooter->isIsDateTimeVisible());
+	EXPECT_TRUE(headerFooter->getIsHeaderVisible());
+	EXPECT_FALSE(headerFooter->getIsDateTimeVisible());
 	headerFooter = utils->getSlidesApi()->getNotesSlideHeaderFooter(fileName, 1, password, folderName).get();
-	EXPECT_TRUE(headerFooter->isIsHeaderVisible());
-	EXPECT_FALSE(headerFooter->isIsDateTimeVisible());
+	EXPECT_TRUE(headerFooter->getIsHeaderVisible());
+	EXPECT_FALSE(headerFooter->getIsDateTimeVisible());
 }

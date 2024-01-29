@@ -46,6 +46,7 @@ Effect::Effect()
 	m_RepeatUntilNextClickIsSet = false;
 	m_StopPreviousSoundIsSet = false;
 	m_RewindIsSet = false;
+	setShapeIndex(0);
 }
 
 Effect::~Effect()

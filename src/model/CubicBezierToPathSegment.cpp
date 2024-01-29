@@ -34,6 +34,12 @@ namespace model {
 CubicBezierToPathSegment::CubicBezierToPathSegment()
 {
 	setType(L"CubicBezierTo");
+	setX1(0.0);
+	setY1(0.0);
+	setX2(0.0);
+	setY2(0.0);
+	setX3(0.0);
+	setY3(0.0);
 }
 
 CubicBezierToPathSegment::~CubicBezierToPathSegment()

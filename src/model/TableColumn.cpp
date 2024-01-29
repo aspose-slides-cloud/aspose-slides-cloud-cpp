@@ -33,6 +33,7 @@ namespace model {
 
 TableColumn::TableColumn()
 {
+	setWidth(0.0);
 }
 
 TableColumn::~TableColumn()

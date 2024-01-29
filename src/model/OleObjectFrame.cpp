@@ -34,6 +34,7 @@ namespace model {
 OleObjectFrame::OleObjectFrame()
 {
 	m_UpdateAutomaticIsSet = false;
+	setZOrderPosition(0);
 	setType(L"OleObjectFrame");
 }
 
@@ -41,7 +42,7 @@ OleObjectFrame::~OleObjectFrame()
 {
 }
 
-bool OleObjectFrame::isIsObjectIcon() const
+bool OleObjectFrame::getIsObjectIcon() const
 {
 	return m_IsObjectIcon;
 }

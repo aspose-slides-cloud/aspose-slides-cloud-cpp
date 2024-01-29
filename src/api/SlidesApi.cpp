@@ -5637,6 +5637,35 @@ pplx::task<std::shared_ptr<ApiInfo>> SlidesApi::getApiInfo()
 		});
 }
 
+pplx::task<std::shared_ptr<FontsData>> SlidesApi::getAvailableFonts(utility::string_t fontsFolder, utility::string_t storage)
+{
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/fonts/available");
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "getAvailableFonts");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FontsData", json);
+			return std::static_pointer_cast<FontsData>(instance);
+		});
+}
+
 pplx::task<std::shared_ptr<SlideBackground>> SlidesApi::getBackground(utility::string_t name, int32_t slideIndex, utility::string_t password, utility::string_t folder, utility::string_t storage)
 {
 	// verify the required parameter 'name' is set

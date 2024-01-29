@@ -34,6 +34,7 @@ namespace model {
 BiLevelEffect::BiLevelEffect()
 {
 	setType(L"BiLevel");
+	setThreshold(0.0);
 }
 
 BiLevelEffect::~BiLevelEffect()

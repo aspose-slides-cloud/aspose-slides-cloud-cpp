@@ -34,6 +34,7 @@ namespace model {
 BlurImageEffect::BlurImageEffect()
 {
 	setType(L"Blur");
+	setRadius(0.0);
 }
 
 BlurImageEffect::~BlurImageEffect()

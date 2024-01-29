@@ -33,6 +33,7 @@ namespace model {
 
 GradientFillStop::GradientFillStop()
 {
+	setPosition(0.0);
 }
 
 GradientFillStop::~GradientFillStop()

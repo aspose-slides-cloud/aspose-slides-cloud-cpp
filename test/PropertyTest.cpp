@@ -174,7 +174,7 @@ TEST_F(PropertyTest, protection) {
 TEST_F(PropertyTest, protectionDelete) {
 	utils->initialize("", "", "");
 	std::shared_ptr<ProtectionProperties> result = utils->getSlidesApi()->deleteProtection(L"test.pptx", L"password", L"TempSlidesSDK").get();
-	EXPECT_FALSE(result->isIsEncrypted());
+	EXPECT_FALSE(result->getIsEncrypted());
 	EXPECT_FALSE(result->isReadOnlyRecommended());
 	EXPECT_EQ(L"", result->getReadPassword());
 }
@@ -238,10 +238,10 @@ TEST_F(PropertyTest, protectionCheck) {
 	utility::string_t fileName = L"test.pptx";
 	utility::string_t folderName = L"TempSlidesSDK";
 	std::shared_ptr<ProtectionProperties> result = utils->getSlidesApi()->getProtectionProperties(fileName, L"", folderName).get();
-	EXPECT_TRUE(result->isIsEncrypted());
+	EXPECT_TRUE(result->getIsEncrypted());
 	EXPECT_EQ(L"", result->getReadPassword());
 
 	result = utils->getSlidesApi()->getProtectionProperties(fileName, L"password", folderName).get();
-	EXPECT_TRUE(result->isIsEncrypted());
+	EXPECT_TRUE(result->getIsEncrypted());
 	EXPECT_NE(L"", result->getReadPassword());
 }

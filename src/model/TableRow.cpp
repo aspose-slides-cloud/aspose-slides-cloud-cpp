@@ -33,6 +33,8 @@ namespace model {
 
 TableRow::TableRow()
 {
+	setMinimalHeight(0.0);
+	setHeight(0.0);
 }
 
 TableRow::~TableRow()

@@ -736,6 +736,11 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ApiInfo>> getApiInfo();
 
 	/// <summary>
+	/// Returns presentation fonts info.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<FontsData>> getAvailableFonts(utility::string_t fontsFolder = L"", utility::string_t storage = L"");
+
+	/// <summary>
 	/// Read slide background info.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<SlideBackground>> getBackground(utility::string_t name, int32_t slideIndex, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");

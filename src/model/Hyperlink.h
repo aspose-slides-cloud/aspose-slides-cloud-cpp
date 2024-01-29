@@ -56,7 +56,7 @@ public:
 	/// <summary>
 	/// If true Hypelink is not applied. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool isIsDisabled() const;
+	ASPOSE_DLL_EXPORT bool getIsDisabled() const;
 	ASPOSE_DLL_EXPORT void setIsDisabled(bool value);
 	ASPOSE_DLL_EXPORT bool isDisabledIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsDisabled();

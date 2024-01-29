@@ -36,6 +36,7 @@ SaveSlide::SaveSlide()
 	m_WidthIsSet = false;
 	m_HeightIsSet = false;
 	setType(L"SaveSlide");
+	setPosition(0);
 }
 
 SaveSlide::~SaveSlide()

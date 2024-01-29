@@ -61,15 +61,24 @@ public:
 	/// <summary>
 	/// Returns true if font is embedded.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool isIsEmbedded() const;
+	ASPOSE_DLL_EXPORT bool getIsEmbedded() const;
 	ASPOSE_DLL_EXPORT void setIsEmbedded(bool value);
 	ASPOSE_DLL_EXPORT bool isEmbeddedIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetIsEmbedded();
+	/// <summary>
+	/// Returns true for a custom font (contained in fontsFolder directory).
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getIsCustom() const;
+	ASPOSE_DLL_EXPORT void setIsCustom(bool value);
+	ASPOSE_DLL_EXPORT bool isCustomIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetIsCustom();
 
 protected:
 	utility::string_t m_FontName;
 	bool m_IsEmbedded;
 	bool m_IsEmbeddedIsSet;
+	bool m_IsCustom;
+	bool m_IsCustomIsSet;
 };
 
 }

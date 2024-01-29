@@ -33,6 +33,7 @@ namespace model {
 
 DocumentReplaceResult::DocumentReplaceResult()
 {
+	setMatches(0);
 }
 
 DocumentReplaceResult::~DocumentReplaceResult()

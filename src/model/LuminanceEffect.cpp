@@ -34,6 +34,8 @@ namespace model {
 LuminanceEffect::LuminanceEffect()
 {
 	setType(L"Luminance");
+	setBrightness(0.0);
+	setContrast(0.0);
 }
 
 LuminanceEffect::~LuminanceEffect()

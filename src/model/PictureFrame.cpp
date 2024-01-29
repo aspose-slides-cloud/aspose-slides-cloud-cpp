@@ -33,6 +33,7 @@ namespace model {
 
 PictureFrame::PictureFrame()
 {
+	setZOrderPosition(0);
 	setType(L"PictureFrame");
 }
 

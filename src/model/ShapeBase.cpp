@@ -38,6 +38,7 @@ ShapeBase::ShapeBase()
 	m_HiddenIsSet = false;
 	m_XIsSet = false;
 	m_YIsSet = false;
+	setZOrderPosition(0);
 }
 
 ShapeBase::~ShapeBase()

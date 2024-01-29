@@ -44,7 +44,7 @@ Hyperlink::~Hyperlink()
 {
 }
 
-bool Hyperlink::isIsDisabled() const
+bool Hyperlink::getIsDisabled() const
 {
 	return m_IsDisabled;
 }

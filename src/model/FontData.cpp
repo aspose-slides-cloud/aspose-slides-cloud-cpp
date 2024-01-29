@@ -34,6 +34,7 @@ namespace model {
 FontData::FontData()
 {
 	m_IsEmbeddedIsSet = false;
+	m_IsCustomIsSet = false;
 }
 
 FontData::~FontData()
@@ -51,7 +52,7 @@ void FontData::setFontName(utility::string_t value)
 	
 }
 
-bool FontData::isIsEmbedded() const
+bool FontData::getIsEmbedded() const
 {
 	return m_IsEmbedded;
 }
@@ -72,6 +73,27 @@ void FontData::unsetIsEmbedded()
 	m_IsEmbeddedIsSet = false;
 }
 
+bool FontData::getIsCustom() const
+{
+	return m_IsCustom;
+}
+
+void FontData::setIsCustom(bool value)
+{
+	m_IsCustom = value;
+	m_IsCustomIsSet = true;
+}
+
+bool FontData::isCustomIsSet() const
+{
+	return m_IsCustomIsSet;
+}
+
+void FontData::unsetIsCustom()
+{
+	m_IsCustomIsSet = false;
+}
+
 web::json::value FontData::toJson() const
 {
 	web::json::value val = web::json::value::object();
@@ -82,6 +104,10 @@ web::json::value FontData::toJson() const
 	if(m_IsEmbeddedIsSet)
 	{
 		val[utility::conversions::to_string_t("IsEmbedded")] = ModelBase::toJson(m_IsEmbedded);
+	}
+	if(m_IsCustomIsSet)
+	{
+		val[utility::conversions::to_string_t("IsCustom")] = ModelBase::toJson(m_IsCustom);
 	}
 	return val;
 }
@@ -97,6 +123,11 @@ void FontData::fromJson(web::json::value& val)
 	if(jsonForIsEmbedded != nullptr && !jsonForIsEmbedded->is_null())
 	{
 		setIsEmbedded(ModelBase::boolFromJson(*jsonForIsEmbedded));
+	}
+	web::json::value* jsonForIsCustom = ModelBase::getField(val, "IsCustom");
+	if(jsonForIsCustom != nullptr && !jsonForIsCustom->is_null())
+	{
+		setIsCustom(ModelBase::boolFromJson(*jsonForIsCustom));
 	}
 }
 

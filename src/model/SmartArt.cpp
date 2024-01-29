@@ -33,6 +33,7 @@ namespace model {
 
 SmartArt::SmartArt()
 {
+	setZOrderPosition(0);
 	setType(L"SmartArt");
 }
 
@@ -84,7 +85,7 @@ void SmartArt::setNodes(std::vector<std::shared_ptr<SmartArtNode>> value)
 	
 }
 
-bool SmartArt::isIsReversed() const
+bool SmartArt::getIsReversed() const
 {
 	return m_IsReversed;
 }

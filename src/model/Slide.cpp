@@ -33,6 +33,8 @@ namespace model {
 
 Slide::Slide()
 {
+	setWidth(0.0);
+	setHeight(0.0);
 }
 
 Slide::~Slide()

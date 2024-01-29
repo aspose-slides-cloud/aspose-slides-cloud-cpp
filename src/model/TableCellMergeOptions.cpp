@@ -33,6 +33,10 @@ namespace model {
 
 TableCellMergeOptions::TableCellMergeOptions()
 {
+	setFirstRowIndex(0);
+	setFirstCellIndex(0);
+	setLastRowIndex(0);
+	setLastCellIndex(0);
 }
 
 TableCellMergeOptions::~TableCellMergeOptions()

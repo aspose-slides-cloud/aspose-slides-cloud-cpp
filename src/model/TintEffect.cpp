@@ -34,6 +34,8 @@ namespace model {
 TintEffect::TintEffect()
 {
 	setType(L"Tint");
+	setHue(0.0);
+	setAmount(0.0);
 }
 
 TintEffect::~TintEffect()

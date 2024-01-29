@@ -33,6 +33,8 @@ namespace model {
 
 FontFallbackRule::FontFallbackRule()
 {
+	setRangeStartIndex(0);
+	setRangeEndIndex(0);
 }
 
 FontFallbackRule::~FontFallbackRule()

@@ -34,6 +34,7 @@ namespace model {
 ReplaceText::ReplaceText()
 {
 	setType(L"ReplaceText");
+	setSlidePosition(0);
 }
 
 ReplaceText::~ReplaceText()

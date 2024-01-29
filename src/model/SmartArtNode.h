@@ -69,7 +69,7 @@ public:
 	/// <summary>
 	/// True for and assistant node.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool isIsAssistant() const;
+	ASPOSE_DLL_EXPORT bool getIsAssistant() const;
 	ASPOSE_DLL_EXPORT void setIsAssistant(bool value);
 	/// <summary>
 	/// Node text.

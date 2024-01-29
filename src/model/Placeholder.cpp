@@ -33,6 +33,7 @@ namespace model {
 
 Placeholder::Placeholder()
 {
+	setIndex(0);
 }
 
 Placeholder::~Placeholder()

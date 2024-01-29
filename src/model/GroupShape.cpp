@@ -33,6 +33,7 @@ namespace model {
 
 GroupShape::GroupShape()
 {
+	setZOrderPosition(0);
 	setType(L"GroupShape");
 }
 

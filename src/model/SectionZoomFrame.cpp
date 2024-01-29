@@ -34,6 +34,7 @@ namespace model {
 SectionZoomFrame::SectionZoomFrame()
 {
 	m_TargetSectionIndexIsSet = false;
+	setZOrderPosition(0);
 	setType(L"SectionZoomFrame");
 }
 

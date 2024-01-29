@@ -34,6 +34,10 @@ namespace model {
 ArcToPathSegment::ArcToPathSegment()
 {
 	setType(L"ArcTo");
+	setWidth(0.0);
+	setHeight(0.0);
+	setStartAngle(0.0);
+	setSweepAngle(0.0);
 }
 
 ArcToPathSegment::~ArcToPathSegment()

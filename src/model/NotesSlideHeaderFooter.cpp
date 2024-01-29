@@ -43,7 +43,7 @@ NotesSlideHeaderFooter::~NotesSlideHeaderFooter()
 {
 }
 
-bool NotesSlideHeaderFooter::isIsDateTimeVisible() const
+bool NotesSlideHeaderFooter::getIsDateTimeVisible() const
 {
 	return m_IsDateTimeVisible;
 }
@@ -75,7 +75,7 @@ void NotesSlideHeaderFooter::setDateTimeText(utility::string_t value)
 	
 }
 
-bool NotesSlideHeaderFooter::isIsFooterVisible() const
+bool NotesSlideHeaderFooter::getIsFooterVisible() const
 {
 	return m_IsFooterVisible;
 }
@@ -107,7 +107,7 @@ void NotesSlideHeaderFooter::setFooterText(utility::string_t value)
 	
 }
 
-bool NotesSlideHeaderFooter::isIsHeaderVisible() const
+bool NotesSlideHeaderFooter::getIsHeaderVisible() const
 {
 	return m_IsHeaderVisible;
 }
@@ -139,7 +139,7 @@ void NotesSlideHeaderFooter::setHeaderText(utility::string_t value)
 	
 }
 
-bool NotesSlideHeaderFooter::isIsSlideNumberVisible() const
+bool NotesSlideHeaderFooter::getIsSlideNumberVisible() const
 {
 	return m_IsSlideNumberVisible;
 }

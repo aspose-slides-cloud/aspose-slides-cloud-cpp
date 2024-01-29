@@ -34,6 +34,8 @@ namespace model {
 AddSlide::AddSlide()
 {
 	setType(L"AddSlide");
+	setCloneFromPosition(0);
+	setPosition(0);
 }
 
 AddSlide::~AddSlide()

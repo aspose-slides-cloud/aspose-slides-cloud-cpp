@@ -34,6 +34,8 @@ namespace model {
 LineToPathSegment::LineToPathSegment()
 {
 	setType(L"LineTo");
+	setX(0.0);
+	setY(0.0);
 }
 
 LineToPathSegment::~LineToPathSegment()

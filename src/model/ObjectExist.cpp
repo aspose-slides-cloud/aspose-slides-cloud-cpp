@@ -50,7 +50,7 @@ void ObjectExist::setExists(bool value)
 	
 }
 
-bool ObjectExist::isIsFolder() const
+bool ObjectExist::getIsFolder() const
 {
 	return m_IsFolder;
 }

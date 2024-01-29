@@ -123,7 +123,7 @@ void ChartSeriesGroup::unsetFirstSliceAngle()
 	m_FirstSliceAngleIsSet = false;
 }
 
-bool ChartSeriesGroup::isIsColorVaried() const
+bool ChartSeriesGroup::getIsColorVaried() const
 {
 	return m_IsColorVaried;
 }

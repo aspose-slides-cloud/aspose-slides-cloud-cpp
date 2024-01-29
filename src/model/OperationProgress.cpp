@@ -33,6 +33,8 @@ namespace model {
 
 OperationProgress::OperationProgress()
 {
+	setStepIndex(0);
+	setStepCount(0);
 }
 
 OperationProgress::~OperationProgress()

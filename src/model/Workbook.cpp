@@ -34,6 +34,9 @@ namespace model {
 Workbook::Workbook()
 {
 	setType(L"Workbook");
+	setWorksheetIndex(0);
+	setColumnIndex(0);
+	setRowIndex(0);
 }
 
 Workbook::~Workbook()

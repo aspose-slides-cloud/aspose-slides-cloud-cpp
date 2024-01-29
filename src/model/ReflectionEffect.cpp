@@ -33,6 +33,18 @@ namespace model {
 
 ReflectionEffect::ReflectionEffect()
 {
+	setDirection(0.0);
+	setFadeDirection(0.0);
+	setDistance(0.0);
+	setBlurRadius(0.0);
+	setScaleHorizontal(0.0);
+	setScaleVertical(0.0);
+	setSkewHorizontal(0.0);
+	setSkewVertical(0.0);
+	setStartPosAlpha(0.0);
+	setEndPosAlpha(0.0);
+	setStartReflectionOpacity(0.0);
+	setEndReflectionOpacity(0.0);
 }
 
 ReflectionEffect::~ReflectionEffect()

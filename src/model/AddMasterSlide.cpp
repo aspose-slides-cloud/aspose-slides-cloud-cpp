@@ -34,6 +34,7 @@ namespace model {
 AddMasterSlide::AddMasterSlide()
 {
 	setType(L"AddMasterSlide");
+	setCloneFromPosition(0);
 }
 
 AddMasterSlide::~AddMasterSlide()

@@ -33,6 +33,7 @@ namespace model {
 
 Section::Section()
 {
+	setFirstSlideIndex(0);
 }
 
 Section::~Section()

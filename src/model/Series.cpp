@@ -78,7 +78,7 @@ void Series::setDataSourceForSeriesName(std::shared_ptr<DataSource> value)
 	
 }
 
-bool Series::isIsColorVaried() const
+bool Series::getIsColorVaried() const
 {
 	return m_IsColorVaried;
 }

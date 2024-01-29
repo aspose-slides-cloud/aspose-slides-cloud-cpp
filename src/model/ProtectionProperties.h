@@ -83,12 +83,12 @@ public:
 	/// <summary>
 	/// Returns true if the presentation protected for editing. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool isIsWriteProtected() const;
+	ASPOSE_DLL_EXPORT bool getIsWriteProtected() const;
 	ASPOSE_DLL_EXPORT void setIsWriteProtected(bool value);
 	/// <summary>
 	/// Returns true if the presentation protected for reading. 
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool isIsEncrypted() const;
+	ASPOSE_DLL_EXPORT bool getIsEncrypted() const;
 	ASPOSE_DLL_EXPORT void setIsEncrypted(bool value);
 
 protected:

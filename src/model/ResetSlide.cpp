@@ -34,6 +34,7 @@ namespace model {
 ResetSlide::ResetSlide()
 {
 	setType(L"ResetSlide");
+	setPosition(0);
 }
 
 ResetSlide::~ResetSlide()

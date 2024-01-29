@@ -36,6 +36,7 @@ ZoomObject::ZoomObject()
 	m_ReturnToParentIsSet = false;
 	m_ShowBackgroundIsSet = false;
 	m_TransitionDurationIsSet = false;
+	setZOrderPosition(0);
 }
 
 ZoomObject::~ZoomObject()

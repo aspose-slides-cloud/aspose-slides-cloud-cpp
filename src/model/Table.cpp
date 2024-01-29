@@ -40,6 +40,7 @@ Table::Table()
 	m_LastRowIsSet = false;
 	m_RightToLeftIsSet = false;
 	m_VerticalBandingIsSet = false;
+	setZOrderPosition(0);
 	setType(L"Table");
 }
 

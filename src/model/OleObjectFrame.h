@@ -65,7 +65,7 @@ public:
 	/// <summary>
 	/// True if an object is visible as icon.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool isIsObjectIcon() const;
+	ASPOSE_DLL_EXPORT bool getIsObjectIcon() const;
 	ASPOSE_DLL_EXPORT void setIsObjectIcon(bool value);
 	/// <summary>
 	/// The title for OleObject icon.             

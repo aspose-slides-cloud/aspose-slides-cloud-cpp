@@ -34,6 +34,7 @@ namespace model {
 AlphaReplaceEffect::AlphaReplaceEffect()
 {
 	setType(L"AlphaReplace");
+	setAlpha(0.0);
 }
 
 AlphaReplaceEffect::~AlphaReplaceEffect()

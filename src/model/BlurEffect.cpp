@@ -33,6 +33,7 @@ namespace model {
 
 BlurEffect::BlurEffect()
 {
+	setRadius(0.0);
 }
 
 BlurEffect::~BlurEffect()

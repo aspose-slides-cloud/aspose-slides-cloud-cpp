@@ -33,6 +33,9 @@ namespace model {
 
 OuterShadowEffect::OuterShadowEffect()
 {
+	setDirection(0.0);
+	setDistance(0.0);
+	setBlurRadius(0.0);
 }
 
 OuterShadowEffect::~OuterShadowEffect()

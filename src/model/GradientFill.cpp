@@ -34,6 +34,7 @@ namespace model {
 GradientFill::GradientFill()
 {
 	setType(L"Gradient");
+	setLinearAngle(0.0);
 }
 
 GradientFill::~GradientFill()
@@ -84,7 +85,7 @@ void GradientFill::setLinearAngle(double value)
 	
 }
 
-bool GradientFill::isIsScaled() const
+bool GradientFill::getIsScaled() const
 {
 	return m_IsScaled;
 }

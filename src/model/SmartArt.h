@@ -85,7 +85,7 @@ public:
 	/// <summary>
 	/// The state of the SmartArt diagram with regard to (left-to-right) LTR or (right-to-left) RTL, if the diagram supports reversal.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool isIsReversed() const;
+	ASPOSE_DLL_EXPORT bool getIsReversed() const;
 	ASPOSE_DLL_EXPORT void setIsReversed(bool value);
 
 protected:

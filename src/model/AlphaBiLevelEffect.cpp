@@ -34,6 +34,7 @@ namespace model {
 AlphaBiLevelEffect::AlphaBiLevelEffect()
 {
 	setType(L"AlphaBiLevel");
+	setThreshold(0.0);
 }
 
 AlphaBiLevelEffect::~AlphaBiLevelEffect()

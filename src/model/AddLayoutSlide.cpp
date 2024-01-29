@@ -34,6 +34,7 @@ namespace model {
 AddLayoutSlide::AddLayoutSlide()
 {
 	setType(L"AddLayoutSlide");
+	setCloneFromPosition(0);
 }
 
 AddLayoutSlide::~AddLayoutSlide()

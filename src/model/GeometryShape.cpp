@@ -33,6 +33,7 @@ namespace model {
 
 GeometryShape::GeometryShape()
 {
+	setZOrderPosition(0);
 }
 
 GeometryShape::~GeometryShape()

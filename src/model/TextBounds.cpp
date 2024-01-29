@@ -33,6 +33,10 @@ namespace model {
 
 TextBounds::TextBounds()
 {
+	setX(0.0);
+	setY(0.0);
+	setWidth(0.0);
+	setHeight(0.0);
 }
 
 TextBounds::~TextBounds()

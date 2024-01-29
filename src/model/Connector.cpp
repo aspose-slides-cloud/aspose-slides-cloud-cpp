@@ -35,6 +35,7 @@ Connector::Connector()
 {
 	m_StartShapeConnectedToIndexIsSet = false;
 	m_EndShapeConnectedToIndexIsSet = false;
+	setZOrderPosition(0);
 	setType(L"Connector");
 }
 

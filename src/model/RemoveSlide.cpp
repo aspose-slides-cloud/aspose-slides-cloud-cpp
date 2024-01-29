@@ -34,6 +34,7 @@ namespace model {
 RemoveSlide::RemoveSlide()
 {
 	setType(L"RemoveSlide");
+	setPosition(0);
 }
 
 RemoveSlide::~RemoveSlide()

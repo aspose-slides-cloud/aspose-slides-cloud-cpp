@@ -33,6 +33,8 @@ namespace model {
 
 Image::Image()
 {
+	setWidth(0);
+	setHeight(0);
 }
 
 Image::~Image()

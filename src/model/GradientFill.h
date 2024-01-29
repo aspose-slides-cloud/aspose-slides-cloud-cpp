@@ -79,7 +79,7 @@ public:
 	/// <summary>
 	/// True if the gradient is scaled.
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool isIsScaled() const;
+	ASPOSE_DLL_EXPORT bool getIsScaled() const;
 	ASPOSE_DLL_EXPORT void setIsScaled(bool value);
 	/// <summary>
 	/// Gradient flipping mode.
