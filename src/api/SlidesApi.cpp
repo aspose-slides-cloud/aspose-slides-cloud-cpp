@@ -5740,6 +5740,42 @@ pplx::task<std::shared_ptr<ColorScheme>> SlidesApi::getColorScheme(utility::stri
 		});
 }
 
+pplx::task<std::shared_ptr<CommentAuthors>> SlidesApi::getCommentAuthors(utility::string_t name, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/comments/authors");
+	ApiClient::setPathParameter(methodPath, "name", name);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "getCommentAuthors");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"CommentAuthors", json);
+			return std::static_pointer_cast<CommentAuthors>(instance);
+		});
+}
+
 pplx::task<std::shared_ptr<DiscUsage>> SlidesApi::getDiscUsage(utility::string_t storageName)
 {
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/storage/disc");

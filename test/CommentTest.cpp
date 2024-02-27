@@ -170,3 +170,10 @@ TEST_F(CommentTest, commentCreateModernForShape) {
 	EXPECT_EQ(1, comments->getList().size());
 	EXPECT_EQ(L"Modern", comments->getList()[0]->getType());
 }
+
+TEST_F(CommentTest, commentsGetAuthors) {
+	utils->initialize("", "", "");
+
+	std::shared_ptr<CommentAuthors> comments = utils->getSlidesApi()->getCommentAuthors(L"test.pptx", L"password", L"TempSlidesSDK").get();
+	EXPECT_EQ(1, comments->getList().size());
+}

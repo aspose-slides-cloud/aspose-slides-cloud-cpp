@@ -47,6 +47,7 @@
 #include "../model/ChartSeriesGroup.h"
 #include "../model/ChartWall.h"
 #include "../model/ColorScheme.h"
+#include "../model/CommentAuthors.h"
 #include "../model/DataPoint.h"
 #include "../model/DiscUsage.h"
 #include "../model/Document.h"
@@ -749,6 +750,11 @@ public:
 	/// Read slide theme color scheme info.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<ColorScheme>> getColorScheme(utility::string_t name, int32_t slideIndex, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
+
+	/// <summary>
+	/// Lists comment authors.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<CommentAuthors>> getCommentAuthors(utility::string_t name, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
 
 	/// <summary>
 	/// Get disc usage

@@ -35624,6 +35624,172 @@ TEST_F(SlidesApiTest, getColorSchemeInvalidStorage) {
 	}
 }
 
+TEST_F(SlidesApiTest, getCommentAuthors) {
+	utility::string_t paramName = utils->getTestValue("getCommentAuthors", "name", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("getCommentAuthors", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("getCommentAuthors", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("getCommentAuthors", "storage", "utility::string_t");
+	utils->initialize("getCommentAuthors", "", "");
+	std::shared_ptr<CommentAuthors> result = utils->getSlidesApi()->getCommentAuthors(paramName, paramPassword, paramFolder, paramStorage).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesApiTest, getCommentAuthorsInvalidName) {
+	utility::string_t paramName = utils->getTestValue("getCommentAuthors", "name", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("getCommentAuthors", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("getCommentAuthors", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("getCommentAuthors", "storage", "utility::string_t");
+	paramName = utils->getInvalidTestValue("getCommentAuthors", "name", "utility::string_t", paramName);
+	utils->initialize("getCommentAuthors", "name", "utility::string_t", paramName);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesApi()->getCommentAuthors(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getCommentAuthors", "name", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getCommentAuthors", "name", "utility::string_t", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getCommentAuthors", "name", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getCommentAuthors", "name", "utility::string_t", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getCommentAuthors", "name", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getCommentAuthorsInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("getCommentAuthors", "name", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("getCommentAuthors", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("getCommentAuthors", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("getCommentAuthors", "storage", "utility::string_t");
+	paramPassword = utils->getInvalidTestValue("getCommentAuthors", "password", "utility::string_t", paramPassword);
+	utils->initialize("getCommentAuthors", "password", "utility::string_t", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesApi()->getCommentAuthors(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getCommentAuthors", "password", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getCommentAuthors", "password", "utility::string_t", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getCommentAuthors", "password", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getCommentAuthors", "password", "utility::string_t", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getCommentAuthors", "password", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getCommentAuthorsInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("getCommentAuthors", "name", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("getCommentAuthors", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("getCommentAuthors", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("getCommentAuthors", "storage", "utility::string_t");
+	paramFolder = utils->getInvalidTestValue("getCommentAuthors", "folder", "utility::string_t", paramFolder);
+	utils->initialize("getCommentAuthors", "folder", "utility::string_t", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesApi()->getCommentAuthors(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getCommentAuthors", "folder", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getCommentAuthors", "folder", "utility::string_t", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getCommentAuthors", "folder", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getCommentAuthors", "folder", "utility::string_t", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getCommentAuthors", "folder", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesApiTest, getCommentAuthorsInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("getCommentAuthors", "name", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("getCommentAuthors", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("getCommentAuthors", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("getCommentAuthors", "storage", "utility::string_t");
+	paramStorage = utils->getInvalidTestValue("getCommentAuthors", "storage", "utility::string_t", paramStorage);
+	utils->initialize("getCommentAuthors", "storage", "utility::string_t", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesApi()->getCommentAuthors(paramName, paramPassword, paramFolder, paramStorage).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("getCommentAuthors", "storage", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("getCommentAuthors", "storage", "utility::string_t", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("getCommentAuthors", "storage", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("getCommentAuthors", "storage", "utility::string_t", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("getCommentAuthors", "storage", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesApiTest, getDiscUsage) {
 	utility::string_t paramStorageName = utils->getTestValue("getDiscUsage", "storageName", "utility::string_t");
 	utils->initialize("getDiscUsage", "", "");

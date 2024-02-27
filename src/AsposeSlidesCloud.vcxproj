@@ -170,6 +170,8 @@
     <ClCompile Include="model\ColorChangeEffect.cpp" />
     <ClCompile Include="model\ColorReplaceEffect.cpp" />
     <ClCompile Include="model\ColorScheme.cpp" />
+    <ClCompile Include="model\CommentAuthor.cpp" />
+    <ClCompile Include="model\CommentAuthors.cpp" />
     <ClCompile Include="model\CommonSlideViewProperties.cpp" />
     <ClCompile Include="model\Connector.cpp" />
     <ClCompile Include="model\CubicBezierToPathSegment.cpp" />
@@ -436,6 +438,8 @@
     <ClInclude Include="model\ColorChangeEffect.h" />
     <ClInclude Include="model\ColorReplaceEffect.h" />
     <ClInclude Include="model\ColorScheme.h" />
+    <ClInclude Include="model\CommentAuthor.h" />
+    <ClInclude Include="model\CommentAuthors.h" />
     <ClInclude Include="model\CommonSlideViewProperties.h" />
     <ClInclude Include="model\Connector.h" />
     <ClInclude Include="model\CubicBezierToPathSegment.h" />

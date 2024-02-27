@@ -69,6 +69,8 @@
 #include "model/ColorChangeEffect.h"
 #include "model/ColorReplaceEffect.h"
 #include "model/ColorScheme.h"
+#include "model/CommentAuthor.h"
+#include "model/CommentAuthors.h"
 #include "model/CommonSlideViewProperties.h"
 #include "model/Connector.h"
 #include "model/CubicBezierToPathSegment.h"
@@ -609,6 +611,18 @@ std::shared_ptr<void> ClassRegistry::deserializeSubclass(utility::string_t class
 	if (className == L"ColorScheme")
 	{
 		std::shared_ptr<ColorScheme> result(new ColorScheme());
+		result->fromJson(json);
+		return result;
+	}
+	if (className == L"CommentAuthor")
+	{
+		std::shared_ptr<CommentAuthor> result(new CommentAuthor());
+		result->fromJson(json);
+		return result;
+	}
+	if (className == L"CommentAuthors")
+	{
+		std::shared_ptr<CommentAuthors> result(new CommentAuthors());
 		result->fromJson(json);
 		return result;
 	}
@@ -1894,6 +1908,7 @@ std::map<utility::string_t, utility::string_t> ClassRegistry::s_hierarchy =
 	{ L"ColorChangeEffect", L"ImageTransformEffect" },
 	{ L"ColorReplaceEffect", L"ImageTransformEffect" },
 	{ L"ColorScheme", L"ResourceBase" },
+	{ L"CommentAuthors", L"ResourceBase" },
 	{ L"Connector", L"GeometryShape" },
 	{ L"CubicBezierToPathSegment", L"PathSegment" },
 	{ L"DelimiterElement", L"MathElement" },
@@ -2063,6 +2078,8 @@ std::map<utility::string_t, std::map<utility::string_t, utility::string_t>> Clas
 	{ L"ColorChangeEffect", { { L"Type", L"ColorChange" }, } },
 	{ L"ColorReplaceEffect", { { L"Type", L"ColorReplace" }, } },
 	{ L"ColorScheme", { } },
+	{ L"CommentAuthor", { } },
+	{ L"CommentAuthors", { } },
 	{ L"CommonSlideViewProperties", { } },
 	{ L"Connector", { { L"Type", L"Connector" }, } },
 	{ L"CubicBezierToPathSegment", { { L"Type", L"CubicBezierTo" }, } },
