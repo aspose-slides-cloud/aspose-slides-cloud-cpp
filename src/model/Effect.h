@@ -69,6 +69,11 @@ public:
 	ASPOSE_DLL_EXPORT utility::string_t getPresetClassType() const;
 	ASPOSE_DLL_EXPORT void setPresetClassType(utility::string_t value);
 	/// <summary>
+	/// Preset class type.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getAnimateTextType() const;
+	ASPOSE_DLL_EXPORT void setAnimateTextType(utility::string_t value);
+	/// <summary>
 	/// Shape index.
 	/// </summary>
 	ASPOSE_DLL_EXPORT int32_t getShapeIndex() const;
@@ -189,6 +194,7 @@ protected:
 	utility::string_t m_Type;
 	utility::string_t m_Subtype;
 	utility::string_t m_PresetClassType;
+	utility::string_t m_AnimateTextType;
 	int32_t m_ShapeIndex;
 	int32_t m_ParagraphIndex;
 	bool m_ParagraphIndexIsSet;

@@ -38,6 +38,7 @@
 #include "../model/FontFallbackRule.h"
 #include "../model/FontSubstRule.h"
 #include <cpprest/details/basic_types.h>
+#include "../model/NotesCommentsLayoutingOptions.h"
 #include <vector>
 
 #include "../ClassRegistry.h"
@@ -71,12 +72,27 @@ public:
 	ASPOSE_DLL_EXPORT void setAnimateShapes(bool value);
 	ASPOSE_DLL_EXPORT bool animateShapesIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetAnimateShapes();
+	/// <summary>
+	/// Gets or sets embed images option.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool isEmbedImages() const;
+	ASPOSE_DLL_EXPORT void setEmbedImages(bool value);
+	ASPOSE_DLL_EXPORT bool embedImagesIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetEmbedImages();
+	/// <summary>
+	/// Slides layouting options
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<NotesCommentsLayoutingOptions> getNotesCommentsLayouting() const;
+	ASPOSE_DLL_EXPORT void setNotesCommentsLayouting(std::shared_ptr<NotesCommentsLayoutingOptions> value);
 
 protected:
 	bool m_AnimateTransitions;
 	bool m_AnimateTransitionsIsSet;
 	bool m_AnimateShapes;
 	bool m_AnimateShapesIsSet;
+	bool m_EmbedImages;
+	bool m_EmbedImagesIsSet;
+	std::shared_ptr<NotesCommentsLayoutingOptions> m_NotesCommentsLayouting;
 };
 
 }

@@ -97,6 +97,13 @@ public:
 	ASPOSE_DLL_EXPORT bool showNarrationIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowNarration();
 	/// <summary>
+	/// Show media controls.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool isShowMediaControls() const;
+	ASPOSE_DLL_EXPORT void setShowMediaControls(bool value);
+	ASPOSE_DLL_EXPORT bool showMediaControlsIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetShowMediaControls();
+	/// <summary>
 	/// Use timings.
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool isUseTimings() const;
@@ -128,6 +135,8 @@ protected:
 	bool m_ShowAnimationIsSet;
 	bool m_ShowNarration;
 	bool m_ShowNarrationIsSet;
+	bool m_ShowMediaControls;
+	bool m_ShowMediaControlsIsSet;
 	bool m_UseTimings;
 	bool m_UseTimingsIsSet;
 	utility::string_t m_SlideShowType;

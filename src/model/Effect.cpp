@@ -86,6 +86,17 @@ void Effect::setPresetClassType(utility::string_t value)
 	
 }
 
+utility::string_t Effect::getAnimateTextType() const
+{
+	return m_AnimateTextType;
+}
+
+void Effect::setAnimateTextType(utility::string_t value)
+{
+	m_AnimateTextType = value;
+	
+}
+
 int32_t Effect::getShapeIndex() const
 {
 	return m_ShapeIndex;
@@ -429,6 +440,10 @@ web::json::value Effect::toJson() const
 	{
 		val[utility::conversions::to_string_t("PresetClassType")] = ModelBase::toJson(m_PresetClassType);
 	}
+	if (!m_AnimateTextType.empty())
+	{
+		val[utility::conversions::to_string_t("AnimateTextType")] = ModelBase::toJson(m_AnimateTextType);
+	}
 	val[utility::conversions::to_string_t("ShapeIndex")] = ModelBase::toJson(m_ShapeIndex);
 	if(m_ParagraphIndexIsSet)
 	{
@@ -517,6 +532,11 @@ void Effect::fromJson(web::json::value& val)
 	if(jsonForPresetClassType != nullptr && !jsonForPresetClassType->is_null())
 	{
 		setPresetClassType(ModelBase::stringFromJson(*jsonForPresetClassType));
+	}
+	web::json::value* jsonForAnimateTextType = ModelBase::getField(val, "AnimateTextType");
+	if(jsonForAnimateTextType != nullptr && !jsonForAnimateTextType->is_null())
+	{
+		setAnimateTextType(ModelBase::stringFromJson(*jsonForAnimateTextType));
 	}
 	web::json::value* jsonForShapeIndex = ModelBase::getField(val, "ShapeIndex");
 	if(jsonForShapeIndex != nullptr && !jsonForShapeIndex->is_null() && jsonForShapeIndex->is_number())

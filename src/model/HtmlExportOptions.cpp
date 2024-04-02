@@ -38,8 +38,6 @@ HtmlExportOptions::HtmlExportOptions()
 	m_SvgResponsiveLayoutIsSet = false;
 	m_JpegQualityIsSet = false;
 	m_DeletePicturesCroppedAreasIsSet = false;
-	m_CommentsAreaWidthIsSet = false;
-	m_ShowCommentsByNoAuthorIsSet = false;
 	setFormat(L"html");
 }
 
@@ -174,79 +172,15 @@ void HtmlExportOptions::unsetDeletePicturesCroppedAreas()
 	m_DeletePicturesCroppedAreasIsSet = false;
 }
 
-utility::string_t HtmlExportOptions::getNotesPosition() const
+std::shared_ptr<SlidesLayoutOptions> HtmlExportOptions::getSlidesLayoutOptions() const
 {
-	return m_NotesPosition;
+	return m_SlidesLayoutOptions;
 }
 
-void HtmlExportOptions::setNotesPosition(utility::string_t value)
+void HtmlExportOptions::setSlidesLayoutOptions(std::shared_ptr<SlidesLayoutOptions> value)
 {
-	m_NotesPosition = value;
+	m_SlidesLayoutOptions = value;
 	
-}
-
-utility::string_t HtmlExportOptions::getCommentsPosition() const
-{
-	return m_CommentsPosition;
-}
-
-void HtmlExportOptions::setCommentsPosition(utility::string_t value)
-{
-	m_CommentsPosition = value;
-	
-}
-
-int32_t HtmlExportOptions::getCommentsAreaWidth() const
-{
-	return m_CommentsAreaWidth;
-}
-
-void HtmlExportOptions::setCommentsAreaWidth(int32_t value)
-{
-	m_CommentsAreaWidth = value;
-	m_CommentsAreaWidthIsSet = true;
-}
-
-bool HtmlExportOptions::commentsAreaWidthIsSet() const
-{
-	return m_CommentsAreaWidthIsSet;
-}
-
-void HtmlExportOptions::unsetCommentsAreaWidth()
-{
-	m_CommentsAreaWidthIsSet = false;
-}
-
-utility::string_t HtmlExportOptions::getCommentsAreaColor() const
-{
-	return m_CommentsAreaColor;
-}
-
-void HtmlExportOptions::setCommentsAreaColor(utility::string_t value)
-{
-	m_CommentsAreaColor = value;
-	
-}
-
-bool HtmlExportOptions::isShowCommentsByNoAuthor() const
-{
-	return m_ShowCommentsByNoAuthor;
-}
-
-void HtmlExportOptions::setShowCommentsByNoAuthor(bool value)
-{
-	m_ShowCommentsByNoAuthor = value;
-	m_ShowCommentsByNoAuthorIsSet = true;
-}
-
-bool HtmlExportOptions::showCommentsByNoAuthorIsSet() const
-{
-	return m_ShowCommentsByNoAuthorIsSet;
-}
-
-void HtmlExportOptions::unsetShowCommentsByNoAuthor()
-{
-	m_ShowCommentsByNoAuthorIsSet = false;
 }
 
 web::json::value HtmlExportOptions::toJson() const
@@ -280,25 +214,9 @@ web::json::value HtmlExportOptions::toJson() const
 	{
 		val[utility::conversions::to_string_t("DeletePicturesCroppedAreas")] = ModelBase::toJson(m_DeletePicturesCroppedAreas);
 	}
-	if (!m_NotesPosition.empty())
+	if (m_SlidesLayoutOptions != nullptr)
 	{
-		val[utility::conversions::to_string_t("NotesPosition")] = ModelBase::toJson(m_NotesPosition);
-	}
-	if (!m_CommentsPosition.empty())
-	{
-		val[utility::conversions::to_string_t("CommentsPosition")] = ModelBase::toJson(m_CommentsPosition);
-	}
-	if(m_CommentsAreaWidthIsSet)
-	{
-		val[utility::conversions::to_string_t("CommentsAreaWidth")] = ModelBase::toJson(m_CommentsAreaWidth);
-	}
-	if (!m_CommentsAreaColor.empty())
-	{
-		val[utility::conversions::to_string_t("CommentsAreaColor")] = ModelBase::toJson(m_CommentsAreaColor);
-	}
-	if(m_ShowCommentsByNoAuthorIsSet)
-	{
-		val[utility::conversions::to_string_t("ShowCommentsByNoAuthor")] = ModelBase::toJson(m_ShowCommentsByNoAuthor);
+		val[utility::conversions::to_string_t("SlidesLayoutOptions")] = ModelBase::toJson(m_SlidesLayoutOptions);
 	}
 	return val;
 }
@@ -341,30 +259,11 @@ void HtmlExportOptions::fromJson(web::json::value& val)
 	{
 		setDeletePicturesCroppedAreas(ModelBase::boolFromJson(*jsonForDeletePicturesCroppedAreas));
 	}
-	web::json::value* jsonForNotesPosition = ModelBase::getField(val, "NotesPosition");
-	if(jsonForNotesPosition != nullptr && !jsonForNotesPosition->is_null())
+	web::json::value* jsonForSlidesLayoutOptions = ModelBase::getField(val, "SlidesLayoutOptions");
+	if(jsonForSlidesLayoutOptions != nullptr && !jsonForSlidesLayoutOptions->is_null())
 	{
-		setNotesPosition(ModelBase::stringFromJson(*jsonForNotesPosition));
-	}
-	web::json::value* jsonForCommentsPosition = ModelBase::getField(val, "CommentsPosition");
-	if(jsonForCommentsPosition != nullptr && !jsonForCommentsPosition->is_null())
-	{
-		setCommentsPosition(ModelBase::stringFromJson(*jsonForCommentsPosition));
-	}
-	web::json::value* jsonForCommentsAreaWidth = ModelBase::getField(val, "CommentsAreaWidth");
-	if(jsonForCommentsAreaWidth != nullptr && !jsonForCommentsAreaWidth->is_null() && jsonForCommentsAreaWidth->is_number())
-	{
-		setCommentsAreaWidth(ModelBase::int32_tFromJson(*jsonForCommentsAreaWidth));
-	}
-	web::json::value* jsonForCommentsAreaColor = ModelBase::getField(val, "CommentsAreaColor");
-	if(jsonForCommentsAreaColor != nullptr && !jsonForCommentsAreaColor->is_null())
-	{
-		setCommentsAreaColor(ModelBase::stringFromJson(*jsonForCommentsAreaColor));
-	}
-	web::json::value* jsonForShowCommentsByNoAuthor = ModelBase::getField(val, "ShowCommentsByNoAuthor");
-	if(jsonForShowCommentsByNoAuthor != nullptr && !jsonForShowCommentsByNoAuthor->is_null())
-	{
-		setShowCommentsByNoAuthor(ModelBase::boolFromJson(*jsonForShowCommentsByNoAuthor));
+		std::shared_ptr<void> instanceForSlidesLayoutOptions = asposeslidescloud::api::ClassRegistry::deserialize(L"SlidesLayoutOptions", *jsonForSlidesLayoutOptions);
+		setSlidesLayoutOptions(std::static_pointer_cast<SlidesLayoutOptions>(instanceForSlidesLayoutOptions));
 	}
 }
 

@@ -35,6 +35,7 @@ Html5ExportOptions::Html5ExportOptions()
 {
 	m_AnimateTransitionsIsSet = false;
 	m_AnimateShapesIsSet = false;
+	m_EmbedImagesIsSet = false;
 	setFormat(L"html5");
 }
 
@@ -84,6 +85,38 @@ void Html5ExportOptions::unsetAnimateShapes()
 	m_AnimateShapesIsSet = false;
 }
 
+bool Html5ExportOptions::isEmbedImages() const
+{
+	return m_EmbedImages;
+}
+
+void Html5ExportOptions::setEmbedImages(bool value)
+{
+	m_EmbedImages = value;
+	m_EmbedImagesIsSet = true;
+}
+
+bool Html5ExportOptions::embedImagesIsSet() const
+{
+	return m_EmbedImagesIsSet;
+}
+
+void Html5ExportOptions::unsetEmbedImages()
+{
+	m_EmbedImagesIsSet = false;
+}
+
+std::shared_ptr<NotesCommentsLayoutingOptions> Html5ExportOptions::getNotesCommentsLayouting() const
+{
+	return m_NotesCommentsLayouting;
+}
+
+void Html5ExportOptions::setNotesCommentsLayouting(std::shared_ptr<NotesCommentsLayoutingOptions> value)
+{
+	m_NotesCommentsLayouting = value;
+	
+}
+
 web::json::value Html5ExportOptions::toJson() const
 {
 	web::json::value val = this->ExportOptions::toJson();
@@ -94,6 +127,14 @@ web::json::value Html5ExportOptions::toJson() const
 	if(m_AnimateShapesIsSet)
 	{
 		val[utility::conversions::to_string_t("AnimateShapes")] = ModelBase::toJson(m_AnimateShapes);
+	}
+	if(m_EmbedImagesIsSet)
+	{
+		val[utility::conversions::to_string_t("EmbedImages")] = ModelBase::toJson(m_EmbedImages);
+	}
+	if (m_NotesCommentsLayouting != nullptr)
+	{
+		val[utility::conversions::to_string_t("NotesCommentsLayouting")] = ModelBase::toJson(m_NotesCommentsLayouting);
 	}
 	return val;
 }
@@ -110,6 +151,17 @@ void Html5ExportOptions::fromJson(web::json::value& val)
 	if(jsonForAnimateShapes != nullptr && !jsonForAnimateShapes->is_null())
 	{
 		setAnimateShapes(ModelBase::boolFromJson(*jsonForAnimateShapes));
+	}
+	web::json::value* jsonForEmbedImages = ModelBase::getField(val, "EmbedImages");
+	if(jsonForEmbedImages != nullptr && !jsonForEmbedImages->is_null())
+	{
+		setEmbedImages(ModelBase::boolFromJson(*jsonForEmbedImages));
+	}
+	web::json::value* jsonForNotesCommentsLayouting = ModelBase::getField(val, "NotesCommentsLayouting");
+	if(jsonForNotesCommentsLayouting != nullptr && !jsonForNotesCommentsLayouting->is_null())
+	{
+		std::shared_ptr<void> instanceForNotesCommentsLayouting = asposeslidescloud::api::ClassRegistry::deserialize(L"NotesCommentsLayoutingOptions", *jsonForNotesCommentsLayouting);
+		setNotesCommentsLayouting(std::static_pointer_cast<NotesCommentsLayoutingOptions>(instanceForNotesCommentsLayouting));
 	}
 }
 

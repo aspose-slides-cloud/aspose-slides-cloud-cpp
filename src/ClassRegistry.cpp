@@ -118,6 +118,7 @@
 #include "model/GrayScaleEffect.h"
 #include "model/GroupShape.h"
 #include "model/GroupingCharacterElement.h"
+#include "model/HandoutLayoutingOptions.h"
 #include "model/HeaderFooter.h"
 #include "model/HslEffect.h"
 #include "model/Html5ExportOptions.h"
@@ -155,6 +156,7 @@
 #include "model/NaryOperatorElement.h"
 #include "model/NoFill.h"
 #include "model/NormalViewRestoredProperties.h"
+#include "model/NotesCommentsLayoutingOptions.h"
 #include "model/NotesSlide.h"
 #include "model/NotesSlideExportFormat.h"
 #include "model/NotesSlideHeaderFooter.h"
@@ -234,6 +236,7 @@
 #include "model/SlideShowProperties.h"
 #include "model/SlideShowTransition.h"
 #include "model/Slides.h"
+#include "model/SlidesLayoutOptions.h"
 #include "model/SmartArt.h"
 #include "model/SmartArtNode.h"
 #include "model/SmartArtShape.h"
@@ -908,6 +911,12 @@ std::shared_ptr<void> ClassRegistry::deserializeSubclass(utility::string_t class
 		result->fromJson(json);
 		return result;
 	}
+	if (className == L"HandoutLayoutingOptions")
+	{
+		std::shared_ptr<HandoutLayoutingOptions> result(new HandoutLayoutingOptions());
+		result->fromJson(json);
+		return result;
+	}
 	if (className == L"HeaderFooter")
 	{
 		std::shared_ptr<HeaderFooter> result(new HeaderFooter());
@@ -1127,6 +1136,12 @@ std::shared_ptr<void> ClassRegistry::deserializeSubclass(utility::string_t class
 	if (className == L"NormalViewRestoredProperties")
 	{
 		std::shared_ptr<NormalViewRestoredProperties> result(new NormalViewRestoredProperties());
+		result->fromJson(json);
+		return result;
+	}
+	if (className == L"NotesCommentsLayoutingOptions")
+	{
+		std::shared_ptr<NotesCommentsLayoutingOptions> result(new NotesCommentsLayoutingOptions());
 		result->fromJson(json);
 		return result;
 	}
@@ -1604,6 +1619,12 @@ std::shared_ptr<void> ClassRegistry::deserializeSubclass(utility::string_t class
 		result->fromJson(json);
 		return result;
 	}
+	if (className == L"SlidesLayoutOptions")
+	{
+		std::shared_ptr<SlidesLayoutOptions> result(new SlidesLayoutOptions());
+		result->fromJson(json);
+		return result;
+	}
 	if (className == L"SmartArt")
 	{
 		std::shared_ptr<SmartArt> result(new SmartArt());
@@ -1930,6 +1951,7 @@ std::map<utility::string_t, utility::string_t> ClassRegistry::s_hierarchy =
 	{ L"GrayScaleEffect", L"ImageTransformEffect" },
 	{ L"GroupShape", L"ShapeBase" },
 	{ L"GroupingCharacterElement", L"MathElement" },
+	{ L"HandoutLayoutingOptions", L"SlidesLayoutOptions" },
 	{ L"HeaderFooter", L"ResourceBase" },
 	{ L"HslEffect", L"ImageTransformEffect" },
 	{ L"Html5ExportOptions", L"ExportOptions" },
@@ -1952,6 +1974,7 @@ std::map<utility::string_t, utility::string_t> ClassRegistry::s_hierarchy =
 	{ L"MoveToPathSegment", L"PathSegment" },
 	{ L"NaryOperatorElement", L"MathElement" },
 	{ L"NoFill", L"FillFormat" },
+	{ L"NotesCommentsLayoutingOptions", L"SlidesLayoutOptions" },
 	{ L"NotesSlide", L"ResourceBase" },
 	{ L"NotesSlideHeaderFooter", L"ResourceBase" },
 	{ L"OleObjectFrame", L"ShapeBase" },
@@ -2127,6 +2150,7 @@ std::map<utility::string_t, std::map<utility::string_t, utility::string_t>> Clas
 	{ L"GrayScaleEffect", { { L"Type", L"GrayScale" }, } },
 	{ L"GroupShape", { { L"Type", L"GroupShape" }, } },
 	{ L"GroupingCharacterElement", { { L"Type", L"GroupingCharacter" }, } },
+	{ L"HandoutLayoutingOptions", { { L"LayoutType", L"Handout" }, } },
 	{ L"HeaderFooter", { } },
 	{ L"HslEffect", { { L"Type", L"Hsl" }, } },
 	{ L"Html5ExportOptions", { { L"Format", L"html5" }, } },
@@ -2164,6 +2188,7 @@ std::map<utility::string_t, std::map<utility::string_t, utility::string_t>> Clas
 	{ L"NaryOperatorElement", { { L"Type", L"NaryOperator" }, } },
 	{ L"NoFill", { { L"Type", L"NoFill" }, } },
 	{ L"NormalViewRestoredProperties", { } },
+	{ L"NotesCommentsLayoutingOptions", { { L"LayoutType", L"NotesComments" }, } },
 	{ L"NotesSlide", { } },
 	{ L"NotesSlideExportFormat", { } },
 	{ L"NotesSlideHeaderFooter", { } },
@@ -2243,6 +2268,7 @@ std::map<utility::string_t, std::map<utility::string_t, utility::string_t>> Clas
 	{ L"SlideShowProperties", { } },
 	{ L"SlideShowTransition", { } },
 	{ L"Slides", { } },
+	{ L"SlidesLayoutOptions", { } },
 	{ L"SmartArt", { { L"Type", L"SmartArt" }, } },
 	{ L"SmartArtNode", { } },
 	{ L"SmartArtShape", { { L"Type", L"SmartArtShape" }, } },

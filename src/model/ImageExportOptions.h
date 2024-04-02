@@ -36,6 +36,7 @@
 
 #include "../model/FontFallbackRule.h"
 #include "../model/FontSubstRule.h"
+#include "../model/SlidesLayoutOptions.h"
 #include <cpprest/details/basic_types.h>
 #include "../model/ImageExportOptionsBase.h"
 #include <vector>
@@ -58,43 +59,22 @@ public:
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
 	/// <summary>
-	/// Gets or sets the position of the notes on the page.
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getNotesPosition() const;
-	ASPOSE_DLL_EXPORT void setNotesPosition(utility::string_t value);
-	/// <summary>
-	/// Gets or sets the position of the comments on the page.
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getCommentsPosition() const;
-	ASPOSE_DLL_EXPORT void setCommentsPosition(utility::string_t value);
-	/// <summary>
-	/// Gets or sets the width of the comment output area in pixels (Applies only if comments are displayed on the right).
-	/// </summary>
-	ASPOSE_DLL_EXPORT int32_t getCommentsAreaWidth() const;
-	ASPOSE_DLL_EXPORT void setCommentsAreaWidth(int32_t value);
-	ASPOSE_DLL_EXPORT bool commentsAreaWidthIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetCommentsAreaWidth();
-	/// <summary>
-	/// Gets or sets the color of comments area (Applies only if comments are displayed on the right).
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getCommentsAreaColor() const;
-	ASPOSE_DLL_EXPORT void setCommentsAreaColor(utility::string_t value);
-	/// <summary>
 	/// Show hidden slides. If true, hidden are exported.
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool isShowHiddenSlides() const;
 	ASPOSE_DLL_EXPORT void setShowHiddenSlides(bool value);
 	ASPOSE_DLL_EXPORT bool showHiddenSlidesIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetShowHiddenSlides();
+	/// <summary>
+	/// Slides layouting options
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<SlidesLayoutOptions> getSlidesLayoutOptions() const;
+	ASPOSE_DLL_EXPORT void setSlidesLayoutOptions(std::shared_ptr<SlidesLayoutOptions> value);
 
 protected:
-	utility::string_t m_NotesPosition;
-	utility::string_t m_CommentsPosition;
-	int32_t m_CommentsAreaWidth;
-	bool m_CommentsAreaWidthIsSet;
-	utility::string_t m_CommentsAreaColor;
 	bool m_ShowHiddenSlides;
 	bool m_ShowHiddenSlidesIsSet;
+	std::shared_ptr<SlidesLayoutOptions> m_SlidesLayoutOptions;
 };
 
 }

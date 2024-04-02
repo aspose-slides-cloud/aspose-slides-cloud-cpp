@@ -38,6 +38,7 @@ SlideShowProperties::SlideShowProperties()
 	m_EndSlideIsSet = false;
 	m_ShowAnimationIsSet = false;
 	m_ShowNarrationIsSet = false;
+	m_ShowMediaControlsIsSet = false;
 	m_UseTimingsIsSet = false;
 	m_ShowScrollbarIsSet = false;
 }
@@ -162,6 +163,27 @@ void SlideShowProperties::unsetShowNarration()
 	m_ShowNarrationIsSet = false;
 }
 
+bool SlideShowProperties::isShowMediaControls() const
+{
+	return m_ShowMediaControls;
+}
+
+void SlideShowProperties::setShowMediaControls(bool value)
+{
+	m_ShowMediaControls = value;
+	m_ShowMediaControlsIsSet = true;
+}
+
+bool SlideShowProperties::showMediaControlsIsSet() const
+{
+	return m_ShowMediaControlsIsSet;
+}
+
+void SlideShowProperties::unsetShowMediaControls()
+{
+	m_ShowMediaControlsIsSet = false;
+}
+
 bool SlideShowProperties::isUseTimings() const
 {
 	return m_UseTimings;
@@ -242,6 +264,10 @@ web::json::value SlideShowProperties::toJson() const
 	{
 		val[utility::conversions::to_string_t("ShowNarration")] = ModelBase::toJson(m_ShowNarration);
 	}
+	if(m_ShowMediaControlsIsSet)
+	{
+		val[utility::conversions::to_string_t("ShowMediaControls")] = ModelBase::toJson(m_ShowMediaControls);
+	}
 	if(m_UseTimingsIsSet)
 	{
 		val[utility::conversions::to_string_t("UseTimings")] = ModelBase::toJson(m_UseTimings);
@@ -289,6 +315,11 @@ void SlideShowProperties::fromJson(web::json::value& val)
 	if(jsonForShowNarration != nullptr && !jsonForShowNarration->is_null())
 	{
 		setShowNarration(ModelBase::boolFromJson(*jsonForShowNarration));
+	}
+	web::json::value* jsonForShowMediaControls = ModelBase::getField(val, "ShowMediaControls");
+	if(jsonForShowMediaControls != nullptr && !jsonForShowMediaControls->is_null())
+	{
+		setShowMediaControls(ModelBase::boolFromJson(*jsonForShowMediaControls));
 	}
 	web::json::value* jsonForUseTimings = ModelBase::getField(val, "UseTimings");
 	if(jsonForUseTimings != nullptr && !jsonForUseTimings->is_null())

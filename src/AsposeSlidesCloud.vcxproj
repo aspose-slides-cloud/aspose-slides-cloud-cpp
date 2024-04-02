@@ -219,6 +219,7 @@
     <ClCompile Include="model\GrayScaleEffect.cpp" />
     <ClCompile Include="model\GroupShape.cpp" />
     <ClCompile Include="model\GroupingCharacterElement.cpp" />
+    <ClCompile Include="model\HandoutLayoutingOptions.cpp" />
     <ClCompile Include="model\HeaderFooter.cpp" />
     <ClCompile Include="model\HslEffect.cpp" />
     <ClCompile Include="model\Html5ExportOptions.cpp" />
@@ -256,6 +257,7 @@
     <ClCompile Include="model\NaryOperatorElement.cpp" />
     <ClCompile Include="model\NoFill.cpp" />
     <ClCompile Include="model\NormalViewRestoredProperties.cpp" />
+    <ClCompile Include="model\NotesCommentsLayoutingOptions.cpp" />
     <ClCompile Include="model\NotesSlide.cpp" />
     <ClCompile Include="model\NotesSlideExportFormat.cpp" />
     <ClCompile Include="model\NotesSlideHeaderFooter.cpp" />
@@ -335,6 +337,7 @@
     <ClCompile Include="model\SlideShowProperties.cpp" />
     <ClCompile Include="model\SlideShowTransition.cpp" />
     <ClCompile Include="model\Slides.cpp" />
+    <ClCompile Include="model\SlidesLayoutOptions.cpp" />
     <ClCompile Include="model\SmartArt.cpp" />
     <ClCompile Include="model\SmartArtNode.cpp" />
     <ClCompile Include="model\SmartArtShape.cpp" />
@@ -487,6 +490,7 @@
     <ClInclude Include="model\GrayScaleEffect.h" />
     <ClInclude Include="model\GroupShape.h" />
     <ClInclude Include="model\GroupingCharacterElement.h" />
+    <ClInclude Include="model\HandoutLayoutingOptions.h" />
     <ClInclude Include="model\HeaderFooter.h" />
     <ClInclude Include="model\HslEffect.h" />
     <ClInclude Include="model\Html5ExportOptions.h" />
@@ -524,6 +528,7 @@
     <ClInclude Include="model\NaryOperatorElement.h" />
     <ClInclude Include="model\NoFill.h" />
     <ClInclude Include="model\NormalViewRestoredProperties.h" />
+    <ClInclude Include="model\NotesCommentsLayoutingOptions.h" />
     <ClInclude Include="model\NotesSlide.h" />
     <ClInclude Include="model\NotesSlideExportFormat.h" />
     <ClInclude Include="model\NotesSlideHeaderFooter.h" />
@@ -603,6 +608,7 @@
     <ClInclude Include="model\SlideShowProperties.h" />
     <ClInclude Include="model\SlideShowTransition.h" />
     <ClInclude Include="model\Slides.h" />
+    <ClInclude Include="model\SlidesLayoutOptions.h" />
     <ClInclude Include="model\SmartArt.h" />
     <ClInclude Include="model\SmartArtNode.h" />
     <ClInclude Include="model\SmartArtShape.h" />

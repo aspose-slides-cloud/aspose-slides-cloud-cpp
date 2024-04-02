@@ -457,6 +457,11 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Paragraphs>> deleteParagraphs(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, std::vector<int32_t> paragraphs = std::vector<int32_t>(), utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"", utility::string_t subShape = L"");
 
 	/// <summary>
+	/// Deletes cropped areas of a pictire.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<void> deletePictureCroppedAreas(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage = L"");
+
+	/// <summary>
 	/// Remove a portion.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Portions>> deletePortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"", utility::string_t subShape = L"");

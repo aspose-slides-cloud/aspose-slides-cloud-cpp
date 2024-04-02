@@ -36,6 +36,7 @@ ShapeBase::ShapeBase()
 	m_WidthIsSet = false;
 	m_HeightIsSet = false;
 	m_HiddenIsSet = false;
+	m_IsDecorativeIsSet = false;
 	m_XIsSet = false;
 	m_YIsSet = false;
 	setZOrderPosition(0);
@@ -139,6 +140,27 @@ bool ShapeBase::hiddenIsSet() const
 void ShapeBase::unsetHidden()
 {
 	m_HiddenIsSet = false;
+}
+
+bool ShapeBase::getIsDecorative() const
+{
+	return m_IsDecorative;
+}
+
+void ShapeBase::setIsDecorative(bool value)
+{
+	m_IsDecorative = value;
+	m_IsDecorativeIsSet = true;
+}
+
+bool ShapeBase::isDecorativeIsSet() const
+{
+	return m_IsDecorativeIsSet;
+}
+
+void ShapeBase::unsetIsDecorative()
+{
+	m_IsDecorativeIsSet = false;
 }
 
 double ShapeBase::getX() const
@@ -298,6 +320,10 @@ web::json::value ShapeBase::toJson() const
 	{
 		val[utility::conversions::to_string_t("Hidden")] = ModelBase::toJson(m_Hidden);
 	}
+	if(m_IsDecorativeIsSet)
+	{
+		val[utility::conversions::to_string_t("IsDecorative")] = ModelBase::toJson(m_IsDecorative);
+	}
 	if(m_XIsSet)
 	{
 		val[utility::conversions::to_string_t("X")] = ModelBase::toJson(m_X);
@@ -370,6 +396,11 @@ void ShapeBase::fromJson(web::json::value& val)
 	if(jsonForHidden != nullptr && !jsonForHidden->is_null())
 	{
 		setHidden(ModelBase::boolFromJson(*jsonForHidden));
+	}
+	web::json::value* jsonForIsDecorative = ModelBase::getField(val, "IsDecorative");
+	if(jsonForIsDecorative != nullptr && !jsonForIsDecorative->is_null())
+	{
+		setIsDecorative(ModelBase::boolFromJson(*jsonForIsDecorative));
 	}
 	web::json::value* jsonForX = ModelBase::getField(val, "X");
 	if(jsonForX != nullptr && !jsonForX->is_null() && jsonForX->is_number())

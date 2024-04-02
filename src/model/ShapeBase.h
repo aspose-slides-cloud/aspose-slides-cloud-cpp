@@ -98,6 +98,13 @@ public:
 	ASPOSE_DLL_EXPORT bool hiddenIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHidden();
 	/// <summary>
+	/// Gets or sets &#39;Mark as decorative&#39; option.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool getIsDecorative() const;
+	ASPOSE_DLL_EXPORT void setIsDecorative(bool value);
+	ASPOSE_DLL_EXPORT bool isDecorativeIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetIsDecorative();
+	/// <summary>
 	/// Gets or sets the X
 	/// </summary>
 	ASPOSE_DLL_EXPORT double getX() const;
@@ -162,6 +169,8 @@ protected:
 	utility::string_t m_AlternativeTextTitle;
 	bool m_Hidden;
 	bool m_HiddenIsSet;
+	bool m_IsDecorative;
+	bool m_IsDecorativeIsSet;
 	double m_X;
 	bool m_XIsSet;
 	double m_Y;

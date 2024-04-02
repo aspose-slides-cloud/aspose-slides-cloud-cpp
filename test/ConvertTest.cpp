@@ -29,6 +29,7 @@
 #include "TestUtils.h"
 #include "model/PdfExportOptions.h"
 #include "model/ImageExportOptions.h"
+#include "model/HandoutLayoutingOptions.h"
 
 class ConvertTest : public ::testing::Test
 {
@@ -274,6 +275,21 @@ TEST_F(ConvertTest, convertWithFallbackRules) {
 	std::shared_ptr<ImageExportOptions> options = std::make_shared<ImageExportOptions>();
 	options->setFontFallbackRules({ fontRule1, fontRule2 });
 	utils->getSlidesApi()->savePresentation(L"test.pptx", L"pdf", outPath, nullptr, L"password", L"TempSlidesSDK").wait();
+	std::shared_ptr<ObjectExist> exists = utils->getSlidesApi()->objectExists(outPath).get();
+	EXPECT_TRUE(exists->isExists());
+}
+
+TEST_F(ConvertTest, convertWithSlidesLayoutOptions) {
+	utils->initialize("", "", "");
+	utility::string_t outPath = L"TempSlidesSDK/test.pptx";
+
+	std::shared_ptr<HandoutLayoutingOptions> slidesLayoutOptions = std::make_shared<HandoutLayoutingOptions>();
+	slidesLayoutOptions->setHandout(L"Handouts2");
+	slidesLayoutOptions->setPrintSlideNumbers(true);
+
+	std::shared_ptr<PdfExportOptions> options = std::make_shared<PdfExportOptions>();
+	options->setSlidesLayoutOptions(slidesLayoutOptions);
+	utils->getSlidesApi()->savePresentation(L"test.pptx", L"pdf", outPath, options, L"password", L"TempSlidesSDK").wait();
 	std::shared_ptr<ObjectExist> exists = utils->getSlidesApi()->objectExists(outPath).get();
 	EXPECT_TRUE(exists->isExists());
 }

@@ -36,6 +36,7 @@
 
 #include "../model/FontFallbackRule.h"
 #include "../model/FontSubstRule.h"
+#include "../model/SlidesLayoutOptions.h"
 #include <cpprest/details/basic_types.h>
 #include "../model/ImageExportOptionsBase.h"
 #include <vector>
@@ -89,34 +90,15 @@ public:
 	ASPOSE_DLL_EXPORT utility::string_t getPixelFormat() const;
 	ASPOSE_DLL_EXPORT void setPixelFormat(utility::string_t value);
 	/// <summary>
-	/// Gets or sets the position of the notes on the page.
+	/// Slides layouting options
 	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getNotesPosition() const;
-	ASPOSE_DLL_EXPORT void setNotesPosition(utility::string_t value);
+	ASPOSE_DLL_EXPORT std::shared_ptr<SlidesLayoutOptions> getSlidesLayoutOptions() const;
+	ASPOSE_DLL_EXPORT void setSlidesLayoutOptions(std::shared_ptr<SlidesLayoutOptions> value);
 	/// <summary>
-	/// Gets or sets the position of the comments on the page.
+	/// Specifies the algorithm for converting a color image into a black and white image. This option will applied only if Aspose.Slides.Export.TiffOptions.CompressionType is set to Aspose.Slides.Export.TiffCompressionTypes.CCITT4 or Aspose.Slides.Export.TiffCompressionTypes.CCITT3.
 	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getCommentsPosition() const;
-	ASPOSE_DLL_EXPORT void setCommentsPosition(utility::string_t value);
-	/// <summary>
-	/// Gets or sets the width of the comment output area in pixels (Applies only if comments are displayed on the right).
-	/// </summary>
-	ASPOSE_DLL_EXPORT int32_t getCommentsAreaWidth() const;
-	ASPOSE_DLL_EXPORT void setCommentsAreaWidth(int32_t value);
-	ASPOSE_DLL_EXPORT bool commentsAreaWidthIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetCommentsAreaWidth();
-	/// <summary>
-	/// Gets or sets the color of comments area (Applies only if comments are displayed on the right).
-	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getCommentsAreaColor() const;
-	ASPOSE_DLL_EXPORT void setCommentsAreaColor(utility::string_t value);
-	/// <summary>
-	/// True if comments that have no author are displayed. (Applies only if comments are displayed).
-	/// </summary>
-	ASPOSE_DLL_EXPORT bool isShowCommentsByNoAuthor() const;
-	ASPOSE_DLL_EXPORT void setShowCommentsByNoAuthor(bool value);
-	ASPOSE_DLL_EXPORT bool showCommentsByNoAuthorIsSet() const;
-	ASPOSE_DLL_EXPORT void unsetShowCommentsByNoAuthor();
+	ASPOSE_DLL_EXPORT utility::string_t getBwConversionMode() const;
+	ASPOSE_DLL_EXPORT void setBwConversionMode(utility::string_t value);
 
 protected:
 	utility::string_t m_Compression;
@@ -127,13 +109,8 @@ protected:
 	bool m_ShowHiddenSlides;
 	bool m_ShowHiddenSlidesIsSet;
 	utility::string_t m_PixelFormat;
-	utility::string_t m_NotesPosition;
-	utility::string_t m_CommentsPosition;
-	int32_t m_CommentsAreaWidth;
-	bool m_CommentsAreaWidthIsSet;
-	utility::string_t m_CommentsAreaColor;
-	bool m_ShowCommentsByNoAuthor;
-	bool m_ShowCommentsByNoAuthorIsSet;
+	std::shared_ptr<SlidesLayoutOptions> m_SlidesLayoutOptions;
+	utility::string_t m_BwConversionMode;
 };
 
 }

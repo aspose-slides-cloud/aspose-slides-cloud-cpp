@@ -123,3 +123,31 @@ TEST_F(ImageTest, imageDownloadRequest) {
 	//TODO: assert that zip archives contain equal amout of elements
 	EXPECT_NE(pngResultSize, defaultResultSize);
 }
+
+TEST_F(ImageTest, deletePictureCroppedAreas) {
+	utils->initialize("", "", "");
+	utility::string_t fileName = L"test.pptx";
+	utility::string_t folderName = L"TempSlidesSDK";
+	utility::string_t password = L"password";
+	int slideIndex = 2;
+	int shapeIndex = 2;
+	utils->getSlidesApi()->deletePictureCroppedAreas(fileName, slideIndex, shapeIndex, password, folderName).get();
+}
+
+TEST_F(ImageTest, deletePictureCroppedAreasWrongShapeType) {
+	utils->initialize("", "", "");
+	utility::string_t fileName = L"test.pptx";
+	utility::string_t folderName = L"TempSlidesSDK";
+	utility::string_t password = L"password";
+	int slideIndex = 2;
+	int shapeIndex = 3;
+	try
+	{
+		utils->getSlidesApi()->deletePictureCroppedAreas(fileName, slideIndex, shapeIndex, password, folderName).get();
+		FAIL() << "Must have failed";
+	}
+	catch (ApiException ex)
+	{
+		EXPECT_EQ(400, ex.error_code().value());
+	}
+}
