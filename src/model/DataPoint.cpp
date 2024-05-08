@@ -83,6 +83,17 @@ void DataPoint::setLineFormat(std::shared_ptr<LineFormat> value)
 	
 }
 
+std::shared_ptr<SeriesMarker> DataPoint::getMarker() const
+{
+	return m_Marker;
+}
+
+void DataPoint::setMarker(std::shared_ptr<SeriesMarker> value)
+{
+	m_Marker = value;
+	
+}
+
 utility::string_t DataPoint::getType() const
 {
 	return m_Type;
@@ -112,6 +123,10 @@ web::json::value DataPoint::toJson() const
 	if (m_LineFormat != nullptr)
 	{
 		val[utility::conversions::to_string_t("LineFormat")] = ModelBase::toJson(m_LineFormat);
+	}
+	if (m_Marker != nullptr)
+	{
+		val[utility::conversions::to_string_t("Marker")] = ModelBase::toJson(m_Marker);
 	}
 	if (!m_Type.empty())
 	{
@@ -145,6 +160,12 @@ void DataPoint::fromJson(web::json::value& val)
 	{
 		std::shared_ptr<void> instanceForLineFormat = asposeslidescloud::api::ClassRegistry::deserialize(L"LineFormat", *jsonForLineFormat);
 		setLineFormat(std::static_pointer_cast<LineFormat>(instanceForLineFormat));
+	}
+	web::json::value* jsonForMarker = ModelBase::getField(val, "Marker");
+	if(jsonForMarker != nullptr && !jsonForMarker->is_null())
+	{
+		std::shared_ptr<void> instanceForMarker = asposeslidescloud::api::ClassRegistry::deserialize(L"SeriesMarker", *jsonForMarker);
+		setMarker(std::static_pointer_cast<SeriesMarker>(instanceForMarker));
 	}
 	web::json::value* jsonForType = ModelBase::getField(val, "Type");
 	if(jsonForType != nullptr && !jsonForType->is_null())

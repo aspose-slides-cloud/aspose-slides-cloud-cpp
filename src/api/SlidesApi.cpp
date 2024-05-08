@@ -3012,16 +3012,6 @@ pplx::task<void> SlidesApi::deletePictureCroppedAreas(utility::string_t name, in
 	{
 		throw std::invalid_argument("Missing required parameter: name");
 	}
-	// verify the required parameter 'password' is set
-	if (password.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: password");
-	}
-	// verify the required parameter 'folder' is set
-	if (folder.empty())
-	{
-		throw std::invalid_argument("Missing required parameter: folder");
-	}
 	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/pictureCroppedAreas");
 	ApiClient::setPathParameter(methodPath, "name", name);
 	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
@@ -4966,6 +4956,61 @@ pplx::task<HttpContent> SlidesApi::downloadImagesOnline(std::shared_ptr<HttpCont
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "downloadImagesOnline");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			HttpContent result;
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
+			result.setData(stream);
+			return result;
+		});
+}
+
+pplx::task<HttpContent> SlidesApi::downloadMathPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t format, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	// verify the required parameter 'format' is set
+	if (format.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// verify the required parameter 'format' is set
+	if (format.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "MathML") && !boost::iequals(format, "LaTeX"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of MathML, LaTeX.");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/paragraphs/{paragraphIndex}/portions/{portionIndex}/{format}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
+	ApiClient::setPathParameter(methodPath, "portionIndex", portionIndex);
+	ApiClient::setPathParameter(methodPath, "format", format);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "downloadMathPortion");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> responseVector)
@@ -9410,6 +9455,66 @@ pplx::task<HttpContent> SlidesApi::replaceTextFormattingOnline(std::shared_ptr<H
 			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
 			result.setData(stream);
 			return result;
+		});
+}
+
+pplx::task<void> SlidesApi::saveMathPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t format, utility::string_t outPath, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	// verify the required parameter 'format' is set
+	if (format.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// verify the required parameter 'format' is set
+	if (format.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "MathML") && !boost::iequals(format, "LaTeX"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of MathML, LaTeX.");
+	}
+	// verify the required parameter 'outPath' is set
+	if (outPath.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: outPath");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/slides/{slideIndex}/shapes/{shapeIndex}/paragraphs/{paragraphIndex}/portions/{portionIndex}/{format}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "slideIndex", slideIndex);
+	ApiClient::setPathParameter(methodPath, "shapeIndex", shapeIndex);
+	ApiClient::setPathParameter(methodPath, "paragraphIndex", paragraphIndex);
+	ApiClient::setPathParameter(methodPath, "portionIndex", portionIndex);
+	ApiClient::setPathParameter(methodPath, "format", format);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("outPath"), outPath);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "saveMathPortion");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			return void();
 		});
 }
 

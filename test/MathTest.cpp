@@ -137,7 +137,7 @@ TEST_F(MathTest, mathUpdate) {
 
 TEST_F(MathTest, mathDownload) {
 	utils->initialize("", "", "");
-	HttpContent result = utils->getSlidesApi()->downloadPortionAsMathMl(L"test.pptx", 2, 3, 1, 1, L"password", L"TempSlidesSDK").get();
+	HttpContent result = utils->getSlidesApi()->downloadMathPortion(L"test.pptx", 2, 3, 1, 1, L"MathML", L"password", L"TempSlidesSDK").get();
 	EXPECT_NE(nullptr, result.getData());
 }
 
@@ -145,7 +145,7 @@ TEST_F(MathTest, mathDownloadNull) {
 	utils->initialize("", "", "");
 	try
 	{
-		utils->getSlidesApi()->downloadPortionAsMathMl(L"test.pptx", 2, 1, 1, 1, L"password", L"TempSlidesSDK").get();
+		utils->getSlidesApi()->downloadMathPortion(L"test.pptx", 2, 1, 1, 1, L"MathML", L"password", L"TempSlidesSDK").get();
 		FAIL() << "Must have failed";
 	}
 	catch (ApiException ex)
@@ -157,7 +157,7 @@ TEST_F(MathTest, mathDownloadNull) {
 TEST_F(MathTest, mathSave) {
 	utils->initialize("", "", "");
 	utility::string_t outPath = L"TempSlidesSDK/mathml.xml";
-	utils->getSlidesApi()->savePortionAsMathMl(L"test.pptx", 2, 3, 1, 1, outPath, L"password", L"TempSlidesSDK").wait();
+	utils->getSlidesApi()->saveMathPortion(L"test.pptx", 2, 3, 1, 1, L"MathML", outPath, L"password", L"TempSlidesSDK").wait();
 	std::shared_ptr<ObjectExist> exists = utils->getSlidesApi()->objectExists(outPath).get();
 	EXPECT_TRUE(exists->isExists());
 }

@@ -35,6 +35,7 @@
 #include "../ModelBase.h"
 
 #include "../model/EffectFormat.h"
+#include "../model/SeriesMarker.h"
 #include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
@@ -78,6 +79,11 @@ public:
 	ASPOSE_DLL_EXPORT std::shared_ptr<LineFormat> getLineFormat() const;
 	ASPOSE_DLL_EXPORT void setLineFormat(std::shared_ptr<LineFormat> value);
 	/// <summary>
+	/// Gets or sets the marker.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<SeriesMarker> getMarker() const;
+	ASPOSE_DLL_EXPORT void setMarker(std::shared_ptr<SeriesMarker> value);
+	/// <summary>
 	/// 
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getType() const;
@@ -88,6 +94,7 @@ protected:
 	std::shared_ptr<EffectFormat> m_EffectFormat;
 	std::shared_ptr<ThreeDFormat> m_ThreeDFormat;
 	std::shared_ptr<LineFormat> m_LineFormat;
+	std::shared_ptr<SeriesMarker> m_Marker;
 	utility::string_t m_Type;
 };
 

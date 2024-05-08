@@ -145,9 +145,11 @@
 #include "model/LineToPathSegment.h"
 #include "model/Literals.h"
 #include "model/LuminanceEffect.h"
+#include "model/MarkdownExportOptions.h"
 #include "model/MasterSlide.h"
 #include "model/MasterSlides.h"
 #include "model/MathElement.h"
+#include "model/MathFormat.h"
 #include "model/MathParagraph.h"
 #include "model/MatrixElement.h"
 #include "model/Merge.h"
@@ -1073,6 +1075,12 @@ std::shared_ptr<void> ClassRegistry::deserializeSubclass(utility::string_t class
 		result->fromJson(json);
 		return result;
 	}
+	if (className == L"MarkdownExportOptions")
+	{
+		std::shared_ptr<MarkdownExportOptions> result(new MarkdownExportOptions());
+		result->fromJson(json);
+		return result;
+	}
 	if (className == L"MasterSlide")
 	{
 		std::shared_ptr<MasterSlide> result(new MasterSlide());
@@ -1088,6 +1096,12 @@ std::shared_ptr<void> ClassRegistry::deserializeSubclass(utility::string_t class
 	if (className == L"MathElement")
 	{
 		std::shared_ptr<MathElement> result(new MathElement());
+		result->fromJson(json);
+		return result;
+	}
+	if (className == L"MathFormat")
+	{
+		std::shared_ptr<MathFormat> result(new MathFormat());
 		result->fromJson(json);
 		return result;
 	}
@@ -1967,6 +1981,7 @@ std::map<utility::string_t, utility::string_t> ClassRegistry::s_hierarchy =
 	{ L"LineToPathSegment", L"PathSegment" },
 	{ L"Literals", L"DataSource" },
 	{ L"LuminanceEffect", L"ImageTransformEffect" },
+	{ L"MarkdownExportOptions", L"ExportOptions" },
 	{ L"MasterSlide", L"ResourceBase" },
 	{ L"MasterSlides", L"ResourceBase" },
 	{ L"MatrixElement", L"MathElement" },
@@ -2177,9 +2192,11 @@ std::map<utility::string_t, std::map<utility::string_t, utility::string_t>> Clas
 	{ L"LineToPathSegment", { { L"Type", L"LineTo" }, } },
 	{ L"Literals", { { L"Type", L"Literals" }, } },
 	{ L"LuminanceEffect", { { L"Type", L"Luminance" }, } },
+	{ L"MarkdownExportOptions", { { L"Format", L"md" }, } },
 	{ L"MasterSlide", { } },
 	{ L"MasterSlides", { } },
 	{ L"MathElement", { } },
+	{ L"MathFormat", { } },
 	{ L"MathParagraph", { } },
 	{ L"MatrixElement", { { L"Type", L"Matrix" }, } },
 	{ L"Merge", { { L"Type", L"Merge" }, } },

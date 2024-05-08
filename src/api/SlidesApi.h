@@ -459,7 +459,7 @@ public:
 	/// <summary>
 	/// Deletes cropped areas of a pictire.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<void> deletePictureCroppedAreas(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t password, utility::string_t folder, utility::string_t storage = L"");
+	ASPOSE_DLL_EXPORT pplx::task<void> deletePictureCroppedAreas(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
 
 	/// <summary>
 	/// Remove a portion.
@@ -680,6 +680,11 @@ public:
 	/// Get all presentation images in specified format. 
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadImagesOnline(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t password = L"");
+
+	/// <summary>
+	/// Convert Mathematical Text to MathML Format
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadMathPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t format, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
 
 	/// <summary>
 	/// Convert notes slide to the specified image format.
@@ -1190,6 +1195,11 @@ public:
 	/// Finds and replaces text in presentation with given format.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> replaceTextFormattingOnline(std::shared_ptr<HttpContent> document, utility::string_t oldValue, utility::string_t newValue, std::shared_ptr<PortionFormat> portionFormat = std::shared_ptr<PortionFormat>(), boost::optional<bool> withMasters = boost::none, utility::string_t password = L"");
+
+	/// <summary>
+	/// Convert Mathematical Text to MathML Format and saves result to the storage
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<void> saveMathPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t format, utility::string_t outPath, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
 
 	/// <summary>
 	/// Convert Mathematical Text to MathML Format and saves result to the storage

@@ -246,9 +246,11 @@
     <ClCompile Include="model\LineToPathSegment.cpp" />
     <ClCompile Include="model\Literals.cpp" />
     <ClCompile Include="model\LuminanceEffect.cpp" />
+    <ClCompile Include="model\MarkdownExportOptions.cpp" />
     <ClCompile Include="model\MasterSlide.cpp" />
     <ClCompile Include="model\MasterSlides.cpp" />
     <ClCompile Include="model\MathElement.cpp" />
+    <ClCompile Include="model\MathFormat.cpp" />
     <ClCompile Include="model\MathParagraph.cpp" />
     <ClCompile Include="model\MatrixElement.cpp" />
     <ClCompile Include="model\Merge.cpp" />
@@ -517,9 +519,11 @@
     <ClInclude Include="model\LineToPathSegment.h" />
     <ClInclude Include="model\Literals.h" />
     <ClInclude Include="model\LuminanceEffect.h" />
+    <ClInclude Include="model\MarkdownExportOptions.h" />
     <ClInclude Include="model\MasterSlide.h" />
     <ClInclude Include="model\MasterSlides.h" />
     <ClInclude Include="model\MathElement.h" />
+    <ClInclude Include="model\MathFormat.h" />
     <ClInclude Include="model\MathParagraph.h" />
     <ClInclude Include="model\MatrixElement.h" />
     <ClInclude Include="model\Merge.h" />

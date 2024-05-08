@@ -35,6 +35,7 @@
 #include "ScatterChartDataPoint.h"
 
 #include "../model/EffectFormat.h"
+#include "../model/SeriesMarker.h"
 #include "../model/ScatterChartDataPoint.h"
 #include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"
