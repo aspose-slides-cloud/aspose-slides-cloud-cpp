@@ -8301,7 +8301,7 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::importFromHtml(utility::string_
 		});
 }
 
-pplx::task<std::shared_ptr<Document>> SlidesApi::importFromPdf(utility::string_t name, std::shared_ptr<HttpContent> pdf, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<Document>> SlidesApi::importFromPdf(utility::string_t name, std::shared_ptr<HttpContent> pdf, std::shared_ptr<PdfImportOptions> options, utility::string_t password, utility::string_t folder, utility::string_t storage)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -8327,6 +8327,10 @@ pplx::task<std::shared_ptr<Document>> SlidesApi::importFromPdf(utility::string_t
 	if (pdf != nullptr)
 	{
 		requestFiles.push_back(pdf);
+	}
+	if (options != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(options->toJson()));
 	}
 
 	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)

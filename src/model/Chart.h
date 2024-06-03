@@ -98,6 +98,13 @@ public:
 	ASPOSE_DLL_EXPORT std::shared_ptr<DataSource> getDataSourceForCategories() const;
 	ASPOSE_DLL_EXPORT void setDataSourceForCategories(std::shared_ptr<DataSource> value);
 	/// <summary>
+	/// True if the chart has a title.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool isHasTitle() const;
+	ASPOSE_DLL_EXPORT void setHasTitle(bool value);
+	ASPOSE_DLL_EXPORT bool hasTitleIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetHasTitle();
+	/// <summary>
 	/// Gets or sets the title.
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::shared_ptr<ChartTitle> getTitle() const;
@@ -152,6 +159,8 @@ protected:
 	std::vector<std::shared_ptr<Series>> m_Series;
 	std::vector<std::shared_ptr<ChartCategory>> m_Categories;
 	std::shared_ptr<DataSource> m_DataSourceForCategories;
+	bool m_HasTitle;
+	bool m_HasTitleIsSet;
 	std::shared_ptr<ChartTitle> m_Title;
 	std::shared_ptr<ChartWall> m_BackWall;
 	std::shared_ptr<ChartWall> m_SideWall;

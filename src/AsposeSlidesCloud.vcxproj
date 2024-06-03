@@ -280,6 +280,7 @@
     <ClCompile Include="model\PathSegment.cpp" />
     <ClCompile Include="model\PatternFill.cpp" />
     <ClCompile Include="model\PdfExportOptions.cpp" />
+    <ClCompile Include="model\PdfImportOptions.cpp" />
     <ClCompile Include="model\PictureFill.cpp" />
     <ClCompile Include="model\PictureFrame.cpp" />
     <ClCompile Include="model\Pipeline.cpp" />
@@ -553,6 +554,7 @@
     <ClInclude Include="model\PathSegment.h" />
     <ClInclude Include="model\PatternFill.h" />
     <ClInclude Include="model\PdfExportOptions.h" />
+    <ClInclude Include="model\PdfImportOptions.h" />
     <ClInclude Include="model\PictureFill.h" />
     <ClInclude Include="model\PictureFrame.h" />
     <ClInclude Include="model\Pipeline.h" />

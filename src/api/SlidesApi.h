@@ -81,6 +81,7 @@
 #include "../model/OrderedMergeRequest.h"
 #include "../model/Paragraph.h"
 #include "../model/Paragraphs.h"
+#include "../model/PdfImportOptions.h"
 #include "../model/PictureFrame.h"
 #include "../model/Pipeline.h"
 #include "../model/Placeholder.h"
@@ -1069,7 +1070,7 @@ public:
 	/// <summary>
 	/// Create presentation document from pdf or append pdf to an existing presentation.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Document>> importFromPdf(utility::string_t name, std::shared_ptr<HttpContent> pdf, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Document>> importFromPdf(utility::string_t name, std::shared_ptr<HttpContent> pdf, std::shared_ptr<PdfImportOptions> options = std::shared_ptr<PdfImportOptions>(), utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
 
 	/// <summary>
 	/// Imports shapes from SVG file.

@@ -130,7 +130,7 @@ TEST_F(CreateTest, createFromPdf) {
 
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pdf", std::ios::binary));
-	std::shared_ptr<Document> result = utils->getSlidesApi()->importFromPdf(fileName, data, L"", folderName).get();
+	std::shared_ptr<Document> result = utils->getSlidesApi()->importFromPdf(fileName, data, nullptr, L"", folderName).get();
 	EXPECT_NE(nullptr, result);
 }
 
@@ -144,7 +144,9 @@ TEST_F(CreateTest, appendFromPdf) {
 
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pdf", std::ios::binary));
-	std::shared_ptr<Document> result = utils->getSlidesApi()->importFromPdf(fileName, data, password, folderName).get();
+	std::shared_ptr<PdfImportOptions> options = std::make_shared<PdfImportOptions>();
+	options->setDetectTables(true);
+	std::shared_ptr<Document> result = utils->getSlidesApi()->importFromPdf(fileName, data, options, password, folderName).get();
 	size_t newSlideCount = utils->getSlidesApi()->getSlides(fileName, password, folderName).get()->getSlideList().size();
 	EXPECT_EQ(slideCount + 4, newSlideCount);
 }

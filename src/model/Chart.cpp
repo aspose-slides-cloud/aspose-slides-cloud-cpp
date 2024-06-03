@@ -34,6 +34,7 @@ namespace model {
 Chart::Chart()
 {
 	m_ShowDataLabelsOverMaximumIsSet = false;
+	m_HasTitleIsSet = false;
 	m_HasRoundedCornersIsSet = false;
 	setZOrderPosition(0);
 	setType(L"Chart");
@@ -106,6 +107,27 @@ void Chart::setDataSourceForCategories(std::shared_ptr<DataSource> value)
 {
 	m_DataSourceForCategories = value;
 	
+}
+
+bool Chart::isHasTitle() const
+{
+	return m_HasTitle;
+}
+
+void Chart::setHasTitle(bool value)
+{
+	m_HasTitle = value;
+	m_HasTitleIsSet = true;
+}
+
+bool Chart::hasTitleIsSet() const
+{
+	return m_HasTitleIsSet;
+}
+
+void Chart::unsetHasTitle()
+{
+	m_HasTitleIsSet = false;
 }
 
 std::shared_ptr<ChartTitle> Chart::getTitle() const
@@ -250,6 +272,10 @@ web::json::value Chart::toJson() const
 	{
 		val[utility::conversions::to_string_t("DataSourceForCategories")] = ModelBase::toJson(m_DataSourceForCategories);
 	}
+	if(m_HasTitleIsSet)
+	{
+		val[utility::conversions::to_string_t("HasTitle")] = ModelBase::toJson(m_HasTitle);
+	}
 	if (m_Title != nullptr)
 	{
 		val[utility::conversions::to_string_t("Title")] = ModelBase::toJson(m_Title);
@@ -352,6 +378,11 @@ void Chart::fromJson(web::json::value& val)
 	{
 		std::shared_ptr<void> instanceForDataSourceForCategories = asposeslidescloud::api::ClassRegistry::deserialize(L"DataSource", *jsonForDataSourceForCategories);
 		setDataSourceForCategories(std::static_pointer_cast<DataSource>(instanceForDataSourceForCategories));
+	}
+	web::json::value* jsonForHasTitle = ModelBase::getField(val, "HasTitle");
+	if(jsonForHasTitle != nullptr && !jsonForHasTitle->is_null())
+	{
+		setHasTitle(ModelBase::boolFromJson(*jsonForHasTitle));
 	}
 	web::json::value* jsonForTitle = ModelBase::getField(val, "Title");
 	if(jsonForTitle != nullptr && !jsonForTitle->is_null())

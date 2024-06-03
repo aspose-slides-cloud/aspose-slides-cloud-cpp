@@ -179,6 +179,7 @@
 #include "model/PathSegment.h"
 #include "model/PatternFill.h"
 #include "model/PdfExportOptions.h"
+#include "model/PdfImportOptions.h"
 #include "model/PictureFill.h"
 #include "model/PictureFrame.h"
 #include "model/Pipeline.h"
@@ -1279,6 +1280,12 @@ std::shared_ptr<void> ClassRegistry::deserializeSubclass(utility::string_t class
 		result->fromJson(json);
 		return result;
 	}
+	if (className == L"PdfImportOptions")
+	{
+		std::shared_ptr<PdfImportOptions> result(new PdfImportOptions());
+		result->fromJson(json);
+		return result;
+	}
 	if (className == L"PictureFill")
 	{
 		std::shared_ptr<PictureFill> result(new PictureFill());
@@ -2226,6 +2233,7 @@ std::map<utility::string_t, std::map<utility::string_t, utility::string_t>> Clas
 	{ L"PathSegment", { } },
 	{ L"PatternFill", { { L"Type", L"Pattern" }, } },
 	{ L"PdfExportOptions", { { L"Format", L"pdf" }, } },
+	{ L"PdfImportOptions", { } },
 	{ L"PictureFill", { { L"Type", L"Picture" }, } },
 	{ L"PictureFrame", { { L"Type", L"PictureFrame" }, } },
 	{ L"Pipeline", { } },

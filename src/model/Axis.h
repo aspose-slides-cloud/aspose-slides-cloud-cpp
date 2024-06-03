@@ -39,6 +39,7 @@
 #include <cpprest/details/basic_types.h>
 #include "../model/FillFormat.h"
 #include "../model/LineFormat.h"
+#include "../model/ChartTitle.h"
 
 #include "../ClassRegistry.h"
 
@@ -71,6 +72,11 @@ public:
 	ASPOSE_DLL_EXPORT void setHasTitle(bool value);
 	ASPOSE_DLL_EXPORT bool hasTitleIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetHasTitle();
+	/// <summary>
+	/// Axis title
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<ChartTitle> getTitle() const;
+	ASPOSE_DLL_EXPORT void setTitle(std::shared_ptr<ChartTitle> value);
 	/// <summary>
 	/// Axis position
 	/// </summary>
@@ -297,6 +303,7 @@ protected:
 	bool m_IsVisibleIsSet;
 	bool m_HasTitle;
 	bool m_HasTitleIsSet;
+	std::shared_ptr<ChartTitle> m_Title;
 	utility::string_t m_Position;
 	utility::string_t m_DisplayUnit;
 	utility::string_t m_BaseUnitScale;

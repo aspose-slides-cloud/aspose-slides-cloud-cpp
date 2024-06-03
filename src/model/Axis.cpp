@@ -103,6 +103,17 @@ void Axis::unsetHasTitle()
 	m_HasTitleIsSet = false;
 }
 
+std::shared_ptr<ChartTitle> Axis::getTitle() const
+{
+	return m_Title;
+}
+
+void Axis::setTitle(std::shared_ptr<ChartTitle> value)
+{
+	m_Title = value;
+	
+}
+
 utility::string_t Axis::getPosition() const
 {
 	return m_Position;
@@ -710,6 +721,10 @@ web::json::value Axis::toJson() const
 	{
 		val[utility::conversions::to_string_t("HasTitle")] = ModelBase::toJson(m_HasTitle);
 	}
+	if (m_Title != nullptr)
+	{
+		val[utility::conversions::to_string_t("Title")] = ModelBase::toJson(m_Title);
+	}
 	if (!m_Position.empty())
 	{
 		val[utility::conversions::to_string_t("Position")] = ModelBase::toJson(m_Position);
@@ -868,6 +883,12 @@ void Axis::fromJson(web::json::value& val)
 	if(jsonForHasTitle != nullptr && !jsonForHasTitle->is_null())
 	{
 		setHasTitle(ModelBase::boolFromJson(*jsonForHasTitle));
+	}
+	web::json::value* jsonForTitle = ModelBase::getField(val, "Title");
+	if(jsonForTitle != nullptr && !jsonForTitle->is_null())
+	{
+		std::shared_ptr<void> instanceForTitle = asposeslidescloud::api::ClassRegistry::deserialize(L"ChartTitle", *jsonForTitle);
+		setTitle(std::static_pointer_cast<ChartTitle>(instanceForTitle));
 	}
 	web::json::value* jsonForPosition = ModelBase::getField(val, "Position");
 	if(jsonForPosition != nullptr && !jsonForPosition->is_null())

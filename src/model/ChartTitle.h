@@ -34,7 +34,10 @@
 
 #include "../ModelBase.h"
 
+#include "../model/EffectFormat.h"
 #include <cpprest/details/basic_types.h>
+#include "../model/FillFormat.h"
+#include "../model/LineFormat.h"
 
 #include "../ClassRegistry.h"
 
@@ -59,14 +62,71 @@ public:
 	ASPOSE_DLL_EXPORT utility::string_t getText() const;
 	ASPOSE_DLL_EXPORT void setText(utility::string_t value);
 	/// <summary>
-	/// Get or sets value determines visibility of title
+	/// the X location
 	/// </summary>
-	ASPOSE_DLL_EXPORT bool isHasTitle() const;
-	ASPOSE_DLL_EXPORT void setHasTitle(bool value);
+	ASPOSE_DLL_EXPORT double getX() const;
+	ASPOSE_DLL_EXPORT void setX(double value);
+	ASPOSE_DLL_EXPORT bool XIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetX();
+	/// <summary>
+	/// the Y location
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getY() const;
+	ASPOSE_DLL_EXPORT void setY(double value);
+	ASPOSE_DLL_EXPORT bool YIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetY();
+	/// <summary>
+	/// Width
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getWidth() const;
+	ASPOSE_DLL_EXPORT void setWidth(double value);
+	ASPOSE_DLL_EXPORT bool widthIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetWidth();
+	/// <summary>
+	/// Height
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getHeight() const;
+	ASPOSE_DLL_EXPORT void setHeight(double value);
+	ASPOSE_DLL_EXPORT bool heightIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetHeight();
+	/// <summary>
+	/// true if other elements are allowed to overlay the legend
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool isOverlay() const;
+	ASPOSE_DLL_EXPORT void setOverlay(bool value);
+	ASPOSE_DLL_EXPORT bool overlayIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetOverlay();
+	/// <summary>
+	/// Get or sets the fill format.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<FillFormat> getFillFormat() const;
+	ASPOSE_DLL_EXPORT void setFillFormat(std::shared_ptr<FillFormat> value);
+	/// <summary>
+	/// Get or sets the effect format.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<EffectFormat> getEffectFormat() const;
+	ASPOSE_DLL_EXPORT void setEffectFormat(std::shared_ptr<EffectFormat> value);
+	/// <summary>
+	/// Get or sets the line format.
+	/// </summary>
+	ASPOSE_DLL_EXPORT std::shared_ptr<LineFormat> getLineFormat() const;
+	ASPOSE_DLL_EXPORT void setLineFormat(std::shared_ptr<LineFormat> value);
 
 protected:
 	utility::string_t m_Text;
-	bool m_HasTitle;
+	double m_X;
+	bool m_XIsSet;
+	double m_Y;
+	bool m_YIsSet;
+	double m_Width;
+	bool m_WidthIsSet;
+	double m_Height;
+	bool m_HeightIsSet;
+	bool m_Overlay;
+	bool m_OverlayIsSet;
+	std::shared_ptr<FillFormat> m_FillFormat;
+	std::shared_ptr<EffectFormat> m_EffectFormat;
+	std::shared_ptr<LineFormat> m_LineFormat;
 };
 
 }

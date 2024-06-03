@@ -63,8 +63,8 @@ TEST_F(NullableFieldTest, nullableProperties) {
 	dto->setWidth(400);
 	dto->setHeight(300);
 	std::shared_ptr<ChartTitle> title(new ChartTitle());
-	title->setHasTitle(true);
 	title->setText(L"MyTitle");
+	dto->setHasTitle(true);
 	dto->setTitle(title);
 	std::shared_ptr<OneValueSeries> series(new OneValueSeries());
 	series->setType(L"ClusteredColumn");
