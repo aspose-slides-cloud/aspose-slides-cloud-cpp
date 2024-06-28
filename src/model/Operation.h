@@ -83,11 +83,6 @@ public:
 	/// <summary>
 	/// 
 	/// </summary>
-	ASPOSE_DLL_EXPORT utility::datetime getEnqueued() const;
-	ASPOSE_DLL_EXPORT void setEnqueued(utility::datetime value);
-	/// <summary>
-	/// 
-	/// </summary>
 	ASPOSE_DLL_EXPORT utility::datetime getStarted() const;
 	ASPOSE_DLL_EXPORT void setStarted(utility::datetime value);
 	/// <summary>
@@ -117,7 +112,6 @@ protected:
 	utility::string_t m_Status;
 	std::shared_ptr<OperationProgress> m_Progress;
 	utility::datetime m_Created;
-	utility::datetime m_Enqueued;
 	utility::datetime m_Started;
 	utility::datetime m_Failed;
 	utility::datetime m_Canceled;

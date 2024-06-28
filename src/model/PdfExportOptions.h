@@ -150,6 +150,20 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::shared_ptr<AccessPermissions> getAccessPermissions() const;
 	ASPOSE_DLL_EXPORT void setAccessPermissions(std::shared_ptr<AccessPermissions> value);
+	/// <summary>
+	/// True to hide Ink elements in exported document.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool isHideInk() const;
+	ASPOSE_DLL_EXPORT void setHideInk(bool value);
+	ASPOSE_DLL_EXPORT bool hideInkIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetHideInk();
+	/// <summary>
+	/// True to use ROP operation or Opacity for rendering brush.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool isInterpretMaskOpAsOpacity() const;
+	ASPOSE_DLL_EXPORT void setInterpretMaskOpAsOpacity(bool value);
+	ASPOSE_DLL_EXPORT bool interpretMaskOpAsOpacityIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetInterpretMaskOpAsOpacity();
 
 protected:
 	utility::string_t m_TextCompression;
@@ -175,6 +189,10 @@ protected:
 	bool m_ApplyImageTransparent;
 	bool m_ApplyImageTransparentIsSet;
 	std::shared_ptr<AccessPermissions> m_AccessPermissions;
+	bool m_HideInk;
+	bool m_HideInkIsSet;
+	bool m_InterpretMaskOpAsOpacity;
+	bool m_InterpretMaskOpAsOpacityIsSet;
 };
 
 }

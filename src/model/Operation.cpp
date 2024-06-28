@@ -94,17 +94,6 @@ void Operation::setCreated(utility::datetime value)
 	
 }
 
-utility::datetime Operation::getEnqueued() const
-{
-	return m_Enqueued;
-}
-
-void Operation::setEnqueued(utility::datetime value)
-{
-	m_Enqueued = value;
-	
-}
-
 utility::datetime Operation::getStarted() const
 {
 	return m_Started;
@@ -183,10 +172,6 @@ web::json::value Operation::toJson() const
 	{
 		val[utility::conversions::to_string_t("Created")] = ModelBase::toJson(m_Created);
 	}
-	if (m_Enqueued.is_initialized())
-	{
-		val[utility::conversions::to_string_t("Enqueued")] = ModelBase::toJson(m_Enqueued);
-	}
 	if (m_Started.is_initialized())
 	{
 		val[utility::conversions::to_string_t("Started")] = ModelBase::toJson(m_Started);
@@ -237,11 +222,6 @@ void Operation::fromJson(web::json::value& val)
 	if(jsonForCreated != nullptr && !jsonForCreated->is_null())
 	{
 		setCreated(ModelBase::dateFromJson(*jsonForCreated));
-	}
-	web::json::value* jsonForEnqueued = ModelBase::getField(val, "Enqueued");
-	if(jsonForEnqueued != nullptr && !jsonForEnqueued->is_null())
-	{
-		setEnqueued(ModelBase::dateFromJson(*jsonForEnqueued));
 	}
 	web::json::value* jsonForStarted = ModelBase::getField(val, "Started");
 	if(jsonForStarted != nullptr && !jsonForStarted->is_null())

@@ -41,6 +41,8 @@ PdfExportOptions::PdfExportOptions()
 	m_SaveMetafilesAsPngIsSet = false;
 	m_EmbedTrueTypeFontsForASCIIIsSet = false;
 	m_ApplyImageTransparentIsSet = false;
+	m_HideInkIsSet = false;
+	m_InterpretMaskOpAsOpacityIsSet = false;
 	setFormat(L"pdf");
 }
 
@@ -293,6 +295,48 @@ void PdfExportOptions::setAccessPermissions(std::shared_ptr<AccessPermissions> v
 	
 }
 
+bool PdfExportOptions::isHideInk() const
+{
+	return m_HideInk;
+}
+
+void PdfExportOptions::setHideInk(bool value)
+{
+	m_HideInk = value;
+	m_HideInkIsSet = true;
+}
+
+bool PdfExportOptions::hideInkIsSet() const
+{
+	return m_HideInkIsSet;
+}
+
+void PdfExportOptions::unsetHideInk()
+{
+	m_HideInkIsSet = false;
+}
+
+bool PdfExportOptions::isInterpretMaskOpAsOpacity() const
+{
+	return m_InterpretMaskOpAsOpacity;
+}
+
+void PdfExportOptions::setInterpretMaskOpAsOpacity(bool value)
+{
+	m_InterpretMaskOpAsOpacity = value;
+	m_InterpretMaskOpAsOpacityIsSet = true;
+}
+
+bool PdfExportOptions::interpretMaskOpAsOpacityIsSet() const
+{
+	return m_InterpretMaskOpAsOpacityIsSet;
+}
+
+void PdfExportOptions::unsetInterpretMaskOpAsOpacity()
+{
+	m_InterpretMaskOpAsOpacityIsSet = false;
+}
+
 web::json::value PdfExportOptions::toJson() const
 {
 	web::json::value val = this->ExportOptions::toJson();
@@ -360,6 +404,14 @@ web::json::value PdfExportOptions::toJson() const
 	if (m_AccessPermissions != nullptr)
 	{
 		val[utility::conversions::to_string_t("AccessPermissions")] = ModelBase::toJson(m_AccessPermissions);
+	}
+	if(m_HideInkIsSet)
+	{
+		val[utility::conversions::to_string_t("HideInk")] = ModelBase::toJson(m_HideInk);
+	}
+	if(m_InterpretMaskOpAsOpacityIsSet)
+	{
+		val[utility::conversions::to_string_t("InterpretMaskOpAsOpacity")] = ModelBase::toJson(m_InterpretMaskOpAsOpacity);
 	}
 	return val;
 }
@@ -450,6 +502,16 @@ void PdfExportOptions::fromJson(web::json::value& val)
 	{
 		std::shared_ptr<void> instanceForAccessPermissions = asposeslidescloud::api::ClassRegistry::deserialize(L"AccessPermissions", *jsonForAccessPermissions);
 		setAccessPermissions(std::static_pointer_cast<AccessPermissions>(instanceForAccessPermissions));
+	}
+	web::json::value* jsonForHideInk = ModelBase::getField(val, "HideInk");
+	if(jsonForHideInk != nullptr && !jsonForHideInk->is_null())
+	{
+		setHideInk(ModelBase::boolFromJson(*jsonForHideInk));
+	}
+	web::json::value* jsonForInterpretMaskOpAsOpacity = ModelBase::getField(val, "InterpretMaskOpAsOpacity");
+	if(jsonForInterpretMaskOpAsOpacity != nullptr && !jsonForInterpretMaskOpAsOpacity->is_null())
+	{
+		setInterpretMaskOpAsOpacity(ModelBase::boolFromJson(*jsonForInterpretMaskOpAsOpacity));
 	}
 }
 
