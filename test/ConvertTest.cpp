@@ -28,6 +28,7 @@
 
 #include "TestUtils.h"
 #include "model/PdfExportOptions.h"
+#include "model/Html5ExportOptions.h"
 #include "model/ImageExportOptions.h"
 #include "model/HandoutLayoutingOptions.h"
 
@@ -292,4 +293,23 @@ TEST_F(ConvertTest, convertWithSlidesLayoutOptions) {
 	utils->getSlidesApi()->savePresentation(L"test.pptx", L"pdf", outPath, options, L"password", L"TempSlidesSDK").wait();
 	std::shared_ptr<ObjectExist> exists = utils->getSlidesApi()->objectExists(outPath).get();
 	EXPECT_TRUE(exists->isExists());
+}
+
+TEST_F(ConvertTest, convertWithCustomHtml5Templates) {
+	utils->initialize("", "", "");
+	utility::string_t templatesPath = L"Html5Templates";
+	utility::string_t templateFileName = L"pictureFrame.html";
+	utils->getSlidesApi()->createFolder(templatesPath);
+	utils->getSlidesApi()->copyFile(L"TestData/" + templateFileName, templatesPath + L"/" + templateFileName);
+	std::shared_ptr<Html5ExportOptions> exportOptions = std::make_shared<Html5ExportOptions>();
+	exportOptions->setTemplatesPath(templatesPath);
+	exportOptions->setAnimateTransitions(true);
+	HttpContent result = utils->getSlidesApi()->downloadPresentation(L"test.pptx", L"html5", exportOptions, L"password", L"TempSlidesSDK").get();
+	EXPECT_NE(nullptr, result.getData());
+}
+
+TEST_F(ConvertTest, convertGetHtml5Templates) {
+	utils->initialize("", "", "");
+	HttpContent result = utils->getSlidesApi()->getHtml5Templates().get();
+	EXPECT_NE(nullptr, result.getData());
 }

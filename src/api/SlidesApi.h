@@ -698,11 +698,6 @@ public:
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadNotesSlideOnline(std::shared_ptr<HttpContent> document, int32_t slideIndex, utility::string_t format, boost::optional<int32_t> width = boost::none, boost::optional<int32_t> height = boost::none, utility::string_t password = L"", utility::string_t fontsFolder = L"");
 
 	/// <summary>
-	/// Convert Mathematical Text to MathML Format
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadPortionAsMathMl(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
-
-	/// <summary>
 	/// Save a presentation to a specified format.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> downloadPresentation(utility::string_t name, utility::string_t format, std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>(), utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"", utility::string_t fontsFolder = L"", std::vector<int32_t> slides = std::vector<int32_t>());
@@ -811,6 +806,11 @@ public:
 	/// Read slide theme format scheme info.
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<FormatScheme>> getFormatScheme(utility::string_t name, int32_t slideIndex, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
+
+	/// <summary>
+	/// Get default templates for HTML5 export.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> getHtml5Templates();
 
 	/// <summary>
 	/// Read presentation layoutSlide info.
@@ -1170,12 +1170,12 @@ public:
 	/// <summary>
 	/// Replace text with a new value.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<DocumentReplaceResult>> replacePresentationText(utility::string_t name, utility::string_t oldValue, utility::string_t newValue, boost::optional<bool> ignoreCase = boost::none, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<DocumentReplaceResult>> replacePresentationText(utility::string_t name, utility::string_t oldValue, utility::string_t newValue, boost::optional<bool> ignoreCase = boost::none, boost::optional<bool> wholeWordsOnly = boost::none, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
 
 	/// <summary>
 	/// Replace text with a new value.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<HttpContent> replacePresentationTextOnline(std::shared_ptr<HttpContent> document, utility::string_t oldValue, utility::string_t newValue, boost::optional<bool> ignoreCase = boost::none, utility::string_t password = L"");
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> replacePresentationTextOnline(std::shared_ptr<HttpContent> document, utility::string_t oldValue, utility::string_t newValue, boost::optional<bool> ignoreCase = boost::none, boost::optional<bool> wholeWordsOnly = boost::none, utility::string_t password = L"");
 
 	/// <summary>
 	/// Replace text with a new value.
@@ -1201,11 +1201,6 @@ public:
 	/// Convert Mathematical Text to MathML Format and saves result to the storage
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<void> saveMathPortion(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t format, utility::string_t outPath, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
-
-	/// <summary>
-	/// Convert Mathematical Text to MathML Format and saves result to the storage
-	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<void> savePortionAsMathMl(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, int32_t paragraphIndex, int32_t portionIndex, utility::string_t outPath, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
 
 	/// <summary>
 	/// Save a presentation to a specified format.

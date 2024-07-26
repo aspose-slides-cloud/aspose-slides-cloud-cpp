@@ -164,6 +164,13 @@ public:
 	ASPOSE_DLL_EXPORT void setInterpretMaskOpAsOpacity(bool value);
 	ASPOSE_DLL_EXPORT bool interpretMaskOpAsOpacityIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetInterpretMaskOpAsOpacity();
+	/// <summary>
+	/// True if text should be rasterized as a bitmap and saved to PDF when the font does not support bold styling. This approach can enhance the quality of text in the resulting PDF for certain fonts.
+	/// </summary>
+	ASPOSE_DLL_EXPORT bool isRasterizeUnsupportedFontStyles() const;
+	ASPOSE_DLL_EXPORT void setRasterizeUnsupportedFontStyles(bool value);
+	ASPOSE_DLL_EXPORT bool rasterizeUnsupportedFontStylesIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetRasterizeUnsupportedFontStyles();
 
 protected:
 	utility::string_t m_TextCompression;
@@ -193,6 +200,8 @@ protected:
 	bool m_HideInkIsSet;
 	bool m_InterpretMaskOpAsOpacity;
 	bool m_InterpretMaskOpAsOpacityIsSet;
+	bool m_RasterizeUnsupportedFontStyles;
+	bool m_RasterizeUnsupportedFontStylesIsSet;
 };
 
 }

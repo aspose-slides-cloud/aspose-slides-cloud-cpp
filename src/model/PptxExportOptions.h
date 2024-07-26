@@ -58,13 +58,19 @@ public:
 	ASPOSE_DLL_EXPORT void fromJson(web::json::value& json) override;
 
 	/// <summary>
-	/// The conformance class to which the PresentationML document conforms. Read/write Conformance.
+	/// The conformance class to which the PresentationML document conforms.
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getConformance() const;
 	ASPOSE_DLL_EXPORT void setConformance(utility::string_t value);
+	/// <summary>
+	/// Specifies whether the ZIP64 format is used for the Presentation document. The default value is Zip64Mode.IfNecessary.
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getZip64Mode() const;
+	ASPOSE_DLL_EXPORT void setZip64Mode(utility::string_t value);
 
 protected:
 	utility::string_t m_Conformance;
+	utility::string_t m_Zip64Mode;
 };
 
 }

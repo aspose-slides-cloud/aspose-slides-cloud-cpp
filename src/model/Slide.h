@@ -71,6 +71,8 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool isShowMasterShapes() const;
 	ASPOSE_DLL_EXPORT void setShowMasterShapes(bool value);
+	ASPOSE_DLL_EXPORT bool showMasterShapesIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetShowMasterShapes();
 	/// <summary>
 	/// Specifies if shapes of the master slide should be shown on the slide. True by default.
 	/// </summary>
@@ -121,6 +123,7 @@ protected:
 	double m_Width;
 	double m_Height;
 	bool m_ShowMasterShapes;
+	bool m_ShowMasterShapesIsSet;
 	std::shared_ptr<SlideShowTransition> m_SlideShowTransition;
 	std::shared_ptr<ResourceUri> m_LayoutSlide;
 	std::shared_ptr<ResourceUri> m_Shapes;

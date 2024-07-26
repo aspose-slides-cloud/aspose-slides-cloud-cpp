@@ -33,6 +33,7 @@ namespace model {
 
 Slide::Slide()
 {
+	m_ShowMasterShapesIsSet = false;
 	setWidth(0.0);
 	setHeight(0.0);
 }
@@ -71,7 +72,17 @@ bool Slide::isShowMasterShapes() const
 void Slide::setShowMasterShapes(bool value)
 {
 	m_ShowMasterShapes = value;
-	
+	m_ShowMasterShapesIsSet = true;
+}
+
+bool Slide::showMasterShapesIsSet() const
+{
+	return m_ShowMasterShapesIsSet;
+}
+
+void Slide::unsetShowMasterShapes()
+{
+	m_ShowMasterShapesIsSet = false;
 }
 
 std::shared_ptr<SlideShowTransition> Slide::getSlideShowTransition() const
@@ -178,7 +189,10 @@ web::json::value Slide::toJson() const
 	web::json::value val = this->ResourceBase::toJson();
 	val[utility::conversions::to_string_t("Width")] = ModelBase::toJson(m_Width);
 	val[utility::conversions::to_string_t("Height")] = ModelBase::toJson(m_Height);
-	val[utility::conversions::to_string_t("ShowMasterShapes")] = ModelBase::toJson(m_ShowMasterShapes);
+	if(m_ShowMasterShapesIsSet)
+	{
+		val[utility::conversions::to_string_t("ShowMasterShapes")] = ModelBase::toJson(m_ShowMasterShapes);
+	}
 	if (m_SlideShowTransition != nullptr)
 	{
 		val[utility::conversions::to_string_t("SlideShowTransition")] = ModelBase::toJson(m_SlideShowTransition);

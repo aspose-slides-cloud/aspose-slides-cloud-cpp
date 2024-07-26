@@ -76,11 +76,15 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT double getLinearAngle() const;
 	ASPOSE_DLL_EXPORT void setLinearAngle(double value);
+	ASPOSE_DLL_EXPORT bool linearAngleIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetLinearAngle();
 	/// <summary>
 	/// True if the gradient is scaled.
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getIsScaled() const;
 	ASPOSE_DLL_EXPORT void setIsScaled(bool value);
+	ASPOSE_DLL_EXPORT bool isScaledIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetIsScaled();
 	/// <summary>
 	/// Gradient flipping mode.
 	/// </summary>
@@ -92,7 +96,9 @@ protected:
 	utility::string_t m_Shape;
 	std::vector<std::shared_ptr<GradientFillStop>> m_Stops;
 	double m_LinearAngle;
+	bool m_LinearAngleIsSet;
 	bool m_IsScaled;
+	bool m_IsScaledIsSet;
 	utility::string_t m_TileFlip;
 };
 

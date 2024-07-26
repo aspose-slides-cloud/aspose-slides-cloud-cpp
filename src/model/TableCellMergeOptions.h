@@ -77,6 +77,8 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool isAllowSplitting() const;
 	ASPOSE_DLL_EXPORT void setAllowSplitting(bool value);
+	ASPOSE_DLL_EXPORT bool allowSplittingIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetAllowSplitting();
 
 protected:
 	int32_t m_FirstRowIndex;
@@ -84,6 +86,7 @@ protected:
 	int32_t m_LastRowIndex;
 	int32_t m_LastCellIndex;
 	bool m_AllowSplitting;
+	bool m_AllowSplittingIsSet;
 };
 
 }

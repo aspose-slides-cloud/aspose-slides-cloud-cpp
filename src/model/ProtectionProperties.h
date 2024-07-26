@@ -85,11 +85,15 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getIsWriteProtected() const;
 	ASPOSE_DLL_EXPORT void setIsWriteProtected(bool value);
+	ASPOSE_DLL_EXPORT bool isWriteProtectedIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetIsWriteProtected();
 	/// <summary>
 	/// Returns true if the presentation protected for reading. 
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getIsEncrypted() const;
 	ASPOSE_DLL_EXPORT void setIsEncrypted(bool value);
+	ASPOSE_DLL_EXPORT bool isEncryptedIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetIsEncrypted();
 
 protected:
 	bool m_EncryptDocumentProperties;
@@ -99,7 +103,9 @@ protected:
 	utility::string_t m_ReadPassword;
 	utility::string_t m_WritePassword;
 	bool m_IsWriteProtected;
+	bool m_IsWriteProtectedIsSet;
 	bool m_IsEncrypted;
+	bool m_IsEncryptedIsSet;
 };
 
 }

@@ -33,8 +33,9 @@ namespace model {
 
 GradientFill::GradientFill()
 {
+	m_LinearAngleIsSet = false;
+	m_IsScaledIsSet = false;
 	setType(L"Gradient");
-	setLinearAngle(0.0);
 }
 
 GradientFill::~GradientFill()
@@ -82,7 +83,17 @@ double GradientFill::getLinearAngle() const
 void GradientFill::setLinearAngle(double value)
 {
 	m_LinearAngle = value;
-	
+	m_LinearAngleIsSet = true;
+}
+
+bool GradientFill::linearAngleIsSet() const
+{
+	return m_LinearAngleIsSet;
+}
+
+void GradientFill::unsetLinearAngle()
+{
+	m_LinearAngleIsSet = false;
 }
 
 bool GradientFill::getIsScaled() const
@@ -93,7 +104,17 @@ bool GradientFill::getIsScaled() const
 void GradientFill::setIsScaled(bool value)
 {
 	m_IsScaled = value;
-	
+	m_IsScaledIsSet = true;
+}
+
+bool GradientFill::isScaledIsSet() const
+{
+	return m_IsScaledIsSet;
+}
+
+void GradientFill::unsetIsScaled()
+{
+	m_IsScaledIsSet = false;
 }
 
 utility::string_t GradientFill::getTileFlip() const
@@ -127,8 +148,14 @@ web::json::value GradientFill::toJson() const
 		}
 		val[utility::conversions::to_string_t("Stops")] = web::json::value::array(jsonArray);
 	}
-	val[utility::conversions::to_string_t("LinearAngle")] = ModelBase::toJson(m_LinearAngle);
-	val[utility::conversions::to_string_t("IsScaled")] = ModelBase::toJson(m_IsScaled);
+	if(m_LinearAngleIsSet)
+	{
+		val[utility::conversions::to_string_t("LinearAngle")] = ModelBase::toJson(m_LinearAngle);
+	}
+	if(m_IsScaledIsSet)
+	{
+		val[utility::conversions::to_string_t("IsScaled")] = ModelBase::toJson(m_IsScaled);
+	}
 	if (!m_TileFlip.empty())
 	{
 		val[utility::conversions::to_string_t("TileFlip")] = ModelBase::toJson(m_TileFlip);

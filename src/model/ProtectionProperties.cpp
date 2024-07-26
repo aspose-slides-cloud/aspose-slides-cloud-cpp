@@ -35,6 +35,8 @@ ProtectionProperties::ProtectionProperties()
 {
 	m_EncryptDocumentPropertiesIsSet = false;
 	m_ReadOnlyRecommendedIsSet = false;
+	m_IsWriteProtectedIsSet = false;
+	m_IsEncryptedIsSet = false;
 }
 
 ProtectionProperties::~ProtectionProperties()
@@ -113,7 +115,17 @@ bool ProtectionProperties::getIsWriteProtected() const
 void ProtectionProperties::setIsWriteProtected(bool value)
 {
 	m_IsWriteProtected = value;
-	
+	m_IsWriteProtectedIsSet = true;
+}
+
+bool ProtectionProperties::isWriteProtectedIsSet() const
+{
+	return m_IsWriteProtectedIsSet;
+}
+
+void ProtectionProperties::unsetIsWriteProtected()
+{
+	m_IsWriteProtectedIsSet = false;
 }
 
 bool ProtectionProperties::getIsEncrypted() const
@@ -124,7 +136,17 @@ bool ProtectionProperties::getIsEncrypted() const
 void ProtectionProperties::setIsEncrypted(bool value)
 {
 	m_IsEncrypted = value;
-	
+	m_IsEncryptedIsSet = true;
+}
+
+bool ProtectionProperties::isEncryptedIsSet() const
+{
+	return m_IsEncryptedIsSet;
+}
+
+void ProtectionProperties::unsetIsEncrypted()
+{
+	m_IsEncryptedIsSet = false;
 }
 
 web::json::value ProtectionProperties::toJson() const
@@ -146,8 +168,14 @@ web::json::value ProtectionProperties::toJson() const
 	{
 		val[utility::conversions::to_string_t("WritePassword")] = ModelBase::toJson(m_WritePassword);
 	}
-	val[utility::conversions::to_string_t("IsWriteProtected")] = ModelBase::toJson(m_IsWriteProtected);
-	val[utility::conversions::to_string_t("IsEncrypted")] = ModelBase::toJson(m_IsEncrypted);
+	if(m_IsWriteProtectedIsSet)
+	{
+		val[utility::conversions::to_string_t("IsWriteProtected")] = ModelBase::toJson(m_IsWriteProtected);
+	}
+	if(m_IsEncryptedIsSet)
+	{
+		val[utility::conversions::to_string_t("IsEncrypted")] = ModelBase::toJson(m_IsEncrypted);
+	}
 	return val;
 }
 

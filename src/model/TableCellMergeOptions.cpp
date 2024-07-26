@@ -33,6 +33,7 @@ namespace model {
 
 TableCellMergeOptions::TableCellMergeOptions()
 {
+	m_AllowSplittingIsSet = false;
 	setFirstRowIndex(0);
 	setFirstCellIndex(0);
 	setLastRowIndex(0);
@@ -95,7 +96,17 @@ bool TableCellMergeOptions::isAllowSplitting() const
 void TableCellMergeOptions::setAllowSplitting(bool value)
 {
 	m_AllowSplitting = value;
-	
+	m_AllowSplittingIsSet = true;
+}
+
+bool TableCellMergeOptions::allowSplittingIsSet() const
+{
+	return m_AllowSplittingIsSet;
+}
+
+void TableCellMergeOptions::unsetAllowSplitting()
+{
+	m_AllowSplittingIsSet = false;
 }
 
 web::json::value TableCellMergeOptions::toJson() const
@@ -105,7 +116,10 @@ web::json::value TableCellMergeOptions::toJson() const
 	val[utility::conversions::to_string_t("FirstCellIndex")] = ModelBase::toJson(m_FirstCellIndex);
 	val[utility::conversions::to_string_t("LastRowIndex")] = ModelBase::toJson(m_LastRowIndex);
 	val[utility::conversions::to_string_t("LastCellIndex")] = ModelBase::toJson(m_LastCellIndex);
-	val[utility::conversions::to_string_t("AllowSplitting")] = ModelBase::toJson(m_AllowSplitting);
+	if(m_AllowSplittingIsSet)
+	{
+		val[utility::conversions::to_string_t("AllowSplitting")] = ModelBase::toJson(m_AllowSplitting);
+	}
 	return val;
 }
 

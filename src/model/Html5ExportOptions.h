@@ -84,6 +84,11 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::shared_ptr<NotesCommentsLayoutingOptions> getNotesCommentsLayouting() const;
 	ASPOSE_DLL_EXPORT void setNotesCommentsLayouting(std::shared_ptr<NotesCommentsLayoutingOptions> value);
+	/// <summary>
+	/// Path to custom templates
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getTemplatesPath() const;
+	ASPOSE_DLL_EXPORT void setTemplatesPath(utility::string_t value);
 
 protected:
 	bool m_AnimateTransitions;
@@ -93,6 +98,7 @@ protected:
 	bool m_EmbedImages;
 	bool m_EmbedImagesIsSet;
 	std::shared_ptr<NotesCommentsLayoutingOptions> m_NotesCommentsLayouting;
+	utility::string_t m_TemplatesPath;
 };
 
 }

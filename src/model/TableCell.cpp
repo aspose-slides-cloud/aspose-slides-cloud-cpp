@@ -39,6 +39,7 @@ TableCell::TableCell()
 	m_MarginRightIsSet = false;
 	m_MarginLeftIsSet = false;
 	m_MarginBottomIsSet = false;
+	m_TransparencyIsSet = false;
 	m_ColumnIndexIsSet = false;
 	m_RowIndexIsSet = false;
 }
@@ -182,6 +183,27 @@ bool TableCell::marginBottomIsSet() const
 void TableCell::unsetMarginBottom()
 {
 	m_MarginBottomIsSet = false;
+}
+
+double TableCell::getTransparency() const
+{
+	return m_Transparency;
+}
+
+void TableCell::setTransparency(double value)
+{
+	m_Transparency = value;
+	m_TransparencyIsSet = true;
+}
+
+bool TableCell::transparencyIsSet() const
+{
+	return m_TransparencyIsSet;
+}
+
+void TableCell::unsetTransparency()
+{
+	m_TransparencyIsSet = false;
 }
 
 utility::string_t TableCell::getTextAnchorType() const
@@ -378,6 +400,10 @@ web::json::value TableCell::toJson() const
 	{
 		val[utility::conversions::to_string_t("MarginBottom")] = ModelBase::toJson(m_MarginBottom);
 	}
+	if(m_TransparencyIsSet)
+	{
+		val[utility::conversions::to_string_t("Transparency")] = ModelBase::toJson(m_Transparency);
+	}
 	if (!m_TextAnchorType.empty())
 	{
 		val[utility::conversions::to_string_t("TextAnchorType")] = ModelBase::toJson(m_TextAnchorType);
@@ -469,6 +495,11 @@ void TableCell::fromJson(web::json::value& val)
 	if(jsonForMarginBottom != nullptr && !jsonForMarginBottom->is_null() && jsonForMarginBottom->is_number())
 	{
 		setMarginBottom(ModelBase::doubleFromJson(*jsonForMarginBottom));
+	}
+	web::json::value* jsonForTransparency = ModelBase::getField(val, "Transparency");
+	if(jsonForTransparency != nullptr && !jsonForTransparency->is_null() && jsonForTransparency->is_number())
+	{
+		setTransparency(ModelBase::doubleFromJson(*jsonForTransparency));
 	}
 	web::json::value* jsonForTextAnchorType = ModelBase::getField(val, "TextAnchorType");
 	if(jsonForTextAnchorType != nullptr && !jsonForTextAnchorType->is_null())

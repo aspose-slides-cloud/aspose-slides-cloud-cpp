@@ -71,11 +71,14 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool isBuiltIn() const;
 	ASPOSE_DLL_EXPORT void setBuiltIn(bool value);
+	ASPOSE_DLL_EXPORT bool builtInIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetBuiltIn();
 
 protected:
 	utility::string_t m_Name;
 	utility::string_t m_Value;
 	bool m_BuiltIn;
+	bool m_BuiltInIsSet;
 };
 
 }

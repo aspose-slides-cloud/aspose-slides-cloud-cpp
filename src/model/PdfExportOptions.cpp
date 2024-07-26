@@ -43,6 +43,7 @@ PdfExportOptions::PdfExportOptions()
 	m_ApplyImageTransparentIsSet = false;
 	m_HideInkIsSet = false;
 	m_InterpretMaskOpAsOpacityIsSet = false;
+	m_RasterizeUnsupportedFontStylesIsSet = false;
 	setFormat(L"pdf");
 }
 
@@ -337,6 +338,27 @@ void PdfExportOptions::unsetInterpretMaskOpAsOpacity()
 	m_InterpretMaskOpAsOpacityIsSet = false;
 }
 
+bool PdfExportOptions::isRasterizeUnsupportedFontStyles() const
+{
+	return m_RasterizeUnsupportedFontStyles;
+}
+
+void PdfExportOptions::setRasterizeUnsupportedFontStyles(bool value)
+{
+	m_RasterizeUnsupportedFontStyles = value;
+	m_RasterizeUnsupportedFontStylesIsSet = true;
+}
+
+bool PdfExportOptions::rasterizeUnsupportedFontStylesIsSet() const
+{
+	return m_RasterizeUnsupportedFontStylesIsSet;
+}
+
+void PdfExportOptions::unsetRasterizeUnsupportedFontStyles()
+{
+	m_RasterizeUnsupportedFontStylesIsSet = false;
+}
+
 web::json::value PdfExportOptions::toJson() const
 {
 	web::json::value val = this->ExportOptions::toJson();
@@ -412,6 +434,10 @@ web::json::value PdfExportOptions::toJson() const
 	if(m_InterpretMaskOpAsOpacityIsSet)
 	{
 		val[utility::conversions::to_string_t("InterpretMaskOpAsOpacity")] = ModelBase::toJson(m_InterpretMaskOpAsOpacity);
+	}
+	if(m_RasterizeUnsupportedFontStylesIsSet)
+	{
+		val[utility::conversions::to_string_t("RasterizeUnsupportedFontStyles")] = ModelBase::toJson(m_RasterizeUnsupportedFontStyles);
 	}
 	return val;
 }
@@ -512,6 +538,11 @@ void PdfExportOptions::fromJson(web::json::value& val)
 	if(jsonForInterpretMaskOpAsOpacity != nullptr && !jsonForInterpretMaskOpAsOpacity->is_null())
 	{
 		setInterpretMaskOpAsOpacity(ModelBase::boolFromJson(*jsonForInterpretMaskOpAsOpacity));
+	}
+	web::json::value* jsonForRasterizeUnsupportedFontStyles = ModelBase::getField(val, "RasterizeUnsupportedFontStyles");
+	if(jsonForRasterizeUnsupportedFontStyles != nullptr && !jsonForRasterizeUnsupportedFontStyles->is_null())
+	{
+		setRasterizeUnsupportedFontStyles(ModelBase::boolFromJson(*jsonForRasterizeUnsupportedFontStyles));
 	}
 }
 

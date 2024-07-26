@@ -62,6 +62,11 @@ public:
 	ASPOSE_DLL_EXPORT utility::string_t getDefaultRegularFont() const;
 	ASPOSE_DLL_EXPORT void setDefaultRegularFont(utility::string_t value);
 	/// <summary>
+	/// Default regular font for rendering the presentation. 
+	/// </summary>
+	ASPOSE_DLL_EXPORT utility::string_t getGradientStyle() const;
+	ASPOSE_DLL_EXPORT void setGradientStyle(utility::string_t value);
+	/// <summary>
 	/// Gets of sets list of font fallback rules.
 	/// </summary>
 	ASPOSE_DLL_EXPORT std::vector<std::shared_ptr<FontFallbackRule>> getFontFallbackRules() const;
@@ -79,6 +84,7 @@ public:
 
 protected:
 	utility::string_t m_DefaultRegularFont;
+	utility::string_t m_GradientStyle;
 	std::vector<std::shared_ptr<FontFallbackRule>> m_FontFallbackRules;
 	std::vector<std::shared_ptr<FontSubstRule>> m_FontSubstRules;
 	utility::string_t m_Format;

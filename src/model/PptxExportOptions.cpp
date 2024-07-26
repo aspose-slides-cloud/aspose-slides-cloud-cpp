@@ -51,12 +51,27 @@ void PptxExportOptions::setConformance(utility::string_t value)
 	
 }
 
+utility::string_t PptxExportOptions::getZip64Mode() const
+{
+	return m_Zip64Mode;
+}
+
+void PptxExportOptions::setZip64Mode(utility::string_t value)
+{
+	m_Zip64Mode = value;
+	
+}
+
 web::json::value PptxExportOptions::toJson() const
 {
 	web::json::value val = this->ExportOptions::toJson();
 	if (!m_Conformance.empty())
 	{
 		val[utility::conversions::to_string_t("Conformance")] = ModelBase::toJson(m_Conformance);
+	}
+	if (!m_Zip64Mode.empty())
+	{
+		val[utility::conversions::to_string_t("Zip64Mode")] = ModelBase::toJson(m_Zip64Mode);
 	}
 	return val;
 }
@@ -68,6 +83,11 @@ void PptxExportOptions::fromJson(web::json::value& val)
 	if(jsonForConformance != nullptr && !jsonForConformance->is_null())
 	{
 		setConformance(ModelBase::stringFromJson(*jsonForConformance));
+	}
+	web::json::value* jsonForZip64Mode = ModelBase::getField(val, "Zip64Mode");
+	if(jsonForZip64Mode != nullptr && !jsonForZip64Mode->is_null())
+	{
+		setZip64Mode(ModelBase::stringFromJson(*jsonForZip64Mode));
 	}
 }
 

@@ -105,6 +105,13 @@ public:
 	ASPOSE_DLL_EXPORT bool marginBottomIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetMarginBottom();
 	/// <summary>
+	/// Transparency.
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getTransparency() const;
+	ASPOSE_DLL_EXPORT void setTransparency(double value);
+	ASPOSE_DLL_EXPORT bool transparencyIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetTransparency();
+	/// <summary>
 	/// Text anchor type.
 	/// </summary>
 	ASPOSE_DLL_EXPORT utility::string_t getTextAnchorType() const;
@@ -188,6 +195,8 @@ protected:
 	bool m_MarginLeftIsSet;
 	double m_MarginBottom;
 	bool m_MarginBottomIsSet;
+	double m_Transparency;
+	bool m_TransparencyIsSet;
 	utility::string_t m_TextAnchorType;
 	utility::string_t m_TextVerticalType;
 	std::shared_ptr<FillFormat> m_FillFormat;

@@ -127,6 +127,13 @@ public:
 	ASPOSE_DLL_EXPORT void setVerticalBanding(bool value);
 	ASPOSE_DLL_EXPORT bool verticalBandingIsSet() const;
 	ASPOSE_DLL_EXPORT void unsetVerticalBanding();
+	/// <summary>
+	/// Transparency.
+	/// </summary>
+	ASPOSE_DLL_EXPORT double getTransparency() const;
+	ASPOSE_DLL_EXPORT void setTransparency(double value);
+	ASPOSE_DLL_EXPORT bool transparencyIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetTransparency();
 
 protected:
 	utility::string_t m_Style;
@@ -146,6 +153,8 @@ protected:
 	bool m_RightToLeftIsSet;
 	bool m_VerticalBanding;
 	bool m_VerticalBandingIsSet;
+	double m_Transparency;
+	bool m_TransparencyIsSet;
 };
 
 }

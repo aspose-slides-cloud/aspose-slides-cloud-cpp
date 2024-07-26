@@ -117,6 +117,17 @@ void Html5ExportOptions::setNotesCommentsLayouting(std::shared_ptr<NotesComments
 	
 }
 
+utility::string_t Html5ExportOptions::getTemplatesPath() const
+{
+	return m_TemplatesPath;
+}
+
+void Html5ExportOptions::setTemplatesPath(utility::string_t value)
+{
+	m_TemplatesPath = value;
+	
+}
+
 web::json::value Html5ExportOptions::toJson() const
 {
 	web::json::value val = this->ExportOptions::toJson();
@@ -135,6 +146,10 @@ web::json::value Html5ExportOptions::toJson() const
 	if (m_NotesCommentsLayouting != nullptr)
 	{
 		val[utility::conversions::to_string_t("NotesCommentsLayouting")] = ModelBase::toJson(m_NotesCommentsLayouting);
+	}
+	if (!m_TemplatesPath.empty())
+	{
+		val[utility::conversions::to_string_t("TemplatesPath")] = ModelBase::toJson(m_TemplatesPath);
 	}
 	return val;
 }
@@ -162,6 +177,11 @@ void Html5ExportOptions::fromJson(web::json::value& val)
 	{
 		std::shared_ptr<void> instanceForNotesCommentsLayouting = asposeslidescloud::api::ClassRegistry::deserialize(L"NotesCommentsLayoutingOptions", *jsonForNotesCommentsLayouting);
 		setNotesCommentsLayouting(std::static_pointer_cast<NotesCommentsLayoutingOptions>(instanceForNotesCommentsLayouting));
+	}
+	web::json::value* jsonForTemplatesPath = ModelBase::getField(val, "TemplatesPath");
+	if(jsonForTemplatesPath != nullptr && !jsonForTemplatesPath->is_null())
+	{
+		setTemplatesPath(ModelBase::stringFromJson(*jsonForTemplatesPath));
 	}
 }
 

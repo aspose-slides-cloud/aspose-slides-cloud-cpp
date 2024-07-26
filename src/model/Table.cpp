@@ -40,6 +40,7 @@ Table::Table()
 	m_LastRowIsSet = false;
 	m_RightToLeftIsSet = false;
 	m_VerticalBandingIsSet = false;
+	m_TransparencyIsSet = false;
 	setZOrderPosition(0);
 	setType(L"Table");
 }
@@ -228,6 +229,27 @@ void Table::unsetVerticalBanding()
 	m_VerticalBandingIsSet = false;
 }
 
+double Table::getTransparency() const
+{
+	return m_Transparency;
+}
+
+void Table::setTransparency(double value)
+{
+	m_Transparency = value;
+	m_TransparencyIsSet = true;
+}
+
+bool Table::transparencyIsSet() const
+{
+	return m_TransparencyIsSet;
+}
+
+void Table::unsetTransparency()
+{
+	m_TransparencyIsSet = false;
+}
+
 web::json::value Table::toJson() const
 {
 	web::json::value val = this->ShapeBase::toJson();
@@ -280,6 +302,10 @@ web::json::value Table::toJson() const
 	if(m_VerticalBandingIsSet)
 	{
 		val[utility::conversions::to_string_t("VerticalBanding")] = ModelBase::toJson(m_VerticalBanding);
+	}
+	if(m_TransparencyIsSet)
+	{
+		val[utility::conversions::to_string_t("Transparency")] = ModelBase::toJson(m_Transparency);
 	}
 	return val;
 }
@@ -366,6 +392,11 @@ void Table::fromJson(web::json::value& val)
 	if(jsonForVerticalBanding != nullptr && !jsonForVerticalBanding->is_null())
 	{
 		setVerticalBanding(ModelBase::boolFromJson(*jsonForVerticalBanding));
+	}
+	web::json::value* jsonForTransparency = ModelBase::getField(val, "Transparency");
+	if(jsonForTransparency != nullptr && !jsonForTransparency->is_null() && jsonForTransparency->is_number())
+	{
+		setTransparency(ModelBase::doubleFromJson(*jsonForTransparency));
 	}
 }
 

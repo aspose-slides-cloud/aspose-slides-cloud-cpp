@@ -33,6 +33,7 @@ namespace model {
 
 DocumentProperty::DocumentProperty()
 {
+	m_BuiltInIsSet = false;
 }
 
 DocumentProperty::~DocumentProperty()
@@ -69,7 +70,17 @@ bool DocumentProperty::isBuiltIn() const
 void DocumentProperty::setBuiltIn(bool value)
 {
 	m_BuiltIn = value;
-	
+	m_BuiltInIsSet = true;
+}
+
+bool DocumentProperty::builtInIsSet() const
+{
+	return m_BuiltInIsSet;
+}
+
+void DocumentProperty::unsetBuiltIn()
+{
+	m_BuiltInIsSet = false;
 }
 
 web::json::value DocumentProperty::toJson() const
@@ -83,7 +94,10 @@ web::json::value DocumentProperty::toJson() const
 	{
 		val[utility::conversions::to_string_t("Value")] = ModelBase::toJson(m_Value);
 	}
-	val[utility::conversions::to_string_t("BuiltIn")] = ModelBase::toJson(m_BuiltIn);
+	if(m_BuiltInIsSet)
+	{
+		val[utility::conversions::to_string_t("BuiltIn")] = ModelBase::toJson(m_BuiltIn);
+	}
 	return val;
 }
 
