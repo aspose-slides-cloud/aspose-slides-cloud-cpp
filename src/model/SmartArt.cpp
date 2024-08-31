@@ -33,6 +33,7 @@ namespace model {
 
 SmartArt::SmartArt()
 {
+	m_IsReversedIsSet = false;
 	setZOrderPosition(0);
 	setType(L"SmartArt");
 }
@@ -93,7 +94,17 @@ bool SmartArt::getIsReversed() const
 void SmartArt::setIsReversed(bool value)
 {
 	m_IsReversed = value;
-	
+	m_IsReversedIsSet = true;
+}
+
+bool SmartArt::isReversedIsSet() const
+{
+	return m_IsReversedIsSet;
+}
+
+void SmartArt::unsetIsReversed()
+{
+	m_IsReversedIsSet = false;
 }
 
 web::json::value SmartArt::toJson() const
@@ -120,7 +131,10 @@ web::json::value SmartArt::toJson() const
 		}
 		val[utility::conversions::to_string_t("Nodes")] = web::json::value::array(jsonArray);
 	}
-	val[utility::conversions::to_string_t("IsReversed")] = ModelBase::toJson(m_IsReversed);
+	if(m_IsReversedIsSet)
+	{
+		val[utility::conversions::to_string_t("IsReversed")] = ModelBase::toJson(m_IsReversed);
+	}
 	return val;
 }
 

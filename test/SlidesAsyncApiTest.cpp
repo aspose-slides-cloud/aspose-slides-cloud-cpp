@@ -1853,3 +1853,1108 @@ TEST_F(SlidesAsyncApiTest, startSavePresentationInvalidSlides) {
 		FAIL() << "Must have failed";
 	}
 }
+
+TEST_F(SlidesAsyncApiTest, startSplit) {
+	utility::string_t paramName = utils->getTestValue("startSplit", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSplit", "format", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSplit", "options", "std::shared_ptr<ExportOptions>");
+	auto paramWidth = utils->getOptionalIntTestValue("startSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startSplit", "to", "int32_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startSplit", "destFolder", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startSplit", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSplit", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSplit", "fontsFolder", "utility::string_t");
+	utils->initialize("startSplit", "", "");
+	utility::string_t result = utils->getSlidesAsyncApi()->startSplit(paramName, paramFormat, paramOptions, paramWidth, paramHeight, paramFrom, paramTo, paramDestFolder, paramPassword, paramFolder, paramStorage, paramFontsFolder).get();
+	EXPECT_NE(L"", result);
+}
+
+TEST_F(SlidesAsyncApiTest, startSplitInvalidName) {
+	utility::string_t paramName = utils->getTestValue("startSplit", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSplit", "format", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSplit", "options", "std::shared_ptr<ExportOptions>");
+	auto paramWidth = utils->getOptionalIntTestValue("startSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startSplit", "to", "int32_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startSplit", "destFolder", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startSplit", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSplit", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSplit", "fontsFolder", "utility::string_t");
+	paramName = utils->getInvalidTestValue("startSplit", "name", "utility::string_t", paramName);
+	utils->initialize("startSplit", "name", "utility::string_t", paramName);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSplit(paramName, paramFormat, paramOptions, paramWidth, paramHeight, paramFrom, paramTo, paramDestFolder, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "name", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "name", "utility::string_t", paramName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "name", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "name", "utility::string_t", paramName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSplit", "name", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSplitInvalidFormat) {
+	utility::string_t paramName = utils->getTestValue("startSplit", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSplit", "format", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSplit", "options", "std::shared_ptr<ExportOptions>");
+	auto paramWidth = utils->getOptionalIntTestValue("startSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startSplit", "to", "int32_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startSplit", "destFolder", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startSplit", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSplit", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSplit", "fontsFolder", "utility::string_t");
+	paramFormat = utils->getInvalidTestValue("startSplit", "format", "utility::string_t", paramFormat);
+	utils->initialize("startSplit", "format", "utility::string_t", paramFormat);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSplit(paramName, paramFormat, paramOptions, paramWidth, paramHeight, paramFrom, paramTo, paramDestFolder, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "format", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "format", "utility::string_t", paramFormat);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "format", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "format", "utility::string_t", paramFormat);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSplit", "format", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSplitInvalidOptions) {
+	utility::string_t paramName = utils->getTestValue("startSplit", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSplit", "format", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSplit", "options", "std::shared_ptr<ExportOptions>");
+	auto paramWidth = utils->getOptionalIntTestValue("startSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startSplit", "to", "int32_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startSplit", "destFolder", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startSplit", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSplit", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSplit", "fontsFolder", "utility::string_t");
+	paramOptions = utils->getInvalidTestValueForClass<>("startSplit", "options", "std::shared_ptr<ExportOptions>", paramOptions);
+	utils->initialize("startSplit", "options", "std::shared_ptr<ExportOptions>", paramOptions);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSplit(paramName, paramFormat, paramOptions, paramWidth, paramHeight, paramFrom, paramTo, paramDestFolder, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "options", "std::shared_ptr<ExportOptions>");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "options", "std::shared_ptr<ExportOptions>", paramOptions);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "options", "std::shared_ptr<ExportOptions>");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "options", "std::shared_ptr<ExportOptions>", paramOptions);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSplit", "options", "std::shared_ptr<ExportOptions>"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSplitInvalidWidth) {
+	utility::string_t paramName = utils->getTestValue("startSplit", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSplit", "format", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSplit", "options", "std::shared_ptr<ExportOptions>");
+	auto paramWidth = utils->getOptionalIntTestValue("startSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startSplit", "to", "int32_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startSplit", "destFolder", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startSplit", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSplit", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSplit", "fontsFolder", "utility::string_t");
+	paramWidth = utils->getInvalidIntTestValue("startSplit", "width", "int32_t", paramWidth).value();
+	utils->initialize("startSplit", "width", "int32_t", paramWidth);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSplit(paramName, paramFormat, paramOptions, paramWidth, paramHeight, paramFrom, paramTo, paramDestFolder, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "width", "int32_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "width", "int32_t", paramWidth);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "width", "int32_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "width", "int32_t", paramWidth);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSplit", "width", "int32_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSplitInvalidHeight) {
+	utility::string_t paramName = utils->getTestValue("startSplit", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSplit", "format", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSplit", "options", "std::shared_ptr<ExportOptions>");
+	auto paramWidth = utils->getOptionalIntTestValue("startSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startSplit", "to", "int32_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startSplit", "destFolder", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startSplit", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSplit", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSplit", "fontsFolder", "utility::string_t");
+	paramHeight = utils->getInvalidIntTestValue("startSplit", "height", "int32_t", paramHeight).value();
+	utils->initialize("startSplit", "height", "int32_t", paramHeight);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSplit(paramName, paramFormat, paramOptions, paramWidth, paramHeight, paramFrom, paramTo, paramDestFolder, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "height", "int32_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "height", "int32_t", paramHeight);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "height", "int32_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "height", "int32_t", paramHeight);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSplit", "height", "int32_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSplitInvalidFrom) {
+	utility::string_t paramName = utils->getTestValue("startSplit", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSplit", "format", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSplit", "options", "std::shared_ptr<ExportOptions>");
+	auto paramWidth = utils->getOptionalIntTestValue("startSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startSplit", "to", "int32_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startSplit", "destFolder", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startSplit", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSplit", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSplit", "fontsFolder", "utility::string_t");
+	paramFrom = utils->getInvalidIntTestValue("startSplit", "from", "int32_t", paramFrom).value();
+	utils->initialize("startSplit", "from", "int32_t", paramFrom);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSplit(paramName, paramFormat, paramOptions, paramWidth, paramHeight, paramFrom, paramTo, paramDestFolder, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "from", "int32_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "from", "int32_t", paramFrom);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "from", "int32_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "from", "int32_t", paramFrom);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSplit", "from", "int32_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSplitInvalidTo) {
+	utility::string_t paramName = utils->getTestValue("startSplit", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSplit", "format", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSplit", "options", "std::shared_ptr<ExportOptions>");
+	auto paramWidth = utils->getOptionalIntTestValue("startSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startSplit", "to", "int32_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startSplit", "destFolder", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startSplit", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSplit", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSplit", "fontsFolder", "utility::string_t");
+	paramTo = utils->getInvalidIntTestValue("startSplit", "to", "int32_t", paramTo).value();
+	utils->initialize("startSplit", "to", "int32_t", paramTo);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSplit(paramName, paramFormat, paramOptions, paramWidth, paramHeight, paramFrom, paramTo, paramDestFolder, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "to", "int32_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "to", "int32_t", paramTo);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "to", "int32_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "to", "int32_t", paramTo);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSplit", "to", "int32_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSplitInvalidDestFolder) {
+	utility::string_t paramName = utils->getTestValue("startSplit", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSplit", "format", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSplit", "options", "std::shared_ptr<ExportOptions>");
+	auto paramWidth = utils->getOptionalIntTestValue("startSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startSplit", "to", "int32_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startSplit", "destFolder", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startSplit", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSplit", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSplit", "fontsFolder", "utility::string_t");
+	paramDestFolder = utils->getInvalidTestValue("startSplit", "destFolder", "utility::string_t", paramDestFolder);
+	utils->initialize("startSplit", "destFolder", "utility::string_t", paramDestFolder);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSplit(paramName, paramFormat, paramOptions, paramWidth, paramHeight, paramFrom, paramTo, paramDestFolder, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "destFolder", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "destFolder", "utility::string_t", paramDestFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "destFolder", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "destFolder", "utility::string_t", paramDestFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSplit", "destFolder", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSplitInvalidPassword) {
+	utility::string_t paramName = utils->getTestValue("startSplit", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSplit", "format", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSplit", "options", "std::shared_ptr<ExportOptions>");
+	auto paramWidth = utils->getOptionalIntTestValue("startSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startSplit", "to", "int32_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startSplit", "destFolder", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startSplit", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSplit", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSplit", "fontsFolder", "utility::string_t");
+	paramPassword = utils->getInvalidTestValue("startSplit", "password", "utility::string_t", paramPassword);
+	utils->initialize("startSplit", "password", "utility::string_t", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSplit(paramName, paramFormat, paramOptions, paramWidth, paramHeight, paramFrom, paramTo, paramDestFolder, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "password", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "password", "utility::string_t", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "password", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "password", "utility::string_t", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSplit", "password", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSplitInvalidFolder) {
+	utility::string_t paramName = utils->getTestValue("startSplit", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSplit", "format", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSplit", "options", "std::shared_ptr<ExportOptions>");
+	auto paramWidth = utils->getOptionalIntTestValue("startSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startSplit", "to", "int32_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startSplit", "destFolder", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startSplit", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSplit", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSplit", "fontsFolder", "utility::string_t");
+	paramFolder = utils->getInvalidTestValue("startSplit", "folder", "utility::string_t", paramFolder);
+	utils->initialize("startSplit", "folder", "utility::string_t", paramFolder);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSplit(paramName, paramFormat, paramOptions, paramWidth, paramHeight, paramFrom, paramTo, paramDestFolder, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "folder", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "folder", "utility::string_t", paramFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "folder", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "folder", "utility::string_t", paramFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSplit", "folder", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSplitInvalidStorage) {
+	utility::string_t paramName = utils->getTestValue("startSplit", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSplit", "format", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSplit", "options", "std::shared_ptr<ExportOptions>");
+	auto paramWidth = utils->getOptionalIntTestValue("startSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startSplit", "to", "int32_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startSplit", "destFolder", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startSplit", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSplit", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSplit", "fontsFolder", "utility::string_t");
+	paramStorage = utils->getInvalidTestValue("startSplit", "storage", "utility::string_t", paramStorage);
+	utils->initialize("startSplit", "storage", "utility::string_t", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSplit(paramName, paramFormat, paramOptions, paramWidth, paramHeight, paramFrom, paramTo, paramDestFolder, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "storage", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "storage", "utility::string_t", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "storage", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "storage", "utility::string_t", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSplit", "storage", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startSplitInvalidFontsFolder) {
+	utility::string_t paramName = utils->getTestValue("startSplit", "name", "utility::string_t");
+	utility::string_t paramFormat = utils->getTestValue("startSplit", "format", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startSplit", "options", "std::shared_ptr<ExportOptions>");
+	auto paramWidth = utils->getOptionalIntTestValue("startSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startSplit", "to", "int32_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startSplit", "destFolder", "utility::string_t");
+	utility::string_t paramPassword = utils->getTestValue("startSplit", "password", "utility::string_t");
+	utility::string_t paramFolder = utils->getTestValue("startSplit", "folder", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startSplit", "fontsFolder", "utility::string_t");
+	paramFontsFolder = utils->getInvalidTestValue("startSplit", "fontsFolder", "utility::string_t", paramFontsFolder);
+	utils->initialize("startSplit", "fontsFolder", "utility::string_t", paramFontsFolder);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startSplit(paramName, paramFormat, paramOptions, paramWidth, paramHeight, paramFrom, paramTo, paramDestFolder, paramPassword, paramFolder, paramStorage, paramFontsFolder).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "fontsFolder", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "fontsFolder", "utility::string_t", paramFontsFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startSplit", "fontsFolder", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startSplit", "fontsFolder", "utility::string_t", paramFontsFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startSplit", "fontsFolder", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startUploadAndSplit) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startUploadAndSplit", "format", "utility::string_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startUploadAndSplit", "destFolder", "utility::string_t");
+	auto paramWidth = utils->getOptionalIntTestValue("startUploadAndSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startUploadAndSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startUploadAndSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startUploadAndSplit", "to", "int32_t");
+	utility::string_t paramPassword = utils->getTestValue("startUploadAndSplit", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startUploadAndSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startUploadAndSplit", "fontsFolder", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>");
+	utils->initialize("startUploadAndSplit", "", "");
+	utility::string_t result = utils->getSlidesAsyncApi()->startUploadAndSplit(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).get();
+	EXPECT_NE(L"", result);
+}
+
+TEST_F(SlidesAsyncApiTest, startUploadAndSplitInvalidDocument) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startUploadAndSplit", "format", "utility::string_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startUploadAndSplit", "destFolder", "utility::string_t");
+	auto paramWidth = utils->getOptionalIntTestValue("startUploadAndSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startUploadAndSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startUploadAndSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startUploadAndSplit", "to", "int32_t");
+	utility::string_t paramPassword = utils->getTestValue("startUploadAndSplit", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startUploadAndSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startUploadAndSplit", "fontsFolder", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>");
+	paramDocument = utils->getInvalidBinaryTestValue("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>", paramDocument);
+	utils->initialize("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>", paramDocument);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startUploadAndSplit(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>", paramDocument);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>", paramDocument);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startUploadAndSplitInvalidFormat) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startUploadAndSplit", "format", "utility::string_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startUploadAndSplit", "destFolder", "utility::string_t");
+	auto paramWidth = utils->getOptionalIntTestValue("startUploadAndSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startUploadAndSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startUploadAndSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startUploadAndSplit", "to", "int32_t");
+	utility::string_t paramPassword = utils->getTestValue("startUploadAndSplit", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startUploadAndSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startUploadAndSplit", "fontsFolder", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>");
+	paramFormat = utils->getInvalidTestValue("startUploadAndSplit", "format", "utility::string_t", paramFormat);
+	utils->initialize("startUploadAndSplit", "format", "utility::string_t", paramFormat);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startUploadAndSplit(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "format", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "format", "utility::string_t", paramFormat);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "format", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "format", "utility::string_t", paramFormat);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startUploadAndSplit", "format", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startUploadAndSplitInvalidDestFolder) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startUploadAndSplit", "format", "utility::string_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startUploadAndSplit", "destFolder", "utility::string_t");
+	auto paramWidth = utils->getOptionalIntTestValue("startUploadAndSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startUploadAndSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startUploadAndSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startUploadAndSplit", "to", "int32_t");
+	utility::string_t paramPassword = utils->getTestValue("startUploadAndSplit", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startUploadAndSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startUploadAndSplit", "fontsFolder", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>");
+	paramDestFolder = utils->getInvalidTestValue("startUploadAndSplit", "destFolder", "utility::string_t", paramDestFolder);
+	utils->initialize("startUploadAndSplit", "destFolder", "utility::string_t", paramDestFolder);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startUploadAndSplit(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "destFolder", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "destFolder", "utility::string_t", paramDestFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "destFolder", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "destFolder", "utility::string_t", paramDestFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startUploadAndSplit", "destFolder", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startUploadAndSplitInvalidWidth) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startUploadAndSplit", "format", "utility::string_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startUploadAndSplit", "destFolder", "utility::string_t");
+	auto paramWidth = utils->getOptionalIntTestValue("startUploadAndSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startUploadAndSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startUploadAndSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startUploadAndSplit", "to", "int32_t");
+	utility::string_t paramPassword = utils->getTestValue("startUploadAndSplit", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startUploadAndSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startUploadAndSplit", "fontsFolder", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>");
+	paramWidth = utils->getInvalidIntTestValue("startUploadAndSplit", "width", "int32_t", paramWidth).value();
+	utils->initialize("startUploadAndSplit", "width", "int32_t", paramWidth);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startUploadAndSplit(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "width", "int32_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "width", "int32_t", paramWidth);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "width", "int32_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "width", "int32_t", paramWidth);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startUploadAndSplit", "width", "int32_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startUploadAndSplitInvalidHeight) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startUploadAndSplit", "format", "utility::string_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startUploadAndSplit", "destFolder", "utility::string_t");
+	auto paramWidth = utils->getOptionalIntTestValue("startUploadAndSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startUploadAndSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startUploadAndSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startUploadAndSplit", "to", "int32_t");
+	utility::string_t paramPassword = utils->getTestValue("startUploadAndSplit", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startUploadAndSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startUploadAndSplit", "fontsFolder", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>");
+	paramHeight = utils->getInvalidIntTestValue("startUploadAndSplit", "height", "int32_t", paramHeight).value();
+	utils->initialize("startUploadAndSplit", "height", "int32_t", paramHeight);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startUploadAndSplit(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "height", "int32_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "height", "int32_t", paramHeight);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "height", "int32_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "height", "int32_t", paramHeight);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startUploadAndSplit", "height", "int32_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startUploadAndSplitInvalidFrom) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startUploadAndSplit", "format", "utility::string_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startUploadAndSplit", "destFolder", "utility::string_t");
+	auto paramWidth = utils->getOptionalIntTestValue("startUploadAndSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startUploadAndSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startUploadAndSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startUploadAndSplit", "to", "int32_t");
+	utility::string_t paramPassword = utils->getTestValue("startUploadAndSplit", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startUploadAndSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startUploadAndSplit", "fontsFolder", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>");
+	paramFrom = utils->getInvalidIntTestValue("startUploadAndSplit", "from", "int32_t", paramFrom).value();
+	utils->initialize("startUploadAndSplit", "from", "int32_t", paramFrom);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startUploadAndSplit(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "from", "int32_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "from", "int32_t", paramFrom);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "from", "int32_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "from", "int32_t", paramFrom);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startUploadAndSplit", "from", "int32_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startUploadAndSplitInvalidTo) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startUploadAndSplit", "format", "utility::string_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startUploadAndSplit", "destFolder", "utility::string_t");
+	auto paramWidth = utils->getOptionalIntTestValue("startUploadAndSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startUploadAndSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startUploadAndSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startUploadAndSplit", "to", "int32_t");
+	utility::string_t paramPassword = utils->getTestValue("startUploadAndSplit", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startUploadAndSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startUploadAndSplit", "fontsFolder", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>");
+	paramTo = utils->getInvalidIntTestValue("startUploadAndSplit", "to", "int32_t", paramTo).value();
+	utils->initialize("startUploadAndSplit", "to", "int32_t", paramTo);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startUploadAndSplit(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "to", "int32_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "to", "int32_t", paramTo);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "to", "int32_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "to", "int32_t", paramTo);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startUploadAndSplit", "to", "int32_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startUploadAndSplitInvalidPassword) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startUploadAndSplit", "format", "utility::string_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startUploadAndSplit", "destFolder", "utility::string_t");
+	auto paramWidth = utils->getOptionalIntTestValue("startUploadAndSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startUploadAndSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startUploadAndSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startUploadAndSplit", "to", "int32_t");
+	utility::string_t paramPassword = utils->getTestValue("startUploadAndSplit", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startUploadAndSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startUploadAndSplit", "fontsFolder", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>");
+	paramPassword = utils->getInvalidTestValue("startUploadAndSplit", "password", "utility::string_t", paramPassword);
+	utils->initialize("startUploadAndSplit", "password", "utility::string_t", paramPassword);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startUploadAndSplit(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "password", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "password", "utility::string_t", paramPassword);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "password", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "password", "utility::string_t", paramPassword);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startUploadAndSplit", "password", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startUploadAndSplitInvalidStorage) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startUploadAndSplit", "format", "utility::string_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startUploadAndSplit", "destFolder", "utility::string_t");
+	auto paramWidth = utils->getOptionalIntTestValue("startUploadAndSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startUploadAndSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startUploadAndSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startUploadAndSplit", "to", "int32_t");
+	utility::string_t paramPassword = utils->getTestValue("startUploadAndSplit", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startUploadAndSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startUploadAndSplit", "fontsFolder", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>");
+	paramStorage = utils->getInvalidTestValue("startUploadAndSplit", "storage", "utility::string_t", paramStorage);
+	utils->initialize("startUploadAndSplit", "storage", "utility::string_t", paramStorage);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startUploadAndSplit(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "storage", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "storage", "utility::string_t", paramStorage);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "storage", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "storage", "utility::string_t", paramStorage);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startUploadAndSplit", "storage", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startUploadAndSplitInvalidFontsFolder) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startUploadAndSplit", "format", "utility::string_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startUploadAndSplit", "destFolder", "utility::string_t");
+	auto paramWidth = utils->getOptionalIntTestValue("startUploadAndSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startUploadAndSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startUploadAndSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startUploadAndSplit", "to", "int32_t");
+	utility::string_t paramPassword = utils->getTestValue("startUploadAndSplit", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startUploadAndSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startUploadAndSplit", "fontsFolder", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>");
+	paramFontsFolder = utils->getInvalidTestValue("startUploadAndSplit", "fontsFolder", "utility::string_t", paramFontsFolder);
+	utils->initialize("startUploadAndSplit", "fontsFolder", "utility::string_t", paramFontsFolder);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startUploadAndSplit(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "fontsFolder", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "fontsFolder", "utility::string_t", paramFontsFolder);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "fontsFolder", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "fontsFolder", "utility::string_t", paramFontsFolder);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startUploadAndSplit", "fontsFolder", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, startUploadAndSplitInvalidOptions) {
+	std::shared_ptr<HttpContent> paramDocument = utils->getBinaryTestValue("startUploadAndSplit", "document", "std::shared_ptr<HttpContent>");
+	utility::string_t paramFormat = utils->getTestValue("startUploadAndSplit", "format", "utility::string_t");
+	utility::string_t paramDestFolder = utils->getTestValue("startUploadAndSplit", "destFolder", "utility::string_t");
+	auto paramWidth = utils->getOptionalIntTestValue("startUploadAndSplit", "width", "int32_t");
+	auto paramHeight = utils->getOptionalIntTestValue("startUploadAndSplit", "height", "int32_t");
+	auto paramFrom = utils->getOptionalIntTestValue("startUploadAndSplit", "from", "int32_t");
+	auto paramTo = utils->getOptionalIntTestValue("startUploadAndSplit", "to", "int32_t");
+	utility::string_t paramPassword = utils->getTestValue("startUploadAndSplit", "password", "utility::string_t");
+	utility::string_t paramStorage = utils->getTestValue("startUploadAndSplit", "storage", "utility::string_t");
+	utility::string_t paramFontsFolder = utils->getTestValue("startUploadAndSplit", "fontsFolder", "utility::string_t");
+	std::shared_ptr<ExportOptions> paramOptions = utils->getTestValueForClass<ExportOptions>("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>");
+	paramOptions = utils->getInvalidTestValueForClass<>("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>", paramOptions);
+	utils->initialize("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>", paramOptions);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->startUploadAndSplit(paramDocument, paramFormat, paramDestFolder, paramWidth, paramHeight, paramFrom, paramTo, paramPassword, paramStorage, paramFontsFolder, paramOptions).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>", paramOptions);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>", paramOptions);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>"))
+	{
+		FAIL() << "Must have failed";
+	}
+}

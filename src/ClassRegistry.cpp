@@ -167,6 +167,7 @@
 #include "model/OneValueChartDataPoint.h"
 #include "model/OneValueSeries.h"
 #include "model/Operation.h"
+#include "model/OperationError.h"
 #include "model/OperationProgress.h"
 #include "model/OrderedMergeRequest.h"
 #include "model/OuterShadowEffect.h"
@@ -1208,6 +1209,12 @@ std::shared_ptr<void> ClassRegistry::deserializeSubclass(utility::string_t class
 		result->fromJson(json);
 		return result;
 	}
+	if (className == L"OperationError")
+	{
+		std::shared_ptr<OperationError> result(new OperationError());
+		result->fromJson(json);
+		return result;
+	}
 	if (className == L"OperationProgress")
 	{
 		std::shared_ptr<OperationProgress> result(new OperationProgress());
@@ -2221,6 +2228,7 @@ std::map<utility::string_t, std::map<utility::string_t, utility::string_t>> Clas
 	{ L"OneValueChartDataPoint", { { L"Type", L"OneValue" }, } },
 	{ L"OneValueSeries", { { L"DataPointType", L"OneValue" }, } },
 	{ L"Operation", { } },
+	{ L"OperationError", { } },
 	{ L"OperationProgress", { } },
 	{ L"OrderedMergeRequest", { } },
 	{ L"OuterShadowEffect", { } },

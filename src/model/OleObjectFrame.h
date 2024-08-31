@@ -67,6 +67,8 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getIsObjectIcon() const;
 	ASPOSE_DLL_EXPORT void setIsObjectIcon(bool value);
+	ASPOSE_DLL_EXPORT bool isObjectIconIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetIsObjectIcon();
 	/// <summary>
 	/// The title for OleObject icon.             
 	/// </summary>
@@ -112,6 +114,7 @@ public:
 
 protected:
 	bool m_IsObjectIcon;
+	bool m_IsObjectIconIsSet;
 	utility::string_t m_SubstitutePictureTitle;
 	std::shared_ptr<PictureFill> m_SubstitutePictureFormat;
 	utility::string_t m_ObjectName;

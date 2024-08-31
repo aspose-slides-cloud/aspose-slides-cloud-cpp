@@ -55,12 +55,15 @@ public:
 	static utility::string_t parameterToString(bool value);
 	static void setPathParameter(utility::string_t& path, std::string name, utility::string_t value);
 	static void setPathParameter(utility::string_t& path, std::string name, int32_t value);
+	static void setPathParameter(utility::string_t& path, std::string name, double value);
 	static void setQueryParameter(
 		std::map<utility::string_t, utility::string_t>& queryParams, utility::string_t name, utility::string_t value);
 	static void setQueryParameter(
 		std::map<utility::string_t, utility::string_t>& queryParams, utility::string_t name, std::vector<int32_t> value);
 	static void setQueryParameter(
 		std::map<utility::string_t, utility::string_t>& queryParams, utility::string_t name, int32_t value);
+	static void setQueryParameter(
+		std::map<utility::string_t, utility::string_t>& queryParams, utility::string_t name, double value);
 	static void setBoolQueryParameter(
 		std::map<utility::string_t, utility::string_t>& queryParams, utility::string_t name, bool value);
 	void logString(utility::string_t contents) const;

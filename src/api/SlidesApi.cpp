@@ -8132,7 +8132,115 @@ pplx::task<std::shared_ptr<ViewProperties>> SlidesApi::getViewProperties(utility
 		});
 }
 
-pplx::task<std::shared_ptr<Shape>> SlidesApi::highlightShapeRegex(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t regex, utility::string_t color, boost::optional<bool> wholeWordsOnly, boost::optional<bool> ignoreCase, utility::string_t password, utility::string_t folder, utility::string_t storage)
+pplx::task<std::shared_ptr<DocumentReplaceResult>> SlidesApi::highlightPresentationRegex(utility::string_t name, utility::string_t regex, utility::string_t color, boost::optional<bool> ignoreCase, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	// verify the required parameter 'regex' is set
+	if (regex.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: regex");
+	}
+	// verify the required parameter 'color' is set
+	if (color.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: color");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/highlightRegex");
+	ApiClient::setPathParameter(methodPath, "name", name);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("regex"), regex);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("color"), color);
+	if (ignoreCase.has_value())
+	{
+		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("ignoreCase"), ignoreCase.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "highlightPresentationRegex");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DocumentReplaceResult", json);
+			return std::static_pointer_cast<DocumentReplaceResult>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<DocumentReplaceResult>> SlidesApi::highlightPresentationText(utility::string_t name, utility::string_t text, utility::string_t color, boost::optional<bool> wholeWordsOnly, boost::optional<bool> ignoreCase, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	// verify the required parameter 'text' is set
+	if (text.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: text");
+	}
+	// verify the required parameter 'color' is set
+	if (color.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: color");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/highlightText");
+	ApiClient::setPathParameter(methodPath, "name", name);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("text"), text);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("color"), color);
+	if (wholeWordsOnly.has_value())
+	{
+		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("wholeWordsOnly"), wholeWordsOnly.value());
+	}
+	if (ignoreCase.has_value())
+	{
+		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("ignoreCase"), ignoreCase.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "highlightPresentationText");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DocumentReplaceResult", json);
+			return std::static_pointer_cast<DocumentReplaceResult>(instance);
+		});
+}
+
+pplx::task<std::shared_ptr<Shape>> SlidesApi::highlightShapeRegex(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t regex, utility::string_t color, boost::optional<bool> ignoreCase, utility::string_t password, utility::string_t folder, utility::string_t storage)
 {
 	// verify the required parameter 'name' is set
 	if (name.empty())
@@ -8157,10 +8265,6 @@ pplx::task<std::shared_ptr<Shape>> SlidesApi::highlightShapeRegex(utility::strin
 	std::map<utility::string_t, utility::string_t> queryParams;
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("regex"), regex);
 	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("color"), color);
-	if (wholeWordsOnly.has_value())
-	{
-		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("wholeWordsOnly"), wholeWordsOnly.value());
-	}
 	if (ignoreCase.has_value())
 	{
 		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("ignoreCase"), ignoreCase.value());
@@ -9119,6 +9223,109 @@ pplx::task<HttpContent> SlidesApi::replaceImageOnline(std::shared_ptr<HttpConten
 		.then([=](web::http::http_response response)
 		{
 			m_ApiClient->assertResponseException(response, "replaceImageOnline");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			HttpContent result;
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
+			result.setData(stream);
+			return result;
+		});
+}
+
+pplx::task<std::shared_ptr<DocumentReplaceResult>> SlidesApi::replacePresentationRegex(utility::string_t name, utility::string_t pattern, utility::string_t newValue, boost::optional<bool> ignoreCase, utility::string_t password, utility::string_t folder, utility::string_t storage)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	// verify the required parameter 'pattern' is set
+	if (pattern.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: pattern");
+	}
+	// verify the required parameter 'newValue' is set
+	if (newValue.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: newValue");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/{name}/replaceRegex");
+	ApiClient::setPathParameter(methodPath, "name", name);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("pattern"), pattern);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("newValue"), newValue);
+	if (ignoreCase.has_value())
+	{
+		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("ignoreCase"), ignoreCase.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "replacePresentationRegex");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"DocumentReplaceResult", json);
+			return std::static_pointer_cast<DocumentReplaceResult>(instance);
+		});
+}
+
+pplx::task<HttpContent> SlidesApi::replacePresentationRegexOnline(std::shared_ptr<HttpContent> document, utility::string_t pattern, utility::string_t newValue, boost::optional<bool> ignoreCase, utility::string_t password)
+{
+	if (document == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.document");
+	}
+	// verify the required parameter 'pattern' is set
+	if (pattern.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: pattern");
+	}
+	// verify the required parameter 'newValue' is set
+	if (newValue.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: newValue");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/replaceRegex");
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("pattern"), pattern);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("newValue"), newValue);
+	if (ignoreCase.has_value())
+	{
+		ApiClient::setBoolQueryParameter(queryParams, utility::conversions::to_string_t("ignoreCase"), ignoreCase.value());
+	}
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "replacePresentationRegexOnline");
 			return response.extract_vector();
 		})
 		.then([=](std::vector<unsigned char> responseVector)

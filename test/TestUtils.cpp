@@ -104,6 +104,11 @@ void TestUtils::initialize(std::string functionName, std::string parameterName, 
 	initialize(functionName, parameterName, parameterType, L"");
 }
 
+void TestUtils::initialize(std::string functionName, std::string parameterName, std::string parameterType, double parameterValue)
+{
+	initialize(functionName, parameterName, parameterType, L"");
+}
+
 void TestUtils::initialize(std::string functionName, std::string parameterName, std::string parameterType, std::vector<int32_t> parameterValue)
 {
 	initialize(functionName, parameterName, parameterType, L"");
@@ -441,6 +446,12 @@ int TestUtils::getExpectedCode(std::string functionName, std::string parameterNa
 }
 
 utility::string_t TestUtils::getExpectedMessage(std::string functionName, std::string parameterName, std::string parameterType, int32_t value)
+{
+	std::stringstream valueAsStringStream;
+	valueAsStringStream << value;
+	return getExpectedMessage(functionName, parameterName, parameterType, utility::conversions::to_string_t(valueAsStringStream.str()));
+}
+utility::string_t TestUtils::getExpectedMessage(std::string functionName, std::string parameterName, std::string parameterType, double value)
 {
 	std::stringstream valueAsStringStream;
 	valueAsStringStream << value;

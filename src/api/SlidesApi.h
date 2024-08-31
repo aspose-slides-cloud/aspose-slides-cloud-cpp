@@ -1055,7 +1055,17 @@ public:
 	/// <summary>
 	/// Highlight all matches of sample in text frame text using specified color.
 	/// </summary>
-	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shape>> highlightShapeRegex(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t regex, utility::string_t color, boost::optional<bool> wholeWordsOnly = boost::none, boost::optional<bool> ignoreCase = boost::none, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<DocumentReplaceResult>> highlightPresentationRegex(utility::string_t name, utility::string_t regex, utility::string_t color, boost::optional<bool> ignoreCase = boost::none, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
+
+	/// <summary>
+	/// Highlight all matches of sample using specified color.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<DocumentReplaceResult>> highlightPresentationText(utility::string_t name, utility::string_t text, utility::string_t color, boost::optional<bool> wholeWordsOnly = boost::none, boost::optional<bool> ignoreCase = boost::none, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
+
+	/// <summary>
+	/// Highlight all matches of sample in text frame text using specified color.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<Shape>> highlightShapeRegex(utility::string_t name, int32_t slideIndex, int32_t shapeIndex, utility::string_t regex, utility::string_t color, boost::optional<bool> ignoreCase = boost::none, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
 
 	/// <summary>
 	/// Highlight all matches of sample in text frame text using specified color.
@@ -1166,6 +1176,16 @@ public:
 	/// Replaces image by the specified index and returns updated document. 
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<HttpContent> replaceImageOnline(std::shared_ptr<HttpContent> document, int32_t imageIndex, std::shared_ptr<HttpContent> image, utility::string_t password = L"");
+
+	/// <summary>
+	/// Replace text with a new value using a regex.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<DocumentReplaceResult>> replacePresentationRegex(utility::string_t name, utility::string_t pattern, utility::string_t newValue, boost::optional<bool> ignoreCase = boost::none, utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"");
+
+	/// <summary>
+	/// Replace text with a new value using a regex.
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> replacePresentationRegexOnline(std::shared_ptr<HttpContent> document, utility::string_t pattern, utility::string_t newValue, boost::optional<bool> ignoreCase = boost::none, utility::string_t password = L"");
 
 	/// <summary>
 	/// Replace text with a new value.

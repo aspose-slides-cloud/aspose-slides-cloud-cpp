@@ -87,6 +87,8 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getIsReversed() const;
 	ASPOSE_DLL_EXPORT void setIsReversed(bool value);
+	ASPOSE_DLL_EXPORT bool isReversedIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetIsReversed();
 
 protected:
 	utility::string_t m_Layout;
@@ -94,6 +96,7 @@ protected:
 	utility::string_t m_ColorStyle;
 	std::vector<std::shared_ptr<SmartArtNode>> m_Nodes;
 	bool m_IsReversed;
+	bool m_IsReversedIsSet;
 };
 
 }

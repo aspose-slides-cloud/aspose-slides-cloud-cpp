@@ -68,7 +68,7 @@ TEST_F(AsyncTest, asyncConvert) {
 		}
 	}
 	EXPECT_EQ(L"Finished", operation->getStatus());
-	EXPECT_EQ(L"", operation->getError());
+	EXPECT_EQ(nullptr, operation->getError());
 
 	HttpContent converted = utils->getSlidesAsyncApi()->getOperationResult(operationId).get();
 	int convertedSize = 0;
@@ -95,7 +95,7 @@ TEST_F(AsyncTest, asyncDownloadPresentation) {
 		}
 	}
 	EXPECT_EQ(L"Finished", operation->getStatus());
-	EXPECT_EQ(L"", operation->getError());
+	EXPECT_EQ(nullptr, operation->getError());
 
 	HttpContent converted = utils->getSlidesAsyncApi()->getOperationResult(operationId).get();
 	int convertedSize = 0;
@@ -129,7 +129,7 @@ TEST_F(AsyncTest, asyncConvertAndSave) {
 		}
 	}
 	EXPECT_EQ(L"Finished", operation->getStatus());
-	EXPECT_EQ(L"", operation->getError());
+	EXPECT_EQ(nullptr, operation->getError());
 
 	std::shared_ptr<ObjectExist> exists = utils->getSlidesApi()->objectExists(outPath).get();
 	EXPECT_TRUE(exists->isExists());
@@ -155,7 +155,7 @@ TEST_F(AsyncTest, asyncSavePresentation) {
 		}
 	}
 	EXPECT_EQ(L"Finished", operation->getStatus());
-	EXPECT_EQ(L"", operation->getError());
+	EXPECT_EQ(nullptr, operation->getError());
 
 	std::shared_ptr<ObjectExist> exists = utils->getSlidesApi()->objectExists(outPath).get();
 	EXPECT_TRUE(exists->isExists());
@@ -187,7 +187,7 @@ TEST_F(AsyncTest, asyncMerge) {
 	EXPECT_NE(nullptr, operation->getProgress());
 	EXPECT_EQ(2, operation->getProgress()->getStepCount());
 	EXPECT_EQ(operation->getProgress()->getStepCount(), operation->getProgress()->getStepIndex());
-	EXPECT_EQ(L"", operation->getError());
+	EXPECT_EQ(nullptr, operation->getError());
 
 	HttpContent merged = utils->getSlidesAsyncApi()->getOperationResult(operationId).get();
 	int mergedSize = 0;
@@ -224,9 +224,62 @@ TEST_F(AsyncTest, asyncMergeAndSave) {
 	EXPECT_NE(nullptr, operation->getProgress());
 	EXPECT_EQ(2, operation->getProgress()->getStepCount());
 	EXPECT_EQ(operation->getProgress()->getStepCount(), operation->getProgress()->getStepIndex());
-	EXPECT_EQ(L"", operation->getError());
+	EXPECT_EQ(nullptr, operation->getError());
 
 	std::shared_ptr<ObjectExist> exists = utils->getSlidesApi()->objectExists(outPath).get();
+	EXPECT_TRUE(exists->isExists());
+}
+
+TEST_F(AsyncTest, asyncSplit) {
+	const int maxTries = 10;
+	const int sleepTimeout = 3;
+	utility::string_t outFolder = L"splitResult";
+	utils->getSlidesApi()->deleteFolder(outFolder, L"", true).get();
+
+	utils->initialize("", "", "");
+	utility::string_t operationId = utils->getSlidesAsyncApi()->startSplit(L"test.pptx", L"png", nullptr, boost::none, boost::none, boost::none, boost::none, outFolder, L"password", L"TempSlidesSDK").get();
+
+	std::shared_ptr<Operation> operation = nullptr;
+	for (int i = 0; i < maxTries; i++)
+	{
+		boost::this_thread::sleep(boost::posix_time::seconds(sleepTimeout));
+		operation = utils->getSlidesAsyncApi()->getOperationStatus(operationId).get();
+		if (operation->getStatus() != L"Created" && operation->getStatus() != L"Enqueued" && operation->getStatus() != L"Started")
+		{
+			break;
+		}
+	}
+	EXPECT_EQ(L"Finished", operation->getStatus());
+	EXPECT_EQ(nullptr, operation->getError());
+
+	std::shared_ptr<ObjectExist> exists = utils->getSlidesApi()->objectExists(outFolder).get();
+	EXPECT_TRUE(exists->isExists());
+}
+
+TEST_F(AsyncTest, asyncUploadAndSplit) {
+	const int maxTries = 10;
+	const int sleepTimeout = 3;
+	utility::string_t outFolder = L"splitResult";
+	utils->getSlidesApi()->deleteFolder(outFolder, L"", true).get();
+
+	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
+	data->setData(std::make_shared<std::ifstream>(L"TestData/test.pptx", std::ios::binary));
+	utility::string_t operationId = utils->getSlidesAsyncApi()->startUploadAndSplit(data, L"png", outFolder, boost::none, boost::none, boost::none, boost::none, L"password").get();
+
+	std::shared_ptr<Operation> operation = nullptr;
+	for (int i = 0; i < maxTries; i++)
+	{
+		boost::this_thread::sleep(boost::posix_time::seconds(sleepTimeout));
+		operation = utils->getSlidesAsyncApi()->getOperationStatus(operationId).get();
+		if (operation->getStatus() != L"Created" && operation->getStatus() != L"Enqueued" && operation->getStatus() != L"Started")
+		{
+			break;
+		}
+	}
+	EXPECT_EQ(L"Finished", operation->getStatus());
+	EXPECT_EQ(nullptr, operation->getError());
+
+	std::shared_ptr<ObjectExist> exists = utils->getSlidesApi()->objectExists(outFolder).get();
 	EXPECT_TRUE(exists->isExists());
 }
 
@@ -247,5 +300,5 @@ TEST_F(AsyncTest, asyncBadOperation) {
 		}
 	}
 	EXPECT_EQ(L"Failed", operation->getStatus());
-	EXPECT_NE(L"", operation->getError());
+	EXPECT_NE(nullptr, operation->getError());
 }

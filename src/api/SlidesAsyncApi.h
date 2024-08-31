@@ -99,6 +99,16 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<utility::string_t> startSavePresentation(utility::string_t name, utility::string_t format, utility::string_t outPath, std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>(), utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"", utility::string_t fontsFolder = L"", std::vector<int32_t> slides = std::vector<int32_t>());
 
+	/// <summary>
+	/// 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<utility::string_t> startSplit(utility::string_t name, utility::string_t format, std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>(), boost::optional<int32_t> width = boost::none, boost::optional<int32_t> height = boost::none, boost::optional<int32_t> from = boost::none, boost::optional<int32_t> to = boost::none, utility::string_t destFolder = L"", utility::string_t password = L"", utility::string_t folder = L"", utility::string_t storage = L"", utility::string_t fontsFolder = L"");
+
+	/// <summary>
+	/// 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<utility::string_t> startUploadAndSplit(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t destFolder = L"", boost::optional<int32_t> width = boost::none, boost::optional<int32_t> height = boost::none, boost::optional<int32_t> from = boost::none, boost::optional<int32_t> to = boost::none, utility::string_t password = L"", utility::string_t storage = L"", utility::string_t fontsFolder = L"", std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>());
+
 protected:
 	ApiClient* m_ApiClient;
 };

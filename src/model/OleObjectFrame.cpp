@@ -33,6 +33,7 @@ namespace model {
 
 OleObjectFrame::OleObjectFrame()
 {
+	m_IsObjectIconIsSet = false;
 	m_UpdateAutomaticIsSet = false;
 	setZOrderPosition(0);
 	setType(L"OleObjectFrame");
@@ -50,7 +51,17 @@ bool OleObjectFrame::getIsObjectIcon() const
 void OleObjectFrame::setIsObjectIcon(bool value)
 {
 	m_IsObjectIcon = value;
-	
+	m_IsObjectIconIsSet = true;
+}
+
+bool OleObjectFrame::isObjectIconIsSet() const
+{
+	return m_IsObjectIconIsSet;
+}
+
+void OleObjectFrame::unsetIsObjectIcon()
+{
+	m_IsObjectIconIsSet = false;
 }
 
 utility::string_t OleObjectFrame::getSubstitutePictureTitle() const
@@ -154,7 +165,10 @@ void OleObjectFrame::unsetUpdateAutomatic()
 web::json::value OleObjectFrame::toJson() const
 {
 	web::json::value val = this->ShapeBase::toJson();
-	val[utility::conversions::to_string_t("IsObjectIcon")] = ModelBase::toJson(m_IsObjectIcon);
+	if(m_IsObjectIconIsSet)
+	{
+		val[utility::conversions::to_string_t("IsObjectIcon")] = ModelBase::toJson(m_IsObjectIcon);
+	}
 	if (!m_SubstitutePictureTitle.empty())
 	{
 		val[utility::conversions::to_string_t("SubstitutePictureTitle")] = ModelBase::toJson(m_SubstitutePictureTitle);

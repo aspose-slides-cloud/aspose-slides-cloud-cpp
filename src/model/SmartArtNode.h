@@ -71,6 +71,8 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT bool getIsAssistant() const;
 	ASPOSE_DLL_EXPORT void setIsAssistant(bool value);
+	ASPOSE_DLL_EXPORT bool isAssistantIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetIsAssistant();
 	/// <summary>
 	/// Node text.
 	/// </summary>
@@ -91,6 +93,7 @@ protected:
 	std::vector<std::shared_ptr<SmartArtNode>> m_Nodes;
 	std::shared_ptr<ResourceUri> m_Shapes;
 	bool m_IsAssistant;
+	bool m_IsAssistantIsSet;
 	utility::string_t m_Text;
 	utility::string_t m_OrgChartLayout;
 	std::shared_ptr<ResourceUri> m_Paragraphs;

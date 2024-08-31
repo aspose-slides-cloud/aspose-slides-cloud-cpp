@@ -33,6 +33,7 @@ namespace model {
 
 SmartArtNode::SmartArtNode()
 {
+	m_IsAssistantIsSet = false;
 }
 
 SmartArtNode::~SmartArtNode()
@@ -69,7 +70,17 @@ bool SmartArtNode::getIsAssistant() const
 void SmartArtNode::setIsAssistant(bool value)
 {
 	m_IsAssistant = value;
-	
+	m_IsAssistantIsSet = true;
+}
+
+bool SmartArtNode::isAssistantIsSet() const
+{
+	return m_IsAssistantIsSet;
+}
+
+void SmartArtNode::unsetIsAssistant()
+{
+	m_IsAssistantIsSet = false;
 }
 
 utility::string_t SmartArtNode::getText() const
@@ -121,7 +132,10 @@ web::json::value SmartArtNode::toJson() const
 	{
 		val[utility::conversions::to_string_t("Shapes")] = ModelBase::toJson(m_Shapes);
 	}
-	val[utility::conversions::to_string_t("IsAssistant")] = ModelBase::toJson(m_IsAssistant);
+	if(m_IsAssistantIsSet)
+	{
+		val[utility::conversions::to_string_t("IsAssistant")] = ModelBase::toJson(m_IsAssistant);
+	}
 	if (!m_Text.empty())
 	{
 		val[utility::conversions::to_string_t("Text")] = ModelBase::toJson(m_Text);

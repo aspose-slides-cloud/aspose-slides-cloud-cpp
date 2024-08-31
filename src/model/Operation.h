@@ -34,6 +34,7 @@
 
 #include "../ModelBase.h"
 
+#include "../model/OperationError.h"
 #include "../model/OperationProgress.h"
 #include <cpprest/details/basic_types.h>
 #include <cpprest/asyncrt_utils.h>
@@ -103,8 +104,8 @@ public:
 	/// <summary>
 	/// 
 	/// </summary>
-	ASPOSE_DLL_EXPORT utility::string_t getError() const;
-	ASPOSE_DLL_EXPORT void setError(utility::string_t value);
+	ASPOSE_DLL_EXPORT std::shared_ptr<OperationError> getError() const;
+	ASPOSE_DLL_EXPORT void setError(std::shared_ptr<OperationError> value);
 
 protected:
 	utility::string_t m_Id;
@@ -116,7 +117,7 @@ protected:
 	utility::datetime m_Failed;
 	utility::datetime m_Canceled;
 	utility::datetime m_Finished;
-	utility::string_t m_Error;
+	std::shared_ptr<OperationError> m_Error;
 };
 
 }

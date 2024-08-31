@@ -46,6 +46,7 @@ public:
 
 	void initialize(std::string functionName, std::string parameterName, std::string parameterType);
 	void initialize(std::string functionName, std::string parameterName, std::string parameterType, int32_t parameterValue);
+	void initialize(std::string functionName, std::string parameterName, std::string parameterType, double parameterValue);
 	void initialize(std::string functionName, std::string parameterName, std::string parameterType, std::vector<int32_t> parameterValue);
 	void initialize(std::string functionName, std::string parameterName, std::string parameterType, std::vector<std::shared_ptr<HttpContent>> parameterValue);
 	void initialize(std::string functionName, std::string parameterName, std::string parameterType, utility::string_t parameterValue);
@@ -91,6 +92,7 @@ public:
 	int getExpectedCode(std::string functionName, std::string parameterName, std::string parameterType);
 
 	utility::string_t getExpectedMessage(std::string functionName, std::string parameterName, std::string parameterType, int32_t value);
+	utility::string_t getExpectedMessage(std::string functionName, std::string parameterName, std::string parameterType, double value);
 	utility::string_t getExpectedMessage(std::string functionName, std::string parameterName, std::string parameterType, std::vector<int32_t> value);
 	utility::string_t getExpectedMessage(std::string functionName, std::string parameterName, std::string parameterType, std::vector<std::shared_ptr<HttpContent>> value);
 	utility::string_t getExpectedMessage(std::string functionName, std::string parameterName, std::string parameterType, utility::string_t value);

@@ -60,7 +60,7 @@ pplx::task<web::http::http_response> ApiClient::callApi(
 	request.set_method(method);
 	setRequestHeaders(request, headerParams);
 	logRequest(request);
-	int parts = (postBody != nullptr ? 1 : 0) + files.size();
+	size_t parts = (postBody != nullptr ? 1 : 0) + files.size();
 	if (files.size() > 0)
 	{
 		std::stringstream data;
@@ -171,7 +171,7 @@ void ApiClient::setRequestHeaders(
 void ApiClient::logRequest(web::http::http_request& request) const
 {
 	if (!m_Configuration->getDebug()) return;
-	ucout << request.method() << _XPLATSTR(": ") << request.request_uri().to_string() << _XPLATSTR('\nHeaders\n');
+	ucout << request.method() << _XPLATSTR(": ") << request.request_uri().to_string() << _XPLATSTR("\nHeaders\n");
 	for (auto& kvp : request.headers())
 	{
 		ucout << kvp.first << _XPLATSTR(": ") << kvp.second << _XPLATSTR('\n');
@@ -182,7 +182,7 @@ void ApiClient::logRequest(web::http::http_request& request) const
 void ApiClient::logResponse(web::http::http_response& response) const
 {
 	if (!m_Configuration->getDebug()) return;
-	ucout << _XPLATSTR("Response ") << response.status_code() << _XPLATSTR(": ") << response.reason_phrase() << _XPLATSTR('\nHeaders\n');
+	ucout << _XPLATSTR("Response ") << response.status_code() << _XPLATSTR(": ") << response.reason_phrase() << _XPLATSTR("\nHeaders\n");
 	for (auto& kvp : response.headers())
 	{
 		ucout << kvp.first << _XPLATSTR(": ") << kvp.second << _XPLATSTR('\n');
@@ -220,6 +220,14 @@ void ApiClient::setQueryParameter(
 }
 
 void ApiClient::setQueryParameter(
+	std::map<utility::string_t, utility::string_t>& queryParams, utility::string_t name, double value)
+{
+	std::ostringstream oss;
+	oss << value;
+	queryParams[name] = utility::conversions::to_string_t(oss.str());
+}
+
+void ApiClient::setQueryParameter(
 	std::map<utility::string_t, utility::string_t>& queryParams, utility::string_t name, std::vector<int32_t> value)
 {
 	std::ostringstream oss;
@@ -241,6 +249,13 @@ void ApiClient::setPathParameter(utility::string_t& path, std::string name, util
 }
 
 void ApiClient::setPathParameter(utility::string_t& path, std::string name, int32_t value)
+{
+	std::stringstream valueAsStringStream;
+	valueAsStringStream << value;
+	setPathParameter(path, name, utility::conversions::to_string_t(valueAsStringStream.str()));
+}
+
+void ApiClient::setPathParameter(utility::string_t& path, std::string name, double value)
 {
 	std::stringstream valueAsStringStream;
 	valueAsStringStream << value;

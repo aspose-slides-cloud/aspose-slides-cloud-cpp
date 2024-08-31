@@ -418,6 +418,151 @@ pplx::task<utility::string_t> SlidesAsyncApi::startSavePresentation(utility::str
 		});
 }
 
+pplx::task<utility::string_t> SlidesAsyncApi::startSplit(utility::string_t name, utility::string_t format, std::shared_ptr<ExportOptions> options, boost::optional<int32_t> width, boost::optional<int32_t> height, boost::optional<int32_t> from, boost::optional<int32_t> to, utility::string_t destFolder, utility::string_t password, utility::string_t folder, utility::string_t storage, utility::string_t fontsFolder)
+{
+	// verify the required parameter 'name' is set
+	if (name.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: name");
+	}
+	// verify the required parameter 'format' is set
+	if (format.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// verify the required parameter 'format' is set
+	if (format.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Html") && !boost::iequals(format, "Pdf") && !boost::iequals(format, "Xps") && !boost::iequals(format, "Pptx") && !boost::iequals(format, "Odp") && !boost::iequals(format, "Otp") && !boost::iequals(format, "Ppt") && !boost::iequals(format, "Pps") && !boost::iequals(format, "Ppsx") && !boost::iequals(format, "Pptm") && !boost::iequals(format, "Ppsm") && !boost::iequals(format, "Potx") && !boost::iequals(format, "Pot") && !boost::iequals(format, "Potm") && !boost::iequals(format, "Svg") && !boost::iequals(format, "Fodp") && !boost::iequals(format, "Xaml") && !boost::iequals(format, "Html5") && !boost::iequals(format, "Md") && !boost::iequals(format, "Xml"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Html, Pdf, Xps, Pptx, Odp, Otp, Ppt, Pps, Ppsx, Pptm, Ppsm, Potx, Pot, Potm, Svg, Fodp, Xaml, Html5, Md, Xml.");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/async/{name}/split/{format}");
+	ApiClient::setPathParameter(methodPath, "name", name);
+	ApiClient::setPathParameter(methodPath, "format", format);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	if (width.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("width"), width.value());
+	}
+	if (height.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("height"), height.value());
+	}
+	if (from.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("from"), from.value());
+	}
+	if (to.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("to"), to.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("destFolder"), destFolder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("folder"), folder);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (options != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(options->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "startSplit");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			return response;
+		});
+}
+
+pplx::task<utility::string_t> SlidesAsyncApi::startUploadAndSplit(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t destFolder, boost::optional<int32_t> width, boost::optional<int32_t> height, boost::optional<int32_t> from, boost::optional<int32_t> to, utility::string_t password, utility::string_t storage, utility::string_t fontsFolder, std::shared_ptr<ExportOptions> options)
+{
+	if (document == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.document");
+	}
+	// verify the required parameter 'format' is set
+	if (format.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// verify the required parameter 'format' is set
+	if (format.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: format");
+	}
+	// validate the parameter 'format'
+	if (!boost::iequals(format, "Jpeg") && !boost::iequals(format, "Png") && !boost::iequals(format, "Gif") && !boost::iequals(format, "Bmp") && !boost::iequals(format, "Tiff") && !boost::iequals(format, "Html") && !boost::iequals(format, "Pdf") && !boost::iequals(format, "Xps") && !boost::iequals(format, "Pptx") && !boost::iequals(format, "Odp") && !boost::iequals(format, "Otp") && !boost::iequals(format, "Ppt") && !boost::iequals(format, "Pps") && !boost::iequals(format, "Ppsx") && !boost::iequals(format, "Pptm") && !boost::iequals(format, "Ppsm") && !boost::iequals(format, "Potx") && !boost::iequals(format, "Pot") && !boost::iequals(format, "Potm") && !boost::iequals(format, "Svg") && !boost::iequals(format, "Fodp") && !boost::iequals(format, "Xaml") && !boost::iequals(format, "Html5") && !boost::iequals(format, "Md") && !boost::iequals(format, "Xml"))
+	{
+		throw std::invalid_argument("Invalid value for format. Must be one of Jpeg, Png, Gif, Bmp, Tiff, Html, Pdf, Xps, Pptx, Odp, Otp, Ppt, Pps, Ppsx, Pptm, Ppsm, Potx, Pot, Potm, Svg, Fodp, Xaml, Html5, Md, Xml.");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/async/split/{format}");
+	ApiClient::setPathParameter(methodPath, "format", format);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("destFolder"), destFolder);
+	if (width.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("width"), width.value());
+	}
+	if (height.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("height"), height.value());
+	}
+	if (from.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("from"), from.value());
+	}
+	if (to.has_value())
+	{
+		ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("to"), to.value());
+	}
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storage"), storage);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("fontsFolder"), fontsFolder);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+	ApiClient::setQueryParameter(headerParams, utility::conversions::to_string_t("password"), password);
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (document != nullptr)
+	{
+		requestFiles.push_back(document);
+	}
+	if (options != nullptr)
+	{
+		httpBody = std::shared_ptr<IHttpBody>(new JsonBody(options->toJson()));
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("POST"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "startUploadAndSplit");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			return response;
+		});
+}
+
 }
 }
 

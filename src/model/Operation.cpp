@@ -138,12 +138,12 @@ void Operation::setFinished(utility::datetime value)
 	
 }
 
-utility::string_t Operation::getError() const
+std::shared_ptr<OperationError> Operation::getError() const
 {
 	return m_Error;
 }
 
-void Operation::setError(utility::string_t value)
+void Operation::setError(std::shared_ptr<OperationError> value)
 {
 	m_Error = value;
 	
@@ -188,7 +188,7 @@ web::json::value Operation::toJson() const
 	{
 		val[utility::conversions::to_string_t("Finished")] = ModelBase::toJson(m_Finished);
 	}
-	if (!m_Error.empty())
+	if (m_Error != nullptr)
 	{
 		val[utility::conversions::to_string_t("Error")] = ModelBase::toJson(m_Error);
 	}
@@ -246,7 +246,8 @@ void Operation::fromJson(web::json::value& val)
 	web::json::value* jsonForError = ModelBase::getField(val, "Error");
 	if(jsonForError != nullptr && !jsonForError->is_null())
 	{
-		setError(ModelBase::stringFromJson(*jsonForError));
+		std::shared_ptr<void> instanceForError = asposeslidescloud::api::ClassRegistry::deserialize(L"OperationError", *jsonForError);
+		setError(std::static_pointer_cast<OperationError>(instanceForError));
 	}
 }
 

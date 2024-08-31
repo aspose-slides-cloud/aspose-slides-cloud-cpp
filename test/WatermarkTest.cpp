@@ -54,7 +54,7 @@ TEST_F(WatermarkTest, watermarkTextStorage) {
 	utility::string_t watermarkText = L"watermarkText";
 
 	std::shared_ptr<Shapes> shapes = utils->getSlidesApi()->getShapes(fileName, slideIndex, password, folderName).get();
-	size_t shapeCount = shapes->getShapesLinks().size() + 1;
+	int shapeCount = (int)shapes->getShapesLinks().size() + 1;
 
 	utils->getSlidesApi()->createWatermark(fileName, nullptr, boost::none, watermarkText, L"", L"", password, folderName).get();
 	shapes = utils->getSlidesApi()->getShapes(fileName, slideIndex, password, folderName).get();
@@ -79,7 +79,7 @@ TEST_F(WatermarkTest, watermarkDtoStorage) {
 	utility::string_t watermarkText = L"watermarkText";
 
 	std::shared_ptr<Shapes> shapes = utils->getSlidesApi()->getShapes(fileName, slideIndex, password, folderName).get();
-	size_t shapeCount = shapes->getShapesLinks().size() + 1;
+	int shapeCount = (int)shapes->getShapesLinks().size() + 1;
 
 	std::shared_ptr<Shape> dto(new Shape());
 	dto->setText(watermarkText);
@@ -105,7 +105,7 @@ TEST_F(WatermarkTest, watermarkImageStorage) {
 	int slideIndex = 1;
 
 	std::shared_ptr<Shapes> shapes = utils->getSlidesApi()->getShapes(fileName, slideIndex, password, folderName).get();
-	size_t shapeCount = shapes->getShapesLinks().size() + 1;
+	int shapeCount = (int)shapes->getShapesLinks().size() + 1;
 
 	std::shared_ptr<HttpContent> data = std::make_shared<HttpContent>();
 	data->setData(std::make_shared<std::ifstream>(L"TestData/watermark.png", std::ios::binary));
@@ -131,7 +131,7 @@ TEST_F(WatermarkTest, watermarkImageDtoStorage) {
 	utility::string_t watermarkName = L"myWatermark";
 
 	std::shared_ptr<Shapes> shapes = utils->getSlidesApi()->getShapes(fileName, slideIndex, password, folderName).get();
-	size_t shapeCount = shapes->getShapesLinks().size() + 1;
+	int shapeCount = (int)shapes->getShapesLinks().size() + 1;
 
 	std::shared_ptr<PictureFrame> dto(new PictureFrame());
 	dto->setName(watermarkName);
