@@ -35,7 +35,6 @@ OleObjectFrame::OleObjectFrame()
 {
 	m_IsObjectIconIsSet = false;
 	m_UpdateAutomaticIsSet = false;
-	setZOrderPosition(0);
 	setType(L"OleObjectFrame");
 }
 

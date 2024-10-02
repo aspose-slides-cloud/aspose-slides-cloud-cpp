@@ -33,7 +33,6 @@ namespace model {
 
 SummaryZoomFrame::SummaryZoomFrame()
 {
-	setZOrderPosition(0);
 	setType(L"SummaryZoomFrame");
 }
 

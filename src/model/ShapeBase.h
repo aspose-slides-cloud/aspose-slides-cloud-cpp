@@ -123,6 +123,8 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT int32_t getZOrderPosition() const;
 	ASPOSE_DLL_EXPORT void setZOrderPosition(int32_t value);
+	ASPOSE_DLL_EXPORT bool zOrderPositionIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetZOrderPosition();
 	/// <summary>
 	/// Gets or sets the fill format.
 	/// </summary>
@@ -176,6 +178,7 @@ protected:
 	double m_Y;
 	bool m_YIsSet;
 	int32_t m_ZOrderPosition;
+	bool m_ZOrderPositionIsSet;
 	std::shared_ptr<FillFormat> m_FillFormat;
 	std::shared_ptr<EffectFormat> m_EffectFormat;
 	std::shared_ptr<ThreeDFormat> m_ThreeDFormat;

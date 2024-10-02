@@ -45,6 +45,129 @@ protected:
 
 TestUtils* SlidesAsyncApiTest::utils = nullptr;
 
+TEST_F(SlidesAsyncApiTest, download) {
+	utility::string_t paramPath = utils->getTestValue("download", "path", "utility::string_t");
+	utility::string_t paramStorageName = utils->getTestValue("download", "storageName", "utility::string_t");
+	utility::string_t paramVersionId = utils->getTestValue("download", "versionId", "utility::string_t");
+	utils->initialize("download", "", "");
+	HttpContent result = utils->getSlidesAsyncApi()->download(paramPath, paramStorageName, paramVersionId).get();
+	EXPECT_FALSE(result.getData()->eof());
+}
+
+TEST_F(SlidesAsyncApiTest, downloadInvalidPath) {
+	utility::string_t paramPath = utils->getTestValue("download", "path", "utility::string_t");
+	utility::string_t paramStorageName = utils->getTestValue("download", "storageName", "utility::string_t");
+	utility::string_t paramVersionId = utils->getTestValue("download", "versionId", "utility::string_t");
+	paramPath = utils->getInvalidTestValue("download", "path", "utility::string_t", paramPath);
+	utils->initialize("download", "path", "utility::string_t", paramPath);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->download(paramPath, paramStorageName, paramVersionId).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("download", "path", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("download", "path", "utility::string_t", paramPath);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("download", "path", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("download", "path", "utility::string_t", paramPath);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("download", "path", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, downloadInvalidStorageName) {
+	utility::string_t paramPath = utils->getTestValue("download", "path", "utility::string_t");
+	utility::string_t paramStorageName = utils->getTestValue("download", "storageName", "utility::string_t");
+	utility::string_t paramVersionId = utils->getTestValue("download", "versionId", "utility::string_t");
+	paramStorageName = utils->getInvalidTestValue("download", "storageName", "utility::string_t", paramStorageName);
+	utils->initialize("download", "storageName", "utility::string_t", paramStorageName);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->download(paramPath, paramStorageName, paramVersionId).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("download", "storageName", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("download", "storageName", "utility::string_t", paramStorageName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("download", "storageName", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("download", "storageName", "utility::string_t", paramStorageName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("download", "storageName", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, downloadInvalidVersionId) {
+	utility::string_t paramPath = utils->getTestValue("download", "path", "utility::string_t");
+	utility::string_t paramStorageName = utils->getTestValue("download", "storageName", "utility::string_t");
+	utility::string_t paramVersionId = utils->getTestValue("download", "versionId", "utility::string_t");
+	paramVersionId = utils->getInvalidTestValue("download", "versionId", "utility::string_t", paramVersionId);
+	utils->initialize("download", "versionId", "utility::string_t", paramVersionId);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->download(paramPath, paramStorageName, paramVersionId).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("download", "versionId", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("download", "versionId", "utility::string_t", paramVersionId);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("download", "versionId", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("download", "versionId", "utility::string_t", paramVersionId);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("download", "versionId", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
 TEST_F(SlidesAsyncApiTest, getOperationResult) {
 	utility::string_t paramId = utils->getTestValue("getOperationResult", "id", "utility::string_t");
 	utils->initialize("getOperationResult", "", "");
@@ -2954,6 +3077,129 @@ TEST_F(SlidesAsyncApiTest, startUploadAndSplitInvalidOptions) {
 		EXPECT_TRUE(boost::contains(ex.what(), message));
 	}
 	if (!failed && utils->mustFail("startUploadAndSplit", "options", "std::shared_ptr<ExportOptions>"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, upload) {
+	utility::string_t paramPath = utils->getTestValue("upload", "path", "utility::string_t");
+	std::shared_ptr<HttpContent> paramFile = utils->getBinaryTestValue("upload", "file", "std::shared_ptr<HttpContent>");
+	utility::string_t paramStorageName = utils->getTestValue("upload", "storageName", "utility::string_t");
+	utils->initialize("upload", "", "");
+	std::shared_ptr<FilesUploadResult> result = utils->getSlidesAsyncApi()->upload(paramPath, paramFile, paramStorageName).get();
+	EXPECT_NE(nullptr, result);
+}
+
+TEST_F(SlidesAsyncApiTest, uploadInvalidPath) {
+	utility::string_t paramPath = utils->getTestValue("upload", "path", "utility::string_t");
+	std::shared_ptr<HttpContent> paramFile = utils->getBinaryTestValue("upload", "file", "std::shared_ptr<HttpContent>");
+	utility::string_t paramStorageName = utils->getTestValue("upload", "storageName", "utility::string_t");
+	paramPath = utils->getInvalidTestValue("upload", "path", "utility::string_t", paramPath);
+	utils->initialize("upload", "path", "utility::string_t", paramPath);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->upload(paramPath, paramFile, paramStorageName).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("upload", "path", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("upload", "path", "utility::string_t", paramPath);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("upload", "path", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("upload", "path", "utility::string_t", paramPath);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("upload", "path", "utility::string_t"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, uploadInvalidFile) {
+	utility::string_t paramPath = utils->getTestValue("upload", "path", "utility::string_t");
+	std::shared_ptr<HttpContent> paramFile = utils->getBinaryTestValue("upload", "file", "std::shared_ptr<HttpContent>");
+	utility::string_t paramStorageName = utils->getTestValue("upload", "storageName", "utility::string_t");
+	paramFile = utils->getInvalidBinaryTestValue("upload", "file", "std::shared_ptr<HttpContent>", paramFile);
+	utils->initialize("upload", "file", "std::shared_ptr<HttpContent>", paramFile);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->upload(paramPath, paramFile, paramStorageName).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("upload", "file", "std::shared_ptr<HttpContent>");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("upload", "file", "std::shared_ptr<HttpContent>", paramFile);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("upload", "file", "std::shared_ptr<HttpContent>");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("upload", "file", "std::shared_ptr<HttpContent>", paramFile);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("upload", "file", "std::shared_ptr<HttpContent>"))
+	{
+		FAIL() << "Must have failed";
+	}
+}
+
+TEST_F(SlidesAsyncApiTest, uploadInvalidStorageName) {
+	utility::string_t paramPath = utils->getTestValue("upload", "path", "utility::string_t");
+	std::shared_ptr<HttpContent> paramFile = utils->getBinaryTestValue("upload", "file", "std::shared_ptr<HttpContent>");
+	utility::string_t paramStorageName = utils->getTestValue("upload", "storageName", "utility::string_t");
+	paramStorageName = utils->getInvalidTestValue("upload", "storageName", "utility::string_t", paramStorageName);
+	utils->initialize("upload", "storageName", "utility::string_t", paramStorageName);
+
+	bool failed = true;
+	try
+	{
+		utils->getSlidesAsyncApi()->upload(paramPath, paramFile, paramStorageName).wait();
+		failed = false;
+	}
+	catch (ApiException ex)
+	{
+		int code = utils->getExpectedCode("upload", "storageName", "utility::string_t");
+		EXPECT_EQ(code, ex.error_code().value());
+
+		utility::string_t message = utils->getExpectedMessage("upload", "storageName", "utility::string_t", paramStorageName);
+		std::string contentString;
+		std::ostringstream contentStream;
+		contentStream << ex.getContent()->rdbuf();
+		EXPECT_TRUE(boost::contains(contentStream.str(), message));
+	}
+	catch (std::invalid_argument ex)
+	{
+		int code = utils->getExpectedCode("upload", "storageName", "utility::string_t");
+		EXPECT_EQ(code, 400);
+
+		utility::string_t message = utils->getExpectedMessage("upload", "storageName", "utility::string_t", paramStorageName);
+		EXPECT_TRUE(boost::contains(ex.what(), message));
+	}
+	if (!failed && utils->mustFail("upload", "storageName", "utility::string_t"))
 	{
 		FAIL() << "Must have failed";
 	}

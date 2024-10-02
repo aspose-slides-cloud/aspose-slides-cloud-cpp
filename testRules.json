@@ -226,6 +226,7 @@
 		{ "Message": " required parameter", "Type": "model" },
 		{ "Message": "Failed to load the presentation", "Parameter": "Request", "Method": "/Merge.*Online/" },
 		{ "Message": "Invalid Request", "Parameter": "VersionId" },
+		{ "Message": "Invalid version", "Parameter": "VersionId", "Method": "Download" },
 		{ "Message": "AmazonS3 Storage exception", "Parameter": "VersionId", "Method": "ObjectExists" },
 		{ "Message": "Invalid version id specified", "Parameter": "VersionId", "Method": "DeleteFile" },
 		{ "Message": "Invalid version id specified", "Parameter": "VersionId", "Method": "DownloadFile" },

@@ -47,6 +47,40 @@ SlidesAsyncApi::~SlidesAsyncApi()
 	delete m_ApiClient;
 }
 
+pplx::task<HttpContent> SlidesAsyncApi::download(utility::string_t path, utility::string_t storageName, utility::string_t versionId)
+{
+	// verify the required parameter 'path' is set
+	if (path.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: path");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/async/storage/file/{path}");
+	ApiClient::setPathParameter(methodPath, "path", path);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storageName"), storageName);
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("versionId"), versionId);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("GET"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "download");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			HttpContent result;
+			std::shared_ptr<std::stringstream> stream = std::make_shared<std::stringstream>(std::string(responseVector.begin(), responseVector.end()));
+			result.setData(stream);
+			return result;
+		});
+}
+
 pplx::task<HttpContent> SlidesAsyncApi::getOperationResult(utility::string_t id)
 {
 	// verify the required parameter 'id' is set
@@ -560,6 +594,48 @@ pplx::task<utility::string_t> SlidesAsyncApi::startUploadAndSplit(std::shared_pt
 			utility::string_t response(responseVector.begin(), responseVector.end());
 			m_ApiClient->logString(response);
 			return response;
+		});
+}
+
+pplx::task<std::shared_ptr<FilesUploadResult>> SlidesAsyncApi::upload(utility::string_t path, std::shared_ptr<HttpContent> file, utility::string_t storageName)
+{
+	// verify the required parameter 'path' is set
+	if (path.empty())
+	{
+		throw std::invalid_argument("Missing required parameter: path");
+	}
+	if (file == nullptr)
+	{
+		throw std::invalid_argument("Missing required parameter: request.file");
+	}
+	utility::string_t methodPath = utility::conversions::to_string_t("/slides/async/storage/file/{path}");
+	ApiClient::setPathParameter(methodPath, "path", path);
+
+	std::map<utility::string_t, utility::string_t> queryParams;
+	ApiClient::setQueryParameter(queryParams, utility::conversions::to_string_t("storageName"), storageName);
+
+	std::map<utility::string_t, utility::string_t> headerParams;
+
+	std::shared_ptr<IHttpBody> httpBody = nullptr;
+	std::vector<std::shared_ptr<HttpContent>> requestFiles;
+	if (file != nullptr)
+	{
+		requestFiles.push_back(file);
+	}
+
+	return m_ApiClient->callApi(methodPath, utility::conversions::to_string_t("PUT"), queryParams, headerParams, httpBody, requestFiles)
+		.then([=](web::http::http_response response)
+		{
+			m_ApiClient->assertResponseException(response, "upload");
+			return response.extract_vector();
+		})
+		.then([=](std::vector<unsigned char> responseVector)
+		{
+			utility::string_t response(responseVector.begin(), responseVector.end());
+			m_ApiClient->logString(response);
+			web::json::value json = web::json::value::parse(response);
+			std::shared_ptr<void> instance = ClassRegistry::deserialize(L"FilesUploadResult", json);
+			return std::static_pointer_cast<FilesUploadResult>(instance);
 		});
 }
 

@@ -34,7 +34,6 @@ namespace model {
 ZoomFrame::ZoomFrame()
 {
 	m_TargetSlideIndexIsSet = false;
-	setZOrderPosition(0);
 	setType(L"ZoomFrame");
 }
 

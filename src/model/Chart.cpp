@@ -36,7 +36,6 @@ Chart::Chart()
 	m_ShowDataLabelsOverMaximumIsSet = false;
 	m_HasTitleIsSet = false;
 	m_HasRoundedCornersIsSet = false;
-	setZOrderPosition(0);
 	setType(L"Chart");
 }
 

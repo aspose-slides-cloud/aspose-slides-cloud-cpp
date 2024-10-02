@@ -34,7 +34,6 @@ namespace model {
 SmartArt::SmartArt()
 {
 	m_IsReversedIsSet = false;
-	setZOrderPosition(0);
 	setType(L"SmartArt");
 }
 

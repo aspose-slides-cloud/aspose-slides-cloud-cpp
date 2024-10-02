@@ -33,8 +33,8 @@ namespace model {
 
 TableRow::TableRow()
 {
-	setMinimalHeight(0.0);
-	setHeight(0.0);
+	m_MinimalHeightIsSet = false;
+	m_HeightIsSet = false;
 }
 
 TableRow::~TableRow()
@@ -60,7 +60,17 @@ double TableRow::getMinimalHeight() const
 void TableRow::setMinimalHeight(double value)
 {
 	m_MinimalHeight = value;
-	
+	m_MinimalHeightIsSet = true;
+}
+
+bool TableRow::minimalHeightIsSet() const
+{
+	return m_MinimalHeightIsSet;
+}
+
+void TableRow::unsetMinimalHeight()
+{
+	m_MinimalHeightIsSet = false;
 }
 
 double TableRow::getHeight() const
@@ -71,7 +81,17 @@ double TableRow::getHeight() const
 void TableRow::setHeight(double value)
 {
 	m_Height = value;
-	
+	m_HeightIsSet = true;
+}
+
+bool TableRow::heightIsSet() const
+{
+	return m_HeightIsSet;
+}
+
+void TableRow::unsetHeight()
+{
+	m_HeightIsSet = false;
 }
 
 web::json::value TableRow::toJson() const
@@ -86,8 +106,14 @@ web::json::value TableRow::toJson() const
 		}
 		val[utility::conversions::to_string_t("Cells")] = web::json::value::array(jsonArray);
 	}
-	val[utility::conversions::to_string_t("MinimalHeight")] = ModelBase::toJson(m_MinimalHeight);
-	val[utility::conversions::to_string_t("Height")] = ModelBase::toJson(m_Height);
+	if(m_MinimalHeightIsSet)
+	{
+		val[utility::conversions::to_string_t("MinimalHeight")] = ModelBase::toJson(m_MinimalHeight);
+	}
+	if(m_HeightIsSet)
+	{
+		val[utility::conversions::to_string_t("Height")] = ModelBase::toJson(m_Height);
+	}
 	return val;
 }
 

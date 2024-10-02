@@ -39,7 +39,7 @@ ShapeBase::ShapeBase()
 	m_IsDecorativeIsSet = false;
 	m_XIsSet = false;
 	m_YIsSet = false;
-	setZOrderPosition(0);
+	m_ZOrderPositionIsSet = false;
 }
 
 ShapeBase::~ShapeBase()
@@ -213,7 +213,17 @@ int32_t ShapeBase::getZOrderPosition() const
 void ShapeBase::setZOrderPosition(int32_t value)
 {
 	m_ZOrderPosition = value;
-	
+	m_ZOrderPositionIsSet = true;
+}
+
+bool ShapeBase::zOrderPositionIsSet() const
+{
+	return m_ZOrderPositionIsSet;
+}
+
+void ShapeBase::unsetZOrderPosition()
+{
+	m_ZOrderPositionIsSet = false;
 }
 
 std::shared_ptr<FillFormat> ShapeBase::getFillFormat() const
@@ -332,7 +342,10 @@ web::json::value ShapeBase::toJson() const
 	{
 		val[utility::conversions::to_string_t("Y")] = ModelBase::toJson(m_Y);
 	}
-	val[utility::conversions::to_string_t("ZOrderPosition")] = ModelBase::toJson(m_ZOrderPosition);
+	if(m_ZOrderPositionIsSet)
+	{
+		val[utility::conversions::to_string_t("ZOrderPosition")] = ModelBase::toJson(m_ZOrderPosition);
+	}
 	if (m_FillFormat != nullptr)
 	{
 		val[utility::conversions::to_string_t("FillFormat")] = ModelBase::toJson(m_FillFormat);

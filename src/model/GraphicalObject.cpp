@@ -33,7 +33,6 @@ namespace model {
 
 GraphicalObject::GraphicalObject()
 {
-	setZOrderPosition(0);
 	setType(L"GraphicalObject");
 }
 

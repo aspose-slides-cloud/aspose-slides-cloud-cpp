@@ -64,16 +64,22 @@ public:
 	/// </summary>
 	ASPOSE_DLL_EXPORT double getMinimalHeight() const;
 	ASPOSE_DLL_EXPORT void setMinimalHeight(double value);
+	ASPOSE_DLL_EXPORT bool minimalHeightIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetMinimalHeight();
 	/// <summary>
 	/// Height of the row.
 	/// </summary>
 	ASPOSE_DLL_EXPORT double getHeight() const;
 	ASPOSE_DLL_EXPORT void setHeight(double value);
+	ASPOSE_DLL_EXPORT bool heightIsSet() const;
+	ASPOSE_DLL_EXPORT void unsetHeight();
 
 protected:
 	std::vector<std::shared_ptr<TableCell>> m_Cells;
 	double m_MinimalHeight;
+	bool m_MinimalHeightIsSet;
 	double m_Height;
+	bool m_HeightIsSet;
 };
 
 }

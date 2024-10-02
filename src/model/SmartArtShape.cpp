@@ -33,7 +33,6 @@ namespace model {
 
 SmartArtShape::SmartArtShape()
 {
-	setZOrderPosition(0);
 	setType(L"SmartArtShape");
 }
 

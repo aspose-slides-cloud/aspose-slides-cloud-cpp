@@ -41,6 +41,7 @@
 #include "../ClassRegistry.h"
 
 #include "../model/ExportOptions.h"
+#include "../model/FilesUploadResult.h"
 #include "../HttpContent.h"
 
 #include "../model/Operation.h"
@@ -58,6 +59,11 @@ public:
 	ASPOSE_DLL_EXPORT SlidesAsyncApi(std::shared_ptr<ApiConfiguration> configuration);
 	ASPOSE_DLL_EXPORT SlidesAsyncApi(utility::string_t appSid, utility::string_t appKey);
 	ASPOSE_DLL_EXPORT virtual ~SlidesAsyncApi();
+
+	/// <summary>
+	/// 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<HttpContent> download(utility::string_t path, utility::string_t storageName = L"", utility::string_t versionId = L"");
 
 	/// <summary>
 	/// 
@@ -108,6 +114,11 @@ public:
 	/// 
 	/// </summary>
 	ASPOSE_DLL_EXPORT pplx::task<utility::string_t> startUploadAndSplit(std::shared_ptr<HttpContent> document, utility::string_t format, utility::string_t destFolder = L"", boost::optional<int32_t> width = boost::none, boost::optional<int32_t> height = boost::none, boost::optional<int32_t> from = boost::none, boost::optional<int32_t> to = boost::none, utility::string_t password = L"", utility::string_t storage = L"", utility::string_t fontsFolder = L"", std::shared_ptr<ExportOptions> options = std::shared_ptr<ExportOptions>());
+
+	/// <summary>
+	/// 
+	/// </summary>
+	ASPOSE_DLL_EXPORT pplx::task<std::shared_ptr<FilesUploadResult>> upload(utility::string_t path, std::shared_ptr<HttpContent> file, utility::string_t storageName = L"");
 
 protected:
 	ApiClient* m_ApiClient;

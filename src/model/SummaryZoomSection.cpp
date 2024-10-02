@@ -33,7 +33,6 @@ namespace model {
 
 SummaryZoomSection::SummaryZoomSection()
 {
-	setZOrderPosition(0);
 	setType(L"SummaryZoomSection");
 }
 

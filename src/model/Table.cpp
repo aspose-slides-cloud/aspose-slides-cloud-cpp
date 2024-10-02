@@ -41,7 +41,6 @@ Table::Table()
 	m_RightToLeftIsSet = false;
 	m_VerticalBandingIsSet = false;
 	m_TransparencyIsSet = false;
-	setZOrderPosition(0);
 	setType(L"Table");
 }
 

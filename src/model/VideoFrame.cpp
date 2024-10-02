@@ -39,7 +39,6 @@ VideoFrame::VideoFrame()
 	m_RewindVideoIsSet = false;
 	m_TrimFromStartIsSet = false;
 	m_TrimFromEndIsSet = false;
-	setZOrderPosition(0);
 	setType(L"VideoFrame");
 }
 
